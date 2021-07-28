@@ -15,7 +15,6 @@ const KakaoLogin = () => {
 function SocialKakao () {
 window.Kakao.init("260d1c32075b38f17bb12e77e11aa4ca");
     window.Kakao.Auth.login({
-        // scope:'profile_image',
         success: function(authObj) {
             console.log(authObj);
             window.Kakao.API.request({
@@ -31,7 +30,7 @@ window.Kakao.init("260d1c32075b38f17bb12e77e11aa4ca");
 
   return (
     <React.Fragment>
-        <Button _onClick={SocialKakao} bg width="100px">로그인</Button>
+        <Button _onClick={SocialKakao} bg width="5rem" height="1rem">로그인</Button>
     </React.Fragment>
   );
 }
