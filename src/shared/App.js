@@ -10,11 +10,18 @@ const App = (props) => {
   return (
     <React.Fragment>
       <GlobalStyles/>
-      {/* calendar 테스트 라우팅 나중에 지울게요! */}
-      <Route path="/calendar" exact component={Calendar}/>
+      <Wrap>
+        {/* calendar 테스트 라우팅 나중에 지울게요! */}
+        <Route path="/calendar" exact component={Calendar}/>
+      </Wrap>
     </React.Fragment>
   );
 }
+
+const Wrap = styled.div`
+  max-width: 420px;
+  height: 896px;
+`;
 
 
 export default App;
