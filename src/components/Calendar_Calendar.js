@@ -16,7 +16,7 @@ import moment from 'moment';
  * @담당자 : 김나영
 */
 
-const Calendar = (props) => {
+const Calendar_Calendar = (props) => {
 // dispatch
 // props
 // useEffect
@@ -47,21 +47,21 @@ const calendarArr = () => {
             //오늘 날짜일 경우
             if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
               return(
-                <td key={idx} style={{color:'blue'}}>
+                <td key={idx} style={{color:'blue', padding:'2%'}}>
                   <td>{days.format('D')}</td>
                 </td>
               )
               //이번 달에 해당되는 날짜가 아닌 지난 달 또는 다음 달 날짜인 경우
             } else if (days.format('MM') !== month.format('MM')) {
               return (
-                <td key={idx} style={{color:'gray'}}>
+                <td key={idx} style={{color:'gray', padding:'2%'}}>
                   <span>{days.format('D')}</span>
                 </td>
               )
               //그 외 날짜
             } else {
               return(
-                <td key={idx}>
+                <td key={idx} style={{padding:'2%'}}>
                   <span>{days.format('D')}</span>
                 </td>
               )
@@ -77,7 +77,7 @@ const calendarArr = () => {
 
   return (
     <React.Fragment>
-      <Grid>
+      <Grid padding="0% 6%">
       {/* 헤더 */}
         <Header>
         {/* < icon */}
@@ -110,9 +110,10 @@ const Header = styled.div`
 `;
 
 const Table = styled.table`
+  background-color: #eee;
   margin: 5% auto 0% auto;
-  width: 95vw;
-  height: 80vh;
+  width: 100%;
+  height: 70vh;
 `;
 
-export default Calendar;
+export default Calendar_Calendar;

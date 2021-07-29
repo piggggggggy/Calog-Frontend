@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Login, Signup, Main} from '../pages'
-//캘린더 임시
-import Calendar from '../components/Calendar';
+import {DashBoard, Login, Signup, Main, Calendar} from '../pages'
+import Nav from './Nav';
 
 
 const App = (props) => {
@@ -17,8 +16,8 @@ const App = (props) => {
       <Route path="/dashboard" exact component={DashBoard}/>
       <Route path="/login" exact component={Login}/>
       <Route path="/signup" exact component={Signup}/>
-      {/* calendar 테스트 라우팅 나중에 지울게요! */}
       <Route path="/calendar" exact component={Calendar}/>
+      <Nav />
       </Wrap>
     </React.Fragment>
   );

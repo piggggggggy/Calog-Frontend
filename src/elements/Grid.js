@@ -9,7 +9,7 @@ const Grid = (props) => {
   // fd : flex-direction
   // grid_row : grid-template-row
   // grid_column : grid-template-column
-  const {children, width, height, margin, padding, bg, border_radius, border, text_align, is_flex, _onClick, cursor, display, jc, ai, fd, grid_row, grid_column} = props;
+  const {children, width, height, margin, padding, bg, border_radius, border, text_align, is_flex, _onClick, cursor, display, jc, ai, fd, grid_row, grid_column, line_height} = props;
 
   const styles = {
     width,
@@ -27,7 +27,8 @@ const Grid = (props) => {
     ai,
     fd,
     grid_row,
-    grid_column
+    grid_column,
+    line_height,
   };
 
   return (
@@ -57,6 +58,7 @@ Grid.defaultProps = {
   grid_row: false,
   grid_column: false,
   _onClick: () => {},
+  line_height: false,
 };
 
 const DefaultGrid = styled.div`
@@ -76,6 +78,7 @@ const DefaultGrid = styled.div`
   ${(props) => (props.fd ? `flex-direction: ${props.fd}` : "")};
   ${(props) => (props.grid_row ? `grid-template-row: ${props.grid_row}` : "")};
   ${(props) => (props.grid_column ? `grid-template-column: ${props.grid_column}` : "")};
+  ${(props) => (props.line_height ? `line-height: ${props.line_height}` : "")};
 `;
 
 export default Grid;
