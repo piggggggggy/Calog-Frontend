@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Text } from '../elements';
 // icons
 import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
+// library
+// import Swipeout
 
 /** 
  * @param {*} props
