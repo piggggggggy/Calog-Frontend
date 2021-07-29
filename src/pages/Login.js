@@ -1,44 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Kakao from '../components/social/Kakao';
-import { Input, Grid, Button } from '../elements';
+import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
-import { SetUser } from '../redux/modules/user';
 import { useDispatch } from 'react-redux';
-import { SetUserCheck } from '../redux/modules/user';
+import { LoginDB } from '../redux/modules/user';
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @역할 로그인
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 최지혁
 */
 
 const Login = (props) => {
 // dispatch
 const dispatch = useDispatch();
+
+const [user_info, setUserInfo] = useState({});
+
 const clickDispatch = () => {
-  // dispatch(SetUserCheck())
-  const user_info = {username:"jeehyuk"}
-  dispatch(SetUser(user_info))
+  dispatch(LoginDB(user_info))
 }
-// props
-// useEffect
 
 
   return (
     <React.Fragment>
       <Container>
         <h1>로그인 페이지</h1>
-        <Grid display="flex" jc="center" width="30%">
-        <Input padding="10px" border_radius="26px"/>
+        <Grid width="30%">
+        <Text>이메일</Text>
+        <Input padding="10px" border_radius="26px"
+        _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}/>
         </Grid>
-        <Grid display="flex" jc="center" width="30%">
-        <Input padding="10px" border_radius="26px"/>
+        <Grid width="30%">
+        <Text>비밀번호</Text>
+        <Input padding="10px" border_radius="26px"
+        _onChange={(e)=>{setUserInfo({...user_info, pwd: e.target.value})}}/>
         </Grid>
-        <Grid display="flex" jc="center" width="30%">
-        <Input padding="10px" border_radius="26px"/>
-        </Grid>
-        <button onClick={clickDispatch}>디스패치</button>
+        <Button width="30%" bg="#9be7ff"
+        _onClick={clickDispatch}>디스패치</Button>
         </Container>
     </React.Fragment>
   );
