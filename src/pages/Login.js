@@ -4,7 +4,7 @@ import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { SetUser } from '../redux/modules/user';
 import { useDispatch } from 'react-redux';
-import { SetUserCheck } from '../redux/modules/user';
+import { LoginDB } from '../redux/modules/user';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -20,7 +20,7 @@ const dispatch = useDispatch();
 const [user_info, setUserInfo] = useState({});
 
 const clickDispatch = () => {
-  dispatch(SetUserCheck(user_info))
+  dispatch(LoginDB(user_info))
 }
 
 
