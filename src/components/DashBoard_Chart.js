@@ -37,7 +37,7 @@ const data_day = {
   return (
     <React.Fragment>
       {/* 전체 틀 */}
-      <Grid margin="5% auto" height="414px" bg={'#eee'} border_radius="20px" width="90%"> 
+      <Grid margin="5% auto" height="400px" bg={'#eee'} border_radius="20px" width="90%"> 
         <Grid width="65%">
           <Doughnut data={data_day} />
         </Grid>
