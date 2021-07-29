@@ -4,6 +4,7 @@ import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
 import {DashBoard, Login, Signup, Main, Calendar} from '../pages'
+import Nav from './Nav';
 
 
 const App = (props) => {
@@ -16,6 +17,7 @@ const App = (props) => {
       <Route path="/login" exact component={Login}/>
       <Route path="/signup" exact component={Signup}/>
       <Route path="/calendar" exact component={Calendar}/>
+      <Nav />
       </Wrap>
     </React.Fragment>
   );
