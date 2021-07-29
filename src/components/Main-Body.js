@@ -17,14 +17,16 @@ const MainBody = (props) => {
 
   return (
     <React.Fragment>
+      <BodyContainer>
 
+        <SearchGrid margin="1rem 0.5rem">
+          <SearchInput placeholder="입력해"/>
+          <SearchButton>검색</SearchButton>
+        </SearchGrid>
 
-      <SearchGrid width="60%" margin="2rem auto">
-        <SearchInput placeholder="입력해"/>
-        <SearchButton>검색</SearchButton>
-      </SearchGrid>
+          
 
-
+      </BodyContainer>
     </React.Fragment>
   );
 }
@@ -33,12 +35,17 @@ MainBody.defaultProps = {
 
 }
 
+const BodyContainer = styled.div`
+  max-width: 100%;
+`;
+
 const SearchGrid = styled.div`
   position: relative;
-  width: 30vw;
-  margin: 2rem auto;
-  /* display: flex;
-  align-items: center; */
+  margin: 10px 20px;
+  /* width: 30vw; */
+  display: flex;
+  align-items: auto;
+  justify-content: space-between;
   
 `;
 

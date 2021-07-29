@@ -3,18 +3,20 @@ import styled from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard} from '../pages'
+import { DashBoard, Main } from '../pages'
 //로그인 및 회원가입
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 //캘린더 임시
 import Calendar from '../components/Calendar';
 
+
 const App = (props) => {
   return (
     <React.Fragment>
       <GlobalStyles/>
       <Wrap>
+      <Route path="/" exact componet={Main} />
       <Route path="/dashboard" exact component={DashBoard}/>
       <Route path="/login" exact component={Login}/>
       <Route path="/signup" exact component={Signup}/>
