@@ -24,7 +24,7 @@ const FDbody = (props) => {
         
         <Grid is_flex>
           <Grid>
-            <Text margin="10px 0" paddig="0">떡볶이</Text>
+            <Text bold margin="10px 0" paddig="0">떡볶이</Text>
             <Text bold size="3rem" margin="15px 0" paddig="0">3100kcal</Text>
             <div><AiOutlinePlusCircle size="2rem"/></div>
           </Grid>
