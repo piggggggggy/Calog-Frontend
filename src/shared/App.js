@@ -14,7 +14,7 @@ const App = (props) => {
       <Wrap>
       <Route path="/" exact component={Main} />
       <Route path="/fooddetail" exact component={FoodDetail} />
-      <Route path="/Cart" exact component={Cart} />
+      <Route path="/cart" exact component={Cart} />
       <Route path="/dashboard" exact component={DashBoard}/>
       <Route path="/login" exact component={Login}/>
       <Route path="/signup" exact component={Signup}/>

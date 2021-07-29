@@ -163,7 +163,7 @@ const CardContainer = styled.div`
   height: 100%auto;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 20px;
+  column-gap: 6%;
 `;
 
 

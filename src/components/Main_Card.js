@@ -45,7 +45,7 @@ const FoodCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 175px;
+  width: 47%;
   height: 160px;
   margin: 6px 0;
   padding: 15px;
