@@ -20,7 +20,7 @@ const MainBody = (props) => {
       <BodyContainer>
 
         <SearchGrid margin="1rem 0.5rem">
-          <SearchInput placeholder="입력해"/>
+          <input placeholder="입력해"/>
           <SearchButton>검색</SearchButton>
         </SearchGrid>
 
@@ -47,18 +47,18 @@ const SearchGrid = styled.div`
   align-items: auto;
   justify-content: space-between;
   
+  & > input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 10rem 1rem 1rem;
+    border: 1px solid black;
+    /* border-radius: 6px; */
+    outline: none;
+    line-height: 1rem;
+  }
 `;
 
-const SearchInput = styled.input`
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 1rem 10rem 1rem 1rem;
-  border: 1px solid black;
-  /* border-radius: 6px; */
-  outline: none;
-  line-height: 1rem;
-`;
 
 const SearchButton = styled.button`
   display: flex;
