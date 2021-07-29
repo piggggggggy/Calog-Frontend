@@ -8,7 +8,7 @@ const BtnHeader = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex" jc="space-between" padding="5% 25px">
+      <Grid is_flex padding="5% 25px">
         <Grid width="7%">
           <BiChevronLeft size="40px"/>
         </Grid>
