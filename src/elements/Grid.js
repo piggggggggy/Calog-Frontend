@@ -51,7 +51,7 @@ Grid.defaultProps = {
   text_align: false,
   is_flex: false,
   cursor: null,
-  display: "block",
+  display: false,
   jc: false,
   ai: "center",
   fd: false,
@@ -70,7 +70,7 @@ const DefaultGrid = styled.div`
   border-radius: ${(props) => props.border_radius};
   border: ${(props) => props.border};
   ${(props) => props.text_align ? `text-align: ${props.text_align}` : ""};
-  ${(props) => props.is_flex &&"display: flex; justify-content: space-between; align-items: center;"}
+  ${(props) => (props.is_flex ? "display: flex; justify-content: space-between; align-items: center;" : "")}
   ${(props) => (props.cursor ? `cursor: pointer` : "")};
   ${(props) => (props.display ? `display: ${props.display}` : "")};
   ${(props) => (props.jc ? `justify-content: ${props.jc}` : "")};
