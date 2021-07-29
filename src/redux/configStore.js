@@ -3,6 +3,10 @@ import { connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import user from "./modules/user";
+import record from './modules/record';
+import cart from './modules/cart';
+import favorite from './modules/favorite';
+import search from './modules/search';
 
 export const history = createBrowserHistory();
 
@@ -21,6 +25,10 @@ if (env === "development") {
 
 const reducer = combineReducers({
   user: user.reducer,
+  record: record.reducer,
+  cart: cart.reducer,
+  favorite: favorite.reducer,
+  search: search.reducer,
   router: connectRouter(history),
 });
 
