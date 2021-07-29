@@ -12,19 +12,6 @@ const App = (props) => {
     <React.Fragment>
       <GlobalStyles />
       <Wrap>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      <Route path="/" exact component={Main} />
-      <Route path="/fooddetail" exact component={FoodDetail} />
-      <Route path="/cart" exact component={Cart} />
-      <Route path="/dashboard" exact component={DashBoard}/>
-      <Route path="/login" exact component={Login}/>
-      <Route path="/signup" exact component={Signup}/>
-      <Route path="/calendar" exact component={Calendar}/>
-      <Nav />
-=======
-=======
->>>>>>> Stashed changes
         <Route path="/" exact component={Main} />
         <Route path="/fooddetail" exact component={FoodDetail} />
         <Route path="/cart" exact component={Cart} />
