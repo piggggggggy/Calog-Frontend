@@ -11,19 +11,6 @@ import theme from './theme';
 const App = (props) => {
   return (
     <React.Fragment>
-<<<<<<< Updated upstream
-      <GlobalStyles />
-      <Wrap>
-        <Route path="/" exact component={Main} />
-        <Route path="/fooddetail" exact component={FoodDetail} />
-        <Route path="/cart" exact component={Cart} />
-        <Route path="/dashboard" exact component={DashBoard}/>
-        <Route path="/login" exact component={Login}/>
-        <Route path="/signup" exact component={Signup}/>
-        <Route path="/calendar" exact component={Calendar}/>
-        <Nav />
-      </Wrap>
-=======
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Wrap>
@@ -37,7 +24,6 @@ const App = (props) => {
           <Nav />
         </Wrap>
       </ThemeProvider>
->>>>>>> Stashed changes
     </React.Fragment>
   );
 }
