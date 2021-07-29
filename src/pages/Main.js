@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-
-// Components
+// elements & components
 import MainBody from '../components/Main_MainBody';
+import LogoHeader from '../shared/LogoHeader';
+// import 
 
 /** 
  * @param {*} props
@@ -19,6 +20,7 @@ const Main = (props) => {
 
   return (
     <React.Fragment>
+      <LogoHeader/>
       <MainBody/>
     </React.Fragment>
   );
