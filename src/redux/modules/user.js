@@ -21,8 +21,8 @@ export const LoginDB = (user_info) => {
         .catch((err) => {
             console.log("err of loginDB", err);
         })
-    }
-}
+    };
+};
 
 export const SignupDB = (user_info) => {
     console.log("click SignupDB")
@@ -35,8 +35,50 @@ export const SignupDB = (user_info) => {
         .catch((err) => {
             console.log("err of SignupDB", err);
         })
-    }
-}
+    };
+};
+
+export const EmailDuplicate = (email) => {
+    console.log("click email dupli")
+    return function(dispatch, getState, {history}){
+        instance
+        .post('/api/duplicate-email')
+        .then((res) => {
+            console.log("res of email dupli", res);
+        })
+        .catch((err) => {
+            console.log("err of email dupli", err);
+        })
+    };
+};
+
+export const NickDuplicate = (nickname) => {
+    console.log("click nickname dupli")
+    return function(dispatch, getState, {history}){
+        instance
+        .post('/api/duplicate-nickname')
+        .then((res) => {
+            console.log("res of nickname dupli", res);
+        })
+        .catch((err) => {
+            console.log("err of nickname dupli", err);
+        })
+    };
+};
+
+export const LoginCheck = () => {
+    console.log("click login check")
+    return function(dispatch, getState, {history}){
+        instance
+        .get('/api/me')
+        .then((res) => {
+            console.log("res of login check", res);
+        })
+        .catch((err) => {
+            console.log("err of login check", err);
+        })
+    };
+};
 
 //리덕스
 const user = createSlice({
@@ -54,5 +96,5 @@ const user = createSlice({
   },
 });
 
-export const {SetUser} = user.actions
+export const {SetUser, LogOut} = user.actions
 export default user;

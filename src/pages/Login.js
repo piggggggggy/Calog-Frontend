@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import Kakao from '../components/social/Kakao';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
-import { SetUser } from '../redux/modules/user';
 import { useDispatch } from 'react-redux';
 import { LoginDB } from '../redux/modules/user';
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @역할 로그인
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 최지혁
 */
 
 const Login = (props) => {
