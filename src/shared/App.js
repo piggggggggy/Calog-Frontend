@@ -3,7 +3,7 @@ import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Login, Signup, Main, Calendar} from '../pages'
+import {DashBoard, Login, Signup, Main, Calendar, FoodDetail, Cart} from '../pages'
 import Nav from './Nav';
 //테마
 import theme from './theme';
@@ -14,17 +14,6 @@ const App = (props) => {
 <<<<<<< Updated upstream
       <GlobalStyles />
       <Wrap>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      <Route path="/" exact component={Main} />
-      <Route path="/dashboard" exact component={DashBoard}/>
-      <Route path="/login" exact component={Login}/>
-      <Route path="/signup" exact component={Signup}/>
-      <Route path="/calendar" exact component={Calendar}/>
-      <Nav />
-=======
-=======
->>>>>>> Stashed changes
         <Route path="/" exact component={Main} />
         <Route path="/fooddetail" exact component={FoodDetail} />
         <Route path="/cart" exact component={Cart} />

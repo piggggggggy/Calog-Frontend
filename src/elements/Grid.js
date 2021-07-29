@@ -42,7 +42,7 @@ const Grid = (props) => {
 Grid.defaultProps = {
   children: null,
   width: "100%",
-  height: false,
+  height: null,
   margin: "0px",
   padding: "0px",
   bg: null,
@@ -51,7 +51,7 @@ Grid.defaultProps = {
   text_align: false,
   is_flex: false,
   cursor: null,
-  display: false,
+  display: null,
   jc: false,
   ai: "center",
   fd: false,
@@ -63,14 +63,14 @@ Grid.defaultProps = {
 
 const DefaultGrid = styled.div`
   width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  ${(props) => props.height? `height: ${props.height}`:''};
   margin: ${(props) => props.margin};
   padding : ${(props) => props.padding};
   background-color: ${(props) => props.bg};
   border-radius: ${(props) => props.border_radius};
   border: ${(props) => props.border};
-  text-align: ${(props) => props.text_align};
-  ${(props) =>props.is_flex &&`display: flex; justify-content: space-between; align-items: center;`}
+  ${(props) => props.text_align ? `text-align: ${props.text_align}` : ""};
+  ${(props) => (props.is_flex ? "display: flex; justify-content: space-between; align-items: center;" : "")}
   ${(props) => (props.cursor ? `cursor: pointer` : "")};
   ${(props) => (props.display ? `display: ${props.display}` : "")};
   ${(props) => (props.jc ? `justify-content: ${props.jc}` : "")};

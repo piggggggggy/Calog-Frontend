@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Kakao from '../components/social/Kakao';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { LoginDB } from '../redux/modules/user';
+import { LoginSV, LoginCheck, _logOut } from '../redux/modules/user';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -13,15 +13,22 @@ import { LoginDB } from '../redux/modules/user';
 */
 
 const Login = (props) => {
-// dispatch
 const dispatch = useDispatch();
 
 const [user_info, setUserInfo] = useState({});
 
-const clickDispatch = () => {
-  dispatch(LoginDB(user_info))
+const loginDB = () => {
+  dispatch(LoginSV(user_info))
 }
 
+const logoutDB = () => {
+  dispatch(_logOut())
+}
+
+useEffect(() => {
+  dispatch(LoginCheck());
+  console.log(document.cookie.split("=")[1])
+}, [])
 
   return (
     <React.Fragment>
@@ -35,10 +42,12 @@ const clickDispatch = () => {
         <Grid width="30%">
         <Text>비밀번호</Text>
         <Input padding="10px" border_radius="26px"
-        _onChange={(e)=>{setUserInfo({...user_info, pwd: e.target.value})}}/>
+        _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}/>
         </Grid>
-        <Button width="30%" bg="#9be7ff"
-        _onClick={clickDispatch}>디스패치</Button>
+        <Button width="30%" bg="#9be7ff" margin="10px 0px"
+        _onClick={loginDB}>로그인</Button>
+        <Button width="30%" bg="#9be7ff" margin="10px 0px"
+        _onClick={logoutDB}>로그아웃</Button>
         </Container>
     </React.Fragment>
   );

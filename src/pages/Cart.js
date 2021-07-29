@@ -1,9 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 // elements & components
-import MainBody from '../components/Main_MainBody';
-import LogoHeader from '../shared/LogoHeader';
-// import 
+import BtnHeader from '../shared/BtnHeader';
+import CartBody from '../components/Cart_CartBody';
 
 /** 
  * @param {*} props
@@ -13,21 +11,21 @@ import LogoHeader from '../shared/LogoHeader';
  * @담당자 : 박용태
 */
 
-const Main = (props) => {
+const Cart = (props) => {
 // dispatch
 // props
 // useEffect
 
   return (
     <React.Fragment>
-      <LogoHeader/>
-      <MainBody/>
+      <BtnHeader/>
+      <CartBody/>
     </React.Fragment>
   );
 }
 
-Main.defaultProps = {
+Cart.defaultProps = {
 
 }
 
-export default Main;
+export default Cart;

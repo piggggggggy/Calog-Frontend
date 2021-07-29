@@ -1,22 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-// 토큰 저장 형식
-// document.cookie = `MY_COOKIE=${res.data.token};`;
-// instance.get('/api/xxx').then().catch
+
 const initialState = {
   user_info: {email: "email", nickname: "nickname"},
   is_login: false,
 };
 
-export const LoginDB = (user_info) => {
+export const LoginSV = (user_info) => {
     console.log("click LoginDB")
-    //  {email:"jeehyuk97@daum.net", nickname:"sungsu"}
+    const {email, password} = user_info
     return function(dispatch, getState, {history}){
         instance
-        .post('/api/login')
+        .post('/api/user/login', {email, password})
         .then((res) => {
             console.log("res of loginDB", res);
-            // dispatch(SetUser(user_info));
+            if(res.status===200){
+                document.cookie = `TOKEN=${res.data.token};`;
+                //로그인 체크해야할 듯. user info 부족
+            } else{
+                window.alert("값을 재입력해주세요!")
+            }
         })
         .catch((err) => {
             console.log("err of loginDB", err);
@@ -24,11 +27,12 @@ export const LoginDB = (user_info) => {
     };
 };
 
-export const SignupDB = (user_info) => {
+export const SignupSV = (user_info) => {
     console.log("click SignupDB")
+    const {email, nickname, password} = user_info
     return function(dispatch, getState, {history}){
         instance
-        .post('/api/register')
+        .post('/api/user/register', {email, nickname, password})
         .then((res) => {
             console.log("res of SignupDB", res);
         })
@@ -38,39 +42,49 @@ export const SignupDB = (user_info) => {
     };
 };
 
-export const EmailDuplicate = (email) => {
+export const EmailDuplicate = (email) => { //undefined 도 됨
     console.log("click email dupli")
+    console.log(email)
     return function(dispatch, getState, {history}){
         instance
-        .post('/api/duplicate-email')
+        .post('/api/user/duplicate-email', {email})
         .then((res) => {
             console.log("res of email dupli", res);
+            if(res.status===201){
+                console.log("사용가능한 아이디! inputbox disabled 걸기")
+            }
         })
         .catch((err) => {
             console.log("err of email dupli", err);
+            console.log("중복된 아이디!")
         })
     };
 };
 
 export const NickDuplicate = (nickname) => {
     console.log("click nickname dupli")
+    console.log({nickname})
     return function(dispatch, getState, {history}){
         instance
-        .post('/api/duplicate-nickname')
+        .post('/api/user/duplicate-nickname', {nickname})
         .then((res) => {
             console.log("res of nickname dupli", res);
+            if(res.status===201){
+                console.log("사용가능한 아이디! inputbox disabled 걸기")
+            }
         })
         .catch((err) => {
             console.log("err of nickname dupli", err);
+            console.log("중복된 아이디!")
         })
     };
 };
 
 export const LoginCheck = () => {
-    console.log("click login check")
     return function(dispatch, getState, {history}){
+    console.log("click login check")
         instance
-        .get('/api/me')
+        .get('/api/user/me')
         .then((res) => {
             console.log("res of login check", res);
         })
@@ -80,6 +94,12 @@ export const LoginCheck = () => {
     };
 };
 
+export const _logOut = () => {
+    return function(dispatch, getState, {history}){
+        document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
+        dispatch(LogOut()); // action payload 가 undefined 괜찮은지
+    }
+}
 //리덕스
 const user = createSlice({
   name: "user",
@@ -90,7 +110,7 @@ const user = createSlice({
       state.is_login = true;
     },
     LogOut: (state, action) => {
-        state.user_info = action.payload;
+        state.user_info = null;
         state.is_login = false;
     }
   },

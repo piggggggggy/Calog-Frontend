@@ -3,6 +3,7 @@ import Kakao from '../components/social/Kakao';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -16,7 +17,15 @@ const Signup = (props) => {
 const dispatch = useDispatch();
 // userinfo hooks
 const [user_info, setUserInfo] = useState({});
-console.log(user_info)
+const Signup = () => {
+  dispatch(SignupSV(user_info));
+}
+const EmailDup = () => {
+  dispatch(EmailDuplicate(user_info.email));
+}
+const NickDup = () => {
+  dispatch(NickDuplicate(user_info.nickname));
+}
 
   return (
     <React.Fragment>
@@ -27,18 +36,20 @@ console.log(user_info)
         <Text>이메일</Text>
         <Input padding="10px" border_radius="26px"
         _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}/>
+        <Button bg="#ce93d8" _onClick={EmailDup}>email중복확인</Button>
         </Grid>
 
         <Grid width="30%">
         <Text>닉네임</Text>
         <Input padding="10px" border_radius="26px"
         _onChange={(e)=>{setUserInfo({...user_info, nickname: e.target.value})}}/>
+        <Button bg="#ce93d8" _onClick={NickDup}>nick중복확인</Button>
         </Grid>
 
         <Grid  width="30%">
         <Text>비밀번호</Text>
         <Input padding="10px" border_radius="26px"
-        _onChange={(e)=>{setUserInfo({...user_info, pwd: e.target.value})}}/>
+        _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}/>
         </Grid>
 
         <Grid  width="30%">
@@ -47,7 +58,7 @@ console.log(user_info)
         _onChange={(e)=>{setUserInfo({...user_info, pwdcheck: e.target.value})}}/>
         </Grid>
 
-        {/* <button onClick={clickDispatch}>디스패치</button> */}
+        <button onClick={Signup}>회원가입</button>
         </Container>
     </React.Fragment>
   );

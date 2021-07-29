@@ -5,13 +5,14 @@ import { BiChevronLeft } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 
 const BtnHeader = (props) => {
+
   return (
     <React.Fragment>
-      <Grid is_flex padding="5% 6%">
+      <Grid is_flex padding="5% 25px">
         <Grid width="7%">
           <BiChevronLeft size="40px"/>
         </Grid>
-        <Text width="auto">페이지 이름</Text>
+        <Text bold size="1rem" width="auto">{props.title}</Text>
         <Grid width="10%">
           <FiShoppingCart size="30px"/>
         </Grid>
