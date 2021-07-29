@@ -4,8 +4,6 @@ import styled from 'styled-components';
 //이모지
 import { BiSearchAlt, BiBarChart, BiCalendarCheck, BiUser } from "react-icons/bi";
 
-
-
 const Nav = (props) => {
   return (
     <React.Fragment>
