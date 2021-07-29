@@ -11,9 +11,9 @@ import Calendar from '../components/Calendar';
 const App = (props) => {
   return (
     <React.Fragment>
-      <GlobalStyles/>
+      <GlobalStyles />
       <Wrap>
-      <Route path="/" exact componet={Main} />
+      <Route path="/" exact component={Main} />
       <Route path="/dashboard" exact component={DashBoard}/>
       <Route path="/login" exact component={Login}/>
       <Route path="/signup" exact component={Signup}/>
@@ -24,7 +24,8 @@ const App = (props) => {
   );
 }
 const Wrap = styled.div`
-
+  max-width: 420px;
+  margin: auto;
 `;
 export default App;
 
