@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
+// 토큰 저장 형식
+// document.cookie = `MY_COOKIE=${res.data.token};`;
+// instance.get('/api/xxx').then().catch()
 const initialState = {
-  user_info: "",
+  user_info: {email: "email", nickname: "nickname"},
   is_login: false,
 };
 
-export const SetUserCheck = () => {
+export const SetUserCheck = (user_info) => {
     console.log("click setUserCheck")
-    const user_info = {username:"jeehyuk"}
-    return function(dispatch, getState){
+    //  {email:"jeehyuk97@daum.net", nickname:"sungsu"}
+    return function(dispatch, getState, {history}){
         dispatch(SetUser(user_info))
     }
 }
@@ -21,11 +22,13 @@ const user = createSlice({
   initialState,
   reducers: {
     SetUser: (state, action) => {
-    //   state.user_info = action.payload.username;
+      state.user_info = action.payload;
       state.is_login = true;
-      state.user_info = action.payload.username;
     },
-
+    LogOut: (state, action) => {
+        state.user_info = action.payload;
+        state.is_login = false;
+    }
   },
 });
 
