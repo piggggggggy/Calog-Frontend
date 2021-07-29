@@ -17,7 +17,7 @@ const FoodDetail = (props) => {
 
   return (
     <React.Fragment>
-      <BtnHeader/>
+      <BtnHeader title="칼로리 상세"/>
       <FDbody/>
     </React.Fragment>
   );

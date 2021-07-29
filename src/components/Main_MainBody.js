@@ -124,9 +124,12 @@ const SearchGrid = styled.div`
 const CategoryButton = styled.button`
   /* width: 54px; */
   margin: 5px;
-  height: 20px;
+  /* height: 20px; */
+  padding: 5px;
+  line-height: 1rem;
+  font-size: 0.8rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   background: #d87c3f;
   cursor: pointer;
 `;
