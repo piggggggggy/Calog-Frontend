@@ -1,7 +1,10 @@
 import React from 'react';
 import Kakao from '../components/social/Kakao';
-import { Input } from '../elements';
+import { Input, Grid, Button } from '../elements';
 import styled from 'styled-components';
+import { SetUser } from '../redux/modules/user';
+import { useDispatch } from 'react-redux';
+import { SetUserCheck } from '../redux/modules/user';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -12,6 +15,12 @@ import styled from 'styled-components';
 
 const Login = (props) => {
 // dispatch
+const dispatch = useDispatch();
+const clickDispatch = () => {
+  // dispatch(SetUserCheck())
+  const user_info = {username:"jeehyuk"}
+  dispatch(SetUser(user_info))
+}
 // props
 // useEffect
 
@@ -20,13 +29,11 @@ const Login = (props) => {
     <React.Fragment>
       <Container>
         <h1>로그인 페이지</h1>
-        <Input width="100px" padding="10px" border_radius="26px"/>
+        <Grid display="flex" jc="center" width="30%">
+        <Input padding="10px" border_radius="26px"/>
+        </Grid>
         <InputB/>
-        <Kakao/>
-        <Kakao/>
-        <Kakao/>
-        <Kakao/>
-        <Kakao/>
+        <button onClick={clickDispatch}>디스패치</button>
         </Container>
     </React.Fragment>
   );
@@ -41,7 +48,6 @@ const Container = styled.div`
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 `;
 
