@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Range, getTrackBackground } from 'react-range';
-// elements, components
+// elements & components
 import { Grid } from '../elements';
 import Card from './Main_Card';
 // icon
