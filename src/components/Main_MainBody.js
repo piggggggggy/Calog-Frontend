@@ -42,7 +42,7 @@ const MainBody = (props) => {
         <Grid display="flex" jc="center" padding="0 20px">
           {category_list.map((c, idx) => {
             return (
-              <CategoryButton>{c}</CategoryButton>
+              <CategoryButton key={idx}>{c}</CategoryButton>
             )
           })}
         </Grid>
