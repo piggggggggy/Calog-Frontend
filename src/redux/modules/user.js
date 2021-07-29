@@ -13,13 +13,27 @@ export const LoginDB = (user_info) => {
     //  {email:"jeehyuk97@daum.net", nickname:"sungsu"}
     return function(dispatch, getState, {history}){
         instance
-        .get('/api/login')
+        .post('/api/login')
         .then((res) => {
             console.log("res of loginDB", res);
             // dispatch(SetUser(user_info));
         })
         .catch((err) => {
             console.log("err of loginDB", err);
+        })
+    }
+}
+
+export const SignupDB = (user_info) => {
+    console.log("click SignupDB")
+    return function(dispatch, getState, {history}){
+        instance
+        .post('/api/register')
+        .then((res) => {
+            console.log("res of SignupDB", res);
+        })
+        .catch((err) => {
+            console.log("err of SignupDB", err);
         })
     }
 }
