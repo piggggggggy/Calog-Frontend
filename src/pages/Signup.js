@@ -13,7 +13,7 @@ import { SetUserCheck } from '../redux/modules/user';
  * @담당자 : 
 */
 
-const Login = (props) => {
+const Signup = (props) => {
 // dispatch
 const dispatch = useDispatch();
 const clickDispatch = () => {
@@ -45,7 +45,7 @@ const clickDispatch = () => {
 }
 
 
-export default Login;
+export default Signup;
 
 const Container = styled.div`
   background-color: #eee;
