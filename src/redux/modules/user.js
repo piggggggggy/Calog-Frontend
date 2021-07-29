@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// 토큰 저장 형식
+// document.cookie = `MY_COOKIE=${res.data.token};`;
+// instance.get('/api/xxx').then().catch()
 const initialState = {
   user_info: {email: "email", nickname: "nickname"},
   is_login: false,
