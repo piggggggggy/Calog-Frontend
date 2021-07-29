@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Login, Signup, Main, Calendar} from '../pages'
+import {DashBoard, Login, Signup, Main, Calendar, FoodDetail, Cart} from '../pages'
 import Nav from './Nav';
 
 
@@ -13,6 +13,8 @@ const App = (props) => {
       <GlobalStyles />
       <Wrap>
       <Route path="/" exact component={Main} />
+      <Route path="/fooddetail" exact component={FoodDetail} />
+      <Route path="/cart" exact component={Cart} />
       <Route path="/dashboard" exact component={DashBoard}/>
       <Route path="/login" exact component={Login}/>
       <Route path="/signup" exact component={Signup}/>

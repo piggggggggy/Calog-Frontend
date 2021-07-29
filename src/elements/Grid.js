@@ -51,7 +51,7 @@ Grid.defaultProps = {
   text_align: false,
   is_flex: false,
   cursor: null,
-  display: false,
+  display: "block",
   jc: false,
   ai: "center",
   fd: false,
@@ -63,7 +63,7 @@ Grid.defaultProps = {
 
 const DefaultGrid = styled.div`
   width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  ${(props) => props.height? `height: ${props.height}`:''};
   margin: ${(props) => props.margin};
   padding : ${(props) => props.padding};
   background-color: ${(props) => props.bg};
