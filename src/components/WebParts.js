@@ -5,9 +5,9 @@ import { Grid } from '../elements'
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @역할 작업에 필요한 파츠들 임시 작성
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 용태
 */
 
 const WebParts = (props) => {
