@@ -16,7 +16,7 @@ const DashBoard_List = (props) => {
 
   return (
     <React.Fragment>
-      <Grid bg={'#eee'} width="40%" height="130px" margin="3% 0%">
+      <Grid bg={'#eee'} width="40%" height="130px" margin="3% 0">
         <Image />
       </Grid>
     </React.Fragment>
