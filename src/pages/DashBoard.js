@@ -23,7 +23,7 @@ const DashBoard = (props) => {
       {/* 헤더 */}
       <LogoHeader />
       {/* 멘트, 바디스펙 */}
-      <Grid is_flex padding="0% 6%">
+      <Grid is_flex padding="0 6%">
         {/* 멘트 */}
         <Grid line_height="27px">
           <Text size="20px" bold>땡땡님!</Text>
