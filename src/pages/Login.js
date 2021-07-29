@@ -38,7 +38,7 @@ const clickDispatch = () => {
         _onChange={(e)=>{setUserInfo({...user_info, pwd: e.target.value})}}/>
         </Grid>
         <Button width="30%" bg="#9be7ff"
-        _onClick={clickDispatch}>디스패치</Button>
+        _onClick={clickDispatch}>로그인</Button>
         </Container>
     </React.Fragment>
   );

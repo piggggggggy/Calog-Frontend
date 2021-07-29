@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
+import axios from "axios";
 // 토큰 저장 형식
 // document.cookie = `MY_COOKIE=${res.data.token};`;
 // instance.get('/api/xxx').then().catch
@@ -12,28 +13,59 @@ export const LoginDB = (user_info) => {
     console.log("click LoginDB")
     //  {email:"jeehyuk97@daum.net", nickname:"sungsu"}
     return function(dispatch, getState, {history}){
-        instance
-        .post('/api/login')
+        // instance
+        // .post('/api/login')
+        // .then((res) => {
+        //     console.log("res of loginDB", res);
+        //     // dispatch(SetUser(user_info));
+        // })
+        // .catch((err) => {
+        //     console.log("err of loginDB", err);
+        // })
+        axios({
+            method: "post",
+            url: "http://52.78.116.106/api/user/login",
+            data: {
+                email: user_info.email,
+                password: user_info.pwd,
+            },
+        })
         .then((res) => {
-            console.log("res of loginDB", res);
-            // dispatch(SetUser(user_info));
+            console.log("res of SignupDB", res);
         })
         .catch((err) => {
-            console.log("err of loginDB", err);
+            console.log("err of signupDB", err);
         })
     };
 };
 
 export const SignupDB = (user_info) => {
     console.log("click SignupDB")
+    console.log(user_info)
+    const user_infoDB = {email: user_info.email,nickname: user_info.nickname, password: user_info.pwd}
     return function(dispatch, getState, {history}){
-        instance
-        .post('/api/register')
+        // instance
+        // .post('/api/user/register', user_infoDB)
+        // .then((res) => {
+        //     console.log("res of SignupDB", res);
+        // })
+        // .catch((err) => {
+        //     console.log("err of SignupDB", err);
+        // })
+        axios({
+            method: "post",
+            url: "http://52.78.116.106/api/user/register",
+            data: {
+                email: user_info.email,
+                nickname: user_info.nickname,
+                password: user_info.pwd,
+            },
+        })
         .then((res) => {
             console.log("res of SignupDB", res);
         })
         .catch((err) => {
-            console.log("err of SignupDB", err);
+            console.log("err of signupDB", err);
         })
     };
 };
@@ -41,8 +73,9 @@ export const SignupDB = (user_info) => {
 export const EmailDuplicate = (email) => {
     console.log("click email dupli")
     return function(dispatch, getState, {history}){
+        console.log(email)
         instance
-        .post('/api/duplicate-email')
+        .post('/api/user/duplicate-email', {email:email})
         .then((res) => {
             console.log("res of email dupli", res);
         })
