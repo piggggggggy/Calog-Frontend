@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
-import { DashBoard, Main } from '../pages'
-//로그인 및 회원가입
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
+import {DashBoard, Login, Signup, Main} from '../pages'
 //캘린더 임시
 import Calendar from '../components/Calendar';
 
