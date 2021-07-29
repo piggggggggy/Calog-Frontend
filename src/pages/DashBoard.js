@@ -1,5 +1,7 @@
 import React from 'react';
-import Kakao from '../components/social/Kakao';
+// import LogoHeader from '../shared/LogoHeader';
+import BtnHeader from '../shared/BtnHeader';
+
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -8,19 +10,21 @@ import Kakao from '../components/social/Kakao';
  * @담당자 : 
 */
 
-const Example = (props) => {
+const DashBoard = (props) => {
 // dispatch
 // props
 // useEffect
 
-
   return (
     <React.Fragment>
-        <h1>로그인 페이지</h1>
-        <Kakao/>
+      {/* <LogoHeader /> */}
+      <BtnHeader />
     </React.Fragment>
   );
 }
 
+DashBoard.defaultProps = {
 
-export default Example;
+}
+
+export default DashBoard;

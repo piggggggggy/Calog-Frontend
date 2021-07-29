@@ -26,7 +26,7 @@ Button.defaultProps = {
   bg: "black",
   width: "100%",
   margin: "auto",
-  height: "100%",
+  height: false,
   _onClick: () => {},
   border_radius: "0px",
 };
