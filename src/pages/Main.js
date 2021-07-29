@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Components
-import MainBody from '../components/Main-Body';
+import MainBody from '../components/Main_MainBody';
 
 /** 
  * @param {*} props

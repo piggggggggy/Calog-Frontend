@@ -6,8 +6,6 @@ const GlobalStyles = createGlobalStyle`
 
     *{
         box-sizing: border-box;
-        max-width: 420px;
-
     }
 
 `;
