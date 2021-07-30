@@ -25,7 +25,7 @@ const App = (props) => {
           <Route path="/login" exact component={Login}/>
           <Route path="/signup" exact component={Signup}/>
           <Route path="/signsocial" exact component={SignSocial}/>
-            
+          
           <Nav />
         </Wrap>
       </ThemeProvider>
@@ -36,7 +36,7 @@ const Wrap = styled.div`
   max-width: 420px;
   min-width: 420px;
   margin: 0 auto 80px auto;
-  overflow: auto;
+  overflow-y: auto;
 `;
 export default App;
 
