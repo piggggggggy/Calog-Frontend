@@ -4,6 +4,9 @@ import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LoginSV, LoginCheck, _logOut } from '../redux/modules/user';
+import { PeopleE, Xemoti, LockE, CheckE } from '../img/svg';
+import _ from "lodash";
+
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -32,23 +35,6 @@ useEffect(() => {
 
   return (
     <React.Fragment>
-      {/* <Container>
-        <h1>로그인 페이지</h1>
-        <Grid width="30%">
-        <Text>이메일</Text>
-        <Input padding="10px" border_radius="26px"
-        _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}/>
-        </Grid>
-        <Grid width="30%">
-        <Text>비밀번호</Text>
-        <Input padding="10px" border_radius="26px"
-        _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}/>
-        </Grid>
-        <Button width="30%" bg="#9be7ff" margin="10px 0px"
-        _onClick={loginDB}>로그인</Button>
-        <Button width="30%" bg="#9be7ff" margin="10px 0px"
-        _onClick={logoutDB}>로그아웃</Button>
-        </Container> */}
         <Container>
         <BgTop>
           <TextDiv>
@@ -61,30 +47,32 @@ useEffect(() => {
           </Text>
           </TextDiv>
         </BgTop>
+        {/* _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}} */}
+        {/* _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}} */}
         <InputContainer>
         <InputBox>
-            <Button></Button>
-            <Input width="240px" border="none" placeholder="이메일을 입력해주세요"
-            _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}/>
-            <Button></Button>
+            {PeopleE}
+            <Input border="none" placeholder="이메일을 입력해주세요"
+            _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}
+            />
+            {Xemoti}
         </InputBox>
         <InputBox>
-            <Button></Button>
-            <Input width="240px" border="none" placeholder="비밀번호를 입력해주세요"
-            _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}/>
-            <Button></Button>
-          </InputBox>
+            {LockE}
+            <Input border="none" placeholder="비밀번호를 입력해주세요"
+            _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}
+            />
+            {Xemoti}
+        </InputBox>
         <InputBox>
-        <Button width="69vw" height="46px" bg="#FFA573" border_radius="26px" _onClick={loginDB}>
+        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px" _onClick={loginDB}>
           <Text bold="5px" size="17px" color="#FFFFFF">로그인</Text>
         </Button>
         </InputBox>
         <Text size="12px" margin="0px 0px 20px 0px">아이디 찾기 / 비밀번호 찾기</Text>
         <Text size="12px">회원가입하기</Text>
         </InputContainer>
-        <SocialDiv>
-          <Text>소셜 로그인</Text>
-        </SocialDiv>
+
         </Container>
     </React.Fragment>
   );

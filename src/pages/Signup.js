@@ -4,6 +4,7 @@ import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
+import { PeopleE, Xemoti, LockE, CheckE } from '../img/svg';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -29,9 +30,7 @@ const NickDup = () => {
 
   return (
     <React.Fragment>
-      <Container>
-        <h1>회원가입 페이지</h1>
-
+      {/* <Container>
         <Grid width="30%">
         <Text>이메일</Text>
         <Input padding="10px" border_radius="26px"
@@ -59,6 +58,55 @@ const NickDup = () => {
         </Grid>
 
         <button onClick={Signup}>회원가입</button>
+        </Container> */}
+                <Container>
+
+        <BgTop>
+          <TextDiv>
+          <Text bold="5px" size="28px">
+            칼로리즈<br/>
+            회원가입
+          </Text>
+          <Text size="15px" margin="20px 0px 0px 0px">
+            지금 로그인하면 손쉽게 칼로리 분석 가능!
+          </Text>
+          </TextDiv>
+        </BgTop>
+        <InputContainer>
+        <InputBox>
+            {PeopleE}
+            <Input border="none" placeholder="이메일을 입력해주세요"
+            />
+            {Xemoti}
+        </InputBox>
+        <InputBox>
+            {PeopleE}
+            <Input border="none" placeholder="닉네임을 입력해주세요"
+            />
+            {Xemoti}
+        </InputBox>
+        <InputBox>
+            {LockE}
+            <Input border="none" placeholder="비밀번호를 입력해주세요"
+            />
+            {Xemoti}
+        </InputBox>
+        <InputBox>
+            {LockE}
+            <Input border="none" placeholder="비밀번호를 다시 입력해주세요"
+            />
+            {Xemoti}
+        </InputBox>
+
+        <InputBox>
+        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px">
+          <Text bold="5px" size="17px" color="#FFFFFF">회원가입</Text>
+        </Button>
+        </InputBox>
+        <Text size="12px" margin="0px 0px 20px 0px">아이디 찾기 / 비밀번호 찾기</Text>
+        <Text size="12px">회원가입하기</Text>
+        </InputContainer>
+
         </Container>
     </React.Fragment>
   );
@@ -68,10 +116,42 @@ const NickDup = () => {
 export default Signup;
 
 const Container = styled.div`
-  background-color: #eee;
   height: 896px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  width: 420px;
+`;
+
+const BgTop = styled.div`
+  background-color: #FFE999;
+  height: 359px;
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+`;
+
+const InputBox = styled.div`
+  width: 290px;
+  height: 46px;
+  background-color: #FFFFFF;
+  border: 1px solid #FFA573;
+  border-radius: 26px;
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  margin: 15px;
+`;
+
+const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -47px;
+`;
+
+const TextDiv = styled.div`
+  padding: 15vh 20px 0px 20px;
+`;
+
+const SocialDiv = styled.div`
+  display: flex;
+  margin-top: 10vh;
 `;
