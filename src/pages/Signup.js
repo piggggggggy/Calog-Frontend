@@ -42,11 +42,11 @@ const Signup = () => {
 
 const debounceEmail = _.debounce((e) => {
   setUserInfo({...user_info, email: e.target.value})
-}, 1000);
+}, 600);
 
 const debounceNick = _.debounce((e) => {
   setUserInfo({...user_info, nickname: e.target.value})
-}, 1000);
+}, 600);
 
 
   return (
