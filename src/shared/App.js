@@ -25,6 +25,7 @@ const App = (props) => {
           <Route path="/login" exact component={Login}/>
           <Route path="/signup" exact component={Signup}/>
           <Route path="/signsocial" exact component={SignSocial}/>
+          
           <Nav />
         </Wrap>
       </ThemeProvider>
