@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-    //bold : font-weight / size : font-size
-    const {children, width, bold, color, size, margin} = props;
+    //bold : font-weight / size : font-size / lineheight: line-height
+    const {children, width, bold, color, size, margin, lineheight} = props;
 
 
     const styles = {
@@ -12,6 +12,7 @@ const Text = (props) => {
         color,
         size,
         margin,
+        lineheight,
     };
 
     return(
@@ -28,6 +29,7 @@ Text.defaultProps = {
     color: "black",
     size: "1em",
     margin: "auto",
+    lineheight: "null",
 };
 
 const DefaultText = styled.p`
@@ -36,6 +38,7 @@ const DefaultText = styled.p`
     color: ${(props) => props.color};
     font-size: ${(props) => props.size};
     margin: ${(props) => props.margin};  
+    ${(props) => props.lineheight ? `line-height: ${props.lineheight}` : ''};
 `;
 
 export default Text;

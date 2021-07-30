@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons
-import { BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
+import { IoStar } from 'react-icons/io5';
 import { AiOutlinePlusCircle, AiFillPlusCircle } from 'react-icons/ai';
 
 /** 
@@ -23,13 +23,13 @@ const Card = (props) => {
     <React.Fragment>
       <FoodCard>
         <BookmarkBox>
-          <BsBookmark size="20px"/>
+          <IoStar color="#E4E4E4" size="21px"/>
         </BookmarkBox>
         <CartBox>
-          <AiOutlinePlusCircle size="20px"/>
+          <AiOutlinePlusCircle size="17px"/>
         </CartBox>
-        <Text margin="0" padding="0">쌀밥</Text>
-        <Text size="1.2rem" bold color="green" margin="0" padding="0">310 kcal</Text>
+        <Text size="13px" lineheight="18px" margin="0" padding="0">쌀밥</Text>
+        <Text size="22px" lineheight="" bold margin="0" padding="0">310 kcal</Text>
       </FoodCard>
     </React.Fragment>
   );
@@ -44,33 +44,36 @@ const FoodCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 47%;
-  height: 160px;
-  margin: 6px 0;
-  padding: 15px;
-  background: lightgray;
-  border: none;
-  border-radius: 20px;
+  width: 48%;
+  height: 112px;
+  padding: 47px 6% 18px 6%;
+  margin-bottom: 16px;
+  background: #FFFFFF;
+  border: 1px solid #F19F13;
+  border-radius: 28px;
+  box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  z-index: 5;
 `;
 
 const BookmarkBox = styled.div`
   position: absolute;
   z-index: 10;
-  right: calc(1rem + 5px);
-  top: 1rem;
-  width: 1rem;
-  height: 1rem;
-  /* background: yellow; */
+  right: 19px;
+  top: 14px;
+  padding: 1px;
+  cursor: pointer;
+  z-index: 10;
 `;
 
 const CartBox = styled.div`
   position: absolute;
   z-index: 10;
-  left: 1rem;
-  top: 1rem;
-  width: 1rem;
-  height: 1rem;
-  /* background: black; */
+  left: 19px;
+  top: 14px;
+  padding: 3px;
+  cursor: pointer;
+  z-index: 10;
 `;
 
 
