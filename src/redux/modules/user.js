@@ -4,6 +4,8 @@ import instance from "./instance";
 const initialState = {
   user_info: {email: "email", nickname: "nickname"},
   is_login: false,
+  email_dupli: false,
+  nick_dupli: false,
 };
 
 export const LoginSV = (user_info) => {
@@ -52,11 +54,13 @@ export const EmailDuplicate = (email) => { //undefined 도 됨
             console.log("res of email dupli", res);
             if(res.status===201){
                 console.log("사용가능한 아이디! inputbox disabled 걸기")
+                dispatch(EmailDupli(true));
             }
         })
         .catch((err) => {
             console.log("err of email dupli", err);
             console.log("중복된 아이디!")
+            dispatch(EmailDupli(false));
         })
     };
 };
@@ -71,11 +75,13 @@ export const NickDuplicate = (nickname) => {
             console.log("res of nickname dupli", res);
             if(res.status===201){
                 console.log("사용가능한 아이디! inputbox disabled 걸기")
+                dispatch(NickDupli(true));
             }
         })
         .catch((err) => {
             console.log("err of nickname dupli", err);
             console.log("중복된 아이디!")
+            dispatch(NickDupli(false));
         })
     };
 };
@@ -112,9 +118,15 @@ const user = createSlice({
     LogOut: (state, action) => {
         state.user_info = null;
         state.is_login = false;
-    }
+    },
+    EmailDupli: (state, action) => {
+        state.email_dupli = action.payload;
+    },
+    NickDupli: (state, action) => {
+        state.nick_dupli = action.payload;
+    },
   },
 });
 
-export const {SetUser, LogOut} = user.actions
+export const {SetUser, LogOut, EmailDupli, NickDupli} = user.actions
 export default user;
