@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Range, getTrackBackground } from 'react-range';
+import { useState, useRef } from 'react';
 // elements & components
 import { Grid } from '../elements';
 import Card from './Main_Card';
+import RangeSlider from './RangeSlider';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 
@@ -39,32 +40,20 @@ const MainBody = (props) => {
           </div>
         </SearchGrid>
 
-        <Grid display="flex" jc="center" padding="0 20px">
+        {/* <Grid display="flex" jc="center" padding="0 20px">
           {category_list.map((c, idx) => {
             return (
               <CategoryButton key={idx}>{c}</CategoryButton>
             )
           })}
-        </Grid>
+        </Grid> */}
 
         <Grid margin="30px 0">
-          <Grid>
-            <RangeTrack>
-              <RangeBar/>
-              <RangePoint style={{left:"0"}}/>
-              <RangePoint style={{right:"0"}}/>
-            </RangeTrack>
-          </Grid>
-          {/* <Range
-            draggableTrack
-            step
-            min
-            max
-            values
-            onChange
-            renderTrack
-            renderThumb
-            /> */}
+          <RangeSlider 
+            min={0}
+            max={5000}
+            onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+          />
         </Grid>
 
         <CardContainer>
@@ -134,34 +123,11 @@ const CategoryButton = styled.button`
   cursor: pointer;
 `;
 
-const RangeTrack = styled.div`
-  position: relative;
-  width: 100%;
-  height: 0.5rem;
-  background: #bdc3c7;
-  /* border-radius: ; */
-`;
 
-const RangeBar = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #2c3e50;
-`;
 
-const RangePoint = styled.div`
-  position: absolute;
-  top: 0;
-  transform: translateY(-0.25rem);
-  width: 1rem;
-  height: 1rem;
-  background-color: black;
-  border-radius: 50%;
-`;
 
 const CardContainer = styled.div`
+  margin-top: 60px;
   width: 100%;
   height: 100%auto;
   display: flex;
