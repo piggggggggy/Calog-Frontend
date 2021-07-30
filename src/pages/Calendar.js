@@ -1,11 +1,7 @@
 import React from 'react';
-import {Grid, Text} from '../elements';
 //컴포넌트
 import BtnHeader from '../shared/BtnHeader';
 import Calendar_Calendar from '../components/Calendar_Calendar';
-//이모지
-import { BiChevronLeft } from "react-icons/bi";
-import { FiShoppingCart } from "react-icons/fi";
 
 /** 
  * @param {*} props
@@ -23,15 +19,8 @@ const Calendar = (props) => {
   return (
     <React.Fragment>
       {/* 헤더 */}
-      <Grid is_flex padding="5% 6%">
-        <Grid width="7%">
-          <BiChevronLeft size="40px"/>
-        </Grid>
-        <Text width="auto">캘린더</Text>
-        <Grid width="10%">
-          <FiShoppingCart size="30px"/>
-        </Grid>
-      </Grid>
+      <BtnHeader title="캘린더" display="none"/>
+      {/* 캘린더 */}
       <Calendar_Calendar />
     </React.Fragment>
   );
