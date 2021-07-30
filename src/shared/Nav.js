@@ -7,7 +7,7 @@ import { BiSearchAlt, BiBarChart, BiCalendarCheck, BiUser } from "react-icons/bi
 const Nav = (props) => {
   return (
     <React.Fragment>
-      <Wrap navbar-fixed-bottom>
+      <Wrap>
         {/* 칼로리 사전 */}
           <Grid width="auto" margin="auto 0">
             <BiSearchAlt size="40px"/>
@@ -36,7 +36,7 @@ const Wrap = styled.div`
   background-color: #eee;
   width: 100%;
   max-width: 420px;
-  height: 60px;
+  height: 80px;
   position: fixed;
   bottom: 0;
 `;
