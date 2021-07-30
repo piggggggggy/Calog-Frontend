@@ -14,7 +14,7 @@ const BtnHeader = (props) => {
         </Grid>
         <Text bold size="1rem" width="auto">{props.title}</Text>
         <Grid width="10%">
-          <FiShoppingCart size="30px"/>
+        {props.display !== 'none' && <FiShoppingCart size="30px"/>}
         </Grid>
       </Grid>
     </React.Fragment>
