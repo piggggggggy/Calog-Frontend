@@ -1,4 +1,6 @@
 import React from 'react';
+//컴포넌트
+import BtnHeader from '../shared/BtnHeader';
 
 /** 
  * @param {*} props
@@ -14,7 +16,8 @@ const Record = (props) => {
 
   return (
     <React.Fragment>
-
+      {/* 헤더 */}
+      <BtnHeader title="기록하기" display="none"/>
     </React.Fragment>
   );
 }
