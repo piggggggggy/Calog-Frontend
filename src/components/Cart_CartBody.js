@@ -21,7 +21,7 @@ const CartBody = (props) => {
     <React.Fragment>
       <BodyContainer>
         
-        <Grid is_flex>
+        <Grid is_flex padding="0 25px">
           <Grid>
             <Text bold color="red" margin="10px 0" paddig="0">100kcal 초과했어요!</Text>
             <Text bold size="3rem" margin="15px 0" paddig="0">3100kcal</Text>
@@ -49,7 +49,7 @@ CartBody.defaultProps = {
 
 const BodyContainer = styled.div`
   max-width: 100%;
-  padding: 0 25px;
+  /* padding: 0 25px; */
 `;
 
 const CartListBox = styled.div`

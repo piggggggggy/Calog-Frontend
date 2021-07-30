@@ -9,7 +9,6 @@ import Record_List from '../components/Record_List';
 //이모지
 import { BiCamera } from "react-icons/bi";
 
-
 /** 
  * @param {*} props
  * @returns 설명적기
