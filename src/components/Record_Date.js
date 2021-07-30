@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 //date picker
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
-import 'react-nice-dates/build/style.css'
+import '../styles/css/nice_date.css'
 //moment
 import moment from 'moment'
 //icon
@@ -25,15 +25,15 @@ const Record_Date = (props) => {
 // useEffect
 const dateFormat = moment().format('M월 DD일')
 const [date, setDate] = React.useState(dateFormat)
-const Change = () => {
-  setDate()
+const Change = (date) => {
+  setDate(moment(date).format('M월 DD일'))
 }
 
   return (
     <Grid padding="9px 20px 31px 20px">
       
       {/* 실제 DatePicker */}
-      <DatePicker onDateChange={setDate} locale={enGB} format=' '>
+      <DatePicker onDateChange={Change} locale={enGB} format=' '>
         {({ inputProps, focused }) => (
           <React.Fragment>
           <Grid display="flex">
