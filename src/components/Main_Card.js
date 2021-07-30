@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons

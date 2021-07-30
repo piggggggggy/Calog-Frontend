@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState, useRef } from 'react';
 // elements & components
 import { Grid } from '../elements';
 import Card from './Main_Card';
@@ -20,12 +19,6 @@ const MainBody = (props) => {
 // dispatch
 // props
 // useEffect
-
-  const category_list = [
-    "자주먹는",
-    "자주검색된",
-    "추천하는",
-  ]
 
   return (
     <React.Fragment>
@@ -110,18 +103,6 @@ const SearchGrid = styled.div`
   }
 `;
 
-const CategoryButton = styled.button`
-  /* width: 54px; */
-  margin: 5px;
-  /* height: 20px; */
-  padding: 5px;
-  line-height: 1rem;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 15px;
-  background: #d87c3f;
-  cursor: pointer;
-`;
 
 
 

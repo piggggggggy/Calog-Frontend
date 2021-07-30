@@ -168,11 +168,4 @@ const Thumb = styled.input`
   }
 `;
 
-const SliderValue = styled.div`
-  color: #dee2e6;
-  font-size: 12px;
-  margin-top: 20px;
-  position: absolute;
-`;
-
 export default RangeSlider;
