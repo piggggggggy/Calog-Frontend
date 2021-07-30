@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Kakao from '../components/social/Kakao';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
 import { PeopleE, Xemoti, LockE, CheckE } from '../img/svg';
 import _ from 'lodash';
-/** 
+/**
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
@@ -118,7 +117,6 @@ export default Signup;
 
 const Container = styled.div`
   height: 896px;
-  /* overflow-y: scroll; */
   width: 420px;
 `;
 
@@ -136,7 +134,6 @@ const InputBox = styled.div`
   border: 1px solid #FFA573;
   border-radius: 26px;
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
   margin: 15px;
 `;
@@ -150,9 +147,4 @@ const InputContainer = styled.div`
 
 const TextDiv = styled.div`
   padding: 15vh 20px 0px 20px;
-`;
-
-const SocialDiv = styled.div`
-  display: flex;
-  margin-top: 10vh;
 `;
