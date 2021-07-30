@@ -58,7 +58,7 @@ const RangeSlider = ({min, max, onChange}) => {
   return (
     <React.Fragment>
       <RangeText>
-        <Text size="20px" bold>{minVal} kacl ~ {maxVal} kcal</Text>
+        <Text size="13px" color="#8C8C8C" bold>{minVal} kacl ~ {maxVal} kcal</Text>
       </RangeText>
       <SliderContainer>
         <Grid>
@@ -114,32 +114,34 @@ const RangeText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  line-height: 18px;
+
 `;
 
 const SliderContainer = styled.div`
-  max-width: 400px;
+  width: 100%;
 `;
 
 const Slider = styled.div`
   position: relative;
-  width: 370px;
+  width: 100%;
 `;
 
 const SliderTrack = styled.div`
-  border-radius: 3px;
-  height: 5px;
+  border-radius: 4.5px;
+  height: 9px;
   position: absolute;
-  background: lightgray;
+  background: #FFE999;
   width: 100%;
   z-index: 1;
 `;
 
 const SliderRange = styled.div`
-  border-radius: 3px;
-  height: 5px;
+  border-radius: 4.5px;
+  height: 9px;
   position: absolute;
-  background: orange;
+  background: #FFE999;
   z-index: 2;
 `;
 
@@ -149,19 +151,19 @@ const Thumb = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 370px;
+  width: 378px;
   outline: none;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
-    background-color: #f1f5f7;
+    background-color: #F19F13;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 1px 1px #ced4da;
+    /* box-shadow: 0 0 1px 1px #ced4da; */
     cursor: pointer;
-    height: 18px;
-    width: 18px;
+    height: 16px;
+    width: 16px;
     margin-top: 4px;
     pointer-events: all;
     position: relative;
