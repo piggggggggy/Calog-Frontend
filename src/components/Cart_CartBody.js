@@ -21,13 +21,15 @@ const CartBody = (props) => {
     <React.Fragment>
       <BodyContainer>
         
-        <Grid is_flex padding="0 25px">
+        <Grid is_flex padding="0 32px">
           <Grid>
-            <Text bold color="red" margin="10px 0" paddig="0">100kcal 초과했어요!</Text>
-            <Text bold size="3rem" margin="15px 0" paddig="0">3100kcal</Text>
+            <Text lineheight="22px" size="17px" color="#EB5858" margin="0 0 4px 0" paddig="0">100kcal 초과했어요!</Text>
+            <Text lineheight="41px" bold size="34px" color="#2A2A2A" margin="0" paddig="0">3100 kcal</Text>
           </Grid>
-          <Grid>
-            이미지
+          <Grid width="60px" display="flex" fd="column" jc="space-between" align-items="flex-end">
+            <Text lineheight="24px" bold size="20px" margin="5px 0" padding="0">아침</Text>
+            <Text lineheight="24px" bold size="20px" color="#C4C4C4" margin="5px 0" padding="0">점심</Text>
+            <Text lineheight="24px" bold size="20px" color="#C4C4C4" margin="5px 0" padding="0">저녁</Text>
           </Grid>
         </Grid>
 
@@ -53,7 +55,7 @@ const BodyContainer = styled.div`
 `;
 
 const CartListBox = styled.div`
-  margin-top: 3rem;
+  margin-top: 32px;
 `;
 
 export default CartBody;
