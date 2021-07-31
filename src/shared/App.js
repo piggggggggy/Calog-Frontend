@@ -34,8 +34,8 @@ const App = (props) => {
 }
 const Wrap = styled.div`
   max-width: 420px;
-  min-width: 420px;
-  margin: 0 auto 80px auto;
+  min-width: 320px;
+  margin: 0 auto 9% auto;
   overflow-y: auto;
 `;
 export default App;

@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
-import RangeSlider from './RangeSlider';
+import RangeSlider from './Main_RangeSlider';
+import UnderBar from './Main_UnderBar';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 /** 
  * @param {*} props
@@ -19,6 +21,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 const MainBody = (props) => {
 // dispatch
 // props
+
 // useEffect
 
   return (
@@ -42,8 +45,8 @@ const MainBody = (props) => {
           />
         </Grid>
 
-        <Grid margin="42px 0 25px 0" padding="0 25px" display="flex" jc="flex-end">
-          <Grid display="flex" jc="flex-end" width="35%" cursor>
+        <Grid margin="6vh 0 3vh 0" padding="0 25px" display="flex" jc="flex-end">
+          <Grid display="flex" jc="flex-end" width="auto" cursor>
             <Text size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
             <Grid width="16px" height="16px" display="flex" jc="center">
               <IoIosArrowDown size="14px" color="8C8C8C"/>
@@ -58,9 +61,24 @@ const MainBody = (props) => {
           <Card/>
           <Card/>
           <Card/>
+          <Card/>
+          <Card/>
+          <Card/>
+          <Card/>
+          <Card/>
         </CardContainer>
 
-
+        {/* <CartContainer>
+          <Grid display="flex" jc="center" align-items="center" height="20px" width="20px" margin="10px auto" cursor>
+            <IoIosArrowUp size="20" color="#757575"/>
+          </Grid>
+          <CalcBox>
+            <div>계산하러가기</div>
+          </CalcBox>
+        </CartContainer> */}
+        <UnderBar>
+          
+        </UnderBar>
 
       </BodyContainer>
     </React.Fragment>
@@ -76,7 +94,7 @@ const BodyContainer = styled.div`
 `;
 
 const SearchGrid = styled.div`
-  margin: 18px 25px 11px 25px;
+  padding: 3% 25px 3% 25px;
   
   & > div {
     position: relative;
@@ -85,7 +103,7 @@ const SearchGrid = styled.div`
     justify-content: space-between; */
     width: 100%;
     border: 1px solid #F19F13;
-    padding: 12px 25px;
+    padding: 1.3vh 25px;
     border-radius: 31px;
 
     & > input {
@@ -101,27 +119,60 @@ const SearchGrid = styled.div`
 
     & > div {
       position: absolute;
-      padding: 4px;
+      padding: 0.5vh;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      right: 13px;
-      top: 5px;
+      right: 1.4vw;
+      top: 0.5vh;
     }
   }
 `;
 
 const CardContainer = styled.div`
-  margin-top: 60px;
-  max-width: 370px;
-  margin: auto;
+  width: 100%;
+  padding: 0 25px;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   column-gap: 4%;
 `;
 
+const CartContainer = styled.div`
+  width: 100%;
+  height: 12.5%;
+  position: fixed;
+  bottom: 9%;
+  border: none;
+  border-top-left-radius: 44px;
+  border-top-right-radius: 44px;
+  box-shadow: 0px -5px 22px -8px rgba(0, 0, 0, 0.14);
+  background: #fff;
+  z-index: 20;
+`;
+
+const CalcBox = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 2.8% 20px;
+
+  & > div {
+    width: 100%;
+    height: 6.25vh;
+    background: #FFE899;
+    border: none;
+    border-radius: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+`;
 
 export default MainBody;

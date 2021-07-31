@@ -45,8 +45,9 @@ const FoodCard = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 48%;
-  height: 112px;
-  padding: 47px 6% 18px 6%;
+  height: 12.5vh;
+  min-height: 95px;
+  padding: 5.2vh 6% 2vh 6%;
   margin-bottom: 16px;
   background: #FFFFFF;
   border: 1px solid #F19F13;
@@ -59,8 +60,8 @@ const FoodCard = styled.div`
 const BookmarkBox = styled.div`
   position: absolute;
   z-index: 10;
-  right: 19px;
-  top: 14px;
+  right: 2vh;
+  top: 1.5vh;
   padding: 1px;
   cursor: pointer;
   z-index: 10;
@@ -69,8 +70,8 @@ const BookmarkBox = styled.div`
 const CartBox = styled.div`
   position: absolute;
   z-index: 10;
-  left: 19px;
-  top: 14px;
+  left: 2vh;
+  top: 1.5vh;
   padding: 3px;
   cursor: pointer;
   z-index: 10;
