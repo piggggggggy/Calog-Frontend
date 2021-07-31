@@ -21,13 +21,13 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 const MainBody = (props) => {
 // dispatch
 // props
-
 // useEffect
 
   return (
     <React.Fragment>
       <BodyContainer>
 
+        {/* 검색바 */}
         <SearchGrid>
           <div>
             <input placeholder="어떤 칼로리가 궁금하신가요?"/>
@@ -37,6 +37,7 @@ const MainBody = (props) => {
           </div>
         </SearchGrid>
 
+        {/* {Range Slider // 수정해야함} */}
         <Grid margin="auto" width="90%" >
           <RangeSlider 
             min={0}
@@ -45,6 +46,7 @@ const MainBody = (props) => {
           />
         </Grid>
 
+        {/* 모냥만 만들어논 정렬 탭 */}
         <Grid margin="6vh 0 3vh 0" padding="0 25px" display="flex" jc="flex-end">
           <Grid display="flex" jc="flex-end" width="auto" cursor>
             <Text size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
@@ -54,6 +56,7 @@ const MainBody = (props) => {
           </Grid>
         </Grid>
 
+        {/* 검색결과가 들어가는 곳 */}
         <CardContainer>
           <Card/>
           <Card/>
@@ -68,16 +71,8 @@ const MainBody = (props) => {
           <Card/>
         </CardContainer>
 
-        {/* <CartContainer>
-          <Grid display="flex" jc="center" align-items="center" height="20px" width="20px" margin="10px auto" cursor>
-            <IoIosArrowUp size="20" color="#757575"/>
-          </Grid>
-          <CalcBox>
-            <div>계산하러가기</div>
-          </CalcBox>
-        </CartContainer> */}
+        {/* 장바구니 탭 */}
         <UnderBar>
-          
         </UnderBar>
 
       </BodyContainer>

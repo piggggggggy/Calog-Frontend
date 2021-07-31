@@ -21,6 +21,7 @@ const CartBody = (props) => {
     <React.Fragment>
       <BodyContainer>
         
+        {/* 상단 내용 // 모냥만 만든 상태 */}
         <Grid is_flex padding="0 32px">
           <Grid>
             <Text lineheight="22px" size="17px" color="#EB5858" margin="0 0 4px 0" paddig="0">100kcal 초과했어요!</Text>

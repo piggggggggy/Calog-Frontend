@@ -21,6 +21,7 @@ const UnderBar = (props) => {
   const [barOnOff, barSet] = useState(false);
 // useEffect
 
+  // 열고 닫는 
   const toggleCart = () => {
     if (barOnOff === false) {
       barSet(true);
@@ -34,6 +35,7 @@ const UnderBar = (props) => {
       <CartContainer 
       style={{ transform: `translate(0, ${barOnOff ? '0%' : '80%'})` }}
         >
+          {/* 감사합니다 나영님 */}
 
           <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="20px" width="20px" margin="10px auto" cursor>
             {barOnOff ? 
@@ -41,6 +43,7 @@ const UnderBar = (props) => {
             : <IoIosArrowUp size="20px" color="#757575"/> }
           </Grid>
           
+          {/* 즐겨찾기 항목 (가라데이터) */}
           <Grid padding="4px 5% 3% 5%" display="flex" fw="wrap">
             <CartButton>
               <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
