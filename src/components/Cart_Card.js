@@ -5,8 +5,7 @@ import { Text } from '../elements';
 // icons
 import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
 // library
-// import Swipeout from 'rc-swipeout';
-// import '../../node_modules/rc-swipeout/assets/index.css';
+
 
 /** 
  * @param {*} props
@@ -23,19 +22,6 @@ const Card = (props) => {
 
   return (
     <React.Fragment>
-      {/* <Swipeout
-        right={[
-          {
-            text: 'x',
-            onPress: () => console.log('삭제?'),
-            style: { backgroundColor: 'gray', color: '#353535', width: "4rem", margin: "0.5rem 0", borderRadius: "20px"},
-            // className: 'custom-class-2'
-          }
-        ]}
-        onOpen={() => console.log('열림')}
-        onClose={() => console.log('닫힘')}
-        > */}
-        {/* <div style={{height: 44}}> swipeout demo </div> */}
         <FoodCard>
           <Text lineheight="22px" size="17px" margin="0" padding="0">쌀밥</Text>
           <Text lineheight="28px" size="22px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">310 kcal</Text>
@@ -45,8 +31,6 @@ const Card = (props) => {
             <div><IoIosArrowDropright color="gray" size="27px"/></div>
           </CountBox>
         </FoodCard>
-      {/* </Swipeout> */}
-      
     </React.Fragment>
   );
 }
@@ -76,7 +60,7 @@ const CountBox = styled.div`
   align-items: center;
   justify-content: space-between;  
   position: absolute;
-  gap: 26px;
+  gap: 3vh;
 
   & > div {
     width: 27px;
@@ -84,9 +68,6 @@ const CountBox = styled.div`
     margin: 0;
     padding: 0;
     cursor: pointer;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
   }
 `;
 
