@@ -48,15 +48,6 @@ export const getWorkoutDB = () => {
   }
 }
 
-export const addRecordDB = (date, url) => {
-  return function (dispatch, getState, {history}) {
-    window.alert('기록이 완료되었어요!')
-    history.push('/dashboard')
-    // instance
-    //   .post('/api/record', {date, url})
-  }
-}
-
 
 // initial State 
 const initialState = {
@@ -66,8 +57,6 @@ const initialState = {
   record: [],
   //추천 운동 리스트
   workout: [],
-  //날짜
-  date: [],
 }
 
 // redux
@@ -87,14 +76,9 @@ const record = createSlice({
     getWorkout : (state, action) => {
 
     },
-
-    //날짜 저장하기
-    addDate : (state, action) => {
-      state.date = action.payload
-    }
   }
 });
 
-export const {getBodySpec, getRecord, getWorkout, addDate} = record.actions;
+export const {getBodySpec, getRecord, getWorkout} = record.actions;
 
 export default record;

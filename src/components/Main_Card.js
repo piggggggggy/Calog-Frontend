@@ -21,16 +21,22 @@ const Card = (props) => {
 
   return (
     <React.Fragment>
+      {/* 검색 결과 낱개 카드 */}
       <FoodCard>
+
         <BookmarkBox>
           <IoStar color="#E4E4E4" size="21px"/>
         </BookmarkBox>
+
         <CartBox>
           <AiOutlinePlusCircle size="17px"/>
         </CartBox>
+
         <Text size="13px" lineheight="18px" margin="0" padding="0">쌀밥</Text>
         <Text size="22px" lineheight="" bold margin="0" padding="0">310 kcal</Text>
+        
       </FoodCard>
+
     </React.Fragment>
   );
 }
