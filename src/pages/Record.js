@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Grid, Text } from '../elements';
+import React, {useRef, useState} from 'react';
+import { Button, Grid, Text, Image } from '../elements';
 import styled from 'styled-components';
 //컴포넌트
 import BtnHeader from '../shared/BtnHeader';
@@ -9,6 +9,11 @@ import Record_List from '../components/Record_List';
 import theme from '../shared/theme';
 //이모지
 import { BiCamera } from "react-icons/bi";
+//이미지 업로드
+import S3upload from 'react-aws-s3';
+//for axios
+import {useSelector, useDispatch} from 'react-redux';
+import {addRecordDB} from '../redux/modules/record';
 
 /** 
  * @param {*} props
@@ -70,14 +75,19 @@ const Record = (props) => {
       </Grid>
       {/* 사진 */}
       <Grid>
-        <label for="File">
-          <Grid bg={'#eee'} width="374px" height="236px" margin="23px auto" border_radius="44px" padding="15% 30%">
-            <BiCamera size="118px" color={'white'}/>
-          </Grid>
+        <label for="imgFile">
+            {!fileUrl ?
+            <Grid bg={'#eee'} width="374px" height="236px" margin="23px auto" border_radius="44px" padding="15% 30%">
+              <BiCamera size="118px" color={'white'}/>
+            </Grid> :
+              <Image src={fileUrl} width="374px" height="236px" margin="3% auto"/>
+            }
         </label>
-        <FileBox type="file" id="File" accept="image/*"/>
+        <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
         {/* btn */}
-        <Button width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 3% auto">
+        <Button
+          _onClick={submitBtn}
+          width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 12% auto">
           <Text>기록하기</Text>
         </Button>
       </Grid>

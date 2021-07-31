@@ -10,6 +10,9 @@ import '../styles/css/nice_date.css'
 import moment from 'moment'
 //icon
 import { BiCaretDown } from "react-icons/bi";
+//날짜 보내기
+import {useDispatch} from 'react-redux';
+import {getDate} from '../redux/modules/record'
 
 /** 
  * @param {*} props
@@ -20,14 +23,17 @@ import { BiCaretDown } from "react-icons/bi";
 */
 
 const Record_Date = (props) => {
-// dispatch
+  const dispatch = useDispatch()
 // props
 // useEffect
-const dateFormat = moment().format('M월 DD일')
-const [date, setDate] = React.useState(dateFormat)
-const Change = (date) => {
-  setDate(moment(date).format('M월 DD일'))
-}
+  const dateFormat = moment().format('M월 DD일')
+  const [date, setDate] = React.useState(dateFormat)
+  const Change = (date) => {
+    setDate(moment(date).format('M월 DD일'))
+    //백엔드 날짜 data post
+    let toBack = moment(date).format('YYYY-MM-DD')
+    dispatch(getDate(toBack))
+  }
 
   return (
     <Grid padding="9px 20px 31px 20px">
