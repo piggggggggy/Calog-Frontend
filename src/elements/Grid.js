@@ -9,7 +9,7 @@ const Grid = (props) => {
   // fd : flex-direction
   // grid_row : grid-template-row
   // grid_column : grid-template-column
-  const {children, width, height, margin, padding, bg, border_radius, border, text_align, is_flex, _onClick, cursor, display, jc, ai, fd, grid_row, grid_column, line_height} = props;
+  const {children, width, height, margin, padding, bg, border_radius, border, text_align, is_flex, _onClick, cursor, display, jc, ai, fd, fw, grid_row, grid_column, line_height} = props;
 
   const styles = {
     width,
@@ -26,6 +26,7 @@ const Grid = (props) => {
     jc,
     ai,
     fd,
+    fw,
     grid_row,
     grid_column,
     line_height,
@@ -55,6 +56,7 @@ Grid.defaultProps = {
   jc: false,
   ai: "center",
   fd: false,
+  fw: false,
   grid_row: false,
   grid_column: false,
   _onClick: () => {},
@@ -76,6 +78,7 @@ const DefaultGrid = styled.div`
   ${(props) => (props.jc ? `justify-content: ${props.jc}` : "")};
   ${(props) => (props.ai ? `align-items: ${props.ai}` : "")};
   ${(props) => (props.fd ? `flex-direction: ${props.fd}` : "")};
+  ${(props) => (props.fw ? `flex-wrap: ${props.fw}` : "")};
   ${(props) => (props.grid_row ? `grid-template-row: ${props.grid_row}` : "")};
   ${(props) => (props.grid_column ? `grid-template-column: ${props.grid_column}` : "")};
   ${(props) => (props.line_height ? `line-height: ${props.line_height}` : "")};

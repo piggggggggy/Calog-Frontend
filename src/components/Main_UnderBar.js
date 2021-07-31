@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // elements & components
-import { Grid } from '../elements';
+import { Grid, Text } from '../elements';
 // icons
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
+import { MdCancel } from 'react-icons/md';
 
 
 /** 
@@ -17,7 +18,6 @@ import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 const UnderBar = (props) => {
 // dispatch
 // props
-  const { width, height, children } = props;
   const [barOnOff, barSet] = useState(false);
 // useEffect
 
@@ -29,55 +29,61 @@ const UnderBar = (props) => {
     }
   };
 
-  // const OnOff = () => {
-  //   return (
-  //     barOnOff ? "top: '87.5%'" : "bottom: '9%'"
-  //   )
-  // };
-
-  // const style = {
-  //   height,
-  //   barOnOff
-  // };
-
-  // const styles = { 
-  //   transform: `translate(${x}px, ${y}px)` }; 
-  //   return ( <div style={styles}></div> );
-
-  // const styles = {
-  //   transform: `translateY(${barOnOff ? '-50%' : '12.5%'}});`
-  // }
-
-  const kk = () => {
-    if (barOnOff) {
-      return '-50%'
-    }else{
-      return '12.5%'
-    }
-  };
-
   return (
     <React.Fragment>
       <CartContainer 
-        // style={styles}
-      style={{ 
-        transform: `translateY(${kk});`,
-        // transform: "translateY(80%);"
-        // height: `${barOnOff ? '500px': '12.5%'}`,
-        // top: `${barOnOff ?  '' : '87.5%'}`,
-        // bottom: `${barOnOff ? '9%' : ''}`
-        }}
+      style={{ transform: `translate(0, ${barOnOff ? '0%' : '80%'})` }}
         >
+
           <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="20px" width="20px" margin="10px auto" cursor>
             {barOnOff ? 
-            <IoIosArrowDown size="20" color="#757575"/>
-            : <IoIosArrowUp size="20" color="#757575"/> }
+            <IoIosArrowDown size="20px" color="#757575"/>
+            : <IoIosArrowUp size="20px" color="#757575"/> }
           </Grid>
-          <CalcBox 
-          // style={{ display: `${barOnOff ? 'block': 'none'}` }}
-          >
+          
+          <Grid padding="4px 5% 3% 5%" display="flex" fw="wrap">
+            <CartButton>
+              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                피자마루 간장치킨
+              </Text>
+              <div><MdCancel size="13px" color="#404040"/></div>
+            </CartButton>
+            <CartButton>
+              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                삶은 겨란
+              </Text>
+              <div><MdCancel size="13px" color="#404040"/></div>
+            </CartButton>
+            <CartButton>
+              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                고추바사삭
+              </Text>
+              <div><MdCancel size="13px" color="#404040"/></div>
+            </CartButton>
+            <CartButton>
+              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                신라면
+              </Text>
+              <div><MdCancel size="13px" color="#404040"/></div>
+            </CartButton>
+            <CartButton>
+              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                알리오올리오
+              </Text>
+              <div><MdCancel size="13px" color="#404040"/></div>
+            </CartButton>
+            <CartButton>
+              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                뽀또
+              </Text>
+              <div><MdCancel size="13px" color="#404040"/></div>
+            </CartButton>
+          </Grid>
+          
+          <CalcBox>
             <div>계산하러가기</div>
           </CalcBox>
+
         </CartContainer>
     </React.Fragment>
   );
@@ -87,14 +93,9 @@ UnderBar.defaultProps = {
 
 }
 
-// const BarContainer = styled.div`
-
-// `;
-
 const CartContainer = styled.div`
   width: 100%;
-  /* height: 12.5%; */
-  height: 500px;
+  min-height: 12.5%;
   position: fixed;
   bottom: 9%;
   border: none;
@@ -104,12 +105,14 @@ const CartContainer = styled.div`
   background: #fff;
   z-index: 20;
   transition: 1s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const CalcBox = styled.div`
-  /* display: none; */
-  position: absolute;
-  bottom: 0;
   width: 100%;
   padding: 2.8% 20px;
 
@@ -124,6 +127,25 @@ const CalcBox = styled.div`
     justify-content: center;
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
+  }
+`;
+
+const CartButton = styled.div`
+  height: 4vh;
+  padding: 5px 8px;
+  background: #E4E4E4;
+  border-radius: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  gap: 3px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 `;
