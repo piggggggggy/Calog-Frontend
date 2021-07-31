@@ -45,10 +45,10 @@ const Record = (props) => {
     let file = fileUpload.current.files[0];
     let newFileName = fileUpload.current.files[0].name;
     const config = {
-      bucketName: 'calories-img',
-      region: 'ap-northeast-2',
-      accessKeyId: 'AKIAZXJLMTKJ723VZ67X',
-      secretAccessKey: '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',
+      bucketName: process.env.REACT_APP_BUCKET_NAME,
+      region: process.env.REACT_APP_REGION,
+      accessKeyId: process.env.REACT_APP_ACCESS_ID,
+      secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
     };
     const ReactS3Client = new S3upload(config);
     ReactS3Client.uploadFile(file, newFileName).then(data => {
