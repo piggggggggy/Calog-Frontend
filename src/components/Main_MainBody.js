@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { searchKeywordDB } from '../redux/modules/search';
+import _ from 'lodash';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -19,8 +22,22 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 const MainBody = (props) => {
 // dispatch
+  const dispatch = useDispatch();
 // props
+  const search_list = useSelector((state) => state.search.filtered_list);
+  const [keyword, setKey] = useState();
 // useEffect
+  
+  
+
+  const keyChange = (e) => {
+    setKey(e.target.value)
+  };
+
+  // 검색 함수!
+  const search = () => {
+    dispatch(searchKeywordDB(keyword))
+  };
 
   return (
     <React.Fragment>
@@ -29,8 +46,8 @@ const MainBody = (props) => {
         {/* 검색바 */}
         <SearchGrid>
           <div>
-            <input placeholder="어떤 칼로리가 궁금하신가요?"/>
-            <div>
+            <input onChange={(e)=>{keyChange(e)}} placeholder="어떤 칼로리가 궁금하신가요?"/>
+            <div onClick={()=>{search()}}>
               <BiSearchAlt2 size="24px" color="#5F5F5F" />
             </div>
           </div>
@@ -40,7 +57,7 @@ const MainBody = (props) => {
         <Grid padding="0 2.8vh" >
           <RangeSlider 
             min={0}
-            max={1000}
+            max={5000}
             onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
           />
         </Grid>
@@ -57,17 +74,9 @@ const MainBody = (props) => {
 
         {/* 검색결과가 들어가는 곳 */}
         <CardContainer>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          {search_list.map((result, idx) => {
+            return <Card key={result.foodId} {...result}/>
+          })}
         </CardContainer>
 
         {/* 장바구니 탭 */}
