@@ -151,7 +151,7 @@ const Thumb = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 378px;
+  width: 85%;
   outline: none;
 
   &::-webkit-slider-thumb {

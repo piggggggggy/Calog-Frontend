@@ -35,10 +35,11 @@ const Wrap = styled.div`
   align-items: center;
   background-color: #eee;
   width: 100%;
-  max-width: 420px;
-  height: 80px;
+  /* max-width: 420px; */
+  height: 9%;
   position: fixed;
   bottom: 0;
+  z-index: 30;
 `;
 
 export default Nav;
