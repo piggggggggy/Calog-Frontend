@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Grid, Text } from '../elements';
+import React, {useRef, useState} from 'react';
+import { Button, Grid, Text, Image } from '../elements';
 import styled from 'styled-components';
 //컴포넌트
 import BtnHeader from '../shared/BtnHeader';
@@ -9,6 +9,11 @@ import Record_List from '../components/Record_List';
 import theme from '../shared/theme';
 //이모지
 import { BiCamera } from "react-icons/bi";
+//이미지 업로드
+import S3upload from 'react-aws-s3';
+//for axios
+import {useSelector, useDispatch} from 'react-redux';
+import {addRecordDB} from '../redux/modules/record';
 
 /** 
  * @param {*} props
@@ -18,9 +23,44 @@ import { BiCamera } from "react-icons/bi";
 */
 
 const Record = (props) => {
-// dispatch
-// props
-// useEffect
+  const dispatch = useDispatch()
+  // props
+  // useEffect
+
+  const fileUpload = useRef()
+  //preview
+  const [fileUrl, setFileUrl] = useState(null);
+  const chgPreview = (e) => {
+    const imageFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    setFileUrl(imageUrl)
+  }
+
+  //for axios
+  const recordDate = useSelector((state) => state.record.date)
+
+  //upload btn
+  const submitBtn = (e) => {
+    e.preventDefault();
+    let file = fileUpload.current.files[0];
+    let newFileName = fileUpload.current.files[0].name;
+    const config = {
+      bucketName: 'calories-img',
+      region: 'ap-northeast-2',
+      accessKeyId: 'AKIAZXJLMTKJ723VZ67X',
+      secretAccessKey: '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',
+    };
+    const ReactS3Client = new S3upload(config);
+    ReactS3Client.uploadFile(file, newFileName).then(data => {
+      if(data.status === 204) {
+        let imgUrl = data.location
+        dispatch(addRecordDB(recordDate, imgUrl))
+      } else {
+        window.alert('사진 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
+      }
+    });
+  }
+
 
   return (
     <React.Fragment>
@@ -36,14 +76,19 @@ const Record = (props) => {
       </Grid>
       {/* 사진 */}
       <Grid>
-        <label for="File">
-          <Grid bg={'#eee'} width="374px" height="236px" margin="23px auto" border_radius="44px" padding="15% 30%">
-            <BiCamera size="118px" color={'white'}/>
-          </Grid>
+        <label for="imgFile">
+            {!fileUrl ?
+            <Grid bg={'#eee'} width="374px" height="236px" margin="23px auto" border_radius="44px" padding="15% 30%">
+              <BiCamera size="118px" color={'white'}/>
+            </Grid> :
+              <Image src={fileUrl} width="374px" height="236px" margin="3% auto"/>
+            }
         </label>
-        <FileBox type="file" id="File" accept="image/*"/>
+        <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
         {/* btn */}
-        <Button width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 3% auto">
+        <Button
+          _onClick={submitBtn}
+          width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 12% auto">
           <Text>기록하기</Text>
         </Button>
       </Grid>
