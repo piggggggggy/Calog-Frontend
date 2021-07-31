@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -8,7 +7,7 @@ import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown } from 'react-icons/io';
 
 /** 
  * @param {*} props
@@ -38,10 +37,10 @@ const MainBody = (props) => {
         </SearchGrid>
 
         {/* {Range Slider // 수정해야함} */}
-        <Grid margin="auto" width="90%" >
+        <Grid padding="0 2.8vh" >
           <RangeSlider 
             min={0}
-            max={5000}
+            max={1000}
             onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
           />
         </Grid>

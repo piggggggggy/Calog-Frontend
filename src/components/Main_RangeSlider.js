@@ -60,7 +60,9 @@ const RangeSlider = ({min, max, onChange}) => {
       <RangeText>
         <Text size="13px" color="#8C8C8C" bold>{minVal} kacl ~ {maxVal} kcal</Text>
       </RangeText>
+
       <SliderContainer>
+
         <Grid>
           <Thumb
             type="range"
@@ -69,7 +71,7 @@ const RangeSlider = ({min, max, onChange}) => {
             max={max}
             value={minVal}
             onChange={(e) => {
-              const value = Math.min(Number(e.target.value), maxVal - 1);
+              const value = Math.min(Number(e.target.value), maxVal - 100);
               setMin(value);
               minRef.current = value;
             }}
@@ -82,20 +84,20 @@ const RangeSlider = ({min, max, onChange}) => {
             max={max}
             value={maxVal}
             onChange={(e) => {
-              const value = Math.max(Number(e.target.value), minVal + 1);
+              const value = Math.max(Number(e.target.value), minVal + 100);
               setMax(value);
               maxRef.current = value;
             }}
           />
         </Grid>
+
         <Slider>
           <SliderTrack/>
           <SliderRange ref={range}/>
         </Slider>
+
       </SliderContainer>
-      
-      {/* <SliderValue style={{left: "6px"}}>{minVal}</SliderValue>
-      <SliderValue style={{right: "-4px"}}>{maxVal}</SliderValue> */}
+
     </React.Fragment>
   );
 }
@@ -151,7 +153,8 @@ const Thumb = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 85%;
+  width: 90%;
+  max-width: 370px;
   outline: none;
 
   &::-webkit-slider-thumb {
