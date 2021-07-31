@@ -18,9 +18,43 @@ import { BiCamera } from "react-icons/bi";
 */
 
 const Record = (props) => {
-// dispatch
-// props
-// useEffect
+  const dispatch = useDispatch()
+  // props
+  // useEffect
+
+  const fileUpload = useRef()
+  //preview
+  const [fileUrl, setFileUrl] = useState(null);
+  const chgPreview = (e) => {
+    const imageFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    setFileUrl(imageUrl)
+  }
+
+  //for axios
+  const recordDate = useSelector((state) => state.record.date)
+
+  //upload btn
+  const submitBtn = (e) => {
+    e.preventDefault();
+    let file = fileUpload.current.files[0];
+    let newFileName = fileUpload.current.files[0].name;
+    const config = {
+      bucketName: process.env.REACT_APP_BUCKET_NAME,
+      region: process.env.REACT_APP_REGION,
+      accessKeyId: process.env.REACT_APP_ACCESS_ID,
+      secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+    };
+    const ReactS3Client = new S3upload(config);
+    ReactS3Client.uploadFile(file, newFileName).then(data => {
+      if(data.status === 204) {
+        let imgUrl = data.location
+        dispatch(addRecordDB(recordDate, imgUrl))
+      } else {
+        window.alert('사진 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
+      }
+    });
+  }
 
   return (
     <React.Fragment>
