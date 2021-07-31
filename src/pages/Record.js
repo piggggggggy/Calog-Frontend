@@ -1,11 +1,12 @@
 import React from 'react';
-import { Grid } from '../elements';
+import { Button, Grid, Text } from '../elements';
 import styled from 'styled-components';
 //컴포넌트
 import BtnHeader from '../shared/BtnHeader';
 import Record_Date from '../components/Record_Date';
 import Record_When from '../components/Record_When';
 import Record_List from '../components/Record_List';
+import theme from '../shared/theme';
 //이모지
 import { BiCamera } from "react-icons/bi";
 
@@ -41,6 +42,10 @@ const Record = (props) => {
           </Grid>
         </label>
         <FileBox type="file" id="File" accept="image/*"/>
+        {/* btn */}
+        <Button width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 3% auto">
+          <Text>기록하기</Text>
+        </Button>
       </Grid>
     </React.Fragment>
   );
