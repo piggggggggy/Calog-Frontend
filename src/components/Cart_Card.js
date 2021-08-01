@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 // elements & components
 import { Text } from '../elements';
@@ -18,17 +18,27 @@ import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
 const Card = (props) => {
 // dispatch
 // props
+  const [count, setCount] = useState(1);
 // useEffect
+
+  const upCount = () => {
+    setCount(count + 0.5)
+  };
+  const downCount = () => {
+    if(count > 0.5){
+      setCount(count - 0.5)
+    }
+  };
 
   return (
     <React.Fragment>
         <FoodCard>
-          <Text lineheight="22px" size="17px" margin="0" padding="0">쌀밥</Text>
-          <Text lineheight="28px" size="22px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">310 kcal</Text>
+          <Text lineheight="22px" size="17px" margin="0" padding="0">{props.name}</Text>
+          <Text lineheight="28px" size="22px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">{props.kcal} kcal</Text>
           <CountBox>
-            <div><IoIosArrowDropleft color="gray" size="27px"/></div>
-            <Text lineheight="28px" color="#000000" bold size="22px" margin="0" padding="0">5</Text>
-            <div><IoIosArrowDropright color="gray" size="27px"/></div>
+            <div onClick={downCount}><IoIosArrowDropleft color="gray" size="27px"/></div>
+            <Text lineheight="28px" color="#000000" bold size="22px" margin="0" padding="0">{count}</Text>
+            <div onClick={upCount}><IoIosArrowDropright color="gray" size="27px"/></div>
           </CountBox>
         </FoodCard>
     </React.Fragment>
@@ -46,7 +56,7 @@ const FoodCard = styled.div`
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 8px;
-  padding: 25px 26px 23px 26px;
+  padding: 2.2vh 7.6vw;
   background: #fff;
   border: 1px solid #F19F13;
   border-radius: 28px;
@@ -55,12 +65,13 @@ const FoodCard = styled.div`
 const CountBox = styled.div`
   position: absolute;
   right: 5%;
-  top: 39px;
+  top: 4.5vh;
+  min-width: 32vw;
+  max-width: 32vw;
   display: flex;
   align-items: center;
   justify-content: space-between;  
-  position: absolute;
-  gap: 3vh;
+  /* gap: auto; */
 
   & > div {
     width: 27px;

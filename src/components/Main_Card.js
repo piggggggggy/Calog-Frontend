@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // modules
-import { addCartRx } from '../redux/modules/search';
+import { addCartRx } from '../redux/modules/cart';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons
@@ -21,6 +21,7 @@ const Card = (props) => {
 // dispatch
   const dispatch = useDispatch();
 // props
+  const cart_list = useSelector((state) => state.cart.cart);
 // useEffect
 
   // 장바구니 담기!
@@ -35,11 +36,25 @@ const Card = (props) => {
     dispatch(addCartRx(cartUnit))
   };
 
+  // 장바구니에 담긴 food일 경우 배경 #FFE899
+  const is_picked = () => {
+    const cartCheck = cart_list.findIndex((c) => c.foodId === props.foodId);
+    if (cartCheck !== -1) {
+      return (
+        { backgroundColor: "#FFE899" }
+        )
+    }else{
+      return (
+        { backgroundColor: "#ffffff" }
+      )
+    }
+  };
+    
   return (
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard>
+      <FoodCard style={is_picked()}>
 
         <BookmarkBox>
           <IoStar color="#E4E4E4" size="21px"/>
@@ -72,7 +87,6 @@ const FoodCard = styled.div`
   min-height: 95px;
   padding: 5.2vh 6% 2vh 6%;
   margin-bottom: 16px;
-  background: #FFFFFF;
   border: 1px solid #F19F13;
   border-radius: 28px;
   box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.14);

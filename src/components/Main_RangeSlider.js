@@ -153,7 +153,7 @@ const Thumb = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 90%;
+  width: 89%;
   max-width: 370px;
   outline: none;
 

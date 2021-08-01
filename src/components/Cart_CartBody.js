@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Cart_Card';
@@ -15,6 +16,8 @@ import Card from './Cart_Card';
 const CartBody = (props) => {
 // dispatch
 // props
+  const cart_list = useSelector((state) => state.cart.cart);
+  const [time, setTime] = useState('morning');
 // useEffect
 
   return (
@@ -35,11 +38,14 @@ const CartBody = (props) => {
         </Grid>
 
         <CartListBox>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          {cart_list.map((cart, idx) => {
+            return <Card key={cart.foodId} {...cart}/>
+          })}
         </CartListBox>
+
+        <CalcBox>
+          <div>기록하러가기</div>
+        </CalcBox>
 
       </BodyContainer>
     </React.Fragment>
@@ -57,6 +63,27 @@ const BodyContainer = styled.div`
 
 const CartListBox = styled.div`
   margin-top: 32px;
+  padding-bottom: 14vh;
 `;
 
+const CalcBox = styled.div`
+  position: fixed;
+  bottom: 9%;
+  width: 100%;
+  padding: 2.8vh 20px;
+
+  & > div {
+    width: 100%;
+    height: 6.25vh;
+    background: #FFE899;
+    border: none;
+    border-radius: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+`;
 export default CartBody;
