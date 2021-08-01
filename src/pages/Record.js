@@ -70,18 +70,23 @@ const Record = (props) => {
       {/* 기록할 칼로리의 시점 */}
       <Record_When />
       {/* 칼로리 리스트 - 맵 */}
-      <Grid margin="24px auto">
+      <Grid margin="24px auto" height="287px">
         <Record_List />
       </Grid>
       {/* 리스트가 5개 이상일 경우 활성화 */}
-      <Grid margin="22px auto" width="30px">
+      {/* {calorie_list >=5 &&
+        <Grid margin="22px auto" width="30px">
         <BiChevronDown size="30px"/>
       </Grid>
+      } */}
       {/* 사진 */}
+      <Grid padding="16px 48px 0 48px">
+        <Text size="17px" bold>내가 먹은 음식</Text>
+      </Grid>
       <Grid>
         <label for="imgFile">
             {!fileUrl ?
-            <Grid bg={'#eee'} width="374px" height="236px" margin="23px auto" border_radius="44px" padding="15% 30%">
+            <Grid bg={'#eee'} width="374px" height="236px" margin="16px auto 23px auto" border_radius="44px" padding="15% 30%">
               <BiCamera size="118px" color={'white'}/>
             </Grid> :
               <Image src={fileUrl} width="374px" height="236px" margin="3% auto"/>
