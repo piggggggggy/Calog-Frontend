@@ -35,7 +35,7 @@ const Wrap = styled.div`
   align-items: center;
   background-color: #eee;
   width: 100%;
-  /* max-width: 420px; */
+  max-width: 420px;
   height: 9%;
   position: fixed;
   bottom: 0;

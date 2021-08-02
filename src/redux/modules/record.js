@@ -49,18 +49,20 @@ export const getWorkoutDB = () => {
 }
 
 //기록하기
-export const addRecordDB = (date, food_list, url) => {
+export const addRecordDB = (date, list, url, memo) => {
   return function (dispatch, getState, {history}) {
-    window.alert('기록이 완료되었어요!')
-    history.push('/dashboard')
-    // instance
-    //   .post('/api/record', {date, food_list, url})
-    //   .then((res) => {
-    //     console.log(res)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
+    const data = {
+      date:date, food_list:list, url:url, contents:memo,
+    }
+    console.log(data);
+    instance
+      .post('/api/record', {data})
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 
@@ -73,8 +75,6 @@ const initialState = {
   record: [],
   //추천 운동 리스트
   workout: [],
-  //날짜 가져오기
-  date: [],
 }
 
 // redux
@@ -94,13 +94,9 @@ const record = createSlice({
     getWorkout : (state, action) => {
 
     },
-    //날짜 가져오기
-    getDate : (state, action) => {
-      state.date = action.payload
-    }
   }
 });
 
-export const {getBodySpec, getRecord, getWorkout, getDate} = record.actions;
+export const {getBodySpec, getRecord, getWorkout} = record.actions;
 
 export default record;

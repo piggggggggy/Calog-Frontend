@@ -11,8 +11,8 @@ import moment from 'moment'
 //icon
 import { BiCaretDown } from "react-icons/bi";
 //날짜 보내기
-import {useDispatch} from 'react-redux';
-import {getDate} from '../redux/modules/record'
+import {useDispatch, useSelector} from 'react-redux';
+import {addDate} from '../redux/modules/cart'
 
 /** 
  * @param {*} props
@@ -24,19 +24,22 @@ import {getDate} from '../redux/modules/record'
 
 const Record_Date = (props) => {
   const dispatch = useDispatch()
-// props
-// useEffect
-  const dateFormat = moment().format('M월 DD일')
-  const [date, setDate] = React.useState(dateFormat)
+
+  //날짜
+  const _SelectDate = useSelector((state) => state.cart.date)
+  const Date = moment(_SelectDate).format('M월 DD일')
+  const [date, setDate] = React.useState(Date)
+  
+
   const Change = (date) => {
     setDate(moment(date).format('M월 DD일'))
     //백엔드 날짜 data post
-    let toBack = moment(date).format('YYYY-MM-DD')
-    dispatch(getDate(toBack))
+    const chgDateFormat = moment(date).format('YYYY-MM-DD')
+    dispatch(addDate(chgDateFormat))
   }
 
   return (
-    <Grid padding="9px 20px 31px 20px">
+    <Grid padding="9px 20px 7% 20px">
       
       {/* 실제 DatePicker */}
       <DatePicker onDateChange={Change} locale={enGB} format=' '>
@@ -44,7 +47,7 @@ const Record_Date = (props) => {
           <React.Fragment>
           <Grid display="flex">
             {/* datePicker 실제로 보이는 부분 */}
-            <Text width="90px" margin="0 8px 0 29px" size="22px" bold>{date}</Text>
+            <Text width="24%" margin="0 8px 0 29px" size="22px" bold>{date}</Text>
             <BiCaretDown size="16px" color={theme.color.gray_4}/>
             {/* datePicker 안보이게 숨김 처리 */}
             <Input

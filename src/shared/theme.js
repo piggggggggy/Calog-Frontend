@@ -16,20 +16,14 @@ const color = {
 
 //반응형용 디바이스 사이즈
 const deviceSizes = {
-  mobileS: "320px",
-  mobileM: "375px",
-  mobileL: "450px",
-  tablet: "768px",
-  tabletL: "1024px",
+  mobileM: "400px",
+  mobileH: "700px"
 };
 
 //반응형용 디바이스
 const device = {
-  mobileS: `only screen and (max-width: ${deviceSizes.mobileS})`,
   mobileM: `only screen and (max-width: ${deviceSizes.mobileM})`,
-  mobileL: `only screen and (max-width: ${deviceSizes.mobileL})`,
-  tablet: `only screen and (max-width: ${deviceSizes.tablet})`,
-  tabletL: `only screen and (max-width: ${deviceSizes.tabletL})`,
+  mobileH: `only screen and (min-height: ${deviceSizes.mobileH})`,
 };
 
 const theme = {

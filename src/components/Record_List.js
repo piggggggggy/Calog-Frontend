@@ -12,16 +12,14 @@ import theme from '../shared/theme';
 */
 
 const Record_List = (props) => {
-// dispatch
-  const {foodId, name, quantity, calorie, gram} = props
-// useEffect
+  const { name, amount, kcal, grams} = props
 
   return (
     <React.Fragment>
       <Wrap>
-        <Text>{props.name} ({props.gram}g)</Text>
-        <Text>{props.calorie}kcal</Text>
-        <Text>X {props.quantity}</Text>
+        <Text width="60%" size="15px" m_size="13px">{name} ({grams}g)</Text>
+        <Text size="15px" bold m_size="13px">{kcal}kcal</Text>
+        <Text size="15px" m_size="13px">X {amount}</Text>
       </Wrap>
     </React.Fragment>
   );
@@ -36,7 +34,7 @@ Record_List.defaultProps = {
 }
 
 const Wrap = styled.div`
-  width: 368px;
+  width: 88%;
   height: 51px;
   border: 1px solid ${theme.color.dark};
   border-radius: 28px;
@@ -44,6 +42,7 @@ const Wrap = styled.div`
   margin: 8px auto;
   display: flex;
   justify-content: space-around;
+  padding: 0 2%;
 `;
 
 export default Record_List;

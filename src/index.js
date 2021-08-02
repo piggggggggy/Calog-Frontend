@@ -6,8 +6,7 @@ import reportWebVitals from './reportWebVitals';
 //history 라우팅
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./redux/configStore";
-//리덕스 store
-// import store from "./redux/configStore";
+//리덕스
 import { Provider } from "react-redux";
 // redux-persist
 import { PersistGate } from 'redux-persist/integration/react';
