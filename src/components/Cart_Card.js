@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 // elements & components
 import { Text } from '../elements';
 // icons
 import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
-// library
+// modules
+import { setUpAmount, setDownAmount } from '../redux/modules/cart';
 
 
 /** 
@@ -17,16 +19,21 @@ import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
 
 const Card = (props) => {
 // dispatch
+  const dispatch = useDispatch();
 // props
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(props.amount);
 // useEffect
 
+  // 갯수 카운팅하기!
   const upCount = () => {
-    setCount(count + 0.5)
+    setCount(count + 0.5);
+    dispatch(setUpAmount(props.foodId));
   };
+
   const downCount = () => {
     if(count > 0.5){
-      setCount(count - 0.5)
+      setCount(count - 0.5);
+      dispatch(setDownAmount(props.foodId));
     }
   };
 

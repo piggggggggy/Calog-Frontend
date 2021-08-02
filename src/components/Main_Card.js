@@ -32,6 +32,7 @@ const Card = (props) => {
       forOne: props.forOne,
       grams: props.grams,
       kcal: props.kcal,
+      amount: 1,
     };
     dispatch(addCartRx(cartUnit))
   };

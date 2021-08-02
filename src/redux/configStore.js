@@ -3,7 +3,7 @@ import { connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 
-// persist
+// redux-persist
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 // => localStorage에 저장!
@@ -22,7 +22,7 @@ const middlewares = [
     history,
   }),
 ];
-
+ 
 const env = process.env.NODE_ENV;
 
 if (env === "development") {
@@ -35,6 +35,7 @@ const persistConfig = {
   key: "root",
   storage: storage,
   whitelist: ["cart"]
+  // blacklist: ["cart"]
 };
 
 const reducer = combineReducers({
@@ -46,10 +47,8 @@ const reducer = combineReducers({
   router: connectRouter(history),
 });
 
-const persistedReducer = persistReducer(persistConfig, reducer)
-
+// persist
+const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({ reducer: persistedReducer, middleware: middlewares });
-
 export const persistor = persistStore(store);
-
 export default { store, persistor };
