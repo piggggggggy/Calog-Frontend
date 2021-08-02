@@ -60,20 +60,27 @@ const CartBody = (props) => {
       <BodyContainer>
         
         {/* 상단 내용 // 모냥만 만든 상태 */}
-        <Grid is_flex padding="0 32px">
+        <Grid padding="0 9vw">
           <Grid>
             <Text lineheight="22px" size="17px" color="#EB5858" margin="0 0 4px 0" paddig="0">100kcal 초과했어요!</Text>
             <Text lineheight="41px" bold size="34px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
           </Grid>
-          <Grid width="60px" display="flex" fd="column" jc="space-between" align-items="flex-end">
-            <div  onClick={()=>{selectType("morning")}}>
-              <Text lineheight="24px" bold size="20px" color={type === "아침" ? "black":"#C4C4C4"} margin="5px 0" padding="0">아침</Text>
+
+          <Grid display="flex" margin="3.5vh 0 0 0">
+            <div onClick={()=>{selectType("morning")}}>
+              <Text lineheight="22px" size="17px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">아침</Text>
             </div>
             <div onClick={()=>{selectType("lunch")}}>
-              <Text lineheight="24px" bold size="20px" color={type === "점심" ? "black":"#C4C4C4"} margin="5px 0" padding="0">점심</Text>
+              <Text lineheight="22px" size="17px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">점심</Text>
             </div>
             <div onClick={()=>{selectType("dinner")}}>
-              <Text lineheight="24px" bold size="20px" color={type === "저녁" ? "black":"#C4C4C4"} margin="5px 0" padding="0">저녁</Text>
+              <Text lineheight="22px" size="17px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">저녁</Text>
+            </div>
+            <div onClick={()=>{selectType("snack")}}>
+              <Text lineheight="22px" size="17px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">간식</Text>
+            </div>
+            <div onClick={()=>{selectType("midnightSnack")}}>
+              <Text lineheight="22px" size="17px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">야식</Text>
             </div>
           </Grid>
         </Grid>
@@ -103,7 +110,7 @@ const BodyContainer = styled.div`
 `;
 
 const CartListBox = styled.div`
-  margin-top: 32px;
+  margin-top: 16px;
   padding-bottom: 14vh;
 `;
 
