@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configStore';
+// modules
+import { deleteCartRx } from '../redux/modules/cart';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons
@@ -17,7 +21,9 @@ import { MdCancel } from 'react-icons/md';
 
 const UnderBar = (props) => {
 // dispatch
+  const dispatch = useDispatch();
 // props
+  const cart_list = useSelector((state) => state.cart.cart);
   const [barOnOff, barSet] = useState(false);
 // useEffect
 
@@ -30,14 +36,19 @@ const UnderBar = (props) => {
     }
   };
 
+  // 카트 내용 삭제
+  const deleteCart = (foodId) => {
+    dispatch(deleteCartRx(foodId));
+  };
+
   return (
     <React.Fragment>
       <CartContainer 
-      style={{ transform: `translate(0, ${barOnOff ? '0%' : '80%'})` }}
+      style={{ transform: `translate(0, ${barOnOff ? '0%' : 'calc(100% - 6.25vh)'})` }}
         >
           {/* 감사합니다 나영님 */}
 
-          <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="20px" width="20px" margin="10px auto" cursor>
+          <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="20px" width="20px" margin="1.5vh auto" cursor>
             {barOnOff ? 
             <IoIosArrowDown size="20px" color="#757575"/>
             : <IoIosArrowUp size="20px" color="#757575"/> }
@@ -45,46 +56,20 @@ const UnderBar = (props) => {
           
           {/* 즐겨찾기 항목 (가라데이터) */}
           <Grid padding="4px 5% 3% 5%" display="flex" fw="wrap">
-            <CartButton>
-              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
-                피자마루 간장치킨
-              </Text>
-              <div><MdCancel size="13px" color="#404040"/></div>
-            </CartButton>
-            <CartButton>
-              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
-                삶은 겨란
-              </Text>
-              <div><MdCancel size="13px" color="#404040"/></div>
-            </CartButton>
-            <CartButton>
-              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
-                고추바사삭
-              </Text>
-              <div><MdCancel size="13px" color="#404040"/></div>
-            </CartButton>
-            <CartButton>
-              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
-                신라면
-              </Text>
-              <div><MdCancel size="13px" color="#404040"/></div>
-            </CartButton>
-            <CartButton>
-              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
-                알리오올리오
-              </Text>
-              <div><MdCancel size="13px" color="#404040"/></div>
-            </CartButton>
-            <CartButton>
-              <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
-                뽀또
-              </Text>
-              <div><MdCancel size="13px" color="#404040"/></div>
-            </CartButton>
+            {cart_list.map((cart, idx) => {
+              return (
+                <CartButton key={idx}>
+                  <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                    {cart.name}
+                  </Text>
+                  <div onClick={()=>{deleteCart(cart.foodId)}}><MdCancel size="13px" color="#404040"/></div>
+                </CartButton>
+              )
+            })}
           </Grid>
           
           <CalcBox>
-            <div>계산하러가기</div>
+            <div onClick={()=>{history.push('/cart')}}>계산하러가기</div>
           </CalcBox>
 
         </CartContainer>
@@ -117,7 +102,7 @@ const CartContainer = styled.div`
 
 const CalcBox = styled.div`
   width: 100%;
-  padding: 2.8% 20px;
+  padding: 2.8vh 20px;
 
   & > div {
     width: 100%;
