@@ -79,13 +79,13 @@ const Record = (props) => {
       {/* 기록할 칼로리의 시점 */}
       <Record_When />
       {/* 칼로리 리스트 - 맵 */}
-      <Grid margin="24px auto" height="287px">
+      <Grid margin="24px auto" height={cart_list.length<=3 ? "180px" : "auto"}>
         {cart_list.map((c, idx) => {
           return <Record_List key={c.foodId} {...c}/>
         })}
       </Grid>
       {/* 리스트가 5개 이상일 경우 활성화 */}
-      {cart_list >=5 &&
+      {cart_list.length >=5 &&
         <Grid margin="22px auto" width="30px">
         <BiChevronDown size="30px"/>
       </Grid>
@@ -95,7 +95,7 @@ const Record = (props) => {
         <Text size="17px" bold>내가 먹은 음식</Text>
       </Grid>
       <Grid>
-        <label for="imgFile">
+        <label htmlFor="imgFile">
             {!fileUrl ?
             <Grid bg={'#eee'} width="374px" height="236px" margin="16px auto 23px auto" border_radius="44px" padding="15% 30%">
               <BiCamera size="118px" color={'white'}/>
@@ -103,7 +103,7 @@ const Record = (props) => {
               <Image src={fileUrl} width="374px" height="236px" margin="3% auto"/>
             }
         </label>
-        <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+        <FileBox type="file" accept="image/*; capture=camera" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
         {/* btn */}
         <Button
           _onClick={submitBtn}

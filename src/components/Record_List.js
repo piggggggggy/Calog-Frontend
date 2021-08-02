@@ -12,7 +12,7 @@ import theme from '../shared/theme';
 */
 
 const Record_List = (props) => {
-  const {foodId, name, amount, kcal, grams} = props
+  const { name, amount, kcal, grams} = props
 
   return (
     <React.Fragment>

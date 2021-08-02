@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
