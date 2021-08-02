@@ -106,6 +106,20 @@ export const _logOut = () => {
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
     }
 }
+
+export const BodySpectSV = (gender, weight, height, age, control) => {
+    return function(dispatch, getState, {history}){
+        console.log(gender, weight, height, age, control)
+        instance
+        .post('/api/user/bodySpec', {gender, weight, height, age, control})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+}
 //리덕스
 const user = createSlice({
   name: "user",
@@ -125,6 +139,9 @@ const user = createSlice({
     NickDupli: (state, action) => {
         state.nick_dupli = action.payload;
     },
+    // BodySpect: (state, action) => {
+    //     state.user_info = action.payload;
+    // }
   },
 });
 

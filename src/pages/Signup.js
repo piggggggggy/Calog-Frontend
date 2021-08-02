@@ -14,6 +14,9 @@ import _ from 'lodash';
 */
 
 const Signup = (props) => {
+  localStorage.setItem('key', JSON.stringify({ a: 'b' }));
+  const a =localStorage.getItem('key');
+  console.log(a);
 const dispatch = useDispatch();
 const dupliEmail = useSelector((state)=>state.user.email_dupli)
 const dupliNick = useSelector((state)=>state.user.nick_dupli)

@@ -3,7 +3,7 @@ import axios from "axios";
 const accessToken = document.cookie.split("=")[1];
 
 const instance = axios.create({
-  baseURL: "http://52.78.116.106/",
+  baseURL: "https://2k1.shop/",
   headers: { authorization: `Bearer ${accessToken}`,
 },
 });
