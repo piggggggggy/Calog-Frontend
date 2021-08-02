@@ -44,7 +44,9 @@ const Record = (props) => {
   const submitBtn = (e) => {
     e.preventDefault();
     let file = fileUpload.current.files[0];
-    let newFileName = fileUpload.current.files[0].name;
+    //업로드 할 이미지가 있을 때
+    if (file) {
+      let newFileName = fileUpload.current.files[0].name;
     const config = {
       bucketName: process.env.REACT_APP_BUCKET_NAME,
       region: process.env.REACT_APP_REGION,
@@ -58,9 +60,14 @@ const Record = (props) => {
         const food_list = [{...cart_list, type:cart.type}]
         dispatch(addRecordDB(cart.date, food_list, imgUrl))
       } else {
-        window.alert('사진 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
+        window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
       }
     });
+    //업로드 할 이미지가 없을 때
+    } else {
+      const food_list = [{...cart_list, type:cart.type}]
+      dispatch(addRecordDB(cart.date, food_list))
+    }
   }
 
   return (

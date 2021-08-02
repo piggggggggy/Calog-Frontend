@@ -27,8 +27,9 @@ const Record_Date = (props) => {
 
   //날짜
   const _SelectDate = useSelector((state) => state.cart.date)
-  const dateFormat = moment(_SelectDate).format('M월 DD일')
-  const [date, setDate] = React.useState(dateFormat)
+  const Date = moment(_SelectDate).format('M월 DD일')
+  const [date, setDate] = React.useState(Date)
+  
 
   const Change = (date) => {
     setDate(moment(date).format('M월 DD일'))
