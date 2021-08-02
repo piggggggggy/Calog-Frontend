@@ -54,62 +54,29 @@ const debounceNick = _.debounce((e) => {
 
   return (
     <React.Fragment>
-      <Container>
-        <BgTop>
-          <TextDiv>
-          <Text bold="5px" size="28px">
-            칼로리즈<br/>
-            회원가입
-          </Text>
-          <Text size="15px" margin="20px 0px 0px 0px">
-            지금 로그인하면 손쉽게 칼로리 분석 가능!
-          </Text>
-          </TextDiv>
-        </BgTop>
-        <InputContainer>
-        <InputBox>
-            {PeopleE}
-            <Input border="none" placeholder="이메일을 입력해주세요"
+                  {/* <Input border="none" placeholder="이메일을 입력해주세요"
             _onChange={(e)=>{debounceEmail(e)}}
             />
-            {dupliEmail?CheckE:Xemoti}
-        </InputBox>
-        {dupliEmail?
-        <Text color="#79CF6B" size="11px" margin="-5px">사용가능한 이메일입니다.</Text>:
-        <Text color="#DE5A5A" size="11px" margin="-5px">사용불가능한 이메일입니다.</Text>}
-        <InputBox>
-            {PeopleE}
-            <Input border="none" placeholder="닉네임을 입력해주세요"
+                        <Input border="none" placeholder="닉네임을 입력해주세요"
             _onChange={(e)=>{debounceNick(e)}}
             />
-            {dupliNick?CheckE:Xemoti}
-        </InputBox>
-        {dupliNick?
-        <Text color="#79CF6B" size="11px" margin="-5px">사용가능한 닉네임입니다.</Text>:
-        <Text color="#DE5A5A" size="11px" margin="-5px">사용불가능한 닉네임입니다.</Text>}
-        <InputBox>
-            {LockE}
-            <Input border="none" placeholder="비밀번호를 입력해주세요"
+                        <Input border="none" placeholder="비밀번호를 입력해주세요"
             _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}
             />
-            {Xemoti}
-        </InputBox>
-        <InputBox>
-            {LockE}
-            <Input border="none" placeholder="비밀번호를 다시 입력해주세요"
+                        <Input border="none" placeholder="비밀번호를 다시 입력해주세요"
             _onChange={(e)=>{setUserInfo({...user_info, pwdcheck: e.target.value})}}
             />
-            {Xemoti}
-        </InputBox>
-
-        <InputBox>
-        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px" _onClick={Signup}>
+                    <Button width="100%" height="46px" bg="#FFA573" border_radius="26px" _onClick={Signup}>
           <Text bold="5px" size="17px" color="#FFFFFF">회원가입</Text>
         </Button>
-        </InputBox>
-        <Text size="12px" margin="0px 0px 20px 0px">아이디 찾기 / 비밀번호 찾기</Text>
-        <Text size="12px">회원가입하기</Text>
-        </InputContainer>
+        {dupliEmail?CheckE:Xemoti} */}
+      <Container>
+          <Head>
+            {/* <></> */}
+            {"<"}
+            <Text size="17px" lineheight="22px" bold color="#000000" >이메일로 가입</Text>
+          </Head>
+
       </Container>
     </React.Fragment>
   );
@@ -119,35 +86,14 @@ const debounceNick = _.debounce((e) => {
 export default Signup;
 
 const Container = styled.div`
-  height: 896px;
+  height: 866px;
   width: 420px;
-`;
-
-const BgTop = styled.div`
-  background-color: #FFE999;
-  height: 359px;
-  border-bottom-left-radius: 26px;
-  border-bottom-right-radius: 26px;
-`;
-
-const InputBox = styled.div`
-  width: 290px;
-  height: 46px;
-  background-color: #FFFFFF;
-  border: 1px solid #FFA573;
-  border-radius: 26px;
-  display: flex;
-  align-items: center;
-  margin: 15px;
-`;
-
-const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -47px;
 `;
 
-const TextDiv = styled.div`
-  padding: 15vh 20px 0px 20px;
+const Head = styled.div`
+  display: flex;
+  margin: 28px 0px 0px 0px;
 `;

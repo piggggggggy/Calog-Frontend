@@ -93,6 +93,7 @@ export const LoginCheck = () => {
         .get('/api/user/me')
         .then((res) => {
             console.log("res of login check", res);
+            dispatch(SetUser());
         })
         .catch((err) => {
             console.log("err of login check", err);
