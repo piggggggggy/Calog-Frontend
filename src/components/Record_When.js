@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
+import theme from '../shared/theme';
 //이모지
 import { FaCircle } from "react-icons/fa";
 //type chk
@@ -38,71 +39,90 @@ const Record_When = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex" padding="0 49px">
+      <Wrap>
         {/* 아침 */}
-        <Grid
-          _onClick={()=> {selectType('morning')}}
-          width="45px" margin="0 20px 0 0">
-          <Text size="17px" bold={type === "아침" && true}>아침</Text>
+        <When onClick={()=> {selectType('morning')}}>
+          <Text size="17px" bold color={type === "아침" ? 'black' : '#c4c4c4'}
+            //mobile
+            m_size="15px"
+          >아침</Text>
           <Dot>
             <Grid display={type === "아침" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
-        </Grid>
+        </When>
         {/* 점심 */}
-        <Grid
-          _onClick={()=> {selectType('lunch')}}
-          width="45px" margin="0 20px 0 0">
-          <Text size="17px" bold={type === "점심" && true}>점심</Text>
+        <When onClick={()=> {selectType('lunch')}}>
+          <Text size="17px" bold color={type === "점심" ? 'black' : '#c4c4c4'}
+            //mobile
+            m_size="15px"
+          >점심</Text>
           <Dot>
             <Grid display={type === "점심" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
-        </Grid>
+        </When>
         {/* 저녁 */}
-        <Grid
-          _onClick={()=> {selectType('dinner')}}
-          width="45px" margin="0 20px 0 0">
-          <Text size="17px" bold={type === "저녁" && true}>저녁</Text>
+        <When onClick={()=> {selectType('dinner')}} >
+          <Text size="17px" bold color={type === "저녁" ? 'black' : '#c4c4c4'}
+            //mobile
+            m_size="15px"
+          >저녁</Text>
           <Dot>
             <Grid display={type === "저녁" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
-        </Grid>
+        </When>
         {/* 간식 */}
-        <Grid
-          _onClick={()=> {selectType('snack')}}
-          width="45px" margin="0 20px 0 0">
-          <Text size="17px" bold={type === "간식" && true}>간식</Text>
+        <When onClick={()=> {selectType('snack')}} >
+          <Text size="17px" bold color={type === "간식" ? 'black' : '#c4c4c4'}
+            //mobile
+            m_size="15px"
+          >간식</Text>
           <Dot>
             <Grid display={type === "간식" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
-        </Grid>
+        </When>
         {/* 야식 */}
-        <Grid
-          _onClick={()=> {selectType('midnightSnack')}}
-          width="45px" margin="0 20px 0 0">
-          <Text size="17px" bold={type === "야식" && true}>야식</Text>
+        <When onClick={()=> {selectType('midnightSnack')}}>
+          <Text size="17px" bold color={type === "야식" ? 'black' : '#c4c4c4'}
+            //mobile
+            m_size="15px"
+          >야식</Text>
           <Dot>
             <Grid display={type === "야식" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
-        </Grid>
-      </Grid>
+        </When>
+      </Wrap>
     </React.Fragment>
   );
 }
+
+const Wrap =styled.div`
+  display: flex;
+  padding: 0 12%;
+
+  @media ${theme.device.mobileM} {
+    padding: 0 8%;
+  }
+`;
 
 const Dot = styled.div`
   position: relative;
   float: right;
   margin-top: -70%;
+`;
+
+const When = styled.div`
+  width: 15%;
+  margin: 0 20px 0 0;
 `;
 
 export default Record_When;

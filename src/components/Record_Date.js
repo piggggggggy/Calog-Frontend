@@ -39,7 +39,7 @@ const Record_Date = (props) => {
   }
 
   return (
-    <Grid padding="9px 20px 31px 20px">
+    <Grid padding="9px 20px 7% 20px">
       
       {/* 실제 DatePicker */}
       <DatePicker onDateChange={Change} locale={enGB} format=' '>
@@ -47,7 +47,7 @@ const Record_Date = (props) => {
           <React.Fragment>
           <Grid display="flex">
             {/* datePicker 실제로 보이는 부분 */}
-            <Text width="90px" margin="0 8px 0 29px" size="22px" bold>{date}</Text>
+            <Text width="24%" margin="0 8px 0 29px" size="22px" bold>{date}</Text>
             <BiCaretDown size="16px" color={theme.color.gray_4}/>
             {/* datePicker 안보이게 숨김 처리 */}
             <Input
