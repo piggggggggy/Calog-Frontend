@@ -110,7 +110,9 @@ const Record = (props) => {
             {!fileUrl ?
             <Grid bg={'#FFFBED'} width="89%" height="236px" margin="4% auto 5% auto" border_radius="8px" padding="15% 0" m_margin="4% auto 5% auto">
               <Image src={Camera} width="21%" height="62px" margin="auto"/>
-              <Text width="44%" size="17px" bold color={'#aeaeae'} margin="6% auto 0 auto" m_size="13px">+ 여기를 눌러 사진 등록</Text>
+              <Grid text_align="center">
+                <Text size="17px" bold color={'#aeaeae'} margin="6% auto 0 auto" m_size="13px">+ 여기를 눌러 사진 등록</Text>
+              </Grid>
             </Grid> :
               <Image src={fileUrl} width="89%" height="236px" margin="4% auto 5% auto" b_size="100% 100%" border_radius="8px"/>
             }
