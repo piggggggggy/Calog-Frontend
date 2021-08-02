@@ -49,10 +49,10 @@ export const getWorkoutDB = () => {
 }
 
 //기록하기
-export const addRecordDB = (date, list, url) => {
+export const addRecordDB = (date, list, url, memo) => {
   return function (dispatch, getState, {history}) {
     const data = {
-      date:date, food_list:list, url:url
+      date:date, food_list:list, url:url, contents:memo,
     }
     console.log(data);
     instance
