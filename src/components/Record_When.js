@@ -42,8 +42,8 @@ const Record_When = (props) => {
         {/* 아침 */}
         <Grid
           _onClick={()=> {selectType('morning')}}
-          width="45px" margin="0 32px 0 0">
-          <Text size="20px" bold={type === "아침" && true}>아침</Text>
+          width="45px" margin="0 20px 0 0">
+          <Text size="17px" bold={type === "아침" && true}>아침</Text>
           <Dot>
             <Grid display={type === "아침" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
@@ -53,8 +53,8 @@ const Record_When = (props) => {
         {/* 점심 */}
         <Grid
           _onClick={()=> {selectType('lunch')}}
-          width="45px" margin="0 32px 0 0">
-          <Text size="20px" bold={type === "점심" && true}>점심</Text>
+          width="45px" margin="0 20px 0 0">
+          <Text size="17px" bold={type === "점심" && true}>점심</Text>
           <Dot>
             <Grid display={type === "점심" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
@@ -64,10 +64,32 @@ const Record_When = (props) => {
         {/* 저녁 */}
         <Grid
           _onClick={()=> {selectType('dinner')}}
-          width="45px" margin="0 32px 0 0">
-          <Text size="20px" bold={type === "저녁" && true}>저녁</Text>
+          width="45px" margin="0 20px 0 0">
+          <Text size="17px" bold={type === "저녁" && true}>저녁</Text>
           <Dot>
             <Grid display={type === "저녁" ? 'block' : 'none'}>
+              <FaCircle size="7px"/>
+            </Grid>
+          </Dot>
+        </Grid>
+        {/* 간식 */}
+        <Grid
+          _onClick={()=> {selectType('snack')}}
+          width="45px" margin="0 20px 0 0">
+          <Text size="17px" bold={type === "간식" && true}>간식</Text>
+          <Dot>
+            <Grid display={type === "간식" ? 'block' : 'none'}>
+              <FaCircle size="7px"/>
+            </Grid>
+          </Dot>
+        </Grid>
+        {/* 야식 */}
+        <Grid
+          _onClick={()=> {selectType('midnightSnack')}}
+          width="45px" margin="0 20px 0 0">
+          <Text size="17px" bold={type === "야식" && true}>야식</Text>
+          <Dot>
+            <Grid display={type === "야식" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
