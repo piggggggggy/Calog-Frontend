@@ -51,8 +51,12 @@ export const getWorkoutDB = () => {
 //기록하기
 export const addRecordDB = (date, list, url) => {
   return function (dispatch, getState, {history}) {
+    const data = {
+      date:date, food_list:list, url:url
+    }
+    console.log(data);
     instance
-      .post('/api/record', {date:date, food_list:list, url:url})
+      .post('/api/record', {data})
       .then((res) => {
         console.log(res)
       })
