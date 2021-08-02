@@ -9,6 +9,8 @@ const initialState = {
   // persist 적용을 위한 cart
   cart: [],
   type: null,
+  //카트 기록 날짜
+  date: [],
 }
 
 // redux
@@ -56,9 +58,13 @@ const search = createSlice({
       state.type = action.payload;
     },
 
+    //날짜 가져오기
+    addDate : (state, action) => {
+      state.date = action.payload
+    }
   }
 });
 
-export const {addCartRx, deleteCartRx, setUpAmount, setDownAmount, cartOut} = search.actions;
+export const {addCartRx, deleteCartRx, setUpAmount, setDownAmount, cartOut, addDate} = search.actions;
 
 export default search;

@@ -3,6 +3,8 @@ import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 //이모지
 import { FaCircle } from "react-icons/fa";
+//type chk
+import { useSelector } from 'react-redux';
 
 /** 
  * @param {*} props
@@ -13,69 +15,59 @@ import { FaCircle } from "react-icons/fa";
 */
 
 const Record_When = (props) => {
-// dispatch
-// useEffect
+  
+  //type chk
+  const typeState = useSelector((state) => state.cart.type)
 
-//아침
-const [bkShow, setBkShow] = useState(false)
-const [bkDisplay, setBkDisplay] = useState('none')
-const breakfast = () => {
-  setBkShow(true)
-  setLcShow(false)
-  setDnShow(false)
-  setBkDisplay('block')
-  setLcDisplay('none')
-  setDnDisplay('none')
-}
-//점심
-const [lcShow, setLcShow] = useState(false)
-const [lcDisplay, setLcDisplay] = useState('none')
-const lunch = () => {
-  setBkShow(false)
-  setLcShow(true)
-  setDnShow(false) 
-  setBkDisplay('none')
-  setLcDisplay('block')
-  setDnDisplay('none')
-}
-//저녁
-const [dnShow, setDnShow] = useState(false)
-const [dnDisplay, setDnDisplay] = useState('none')
-const dinner = () => {
-  setBkShow(false)
-  setLcShow(false)
-  setDnShow(true)
-  setBkDisplay('none')
-  setLcDisplay('none')
-  setDnDisplay('block')
-}
+  //type에 따른 css변경
+  const [type, setType] = useState(typeState);
+
+  const selectType = (type) => {
+    if(type === "morning") {
+      setType("아침")
+    }else if (type === "lunch") {
+      setType("점심") 
+    }else if (type === "dinner") {
+      setType("저녁")
+    }else if (type === "snack") {
+      setType("간식")
+    }else if (type === "midnightSnack") {
+      setType("야식")
+    };
+  }
 
   return (
     <React.Fragment>
       <Grid display="flex" padding="0 49px">
         {/* 아침 */}
-        <Grid _onClick={breakfast} width="45px" margin="0 32px 0 0">
-          <Text size="20px" bold={bkShow}>아침</Text>
+        <Grid
+          _onClick={()=> {selectType('morning')}}
+          width="45px" margin="0 32px 0 0">
+          <Text size="20px" bold={type === "아침" && true}>아침</Text>
           <Dot>
-            <Grid display={bkDisplay}>
+            <Grid display={type === "아침" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
         </Grid>
         {/* 점심 */}
-        <Grid _onClick={lunch} width="45px" margin="0 32px 0 0">
-          <Text size="20px" bold={lcShow}>점심</Text>
+        <Grid
+          _onClick={()=> {selectType('lunch')}}
+          width="45px" margin="0 32px 0 0">
+          <Text size="20px" bold={type === "점심" && true}>점심</Text>
           <Dot>
-            <Grid display={lcDisplay}>
+            <Grid display={type === "점심" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>
         </Grid>
         {/* 저녁 */}
-        <Grid _onClick={dinner} width="45px" margin="0 32px 0 0">
-          <Text size="20px" bold={dnShow}>저녁</Text>
+        <Grid
+          _onClick={()=> {selectType('dinner')}}
+          width="45px" margin="0 32px 0 0">
+          <Text size="20px" bold={type === "저녁" && true}>저녁</Text>
           <Dot>
-            <Grid display={dnDisplay}>
+            <Grid display={type === "저녁" ? 'block' : 'none'}>
               <FaCircle size="7px"/>
             </Grid>
           </Dot>

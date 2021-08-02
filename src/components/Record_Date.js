@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -11,8 +11,8 @@ import moment from 'moment'
 //icon
 import { BiCaretDown } from "react-icons/bi";
 //날짜 보내기
-import {useDispatch} from 'react-redux';
-import {getDate} from '../redux/modules/record'
+import {useDispatch, useSelector} from 'react-redux';
+import {addDate} from '../redux/modules/cart'
 
 /** 
  * @param {*} props
@@ -24,15 +24,17 @@ import {getDate} from '../redux/modules/record'
 
 const Record_Date = (props) => {
   const dispatch = useDispatch()
-// props
-// useEffect
-  const dateFormat = moment().format('M월 DD일')
+
+  //날짜
+  const _SelectDate = useSelector((state) => state.cart.date)
+  const dateFormat = moment(_SelectDate).format('M월 DD일')
   const [date, setDate] = React.useState(dateFormat)
+
   const Change = (date) => {
     setDate(moment(date).format('M월 DD일'))
     //백엔드 날짜 data post
-    let toBack = moment(date).format('YYYY-MM-DD')
-    dispatch(getDate(toBack))
+    const chgDateFormat = moment(date).format('YYYY-MM-DD')
+    dispatch(addDate(chgDateFormat))
   }
 
   return (

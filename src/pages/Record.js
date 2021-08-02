@@ -24,9 +24,13 @@ import {addRecordDB} from '../redux/modules/record';
 
 const Record = (props) => {
   const dispatch = useDispatch()
-  // props
-  // useEffect
 
+  //카트
+  const cart = useSelector((state) => state.cart)
+  //카트 - 리스트
+  const cart_list = cart.cart
+
+  //이미지
   const fileUpload = useRef()
   //preview
   const [fileUrl, setFileUrl] = useState(null);
@@ -35,9 +39,6 @@ const Record = (props) => {
     const imageUrl = URL.createObjectURL(imageFile);
     setFileUrl(imageUrl)
   }
-
-  //기록 일자
-  const recordDate = useSelector((state) => state.record.date)
 
   //upload btn
   const submitBtn = (e) => {
@@ -54,7 +55,8 @@ const Record = (props) => {
     ReactS3Client.uploadFile(file, newFileName).then(data => {
       if(data.status === 204) {
         let imgUrl = data.location
-        dispatch(addRecordDB(recordDate, imgUrl))
+        const food_list = [{...cart_list, type:cart.type}]
+        dispatch(addRecordDB(cart.date, food_list, imgUrl))
       } else {
         window.alert('사진 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
       }
@@ -71,14 +73,16 @@ const Record = (props) => {
       <Record_When />
       {/* 칼로리 리스트 - 맵 */}
       <Grid margin="24px auto" height="287px">
-        <Record_List />
+        {cart_list.map((c, idx) => {
+          return <Record_List key={c.foodId} {...c}/>
+        })}
       </Grid>
       {/* 리스트가 5개 이상일 경우 활성화 */}
-      {/* {calorie_list >=5 &&
+      {cart_list >=5 &&
         <Grid margin="22px auto" width="30px">
         <BiChevronDown size="30px"/>
       </Grid>
-      } */}
+      }
       {/* 사진 */}
       <Grid padding="16px 48px 0 48px">
         <Text size="17px" bold>내가 먹은 음식</Text>
