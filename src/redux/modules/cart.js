@@ -2,6 +2,7 @@
 // @담당자 : 박용태
 
 import { createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
 
 
 // initial State 
@@ -10,7 +11,7 @@ const initialState = {
   cart: [],
   type: null,
   //카트 기록 날짜
-  date: [],
+  date: null,
 }
 
 // redux
@@ -56,9 +57,10 @@ const search = createSlice({
     // 기록하기 => type 넘겨주기
     cartOut  : (state, action) => {
       state.type = action.payload;
+      state.date = moment().format('YYYY-MM-DD')
     },
 
-    //날짜 가져오기
+    //날짜 변경하기
     addDate : (state, action) => {
       state.date = action.payload
     }
