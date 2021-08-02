@@ -16,7 +16,7 @@ const BtnHeader = (props) => {
           <BiChevronLeft size="30px"/>
         </Grid>
         {/* 페이지 이름 */}
-        <Text bold size="16px" width="auto">{props.title}</Text>
+        <Text bold size="15px" width="auto">{props.title}</Text>
         {/* 장바구니 이모지 유무 */}
         {props.display !== 'none' ? 
         <Grid width="10%" _onClick={() => history.push('/cart')}>

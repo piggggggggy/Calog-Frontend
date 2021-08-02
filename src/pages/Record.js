@@ -30,6 +30,12 @@ const Record = (props) => {
   //카트 - 리스트
   const cart_list = cart.cart
 
+  //메모
+  const [inputMemo, setInputMemo] = useState()
+  const memo = (e) => {
+    setInputMemo(e.target.value)
+  }
+
   //이미지
   const fileUpload = useRef()
   //preview
@@ -58,7 +64,7 @@ const Record = (props) => {
       if(data.status === 204) {
         let imgUrl = data.location
         const food_list = [{...cart_list, type:cart.type}]
-        dispatch(addRecordDB(cart.date, food_list, imgUrl))
+        dispatch(addRecordDB(cart.date, food_list, imgUrl, inputMemo))
       } else {
         window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
       }
@@ -66,7 +72,7 @@ const Record = (props) => {
     //업로드 할 이미지가 없을 때
     } else {
       const food_list = [{...cart_list, type:cart.type}]
-      dispatch(addRecordDB(cart.date, food_list))
+      dispatch(addRecordDB(cart.date, food_list, inputMemo))
     }
   }
 
@@ -79,7 +85,7 @@ const Record = (props) => {
       {/* 기록할 칼로리의 시점 */}
       <Record_When />
       {/* 칼로리 리스트 - 맵 */}
-      <Grid margin="24px auto" height={cart_list.length<=3 ? "180px" : "auto"}>
+      <Grid margin="24px auto" height={cart_list.length<=3 ? "200px" : "auto"}>
         {cart_list.map((c, idx) => {
           return <Record_List key={c.foodId} {...c}/>
         })}
@@ -87,8 +93,8 @@ const Record = (props) => {
       {/* 리스트가 5개 이상일 경우 활성화 */}
       {cart_list.length >=5 &&
         <Grid margin="22px auto" width="30px">
-        <BiChevronDown size="30px"/>
-      </Grid>
+          <BiChevronDown size="30px"/>
+        </Grid>
       }
       {/* 사진 */}
       <Grid padding="16px 48px 0 48px">
@@ -97,26 +103,44 @@ const Record = (props) => {
       <Grid>
         <label htmlFor="imgFile">
             {!fileUrl ?
-            <Grid bg={'#eee'} width="374px" height="236px" margin="16px auto 23px auto" border_radius="44px" padding="15% 30%">
+            <Grid bg={theme.color.gray_2} width="374px" height="236px" margin="16px auto 23px auto" border_radius="44px" padding="15% 30%">
               <BiCamera size="118px" color={'white'}/>
             </Grid> :
-              <Image src={fileUrl} width="374px" height="236px" margin="3% auto"/>
+              <Image src={fileUrl} width="374px" height="236px" margin="3% auto" b_size="100% 100%"/>
             }
         </label>
         <FileBox type="file" accept="image/*; capture=camera" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
-        {/* btn */}
-        <Button
-          _onClick={submitBtn}
-          width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 12% auto">
-          <Text>기록하기</Text>
-        </Button>
       </Grid>
-    </React.Fragment>
+      {/* 메모 */}
+      <Grid padding="0 48px">
+        <Text size="17px" bold>메모</Text>
+      </Grid>
+      <TextArea rows={5} onChange={memo}/>
+      {/* btn */}
+      <Button
+        _onClick={submitBtn}
+        width="380px" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 12% auto">
+        <Text>기록하기</Text>
+      </Button>
+  </React.Fragment>
   );
 }
 
 const FileBox = styled.input`
   display: none;
+`;
+
+const TextArea = styled.textarea`
+  resize: none;
+  width: 374px;
+  display: block;
+  margin: 16px auto 23px auto;
+  padding: 7% 5%;
+  border: none;
+  background: ${theme.color.gray_2};
+  border-radius: 44px;
+  outline: none;
+  font-size: 15px;
 `;
 
 export default Record;
