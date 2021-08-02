@@ -14,7 +14,7 @@ export const searchKeywordDB = (keyword) => {
       .then((res) => {
         console.log(res)
       })
-      .err((err) => {
+      .catch((err) => {
         console.log(err, "에러가 났읍니다.")
       }) 
   }
