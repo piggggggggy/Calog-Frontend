@@ -49,10 +49,18 @@ export const getWorkoutDB = () => {
 }
 
 //기록하기
-export const addRecordDB = (date, url) => {
+export const addRecordDB = (date, food_list, url) => {
   return function (dispatch, getState, {history}) {
     window.alert('기록이 완료되었어요!')
     history.push('/dashboard')
+    // instance
+    //   .post('/api/record', {date, food_list, url})
+    //   .then((res) => {
+    //     console.log(res)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   }
 }
 

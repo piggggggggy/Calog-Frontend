@@ -1,5 +1,7 @@
 import React from 'react';
-import {Grid} from '../elements';
+import styled from 'styled-components';
+import {Text} from '../elements';
+import theme from '../shared/theme';
 
 /** 
  * @param {*} props
@@ -11,20 +13,37 @@ import {Grid} from '../elements';
 
 const Record_List = (props) => {
 // dispatch
-// props
+  const {foodId, name, quantity, calorie, gram} = props
 // useEffect
 
   return (
     <React.Fragment>
-      <Grid>
-
-      </Grid>
+      <Wrap>
+        <Text>{props.name} ({props.gram}g)</Text>
+        <Text>{props.calorie}kcal</Text>
+        <Text>X {props.quantity}</Text>
+      </Wrap>
     </React.Fragment>
   );
 }
 
 Record_List.defaultProps = {
-
+  foodId: 1,
+  name: '피자마루 간장치킨',
+  quantity : 1,
+  calorie: 4500,
+  gram: 600,
 }
+
+const Wrap = styled.div`
+  width: 368px;
+  height: 51px;
+  border: 1px solid ${theme.color.dark};
+  border-radius: 28px;
+  box-sizing: border-box;
+  margin: 8px auto;
+  display: flex;
+  justify-content: space-around;
+`;
 
 export default Record_List;

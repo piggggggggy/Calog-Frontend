@@ -14,7 +14,6 @@ import { FaCircle } from "react-icons/fa";
 
 const Record_When = (props) => {
 // dispatch
-// props
 // useEffect
 
 //아침
@@ -84,10 +83,6 @@ const dinner = () => {
       </Grid>
     </React.Fragment>
   );
-}
-
-Record_When.defaultProps = {
-
 }
 
 const Dot = styled.div`

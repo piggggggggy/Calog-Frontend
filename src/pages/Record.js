@@ -8,7 +8,7 @@ import Record_When from '../components/Record_When';
 import Record_List from '../components/Record_List';
 import theme from '../shared/theme';
 //이모지
-import { BiCamera } from "react-icons/bi";
+import { BiCamera, BiChevronDown } from "react-icons/bi";
 //이미지 업로드
 import S3upload from 'react-aws-s3';
 //for axios
@@ -36,7 +36,7 @@ const Record = (props) => {
     setFileUrl(imageUrl)
   }
 
-  //for axios
+  //기록 일자
   const recordDate = useSelector((state) => state.record.date)
 
   //upload btn
@@ -70,14 +70,23 @@ const Record = (props) => {
       {/* 기록할 칼로리의 시점 */}
       <Record_When />
       {/* 칼로리 리스트 - 맵 */}
-      <Grid bg={'#eee'} width="374px" height="361px" margin="23px auto" border_radius="44px">
+      <Grid margin="24px auto" height="287px">
         <Record_List />
       </Grid>
+      {/* 리스트가 5개 이상일 경우 활성화 */}
+      {/* {calorie_list >=5 &&
+        <Grid margin="22px auto" width="30px">
+        <BiChevronDown size="30px"/>
+      </Grid>
+      } */}
       {/* 사진 */}
+      <Grid padding="16px 48px 0 48px">
+        <Text size="17px" bold>내가 먹은 음식</Text>
+      </Grid>
       <Grid>
         <label for="imgFile">
             {!fileUrl ?
-            <Grid bg={'#eee'} width="374px" height="236px" margin="23px auto" border_radius="44px" padding="15% 30%">
+            <Grid bg={'#eee'} width="374px" height="236px" margin="16px auto 23px auto" border_radius="44px" padding="15% 30%">
               <BiCamera size="118px" color={'white'}/>
             </Grid> :
               <Image src={fileUrl} width="374px" height="236px" margin="3% auto"/>
@@ -93,10 +102,6 @@ const Record = (props) => {
       </Grid>
     </React.Fragment>
   );
-}
-
-Record.defaultProps = {
-
 }
 
 const FileBox = styled.input`
