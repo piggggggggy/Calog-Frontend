@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+// history
+import { history } from '../redux/configStore';
 // modules
 import { addCartRx } from '../redux/modules/cart';
 // elements & components
@@ -55,7 +57,7 @@ const Card = (props) => {
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard style={is_picked()}>
+      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox>
           <IoStar color="#E4E4E4" size="21px"/>
