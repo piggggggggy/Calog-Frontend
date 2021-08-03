@@ -7,10 +7,14 @@ import Login from './Login';
 import Signup from './Signup';
 import SignSocial from './SignSocial';
 import BodySpect from './BodySpect';
+import Notice from './Notice';
+import NotiDetail from './NoticeDetail';
+import NoticeWrite from './NoticeWrite';
+import Alam from './Alam';
 //용태
 import Main from './Main';
 import FoodDetail from './FoodDetail';
 import Cart from './Cart';
 import MainSearch from './MainSearch';
 
-export {DashBoard, Login, Signup, SignSocial, BodySpect, Main, Calendar, FoodDetail, Cart, Record, MainSearch}
+export {DashBoard, Login, Signup, SignSocial, BodySpect, Notice, NotiDetail, NoticeWrite, Alam, Main, Calendar, FoodDetail, Cart, Record, MainSearch}

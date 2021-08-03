@@ -2,6 +2,9 @@
 // @담당자 : 김나영
 
 import { createSlice } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+//카트 삭제 액션
+import {delCartAll} from './cart';
 //전역 > 서버 배포
 import instance from "./instance";
 
@@ -49,19 +52,17 @@ export const getWorkoutDB = () => {
 }
 
 //기록하기
-export const addRecordDB = (date, list, url, memo) => {
+export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
-    const data = {
-      date:date, food_list:list, url:url, contents:memo,
-    }
-    console.log(data);
     instance
-      .post('/api/record', {data})
+      .post('/api/record', {date:date, foodList:list, type:type, url:url, contents:memo})
       .then((res) => {
-        console.log(res)
+        window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
+        dispatch(delCartAll())
+        history.replace('/dashboard')
       })
       .catch((err) => {
-        console.log(err)
+        window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
       })
   }
 }

@@ -18,6 +18,7 @@ export const LoginSV = (user_info) => {
             console.log("res of loginDB", res);
             if(res.status===200){
                 document.cookie = `TOKEN=${res.data.token};`;
+                history.push('/dashboard')
                 //로그인 체크해야할 듯. user info 부족
             } else{
                 window.alert("값을 재입력해주세요!")
@@ -78,6 +79,7 @@ export const NickDuplicate = (nickname) => {
 export const LoginCheck = () => {
     return function(dispatch, getState, {history}){
     console.log("click login check")
+
         instance
         .get('/api/user/me')
         .then((res) => {
@@ -94,14 +96,28 @@ export const _logOut = () => {
     return function(dispatch, getState, {history}){
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
+    };
+}
+
+export const BodySpectSV = (gender, weight, height, age) => {
+    return function(dispatch, getState, {history}){
+        console.log(gender, weight, height, age)
+        instance
+        .post('/api/user/bodySpec', {gender, weight, height, age})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     }
 }
 
-export const BodySpectSV = (gender, weight, height, age, control) => {
+export const BodySpectModify = (gender, weight, height, age) => {
     return function(dispatch, getState, {history}){
-        console.log(gender, weight, height, age, control)
+        console.log(gender, weight, height, age)
         instance
-        .post('/api/user/bodySpec', {gender, weight, height, age, control})
+        .put('/api/user/bodySpec/edit', {gender, weight, height, age})
         .then((res) => {
             console.log(res);
         })
