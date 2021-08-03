@@ -48,7 +48,7 @@ const calendarArr = () => {
             if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
               return(
                 <td key={idx} style={{color:'blue', padding:'2%'}}>
-                  <td>{days.format('D')}</td>
+                  <span>{days.format('D')}</span>
                 </td>
               )
               //이번 달에 해당되는 날짜가 아닌 지난 달 또는 다음 달 날짜인 경우
