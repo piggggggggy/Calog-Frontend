@@ -15,7 +15,7 @@ import _ from 'lodash';
  * @담당자 : 
 */
 
-const Notice = (props) => {
+const NotiDetail = (props) => {
 const dispatch = useDispatch();
 const [user_info, setUserInfo] = useState({});
 
@@ -59,7 +59,7 @@ const login = () => {
 }
 
 
-export default Notice;
+export default NotiDetail;
 
 const Container = styled.div`
   height: 866px;
