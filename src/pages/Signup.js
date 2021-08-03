@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
 import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
+import { history } from '../redux/configStore';
 import {Back, X} from "../img/svg";
 import _ from 'lodash';
 /**
@@ -38,6 +39,7 @@ useEffect(() => {
 
 const signup = () => {
   dispatch(SignupSV(user_info));
+  history.push("/login");
 };
 
 const debounceEmail = _.debounce((e) => {
@@ -135,9 +137,7 @@ const debounceNick = _.debounce((e) => {
           </Button>
           </Grid>
           }
-          {/* <Grid display="flex" fd="row-reverse">
-          <Text color="#8C8C8C" size="15px" lineheight="20px" width="95px" margin="10px">비밀번호 재설정</Text>
-          </Grid> */}
+
       </Container>
     </React.Fragment>
   );

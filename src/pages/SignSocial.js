@@ -3,7 +3,9 @@ import Kakao from '../components/social/Kakao';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import {Close} from "../img/svg";
 import _ from 'lodash';
+import { history } from '../redux/configStore';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -18,41 +20,47 @@ const dispatch = useDispatch();
   return (
     <React.Fragment>
       <Container>
-        <BgTop>
-          <TextDiv>
-          <Text bold="5px" size="28px">
-            칼로리즈<br/>
-            회원가입
-          </Text>
-          <Text size="15px" margin="20px 0px 0px 0px">
-            지금 로그인하면 손쉽게 칼로리 분석 가능!
-          </Text>
-          </TextDiv>
-        </BgTop>
+        <Grid display="flex" fd="row-reverse" padding="20px">
+          <Tag>
+        {Close}
+        </Tag>
+        </Grid>
+        <Header>
+          <Text size="34px" lineheight="41px">회원가입/로그인하고</Text>
+          <Text size="34px" lineheight="41px" bold>내 칼로리 관리해보세요!</Text>
+        </Header>
+
         <InputContainer>
         <InputBox>
-        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px">
-          <Text bold="5px" size="17px" color="#79CF6B">네이버 로그인</Text>
-        </Button>
-        </InputBox>
-        <InputBox>
-        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px">
-          <Text bold="5px" size="17px" color="#E05148">구글 로그인</Text>
-        </Button>
-        </InputBox>
-        <InputBox>
-        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px">
-          <Text bold="5px" size="17px" color="#F4E167">카카오 로그인</Text>
+        <Button width="380px" height="56px" bg="#F9DF4A" border_radius="44px">
+          <Text bold size="16px" lineheight="22px" color="#42282A">카카오로 시작하기</Text>
         </Button>
         </InputBox>
 
         <InputBox>
-        <Button width="100%" height="46px" bg="#FFA573" border_radius="26px">
-          <Text bold="5px" size="17px" color="#FFFFFF">홈페이지 회원가입</Text>
+        <Button width="380px" height="56px" bg="#E2635E" border_radius="44px">
+          <Text bold size="16px" lineheight="22px" color="#FFFFFF">구글로 시작하기</Text>
         </Button>
         </InputBox>
+
+        <InputBox>
+        <Button width="380px" height="56px" bg="#59C451" border_radius="44px">
+          <Text bold size="16px" lineheight="22px" color="#FFFFFF">네이버로 시작하기</Text>
+        </Button>
+        </InputBox>
+        <Grid margin="41px 0px 24px 0px" width="23px">
+        <Text size="13px" lineheight="18px" color="#C5C5C5" >또는</Text>
+        </Grid>
         </InputContainer>
+        <Grid dislpay="flex" ai="flex-end" width="420px">
+          <Text size="13px" lineheight="18px" color="#8C8C8C" width="200px">&nbsp;&nbsp;&nbsp;
+          <Tag onClick={()=>{history.push("/login")}}>이메일로 로그인</Tag>
+          &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
+           <Tag onClick={()=>{history.push("/signup")}}>이메일로 가입</Tag>
+           </Text>
+        </Grid>
       </Container>
+
     </React.Fragment>
   );
 }
@@ -65,31 +73,36 @@ const Container = styled.div`
   width: 420px;
 `;
 
-const BgTop = styled.div`
-  background-color: #FFE999;
-  height: 359px;
-  border-bottom-left-radius: 26px;
-  border-bottom-right-radius: 26px;
-`;
+
 
 const InputBox = styled.div`
-  width: 290px;
-  height: 46px;
-  background-color: #FFFFFF;
-  border: 1px solid #FFA573;
-  border-radius: 26px;
+  width: 380px;
+  height: 56px;
+  border-radius: 44px;
   display: flex;
   align-items: center;
-  margin: 15px;
+  margin: 4px;
+  &:hover{
+    cursor: pointer;;
+  }
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -47px;
+  margin-top: 100px;
 `;
 
-const TextDiv = styled.div`
-  padding: 15vh 20px 0px 20px;
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 180px;
+  margin-bottom: -50px;
+`;
+
+const Tag = styled.a`
+  &:hover{
+    cursor: pointer;
+  }
 `;

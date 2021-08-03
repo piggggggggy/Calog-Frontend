@@ -3,8 +3,9 @@ import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { BodySpectSV, LoginCheck } from '../redux/modules/user';
-import { ProfileDefault, Camera, Pen } from '../img/svg';
-
+import { ProfileDefault, Camera, Pen, Go } from '../img/svg';
+import { _logOut } from '../redux/modules/user';
+import {history} from '../redux/configStore';
 import _ from 'lodash';
 /** 
  * @param {*} props
@@ -17,7 +18,9 @@ import _ from 'lodash';
 const BodySpect = (props) => {
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
-console.log(is_login);
+const logout = () => {
+  dispatch(_logOut());
+}
 // const [bodyInfo,setBodyInfo] = useState({});
 // const {gender, weight, height, age, control} = bodyInfo;
 // const bodyStore = () => {
@@ -35,15 +38,21 @@ useEffect(() => {
           {ProfileDefault}
           </Profile>
           <Bottombg>
+            
             <hr color="#FFE899"/>
-            <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">회원가입/로그인하기 {">"}</Text>
+            <div onClick={()=>{history.push("/signsocial")}}>
+            <Grid display="flex">
+            <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
+            <Text  margin="92px 0px 16px 0px">{Go}</Text>
+            </Grid>
+            </div>
             <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!</Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">공지사항</Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>공지사항</Tag></Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">알림</Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">의견 보내기</Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
             <hr color="#F5F5F5"/>
             <Version>
             <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">현재 버전</Text>
@@ -74,18 +83,20 @@ return (
             </Button>
           </BodyBox>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">공지사항</Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>공지사항</Tag></Text>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">알림</Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">의견 보내기</Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
           <hr color="#F5F5F5"/>
           <Version>
           <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">현재 버전</Text>
           <Text size="17px" margin="27px 20px 24px 0px" color="#F19F13">V9.9.9</Text>
           </Version>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">로그아웃</Text>
+          <div onClick={logout}>
+          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px"><Tag>로그아웃</Tag></Text>
+          </div>
           <hr color="#F5F5F5"/>
           <br/>
         </Bottombg>
@@ -138,4 +149,10 @@ const BodyBox = styled.div`
 const Cameradiv = styled.div`
   position: absolute;
   margin: 30px 0px 0px 110px;
+`;
+
+const Tag = styled.a`
+  &:hover{
+    cursor: pointer;
+  }
 `;
