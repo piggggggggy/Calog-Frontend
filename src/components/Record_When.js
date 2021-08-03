@@ -121,8 +121,12 @@ const Dot = styled.div`
 `;
 
 const When = styled.div`
-  width: 15%;
+  width: 11%;
   margin: 0 20px 0 0;
+
+  @media ${theme.device.mobileM} {
+    width: 13%;
+  }
 `;
 
 export default Record_When;

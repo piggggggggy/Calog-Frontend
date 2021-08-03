@@ -49,20 +49,17 @@ export const getWorkoutDB = () => {
 }
 
 //기록하기
-export const addRecordDB = (date, list, url, memo) => {
+export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
-    const data = {
-      date:date, food_list:list, url:url, contents:memo,
-    }
-    console.log(data);
-    // instance
-    //   .post('/api/record', {data})
-    //   .then((res) => {
-    //     console.log(res)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
+    instance
+      .post('/api/record', {date:date, food_list:list, type:type, url:url, contents:memo})
+      .then((res) => {
+        window.alert('식사 기록되었어요! 함께 건강해져봐요💪🏻')
+        history.push('/dashboard')
+      })
+      .catch((err) => {
+        window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+      })
   }
 }
 
