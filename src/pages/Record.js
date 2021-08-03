@@ -58,7 +58,7 @@ const Record = (props) => {
       const imageUrl = URL.createObjectURL(compressedFile);
       setFileUrl(imageUrl)
     } catch (error) {
-      window.alert('이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요!')
+      window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
     }
   }
   //TODO Lambda 사용해보기 >> 이미지 업로드
@@ -83,17 +83,15 @@ const Record = (props) => {
         ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
           if(data.status === 204) {
             let imgUrl = data.location
-            const food_list = [{...cart_list, type:cart.type}]
-            inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, food_list, imgUrl, inputMemo))
+            inputMemo === undefined ? window.alert('기록을 위해 간단한 메모를 입력해주세요✍🏻') : dispatch(addRecordDB(cart.date, cart_list, cart.type, imgUrl, inputMemo))
           } else {
-            window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
+            window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
           }
         });
-      } catch (error) {window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요!')}
+      } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
     //업로드 할 이미지가 없을 때
     } else {
-      const food_list = [{...cart_list, type:cart.type}]
-      inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, food_list, "", inputMemo))
+      inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, cart_list, cart.type, "", inputMemo))
     }
   }
 
@@ -109,19 +107,32 @@ const Record = (props) => {
         <Record_When />
       </FixTop>
       {/* 칼로리 리스트 - 맵 */}
+      {cart_list.length <5 ? 
       <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto">
         {cart_list.map((c, idx) => {
           return <Record_List key={c.foodId} {...c}/>
         })}
-      </Grid>
-      {/* TODO 5개 끊어서 가져와야함 > 아직 테스트 불가! 리스트가 5개 이상일 경우 활성화 */}
-      {cart_list.length >=5 &&
+      </Grid> :
+      <React.Fragment>
+        <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto">
+          {cart_list.map((c, idx) => {
+            return <Record_List key={c.foodId} {...c}/>
+          })}
+        </Grid>
         <Grid margin="22px auto" width="30px">
           <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.23 0.229981L20 1.99998L10 12L-7.73692e-08 1.99998L1.77 0.229981L10 8.45998L18.23 0.229981Z" fill="#757575"/>
           </svg>
         </Grid>
-      }
+      </React.Fragment>
+    }
+      {/* 리스트가 5개 이상일 경우 활성화 */}
+      {/* {cart_list.length >=5 &&
+        <Grid margin="22px auto" width="30px">
+          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.23 0.229981L20 1.99998L10 12L-7.73692e-08 1.99998L1.77 0.229981L10 8.45998L18.23 0.229981Z" fill="#757575"/>
+          </svg>
+        </Grid> */}
       {/* 사진 */}
       <Grid padding="13.5% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
