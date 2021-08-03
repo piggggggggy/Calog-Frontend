@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { searchKeywordDB } from '../redux/modules/search';
 import _ from 'lodash';
+// modules
+import { searchKeywordDB, ascendingSort, descendingSort, koreanSort } from '../redux/modules/search';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -12,6 +13,7 @@ import UnderBar from './Main_UnderBar';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
 import { TiDeleteOutline } from 'react-icons/ti';
+import { MdCancel } from 'react-icons/md';
 
 /** 
  * @param {*} props
@@ -27,6 +29,7 @@ const MainBody = (props) => {
 // props
   const search_list = useSelector((state) => state.search.filtered_list);
   const [keyword, setKey] = useState();
+  const [history, setHistory] = useState(true);
 // useEffect
   
   
@@ -45,6 +48,25 @@ const MainBody = (props) => {
     setKey('');
   };
 
+  // history on off
+  const historyOn = () => {
+    setHistory(false);
+  };
+  const historyOff = () => {
+    setHistory(true);
+  };
+  const styles = history ? {display: "none"} : {display: "block"};
+
+  // 오름차순 정렬
+  // dispatch(ascendingSort());
+  // dispatch(descendingSort());
+  // dispatch(koreanSort());
+
+  const aa = () => {
+    dispatch(koreanSort());
+  };
+
+
   return (
     <React.Fragment>
 
@@ -52,52 +74,52 @@ const MainBody = (props) => {
         {/* 검색바 */}
         <SearchGrid>
           <SearchBox>
-            <input onChange={(e)=>{keyChange(e)}} value={keyword} placeholder="어떤 칼로리가 궁금하신가요?"/>
+            <input onChange={(e)=>{keyChange(e)}} value={keyword} onFocus={()=>{historyOn()}} onBlur={()=>{historyOff()}} placeholder="어떤 칼로리가 궁금하신가요?"/>
             {keyword ? 
             <div onClick={()=>{deleteKeyword()}} style={{right: "10vw", top: "1vh", cursor: "pointer"}}>
-              <TiDeleteOutline size="16px" color="#C4C4C4"/>
+              <MdCancel size="16px" color="#C4C4C4"/>
             </div>
             : ''}
             <div onClick={()=>{search()}}>
               <BiSearchAlt2 size="24px" color="#5F5F5F" />
             </div>
           </SearchBox>
-          <SearchHistory>
+          <SearchHistory style={styles}>
             <div>
               <Grid is_flex padding="1.8vh 6vw">
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
+                <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
+                <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
+                <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
+                <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
+                <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
@@ -119,7 +141,7 @@ const MainBody = (props) => {
 
         {/* 모냥만 만들어논 정렬 탭 */}
         <Grid m_margin="5vh 0 2vh 0" margin="5vh 0 2vh 0" padding="0 25px" display="flex" jc="flex-end">
-          <Grid display="flex" jc="flex-end" width="auto" cursor>
+          <Grid _onClick={()=>{aa()}} display="flex" jc="flex-end" width="auto" cursor>
             <Text size="13px" m_size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
             <Grid width="16px" height="16px" display="flex" jc="center">
               <IoIosArrowDown size="14px" color="8C8C8C"/>
@@ -159,6 +181,7 @@ const HeaderContainer = styled.div`
 `;
 
 const BodyContainer = styled.div`
+  padding-top: 2vh;
   max-width: 100%;
   max-height: 60vh;
   padding-bottom: 10vh;
@@ -217,7 +240,7 @@ const CardContainer = styled.div`
 const SearchHistory = styled.div`
   display: none;
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   /* overflow: hidden; */
   position: absolute;
   background: #00000048;
@@ -226,6 +249,7 @@ const SearchHistory = styled.div`
   & > div {
     width: 100vw;
     height: 35vh;
+    overflow: scroll;
     background: #fff;
     border-bottom-left-radius: 28px;
     border-bottom-right-radius: 28px;

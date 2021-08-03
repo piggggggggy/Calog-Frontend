@@ -49,6 +49,7 @@ const DefaultText = styled.p`
 
     @media ${theme.device.mobileM} {
         font-size: ${(props) => props.m_size};
+        ${(props) => props.m_lineheight ? `line-height: ${props.m_lineheight}` : ''};
     }
 `;
 
