@@ -18,7 +18,7 @@ const App = (props) => {
           <GlobalStyles />
             <Wrap>
               <Route path="/" exact component={Main} />
-              <Route path="/:keyword" exact component={MainSearch} />
+              {/* <Route path="/:keyword" exact component={MainSearch} /> */}
               <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
               <Route path="/cart" exact component={Cart} />
 
