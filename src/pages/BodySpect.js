@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { BodySpectSV, LoginCheck } from '../redux/modules/user';
+import { BodySpectSV, LoginCheck, BodySpectModify } from '../redux/modules/user';
 import { ProfileDefault, Camera, Pen, Go } from '../img/svg';
 import { _logOut } from '../redux/modules/user';
 import {history} from '../redux/configStore';
@@ -28,7 +28,8 @@ const bodyStore = () => {
 }
 useEffect(() => {
   dispatch(LoginCheck());
-  dispatch(BodySpectSV("남자", 80, 180, 25, "mid"));
+  // dispatch(BodySpectSV("남자", 80, 180, 25));
+  // dispatch(BodySpectModify("남자", 75, 180, 25));
 }, []);
 
   if(!is_login){
@@ -49,9 +50,9 @@ useEffect(() => {
             </div>
             <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!</Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>공지사항</Tag></Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag></Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
             <hr color="#F5F5F5"/>
             <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
             <hr color="#F5F5F5"/>
@@ -88,7 +89,7 @@ return (
             <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
             </Text>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
           <hr color="#F5F5F5"/>

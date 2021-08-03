@@ -15,7 +15,7 @@ import _ from 'lodash';
  * @담당자 : 
 */
 
-const Notice = (props) => {
+const Alam = (props) => {
 const dispatch = useDispatch();
 const [user_info, setUserInfo] = useState({});
 
@@ -27,35 +27,21 @@ const [user_info, setUserInfo] = useState({});
             <div onClick={()=>{history.push("/body")}}>
             <Tag>{Back}</Tag>
             </div>
-            <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
+            <Text size="17px" lineheight="22px" bold color="#000000">알람</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br/>
-            <Tag>글쓰기</Tag>
           </Head>
           <hr color="#F5F5F5"/>
-          <PostList>
-            <Post>
-                <Tag onClick={()=>{history.push(`/notice/${"postId"}`)}}>
-                <Text size="17px" lineheight="22px">칼로리즈 서비스 런칭 공지</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
-            <Post>
-            <Tag onClick={()=>{history.push(`/notice/${"postId"}`)}}>
-                <Text size="17px" lineheight="22px">공지사항의 제목이 길 경우에는 이렇게 길어지다가 끝 처리를 ...</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
-          </PostList>
+          푸시 알림
+          <hr color="#F5F5F5"/>
+
       </Container>
     </React.Fragment>
   );
 }
 
 
-export default Notice;
+export default Alam;
 
 const Container = styled.div`
   height: 866px;

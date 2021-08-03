@@ -28,30 +28,24 @@ const login = () => {
     <React.Fragment>
       <Container>
           <Head>
-            <div onClick={()=>{history.push("/body")}}>
-            {Back}
+            <div onClick={()=>{history.push("/notice")}}>
+            <Tag>{Back}</Tag>
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {/* 관리자 글쓰기 버튼 */}
-            <br/>글쓰기
+            <br/>
           </Head>
           <hr color="#F5F5F5"/>
           <PostList>
             <Post>
-                <Tag onClick={()=>{console.log("공지사항 상세페이지")}}>
+                <Tag >
                 <Text size="17px" lineheight="22px">칼로리즈 서비스 런칭 공지</Text>
                 <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
                 </Tag>
                 <hr color="#F5F5F5"/>
             </Post>
-            <Post>
-            <Tag onClick={()=>{console.log("공지사항 상세페이지")}}>
-                <Text size="17px" lineheight="22px">공지사항의 제목이 길 경우에는 이렇게 길어지다가 끝 처리를 ...</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
+
           </PostList>
       </Container>
     </React.Fragment>

@@ -3,7 +3,7 @@ import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpect, Notice, NotiDetail} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpect, Notice, NotiDetail, NoticeWrite, Alam} from '../pages'
 import Nav from './Nav';
 //테마
 import theme from './theme';
@@ -31,6 +31,8 @@ const App = (props) => {
               <Route path="/body" exact component={BodySpect}/>
               <Route path="/notice" exact component={Notice}/>
               <Route path="/notice/:id" exact component={NotiDetail}/>
+              <Route path="/notiwrite" exact component={NoticeWrite}/>
+              <Route path="/alam" exact component={Alam}/>
 
               <Nav />
             </Wrap>
