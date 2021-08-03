@@ -16,7 +16,9 @@ const color = {
 
 //반응형용 디바이스 사이즈
 const deviceSizes = {
+  //가로가 작은 휴대폰(아이폰 5)
   mobileM: "400px",
+  //세로가 긴 휴대폰(갤럭시 폴더나 아이폰 프로의 경우)
   mobileH: "700px"
 };
 
