@@ -42,15 +42,16 @@ const Record = (props) => {
   //이미지
   //preview
   const [fileUrl, setFileUrl] = useState(null);
+  //리사이징 옵션
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
+  }
   //+ 리사이징 후 프리뷰
   const chgPreview = async (e) => {
     //원본
     const imageFile = e.target.files[0];
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true
-    }
     //리사이징
     try {
       const compressedFile = await imageCompression(imageFile, options);
@@ -63,7 +64,7 @@ const Record = (props) => {
   //이미지 업로드
   const fileUpload = useRef()
   //upload btn
-  const submitBtn = (e) => {
+  const submitBtn = async (e) => {
     e.preventDefault();
     let file = fileUpload.current.files[0];
     //업로드 할 이미지가 있을 때
@@ -76,15 +77,19 @@ const Record = (props) => {
         secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
       };
       const ReactS3Client = new S3upload(config);
-      ReactS3Client.uploadFile(file, newFileName).then(data => {
-        if(data.status === 204) {
-          let imgUrl = data.location
-          const food_list = [{...cart_list, type:cart.type}]
-          inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, food_list, imgUrl, inputMemo))
-        } else {
-          window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
-        }
-      });
+      //리사이징하여 업로드
+      try {
+        const resizeFile = await imageCompression(file, options);
+        ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
+          if(data.status === 204) {
+            let imgUrl = data.location
+            const food_list = [{...cart_list, type:cart.type}]
+            inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, food_list, imgUrl, inputMemo))
+          } else {
+            window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
+          }
+        });
+      } catch (error) {window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요!')}
     //업로드 할 이미지가 없을 때
     } else {
       const food_list = [{...cart_list, type:cart.type}]
