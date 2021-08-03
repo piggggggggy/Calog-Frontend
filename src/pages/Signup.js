@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
 import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
+import { history } from '../redux/configStore';
 import {Back, X} from "../img/svg";
 import _ from 'lodash';
 /**
@@ -36,8 +37,9 @@ useEffect(() => {
   debounce()
   }, [user_info.nickname]);
 
-const Signup = () => {
+const signup = () => {
   dispatch(SignupSV(user_info));
+  history.push("/login");
 };
 
 const debounceEmail = _.debounce((e) => {
@@ -123,7 +125,8 @@ const debounceNick = _.debounce((e) => {
           </Grid>
           {dupliEmail&&dupliNick&&pwdDupli(user_info.password, user_info.pwdcheck)&&pwdCheck(user_info.password)?
           <Grid display="flex" fd="column-reverse" height="100%">
-          <Button bg="#FFE899" height="56px" margin="0px">
+          <Button bg="#FFE899" height="56px" margin="0px"
+          _onClick={signup}>
             <Text bold color="#404040" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>
@@ -134,9 +137,7 @@ const debounceNick = _.debounce((e) => {
           </Button>
           </Grid>
           }
-          {/* <Grid display="flex" fd="row-reverse">
-          <Text color="#8C8C8C" size="15px" lineheight="20px" width="95px" margin="10px">비밀번호 재설정</Text>
-          </Grid> */}
+
       </Container>
     </React.Fragment>
   );

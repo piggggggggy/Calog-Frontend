@@ -94,9 +94,10 @@ export const LoginCheck = () => {
 
 export const _logOut = () => {
     return function(dispatch, getState, {history}){
+        console.log("df")
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-    }
+    };
 }
 
 export const BodySpectSV = (gender, weight, height, age, control) => {
