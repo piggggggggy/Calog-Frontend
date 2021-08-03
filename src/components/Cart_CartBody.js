@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Cart_Card';
+// icons
+import { FaCircle } from "react-icons/fa";
 // modules
 import { cartOut } from '../redux/modules/cart';
 // history
@@ -67,20 +69,45 @@ const CartBody = (props) => {
           </Grid>
 
           <Grid display="flex" margin="3.5vh 0 0 0">
-            <div onClick={()=>{selectType("morning")}}>
-              <Text lineheight="22px" size="17px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">아침</Text>
+            <div onClick={()=>{selectType("morning")}} style={{marginRight: "3vw" }}>
+              <Text lineheight="22px" size="17px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
+              <Dot>
+                <Grid display={type === "아침" ? 'block' : 'none'}>
+                  <FaCircle size="7px"/>
+                </Grid>
+              </Dot>
             </div>
-            <div onClick={()=>{selectType("lunch")}}>
-              <Text lineheight="22px" size="17px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">점심</Text>
+            <div onClick={()=>{selectType("lunch")}} style={{marginRight: "3vw" }}>
+              <Text lineheight="22px" size="17px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">점심</Text>
+              <Dot>
+                <Grid display={type === "점심" ? 'block' : 'none'}>
+                  <FaCircle size="7px"/>
+                </Grid>
+              </Dot>
             </div>
-            <div onClick={()=>{selectType("dinner")}}>
-              <Text lineheight="22px" size="17px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">저녁</Text>
+            <div onClick={()=>{selectType("dinner")}} style={{marginRight: "3vw" }}>
+              <Text lineheight="22px" size="17px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">저녁</Text>
+              <Dot>
+                <Grid display={type === "저녁" ? 'block' : 'none'}>
+                  <FaCircle size="7px"/>
+                </Grid>
+              </Dot>
             </div>
-            <div onClick={()=>{selectType("snack")}}>
-              <Text lineheight="22px" size="17px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">간식</Text>
+            <div onClick={()=>{selectType("snack")}} style={{marginRight: "3vw" }}>
+              <Text lineheight="22px" size="17px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">간식</Text>
+              <Dot>
+                <Grid display={type === "간식" ? 'block' : 'none'}>
+                  <FaCircle size="7px"/>
+                </Grid>
+              </Dot>
             </div>
-            <div onClick={()=>{selectType("midnightSnack")}}>
-              <Text lineheight="22px" size="17px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 3vw 0 0">야식</Text>
+            <div onClick={()=>{selectType("midnightSnack")}} style={{marginRight: "3vw" }}>
+              <Text lineheight="22px" size="17px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">야식</Text>
+              <Dot>
+                <Grid display={type === "야식" ? 'block' : 'none'}>
+                  <FaCircle size="7px"/>
+                </Grid>
+              </Dot>
             </div>
           </Grid>
         </Grid>
@@ -134,4 +161,11 @@ const CalcBox = styled.div`
     cursor: pointer;
   }
 `;
+
+const Dot = styled.div`
+  position: relative;
+  float: right;
+  margin-top: -70%;
+`;
+
 export default CartBody;

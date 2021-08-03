@@ -66,7 +66,7 @@ const FoodCard = styled.div`
   padding: 2.2vh 7.6vw;
   background: #fff;
   border: 1px solid #F19F13;
-  border-radius: 28px;
+  border-radius: 16px;
 `;
 
 const CountBox = styled.div`

@@ -15,7 +15,7 @@ const App = (props) => {
         <GlobalStyles />
         <Wrap>
           <Route path="/" exact component={Main} />
-          <Route path="/fooddetail" exact component={FoodDetail} />
+          <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
           <Route path="/cart" exact component={Cart} />
 
           <Route path="/dashboard" exact component={DashBoard}/>
