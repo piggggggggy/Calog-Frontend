@@ -69,8 +69,8 @@ const Card = (props) => {
           <AiOutlinePlusCircle size="17px"/>
         </CartBox>
 
-        <Text size="13px" lineheight="18px" margin="0" padding="0">{props.name}</Text>
-        <Text size="22px" lineheight="" bold margin="0" padding="0">{props.kcal} kcal</Text>
+        <Text size="13px" m_size="13px" lineheight="18px" margin="0" padding="0">{props.name}</Text>
+        <Text size="22px" m_size="20px" lineheight="" bold margin="0" padding="0">{props.kcal} kcal</Text>
         
       </FoodCard>
 

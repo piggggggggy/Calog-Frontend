@@ -12,14 +12,14 @@ import theme from '../shared/theme';
 */
 
 const Record_List = (props) => {
-  const {foodId, name, amount, kcal, grams} = props
+  const { name, amount, kcal, grams} = props
 
   return (
     <React.Fragment>
       <Wrap>
-        <Text width="60%">{name} ({grams}g)</Text>
-        <Text>{kcal}kcal</Text>
-        <Text>X {amount}</Text>
+        <Text width="60%" size="15px" m_size="13px">{name} ({grams}g)</Text>
+        <Text size="15px" bold m_size="13px">{kcal}kcal</Text>
+        <Text size="15px" m_size="13px">X {amount}</Text>
       </Wrap>
     </React.Fragment>
   );
@@ -34,7 +34,7 @@ Record_List.defaultProps = {
 }
 
 const Wrap = styled.div`
-  width: 368px;
+  width: 88%;
   height: 51px;
   border: 1px solid ${theme.color.dark};
   border-radius: 28px;

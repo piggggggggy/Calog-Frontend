@@ -44,21 +44,21 @@ const UnderBar = (props) => {
   return (
     <React.Fragment>
       <CartContainer 
-      style={{ transform: `translate(0, ${barOnOff ? '0%' : 'calc(100% - 11vh)'})` }}
+      style={{ transform: `translate(0, ${barOnOff ? '0%' : 'calc(100% - 10vh)'})` }}
         >
 
-          <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="2.3vh" width="20px" margin="1.2vh auto" cursor>
+          <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="2.3vh" width="20px" margin="1.2vh auto" m_margin="1.2vh auto" cursor>
             {barOnOff ? 
             <IoIosArrowDown size="20px" color="#757575"/>
             : <IoIosArrowUp size="20px" color="#757575"/> }
           </Grid>
           
           {/* 즐겨찾기 항목 (가라데이터) */}
-          <Grid padding="4px 5% 3% 5%" display="flex" fw="wrap">
+          <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
             {cart_list.map((cart, idx) => {
               return (
                 <CartButton key={idx}>
-                  <Text line-height="18px" size="13px" color="#2A2A2A" padding="0" margin="0">
+                  <Text line-height="18px" size="13px" m_size="13px" color="#2A2A2A" padding="0" margin="0">
                     {cart.name}
                   </Text>
                   <div onClick={()=>{deleteCart(cart.foodId)}}><MdCancel size="13px" color="#404040"/></div>
@@ -86,8 +86,8 @@ const CartContainer = styled.div`
   position: fixed;
   bottom: 9%;
   border: none;
-  border-top-left-radius: 44px;
-  border-top-right-radius: 44px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
   box-shadow: 0px -5px 22px -8px rgba(0, 0, 0, 0.14);
   background: #fff;
   z-index: 20;
@@ -101,7 +101,7 @@ const CartContainer = styled.div`
 
 const CalcBox = styled.div`
   width: 100%;
-  padding: 5vh 20px 2.8vh 20px;
+  padding: 3vh 20px 2.8vh 20px;
 
   & > div {
     width: 100%;
@@ -120,14 +120,14 @@ const CalcBox = styled.div`
 
 const CartButton = styled.div`
   height: 4vh;
-  padding: 5px 8px;
+  padding: 5px 2vw;
   background: #E4E4E4;
-  border-radius: 44px;
+  border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px;
-  gap: 3px;
+  margin: 5px 2vw;
+  /* gap: 2vw; */
 
   & > div {
     display: flex;

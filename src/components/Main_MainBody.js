@@ -65,39 +65,39 @@ const MainBody = (props) => {
           <SearchHistory>
             <div>
               <Grid is_flex padding="1.8vh 6vw">
-                <Text lineheight="18px" bold size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
+                <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" color="#404040" padding="0" margin="0">삼겹살</Text>
+                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" color="#404040" padding="0" margin="0">우유</Text>
+                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" color="#404040" padding="0" margin="0">고구마</Text>
+                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" color="#404040" padding="0" margin="0">고등어</Text>
+                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
               </Grid>
               <Line/>
               <Grid is_flex padding="1.3vh 8vw">
-                <Text lineheight="20px" size="15px" color="#404040" padding="0" margin="0">토마토</Text>
+                <Text lineheight="20px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
                 <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                   <TiDeleteOutline size="15px" color="#737373"/>
                 </div>
@@ -118,9 +118,9 @@ const MainBody = (props) => {
         </Grid>
 
         {/* 모냥만 만들어논 정렬 탭 */}
-        <Grid margin="6vh 0 3vh 0" padding="0 25px" display="flex" jc="flex-end">
+        <Grid m_margin="5vh 0 2vh 0" margin="5vh 0 2vh 0" padding="0 25px" display="flex" jc="flex-end">
           <Grid display="flex" jc="flex-end" width="auto" cursor>
-            <Text size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
+            <Text size="13px" m_size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
             <Grid width="16px" height="16px" display="flex" jc="center">
               <IoIosArrowDown size="14px" color="8C8C8C"/>
             </Grid>
@@ -151,6 +151,7 @@ MainBody.defaultProps = {
 }
 const HeaderContainer = styled.div`
   max-width: 100%;
+  /* overflow: auto; */
   /* position: fixed;
   top: 0;
   width: 100%; */
@@ -159,9 +160,9 @@ const HeaderContainer = styled.div`
 
 const BodyContainer = styled.div`
   max-width: 100%;
-  max-height: 55vh;
+  max-height: 60vh;
   padding-bottom: 10vh;
-  overflow: auto;
+  overflow: scroll;
 `;
 
 const SearchGrid = styled.div`
@@ -183,7 +184,7 @@ const SearchBox = styled.div`
   & > input {
     display: block;
     padding: 0;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 400;
     width: 100%;
     border: none;
@@ -214,6 +215,7 @@ const CardContainer = styled.div`
 `;
 
 const SearchHistory = styled.div`
+  display: none;
   width: 100%;
   height: 100vh;
   /* overflow: hidden; */
