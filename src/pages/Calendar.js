@@ -1,6 +1,6 @@
 import React from 'react';
+import {Grid, Text} from '../elements';
 //컴포넌트
-import BtnHeader from '../shared/BtnHeader';
 import Calendar_Calendar from '../components/Calendar_Calendar';
 
 /** 
@@ -19,7 +19,9 @@ const Calendar = (props) => {
   return (
     <React.Fragment>
       {/* 헤더 */}
-      <BtnHeader title="캘린더" display="none"/>
+      <Grid padding="13.5% 0 0 5.8%">
+        <Text size="28px" bold>캘린더</Text>
+      </Grid>
       {/* 캘린더 */}
       <Calendar_Calendar />
     </React.Fragment>
