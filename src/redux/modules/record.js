@@ -55,14 +55,14 @@ export const addRecordDB = (date, list, url, memo) => {
       date:date, food_list:list, url:url, contents:memo,
     }
     console.log(data);
-    instance
-      .post('/api/record', {data})
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // instance
+    //   .post('/api/record', {data})
+    //   .then((res) => {
+    //     console.log(res)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   }
 }
 

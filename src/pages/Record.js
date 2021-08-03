@@ -9,11 +9,14 @@ import Record_List from '../components/Record_List';
 import theme from '../shared/theme';
 //이모지
 import Camera from '../img/Group.png'
-//이미지 업로드
+//이미지 업로드(압축해서 s3)
 import S3upload from 'react-aws-s3';
+import imageCompression from "browser-image-compression";
 //for axios
 import {useSelector, useDispatch} from 'react-redux';
 import {addRecordDB} from '../redux/modules/record';
+//lazy loading
+import LazyLoad from 'react-lazyload';
 
 /** 
  * @param {*} props
@@ -37,15 +40,28 @@ const Record = (props) => {
   }
 
   //이미지
-  const fileUpload = useRef()
   //preview
   const [fileUrl, setFileUrl] = useState(null);
-  const chgPreview = (e) => {
+  //+ 리사이징 후 프리뷰
+  const chgPreview = async (e) => {
+    //원본
     const imageFile = e.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    setFileUrl(imageUrl)
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true
+    }
+    //리사이징
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      const imageUrl = URL.createObjectURL(compressedFile);
+      setFileUrl(imageUrl)
+    } catch (error) {
+      window.alert('이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요!')
+    }
   }
-
+  //이미지 업로드
+  const fileUpload = useRef()
   //upload btn
   const submitBtn = (e) => {
     e.preventDefault();
@@ -53,26 +69,26 @@ const Record = (props) => {
     //업로드 할 이미지가 있을 때
     if (file) {
       let newFileName = fileUpload.current.files[0].name;
-    const config = {
-      bucketName: process.env.REACT_APP_BUCKET_NAME,
-      region: process.env.REACT_APP_REGION,
-      accessKeyId: process.env.REACT_APP_ACCESS_ID,
-      secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-    };
-    const ReactS3Client = new S3upload(config);
-    ReactS3Client.uploadFile(file, newFileName).then(data => {
-      if(data.status === 204) {
-        let imgUrl = data.location
-        const food_list = [{...cart_list, type:cart.type}]
-        dispatch(addRecordDB(cart.date, food_list, imgUrl, inputMemo))
-      } else {
-        window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
-      }
-    });
+      const config = {
+        bucketName: process.env.REACT_APP_BUCKET_NAME,
+        region: process.env.REACT_APP_REGION,
+        accessKeyId: process.env.REACT_APP_ACCESS_ID,
+        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+      };
+      const ReactS3Client = new S3upload(config);
+      ReactS3Client.uploadFile(file, newFileName).then(data => {
+        if(data.status === 204) {
+          let imgUrl = data.location
+          const food_list = [{...cart_list, type:cart.type}]
+          inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, food_list, imgUrl, inputMemo))
+        } else {
+          window.alert('게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요.')
+        }
+      });
     //업로드 할 이미지가 없을 때
     } else {
       const food_list = [{...cart_list, type:cart.type}]
-      dispatch(addRecordDB(cart.date, food_list, inputMemo))
+      inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, food_list, "", inputMemo))
     }
   }
 
@@ -106,18 +122,20 @@ const Record = (props) => {
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
       </Grid>
       <Grid>
-        <label htmlFor="imgFile">
-            {!fileUrl ?
-            <Grid bg={'#FFFBED'} width="89%" height="236px" margin="4% auto 5% auto" border_radius="8px" padding="15% 0" m_margin="4% auto 5% auto">
-              <Image src={Camera} width="21%" height="62px" margin="auto"/>
-              <Grid text_align="center">
-                <Text size="17px" bold color={'#aeaeae'} margin="6% auto 0 auto" m_size="13px">+ 여기를 눌러 사진 등록</Text>
-              </Grid>
-            </Grid> :
-              <Image src={fileUrl} width="89%" height="236px" margin="4% auto 5% auto" b_size="100% 100%" border_radius="8px"/>
-            }
-        </label>
-        <FileBox type="file" accept="image/*; capture=camera" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+        <LazyLoad>
+          <label htmlFor="imgFile">
+              {!fileUrl ?
+              <Grid bg={'#FFFBED'} width="89%" height="236px" margin="4% auto 5% auto" border_radius="8px" padding="15% 0" m_margin="4% auto 5% auto">
+                <Image src={Camera} width="21%" height="62px" margin="auto"/>
+                <Grid text_align="center">
+                  <Text size="17px" bold color={'#aeaeae'} margin="6% auto 0 auto" m_size="13px">+ 여기를 눌러 사진 등록</Text>
+                </Grid>
+              </Grid> :
+                <Image src={fileUrl} width="89%" height="236px" margin="4% auto 5% auto" b_size="100% 100%" border_radius="8px"/>
+              }
+          </label>
+          <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+        </LazyLoad>
       </Grid>
       {/* TODO 메모 커서 올리면 같이 올라오게 가능? - (배포 후 체크) 메모 */}
       <Grid padding="1% 7.7% 0 7.7%">

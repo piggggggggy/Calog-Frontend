@@ -7,29 +7,33 @@ import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, Sign
 import Nav from './Nav';
 //테마
 import theme from './theme';
+//lazy loading
+import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
   return (
     <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Wrap>
-          <Route path="/" exact component={Main} />
-          <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
-          <Route path="/cart" exact component={Cart} />
+      <LazyLoad>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+            <Wrap>
+              <Route path="/" exact component={Main} />
+              <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
+              <Route path="/cart" exact component={Cart} />
 
-          <Route path="/dashboard" exact component={DashBoard}/>
-          <Route path="/calendar" exact component={Calendar}/>
-          <Route path="/record" exact component={Record}/>
+              <Route path="/dashboard" exact component={DashBoard}/>
+              <Route path="/calendar" exact component={Calendar}/>
+              <Route path="/record" exact component={Record}/>
 
-          <Route path="/login" exact component={Login}/>
-          <Route path="/signup" exact component={Signup}/>
-          <Route path="/signsocial" exact component={SignSocial}/>
-          <Route path="/body" exact component={BodySpect}/>
-          
-          <Nav />
-        </Wrap>
-      </ThemeProvider>
+              <Route path="/login" exact component={Login}/>
+              <Route path="/signup" exact component={Signup}/>
+              <Route path="/signsocial" exact component={SignSocial}/>
+              <Route path="/body" exact component={BodySpect}/>
+
+              <Nav />
+            </Wrap>
+        </ThemeProvider>
+      </LazyLoad>
     </React.Fragment>
   );
 }
