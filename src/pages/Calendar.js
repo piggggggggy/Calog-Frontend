@@ -1,20 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Grid, Text} from '../elements';
 //컴포넌트
 import Calendar_Calendar from '../components/Calendar_Calendar';
+//db
+import {useDispatch} from 'react-redux'
+import {getAllRecordDB} from '../redux/modules/record';
 
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @역할 : 유저의 기초대사량을 토대로 한 달 식습관을 확인할 수 있는 페이지
+ * @담당자 : 김나영
 */
 
 const Calendar = (props) => {
-// dispatch
-// props
-// useEffect
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllRecordDB())
+  },[])
 
   return (
     <React.Fragment>
@@ -26,10 +30,6 @@ const Calendar = (props) => {
       <Calendar_Calendar />
     </React.Fragment>
   );
-}
-
-Calendar.defaultProps = {
-
 }
 
 export default Calendar;

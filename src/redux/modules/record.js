@@ -2,14 +2,15 @@
 // @담당자 : 김나영
 
 import { createSlice } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
 //카트 삭제 액션
 import {delCartAll} from './cart';
 //전역 > 서버 배포
 import instance from "./instance";
+//postman test용
+import axios from 'axios'
 
 // middleware 
-//db에서 바디스펙 가져오기
+//dashboard - db에서 바디스펙 가져오기
 export const getBodySpecDB = () => {
   return function (dispatch, getState, {history}) {
     instance
@@ -17,27 +18,27 @@ export const getBodySpecDB = () => {
       .then((res) => {
         console.log(res)
       })
-      .err((err) => {
+      .catch((err) => {
         console.log(err)
       }) 
   }
 };
 
-//db에서 오늘의 칼로리 가져오기 가져오기(날짜 담아서 보내주기)
-export const getRecordDB = () => {
+//dashboard - db에서 오늘의 칼로리 가져오기
+export const getTodayRecordDB = () => {
   return function (dispatch, getState, {history}) {
     instance
       .get('')
       .then((res) => {
         console.log(res)
       })
-      .err((err) => {
+      .catch((err) => {
         console.log(err)
       }) 
   }
 };
 
-//db에서 운동리스트 가져오기
+//dashboard - db에서 운동리스트 가져오기
 export const getWorkoutDB = () => {
   return function (dispatch, getState, {history}) {
     instance
@@ -45,13 +46,13 @@ export const getWorkoutDB = () => {
       .then((res) => {
         console.log(res)
       })
-      .err((err) => {
+      .catch((err) => {
         console.log(err)
       }) 
   }
 }
 
-//기록하기
+//record - 기록하기
 export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
     instance
@@ -67,6 +68,35 @@ export const addRecordDB = (date, list, type, url, memo) => {
   }
 }
 
+//calendar - 전체 기록 불러오기
+export const getAllRecordDB = () => {
+  return function (dispatch, getState, {history}) {
+    axios
+      .get('https://d9670998-d0a1-4d8d-ba12-ad66029d2824.mock.pstmn.io/calendar')
+      .then((res) => {
+        const data_list = res.data
+        dispatch(getAllRecord(data_list))
+      })
+      .catch((err) => {
+        window.alert('게시글 로드에 문제가 발생했어요! 관리자에게 문의해주세요😿')
+      }) 
+  }
+}
+
+//calendar - 특정 일자 기록 불러오기
+export const getRecordDB = () => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .get('')
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+  }
+}
+
 
 // initial State 
 const initialState = {
@@ -76,6 +106,8 @@ const initialState = {
   record: [],
   //추천 운동 리스트
   workout: [],
+  //캘린더 전체 목록
+  calendar: [],
 }
 
 // redux
@@ -83,21 +115,25 @@ const record = createSlice({
   name: "record",
   initialState,
   reducers: {
-    //바디스펙 정보 가져오기
+    //dashboard_바디스펙 정보 가져오기
     getBodySpec : (state, action) => {
 
     },
-    //기록 칼로리 가져오기
+    //dashboard_기록 칼로리 가져오기
     getRecord : (state, action) => {
 
     },
-    //운동 리스트 가져오기
+    //dashboard_운동 리스트 가져오기
     getWorkout : (state, action) => {
 
+    },
+    //calendar_한 달 칼로리 가져오기
+    getAllRecord : (state, action) => {
+      state.calendar = action.payload
     },
   }
 });
 
-export const {getBodySpec, getRecord, getWorkout} = record.actions;
+export const {getBodySpec, getRecord, getWorkout, getAllRecord} = record.actions;
 
 export default record;
