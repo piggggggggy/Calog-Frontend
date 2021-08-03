@@ -18,6 +18,7 @@ export const LoginSV = (user_info) => {
             console.log("res of loginDB", res);
             if(res.status===200){
                 document.cookie = `TOKEN=${res.data.token};`;
+                history.push('/dashboard')
                 //로그인 체크해야할 듯. user info 부족
             } else{
                 window.alert("값을 재입력해주세요!")
@@ -78,6 +79,7 @@ export const NickDuplicate = (nickname) => {
 export const LoginCheck = () => {
     return function(dispatch, getState, {history}){
     console.log("click login check")
+
         instance
         .get('/api/user/me')
         .then((res) => {

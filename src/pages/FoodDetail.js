@@ -45,81 +45,81 @@ const FoodDetail = (props) => {
 
       <BodyContainer>
         
-        <Grid margin="2.7vh 0" padding= "0 6vw">
+        <Grid margin="2.7vh 0" m_margin="2.7vh 0" padding= "0 6vw">
           <div><AiOutlinePlusCircle onClick={addCart} style={{cursor: "pointer"}} size="26px"/></div>
         </Grid>
         
         <Grid is_flex padding= "0 6vw">
           <Grid>
             <Grid display="flex">
-              <Text lineheight="22px" bold size="17px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">떡볶이</Text>
+              <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">떡볶이</Text>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 (200g)</span>
             </Grid>  
-            <Text lineheight="41px" bold size="32px" color="#2A2A2A" margin="15px 0" paddig="0">3100kcal</Text>
+            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="15px 0" paddig="0">3100kcal</Text>
           </Grid>
           <Grid width="27vw" padding="0 8px" display="flex" jc="center" fw="wrap">
             오늘의 기준치를 100kcal를 초과해요!
           </Grid>
         </Grid>
 
-        <Grid margin="4.25vh 0 0 0" padding= "0 6vw">
-          <Text lineheight="22px" bold size="17px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
+        <Grid margin="4.25vh 0 0 0" m_margin="4.25vh 0 0 0" padding= "0 6vw">
+          <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
         </Grid>
         
-        <Grid is_flex margin="2vh 0 6.25vh 0" padding= "0 6vw">
+        <Grid is_flex margin="2vh 0 6.25vh 0" m_margin="2vh 0 6.25vh 0" padding= "0 6vw">
           <IngredientCircle>
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
-            <Text lineheight="28px" bold size="22px" color="#000000" padding="0" margin="0">63g</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
+            <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">63g</Text>
           </IngredientCircle>
           <IngredientCircle>
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">단백질</Text>
-            <Text lineheight="28px" bold size="22px" color="#000000" padding="0" margin="0">6g</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">단백질</Text>
+            <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">6g</Text>
           </IngredientCircle>
           <IngredientCircle>
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">지방</Text>
-            <Text lineheight="28px" bold size="22px" color="#000000" padding="0" margin="0">8g</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">지방</Text>
+            <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">8g</Text>
           </IngredientCircle>
         </Grid>
 
         <Grid padding= "0 6vw">
           <Grid is_flex padding="0.9vh 0.5vh">
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">63g</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">63g</Text>
           </Grid>
           <Line style={{border: "1px solid #F19F13"}}/>
           <Grid is_flex padding="0.9vh 0.5vh 0.9vh 0.9vh">
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">식이섬유</Text>
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">4g</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">식이섬유</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">4g</Text>
           </Grid>
           <Line style={{border: "1px solid #FFE899"}}/>          
           <Grid is_flex padding="0.9vh 0.5vh 0.9vh 0.9vh">
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">당</Text>
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">7g</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">당</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">7g</Text>
           </Grid>
           <Line style={{border: "1px solid #FFE899"}}/>          
           <Grid is_flex padding="0.9vh 0.5vh">
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">단백질</Text>
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">459g</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">단백질</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">459g</Text>
           </Grid>
           <Line style={{border: "1px solid #F19F13"}}/>          
           <Grid is_flex padding="0.9vh 0.5vh 0.9vh 0.9vh">
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">나트륨</Text>
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">549g</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">나트륨</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">549g</Text>
           </Grid>
           <Line style={{border: "1px solid #FFE899"}}/>          
           <Grid is_flex padding="0.9vh 0.5vh 0.9vh 0.9vh">
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0">칼륨</Text>
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">칼륨</Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
           </Grid>
           <Line style={{border: "1px solid #FFE899"}}/>          
           <Grid is_flex padding="0.9vh 0.5vh">
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">지방</Text>
-            <Text lineheight="18px" bold size="13px" color="#404040" padding="0" margin="0">459mg</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">지방</Text>
+            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">459mg</Text>
           </Grid>
           <Line style={{border: "1px solid #F19F13"}}/>          
           <Grid is_flex padding="0.9vh 0.5vh">
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
-            <Text lineheight="18px" size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
+            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
           </Grid>
         </Grid>
 
@@ -136,6 +136,9 @@ FoodDetail.defaultProps = {
 
 const BodyContainer = styled.div`
   max-width: 100%;
+  max-height: 80vh;
+  padding-bottom: 10vh;
+  overflow: scroll;
 `;
 
 const IngredientCircle = styled.div`
