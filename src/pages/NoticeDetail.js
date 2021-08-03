@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginSV } from '../redux/modules/user';
 import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
 import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
@@ -17,12 +16,6 @@ import _ from 'lodash';
 
 const NotiDetail = (props) => {
 const dispatch = useDispatch();
-const [user_info, setUserInfo] = useState({});
-
-const login = () => {
-  dispatch(LoginSV(user_info));
-  console.log("어디 페이지로 갈까!");
-};
 
   return (
     <React.Fragment>
@@ -33,7 +26,6 @@ const login = () => {
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {/* 관리자 글쓰기 버튼 */}
             <br/>
           </Head>
           <hr color="#F5F5F5"/>
@@ -44,6 +36,7 @@ const login = () => {
                 <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
                 </Tag>
                 <hr color="#F5F5F5"/>
+                <Content>내용!</Content>
             </Post>
 
           </PostList>
@@ -81,4 +74,8 @@ const Tag = styled.a`
   &:hover{
     cursor: pointer;
   }
+`;
+
+const Content = styled.div`
+
 `;

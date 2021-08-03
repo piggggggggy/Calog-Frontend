@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginSV } from '../redux/modules/user';
-import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
-import {Back, X} from "../img/svg";
+import {Back} from "../img/svg";
 import { history } from '../redux/configStore';
-import _ from 'lodash';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -17,8 +14,6 @@ import _ from 'lodash';
 
 const Alam = (props) => {
 const dispatch = useDispatch();
-const [user_info, setUserInfo] = useState({});
-
 
   return (
     <React.Fragment>
@@ -32,7 +27,11 @@ const [user_info, setUserInfo] = useState({});
             <br/>
           </Head>
           <hr color="#F5F5F5"/>
-          푸시 알림
+          <Grid display="flex" padding="20px 10px" jc="space-between">
+          <Text size="17px" lineheight="22px" margin="10px">푸시 알림</Text>
+          <PushBtn><Circle/></PushBtn>
+          <ClickBtn><ClickCircle/></ClickBtn>
+          </Grid>
           <hr color="#F5F5F5"/>
 
       </Container>
@@ -55,18 +54,51 @@ const Head = styled.div`
   margin: 28px 0px 0px 0px;
 `;
 
-const PostList = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const Post = styled.div`
-    padding-bottom: 10px;
-    
-`;
-
 const Tag = styled.a`
   &:hover{
     cursor: pointer;
   }
+`;
+
+const PushBtn = styled.div`
+  background-color: #C4C4C4;
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  &:hover{
+    cursor: pointer;
+  }
+`;
+
+const Circle = styled.div`
+  background-color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  position: absolute;
+  margin-left: 2px;
+`;
+
+const ClickBtn = styled.div`
+  background-color: #FCE186;
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  &:hover{
+    cursor: pointer;
+  }
+`;
+
+const ClickCircle = styled.div`
+    background-color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  position: absolute;
+  margin-right: 2px;
 `;
