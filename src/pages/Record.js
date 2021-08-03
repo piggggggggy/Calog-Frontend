@@ -88,12 +88,12 @@ const Record = (props) => {
         <Record_When />
       </FixTop>
       {/* 칼로리 리스트 - 맵 */}
-      <Grid margin="46% auto 24px auto" height={cart_list.length <=3 ? '200px' : 'auto'} m_margin="50% auto 24px auto">
+      <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto">
         {cart_list.map((c, idx) => {
           return <Record_List key={c.foodId} {...c}/>
         })}
       </Grid>
-      {/* 리스트가 5개 이상일 경우 활성화 */}
+      {/* TODO 5개 끊어서 가져와야함 > 아직 테스트 불가! 리스트가 5개 이상일 경우 활성화 */}
       {cart_list.length >=5 &&
         <Grid margin="22px auto" width="30px">
           <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +102,7 @@ const Record = (props) => {
         </Grid>
       }
       {/* 사진 */}
-      <Grid padding="16px 8% 0 8%">
+      <Grid padding="13.5% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
       </Grid>
       <Grid>
@@ -119,8 +119,8 @@ const Record = (props) => {
         </label>
         <FileBox type="file" accept="image/*; capture=camera" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
       </Grid>
-      {/* 메모 */}
-      <Grid padding="1% 8% 0 8%">
+      {/* TODO 메모 커서 올리면 같이 올라오게 가능? - (배포 후 체크) 메모 */}
+      <Grid padding="1% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>메모하기</Text>
       </Grid>
       <TextArea rows={10} onChange={memo} placeholder="메모를 작성해주세요."/>
