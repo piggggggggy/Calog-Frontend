@@ -44,11 +44,10 @@ const UnderBar = (props) => {
   return (
     <React.Fragment>
       <CartContainer 
-      style={{ transform: `translate(0, ${barOnOff ? '0%' : 'calc(100% - 6.25vh)'})` }}
+      style={{ transform: `translate(0, ${barOnOff ? '0%' : 'calc(100% - 11vh)'})` }}
         >
-          {/* 감사합니다 나영님 */}
 
-          <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="20px" width="20px" margin="1.5vh auto" cursor>
+          <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="2.3vh" width="20px" margin="1.2vh auto" cursor>
             {barOnOff ? 
             <IoIosArrowDown size="20px" color="#757575"/>
             : <IoIosArrowUp size="20px" color="#757575"/> }
@@ -102,7 +101,7 @@ const CartContainer = styled.div`
 
 const CalcBox = styled.div`
   width: 100%;
-  padding: 2.8vh 20px;
+  padding: 5vh 20px 2.8vh 20px;
 
   & > div {
     width: 100%;

@@ -4,7 +4,7 @@ import {Grid} from '../elements';
 const LogoHeader = (props) => {
   return (
     <React.Fragment>
-      <Grid bg={'gray'} height="44px" width="10%" margin="2% 5%">
+      <Grid bg={'gray'} height="4.8vh" width="4.8vh" margin="2vh 2.8vh">
         
       </Grid>
     </React.Fragment>

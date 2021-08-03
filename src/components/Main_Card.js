@@ -27,7 +27,7 @@ const Card = (props) => {
 // useEffect
 
   // 장바구니 담기!
-  const addCart = () => {
+  const addCart = (e) => {
     const cartUnit = {
       foodId: props.foodId,
       name: props.name,
@@ -36,7 +36,9 @@ const Card = (props) => {
       kcal: props.kcal,
       amount: 1,
     };
-    dispatch(addCartRx(cartUnit))
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(addCartRx(cartUnit));
   };
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899
@@ -63,7 +65,7 @@ const Card = (props) => {
           <IoStar color="#E4E4E4" size="21px"/>
         </BookmarkBox>
 
-        <CartBox onClick={()=>{addCart()}}>
+        <CartBox onClick={addCart} style={{zIndex: "10"}}>
           <AiOutlinePlusCircle size="17px"/>
         </CartBox>
 

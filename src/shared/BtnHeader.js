@@ -8,18 +8,18 @@ const BtnHeader = (props) => {
 
   return (
     <React.Fragment>
-      <Grid is_flex padding="8% 20px">
+      <Grid is_flex padding="2.9vh 6.2vw">
         {/* 뒤로가기 버튼 */}
-        <Grid width="7%">  
-          <BiChevronLeft size="30px"/>
+        <Grid width="3vh">  
+          <BiChevronLeft size="3vh"/>
         </Grid>
         {/* 페이지 이름 */}
         <Text bold size="16px" width="auto">{props.title}</Text>
         {/* 장바구니 이모지 유무 */}
         {props.display !== 'none' ? 
-        <Grid width="10%">
-          <FiShoppingCart size="30px"/>
-        </Grid> : <Grid width="7%"/>}
+        <Grid width="3vh">
+          <FiShoppingCart size="3vh"/>
+        </Grid> : <Grid width="3vh%"/>}
       </Grid>
     </React.Fragment>
   );
