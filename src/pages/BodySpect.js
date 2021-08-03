@@ -21,13 +21,14 @@ const is_login = useSelector(state=>state.user.is_login);
 const logout = () => {
   dispatch(_logOut());
 }
-// const [bodyInfo,setBodyInfo] = useState({});
-// const {gender, weight, height, age, control} = bodyInfo;
-// const bodyStore = () => {
-//     dispatch(BodySpectSV(gender, weight, height, age, control));
-// }
+const [bodyInfo,setBodyInfo] = useState({});
+const {gender, weight, height, age, control} = bodyInfo;
+const bodyStore = () => {
+    
+}
 useEffect(() => {
   dispatch(LoginCheck());
+  dispatch(BodySpectSV("남자", 80, 180, 25, "mid"));
 }, []);
 
   if(!is_login){
@@ -83,7 +84,9 @@ return (
             </Button>
           </BodyBox>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>공지사항</Tag></Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">
+            <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
+            </Text>
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
           <hr color="#F5F5F5"/>
