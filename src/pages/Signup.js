@@ -36,7 +36,7 @@ useEffect(() => {
   debounce()
   }, [user_info.nickname]);
 
-const Signup = () => {
+const signup = () => {
   dispatch(SignupSV(user_info));
 };
 
@@ -123,7 +123,8 @@ const debounceNick = _.debounce((e) => {
           </Grid>
           {dupliEmail&&dupliNick&&pwdDupli(user_info.password, user_info.pwdcheck)&&pwdCheck(user_info.password)?
           <Grid display="flex" fd="column-reverse" height="100%">
-          <Button bg="#FFE899" height="56px" margin="0px">
+          <Button bg="#FFE899" height="56px" margin="0px"
+          _onClick={signup}>
             <Text bold color="#404040" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>

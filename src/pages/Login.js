@@ -18,7 +18,7 @@ const Signup = (props) => {
 const dispatch = useDispatch();
 const [user_info, setUserInfo] = useState({});
 
-const Signup = () => {
+const login = () => {
   dispatch(LoginSV(user_info));
 };
 
@@ -63,14 +63,15 @@ const Signup = () => {
           <Text color="#FFFFFF" size="13px" lineheight="18px">*비밀번호를 입력해주세요.</Text>
           }
           </Grid>
-          
+
           <Grid display="flex" fd="row-reverse">
           <Text color="#8C8C8C" size="15px" lineheight="20px" width="95px" margin="10px">비밀번호 재설정</Text>
           </Grid>
 
           {user_info.password&&user_info.email&&emailCheck(user_info.email)&&pwdCheck(user_info.password)?
                     <Grid display="flex" fd="column-reverse" height="100%">
-                    <Button bg="#FFE899" height="56px" margin="0px">
+                    <Button bg="#FFE899" height="56px" margin="0px"
+                    _onClick={login}>
                       <Text bold color="#404040" size="16px" lineheight="22px">로그인 하기</Text>
                     </Button>
                     </Grid>

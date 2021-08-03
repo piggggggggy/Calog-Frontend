@@ -107,7 +107,7 @@ const Record_When = (props) => {
 
 const Wrap =styled.div`
   display: flex;
-  padding: 0 12%;
+  padding: 0 7.7%;
 
   @media ${theme.device.mobileM} {
     padding: 0 8%;
