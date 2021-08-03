@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 // modules
-import { searchKeywordDB, ascendingSort, descendingSort, koreanSort } from '../redux/modules/search';
+import { searchKeywordDB, ascendingSort, descendingSort, koreanSort, rangeFilter } from '../redux/modules/search';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -30,6 +30,8 @@ const MainBody = (props) => {
   const search_list = useSelector((state) => state.search.filtered_list);
   const [keyword, setKey] = useState();
   const [history, setHistory] = useState(true);
+  const [filterMin, setMin] = useState(0);
+  const [filterMax, setMax] = useState(5000);
 // useEffect
   
   
@@ -40,7 +42,12 @@ const MainBody = (props) => {
 
   // 검색 함수!
   const search = () => {
-    dispatch(searchKeywordDB(keyword))
+    const data = {
+      keyword: keyword,
+      min: filterMin,
+      max: filterMax
+    };
+    dispatch(searchKeywordDB(data));
   };
 
   // 검색어 삭제
@@ -63,9 +70,29 @@ const MainBody = (props) => {
   // dispatch(koreanSort());
 
   const aa = () => {
-    dispatch(koreanSort());
+    dispatch(descendingSort());
   };
 
+  // range debounce  함수
+  const debounceMin = _.debounce((e) => {
+    setMin(e);
+  }, 500);
+
+  const debounceMax = _.debounce((e) => {
+    setMax(e);
+  }, 500);
+
+  // range 요청
+  useEffect(() => {
+    const data = {
+      min: filterMin,
+      max: filterMax
+    };
+    const debounceRange = _.debounce(() => {
+      dispatch(rangeFilter(data));
+    });
+    debounceRange();
+  }, [filterMin, filterMax]);
 
   return (
     <React.Fragment>
@@ -135,12 +162,16 @@ const MainBody = (props) => {
           <RangeSlider 
             min={0}
             max={5000}
-            onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+            onChange={({ min, max }) => {
+              // console.log(`min = ${min}, max = ${min}`)
+              debounceMin(min);
+              debounceMax(max);
+            }}
           />
         </Grid>
 
         {/* 모냥만 만들어논 정렬 탭 */}
-        <Grid m_margin="5vh 0 2vh 0" margin="5vh 0 2vh 0" padding="0 25px" display="flex" jc="flex-end">
+        <Grid margin="5vh 0 2vh 0" m_margin="5vh 0 2vh 0" padding="0 25px" display="flex" jc="flex-end">
           <Grid _onClick={()=>{aa()}} display="flex" jc="flex-end" width="auto" cursor>
             <Text size="13px" m_size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
             <Grid width="16px" height="16px" display="flex" jc="center">
