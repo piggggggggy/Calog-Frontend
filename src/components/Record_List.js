@@ -37,7 +37,7 @@ const Wrap = styled.div`
   width: 88%;
   height: 51px;
   border: 1px solid ${theme.color.dark};
-  border-radius: 28px;
+  border-radius: 16px;
   box-sizing: border-box;
   margin: 8px auto;
   display: flex;
