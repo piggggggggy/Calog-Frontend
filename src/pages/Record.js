@@ -61,7 +61,7 @@ const Record = (props) => {
       window.alert('이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요!')
     }
   }
-  //이미지 업로드
+  //TODO Lambda 사용해보기 >> 이미지 업로드
   const fileUpload = useRef()
   //upload btn
   const submitBtn = async (e) => {
