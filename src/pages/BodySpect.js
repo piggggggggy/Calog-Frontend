@@ -50,9 +50,9 @@ useEffect(() => {
             </div>
             <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!</Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>공지사항</Tag></Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag></Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
+            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
             <hr color="#F5F5F5"/>
             <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
             <hr color="#F5F5F5"/>
@@ -89,7 +89,7 @@ return (
             <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
             </Text>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>알림</Tag></Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
           <hr color="#F5F5F5"/>
