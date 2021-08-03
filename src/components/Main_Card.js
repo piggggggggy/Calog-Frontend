@@ -69,8 +69,8 @@ const Card = (props) => {
           <AiOutlinePlusCircle size="17px"/>
         </CartBox>
 
-        <Text size="13px" m_size="13px" lineheight="18px" margin="0" padding="0">{props.name}</Text>
-        <Text size="22px" m_size="20px" lineheight="" bold margin="0" padding="0">{props.kcal} kcal</Text>
+        <Text size="13px" m_size="13px" lineheight="18px" m_lineheight="15px" margin="0" padding="0">{props.name}</Text>
+        <Text size="22px" m_size="20px" lineheight="24px" m_lineheight="22px" bold margin="0" padding="0">{props.kcal} kcal</Text>
         
       </FoodCard>
 
@@ -89,8 +89,8 @@ const FoodCard = styled.div`
   justify-content: flex-end;
   width: 48%;
   height: 12.5vh;
-  min-height: 95px;
-  padding: 5.2vh 6% 2vh 6%;
+  min-height: 98px;
+  padding: 5.2vh 6% 1.7vh 6%;
   margin-bottom: 16px;
   border: 1px solid #F19F13;
   border-radius: 28px;
@@ -103,7 +103,7 @@ const BookmarkBox = styled.div`
   position: absolute;
   z-index: 10;
   right: 2vh;
-  top: 1.5vh;
+  top: 1.3vh;
   padding: 1px;
   cursor: pointer;
   z-index: 10;
@@ -114,7 +114,7 @@ const CartBox = styled.div`
   z-index: 10;
   left: 2vh;
   top: 1.5vh;
-  padding: 3px;
+  padding: 2px;
   cursor: pointer;
   z-index: 10;
 `;

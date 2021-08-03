@@ -45,24 +45,24 @@ const FoodDetail = (props) => {
 
       <BodyContainer>
         
-        <Grid margin="2.7vh 0" m_margin="2.7vh 0" padding= "0 6vw">
+        <Grid margin="2.7vh 0" m_margin="2.7vh 0" padding= "0 7.6vw">
           <div><AiOutlinePlusCircle onClick={addCart} style={{cursor: "pointer"}} size="26px"/></div>
         </Grid>
         
-        <Grid is_flex padding= "0 6vw">
+        <Grid is_flex padding= "0 7.6vw">
           <Grid>
             <Grid display="flex">
               <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">떡볶이</Text>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 (200g)</span>
             </Grid>  
-            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="15px 0" paddig="0">3100kcal</Text>
+            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6vh 0" paddig="0">3100 kcal</Text>
           </Grid>
           <Grid width="27vw" padding="0 8px" display="flex" jc="center" fw="wrap">
             오늘의 기준치를 100kcal를 초과해요!
           </Grid>
         </Grid>
 
-        <Grid margin="4.25vh 0 0 0" m_margin="4.25vh 0 0 0" padding= "0 6vw">
+        <Grid margin="7vh 0 0 0" m_margin="7vh 0 0 0" padding= "0 7.6vw">
           <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
         </Grid>
         

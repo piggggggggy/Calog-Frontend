@@ -64,13 +64,13 @@ const CartBody = (props) => {
         {/* 상단 내용 // 모냥만 만든 상태 */}
         <Grid padding="0 9vw">
           <Grid>
-            <Text lineheight="22px" size="17px" color="#EB5858" margin="0 0 4px 0" paddig="0">100kcal 초과했어요!</Text>
-            <Text lineheight="41px" bold size="34px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 4px 0" paddig="0">100kcal 초과했어요!</Text>
+            <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
           </Grid>
 
-          <Grid display="flex" margin="3.5vh 0 0 0">
+          <Grid display="flex" margin="3.5vh 0 0 0" m_margin="3.5vh 0 0 0">
             <div onClick={()=>{selectType("morning")}} style={{marginRight: "3vw" }}>
-              <Text lineheight="22px" size="17px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
               <Dot>
                 <Grid display={type === "아침" ? 'block' : 'none'}>
                   <FaCircle size="7px"/>
@@ -78,7 +78,7 @@ const CartBody = (props) => {
               </Dot>
             </div>
             <div onClick={()=>{selectType("lunch")}} style={{marginRight: "3vw" }}>
-              <Text lineheight="22px" size="17px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">점심</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">점심</Text>
               <Dot>
                 <Grid display={type === "점심" ? 'block' : 'none'}>
                   <FaCircle size="7px"/>
@@ -86,7 +86,7 @@ const CartBody = (props) => {
               </Dot>
             </div>
             <div onClick={()=>{selectType("dinner")}} style={{marginRight: "3vw" }}>
-              <Text lineheight="22px" size="17px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">저녁</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">저녁</Text>
               <Dot>
                 <Grid display={type === "저녁" ? 'block' : 'none'}>
                   <FaCircle size="7px"/>
@@ -94,7 +94,7 @@ const CartBody = (props) => {
               </Dot>
             </div>
             <div onClick={()=>{selectType("snack")}} style={{marginRight: "3vw" }}>
-              <Text lineheight="22px" size="17px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">간식</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">간식</Text>
               <Dot>
                 <Grid display={type === "간식" ? 'block' : 'none'}>
                   <FaCircle size="7px"/>
@@ -102,7 +102,7 @@ const CartBody = (props) => {
               </Dot>
             </div>
             <div onClick={()=>{selectType("midnightSnack")}} style={{marginRight: "3vw" }}>
-              <Text lineheight="22px" size="17px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">야식</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">야식</Text>
               <Dot>
                 <Grid display={type === "야식" ? 'block' : 'none'}>
                   <FaCircle size="7px"/>
@@ -133,6 +133,8 @@ CartBody.defaultProps = {
 
 const BodyContainer = styled.div`
   max-width: 100%;
+  max-height: 80vh;
+  overflow: scroll;
   /* padding: 0 25px; */
 `;
 
