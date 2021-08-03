@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { BodySpectSV, LoginCheck } from '../redux/modules/user';
+import { BodySpectSV, LoginCheck, BodySpectModify } from '../redux/modules/user';
 import { ProfileDefault, Camera, Pen, Go } from '../img/svg';
 import { _logOut } from '../redux/modules/user';
 import {history} from '../redux/configStore';
@@ -28,7 +28,8 @@ const bodyStore = () => {
 }
 useEffect(() => {
   dispatch(LoginCheck());
-  dispatch(BodySpectSV("남자", 80, 180, 25, "mid"));
+  // dispatch(BodySpectSV("남자", 80, 180, 25));
+  // dispatch(BodySpectModify("남자", 75, 180, 25));
 }, []);
 
   if(!is_login){

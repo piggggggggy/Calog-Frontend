@@ -15,7 +15,7 @@ import _ from 'lodash';
  * @담당자 : 
 */
 
-const Notice = (props) => {
+const NoticeWrite = (props) => {
 const dispatch = useDispatch();
 const [user_info, setUserInfo] = useState({});
 
@@ -29,8 +29,8 @@ const [user_info, setUserInfo] = useState({});
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {/* 관리자 글쓰기 버 */}
             <br/>
-            <Tag>글쓰기</Tag>
           </Head>
           <hr color="#F5F5F5"/>
           <PostList>
@@ -55,7 +55,7 @@ const [user_info, setUserInfo] = useState({});
 }
 
 
-export default Notice;
+export default NoticeWrite;
 
 const Container = styled.div`
   height: 866px;

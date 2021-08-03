@@ -99,11 +99,25 @@ export const _logOut = () => {
     };
 }
 
-export const BodySpectSV = (gender, weight, height, age, control) => {
+export const BodySpectSV = (gender, weight, height, age) => {
     return function(dispatch, getState, {history}){
-        console.log(gender, weight, height, age, control)
+        console.log(gender, weight, height, age)
         instance
-        .post('/api/user/bodySpec', {gender, weight, height, age, control})
+        .post('/api/user/bodySpec', {gender, weight, height, age})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+}
+
+export const BodySpectModify = (gender, weight, height, age) => {
+    return function(dispatch, getState, {history}){
+        console.log(gender, weight, height, age)
+        instance
+        .put('/api/user/bodySpec/edit', {gender, weight, height, age})
         .then((res) => {
             console.log(res);
         })
