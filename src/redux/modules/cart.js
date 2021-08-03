@@ -42,6 +42,11 @@ const search = createSlice({
       state.cart = deleted_list;
     },
 
+    //카트 전체 삭제
+    delCartAll : (state, action) => {
+      state.cart = []
+    },
+
     // 푸드 up카운팅
     setUpAmount : (state, action) => {
       const index = state.cart.findIndex((cart) => cart.foodId === action.payload);
@@ -67,6 +72,6 @@ const search = createSlice({
   }
 });
 
-export const {addCartRx, deleteCartRx, setUpAmount, setDownAmount, cartOut, addDate} = search.actions;
+export const {addCartRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate} = search.actions;
 
 export default search;
