@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import BtnHeader from '../shared/BtnHeader';
 import Record_Date from '../components/Record_Date';
 import Record_When from '../components/Record_When';
-import Record_List from '../components/Record_List';
+import Record_ListBody from '../components/Record_ListBody';
 import theme from '../shared/theme';
 //이모지
 import Camera from '../img/Group.png'
@@ -37,20 +37,6 @@ const Record = (props) => {
   const [inputMemo, setInputMemo] = useState()
   const memo = (e) => {
     setInputMemo(e.target.value)
-  }
-
-  //더보기 버튼
-  const [long, setLong] = useState('none')
-  const [short, setShort] = useState('block')
-  //더보기버튼
-  const moreBtn = () => {
-    setLong('block')
-    setShort('none')
-  }
-  //덜보기(?)버튼
-  const lessBtn = () => {
-    setLong('none')
-    setShort('block')
   }
 
   //이미지
@@ -120,40 +106,8 @@ const Record = (props) => {
         {/* 기록할 칼로리의 시점 */}
         <Record_When />
       </FixTop>
-      {/* 칼로리 리스트 - 맵 */}
-      <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto" display={short}>
-        {cart_list.map((c, idx) => {
-          // 리스트가 6개 이상일 경우
-          if(cart_list.length > 5) {
-            // idx 5번까지만 로드한다
-            if(idx < 5) {
-              return <Record_List key={c.foodId} {...c}/>
-            }
-          } else {
-            return <Record_List key={c.foodId} {...c}/>
-          }
-        })}
-      </Grid>
-      {/* 더보기 버튼 눌렀을 때 활성화 */}
-      <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto" display={long}>
-        {cart_list.map((c, idx) => {
-          return <Record_List key={c.foodId} {...c}/>
-        })}
-      </Grid>
-      {/* 리스트가 6개 이상일 경우 활성화 */}
-      {cart_list.length > 5 &&
-        <Grid margin="5% auto" width="30px" _onClick={moreBtn} m_margin="5% auto" display={short}>
-          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.23 0.229981L20 1.99998L10 12L-7.73692e-08 1.99998L1.77 0.229981L10 8.45998L18.23 0.229981Z" fill="#757575"/>
-          </svg>
-        </Grid>
-      }
-      {/* 리스트가 max일 경우 활성화 */}
-      <Grid margin="5% auto" width="30px" m_margin="5% auto" _onClick={lessBtn} display={long}>
-        <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2.87746 12.1475L1.07579 10.4098L10.8936 0.23083L21.0725 10.0486L19.3348 11.8503L10.9575 3.77025L2.87746 12.1475Z" fill="#757575"/>
-        </svg>
-      </Grid>
+      {/* 칼로리 리스트 */}
+      <Record_ListBody list={cart_list}/>
       {/* 사진 */}
       <Grid padding="13.5% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
