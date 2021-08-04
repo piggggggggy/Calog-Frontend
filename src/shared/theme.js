@@ -19,13 +19,16 @@ const deviceSizes = {
   //가로가 작은 휴대폰(아이폰 5)
   mobileM: "400px",
   //세로가 긴 휴대폰(갤럭시 폴더나 아이폰 프로의 경우)
-  mobileH: "700px"
+  mobileH: "700px",
+  //가로도 세로도 작은 휴대폰..
+  mobileMini: "568px"
 };
 
 //반응형용 디바이스
 const device = {
   mobileM: `only screen and (max-width: ${deviceSizes.mobileM})`,
   mobileH: `only screen and (min-height: ${deviceSizes.mobileH})`,
+  mobileMini: `only screen and (max-height: ${deviceSizes.mobileMini})`
 };
 
 const theme = {
