@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {Back, X} from "../img/svg";
+import {Back} from "../img/svg";
 import { history } from '../redux/configStore';
-import { getNoticeSV, putNotiSV } from '../redux/modules/notice';
+import { getNoticeSV, putNotiSV, deleteNotiSV, getNotiDetailSV } from '../redux/modules/notice';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -18,8 +18,10 @@ const dispatch = useDispatch();
 const admin = useSelector((state)=>state.user.user_info.email);
 console.log();
 React.useEffect(()=>{
-  dispatch(putNotiSV({title:"런칭기념", contents:"수정내용",password:"zkffhfltm1@"},"610a49d691560727e0c6cc49"));
+  // dispatch(putNotiSV({title:"ㅇㅇㅇ 제목 수정", contents:"1번 내용 수정",password:"zkffhfltm1@"},"610a5853ec4ceb2aec1cd015"));
+  // dispatch(deleteNotiSV("610a5e75e1d2a82c7297f5d9"));
   dispatch(getNoticeSV());
+  // dispatch(getNotiDetailSV("610a5853ec4ceb2aec1cd015"));
 },[]);
 
 

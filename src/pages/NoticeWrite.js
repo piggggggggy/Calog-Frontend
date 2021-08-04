@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
 import { postNoticeSV } from '../redux/modules/notice';
+import moment from 'moment';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -15,7 +16,7 @@ import { postNoticeSV } from '../redux/modules/notice';
 
 const NoticeWrite = (props) => {
 const dispatch = useDispatch();
-let date = new Date().toLocaleDateString();
+const date = moment().format('YYYY-MM-DD');
 const [noticelist, setNotice] = useState({date});
 const postNoti = () => {
   dispatch(postNoticeSV(noticelist));

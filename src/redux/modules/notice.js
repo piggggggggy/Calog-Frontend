@@ -46,9 +46,35 @@ export const putNotiSV = (updatelist, noticeId) => {
     };
 };
 
+export const deleteNotiSV = (noticeId) => {
+    return function(dispatch, getState, {history}){
+        console.log(noticeId);
+        instance
+        .delete(`/api/notice/${noticeId}`, {data:{password:"zkffhfltm1@"}})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+};
+
+export const getNotiDetailSV = (noticeId) => {
+    return function(dispatch, getState, {history}){
+        instance
+        .get(`/api/notice/${noticeId}`)
+        .then((res) => {
+            console.log(res.data.notice);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+};
 
 //리덕스
-const user = createSlice({
+const notice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -58,5 +84,5 @@ const user = createSlice({
   },
 });
 
-export const {NickDupli} = user.actions
-export default user;
+export const {NickDupli} = notice.actions
+export default notice;
