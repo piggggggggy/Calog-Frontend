@@ -22,10 +22,27 @@ export const searchKeywordDB = (data) => {
   }
 };
 
+export const getDetailDB = (foodId) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .get(`/api/home/search/detail/${foodId}`)
+      .then((res) => {
+        console.log(res)
+
+        dispatch(getDetail(res.data.foodDetail));
+      })
+      .catch((err) => {
+        console.log(err, "에러가 났읍니다.")
+      })
+  }
+};
+
 
 
 // initial State 
 const initialState = {
+  // 상세 정보
+  detail: [],
   //검색 결과 리스트
   list : [],
   filtered_list: [],
@@ -50,7 +67,7 @@ const search = createSlice({
     },
 
     // 무한스크롤
-    getScrollData : (state, action) => {
+    getScrollData : state => {
       state.is_loading = true;
       let sliceData = state.filtered_list.slice(state.paging.start, state.paging.end);
       if (sliceData.length === 21) {
@@ -100,11 +117,16 @@ const search = createSlice({
         return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
       });
       state.filtered_list = koreanSorted;
+    },
+
+    // 상세페이지 조회
+    getDetail : (state, action) => {
+      state.detail = action.payload;
     }
 
   }
 });
 
-export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort, getScrollData} = search.actions;
+export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort, getScrollData, getDetail} = search.actions;
 
 export default search;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 // elements & components
@@ -9,6 +9,7 @@ import UnderBar from '../components/Main_UnderBar';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 // modules
 import { addCartRx } from '../redux/modules/cart';
+import { getDetailDB } from '../redux/modules/search';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -21,21 +22,26 @@ const FoodDetail = (props) => {
 // dispatch
   const dispatch = useDispatch();
 // props
+  const foodInfo = useSelector((state) => state.search.detail);
   const foodId = props.match.params.foodId;
 // useEffect
+  useEffect(() => {
+    dispatch(getDetailDB(foodId))
+  }, [])
+  console.log(foodInfo)
 
   // 장바구니 담기!
   const addCart = () => {
     const cartUnit = {
-      // foodId: props.foodId,
-      // name: props.name,
-      // forOne: props.forOne,
-      // grams: props.grams,
-      // kcal: props.kcal,
-      // amount: 1,
+      foodId: foodInfo.foodId,
+      name: foodInfo.name,
+      forOne: foodInfo.forOne,
+      grams: foodInfo.grams,
+      kcal: foodInfo.kcal,
+      amount: 1,
     };
-    window.alert('아직 연결이 없어!');
-    return;
+    // window.alert('아직 연결이 없어!');
+    // return;
     dispatch(addCartRx(cartUnit));
   };
 
@@ -52,10 +58,10 @@ const FoodDetail = (props) => {
         <Grid is_flex padding= "0 7.6vw">
           <Grid>
             <Grid display="flex">
-              <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">떡볶이</Text>
-              <span style={{fontSize: "13px", color: "#404040"}}>1인분 (200g)</span>
+              <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</Text>
+              <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
-            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6vh 0" paddig="0">3100 kcal</Text>
+            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6vh 0" paddig="0">{foodInfo.kcal} kcal</Text>
           </Grid>
           <Grid width="27vw" padding="0 8px" display="flex" jc="center" fw="wrap">
             오늘의 기준치를 100kcal를 초과해요!
