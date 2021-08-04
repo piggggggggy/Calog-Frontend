@@ -42,30 +42,30 @@ const DashBoard_Chart = (props) => {
   ];
 
   //차트 색
-  const color = ["#e4e4e4","#a9a9a9","#737373","#404040","#111e30"]
+  const color = ["#E4E4E4","#C4C4C4","#A9A9A9","#8C8C8C","#737373"]
   const [typeColor, setTypeColor] = useState(color)
 
   //차트 버튼
   const Btn = (type) => {
     if(type.data.id === "아침") {
-      setTypeColor(["#f19f13","#a9a9a9","#737373","#404040","#111e30"])
+      setTypeColor(["#f19f13","#C4C4C4","#A9A9A9","#8C8C8C","#737373"])
     }else if (type.data.id === "점심") {
-      setTypeColor(["#e4e4e4","#f19f13","#737373","#404040","#111e30"]) 
+      setTypeColor(["#E4E4E4","#f19f13","#A9A9A9","#8C8C8C","#737373"]) 
     }else if (type.data.id === "저녁") {
-      setTypeColor(["#e4e4e4","#a9a9a9","#f19f13","#404040","#111e30"])
+      setTypeColor(["#E4E4E4","#C4C4C4","#f19f13","#8C8C8C","#737373"])
     }else if (type.data.id === "간식") {
-      setTypeColor(["#e4e4e4","#a9a9a9","#737373","#f19f13","#111e30"])
+      setTypeColor(["#E4E4E4","#C4C4C4","#A9A9A9","#f19f13","#737373"])
     }else if (type.data.id === "야식") {
-      setTypeColor(["#e4e4e4","#a9a9a9","#737373","#404040","#f19f13"])
+      setTypeColor(["#E4E4E4","#C4C4C4","#A9A9A9","#8C8C8C","#f19f13"])
     };
   }
 
   return (
     <React.Fragment>
       {/* 전체 틀 */}
-      <Grid margin="7% auto 0 auto" border_radius="20px" width="48%" height="200px">
+      <Grid margin="7% auto 0 auto" border_radius="20px" width="48%" height="200px" m_margin="0 auto">
         <Title>
-          <Text size="13px" bold>나의 칼로리</Text>
+          <Text size="13px" bold m_size="11px">나의 칼로리</Text>
         </Title> 
         <ResponsivePie
           //데이타

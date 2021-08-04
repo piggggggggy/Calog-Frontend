@@ -19,15 +19,15 @@ const DashBoard_FoodItem = (props) => {
       <Grid display="flex" margin="2.5% 0 0 0">
         {/* 메뉴 */}
         <Grid width="63%">
-          <Text size="15px">김치볶음밥</Text>
+          <Text size="15px" m_size="13px">김치볶음밥</Text>
         </Grid>
         {/* 칼로리 */}
         <Grid width="28%">
-          <Text size="15px" bold>89kcal</Text>
+          <Text size="15px" bold m_size="13px">89kcal</Text>
         </Grid>
         {/* 수량 */}
         <Grid width="9.1%">
-          <Text size="15px">X 1.5</Text>
+          <Text size="15px" m_size="13px">X 1.5</Text>
         </Grid>
       </Grid>
     </React.Fragment>

@@ -19,12 +19,12 @@ const DashBoard_Workout = (props) => {
     <React.Fragment>
       <Grid bg={'#FFFCF1'} width="42%" height="168px" border_radius="28px">
         {/* 이미지 */}
-        <Grid padding="11.5% 0 0 0" width="40%" margin="0 auto 0 auto">
+        <Grid padding="11.5% 0 0 0" width="40%" margin="0 auto" m_margin="0 auto">
           <Image src={yoga} height="70px"/>
         </Grid>
-        <Grid margin="11% 14% 0 14%" width="auto">
-          <Text size="13px">요가 30분</Text>
-          <Text margin="4% 0 0 0" color={'#088448'} size="17px" bold>-89kcal</Text>
+        <Grid margin="11% 14% 0 14%" width="auto" m_margin="15% 14% 0 14%">
+          <Text size="13px" m_size="11px">요가 30분</Text>
+          <Text margin="4% 0 0 0" color={'#088448'} size="17px" bold m_size="15px">-89kcal</Text>
         </Grid>
       </Grid>
     </React.Fragment>
