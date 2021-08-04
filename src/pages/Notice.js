@@ -16,6 +16,8 @@ import _ from 'lodash';
 const Notice = (props) => {
 const dispatch = useDispatch();
 const [user_info, setUserInfo] = useState({});
+const admin = useSelector((state)=>state.user);
+console.log(admin);
 
 
   return (
@@ -26,9 +28,10 @@ const [user_info, setUserInfo] = useState({});
             <Tag>{Back}</Tag>
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br/>
-            <Tag>글쓰기</Tag>
+            &nbsp;
+            <Tag onClick={()=>{history.push("/notiwrite")}}>
+              <Text size="13px"><u>쓰기</u></Text>
+            </Tag>
           </Head>
           <hr color="#F5F5F5"/>
           <PostList>
@@ -66,7 +69,7 @@ const Head = styled.div`
   justify-content: space-between;
   width: 400px;
   margin: 18px 0px 0px 0px;
-  padding: 10px;
+  padding-top: 10px;
 `;
 
 const PostList = styled.div`

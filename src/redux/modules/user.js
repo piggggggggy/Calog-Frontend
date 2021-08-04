@@ -17,6 +17,7 @@ export const LoginSV = (user_info) => {
         .then((res) => {
             console.log("res of loginDB", res);
             if(res.status===200){
+                dispatch(LoginCheck());
                 document.cookie = `TOKEN=${res.data.token};`;
                 history.push('/dashboard')
                 //로그인 체크해야할 듯. user info 부족
@@ -87,7 +88,6 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
                 return;
             };
             dispatch(SetUser());
-
         })
         .catch((err) => {
             console.log("err of login check", err);
