@@ -29,8 +29,6 @@ const Card = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 // useEffect
 
-  console.log(is_login)
-
   // 장바구니 담기!
   const addCart = (e) => {
     const cartUnit = {
@@ -89,7 +87,7 @@ const Card = (props) => {
     };
     
     dispatch(addFavoriteDB(data));
-    window.alert("즐겨찾기 추가!");
+
   };
     
   return (

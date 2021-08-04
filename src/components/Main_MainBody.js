@@ -11,6 +11,7 @@ import Card from './Main_Card';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
 import InfiniteScroll from './Main_InfiniteScroll';
+import CardList from './Main_CardList';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -28,43 +29,16 @@ import { MdCancel } from 'react-icons/md';
 const MainBody = (props) => {
 // dispatch
   const dispatch = useDispatch();
-// props
+// props  
   const search_list = useSelector((state) => state.search.filtered_list);
   const [keyword, setKey] = useState();
   // const [history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
 
-  // 무한스크롤 용
-  const [items, setItems] = useState(1);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
 
-  const [ref, inView] = useInView();
 // useEffect
   
-
-  // 무한스크롤
-  // const getItems = useCallback(
-  //   async () => {
-  //     setLoading(true);
-  //     await dispatch(getScrollData()).then((res) =>{
-  //       console.log(res);
-  //     })
-  //     setLoading(false);
-  //   }, [])
-
-  // getItems()
-  
-  // useEffect(() => {
-  //   if (inView && !loading) {
-  //     getItems();
-  //   }
-  // }, [inView, loading, getItems])
-
-
-
-
   // 검색 함수!
   const keyChange = (e) => {
     setKey(e.target.value)
@@ -76,8 +50,7 @@ const MainBody = (props) => {
       min: filterMin,
       max: filterMax
     };
-    dispatch(searchKeywordDB(data))
-    dispatch(getScrollData());
+    dispatch(searchKeywordDB(data));
   };
   // 검색어 삭제
   const deleteKeyword = () => {
@@ -225,18 +198,7 @@ const MainBody = (props) => {
         <BodyContainer>
           {/* 검색결과가 들어가는 곳 */}
           
-            <CardContainer>
-              
-                {search_list.map((result, idx) => {     
-                  if (search_list.length -1 != idx) {
-                    return <Card key={result.foodId} {...result}/> 
-                  } else {
-                    return <Card ref={ref} key={result.foodId} {...result}/> 
-                  }                  
-                })}
-              
-            </CardContainer>
-          
+            <CardList search_list={search_list}/>
 
           {/* 장바구니 탭 */}
           <UnderBar>
@@ -311,15 +273,6 @@ const SearchBox = styled.div`
     right: 1.4%;
     top: 0.5vh;
   }
-`;
-
-const CardContainer = styled.div`
-  width: 100%;
-  padding: 0 25px;
-  /* height: 100%; */
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 4%;
 `;
 
 const SearchHistory = styled.div`
