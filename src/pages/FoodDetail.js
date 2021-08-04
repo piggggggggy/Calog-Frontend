@@ -30,6 +30,10 @@ const FoodDetail = (props) => {
   }, [])
   console.log(foodInfo)
 
+  if (foodId !== foodInfo.foodId) {
+    return <></>;
+  }
+
   // 장바구니 담기!
   const addCart = () => {
     const cartUnit = {
@@ -40,8 +44,6 @@ const FoodDetail = (props) => {
       kcal: foodInfo.kcal,
       amount: 1,
     };
-    // window.alert('아직 연결이 없어!');
-    // return;
     dispatch(addCartRx(cartUnit));
   };
 
@@ -51,28 +53,28 @@ const FoodDetail = (props) => {
 
       <BodyContainer>
         
-        <Grid margin="2.7vh 0" m_margin="2.7vh 0" padding= "0 7.6vw">
+        <Grid margin="2.7vh 0" m_margin="2.7vh 0" padding= "0 7.6%">
           <div><AiOutlinePlusCircle onClick={addCart} style={{cursor: "pointer"}} size="26px"/></div>
         </Grid>
         
-        <Grid is_flex padding= "0 7.6vw">
+        <Grid is_flex padding= "0 7.6%">
           <Grid>
             <Grid display="flex">
               <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</Text>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
-            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6vh 0" paddig="0">{foodInfo.kcal} kcal</Text>
+            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6% 0" paddig="0">{foodInfo.kcal} kcal</Text>
           </Grid>
-          <Grid width="27vw" padding="0 8px" display="flex" jc="center" fw="wrap">
+          <Grid width="27%" padding="0 8px" display="flex" jc="center" fw="wrap">
             오늘의 기준치를 100kcal를 초과해요!
           </Grid>
         </Grid>
 
-        <Grid margin="7vh 0 0 0" m_margin="7vh 0 0 0" padding= "0 7.6vw">
+        <Grid margin="7vh 0 0 0" m_margin="7vh 0 0 0" padding= "0 7.6%">
           <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
         </Grid>
         
-        <Grid is_flex margin="2vh 0 6.25vh 0" m_margin="2vh 0 6.25vh 0" padding= "0 6vw">
+        <Grid is_flex margin="2vh 0 6.25vh 0" m_margin="2vh 0 6.25vh 0" padding= "0 6%">
           <IngredientCircle>
             <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
             <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">63g</Text>
@@ -87,7 +89,7 @@ const FoodDetail = (props) => {
           </IngredientCircle>
         </Grid>
 
-        <Grid padding= "0 6vw">
+        <Grid padding= "0 6%">
           <Grid is_flex padding="0.9vh 0.5vh">
             <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
             <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">63g</Text>
@@ -141,15 +143,15 @@ FoodDetail.defaultProps = {
 }
 
 const BodyContainer = styled.div`
-  max-width: 100%;
+  max-width: 420px;
   max-height: 80vh;
   padding-bottom: 10vh;
   overflow: scroll;
 `;
 
 const IngredientCircle = styled.div`
-  width: 26vw;
-  height: 26vw;
+  width: 12vh;
+  height: 12vh;
   border: 3px solid #F19F13;
   border-radius: 50%;
   display: flex;
@@ -159,7 +161,7 @@ const IngredientCircle = styled.div`
 `;
 
 const Line = styled.div`
-  width: 87vw;
+  width: 87%;
   height: 1px;
   padding: 0;
   margin: auto; 

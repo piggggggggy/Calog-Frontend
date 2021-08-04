@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
+import { useInView } from "react-intersection-observer";
 // modules
 import { searchKeywordDB, ascendingSort, descendingSort, koreanSort, rangeFilter, getScrollData } from '../redux/modules/search';
 // elements & components
@@ -29,43 +30,74 @@ const MainBody = (props) => {
   const dispatch = useDispatch();
 // props
   const search_list = useSelector((state) => state.search.filtered_list);
-  const is_loading = useSelector((state) => state.search.is_loading);
-  const paging = useSelector((state) => state.search.paging);
   const [keyword, setKey] = useState();
-  const [history, setHistory] = useState(true);
+  // const [history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
+
+  // 무한스크롤 용
+  const [items, setItems] = useState(1);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const [ref, inView] = useInView();
 // useEffect
   
-  
 
+  // 무한스크롤
+  // const getItems = useCallback(
+  //   async () => {
+  //     setLoading(true);
+  //     await dispatch(getScrollData()).then((res) =>{
+  //       console.log(res);
+  //     })
+  //     setLoading(false);
+  //   }, [])
+
+  // getItems()
+  
+  // useEffect(() => {
+  //   if (inView && !loading) {
+  //     getItems();
+  //   }
+  // }, [inView, loading, getItems])
+
+
+
+
+  // 검색 함수!
   const keyChange = (e) => {
     setKey(e.target.value)
   };
-
-  // 검색 함수!
+  
   const search = () => {
     const data = {
       keyword: keyword,
       min: filterMin,
       max: filterMax
     };
-    dispatch(searchKeywordDB(data));
+    dispatch(searchKeywordDB(data))
+    dispatch(getScrollData());
   };
-
   // 검색어 삭제
   const deleteKeyword = () => {
     setKey('');
   };
 
+
+
+
   // history on off
-  const historyOn = () => {
-    setHistory(false);
-  };
-  const historyOff = () => {
-    setHistory(true);
-  };
-  const styles = history ? {display: "none"} : {display: "block"};
+  // const historyOn = () => {
+  //   setHistory(false);
+  // };
+  // const historyOff = () => {
+  //   setHistory(true);
+  // };
+  // const styles = history ? {display: "none"} : {display: "block"};
+
+
+
 
   // 오름차순 정렬
   // dispatch(ascendingSort());
@@ -74,6 +106,9 @@ const MainBody = (props) => {
   const aa = () => {
     dispatch(descendingSort());
   };
+
+
+
 
   // range debounce  함수
   const debounce = _.debounce((n, x) => {
@@ -97,11 +132,6 @@ const MainBody = (props) => {
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
 
-  // console.log(test.current.scrollHeight)
-  // console.log(test.current.scrollTop)
-  // console.log(test.current.clientHeight)
-
-
   return (
     <React.Fragment>
 
@@ -109,9 +139,11 @@ const MainBody = (props) => {
         {/* 검색바 */}
         <SearchGrid>
           <SearchBox>
-            <input onChange={(e)=>{keyChange(e)}} value={keyword} onFocus={()=>{historyOn()}} onBlur={()=>{historyOff()}} placeholder="어떤 칼로리가 궁금하신가요?"/>
+            <input onChange={(e)=>{keyChange(e)}} value={keyword} 
+            // onFocus={()=>{historyOn()}} onBlur={()=>{historyOff()}} 
+            placeholder="어떤 칼로리가 궁금하신가요?"/>
             {keyword ? 
-            <div onClick={()=>{deleteKeyword()}} style={{right: "10vw", top: "1vh", cursor: "pointer"}}>
+            <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
               <MdCancel size="16px" color="#C4C4C4"/>
             </div>
             : ''}
@@ -119,7 +151,8 @@ const MainBody = (props) => {
               <BiSearchAlt2 size="24px" color="#5F5F5F" />
             </div>
           </SearchBox>
-          <SearchHistory style={styles}>
+
+          {/* <SearchHistory>
             <div>
               <Grid is_flex padding="1.8vh 6vw">
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
@@ -162,7 +195,7 @@ const MainBody = (props) => {
               <Line/>
               
             </div>
-          </SearchHistory>
+          </SearchHistory> */}
         </SearchGrid>
 
         {/* {Range Slider // 수정해야함} */}
@@ -171,9 +204,7 @@ const MainBody = (props) => {
             min={0}
             max={5000}
             onChange={({ min, max }) => {
-              // console.log(`min = ${min}, max = ${min}`)
               debounce(min, max);
-              // debounceMax(max);
             }}
           />
         </Grid>
@@ -195,21 +226,16 @@ const MainBody = (props) => {
           {/* 검색결과가 들어가는 곳 */}
           
             <CardContainer>
-              <InfiniteScroll
-                callNext={() => {
-                  console.log("next!");
-                }}
-                is_next={paging.next}
-                loading={is_loading}
-              >
-                {search_list.map((result, idx) => {
-                  return (
-                    <Card key={result.foodId} {...result}/>
-                  )
+              
+                {search_list.map((result, idx) => {     
+                  if (search_list.length -1 != idx) {
+                    return <Card key={result.foodId} {...result}/> 
+                  } else {
+                    return <Card ref={ref} key={result.foodId} {...result}/> 
+                  }                  
                 })}
-              </InfiniteScroll>
+              
             </CardContainer>
-
           
 
           {/* 장바구니 탭 */}
@@ -238,13 +264,17 @@ const HeaderContainer = styled.div`
 const BodyContainer = styled.div`
   padding-top: 2vh;
   max-width: 100%;
-  max-height: 60vh;
+  max-height: 55vh;
   padding-bottom: 10vh;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const SearchGrid = styled.div`
   padding: 3% 0;
+  width: 100%;
   position: relative;
 `;
 
@@ -253,7 +283,7 @@ const SearchBox = styled.div`
   /* display: flex;
   align-items: center;
   justify-content: space-between; */
-  width: 88vw;
+  width: 88%;
   border: 1px solid #F19F13;
   padding: 1.3vh 25px;
   margin: auto;
@@ -278,7 +308,7 @@ const SearchBox = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    right: 1.4vw;
+    right: 1.4%;
     top: 0.5vh;
   }
 `;
@@ -286,7 +316,7 @@ const SearchBox = styled.div`
 const CardContainer = styled.div`
   width: 100%;
   padding: 0 25px;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-wrap: wrap;
   column-gap: 4%;
