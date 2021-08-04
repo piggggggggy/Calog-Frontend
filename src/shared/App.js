@@ -38,8 +38,8 @@ const App = (props) => {
               <Route path="/signsocial" exact component={SignSocial}/>
               <Route path="/body" exact component={BodySpec}/>
               <Route path="/notice" exact component={Notice}/>
-              <Route path="/notice/:id" exact component={NotiDetail}/>
-              <Route path="/notiwrite" exact component={NoticeWrite}/>
+              <Route path="/notice/:postid" exact component={NotiDetail}/>
+              <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
               <Route path="/alam" exact component={Alarm}/>
 
               <Nav />
