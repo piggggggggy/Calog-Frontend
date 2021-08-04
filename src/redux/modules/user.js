@@ -76,15 +76,18 @@ export const NickDuplicate = (nickname) => {
     };
 };
 
-export const LoginCheck = () => {
+export const LoginCheck = () => { //토큰 없어도 응답 옴
     return function(dispatch, getState, {history}){
     console.log("click login check")
-
         instance
         .get('/api/user/me')
         .then((res) => {
             console.log("res of login check", res);
+            if(!res.data.user){
+                return;
+            };
             dispatch(SetUser());
+
         })
         .catch((err) => {
             console.log("err of login check", err);

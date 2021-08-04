@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginSV } from '../redux/modules/user';
-import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
 import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
 import _ from 'lodash';
@@ -60,13 +58,15 @@ export default Notice;
 const Container = styled.div`
   height: 866px;
   width: 420px;
+  overflow-y: hidden;
 `;
 
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
   width: 400px;
-  margin: 28px 0px 0px 0px;
+  margin: 18px 0px 0px 0px;
+  padding: 10px;
 `;
 
 const PostList = styled.div`
