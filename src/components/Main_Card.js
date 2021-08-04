@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
 // modules
 import { addCartRx } from '../redux/modules/cart';
+import { addFavoriteDB, deleteFavoriteDB, getFavoriteDB } from '../redux/modules/favorite';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons
@@ -24,7 +25,11 @@ const Card = (props) => {
   const dispatch = useDispatch();
 // props
   const cart_list = useSelector((state) => state.cart.cart);
+  const favorite_list = useSelector((state) => state.favorite.list);
+  const is_login = useSelector((state) => state.user.is_login);
 // useEffect
+
+  console.log(is_login)
 
   // 장바구니 담기!
   const addCart = (e) => {
@@ -54,6 +59,38 @@ const Card = (props) => {
       )
     }
   };
+
+  // 즐겨찾기 확인
+  const is_favorite = () => {
+    const favoCheck = favorite_list.findIndex((f) => f.foodId === props.foodId);
+    if (favoCheck !== -1) {
+      return (
+        { color: "#F19F13" }
+        )
+    }else{
+      return (
+        { color: "#E4E4E4" }
+      )
+    }
+  };
+  
+  // 즐겨찾기 추가 함수
+  const addFavorite = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // if (!is_login) {
+    //   window.alert("로그인부터 하세요.")
+    //   return;
+    // }
+    let data = {
+      foodId : props.foodId,
+      name: props.name,
+      kcal: props.kcal
+    };
+    
+    dispatch(addFavoriteDB(data));
+    window.alert("즐겨찾기 추가!");
+  };
     
   return (
     <React.Fragment>
@@ -62,7 +99,7 @@ const Card = (props) => {
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox>
-          <IoStar color="#E4E4E4" size="21px"/>
+          <IoStar style={is_favorite()} size="21px" onClick={addFavorite}/>
         </BookmarkBox>
 
         <CartBox onClick={addCart} style={{zIndex: "10"}}>

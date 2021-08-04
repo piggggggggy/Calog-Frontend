@@ -12,7 +12,8 @@ export const addFavoriteDB = (data) => {
     instance
       .post('/api/home/favorite/add', {foodId: data.foodId})
       .then((res) => {
-        console.log(res)
+        console.log(res);
+        dispatch(addFavorite(data));
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
