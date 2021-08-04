@@ -136,7 +136,7 @@ const FoodCard = styled.div`
   border: 1px solid #F19F13;
   border-radius: 28px;
   box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.14);
-  cursor: pointer;
+  /* cursor: pointer; */
   z-index: 5;
 `;
 
