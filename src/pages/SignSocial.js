@@ -53,9 +53,9 @@ const dispatch = useDispatch();
         </Grid>
         </InputContainer>
         <Grid dislpay="flex" ai="flex-end" width="420px">
-          <Text size="13px" lineheight="18px" color="#8C8C8C" width="200px">&nbsp;&nbsp;&nbsp;
+          <Text size="13px" lineheight="18px" color="#8C8C8C" width="200px">&nbsp;
           <Tag onClick={()=>{history.push("/login")}}>이메일로 로그인</Tag>
-          &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
            <Tag onClick={()=>{history.push("/signup")}}>이메일로 가입</Tag>
            </Text>
         </Grid>
@@ -69,11 +69,10 @@ const dispatch = useDispatch();
 export default SignSocial;
 
 const Container = styled.div`
-  height: 896px;
+  height: 866px;
   width: 420px;
+  overflow-y: hidden;
 `;
-
-
 
 const InputBox = styled.div`
   width: 380px;

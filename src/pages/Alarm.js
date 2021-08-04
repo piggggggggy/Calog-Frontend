@@ -12,7 +12,7 @@ import { history } from '../redux/configStore';
  * @담당자 : 
 */
 
-const Alam = (props) => {
+const Alarm = (props) => {
 const dispatch = useDispatch();
 
   return (
@@ -27,9 +27,9 @@ const dispatch = useDispatch();
             <br/>
           </Head>
           <hr color="#F5F5F5"/>
-          <Grid display="flex" padding="20px 10px" jc="space-between">
+          <Grid display="flex" padding="20px 15px" jc="space-between">
           <Text size="17px" lineheight="22px" margin="10px">푸시 알림</Text>
-          <PushBtn><Circle/></PushBtn>
+          {/* <PushBtn><Circle/></PushBtn> */}
           <ClickBtn><ClickCircle/></ClickBtn>
           </Grid>
           <hr color="#F5F5F5"/>
@@ -40,18 +40,20 @@ const dispatch = useDispatch();
 }
 
 
-export default Alam;
+export default Alarm;
 
 const Container = styled.div`
   height: 866px;
   width: 420px;
+  overflow-y: hidden;
 `;
 
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
   width: 400px;
-  margin: 28px 0px 0px 0px;
+  margin: 18px 0px 0px 0px;
+  padding: 10px;
 `;
 
 const Tag = styled.a`

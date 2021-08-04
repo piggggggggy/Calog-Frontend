@@ -51,13 +51,15 @@ export default NotiDetail;
 const Container = styled.div`
   height: 866px;
   width: 420px;
+  overflow-y: hidden;
 `;
 
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
   width: 400px;
-  margin: 28px 0px 0px 0px;
+  margin: 18px 0px 0px 0px;
+  padding: 10px;
 `;
 
 const PostList = styled.div`

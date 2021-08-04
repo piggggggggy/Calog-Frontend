@@ -6,14 +6,14 @@ import Record from './Record';
 import Login from './Login';
 import Signup from './Signup';
 import SignSocial from './SignSocial';
-import BodySpect from './BodySpect';
+import BodySpec from './BodySpec';
 import Notice from './Notice';
 import NotiDetail from './NoticeDetail';
 import NoticeWrite from './NoticeWrite';
-import Alam from './Alam';
+import Alarm from './Alarm';
 //용태
 import Main from './Main';
 import FoodDetail from './FoodDetail';
 import Cart from './Cart';
 
-export {DashBoard, Login, Signup, SignSocial, BodySpect, Notice, NotiDetail, NoticeWrite, Alam, Main, Calendar, FoodDetail, Cart, Record}
+export {DashBoard, Login, Signup, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, Main, Calendar, FoodDetail, Cart, Record}

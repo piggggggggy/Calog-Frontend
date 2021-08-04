@@ -15,7 +15,7 @@ import _ from 'lodash';
  * @담당자 : 
 */
 
-const BodySpect = (props) => {
+const BodySpec = (props) => {
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
 const logout = () => {
@@ -24,8 +24,8 @@ const logout = () => {
 const [bodyInfo,setBodyInfo] = useState({});
 const {gender, weight, height, age, control} = bodyInfo;
 const bodyStore = () => {
-    
-}
+
+};
 useEffect(() => {
   dispatch(LoginCheck());
   // dispatch(BodySpectSV("남자", 80, 180, 25));
@@ -40,7 +40,6 @@ useEffect(() => {
           {ProfileDefault}
           </Profile>
           <Bottombg>
-            
             <hr color="#FFE899"/>
             <div onClick={()=>{history.push("/signsocial")}}>
             <Grid display="flex">
@@ -110,7 +109,7 @@ return (
 }
 
 
-export default BodySpect;
+export default BodySpec;
 
 const Container = styled.div`
   padding-top: 120px;
