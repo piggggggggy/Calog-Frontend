@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -6,6 +6,9 @@ import theme from '../shared/theme';
 import moment from 'moment';
 //컴포넌트
 import Calendar_Emoji from './Calendar_Emoji';
+//db
+import {useDispatch} from 'react-redux'
+import {getAllRecordDB} from '../redux/modules/record';
 
 /** 
  * @param {*} props
@@ -15,6 +18,8 @@ import Calendar_Emoji from './Calendar_Emoji';
 */
 
 const Calendar_Calendar = (props) => {
+  const dispatch = useDispatch()
+
   //날짜
   const [month, setMonth] = React.useState(moment())
   //지난달 btn
@@ -25,6 +30,13 @@ const Calendar_Calendar = (props) => {
   const nextMonthBtn = () => {
     setMonth(month.clone().add(1, 'month'))
   }
+
+  //YYYY-MM 넣어 요청 보내기
+  const monthFormat = moment(month._d).format('YYYY-MM')
+  useEffect(() => {
+    dispatch(getAllRecordDB(monthFormat))
+  },[])
+
   //첫째주
   const firstWeek = month.clone().startOf('month').week();
   //마지막주
@@ -46,12 +58,16 @@ const Calendar_Calendar = (props) => {
                     <Today>
                       <span>{days.format('D')}</span>
                     </Today>
-                    <Calendar_Emoji day={days}/>
+                    <Calendar_Emoji key={d.date} day={days} {...d}/>
                   </td>
                 )
                 //이번 달에 해당되는 날짜가 아닌 지난 달 또는 다음 달 날짜인 경우
               } else if (days.format('MM') !== month.format('MM')) {
-                return 
+                return (
+                  <td key={idx} style={{padding:'0px', color:"white"}}>
+                      <span>{days.format('D')}</span>
+                  </td>
+                )
                 //그 외 날짜
               } else {
                 return(
@@ -59,7 +75,7 @@ const Calendar_Calendar = (props) => {
                     <NotToday>
                       <span>{days.format('D')}</span>
                     </NotToday>
-                    {/* <Calendar_Emoji day={days}/> */}
+                    <Calendar_Emoji key={d.date} day={days} {...d}/>
                   </td>
                 )
               }
@@ -84,7 +100,7 @@ const Calendar_Calendar = (props) => {
             </svg>
             {/* 년-월 */}
             <Grid width="auto">
-              <Text size="17px" bold color={theme.color.gray_7}> {month.format('YYYY년 MM일')} </Text>
+              <Text size="17px" bold color={theme.color.gray_7}> {month.format('YYYY년 MM월')} </Text>
             </Grid>
             {/* > icon */}
             <svg onClick={nextMonthBtn}
