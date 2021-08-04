@@ -29,6 +29,9 @@ const initialState = {
   //검색 결과 리스트
   list : [],
   filtered_list: [],
+  export_list: [],
+  paging: { start: 0, end: 20, next: true},
+  is_loading: false,
 }
 
 // redux
@@ -45,6 +48,28 @@ const search = createSlice({
         };
       });
     },
+
+    // 무한스크롤
+    getScrollData : (state, action) => {
+      state.is_loading = true;
+      let sliceData = state.filtered_list.slice(state.paging.start, state.paging.end);
+      if (sliceData.length === 21) {
+        let paging = {
+          start: state.paging.start + 20,
+          end: state.paging.end + 20,
+          next: true
+        };
+        state.paging = paging;
+        sliceData.pop();
+        state.export_list = [...state.export_list, ...sliceData];
+      } else {
+        state.export_list = [...state.export_list, ...sliceData];
+        state.paging.next = false;
+      };
+      state.is_loading = false;
+    },
+
+
     // 칼로리 Range 필터
     rangeFilter : (state, action) => {
       const filtered = state.list.filter((food, idx) => {
@@ -80,6 +105,6 @@ const search = createSlice({
   }
 });
 
-export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort} = search.actions;
+export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort, getScrollData} = search.actions;
 
 export default search;
