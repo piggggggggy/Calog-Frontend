@@ -18,6 +18,7 @@ const App = (props) => {
   useEffect(() => {
     dispatch(LoginCheck());
   }, []);
+  
   return (
     <React.Fragment>
       <LazyLoad>
