@@ -40,11 +40,11 @@ const Card = (props) => {
   return (
     <React.Fragment>
         <FoodCard>
-          <Text lineheight="22px" size="17px" margin="0" padding="0">{props.name}</Text>
-          <Text lineheight="28px" size="22px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">{props.kcal} kcal</Text>
+          <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" margin="0" padding="0">{props.name}</Text>
+          <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">{props.kcal} kcal</Text>
           <CountBox>
             <div onClick={downCount}><IoIosArrowDropleft color="gray" size="27px"/></div>
-            <Text lineheight="28px" color="#000000" bold size="22px" margin="0" padding="0">{count}</Text>
+            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" margin="0" padding="0">{count}</Text>
             <div onClick={upCount}><IoIosArrowDropright color="gray" size="27px"/></div>
           </CountBox>
         </FoodCard>

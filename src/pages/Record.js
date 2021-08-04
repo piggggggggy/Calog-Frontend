@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import BtnHeader from '../shared/BtnHeader';
 import Record_Date from '../components/Record_Date';
 import Record_When from '../components/Record_When';
-import Record_List from '../components/Record_List';
+import Record_ListBody from '../components/Record_ListBody';
 import theme from '../shared/theme';
 //이모지
 import Camera from '../img/Group.png'
@@ -61,7 +61,7 @@ const Record = (props) => {
       window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
     }
   }
-  //TODO Lambda 사용해보기 >> 이미지 업로드
+  //이미지 업로드
   const fileUpload = useRef()
   //upload btn
   const submitBtn = async (e) => {
@@ -106,33 +106,8 @@ const Record = (props) => {
         {/* 기록할 칼로리의 시점 */}
         <Record_When />
       </FixTop>
-      {/* 칼로리 리스트 - 맵 */}
-      {cart_list.length <5 ? 
-      <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto">
-        {cart_list.map((c, idx) => {
-          return <Record_List key={c.foodId} {...c}/>
-        })}
-      </Grid> :
-      <React.Fragment>
-        <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto">
-          {cart_list.map((c, idx) => {
-            return <Record_List key={c.foodId} {...c}/>
-          })}
-        </Grid>
-        <Grid margin="22px auto" width="30px">
-          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.23 0.229981L20 1.99998L10 12L-7.73692e-08 1.99998L1.77 0.229981L10 8.45998L18.23 0.229981Z" fill="#757575"/>
-          </svg>
-        </Grid>
-      </React.Fragment>
-    }
-      {/* 리스트가 5개 이상일 경우 활성화 */}
-      {/* {cart_list.length >=5 &&
-        <Grid margin="22px auto" width="30px">
-          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.23 0.229981L20 1.99998L10 12L-7.73692e-08 1.99998L1.77 0.229981L10 8.45998L18.23 0.229981Z" fill="#757575"/>
-          </svg>
-        </Grid> */}
+      {/* 칼로리 리스트 */}
+      <Record_ListBody list={cart_list}/>
       {/* 사진 */}
       <Grid padding="13.5% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
@@ -174,6 +149,7 @@ const FixTop = styled.div`
   height: 26%;
   top: 0;
   width: 100%;
+  max-width: 420px;
 
   @media ${theme.device.mobileH} {
     height: 21%

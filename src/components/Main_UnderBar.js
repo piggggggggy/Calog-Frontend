@@ -8,7 +8,7 @@ import { deleteCartRx } from '../redux/modules/cart';
 import { Grid, Text } from '../elements';
 // icons
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
-import { MdCancel } from 'react-icons/md';
+import { TiDeleteOutline } from 'react-icons/ti';
 
 
 /** 
@@ -61,7 +61,7 @@ const UnderBar = (props) => {
                   <Text line-height="18px" size="13px" m_size="13px" color="#2A2A2A" padding="0" margin="0">
                     {cart.name}
                   </Text>
-                  <div onClick={()=>{deleteCart(cart.foodId)}}><MdCancel size="13px" color="#404040"/></div>
+                  <div onClick={()=>{deleteCart(cart.foodId)}}><TiDeleteOutline size="13px" color="#404040"/></div>
                 </CartButton>
               )
             })}
@@ -101,7 +101,7 @@ const CartContainer = styled.div`
 
 const CalcBox = styled.div`
   width: 100%;
-  padding: 3vh 20px 2.8vh 20px;
+  padding: 3.8vh 20px 2.8vh 20px;
 
   & > div {
     width: 100%;
@@ -120,13 +120,13 @@ const CalcBox = styled.div`
 
 const CartButton = styled.div`
   height: 4vh;
-  padding: 5px 2vw;
+  padding: 5px 2.4vw;
   background: #E4E4E4;
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 2vw;
+  margin: 5px 1.2vw;
   /* gap: 2vw; */
 
   & > div {

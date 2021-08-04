@@ -15,5 +15,6 @@ import Alarm from './Alarm';
 import Main from './Main';
 import FoodDetail from './FoodDetail';
 import Cart from './Cart';
+import MainSearch from './MainSearch';
 
-export {DashBoard, Login, Signup, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, Main, Calendar, FoodDetail, Cart, Record}
+export {DashBoard, Login, Signup, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, Main, Calendar, FoodDetail, Cart, Record, MainSearch}

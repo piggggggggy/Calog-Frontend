@@ -10,8 +10,8 @@ import { Grid, Text } from '../elements';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @필수값 min(number), max(number), onChange(func)
+ * @담당자 : 박용태
 */
 
 const RangeSlider = ({min, max, onChange}) => {
@@ -22,25 +22,26 @@ const RangeSlider = ({min, max, onChange}) => {
   const minRef = useRef(min);
   const maxRef = useRef(max);
 
-  const range = useRef(null);
+  const range = useRef();
 // useEffect & useCallback
-  // Convert to percentage
+  // percentage 변환 함수
   const getPercent = useCallback((value) => {
-    Math.round(((value-min) / (max - min)) * 100);
+    return Math.round(((value-min) / (max - min)) * 100);
   }, [min, max]);
 
-  // Set width of the range to change from the left side
+  // 왼쪽 SliderRange 조절
   useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxRef.current);
 
     if (range.current) {
+      console.log(minVal, min)
       range.current.style.left = `${minPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`
     }
   }, [minVal, getPercent]);
 
-  // Set width of the range to change from the right side
+  // 오른쪽 SliderRange 조절
   useEffect(() => {
     const minPercent = getPercent(minRef.current);
     const maxPercent = getPercent(maxVal);
@@ -50,7 +51,7 @@ const RangeSlider = ({min, max, onChange}) => {
     }
   }, [maxVal, getPercent]);
 
-  // Get min and max values when their state changes
+  // 변화 값 반환
   useEffect(() => {
     onChange({ min: minVal, max: maxVal });
   }, [minVal, maxVal, onChange]);
@@ -63,7 +64,7 @@ const RangeSlider = ({min, max, onChange}) => {
 
       <SliderContainer>
 
-        <Grid>
+        <ThumbContainer >
           <Thumb
             type="range"
             // style={{zIndex: "3"}}
@@ -89,7 +90,7 @@ const RangeSlider = ({min, max, onChange}) => {
               maxRef.current = value;
             }}
           />
-        </Grid>
+        </ThumbContainer>
 
         <Slider>
           <SliderTrack/>
@@ -108,10 +109,6 @@ RangeSlider.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
-// RangeSlider.defaultProps = {
-
-// }
-
 const RangeText = styled.div`
   display: flex;
   align-items: center;
@@ -125,6 +122,11 @@ const SliderContainer = styled.div`
   width: 100%;
 `;
 
+const ThumbContainer = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
 const Slider = styled.div`
   position: relative;
   width: 100%;
@@ -134,7 +136,7 @@ const SliderTrack = styled.div`
   border-radius: 4.5px;
   height: 9px;
   position: absolute;
-  background: #FFE999;
+  background: #E4E4E4;
   width: 100%;
   z-index: 1;
 `;
@@ -153,7 +155,7 @@ const Thumb = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: 89%;
+  width: 100%;
   max-width: 370px;
   outline: none;
 
