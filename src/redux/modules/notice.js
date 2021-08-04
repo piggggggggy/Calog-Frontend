@@ -6,18 +6,46 @@ const initialState = {
   nick_dupli: false,
 };
 
-export const postNotice = (title, contents, date, password) => {
+export const getNoticeSV = () => {
     return function(dispatch, getState, {history}){
         instance
-        .post('/api/notice', {title, contents, date, password})
+        .get('/api/notice')
+        .then((res) => {
+            console.log(res.data.notice);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+};
+
+export const postNoticeSV = (noticelist) => {
+    return function(dispatch, getState, {history}){
+        instance
+        .post('/api/notice', noticelist)
         .then((res) => {
             console.log(res);
         })
         .catch((err) => {
             console.log(err);
         });
-    }
-}
+    };
+};
+
+export const putNotiSV = (updatelist, noticeId) => {
+    return function(dispatch, getState, {history}){
+        console.log(updatelist, noticeId)
+        instance
+        .put(`/api/notice/${noticeId}`, updatelist)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+};
+
 
 //리덕스
 const user = createSlice({

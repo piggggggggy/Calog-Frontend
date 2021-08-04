@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginSV } from '../redux/modules/user';
-import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
 import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
-import _ from 'lodash';
+import { postNoticeSV } from '../redux/modules/notice';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -17,9 +15,12 @@ import _ from 'lodash';
 
 const NoticeWrite = (props) => {
 const dispatch = useDispatch();
-const [user_info, setUserInfo] = useState({});
-
-
+let date = new Date().toLocaleDateString();
+const [noticelist, setNotice] = useState({date});
+const postNoti = () => {
+  dispatch(postNoticeSV(noticelist));
+}
+console.log(noticelist);
   return (
     <React.Fragment>
       <Container>
@@ -27,14 +28,31 @@ const [user_info, setUserInfo] = useState({});
             <div onClick={()=>{history.push("/notice")}}>
             <Tag>{Back}</Tag>
             </div>
-            <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
+            <Text size="17px" lineheight="22px" bold color="#000000">공지사항 작성</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {/* 관리자 글쓰기 버 */}
             <br/>
           </Head>
           <hr color="#F5F5F5"/>
           <Body>
-
+            <Grid width="80%" margin="20px 0px 0px 0px">
+            <Text>제목</Text>
+            <Input border_radius="5px"
+            _onChange={(e)=>{setNotice({...noticelist,title:e.target.value})}}/>
+            </Grid>
+            <Grid width="80%" margin="20px 0px 0px 0px">
+            <Text>비밀번호</Text>
+            <Input border_radius="5px"
+            _onChange={(e)=>{setNotice({...noticelist,password:e.target.value})}}/>
+            </Grid>
+            <Grid width="80%" margin="20px 0px 0px 0px">
+            <Text>내용</Text>
+            <TextWrite rows="10"
+            onChange={(e)=>{setNotice({...noticelist,contents:e.target.value})}}/>
+            </Grid>
+            <Grid width="80%" margin="20px 0px 0px 0px" display="flex">
+              <Button bg="#FFE899" height="40px" border_radius="26px"
+              _onClick={postNoti}>작성하기</Button>
+            </Grid>
           </Body>
       </Container>
     </React.Fragment>
@@ -60,6 +78,7 @@ const Head = styled.div`
 const Body = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const Post = styled.div`
@@ -71,4 +90,9 @@ const Tag = styled.a`
   &:hover{
     cursor: pointer;
   }
+`;
+
+const TextWrite = styled.textarea`
+  border-radius: 5px;
+  width: 100%;
 `;

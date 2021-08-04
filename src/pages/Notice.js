@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
-import _ from 'lodash';
+import { getNoticeSV, putNotiSV } from '../redux/modules/notice';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -15,9 +15,12 @@ import _ from 'lodash';
 
 const Notice = (props) => {
 const dispatch = useDispatch();
-const [user_info, setUserInfo] = useState({});
-const admin = useSelector((state)=>state.user);
-console.log(admin);
+const admin = useSelector((state)=>state.user.user_info.email);
+console.log();
+React.useEffect(()=>{
+  dispatch(putNotiSV({title:"런칭기념", contents:"수정내용",password:"zkffhfltm1@"},"610a49d691560727e0c6cc49"));
+  dispatch(getNoticeSV());
+},[]);
 
 
   return (
@@ -30,7 +33,7 @@ console.log(admin);
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
             &nbsp;
             <Tag onClick={()=>{history.push("/notiwrite")}}>
-              <Text size="13px"><u>쓰기</u></Text>
+              {admin==="cadmin@calories.com"?<Text size="13px"><u>쓰기</u></Text>:<Text></Text>}
             </Tag>
           </Head>
           <hr color="#F5F5F5"/>
