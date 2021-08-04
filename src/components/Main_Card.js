@@ -59,8 +59,10 @@ const Card = (props) => {
   };
 
   // 즐겨찾기 확인
+  const favoCheck = favorite_list.findIndex((f) => f.foodId === props.foodId);
+ 
   const is_favorite = () => {
-    const favoCheck = favorite_list.findIndex((f) => f.foodId === props.foodId);
+    
     if (favoCheck !== -1) {
       return (
         { color: "#F19F13" }
@@ -76,19 +78,23 @@ const Card = (props) => {
   const addFavorite = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // if (!is_login) {
-    //   window.alert("로그인부터 하세요.")
-    //   return;
-    // }
-    let data = {
-      foodId : props.foodId,
-      name: props.name,
-      kcal: props.kcal
-    };
+    if (!is_login) {
+      window.alert("로그인부터 하세요.")
+      return;
+    }
+    if (favoCheck === -1) {
+      let data = {
+        foodId : props.foodId,
+        name: props.name,
+        kcal: props.kcal
+      };
+      dispatch(addFavoriteDB(data));
+    } else {
+      dispatch(deleteFavoriteDB(props.foodId));
+    }
     
-    dispatch(addFavoriteDB(data));
-
   };
+  // 즐겨찾기 해제
     
   return (
     <React.Fragment>

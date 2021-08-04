@@ -28,7 +28,10 @@ export const deleteFavoriteDB = (foodId) => {
     instance
       .delete('/api/favorite/delete', {foodId: foodId})
       .then((res) => {
-        console.log(res)
+        console.log(res);
+        dispatch(deleteFavorite(foodId));
+        window.alert("즐겨찾기 해제!");
+
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")

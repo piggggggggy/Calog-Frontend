@@ -68,7 +68,9 @@ const UnderBar = (props) => {
           </Grid>
           
           <CalcBox>
-            <div onClick={()=>{history.push('/cart')}}>계산하러가기</div>
+            <div onClick={()=>{history.push('/cart')}}>
+              <Text size="17px" m_size="15px" bold padding="0" margin="0">계산하러가기</Text>
+            </div>
           </CalcBox>
 
         </CartContainer>

@@ -185,7 +185,12 @@ const MainBody = (props) => {
         {/* 모냥만 만들어논 정렬 탭 */}
         <Grid margin="5vh 0 2vh 0" m_margin="5vh 0 2vh 0" padding="0 25px" display="flex" jc="flex-end">
           <Grid _onClick={()=>{aa()}} display="flex" jc="flex-end" width="auto" cursor>
-            <Text size="13px" m_size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text>
+            <SortSelect>
+              <SortOption>칼로리높은순</SortOption>
+              <SortOption>칼로리낮은순</SortOption>
+              <SortOption>한글순</SortOption>
+            </SortSelect>
+            {/* <Text size="13px" m_size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text> */}
             <Grid width="16px" height="16px" display="flex" jc="center">
               <IoIosArrowDown size="14px" color="8C8C8C"/>
             </Grid>
@@ -193,18 +198,13 @@ const MainBody = (props) => {
         </Grid>
       </HeaderContainer>    
 
+      <BodyContainer>
+        {/* 검색결과가 들어가는 곳 */}
+        <CardList search_list={search_list}/>
 
-      
-        <BodyContainer>
-          {/* 검색결과가 들어가는 곳 */}
-          
-            <CardList search_list={search_list}/>
-
-          {/* 장바구니 탭 */}
-          <UnderBar>
-          </UnderBar>
-
-        </BodyContainer>
+        {/* 장바구니 탭 */}
+        <UnderBar/>
+      </BodyContainer>
 
       
     </React.Fragment>
@@ -216,11 +216,6 @@ MainBody.defaultProps = {
 }
 const HeaderContainer = styled.div`
   max-width: 100%;
-  /* overflow: auto; */
-  /* position: fixed;
-  top: 0;
-  width: 100%; */
-
 `;
 
 const BodyContainer = styled.div`
@@ -242,9 +237,6 @@ const SearchGrid = styled.div`
 
 const SearchBox = styled.div`
   position: relative;
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between; */
   width: 88%;
   border: 1px solid #F19F13;
   padding: 1.3vh 25px;
@@ -298,6 +290,25 @@ const Line = styled.div`
   width: 87vw;
   margin: auto;
   border: 1px solid #FFE899;
+`;
+
+const SortSelect = styled.select`
+  /* width: 100%; */
+  border: none;
+  font-size: 13px;
+  color: #8C8C8C; 
+  line-height: 18px; 
+  margin: 0;
+  padding: 0 5px 0 0;
+  appearance: none;
+`;
+
+const SortOption = styled.option`
+  /* font-size: 13px;
+  color: #8C8C8C; 
+  line-height: 18px; 
+  margin: 0 5px 0 0;
+  padding: 0; */
 `;
 
 export default MainBody;

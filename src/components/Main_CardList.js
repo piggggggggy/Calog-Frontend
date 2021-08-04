@@ -48,7 +48,6 @@ const CardList = (props) => {
       setItems([...items, ...result]);
     };
     // setLoading(false)
-      // setItems([...items, ...result]);
   }, [search_list])
 
   // useEffect(() => {
@@ -73,8 +72,8 @@ const CardList = (props) => {
   return (
     <React.Fragment>
       <CardContainer>
-        {items.map((result, idx) => {     
-          if (items.length -1 != idx) {
+        {search_list.map((result, idx) => {     
+          if (search_list.length -1 != idx) {
             return <Card key={result.foodId} {...result}/> 
           } else {
             return <Card ref={ref} key={result.foodId} {...result}/> 
