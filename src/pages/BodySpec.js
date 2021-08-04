@@ -18,6 +18,8 @@ import _ from 'lodash';
 const BodySpec = (props) => {
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
+const user_info = useSelector(state=>state.user.user_info);
+console.log(user_info.nickname);
 const logout = () => {
   dispatch(_logOut());
 }
@@ -76,7 +78,7 @@ return (
     </Cameradiv>
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">최지혁</Text>
+          <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">{user_info?.nickname}</Text>
           <BodyBox>
             <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
             <Button border_radius="12px" bg="#FFE899" width="348px" height="56px">

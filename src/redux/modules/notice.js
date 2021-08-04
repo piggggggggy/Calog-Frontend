@@ -3,7 +3,7 @@ import instance from "./instance";
 //cadmin@calories.com
 //zkffhfltm1@
 const initialState = {
-  nick_dupli: false,
+  list: [],
 };
 
 export const getNoticeSV = () => {
@@ -11,7 +11,7 @@ export const getNoticeSV = () => {
         instance
         .get('/api/notice')
         .then((res) => {
-            console.log(res.data.notice);
+            dispatch(SetList(res.data.notice))
         })
         .catch((err) => {
             console.log(err);
@@ -24,7 +24,7 @@ export const postNoticeSV = (noticelist) => {
         instance
         .post('/api/notice', noticelist)
         .then((res) => {
-            console.log(res);
+              history.push("/notice");
         })
         .catch((err) => {
             console.log(err);
@@ -48,7 +48,6 @@ export const putNotiSV = (updatelist, noticeId) => {
 
 export const deleteNotiSV = (noticeId) => {
     return function(dispatch, getState, {history}){
-        console.log(noticeId);
         instance
         .delete(`/api/notice/${noticeId}`, {data:{password:"zkffhfltm1@"}})
         .then((res) => {
@@ -66,6 +65,7 @@ export const getNotiDetailSV = (noticeId) => {
         .get(`/api/notice/${noticeId}`)
         .then((res) => {
             console.log(res.data.notice);
+            dispatch(SetListOne(res.data.notice));
         })
         .catch((err) => {
             console.log(err);
@@ -75,14 +75,20 @@ export const getNotiDetailSV = (noticeId) => {
 
 //리덕스
 const notice = createSlice({
-  name: "user",
+  name: "notice",
   initialState,
   reducers: {
-    NickDupli: (state, action) => {
-        state.nick_dupli = action.payload;
+    SetList: (state, action) => {
+        state.list = action.payload;
     },
+    SetListOne: (state, action) => {
+        state.listone = action.payload;
+    }
   },
+  DeleteNoti: (state, action) => {
+        state.list = action.payload;
+}
 });
 
-export const {NickDupli} = notice.actions
+export const {SetList, SetListOne, DeleteNoti} = notice.actions
 export default notice;
