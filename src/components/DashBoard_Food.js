@@ -20,16 +20,16 @@ const DashBoard_Food = (props) => {
 
   return (
     <React.Fragment>
-      <Grid width="88%" height="204px" bg={'rgba(255, 232, 153, 0.14)'} border_radius="15px" margin="4.5% auto 0 auto">
+      <Grid width="88%" height="204px" bg={'rgba(255, 232, 153, 0.14)'} border_radius="15px" margin="4.5% auto 0 auto" m_margin="4.5% auto 0 auto">
         {/* 상단 */}
         <Grid is_flex padding="6.3% 5% 0 5%">
           {/* type */}
           <Grid width="17%" height="25px" bg={theme.color.light} border_radius="25px" line_height="25px" text_align="center">
-            <Text size="13px" bold>아침</Text>
+            <Text size="13px" bold m_size="12px">아침</Text>
           </Grid>
           {/* 섭취 칼로리 */}
           <Grid width="auto">
-            <Text size="20px" bold>600kcal</Text>
+            <Text size="20px" bold m_size="17px">600kcal</Text>
           </Grid>
         </Grid>
         {/* 기록 칼로리 리스트 */}

@@ -25,19 +25,19 @@ const DashBoard = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="0 0 13% 0">
+      <Grid margin="0 0 13% 0" m_margin="0 0 11% 0">
         {/* 배경 */}
         <TopBack />
         {/* 멘트 */}
-        <Grid is_flex padding="12.3% 0 0 7.7%">
-          <Grid line_height="27px">
-            <Text size="22px" bold>{user.nickname}님!</Text>
-            <Text size="22px" bold>453kcal<br/>더 먹을 수 있어요!</Text>
+        <Top>
+          <Line>
+            <Text size="22px" bold m_size="20px">{user.nickname}님!</Text>
+            <Text size="22px" bold m_size="20px">453kcal<br/>더 먹을 수 있어요!</Text>
             <Grid margin="2% 0 0 0">
-              <Text size="15px" bold color={theme.color.gray_6}> 현재까지 600kcal 먹었어요.</Text>
+              <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 600kcal 먹었어요.</Text>
             </Grid>
-          </Grid>
-        </Grid>
+          </Line>
+        </Top>
         {/* 바디스펙 */}
         <DashBoard_BodySpec />
         {/* 칼로리 분석 */}
@@ -45,9 +45,9 @@ const DashBoard = (props) => {
         {/* 칼로리 리스트 */}
         <DashBoard_Food />
         {/* 운동 추천 */}
-        <Grid margin="13.5% 0 0 7.8%">
-          <Text size="20px" bold>{user.nickname}을 위한 운동리스트</Text>
-          <Grid margin="7.8% 0 0 0">
+        <Grid margin="13.5% 0 0 7.8%" m_margin="10.5% 0 0 7.8%">
+          <Text size="20px" bold m_size="17px">{user.nickname}을 위한 운동리스트</Text>
+          <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
             {/* 운동 리스트 맵돌리기 */}
             <DashBoard_Workout />
           </Grid>
@@ -61,8 +61,28 @@ const TopBack = styled.div`
   position: absolute;
   z-index: -100;
   width: 100%;
+  max-width: 420px;
   background-color: ${theme.color.light};
   height: 26.6vh;
+`;
+
+const Top = styled.div`
+  padding: 12.3% 0 0 7.7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media ${theme.device.mobileM} {
+    padding: 10% 0 0 7.7%;
+  }
+`;
+
+const Line = styled.div`
+  line-height: 27px;
+
+  @media ${theme.device.mobileM} {
+    line-height: 20px;
+  }
 `;
 
 export default DashBoard;
