@@ -24,7 +24,7 @@ const [user_info, setUserInfo] = useState({});
     <React.Fragment>
       <Container>
           <Head>
-            <div onClick={()=>{history.push("/body")}}>
+            <div onClick={()=>{history.push("/notice")}}>
             <Tag>{Back}</Tag>
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
@@ -33,22 +33,9 @@ const [user_info, setUserInfo] = useState({});
             <br/>
           </Head>
           <hr color="#F5F5F5"/>
-          <PostList>
-            <Post>
-                <Tag onClick={()=>{history.push(`/notice/${"postId"}`)}}>
-                <Text size="17px" lineheight="22px">칼로리즈 서비스 런칭 공지</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
-            <Post>
-            <Tag onClick={()=>{history.push(`/notice/${"postId"}`)}}>
-                <Text size="17px" lineheight="22px">공지사항의 제목이 길 경우에는 이렇게 길어지다가 끝 처리를 ...</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
-          </PostList>
+          <Body>
+
+          </Body>
       </Container>
     </React.Fragment>
   );
@@ -60,6 +47,7 @@ export default NoticeWrite;
 const Container = styled.div`
   height: 866px;
   width: 420px;
+  overflow-y: hidden;
 `;
 
 const Head = styled.div`
@@ -69,7 +57,7 @@ const Head = styled.div`
   margin: 28px 0px 0px 0px;
 `;
 
-const PostList = styled.div`
+const Body = styled.div`
     display: flex;
     flex-direction: column;
 `;

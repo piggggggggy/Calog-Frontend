@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
+// 로그인 상태 전역 유지
+import { useDispatch } from 'react-redux';
+import { LoginCheck } from '../redux/modules/user';
 //라우팅
 import { Route } from "react-router-dom";
 import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch} from '../pages'
@@ -11,6 +14,10 @@ import theme from './theme';
 import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(LoginCheck());
+  }, []);
   return (
     <React.Fragment>
       <LazyLoad>
