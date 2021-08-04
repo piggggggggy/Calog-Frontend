@@ -23,7 +23,7 @@ const Nav = (props) => {
             <BiCalendarCheck size="40px"/>
           </Grid>
         {/* 마이페이지 */}
-          <Grid width="auto" margin="auto 0" _onClick={() => history.push('/login')}>
+          <Grid width="auto" margin="auto 0" _onClick={() => history.push('/body')}>
             <BiUser size="40px" />
           </Grid>
       </Wrap>
