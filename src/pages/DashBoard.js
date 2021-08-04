@@ -4,6 +4,8 @@ import {Grid, Text} from '../elements';
 import LogoHeader from '../shared/LogoHeader';
 import DashBoard_Chart from '../components/DashBoard_Chart';
 import DashBoard_Workout from '../components/DashBoard_Workout';
+//데이터
+import {useSelector} from 'react-redux';
 
 /** 
  * @param {*} props
@@ -15,7 +17,7 @@ import DashBoard_Workout from '../components/DashBoard_Workout';
 
 const DashBoard = (props) => {
 // dispatch
-// props
+  const user = useSelector((state) => state.user.user_info)
 // useEffect
 
   return (
@@ -26,7 +28,7 @@ const DashBoard = (props) => {
       <Grid is_flex padding="0 6%">
         {/* 멘트 */}
         <Grid line_height="27px">
-          <Text size="20px" bold>땡땡님!</Text>
+          <Text size="20px" bold>{user.nickname}님!</Text>
           <Text size="20px" bold>오늘은 300kcal<br/>초과했어요!</Text>
         </Grid>
         {/* 바디스펙 */}
@@ -39,13 +41,9 @@ const DashBoard = (props) => {
       {/* 칼로리 분석 */}
       <DashBoard_Chart />
       {/* 추천 운동 리스트 */}
-      <DashBoard_Workout />
+      <DashBoard_Workout user={user}/>
     </React.Fragment>
   );
-}
-
-DashBoard.defaultProps = {
-
 }
 
 export default DashBoard;
