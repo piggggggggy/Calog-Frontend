@@ -13,13 +13,13 @@ import DashBoard_List from './DashBoard_List';
 
 const DashBoard_Workout = (props) => {
 // dispatch
-// props
+  const {user} = props
 // useEffect
 
   return (
     <React.Fragment>
       <Grid padding="0 6%">
-        <Text size="20px" bold>땡땡님을 위한 운동리스트</Text>
+        <Text size="20px" bold>{user.nickname}님을 위한 운동리스트</Text>
         {/* 리스트 맵돌리기 */}
         <DashBoard_List />
       </Grid>
