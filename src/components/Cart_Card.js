@@ -63,7 +63,7 @@ const FoodCard = styled.div`
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 8px;
-  padding: 2.2vh 7.6vw;
+  padding: 2.2vh 7.6%;
   background: #fff;
   border: 1px solid #F19F13;
   border-radius: 16px;
@@ -73,8 +73,8 @@ const CountBox = styled.div`
   position: absolute;
   right: 5%;
   top: 4.5vh;
-  min-width: 32vw;
-  max-width: 32vw;
+  min-width: 32%;
+  max-width: 32%;
   display: flex;
   align-items: center;
   justify-content: space-between;  
