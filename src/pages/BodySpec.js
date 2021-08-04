@@ -19,7 +19,8 @@ const BodySpec = (props) => {
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
 const user_info = useSelector(state=>state.user.user_info);
-console.log(user_info.nickname);
+console.log(user_info?.nickname);
+console.log(is_login);
 const logout = () => {
   dispatch(_logOut());
 }
@@ -30,6 +31,8 @@ const bodyStore = () => {
 };
 useEffect(() => {
   dispatch(LoginCheck());
+  console.log(is_login);
+  // dispatch(LoginCheck());
   // dispatch(BodySpectSV("남자", 80, 180, 25));
   // dispatch(BodySpectModify("남자", 75, 180, 25));
 }, []);

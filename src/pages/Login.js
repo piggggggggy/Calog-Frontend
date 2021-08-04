@@ -20,7 +20,6 @@ const [user_info, setUserInfo] = useState({});
 
 const login = () => {
   dispatch(LoginSV(user_info));
-  console.log("어디 페이지로 갈까!");
 };
 
   return (
