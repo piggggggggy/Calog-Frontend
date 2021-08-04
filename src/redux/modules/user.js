@@ -87,7 +87,7 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
             if(!res.data.user){
                 return;
             };
-            dispatch(SetUser());
+            dispatch(SetUser(res.data.user));
         })
         .catch((err) => {
             console.log("err of login check", err);
