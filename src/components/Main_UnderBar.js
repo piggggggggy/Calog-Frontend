@@ -81,6 +81,7 @@ UnderBar.defaultProps = {
 }
 
 const CartContainer = styled.div`
+  max-width: 420px;
   width: 100%;
   min-height: 12.5%;
   position: fixed;
@@ -120,13 +121,13 @@ const CalcBox = styled.div`
 
 const CartButton = styled.div`
   height: 4vh;
-  padding: 5px 2.4vw;
+  padding: 5px 2.4%;
   background: #E4E4E4;
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 1.2vw;
+  margin: 5px 1.2%;
   /* gap: 2vw; */
 
   & > div {
