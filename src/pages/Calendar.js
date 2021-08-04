@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Grid, Text} from '../elements';
 //컴포넌트
 import Calendar_Calendar from '../components/Calendar_Calendar';
-//db
-import {useDispatch} from 'react-redux'
-import {getAllRecordDB} from '../redux/modules/record';
+
 
 /** 
  * @param {*} props
@@ -14,11 +12,6 @@ import {getAllRecordDB} from '../redux/modules/record';
 */
 
 const Calendar = (props) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getAllRecordDB())
-  },[])
 
   return (
     <React.Fragment>
