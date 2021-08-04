@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
 import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
+import { getNotiDetailSV, deleteNotiSV } from '../redux/modules/notice';
 import _ from 'lodash';
 /**
  * @param {*} props
@@ -14,9 +14,18 @@ import _ from 'lodash';
  * @담당자 : 
 */
 
+
 const NotiDetail = (props) => {
 const dispatch = useDispatch();
-
+const notiId = props.match.params.postid;
+const noticeOne = useSelector(state=>state.notice.listone);
+const notidelete = () => {
+  dispatch(deleteNotiSV(notiId));
+  history.push("/notice");
+}
+React.useEffect(()=>{
+  dispatch(getNotiDetailSV(notiId));
+},[]);
   return (
     <React.Fragment>
       <Container>
@@ -29,17 +38,18 @@ const dispatch = useDispatch();
             <br/>
           </Head>
           <hr color="#F5F5F5"/>
-          <PostList>
             <Post>
                 <Tag >
-                <Text size="17px" lineheight="22px">칼로리즈 서비스 런칭 공지</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
+                <Text size="17px" lineheight="22px">{noticeOne?.title}</Text>
+                <Text size="17px" lineheight="22px" color="#A9A9A9">{noticeOne?.date}</Text>
                 </Tag>
                 <hr color="#F5F5F5"/>
-                <Content>내용!</Content>
+                <Content>{noticeOne?.contents}</Content>
             </Post>
-
-          </PostList>
+            <Grid width="25%">
+                <Button bg="#FFE899" border_radius="15px"
+                _onClick={notidelete}>삭제</Button>
+            </Grid>
       </Container>
     </React.Fragment>
   );
@@ -62,14 +72,8 @@ const Head = styled.div`
   padding: 10px;
 `;
 
-const PostList = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
 const Post = styled.div`
     padding-bottom: 10px;
-    
 `;
 
 const Tag = styled.a`

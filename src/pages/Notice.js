@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {Back} from "../img/svg";
 import { history } from '../redux/configStore';
-import { getNoticeSV, putNotiSV, deleteNotiSV, getNotiDetailSV } from '../redux/modules/notice';
+import { getNoticeSV, putNotiSV } from '../redux/modules/notice';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -16,12 +16,11 @@ import { getNoticeSV, putNotiSV, deleteNotiSV, getNotiDetailSV } from '../redux/
 const Notice = (props) => {
 const dispatch = useDispatch();
 const admin = useSelector((state)=>state.user.user_info.email);
-console.log();
+const notilist = useSelector(state=>state.notice.list)
+console.log(notilist);
 React.useEffect(()=>{
   // dispatch(putNotiSV({title:"ㅇㅇㅇ 제목 수정", contents:"1번 내용 수정",password:"zkffhfltm1@"},"610a5853ec4ceb2aec1cd015"));
-  // dispatch(deleteNotiSV("610a5e75e1d2a82c7297f5d9"));
   dispatch(getNoticeSV());
-  // dispatch(getNotiDetailSV("610a5853ec4ceb2aec1cd015"));
 },[]);
 
 
@@ -40,20 +39,17 @@ React.useEffect(()=>{
           </Head>
           <hr color="#F5F5F5"/>
           <PostList>
-            <Post>
-                <Tag onClick={()=>{history.push(`/notice/${"postId"}`)}}>
-                <Text size="17px" lineheight="22px">칼로리즈 서비스 런칭 공지</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
-            <Post>
-            <Tag onClick={()=>{history.push(`/notice/${"postId"}`)}}>
-                <Text size="17px" lineheight="22px">공지사항의 제목이 길 경우에는 이렇게 길어지다가 끝 처리를 ...</Text>
-                <Text size="17px" lineheight="22px" color="#A9A9A9">2021.08.13</Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
+          {notilist.map((l)=>{
+            return(
+              <Post>
+                  <Tag onClick={()=>{history.push(`/notice/${l.id}`)}}>
+                  <Text size="17px" lineheight="22px">{l.title}</Text>
+                  <Text size="17px" lineheight="22px" color="#A9A9A9">{l.date}</Text>
+                  </Tag>
+                  <hr color="#F5F5F5"/>
+              </Post>
+              );
+          })}
           </PostList>
       </Container>
     </React.Fragment>
