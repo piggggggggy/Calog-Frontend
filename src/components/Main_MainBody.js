@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 // modules
-import { searchKeywordDB, ascendingSort, descendingSort, koreanSort, rangeFilter } from '../redux/modules/search';
+import { searchKeywordDB, ascendingSort, descendingSort, koreanSort, rangeFilter, getScrollData } from '../redux/modules/search';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
+import InfiniteScroll from './Main_InfiniteScroll';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -28,6 +29,8 @@ const MainBody = (props) => {
   const dispatch = useDispatch();
 // props
   const search_list = useSelector((state) => state.search.filtered_list);
+  const is_loading = useSelector((state) => state.search.is_loading);
+  const paging = useSelector((state) => state.search.paging);
   const [keyword, setKey] = useState();
   const [history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
@@ -68,31 +71,36 @@ const MainBody = (props) => {
   // dispatch(ascendingSort());
   // dispatch(descendingSort());
   // dispatch(koreanSort());
-
   const aa = () => {
     dispatch(descendingSort());
   };
 
   // range debounce  함수
-  const debounceMin = _.debounce((e) => {
-    setMin(e);
-  }, 500);
-
-  const debounceMax = _.debounce((e) => {
-    setMax(e);
+  const debounce = _.debounce((n, x) => {
+    setMin(n);
+    setMax(x);
   }, 500);
 
   // range 요청
+  const debounceRange = _.debounce((e) => {
+    dispatch(rangeFilter(e));
+  });
+  const debounceRangeCB = useCallback((e) => {
+    debounceRange(e);
+  }, [filterMin, filterMax]);
+
   useEffect(() => {
     const data = {
       min: filterMin,
       max: filterMax
     };
-    const debounceRange = _.debounce(() => {
-      dispatch(rangeFilter(data));
-    });
-    debounceRange();
+    debounceRangeCB(data);
   }, [filterMin, filterMax]);
+
+  // console.log(test.current.scrollHeight)
+  // console.log(test.current.scrollTop)
+  // console.log(test.current.clientHeight)
+
 
   return (
     <React.Fragment>
@@ -164,8 +172,8 @@ const MainBody = (props) => {
             max={5000}
             onChange={({ min, max }) => {
               // console.log(`min = ${min}, max = ${min}`)
-              debounceMin(min);
-              debounceMax(max);
+              debounce(min, max);
+              // debounceMax(max);
             }}
           />
         </Grid>
@@ -182,19 +190,35 @@ const MainBody = (props) => {
       </HeaderContainer>    
 
 
-      <BodyContainer>
-        {/* 검색결과가 들어가는 곳 */}
-        <CardContainer>
-          {search_list.map((result, idx) => {
-            return <Card key={result.foodId} {...result}/>
-          })}
-        </CardContainer>
+      
+        <BodyContainer>
+          {/* 검색결과가 들어가는 곳 */}
+          
+            <CardContainer>
+              <InfiniteScroll
+                callNext={() => {
+                  console.log("next!");
+                }}
+                is_next={paging.next}
+                loading={is_loading}
+              >
+                {search_list.map((result, idx) => {
+                  return (
+                    <Card key={result.foodId} {...result}/>
+                  )
+                })}
+              </InfiniteScroll>
+            </CardContainer>
 
-        {/* 장바구니 탭 */}
-        <UnderBar>
-        </UnderBar>
+          
 
-      </BodyContainer>
+          {/* 장바구니 탭 */}
+          <UnderBar>
+          </UnderBar>
+
+        </BodyContainer>
+
+      
     </React.Fragment>
   );
 }
