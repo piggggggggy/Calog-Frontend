@@ -56,7 +56,7 @@ export const getWorkoutDB = () => {
 export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
     instance
-      .post('/api/record', {date:date, foodList:list, type:type, url:[url], contents:[memo]})
+      .post('/api/record', {date:date, foodList:list, type:type, url:url, contents:memo})
       .then((res) => {
         window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
         dispatch(delCartAll())
