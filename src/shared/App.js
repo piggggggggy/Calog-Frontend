@@ -14,6 +14,8 @@ import theme from './theme';
 import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
+const accessToken = document.cookie.split("=")[1];
+console.log(accessToken);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LoginCheck());
@@ -40,6 +42,7 @@ const App = (props) => {
               <Route path="/body" exact component={BodySpec}/>
               <Route path="/notice" exact component={Notice}/>
               <Route path="/notice/:postid" exact component={NotiDetail}/>
+              <Route path="/notiwrite" exact component={NoticeWrite}/>
               <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
               <Route path="/alam" exact component={Alarm}/>
 

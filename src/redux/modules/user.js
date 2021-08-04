@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-
+import axios from "axios";
 const initialState = {
   user_info: {email: "email", nickname: "nickname"},
   is_login: false,
@@ -8,26 +8,23 @@ const initialState = {
   nick_dupli: false,
 };
 
+//err 후처리 방법은??
 export const LoginSV = (user_info) => {
     console.log("click LoginDB")
     const {email, password} = user_info
     return function(dispatch, getState, {history}){
-        instance
-        .post('/api/user/login', {email, password})
-        .then((res) => {
-            console.log("res of loginDB", res);
-            if(res.status===200){
-                dispatch(LoginCheck());
-                document.cookie = `TOKEN=${res.data.token};`;
-                history.push('/dashboard')
-                //로그인 체크해야할 듯. user info 부족
-            } else{
-                window.alert("값을 재입력해주세요!")
-            }
-        })
-        .catch((err) => {
-            console.log("err of loginDB", err);
-        })
+        async function loginsv() {
+            const res_token = await instance.post('/api/user/login', {email, password});
+            const res_user_info = await axios({
+                method: "get",
+                url: "https://2k1.shop/api/user/me",
+                headers: { authorization: `Bearer ${res_token.data.token}` }
+            });
+            document.cookie = `TOKEN=${res_token.data.token};`;
+            dispatch(SetUser(res_user_info.data.user));
+            history.push("/body");
+        };
+        loginsv();
     };
 };
 
@@ -84,10 +81,12 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         .get('/api/user/me')
         .then((res) => {
             console.log("res of login check", res);
+            console.log(res.data.user)
             if(!res.data.user){
                 return;
             };
             dispatch(SetUser(res.data.user));
+            console.log("디스패치 성공!");
         })
         .catch((err) => {
             console.log("err of login check", err);

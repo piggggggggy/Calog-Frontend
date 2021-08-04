@@ -3,7 +3,7 @@ import instance from "./instance";
 //cadmin@calories.com
 //zkffhfltm1@
 const initialState = {
-  nick_dupli: false,
+  list: [],
 };
 
 export const getNoticeSV = () => {
@@ -11,7 +11,7 @@ export const getNoticeSV = () => {
         instance
         .get('/api/notice')
         .then((res) => {
-            console.log(res.data.notice);
+            dispatch(SetList(res.data.notice))
         })
         .catch((err) => {
             console.log(err);
@@ -24,7 +24,7 @@ export const postNoticeSV = (noticelist) => {
         instance
         .post('/api/notice', noticelist)
         .then((res) => {
-            console.log(res);
+              history.push("/notice");
         })
         .catch((err) => {
             console.log(err);
@@ -46,17 +46,49 @@ export const putNotiSV = (updatelist, noticeId) => {
     };
 };
 
+export const deleteNotiSV = (noticeId) => {
+    return function(dispatch, getState, {history}){
+        instance
+        .delete(`/api/notice/${noticeId}`, {data:{password:"zkffhfltm1@"}})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+};
+
+export const getNotiDetailSV = (noticeId) => {
+    return function(dispatch, getState, {history}){
+        instance
+        .get(`/api/notice/${noticeId}`)
+        .then((res) => {
+            console.log(res.data.notice);
+            dispatch(SetListOne(res.data.notice));
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+};
 
 //리덕스
-const user = createSlice({
-  name: "user",
+const notice = createSlice({
+  name: "notice",
   initialState,
   reducers: {
-    NickDupli: (state, action) => {
-        state.nick_dupli = action.payload;
+    SetList: (state, action) => {
+        state.list = action.payload;
     },
+    SetListOne: (state, action) => {
+        state.listone = action.payload;
+    }
   },
+  DeleteNoti: (state, action) => {
+        state.list = action.payload;
+}
 });
 
-export const {NickDupli} = user.actions
-export default user;
+export const {SetList, SetListOne, DeleteNoti} = notice.actions
+export default notice;

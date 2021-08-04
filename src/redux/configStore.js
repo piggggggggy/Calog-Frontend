@@ -14,6 +14,7 @@ import record from './modules/record';
 import cart from './modules/cart';
 import favorite from './modules/favorite';
 import search from './modules/search';
+import notice from "./modules/notice";
 
 export const history = createBrowserHistory();
 
@@ -44,6 +45,7 @@ const reducer = combineReducers({
   cart: cart.reducer,
   favorite: favorite.reducer,
   search: search.reducer,
+  notice: notice.reducer,
   router: connectRouter(history),
 });
 
