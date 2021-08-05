@@ -37,7 +37,7 @@ const Record_Date = (props) => {
   }
 
   return (
-    <Grid padding="9px 20px 7% 20px">
+    <Grid padding="9px 20px 7% 12px">
       
       {/* 실제 DatePicker */}
       <DatePicker onDateChange={Change} locale={enGB} format=' '>
