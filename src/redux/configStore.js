@@ -38,7 +38,6 @@ const persistConfig = {
   key: "root",
   storage: storageSession,
   whitelist: ["cart", "recent"]
-  // blacklist: ["cart"]
 };
 
 // const persistConfigSession = {

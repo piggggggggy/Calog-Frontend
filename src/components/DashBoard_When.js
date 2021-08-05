@@ -5,35 +5,95 @@ import theme from '../shared/theme';
 //이모지
 import { FaCircle } from "react-icons/fa";
 //type chk
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {typeChk, ttlKcal} from '../redux/modules/record';
 
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 : record에서 기록할 칼로리의 시점 컴포넌트
+ * @역할 : dashboard에서 기록할 칼로리의 시점 컴포넌트
  * @필수값 : 기록할 칼로리의 시점
  * @담당자 : 김나영
 */
 
-const Record_When = (props) => {
+const DashBoard_When = (props) => {
+  const dispatch = useDispatch()
   
   //type chk
   const typeState = useSelector((state) => state.cart.type)
+  const foodRecords = props[0]
 
   //type에 따른 css변경
   const [type, setType] = useState(typeState);
 
+  //기록 리스트(각 타입에 맞는 리스트와 총 칼로리 합계)
+  // 아침
+  const morning_list = foodRecords?.filter((f) => f.type === "아침")
+  let morning_kcal = 0
+  if(morning_list?.length !== 0) {
+    for(let idx=0; idx<morning_list?.length; idx++) {
+      let kcal = morning_list[idx].resultKcal
+      morning_kcal += kcal
+    }
+  }
+  // 점심
+  const lunch_list = foodRecords?.filter((f) => f.type === "점심")
+  let lunch_kcal = 0
+  if(lunch_list?.length !== 0) {
+    for(let idx=0; idx<lunch_list?.length; idx++) {
+      let kcal = lunch_list[idx].resultKcal
+      lunch_kcal += kcal
+    }
+  }
+  //저녁
+  const dinner_list = foodRecords?.filter((f) => f.type === "저녁")
+  let dinner_kcal = 0
+  if(dinner_list?.length !== 0) {
+    for(let idx=0; idx<dinner_list?.length; idx++) {
+      let kcal = dinner_list[idx].resultKcal
+      dinner_kcal += kcal
+    }
+  }
+  //간식
+  const snack_list = foodRecords?.filter((f) => f.type === "간식")
+  let snack_kcal = 0
+  if(snack_list?.length !== 0) {
+    for(let idx=0; idx<snack_list?.length; idx++) {
+      let kcal = snack_list[idx].resultKcal
+      snack_kcal += kcal
+    }
+  }
+  //야식
+  const night_list = foodRecords?.filter((f) => f.type === "야식")
+  let night_kcal = 0
+  if(night_list?.length !== 0) {
+    for(let idx=0; idx<night_list?.length; idx++) {
+      let kcal = night_list[idx].resultKcal
+      night_kcal += kcal
+    }
+  }
+
   const selectType = (type) => {
     if(type === "morning") {
       setType("아침")
+      dispatch(typeChk("아침"))
+      dispatch(ttlKcal(morning_kcal))
     }else if (type === "lunch") {
       setType("점심") 
+      dispatch(typeChk("점심"))
+      dispatch(ttlKcal(lunch_kcal))
     }else if (type === "dinner") {
       setType("저녁")
+      dispatch(typeChk("저녁"))
+      dispatch(ttlKcal(dinner_kcal))
     }else if (type === "snack") {
       setType("간식")
+      dispatch(typeChk("간식"))
+      dispatch(ttlKcal(snack_kcal))
     }else if (type === "midnightSnack") {
       setType("야식")
+      dispatch(typeChk("야식"))
+      dispatch(ttlKcal(night_kcal))
     };
   }
 
@@ -129,4 +189,4 @@ const When = styled.div`
   }
 `;
 
-export default Record_When;
+export default DashBoard_When;

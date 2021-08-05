@@ -8,8 +8,6 @@ import { DatePicker } from 'react-nice-dates'
 import '../styles/css/nice_date.css'
 //moment
 import moment from 'moment'
-//icon
-import { BiCaretDown } from "react-icons/bi";
 //날짜 보내기
 import {useDispatch, useSelector} from 'react-redux';
 import {addDate} from '../redux/modules/cart'
@@ -48,7 +46,9 @@ const Record_Date = (props) => {
           <Grid display="flex">
             {/* datePicker 실제로 보이는 부분 */}
             <Text width="24%" margin="0 8px 0 29px" size="22px" bold>{date}</Text>
-            <BiCaretDown size="16px" color={theme.color.gray_4}/>
+            <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd" d="M7.37245 8.712L0.291018 1.704C-0.097006 1.296 -0.097006 0.672 0.291018 0.288C0.679042 -0.096 1.30958 -0.096 1.72186 0.288L8.1 6.6L14.4781 0.288001C14.8662 -0.0959994 15.521 -0.0959993 15.909 0.288001C16.297 0.672001 16.297 1.296 15.909 1.704L8.80329 8.712C8.41527 9.096 7.78473 9.096 7.37245 8.712Z" fill="black"/>
+            </svg>
             {/* datePicker 안보이게 숨김 처리 */}
             <Input
             className={'input' + (focused ? ' -focused' : '')}
