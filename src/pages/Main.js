@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+// modules
+import { getRecentDB } from '../redux/modules/recent';
 // elements & components
 import MainBody from '../components/Main_MainBody';
 import LogoHeader from '../shared/LogoHeader';
@@ -15,8 +18,13 @@ import LogoHeader from '../shared/LogoHeader';
 
 const Main = (props) => {
 // dispatch
+  const dispatch = useDispatch();
 // props
 // useEffect
+  useEffect(() => {
+    dispatch(getRecentDB());
+  }, []);
+
 
   return (
     <React.Fragment>

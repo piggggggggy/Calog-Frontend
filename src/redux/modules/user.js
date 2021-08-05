@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 import axios from "axios";
-//카트 삭제 액션
+//카트, 히스토리 삭제 액션
 import {delCartAll} from './cart';
+import { delRecentAll } from "./recent";
 
 const initialState = {
   user_info: {email: "email", nickname: "nickname"},
@@ -103,7 +104,8 @@ export const _logOut = () => {
     return function(dispatch, getState, {history}){
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-        dispatch(delCartAll())
+        dispatch(delCartAll());
+        dispatch(delRecentAll());
     };
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 // 로그인 상태 전역 유지
@@ -12,13 +12,33 @@ import Nav from './Nav';
 import theme from './theme';
 //lazy loading
 import LazyLoad from 'react-lazyload';
+// modules
+import { delCartAll } from '../redux/modules/cart';
+import { delRecentAll } from '../redux/modules/recent';
 
 const App = (props) => {
+  // dispatch
   const dispatch = useDispatch();
+  // login check
   useEffect(() => {
     dispatch(LoginCheck());
   }, []);
+
+  // 윈도우 종료 이벤트 (local 날리기)
+  const deletePersist = () => {
+    dispatch(delCartAll());
+    dispatch(delRecentAll());
+  };
+
+  const deletePersisitCB = useCallback(() => {
+    deletePersist();
+  }, [])
+  // window.addEventListener('beforeunload', ()=>{window.alert("종료")});
+  useEffect(() => {
+    window.onbeforeunload = () => {window.alert('종료')};
+  }, [])
   
+
   return (
     <React.Fragment>
       <LazyLoad>

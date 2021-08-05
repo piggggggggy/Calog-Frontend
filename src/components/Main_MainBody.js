@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { useInView } from "react-intersection-observer";
 // modules
 import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData } from '../redux/modules/search';
+import { searchRecentDB, getRecentDB, deleteRecentDB } from '../redux/modules/recent';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -14,6 +15,7 @@ import InfiniteScroll from './Main_InfiniteScroll';
 import CardList from './Main_CardList';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
+// import SearchHistory from './Main_SearchHistory';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -33,45 +35,46 @@ const MainBody = (props) => {
   const dispatch = useDispatch();
 // props  
   const search_list = useSelector((state) => state.search.filtered_list);
-  const [keyword, setKey] = useState();
+  // const [keyword, setKey] = useState();
   const [history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
   const [sortType, setSort] = useState('정확도순');
-
-
+  const recent_list = useSelector((state) => state.recent.recent);
+  const keyword = useRef();
+  console.log(recent_list);
 // useEffect
   
   // 검색 함수!
-  const keyChange = (e) => {
-    setKey(e.target.value)
-  };
+  // const keyChange = (e) => {
+  //   setKey(e.target.value)
+  // };
   
   const search = () => {
     const data = {
-      keyword: keyword,
+      keyword: keyword.current.value,
       min: filterMin,
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    dispatch(countKeywordDB(keyword));
+    dispatch(countKeywordDB(keyword.current.value));
+    dispatch(searchRecentDB(keyword.current.value));
   };
   // 엔터 검색
   const onKeyPress = (e) => {
-    if (e.key == 'Enter') {
+    if (e.key === 'Enter') {
       search();
-      setKey('');
+      keyword.current.vlaue = '';
     }
   };
   // 검색어 삭제
   const deleteKeyword = () => {
-    setKey('');
+    keyword.current.value = '';
   };
 
   // 정렬 선택
   const sortChange = (e) => {
     setSort(e.target.value);
-
   };
 
   useEffect(() => {
@@ -91,20 +94,14 @@ const MainBody = (props) => {
   }, [sortType])
 
   // history on off
-  const historyOnoff = () => {
+  const historyOnoff = useCallback(() => {
     if (history) {
       setHistory(false);
     } else {
       setHistory(true);
     }
-  };
+  }, [history]);
   const styles = history ? {display: "none"} : {display: "block"};
-
-
-
-
-
-
 
 
   // range debounce  함수
@@ -114,7 +111,7 @@ const MainBody = (props) => {
   }, 500);
   const debounceCB = useCallback((n, x) => {
     debounce(n,x);
-  })
+  }, [])
 
   // range 요청
   const debounceRange = _.debounce((e) => {
@@ -122,7 +119,7 @@ const MainBody = (props) => {
   }, 500);
   const debounceRangeCB = useCallback((e) => {
     debounceRange(e);
-  }, [filterMin, filterMax]);
+  }, []);
 
   useEffect(() => {
     const data = {
@@ -141,7 +138,10 @@ const MainBody = (props) => {
           {/* 검색바 */}
           <SearchGrid>
             <SearchBox>
-              <input onChange={(e)=>{keyChange(e)}} value={keyword} 
+              <input 
+              // onChange={(e)=>{keyChange(e)}} 
+              // value={keyword} 
+              ref={keyword}
               onFocus={()=>{historyOnoff()}} onBlur={()=>{historyOnoff()}} 
               placeholder="어떤 칼로리가 궁금하신가요?"
               onKeyPress={onKeyPress}
@@ -162,43 +162,23 @@ const MainBody = (props) => {
                   <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                
+                {recent_list[0] !== null ? recent_list.map((rec, idx) => {
+                  if (idx < 5) {
+                    return (
+                      <>
+                        <Grid is_flex padding="1.3vh 8%"  key={idx}>
+                          <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                          <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                            <TiDeleteOutline onClick={()=>{dispatch(deleteRecentDB(rec))}} size="15px" color="#737373"/>
+                          </div>
+                        </Grid>
+                        <Line/>
+                      </>
+                    )
+                  }
+                }) : ''}
               </div>
+
             </SearchHistory>
             <MostUsedKey/>
           </SearchGrid>
@@ -223,7 +203,6 @@ const MainBody = (props) => {
                 <SortOption value="오름차순">칼로리낮은순</SortOption>
                 <SortOption value="가나다순">가나다순</SortOption>
               </SortSelect>
-              {/* <Text size="13px" m_size="13px" color="#8C8C8C" lineheight="18px" margin="0 5px 0 0" padding="0">칼로리높은순</Text> */}
               <Grid width="16px" height="16px" display="flex" jc="center">
                 <IoIosArrowDown size="14px" color="8C8C8C"/>
               </Grid>
@@ -252,7 +231,10 @@ const MainBody = (props) => {
           {/* 검색바 */}
           <SearchGrid>
             <SearchBox>
-              <input onChange={(e)=>{keyChange(e)}} value={keyword} 
+              <input 
+              // onChange={(e)=>{keyChange(e)}} 
+              // value={keyword} 
+              ref={keyword}
               onFocus={()=>{historyOnoff()}} onBlur={()=>{historyOnoff()}} 
               placeholder="어떤 칼로리가 궁금하신가요?"
               onKeyPress={onKeyPress}
@@ -273,42 +255,21 @@ const MainBody = (props) => {
                   <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                <Grid is_flex padding="1.3vh 8%">
-                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
-                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <TiDeleteOutline size="15px" color="#737373"/>
-                  </div>
-                </Grid>
-                <Line/>
-                
+                {recent_list[0] !== null ? recent_list.map((rec, idx) => {
+                  if (idx < 5) {
+                    return (
+                      <>
+                        <Grid is_flex padding="1.3vh 8%"  key={idx}>
+                          <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                          <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                            <TiDeleteOutline onClick={()=>{dispatch(deleteRecentDB(rec))}} size="15px" color="#737373"/>
+                          </div>
+                        </Grid>
+                        <Line/>
+                      </>
+                    )
+                  }
+                }) : ''}
               </div>
             </SearchHistory>
             <MostUsedKey/>
@@ -425,8 +386,8 @@ const SearchHistory = styled.div`
     border-bottom-right-radius: 28px;
 
     &::-webkit-scrollbar {
-    display: none;
-  }
+      display: none;
+    }
   }
 `;
 
@@ -448,11 +409,7 @@ const SortSelect = styled.select`
 `;
 
 const SortOption = styled.option`
-  /* font-size: 13px;
-  color: #8C8C8C; 
-  line-height: 18px; 
-  margin: 0 5px 0 0;
-  padding: 0; */
+
 `;
 
 export default MainBody;
