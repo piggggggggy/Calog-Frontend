@@ -118,6 +118,9 @@ const search = createSlice({
       });
       state.filtered_list = koreanSorted;
     },
+    exactSort : state => {
+      state.filtered_list = state.list;
+    },
 
     // 상세페이지 조회
     getDetail : (state, action) => {
@@ -127,6 +130,6 @@ const search = createSlice({
   }
 });
 
-export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort, getScrollData, getDetail} = search.actions;
+export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort, exactSort, getScrollData, getDetail} = search.actions;
 
 export default search;

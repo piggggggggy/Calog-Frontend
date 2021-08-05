@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
 // modules
 import { addCartRx } from '../redux/modules/cart';
+import { addFavoriteDB, deleteFavoriteDB, getFavoriteDB } from '../redux/modules/favorite';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons
@@ -24,6 +25,8 @@ const Card = (props) => {
   const dispatch = useDispatch();
 // props
   const cart_list = useSelector((state) => state.cart.cart);
+  const favorite_list = useSelector((state) => state.favorite.list);
+  const is_login = useSelector((state) => state.user.is_login);
 // useEffect
 
   // 장바구니 담기!
@@ -54,6 +57,44 @@ const Card = (props) => {
       )
     }
   };
+
+  // 즐겨찾기 확인
+  const favoCheck = favorite_list.findIndex((f) => f.foodId === props.foodId);
+ 
+  const is_favorite = () => {
+    
+    if (favoCheck !== -1) {
+      return (
+        { color: "#F19F13" }
+        )
+    }else{
+      return (
+        { color: "#E4E4E4" }
+      )
+    }
+  };
+  
+  // 즐겨찾기 추가 함수
+  const addFavorite = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!is_login) {
+      window.alert("로그인부터 하세요.")
+      return;
+    }
+    if (favoCheck === -1) {
+      let data = {
+        foodId : props.foodId,
+        name: props.name,
+        kcal: props.kcal
+      };
+      dispatch(addFavoriteDB(data));
+    } else {
+      dispatch(deleteFavoriteDB(props.foodId));
+    }
+    
+  };
+  // 즐겨찾기 해제
     
   return (
     <React.Fragment>
@@ -62,7 +103,7 @@ const Card = (props) => {
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox>
-          <IoStar color="#E4E4E4" size="21px"/>
+          <IoStar style={is_favorite()} size="21px" onClick={addFavorite}/>
         </BookmarkBox>
 
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
@@ -95,7 +136,7 @@ const FoodCard = styled.div`
   border: 1px solid #F19F13;
   border-radius: 28px;
   box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.14);
-  cursor: pointer;
+  /* cursor: pointer; */
   z-index: 5;
 `;
 
