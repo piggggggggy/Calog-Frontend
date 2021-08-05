@@ -95,7 +95,7 @@ const search = createSlice({
   reducers: {
     // 검색하기
     searchKeyword : (state, action) => {
-      state.list = action.payload.data
+      state.list = action.payload.data;
       state.filtered_list = state.list.filter((food, idx) => {
         if (food.kcal >= action.payload.min && food.kcal <= action.payload.max){
           return food;

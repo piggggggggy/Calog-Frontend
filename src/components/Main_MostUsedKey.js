@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import { Text } from '../elements';
 // modules
-import { getMostUsedKeyDB } from '../redux/modules/search';
+import { getMostUsedKeyDB, searchKeywordDB } from '../redux/modules/search';
 
 /** 
  * @param {*} props
@@ -31,7 +31,17 @@ const MostUsedKey = (props) => {
         {most_list.map((m, idx) => {
           if (idx < 4){
             return (
-              <MostButton key={idx}>
+              <MostButton 
+                onClick={()=>{
+                  dispatch(searchKeywordDB(
+                    {
+                      keyword: m.keyword,
+                      min: 0,
+                      max: 5000,
+                    }
+                  ));
+                }}
+                key={idx}>
                 <Text lineheight="12px" m_lineheight="12px" size="10px" m_size="10px" color="#404040" padding="0" margin="0">{m.keyword}</Text>
               </MostButton>
             )

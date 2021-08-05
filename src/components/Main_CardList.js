@@ -20,47 +20,47 @@ const CardList = (props) => {
   const search_list = props.search_list;
 
   // 무한스크롤 용
-  const [items, setItems] = useState([]);
-  const [page, setPage] = useState({
-    start: 0,
-    end: 20,
-    next: false
-  });
-  const [loading, setLoading] = useState(false);
+//   const [items, setItems] = useState([]);
+//   const [page, setPage] = useState({
+//     start: 0,
+//     end: 20,
+//     next: false
+//   });
+//   const [loading, setLoading] = useState(false);
 
-  const [ref, inView] = useInView();
-// useEffect
+//   const [ref, inView] = useInView();
+// // useEffect
 
-  // 무한스크롤
+//   // 무한스크롤
 
-  const sliceItems = useCallback(() => {
-    // setLoading(true)
-    let result = search_list.slice(page.start, page.end);
-    if (result.length === 21) {
-      setPage({
-        start: page.start + 20,
-        end: page.end + 20,
-        next: true
-      })
-      result.pop();
-      setItems([...items, ...result]);
-    } else {
-      setItems([...items, ...result]);
-    };
-    // setLoading(false)
-  }, [search_list])
+//   const sliceItems = useCallback(() => {
+//     // setLoading(true)
+//     let result = search_list.slice(page.start, page.end);
+//     if (result.length === 21) {
+//       setPage({
+//         start: page.start + 20,
+//         end: page.end + 20,
+//         next: true
+//       })
+//       result.pop();
+//       setItems([...items, ...result]);
+//     } else {
+//       setItems([...items, ...result]);
+//     };
+//     // setLoading(false)
+//   }, [search_list])
 
-  // useEffect(() => {
-  //   sliceItems()
-  // }, []);
+//   // useEffect(() => {
+//   //   sliceItems()
+//   // }, []);
 
-  useEffect(() => {
-    if(inView) {
-      sliceItems()
-    }
-  }, [inView]);
+//   useEffect(() => {
+//     if(inView) {
+//       sliceItems()
+//     }
+//   }, [inView]);
 
-  console.log(items);
+//   console.log(items);
   // console.log(items);
   // console.log("loading:",loading);
   // console.log("inView:", inView);
