@@ -12,9 +12,15 @@ export const searchKeywordDB = (data) => {
     instance
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
-        console.log(res)
-        const new_data = {...data, data: res.data}
-        dispatch(searchKeyword(new_data));
+        console.log(res);
+        if (res.data === "") {
+          window.alert('검색 결과가 없어요!');
+        } else {
+          
+          const new_data = {...data, data: res.data};
+          dispatch(searchKeyword(new_data));
+        }
+        
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -22,13 +28,13 @@ export const searchKeywordDB = (data) => {
   }
 };
 
+  // detail foodinfo 가져오기
 export const getDetailDB = (foodId) => {
   return function (dispatch, getState, {history}) {
     instance
       .get(`/api/home/search/detail/${foodId}`)
       .then((res) => {
-        console.log(res)
-
+        // console.log(res)
         dispatch(getDetail(res.data.foodDetail));
       })
       .catch((err) => {
@@ -37,6 +43,35 @@ export const getDetailDB = (foodId) => {
   }
 };
 
+  // 키워드별 조회수 기록
+export const countKeywordDB = (keyword) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .post('/api/home/search/mostUsed',{keyword: keyword})
+      .then((res) => {
+        console.log(res);
+        dispatch(addMostUsedKey(keyword));
+      })
+      .catch((err) => {
+        console.log(err, "에러가 났읍니다.");
+      })
+  }
+};
+
+  // 인기검색어 조회
+export const getMostUsedKeyDB = () => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .get('/api/home/mostUsedKey')
+      .then((res) => {
+        // console.log(res);
+        dispatch(getMostUsedKey(res.data.mostUsedKey));
+      })
+      .catch((err) => {
+        console.log(err, "에러가 났읍니다.")
+      })
+  }
+};
 
 
 // initial State 
@@ -49,6 +84,8 @@ const initialState = {
   export_list: [],
   paging: { start: 0, end: 20, next: true},
   is_loading: false,
+  // 인기검색어
+  most: []
 }
 
 // redux
@@ -125,11 +162,31 @@ const search = createSlice({
     // 상세페이지 조회
     getDetail : (state, action) => {
       state.detail = action.payload;
+    },
+
+
+    // 인기검색어 get
+    getMostUsedKey : (state, action) => {
+      state.most = action.payload;
+    },
+
+    // 인기검색어 추가
+    addMostUsedKey : (state, action) => {
+      let index = state.most.findIndex((most) => most.keyword === action.payload);
+      if (index === -1) {
+        state.most.push({keyword: action.payload, times: 1});
+      } else {
+        state.most[index].times += 1;
+      }
+      const desMost = state.most.sort((a, b) => {
+        return b.times - a.times;
+      });
+      state.most = desMost;
     }
 
   }
 });
 
-export const {searchKeyword, rangeFilter, ascendingSort, descendingSort, koreanSort, exactSort, getScrollData, getDetail} = search.actions;
+export const {searchKeyword, getMostUsedKey, addMostUsedKey, rangeFilter, ascendingSort, descendingSort, koreanSort, exactSort, getScrollData, getDetail} = search.actions;
 
 export default search;
