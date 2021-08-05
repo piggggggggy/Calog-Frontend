@@ -16,10 +16,12 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
-        const food_list = res.data.record
-        dispatch(getRecord(food_list)) 
+        console.log(res)
+          const food_list = res.data.record
+          dispatch(getRecord(food_list)) 
       })
       .catch((err) => {
+        console.log(err)
         window.alert('기록을 불러오는데 오류가 발생했어요! 관리자에게 문의해주세요😿')
       }) 
   }
@@ -123,7 +125,7 @@ const record = createSlice({
     //ttl kcal
     ttlKcal : (state, action) => {
       state.kcal = action.payload
-    }
+    },
   }
 });
 
