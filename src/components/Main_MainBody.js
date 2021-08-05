@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { useInView } from "react-intersection-observer";
 // modules
-import { searchKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData } from '../redux/modules/search';
+import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData } from '../redux/modules/search';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -13,6 +13,7 @@ import UnderBar from './Main_UnderBar';
 import InfiniteScroll from './Main_InfiniteScroll';
 import CardList from './Main_CardList';
 import FavoList from './Main_FavoList';
+import MostUsedKey from './Main_MostUsedKey';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -53,6 +54,7 @@ const MainBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
+    dispatch(countKeywordDB(keyword));
   };
   // 엔터 검색
   const onKeyPress = (e) => {
@@ -198,6 +200,7 @@ const MainBody = (props) => {
                 
               </div>
             </SearchHistory>
+            <MostUsedKey/>
           </SearchGrid>
   
           {/* {Range Slider // 수정해야함} */}
@@ -266,39 +269,39 @@ const MainBody = (props) => {
 
             <SearchHistory style={styles}>
               <div>
-                <Grid is_flex padding="1.8vh 6vw">
+                <Grid is_flex padding="1.8vh 6%">
                   <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8vw">
+                <Grid is_flex padding="1.3vh 8%">
                   <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
                   <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                     <TiDeleteOutline size="15px" color="#737373"/>
                   </div>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8vw">
+                <Grid is_flex padding="1.3vh 8%">
                   <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
                   <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                     <TiDeleteOutline size="15px" color="#737373"/>
                   </div>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8vw">
+                <Grid is_flex padding="1.3vh 8%">
                   <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
                   <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                     <TiDeleteOutline size="15px" color="#737373"/>
                   </div>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8vw">
+                <Grid is_flex padding="1.3vh 8%">
                   <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
                   <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                     <TiDeleteOutline size="15px" color="#737373"/>
                   </div>
                 </Grid>
                 <Line/>
-                <Grid is_flex padding="1.3vh 8vw">
+                <Grid is_flex padding="1.3vh 8%">
                   <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
                   <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                     <TiDeleteOutline size="15px" color="#737373"/>
@@ -308,6 +311,7 @@ const MainBody = (props) => {
                 
               </div>
             </SearchHistory>
+            <MostUsedKey/>
           </SearchGrid>
   
           {/* {Range Slider // 수정해야함} */}
@@ -399,7 +403,7 @@ const SearchHistory = styled.div`
   display: none;
   width: 100%;
   max-width: 420px;
-  /* height: 200vh; */
+  height: 60vh;
   position: absolute;
   top: 1;
   background: #00000048;
@@ -422,7 +426,7 @@ const SearchHistory = styled.div`
 `;
 
 const Line = styled.div`
-  width: 87vw;
+  width: 87%;
   margin: auto;
   border: 1px solid #FFE899;
 `;

@@ -27,7 +27,6 @@ const FavoList = (props) => {
   useEffect(() => {
     dispatch(getFavoriteDB());
   }, [])
-  console.log(favo_list)
 
   const changeFavo = () => {
     if (moreFavo) {

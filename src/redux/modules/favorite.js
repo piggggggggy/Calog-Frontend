@@ -12,7 +12,7 @@ export const addFavoriteDB = (data) => {
     instance
       .post('/api/favorite/add', {foodId: data.foodId})
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(addFavorite(data));
         window.alert("즐겨찾기 추가!");
       })
@@ -28,10 +28,9 @@ export const deleteFavoriteDB = (foodId) => {
     instance
       .delete('/api/favorite/delete', {foodId: foodId})
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(deleteFavorite(foodId));
         window.alert("즐겨찾기 해제!");
-
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -45,7 +44,7 @@ export const getFavoriteDB = () => {
     instance
       .get('/api/favorite/list')
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(getFavorite(res.data));
       })
       .catch((err) => {
