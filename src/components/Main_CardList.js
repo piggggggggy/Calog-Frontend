@@ -73,12 +73,17 @@ const CardList = (props) => {
     <React.Fragment>
       <CardContainer>
         {search_list.map((result, idx) => {     
+            if (idx < 100) {
+              return <Card key={result.foodId} {...result}/>
+            }                  
+          })}
+        {/* {search_list.map((result, idx) => {     
           if (search_list.length -1 != idx) {
             return <Card key={result.foodId} {...result}/> 
           } else {
             return <Card ref={ref} key={result.foodId} {...result}/> 
           }                  
-        })}
+        })} */}
       </CardContainer>
     </React.Fragment>
   );

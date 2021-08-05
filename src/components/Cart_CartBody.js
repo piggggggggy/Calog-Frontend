@@ -145,8 +145,14 @@ const BodyContainer = styled.div`
 `;
 
 const CartListBox = styled.div`
+  position: relative;
+  width: 100%;
   margin-top: 16px;
   padding-bottom: 14vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
 
 `;
 
