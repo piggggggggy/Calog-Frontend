@@ -1,39 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
-import theme from '../shared/theme';
 //date picker
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
 import '../styles/css/nice_date.css'
 //moment
-import moment from 'moment'
-//날짜 보내기
-import {useDispatch, useSelector} from 'react-redux';
-import {addDate} from '../redux/modules/cart'
+import moment from 'moment';
+//history
+import {history} from '../redux/configStore';
 
 /** 
  * @param {*} props
  * @returns 설명적기
  * @역할 : 현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
- * @필수값 : 오늘 날짜(변경 가능)
+ * @필수값 : 유저가 선택한 날짜(변경 가능)
  * @담당자 : 김나영
 */
 
-const Record_Date = (props) => {
-  const dispatch = useDispatch()
+const CalendarDetail_Date = (props) => {
+
+  const {SelectDate} = props
 
   //날짜
-  const _SelectDate = useSelector((state) => state.cart.date)
-  const Date = moment(_SelectDate).format('M월 D일')
-  const [date, setDate] = React.useState(Date)
-  
+  const Date = moment(SelectDate).format('M월 D일')
+  const [date, setDate] = useState(Date)
 
   const Change = (date) => {
     setDate(moment(date).format('M월 D일'))
-    //백엔드 날짜 data post
-    const chgDateFormat = moment(date).format('YYYY-MM-DD')
-    dispatch(addDate(chgDateFormat))
+    const Format = moment(date).format('YYYY-MM-DD')
+    window.location.replace(`/calendar/${Format}`)
   }
 
   return (
@@ -62,7 +58,7 @@ const Record_Date = (props) => {
   )
 }
 
-Record_Date.defaultProps = {
+CalendarDetail_Date.defaultProps = {
 
 }
 
@@ -74,4 +70,4 @@ const Input = styled.input`
 
 
 
-export default Record_Date;
+export default CalendarDetail_Date;

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Grid, Image, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
 //history
 import {history} from '../redux/configStore';
 //컴포넌트
-import Record_Date from'../components/Record_Date';
+import CalendarDetail_Date from'../components/CalendarDetail_Date';
 import CalendarDetail_Info from '../components/CalendarDetail_Info';
 import Record_When from '../components/Record_When';
 import CalendarDetail_Food from '../components/CalendarDetail_Food';
+//데이터
+import {useDispatch, useSelector} from 'react-redux';
+import {getRecordDB} from '../redux/modules/record';
 
 /** 
  * @param {*} props
@@ -19,9 +22,19 @@ import CalendarDetail_Food from '../components/CalendarDetail_Food';
 */
 
 const CalenderDetail = (props) => {
-// dispatch
-// props
-// useEffect
+  const dispatch = useDispatch()
+
+  //날짜
+  const _SelectDate = history.location.pathname.split('/')
+  const SelectDate = _SelectDate[2]
+
+  //useEffect
+  useEffect(() => {
+    dispatch(getRecordDB(SelectDate))
+  },[])
+
+  //기록
+  const record_list = useSelector((state) => state.record.record[0])
 
   return (
     <React.Fragment>
@@ -38,9 +51,9 @@ const CalenderDetail = (props) => {
           </Grid>
         </Grid>
         {/* 캘린더 */}
-        <Record_Date />
+        <CalendarDetail_Date SelectDate={SelectDate}/>
         {/* 안내 메시지 */}
-        <CalendarDetail_Info />
+        <CalendarDetail_Info {...record_list}/>
         {/* 기록 시기 */}
         <Grid margin="9.7% 0 0 2%" m_margin="9.7% 0 0 2%">
           <Record_When />
