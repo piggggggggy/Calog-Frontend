@@ -29,13 +29,9 @@ const {gender, weight, height, age, control} = bodyInfo;
 const bodyStore = () => {
 
 };
-useEffect(() => {
-  dispatch(LoginCheck());
-  console.log(is_login);
   // dispatch(LoginCheck());
   // dispatch(BodySpectSV("남자", 80, 180, 25));
   // dispatch(BodySpectModify("남자", 75, 180, 25));
-}, []);
 
   if(!is_login){
   return (

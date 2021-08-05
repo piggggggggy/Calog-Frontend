@@ -14,8 +14,6 @@ import theme from './theme';
 import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
-const accessToken = document.cookie.split("=")[1];
-console.log(accessToken);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LoginCheck());
