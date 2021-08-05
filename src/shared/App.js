@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { LoginCheck } from '../redux/modules/user';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail} from '../pages'
 import Nav from './Nav';
 //테마
 import theme from './theme';
@@ -32,6 +32,8 @@ const App = (props) => {
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
+              <Route path="/calendarDate" exact component={CalendarDetail}/>
+              {/* <Route path="/calendar/:date" exact component={CalenderDetail}/> */}
               <Route path="/record" exact component={Record}/>
 
               <Route path="/login" exact component={Login}/>

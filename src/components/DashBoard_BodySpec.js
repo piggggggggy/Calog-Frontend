@@ -88,7 +88,7 @@ const DashBoard_BodySpec = (props) => {
               <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_height}cm</Text>
             </Grid>
             <Grid display={hShow}>
-                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">쉿☝🏻비밀!</Text>
+                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
@@ -111,7 +111,7 @@ const DashBoard_BodySpec = (props) => {
               <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_weight}kg</Text>
             </Grid>
             <Grid display={wShow}>
-                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">쉿☝🏻비밀!</Text>
+                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
@@ -134,7 +134,7 @@ const DashBoard_BodySpec = (props) => {
               <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_bmr}kcal</Text>
             </Grid>
             <Grid display={kShow}>
-                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">쉿☝🏻비밀!</Text>
+                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
