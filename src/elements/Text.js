@@ -1,10 +1,12 @@
 import React from "react";
+import { FaLessThanEqual } from "react-icons/fa";
 import styled from "styled-components";
 import theme from '../shared/theme'
 
 const Text = (props) => {
-    //bold : font-weight / size : font-size / lineheight: line-height
-    const {children, width, bold, color, size, margin, lineheight,
+    // bold : font-weight / size : font-size / lineheight: line-height
+    // to : text-overflow / ws : white-space
+    const {children, width, bold, color, size, margin, lineheight, to, ws, overflow,
         //media
         m_size} = props;
 
@@ -16,6 +18,9 @@ const Text = (props) => {
         size,
         margin,
         lineheight,
+        overflow,
+        to,
+        ws,
         //media
         m_size,
     };
@@ -37,6 +42,9 @@ Text.defaultProps = {
     lineheight: "null",
     //media
     m_size: "1em",
+    overflow: false,
+    to: false,
+    ws: false,
 };
 
 const DefaultText = styled.p`
@@ -46,6 +54,9 @@ const DefaultText = styled.p`
     font-size: ${(props) => props.size};
     margin: ${(props) => props.margin};  
     ${(props) => props.lineheight ? `line-height: ${props.lineheight}` : ''};
+    ${(props) => props.overflow ? `overflow: ${props.overflow}` : ''};
+    ${(props) => props.to ? 'text-overflow: ellipsis' : ''};
+    ${(props) => props.ws ? `white-space: ${props.ws}` : ''};
 
     @media ${theme.device.mobileM} {
         font-size: ${(props) => props.m_size};

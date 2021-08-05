@@ -36,21 +36,7 @@ const MostUsedKey = (props) => {
               </MostButton>
             )
           }
-          
         })}
-        {/* <MostButton>
-          <Text lineheight="12px" m_lineheight="12px" size="10px" m_size="10px" color="#404040" padding="0" margin="0">다이어트</Text>
-        </MostButton>
-        <MostButton>
-          <Text lineheight="12px" m_lineheight="12px" size="10px" m_size="10px" color="#404040" padding="0" margin="0">다이어트</Text>
-        </MostButton>
-        <MostButton>
-          <Text lineheight="12px" m_lineheight="12px" size="10px" m_size="10px" color="#404040" padding="0" margin="0">다이어트</Text>
-        </MostButton>
-        <MostButton>
-          <Text lineheight="12px" m_lineheight="12px" size="10px" m_size="10px" color="#404040" padding="0" margin="0">다이어트</Text>
-        </MostButton> */}
-
       </MostContainer>
     </React.Fragment>
   );
