@@ -17,6 +17,7 @@ export const LoginSV = (user_info) => {
     return function(dispatch, getState, {history}){
         async function loginsv() {
             const res_token = await instance.post('/api/user/login', {email, password});
+            console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
                 url: "https://2k1.shop/api/user/me",
