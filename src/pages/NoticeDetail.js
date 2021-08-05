@@ -22,7 +22,7 @@ const noticeOne = useSelector(state=>state.notice.listone);
 const admin_email = useSelector(state=>state.user.user_info?.email);
 const notidelete = () => {
   dispatch(deleteNotiSV(notiId));
-  history.push("/notice");
+  
 }
 React.useEffect(()=>{
   dispatch(getNotiDetailSV(notiId));
