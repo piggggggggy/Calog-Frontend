@@ -52,8 +52,7 @@ const App = (props) => {
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
-              <Route path="/calendarDate" exact component={CalendarDetail}/>
-              {/* <Route path="/calendar/:date" exact component={CalenderDetail}/> */}
+              <Route path="/calendar/:date" exact component={CalendarDetail}/>
               <Route path="/record" exact component={Record}/>
 
               <Route path="/login" exact component={Login}/>

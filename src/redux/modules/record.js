@@ -73,15 +73,16 @@ export const getAllRecordDB = (monthFormat) => {
 }
 
 //calendar - 특정 일자 기록 불러오기
-export const getRecordDB = () => {
+export const getRecordDB = (date) => {
   return function (dispatch, getState, {history}) {
     instance
-      .get('')
+      .get(`/api/calendar/detail/${date}`)
       .then((res) => {
-        console.log(res)
+        const record_list = res.data.record
+        record_list.length === 0 ? window.alert('기록된 칼로리가 없어요!') : dispatch(getRecord(record_list))
       })
       .catch((err) => {
-        console.log(err)
+        window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }
 }
