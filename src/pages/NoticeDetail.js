@@ -19,6 +19,7 @@ const NotiDetail = (props) => {
 const dispatch = useDispatch();
 const notiId = props.match.params.postid;
 const noticeOne = useSelector(state=>state.notice.listone);
+const admin_email = useSelector(state=>state.user.user_info?.email);
 const notidelete = () => {
   dispatch(deleteNotiSV(notiId));
   history.push("/notice");
@@ -46,10 +47,12 @@ React.useEffect(()=>{
                 <hr color="#F5F5F5"/>
                 <Content>{noticeOne?.contents}</Content>
             </Post>
+            {admin_email==="cadmin@calories.com"?
             <Grid width="25%">
                 <Button bg="#FFE899" border_radius="15px"
                 _onClick={notidelete}>삭제</Button>
             </Grid>
+            :""}
       </Container>
     </React.Fragment>
   );
