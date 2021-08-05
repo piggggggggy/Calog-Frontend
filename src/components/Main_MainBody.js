@@ -33,7 +33,7 @@ const MainBody = (props) => {
 // props  
   const search_list = useSelector((state) => state.search.filtered_list);
   const [keyword, setKey] = useState();
-  // const [history, setHistory] = useState(true);
+  const [history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
   const [sortType, setSort] = useState('정확도순');
@@ -53,6 +53,13 @@ const MainBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
+  };
+  // 엔터 검색
+  const onKeyPress = (e) => {
+    if (e.key == 'Enter') {
+      search();
+      setKey('');
+    }
   };
   // 검색어 삭제
   const deleteKeyword = () => {
@@ -82,13 +89,14 @@ const MainBody = (props) => {
   }, [sortType])
 
   // history on off
-  // const historyOn = () => {
-  //   setHistory(false);
-  // };
-  // const historyOff = () => {
-  //   setHistory(true);
-  // };
-  // const styles = history ? {display: "none"} : {display: "block"};
+  const historyOnoff = () => {
+    if (history) {
+      setHistory(false);
+    } else {
+      setHistory(true);
+    }
+  };
+  const styles = history ? {display: "none"} : {display: "block"};
 
 
 
@@ -102,11 +110,14 @@ const MainBody = (props) => {
     setMin(n);
     setMax(x);
   }, 500);
+  const debounceCB = useCallback((n, x) => {
+    debounce(n,x);
+  })
 
   // range 요청
   const debounceRange = _.debounce((e) => {
     dispatch(rangeFilter(e));
-  });
+  }, 500);
   const debounceRangeCB = useCallback((e) => {
     debounceRange(e);
   }, [filterMin, filterMax]);
@@ -129,8 +140,10 @@ const MainBody = (props) => {
           <SearchGrid>
             <SearchBox>
               <input onChange={(e)=>{keyChange(e)}} value={keyword} 
-              // onFocus={()=>{historyOn()}} onBlur={()=>{historyOff()}} 
-              placeholder="어떤 칼로리가 궁금하신가요?"/>
+              onFocus={()=>{historyOnoff()}} onBlur={()=>{historyOnoff()}} 
+              placeholder="어떤 칼로리가 궁금하신가요?"
+              onKeyPress={onKeyPress}
+              />
               {keyword ? 
               <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
                 <MdCancel size="16px" color="#C4C4C4"/>
@@ -141,7 +154,7 @@ const MainBody = (props) => {
               </div>
             </SearchBox>
   
-            {/* <SearchHistory>
+            <SearchHistory style={styles}>
               <div>
                 <Grid is_flex padding="1.8vh 6vw">
                   <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
@@ -184,7 +197,7 @@ const MainBody = (props) => {
                 <Line/>
                 
               </div>
-            </SearchHistory> */}
+            </SearchHistory>
           </SearchGrid>
   
           {/* {Range Slider // 수정해야함} */}
@@ -193,7 +206,7 @@ const MainBody = (props) => {
               min={0}
               max={5000}
               onChange={({ min, max }) => {
-                debounce(min, max);
+                debounceCB(min, max);
               }}
             />
           </Grid>
@@ -237,8 +250,10 @@ const MainBody = (props) => {
           <SearchGrid>
             <SearchBox>
               <input onChange={(e)=>{keyChange(e)}} value={keyword} 
-              // onFocus={()=>{historyOn()}} onBlur={()=>{historyOff()}} 
-              placeholder="어떤 칼로리가 궁금하신가요?"/>
+              onFocus={()=>{historyOnoff()}} onBlur={()=>{historyOnoff()}} 
+              placeholder="어떤 칼로리가 궁금하신가요?"
+              onKeyPress={onKeyPress}
+              />
               {keyword ? 
               <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
                 <MdCancel size="16px" color="#C4C4C4"/>
@@ -248,6 +263,51 @@ const MainBody = (props) => {
                 <BiSearchAlt2 size="24px" color="#5F5F5F" />
               </div>
             </SearchBox>
+
+            <SearchHistory style={styles}>
+              <div>
+                <Grid is_flex padding="1.8vh 6vw">
+                  <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
+                </Grid>
+                <Line/>
+                <Grid is_flex padding="1.3vh 8vw">
+                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">삼겹살</Text>
+                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <TiDeleteOutline size="15px" color="#737373"/>
+                  </div>
+                </Grid>
+                <Line/>
+                <Grid is_flex padding="1.3vh 8vw">
+                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">우유</Text>
+                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <TiDeleteOutline size="15px" color="#737373"/>
+                  </div>
+                </Grid>
+                <Line/>
+                <Grid is_flex padding="1.3vh 8vw">
+                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고구마</Text>
+                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <TiDeleteOutline size="15px" color="#737373"/>
+                  </div>
+                </Grid>
+                <Line/>
+                <Grid is_flex padding="1.3vh 8vw">
+                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">고등어</Text>
+                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <TiDeleteOutline size="15px" color="#737373"/>
+                  </div>
+                </Grid>
+                <Line/>
+                <Grid is_flex padding="1.3vh 8vw">
+                  <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">토마토</Text>
+                  <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <TiDeleteOutline size="15px" color="#737373"/>
+                  </div>
+                </Grid>
+                <Line/>
+                
+              </div>
+            </SearchHistory>
           </SearchGrid>
   
           {/* {Range Slider // 수정해야함} */}
@@ -283,6 +343,7 @@ MainBody.defaultProps = {
 }
 const HeaderContainer = styled.div`
   max-width: 100%;
+  /* overflow: hidden; */
 `;
 
 const BodyContainer = styled.div`
@@ -337,19 +398,26 @@ const SearchBox = styled.div`
 const SearchHistory = styled.div`
   display: none;
   width: 100%;
-  height: 70vh;
-  /* overflow: hidden; */
+  max-width: 420px;
+  /* height: 200vh; */
   position: absolute;
+  top: 1;
   background: #00000048;
-  z-index: 50;
+  z-index: 200;
+
+  
 
   & > div {
-    width: 100vw;
+    width: 100%;
     height: 35vh;
     overflow: scroll;
     background: #fff;
     border-bottom-left-radius: 28px;
     border-bottom-right-radius: 28px;
+
+    &::-webkit-scrollbar {
+    display: none;
+  }
   }
 `;
 
