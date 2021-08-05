@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -21,7 +21,7 @@ const Calendar_Calendar = (props) => {
   const dispatch = useDispatch()
 
   //날짜
-  const [month, setMonth] = React.useState(moment())
+  const [month, setMonth] = useState(moment())
   //지난달 btn
   const lastMonthBtn = () => {
     setMonth(month.clone().subtract(1, 'month'))
@@ -33,9 +33,10 @@ const Calendar_Calendar = (props) => {
 
   //YYYY-MM 넣어 요청 보내기
   const monthFormat = moment(month._d).format('YYYY-MM')
+
   useEffect(() => {
-    dispatch(getAllRecordDB(monthFormat))
-  },[])
+    dispatch(getAllRecordDB(monthFormat));
+  },[dispatch, monthFormat])
 
   //첫째주
   const firstWeek = month.clone().startOf('month').week();
