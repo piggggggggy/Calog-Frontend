@@ -15,9 +15,11 @@ import { getNoticeSV, putNotiSV } from '../redux/modules/notice';
 
 const Notice = (props) => {
 const dispatch = useDispatch();
-const admin = useSelector((state)=>state.user.user_info.email);
-const notilist = useSelector(state=>state.notice.list)
+const admin = useSelector((state)=>state.user.user_info?.email);
+const notilist = useSelector(state=>state.notice.list);
 console.log(notilist);
+const notilist_reverse =[];
+notilist.map((i)=>{})
 React.useEffect(()=>{
   // dispatch(putNotiSV({title:"ㅇㅇㅇ 제목 수정", contents:"1번 내용 수정",password:"zkffhfltm1@"},"610a5853ec4ceb2aec1cd015"));
   dispatch(getNoticeSV());
@@ -41,7 +43,7 @@ React.useEffect(()=>{
           <PostList>
           {notilist.map((l)=>{
             return(
-              <Post>
+              <Post key={l._id}>
                   <Tag onClick={()=>{history.push(`/notice/${l.id}`)}}>
                   <Text size="17px" lineheight="22px">{l.title}</Text>
                   <Text size="17px" lineheight="22px" color="#A9A9A9">{l.date}</Text>

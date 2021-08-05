@@ -11,7 +11,6 @@ const initialState = {
   nick_dupli: false,
 };
 
-//err 후처리 방법은??
 export const LoginSV = (user_info) => {
     console.log("click LoginDB")
     const {email, password} = user_info
@@ -27,7 +26,10 @@ export const LoginSV = (user_info) => {
             dispatch(SetUser(res_user_info.data.user));
             history.push("/body");
         };
-        loginsv();
+        loginsv()
+        .catch((err)=>{
+            window.alert("이메일 또는 비밀번호가 일치하지 않습니다.")
+        });
     };
 };
 
@@ -132,6 +134,7 @@ export const BodySpectModify = (gender, weight, height, age) => {
         });
     }
 }
+
 //리덕스
 const user = createSlice({
   name: "user",
