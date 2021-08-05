@@ -7,6 +7,7 @@ import { ProfileDefault, Camera, Pen, Go } from '../img/svg';
 import { _logOut } from '../redux/modules/user';
 import {history} from '../redux/configStore';
 import _ from 'lodash';
+import { et } from 'date-fns/locale';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -19,18 +20,21 @@ const BodySpec = (props) => {
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
 const user_info = useSelector(state=>state.user.user_info);
-console.log(user_info?.nickname);
-console.log(is_login);
+
 const logout = () => {
   dispatch(_logOut());
 }
 const [bodyInfo,setBodyInfo] = useState({});
-const {gender, weight, height, age, control} = bodyInfo;
+const {gender, weight, height, age} = bodyInfo;
+const [spec, setSpec] = useState(false);
 const bodyStore = () => {
-
+  dispatch(BodySpectSV(gender, weight, height, age));
+};
+const setBodySpec = () => {
+  spec?setSpec(false):setSpec(true);
+  console.log(spec);
 };
   // dispatch(LoginCheck());
-  // dispatch(BodySpectSV("남자", 80, 180, 25));
   // dispatch(BodySpectModify("남자", 75, 180, 25));
 
   if(!is_login){
@@ -80,10 +84,26 @@ return (
           <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">{user_info?.nickname}</Text>
           <BodyBox>
             <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
-            <Button border_radius="12px" bg="#FFE899" width="348px" height="56px">
+            <Button border_radius="12px" bg="#FFE899" width="348px" height="56px"
+            _onClick={setBodySpec}>
               <Text lineheight="22px" size="16px" bold>신체정보 등록하기</Text>
             </Button>
+
           </BodyBox>
+          {spec?
+            <Grid>
+              <Text>성별</Text>
+              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, gender: e.target.value})}/>
+              <Text>나이</Text>
+              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, age: e.target.value})}/>
+              <Text>키</Text>
+              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, height: e.target.value})}/>
+              <Text>몸무게</Text>
+              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, weight: e.target.value})}/>
+              <Button bg="#FFE899"
+              _onClick={bodyStore}>등록!</Button>
+            </Grid>
+            :""}
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">
             <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
