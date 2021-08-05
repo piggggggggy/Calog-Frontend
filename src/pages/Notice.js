@@ -18,6 +18,8 @@ const dispatch = useDispatch();
 const admin = useSelector((state)=>state.user.user_info?.email);
 const notilist = useSelector(state=>state.notice.list);
 console.log(notilist);
+const notilist_reverse =[];
+notilist.map((i)=>{})
 React.useEffect(()=>{
   // dispatch(putNotiSV({title:"ㅇㅇㅇ 제목 수정", contents:"1번 내용 수정",password:"zkffhfltm1@"},"610a5853ec4ceb2aec1cd015"));
   dispatch(getNoticeSV());
