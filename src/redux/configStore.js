@@ -35,8 +35,7 @@ if (env === "development") {
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["cart"]
-  // blacklist: ["cart"]
+  whitelist: ["cart", "record"],
 };
 
 const reducer = combineReducers({

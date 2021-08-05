@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
-
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -18,9 +17,8 @@ const DashBoard_BodySpec = (props) => {
   const user_height = height
   //몸무게
   const user_weight = weight
-  //가장 최신에 기록된 bmr
-  const idx = (bmr.length)-1
-  const user_bmr = bmr[idx]?.bmr
+  //bmr
+  const user_bmr = bmr
 
   //키 onoff
   const [heightShow, setHeightShow] = useState({
@@ -171,6 +169,7 @@ const Wrap = styled.div`
   background-color: white;
   border-radius: 20px;
   margin: 5% auto 0 auto;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.05));
 `;
 
 export default DashBoard_BodySpec;
