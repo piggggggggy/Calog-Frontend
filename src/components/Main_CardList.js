@@ -9,8 +9,8 @@ import Card from './Main_Card';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @필수값 검색 결과 search_list
+ * @담당자 : 박용태
 */
 
 const CardList = (props) => {
@@ -18,56 +18,6 @@ const CardList = (props) => {
   const dispatch = useDispatch();
 // props
   const search_list = props.search_list;
-
-  // 무한스크롤 용
-//   const [items, setItems] = useState([]);
-//   const [page, setPage] = useState({
-//     start: 0,
-//     end: 20,
-//     next: false
-//   });
-//   const [loading, setLoading] = useState(false);
-
-//   const [ref, inView] = useInView();
-// // useEffect
-
-//   // 무한스크롤
-
-//   const sliceItems = useCallback(() => {
-//     // setLoading(true)
-//     let result = search_list.slice(page.start, page.end);
-//     if (result.length === 21) {
-//       setPage({
-//         start: page.start + 20,
-//         end: page.end + 20,
-//         next: true
-//       })
-//       result.pop();
-//       setItems([...items, ...result]);
-//     } else {
-//       setItems([...items, ...result]);
-//     };
-//     // setLoading(false)
-//   }, [search_list])
-
-//   // useEffect(() => {
-//   //   sliceItems()
-//   // }, []);
-
-//   useEffect(() => {
-//     if(inView) {
-//       sliceItems()
-//     }
-//   }, [inView]);
-
-//   console.log(items);
-  // console.log(items);
-  // console.log("loading:",loading);
-  // console.log("inView:", inView);
-
-  // if (!search_list) {
-  //   return <></>
-  // }
 
   return (
     <React.Fragment>
@@ -77,13 +27,6 @@ const CardList = (props) => {
               return <Card key={result.foodId} {...result}/>
             }                  
           })}
-        {/* {search_list.map((result, idx) => {     
-          if (search_list.length -1 != idx) {
-            return <Card key={result.foodId} {...result}/> 
-          } else {
-            return <Card ref={ref} key={result.foodId} {...result}/> 
-          }                  
-        })} */}
       </CardContainer>
     </React.Fragment>
   );
@@ -95,11 +38,11 @@ CardList.defaultProps = {
 
 const CardContainer = styled.div`
   width: 100%;
-  padding: 0 6%;
-  /* height: 100%; */
+  /* padding: 0 6%; */
   display: flex;
-  flex-wrap: wrap;
-  column-gap: 4%;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 1.8vh;
 `;
 
 export default CardList;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { useInView } from "react-intersection-observer";
+import theme from '../shared/theme';
 // modules
 import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData } from '../redux/modules/search';
 import { searchRecentDB, getRecentDB, deleteRecentDB } from '../redux/modules/recent';
@@ -26,7 +27,7 @@ import { MdCancel } from 'react-icons/md';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 검색결과 리스트 값 / 
+ * @필수값 search_list, recent_list
  * @담당자 : 박용태
 */
 
@@ -35,21 +36,15 @@ const MainBody = (props) => {
   const dispatch = useDispatch();
 // props  
   const search_list = useSelector((state) => state.search.filtered_list);
-  // const [keyword, setKey] = useState();
   const [history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
   const [sortType, setSort] = useState('정확도순');
   const recent_list = useSelector((state) => state.recent.recent);
   const keyword = useRef();
-  console.log(recent_list);
 // useEffect
-  
-  // 검색 함수!
-  // const keyChange = (e) => {
-  //   setKey(e.target.value)
-  // };
-  
+
+  // 검색함수
   const search = () => {
     const data = {
       keyword: keyword.current.value,
@@ -59,6 +54,7 @@ const MainBody = (props) => {
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
     dispatch(searchRecentDB(keyword.current.value));
+    setHistory(true);
   };
   // 엔터 검색
   const onKeyPress = (e) => {
@@ -93,14 +89,7 @@ const MainBody = (props) => {
     }
   }, [sortType])
 
-  // history on off
-  const historyOnoff = useCallback(() => {
-    if (history) {
-      setHistory(false);
-    } else {
-      setHistory(true);
-    }
-  }, [history]);
+  // history tab 관리
   const styles = history ? {display: "none"} : {display: "block"};
 
 
@@ -135,14 +124,13 @@ const MainBody = (props) => {
       <React.Fragment>
   
         <HeaderContainer>
+
           {/* 검색바 */}
           <SearchGrid>
             <SearchBox>
               <input 
-              // onChange={(e)=>{keyChange(e)}} 
-              // value={keyword} 
               ref={keyword}
-              onFocus={()=>{historyOnoff()}} onBlur={()=>{historyOnoff()}} 
+              onFocus={()=>{setHistory(false)}} onBlur={()=>{setHistory(true)}} 
               placeholder="어떤 칼로리가 궁금하신가요?"
               onKeyPress={onKeyPress}
               />
@@ -158,7 +146,7 @@ const MainBody = (props) => {
   
             <SearchHistory style={styles}>
               <div>
-                <Grid is_flex padding="1.8vh 6%">
+                <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
                   <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
                 </Grid>
                 <Line/>
@@ -167,7 +155,7 @@ const MainBody = (props) => {
                     return (
                       <>
                         <Grid is_flex padding="1.3vh 8%"  key={idx}>
-                          <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
                           <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                             <TiDeleteOutline onClick={()=>{dispatch(deleteRecentDB(rec))}} size="15px" color="#737373"/>
                           </div>
@@ -228,14 +216,17 @@ const MainBody = (props) => {
       <React.Fragment>
   
         <HeaderContainer>
+
+          {/* 배경 */}
+          <TopBack/>
+
           {/* 검색바 */}
           <SearchGrid>
             <SearchBox>
               <input 
-              // onChange={(e)=>{keyChange(e)}} 
-              // value={keyword} 
+
               ref={keyword}
-              onFocus={()=>{historyOnoff()}} onBlur={()=>{historyOnoff()}} 
+              onFocus={()=>{setHistory(false)}} onBlur={()=>{setHistory(true)}}
               placeholder="어떤 칼로리가 궁금하신가요?"
               onKeyPress={onKeyPress}
               />
@@ -251,7 +242,7 @@ const MainBody = (props) => {
 
             <SearchHistory style={styles}>
               <div>
-                <Grid is_flex padding="1.8vh 6%">
+                <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
                   <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
                 </Grid>
                 <Line/>
@@ -259,8 +250,8 @@ const MainBody = (props) => {
                   if (idx < 5) {
                     return (
                       <>
-                        <Grid is_flex padding="1.3vh 8%"  key={idx}>
-                          <Text lineheight="20px" m_lineheight="17px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                        <Grid is_flex padding="1.1vh 8%"  key={idx}>
+                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
                           <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                             <TiDeleteOutline onClick={()=>{dispatch(deleteRecentDB(rec))}} size="15px" color="#737373"/>
                           </div>
@@ -308,11 +299,25 @@ const MainBody = (props) => {
 MainBody.defaultProps = {
 
 }
+
+
+
 const HeaderContainer = styled.div`
   max-width: 100%;
   /* overflow: hidden; */
   /* overflow: hidden; */
   
+`;
+
+const TopBack = styled.div`
+  position: absolute;
+  z-index: -100;
+  width: 100%;
+  max-width: 420px;
+  background-color: ${theme.color.light};
+  height: 26.6vh;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
 `;
 
 const BodyContainer = styled.div`
@@ -327,7 +332,7 @@ const BodyContainer = styled.div`
 `;
 
 const SearchGrid = styled.div`
-  padding: 3% 0;
+  padding: 1vh 0 3% 0;
   width: 100%;
   position: relative;
 `;
@@ -339,6 +344,9 @@ const SearchBox = styled.div`
   padding: 1.3vh 25px;
   margin: auto;
   border-radius: 31px;
+  background: #ffffff;
+  position: relative;
+  z-index: 200;
 
   & > input {
     display: block;
@@ -349,6 +357,12 @@ const SearchBox = styled.div`
     border: none;
     outline: none;
     line-height: 18px;
+    position: relative;
+    z-index: 200;
+
+    @media ${theme.device.mobileMini} {
+      font-size: 13px;
+    }
   }
 
   & > div {
@@ -361,29 +375,35 @@ const SearchBox = styled.div`
     cursor: pointer;
     right: 1.4%;
     top: 0.5vh;
+    z-index: 210;
   }
 `;
-
+// 8.8
 const SearchHistory = styled.div`
   display: none;
   width: 100%;
   max-width: 420px;
-  height: 67vh;
-  position: absolute;
-  top: 1;
+  height: 80vh;
+  position: fixed;
+  top: calc(11.1vh + 7.5px);
   background: #00000048;
-  z-index: 200;
+  z-index: 180;
   overflow: hidden;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+
+  @media ${theme.device.mobileMini} {
+    top: calc(11.1vh + 6.5px);
+  }
 
   
 
   & > div {
     width: 100%;
     height: 35vh;
-    overflow: scroll;
+    /* overflow: scroll; */
     background: #fff;
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
+    border-radius: 28px;
 
     &::-webkit-scrollbar {
       display: none;

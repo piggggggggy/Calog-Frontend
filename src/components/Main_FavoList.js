@@ -25,8 +25,10 @@ const FavoList = (props) => {
   const [moreFavo, setFavo] = useState(false);
 // useEffect
   useEffect(() => {
-    dispatch(getFavoriteDB());
-  }, [])
+    if(is_login) {
+      dispatch(getFavoriteDB());
+    }
+  }, [is_login])
 
   const changeFavo = () => {
     if (moreFavo) {
@@ -65,7 +67,6 @@ FavoList.defaultProps = {
 const CardContainer = styled.div`
   width: 100%;
   padding: 0 6%;
-  /* height: 100%; */
   display: flex;
   flex-wrap: wrap;
   column-gap: 4%;
@@ -74,7 +75,6 @@ const CardContainer = styled.div`
 const MoreBtn = styled.div`
   width: 100%;
   height: 4vh;
-  /* margin: 1.9vh 0; */
   padding: 1.1vh 6%;
   background: rgba(196, 196, 196, 0.19);
   display: flex;

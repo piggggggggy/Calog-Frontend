@@ -28,7 +28,7 @@ import instance from "./instance";
           console.log(res);
           dispatch(addRecent(keyword));
         })
-        .catch((err) => {
+        .catch((err) => {  
           console.log(err, "에러가 났읍니다.");
         })
     }

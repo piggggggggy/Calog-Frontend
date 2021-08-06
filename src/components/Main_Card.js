@@ -16,7 +16,7 @@ import { AiOutlinePlusCircle, AiFillPlusCircle } from 'react-icons/ai';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
+ * @필수값 favorite_list, is_logtin
  * @담당자 : 박용태
 */
 
@@ -106,13 +106,17 @@ const Card = (props) => {
           <IoStar style={is_favorite()} size="21px" onClick={addFavorite}/>
         </BookmarkBox>
 
+        <div >
+          <Text size="15px" m_size="13px" lineheight="18px" m_lineheight="15px" margin="0" padding="0">{props.name}</Text>
+        </div>
+        <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
+          <Text size="17px" m_size="15px" lineheight="22px" m_lineheight="20px" bold margin="0" padding="0">{props.kcal} kcal</Text>
+        </div>
+
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
           <AiOutlinePlusCircle size="17px"/>
         </CartBox>
 
-        <Text size="13px" m_size="13px" lineheight="18px" m_lineheight="15px" margin="0" padding="0">{props.name}</Text>
-        <Text size="22px" m_size="20px" lineheight="24px" m_lineheight="22px" bold margin="0" padding="0">{props.kcal} kcal</Text>
-        
       </FoodCard>
 
     </React.Fragment>
@@ -125,39 +129,39 @@ Card.defaultProps = {
 
 const FoodCard = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width: 48%;
-  height: 12.5vh;
-  min-height: 98px;
-  padding: 5.2vh 6% 1.7vh 6%;
+  display: grid;
+  grid-template-columns: 10% 52% 26% 12%;
+  width: 87%;
+  height: 6.4vh;
   margin-bottom: 16px;
   border: 1px solid #F19F13;
-  border-radius: 28px;
-  box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.14);
-  /* cursor: pointer; */
-  z-index: 5;
+  border-radius: 16px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+
+  & > div {
+    /* display: flex;
+    align-items: center; */
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 `;
 
 const BookmarkBox = styled.div`
-  position: absolute;
-  z-index: 10;
-  right: 2vh;
-  top: 1.3vh;
-  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  z-index: 10;
 `;
 
 const CartBox = styled.div`
-  position: absolute;
-  z-index: 10;
-  left: 2vh;
-  top: 1.5vh;
-  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  z-index: 10;
 `;
 
 

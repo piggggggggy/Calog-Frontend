@@ -10,8 +10,8 @@ import { getMostUsedKeyDB, searchKeywordDB } from '../redux/modules/search';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @필수값 most_list
+ * @담당자 : 박용태
 */
 
 const MostUsedKey = (props) => {
@@ -71,7 +71,7 @@ const MostButton = styled.div`
   padding: 2px 4px;
   border: none;
   border-radius: 12.5px;
-  background: #FFE899;
+  background: rgba(255, 255, 255, 0.53);;
   display: flex;
   justify-content: center;
   align-items: center;
