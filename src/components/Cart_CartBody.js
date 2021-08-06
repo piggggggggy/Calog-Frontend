@@ -119,7 +119,9 @@ const CartBody = (props) => {
         </CartListBox>
 
         <CalcBox>
-          <div onClick={()=>{write()}}>기록하러가기</div>
+          <div onClick={()=>{write()}}>
+            <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
+          </div>
         </CalcBox>
 
       </BodyContainer>
@@ -137,11 +139,21 @@ const BodyContainer = styled.div`
   max-height: 80vh;
   overflow: scroll;
   /* padding: 0 25px; */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CartListBox = styled.div`
+  position: relative;
+  width: 100%;
   margin-top: 16px;
   padding-bottom: 14vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+
 `;
 
 const CalcBox = styled.div`

@@ -9,6 +9,8 @@ import Calendar_Emoji from './Calendar_Emoji';
 //db
 import {useDispatch} from 'react-redux'
 import {getAllRecordDB} from '../redux/modules/record';
+//history
+import {history} from '../redux/configStore';
 
 /** 
  * @param {*} props
@@ -52,10 +54,15 @@ const Calendar_Calendar = (props) => {
           {
             Array(7).fill(0).map((d, idx) => {
               let days = month.clone().startOf('year').week(week).startOf('week').add(idx, 'day');
+              //캘린더 상세 페이지 이동 버튼
+              let date_format = days.format('YYYY-MM-DD')
+              const detailBtn = () => {
+                history.push(`/calendar/${date_format}`)
+              }
               //오늘 날짜일 경우
               if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
                 return(
-                  <td key={idx} style={{padding:'0px'}}>
+                  <td key={idx} style={{padding:'0px'}} onClick={detailBtn}>
                     <Today>
                       <span>{days.format('D')}</span>
                     </Today>
@@ -72,7 +79,7 @@ const Calendar_Calendar = (props) => {
                 //그 외 날짜
               } else {
                 return(
-                  <td key={idx} style={{padding:'0px'}}>
+                  <td key={idx} style={{padding:'0px'}} onClick={detailBtn}>
                     <NotToday>
                       <span>{days.format('D')}</span>
                     </NotToday>

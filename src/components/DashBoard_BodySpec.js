@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
-
 /** 
  * @param {*} props
  * @returns 설명적기
  * @역할 : dashboard 바디스펙 표출 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
+ * @필수값 : 유저의 바디스펙(키, 몸무게, bmr)
  * @담당자 : 김나영
 */
 
 const DashBoard_BodySpec = (props) => {
-// dispatch
-// props
-// useEffect
+
+  const {height, weight, bmr} = props
+
+  //키
+  const user_height = height
+  //몸무게
+  const user_weight = weight
+  //bmr
+  const user_bmr = bmr
 
   //키 onoff
   const [heightShow, setHeightShow] = useState({
@@ -79,11 +84,11 @@ const DashBoard_BodySpec = (props) => {
           {/* 키 */}
           <Grid>
             <Text size="12px" m_size="11px">키</Text>
-            <Grid display={hHide} m_margin="10% 0 0 0">
-              <Text size="13px" bold margin="7% 0 0 0" m_size="12px">180cm</Text>
+            <Grid display={hHide} m_margin="11% 0 0 0">
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_height}cm</Text>
             </Grid>
             <Grid display={hShow}>
-                <Text size="13px" bold margin="7% 0 0 0" m_size="12px">쉿☝🏻비밀!</Text>
+                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
@@ -102,11 +107,11 @@ const DashBoard_BodySpec = (props) => {
           {/* 몸무게 */}
           <Grid>
             <Text size="12px" m_size="11px">몸무게</Text>
-            <Grid display={wHide} m_margin="10% 0 0 0">
-              <Text size="13px" bold margin="7% 0 0 0" m_size="12px">80kg</Text>
+            <Grid display={wHide} m_margin="11% 0 0 0">
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_weight}kg</Text>
             </Grid>
             <Grid display={wShow}>
-                <Text size="13px" bold margin="7% 0 0 0" m_size="12px">쉿☝🏻비밀!</Text>
+                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
@@ -125,11 +130,11 @@ const DashBoard_BodySpec = (props) => {
           {/* 기초대사량 */}
           <Grid>
             <Text size="12px" m_size="11px">기초대사량</Text>
-            <Grid display={kHide} m_margin="10% 0 0 0">
-              <Text size="13px" bold margin="7% 0 0 0" m_size="12px">1700kcal</Text>
+            <Grid display={kHide} m_margin="11% 0 0 0">
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_bmr}kcal</Text>
             </Grid>
             <Grid display={kShow}>
-                <Text size="13px" bold margin="7% 0 0 0" m_size="12px">쉿☝🏻비밀!</Text>
+                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
@@ -152,6 +157,9 @@ const DashBoard_BodySpec = (props) => {
 }
 
 DashBoard_BodySpec.defaultProps = {
+  "height" : 180,
+  "weight" : 80,
+  "bmr" : 1619,
 
 }
 
@@ -161,6 +169,7 @@ const Wrap = styled.div`
   background-color: white;
   border-radius: 20px;
   margin: 5% auto 0 auto;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.05));
 `;
 
 export default DashBoard_BodySpec;

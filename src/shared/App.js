@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 // 로그인 상태 전역 유지
@@ -6,19 +6,39 @@ import { useDispatch } from 'react-redux';
 import { LoginCheck } from '../redux/modules/user';
 //라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail} from '../pages'
 import Nav from './Nav';
 //테마
 import theme from './theme';
 //lazy loading
 import LazyLoad from 'react-lazyload';
+// modules
+import { delCartAll } from '../redux/modules/cart';
+import { delRecentAll } from '../redux/modules/recent';
 
 const App = (props) => {
+  // dispatch
   const dispatch = useDispatch();
+  // login check
   useEffect(() => {
     dispatch(LoginCheck());
   }, []);
+
+  // 윈도우 종료 이벤트 (local 날리기)
+  const deletePersist = () => {
+    dispatch(delCartAll());
+    dispatch(delRecentAll());
+  };
+
+  const deletePersisitCB = useCallback(() => {
+    deletePersist();
+  }, [])
+  // window.addEventListener('beforeunload', ()=>{window.alert("종료")});
+  useEffect(() => {
+    window.onbeforeunload = () => {window.alert('종료')};
+  }, [])
   
+
   return (
     <React.Fragment>
       <LazyLoad>
@@ -32,6 +52,7 @@ const App = (props) => {
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
+              <Route path="/calendar/:date" exact component={CalendarDetail}/>
               <Route path="/record" exact component={Record}/>
 
               <Route path="/login" exact component={Login}/>

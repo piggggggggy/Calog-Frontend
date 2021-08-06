@@ -10,30 +10,19 @@ import instance from "./instance";
 import axios from 'axios'
 
 // middleware 
-//dashboard - db에서 바디스펙 가져오기
-export const getBodySpecDB = () => {
-  return function (dispatch, getState, {history}) {
-    instance
-      .get('')
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      }) 
-  }
-};
-
-//dashboard - db에서 오늘의 칼로리 가져오기
+//dashboard - db에서 오늘의 칼로리 리스트 가져오기
 export const getTodayRecordDB = () => {
   return function (dispatch, getState, {history}) {
     instance
-      .get('')
+      .get('/api/calendar/dash')
       .then((res) => {
         console.log(res)
+          const food_list = res.data.record
+          dispatch(getRecord(food_list)) 
       })
       .catch((err) => {
         console.log(err)
+        window.alert('기록을 불러오는데 오류가 발생했어요! 관리자에게 문의해주세요😿')
       }) 
   }
 };
@@ -84,15 +73,16 @@ export const getAllRecordDB = (monthFormat) => {
 }
 
 //calendar - 특정 일자 기록 불러오기
-export const getRecordDB = () => {
+export const getRecordDB = (date) => {
   return function (dispatch, getState, {history}) {
     instance
-      .get('')
+      .get(`/api/calendar/detail/${date}`)
       .then((res) => {
-        console.log(res)
+        const record_list = res.data.record
+        record_list.length === 0 ? window.alert('기록된 칼로리가 없어요!') : dispatch(getRecord(record_list))
       })
       .catch((err) => {
-        console.log(err)
+        window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }
 }
@@ -100,14 +90,16 @@ export const getRecordDB = () => {
 
 // initial State 
 const initialState = {
-  //바디스펙
-  body : [],
-  //칼로리 기록
+  //하루 칼로리 리스트(dashboard, calendar_detail)
   record: [],
-  //추천 운동 리스트
+  //추천 운동 리스트(dashboard)
   workout: [],
-  //캘린더 전체 목록
+  //한 달 캘린더(calendar)
   calendar: [],
+  //type
+  type: [],
+  //kcal
+  kcal: [],
 }
 
 // redux
@@ -115,25 +107,29 @@ const record = createSlice({
   name: "record",
   initialState,
   reducers: {
-    //dashboard_바디스펙 정보 가져오기
-    getBodySpec : (state, action) => {
-
-    },
-    //dashboard_기록 칼로리 가져오기
+    //dashboard&calendar - 하루 기록 칼로리 리스트 가져오기
     getRecord : (state, action) => {
-
+      state.record = action.payload
     },
-    //dashboard_운동 리스트 가져오기
+    //dashboard - 운동 리스트 가져오기
     getWorkout : (state, action) => {
 
     },
-    //calendar_한 달 칼로리 가져오기
+    //calendar - 한 달 칼로리 가져오기
     getAllRecord : (state, action) => {
       state.calendar = action.payload
+    },
+    //type chk
+    typeChk : (state, action) => {
+      state.type = action.payload
+    },
+    //ttl kcal
+    ttlKcal : (state, action) => {
+      state.kcal = action.payload
     },
   }
 });
 
-export const {getBodySpec, getRecord, getWorkout, getAllRecord} = record.actions;
+export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal} = record.actions;
 
 export default record;

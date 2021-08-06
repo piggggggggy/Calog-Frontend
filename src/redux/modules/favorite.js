@@ -10,9 +10,11 @@ import instance from "./instance";
 export const addFavoriteDB = (data) => {
   return function (dispatch, getState, {history}) {
     instance
-      .post('/api/home/favorite/add', {foodId: data.foodId})
+      .post('/api/favorite/add', {foodId: data.foodId})
       .then((res) => {
-        console.log(res)
+        // console.log(res);
+        dispatch(addFavorite(data));
+        window.alert("즐겨찾기 추가!");
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -24,9 +26,11 @@ export const addFavoriteDB = (data) => {
 export const deleteFavoriteDB = (foodId) => {
   return function (dispatch, getState, {history}) {
     instance
-      .delete('/api/home/favorite/delete', {foodId: foodId})
+      .delete('/api/favorite/delete', {foodId: foodId})
       .then((res) => {
-        console.log(res)
+        // console.log(res);
+        dispatch(deleteFavorite(foodId));
+        window.alert("즐겨찾기 해제!");
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -38,9 +42,10 @@ export const deleteFavoriteDB = (foodId) => {
 export const getFavoriteDB = () => {
   return function (dispatch, getState, {history}) {
     instance
-      .get('/api/home/favorite/list')
+      .get('/api/favorite/list')
       .then((res) => {
-        console.log(res)
+        // console.log(res);
+        dispatch(getFavorite(res.data));
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")

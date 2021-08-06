@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // elements & components
@@ -7,7 +7,8 @@ import { Text } from '../elements';
 import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
 // modules
 import { setUpAmount, setDownAmount } from '../redux/modules/cart';
-
+// theme
+import theme from '../shared/theme'
 
 /** 
  * @param {*} props
@@ -22,6 +23,8 @@ const Card = (props) => {
   const dispatch = useDispatch();
 // props
   const [count, setCount] = useState(props.amount);
+  const [left, setLeft] = useState(false);
+  // const swipe = useRef();
 // useEffect
 
   // 갯수 카운팅하기!
@@ -37,17 +40,28 @@ const Card = (props) => {
     }
   };
 
+  // swipe
+  const handleSwipe = (e) => {
+    // e.preventDefault();
+    // e.stopPropagation();
+    setLeft(true);
+  };
+
+  const styles = left ? {left: "-300"} : {left: "0"}
+
   return (
     <React.Fragment>
-        <FoodCard>
-          <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" margin="0" padding="0">{props.name}</Text>
-          <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">{props.kcal} kcal</Text>
-          <CountBox>
-            <div onClick={downCount}><IoIosArrowDropleft color="gray" size="27px"/></div>
-            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" margin="0" padding="0">{count}</Text>
-            <div onClick={upCount}><IoIosArrowDropright color="gray" size="27px"/></div>
-          </CountBox>
-        </FoodCard>
+      <CardContainer>
+        <FoodCard style={{left: "-300"}} onClick={handleSwipe}>
+            <NameBox>{props.name}</NameBox>
+            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">{props.kcal} kcal</Text>
+            <CountBox>
+              <div onClick={downCount}><IoIosArrowDropleft color="gray" size="27px"/></div>
+              <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" margin="0" padding="0">{count}</Text>
+              <div onClick={upCount}><IoIosArrowDropright color="gray" size="27px"/></div>
+            </CountBox>
+          </FoodCard>
+      </CardContainer>
     </React.Fragment>
   );
 }
@@ -55,18 +69,43 @@ const Card = (props) => {
 Card.defaultProps = {
 
 }
+const CardContainer = styled.div`
+  position: relative;
+  min-width: 88%;
+  height: calc(4.4vh + 58px);
+
+  @media ${theme.device.mobileM} {
+    height: calc(4.4vh + 53px);
+  }
+`;
 
 const FoodCard = styled.div`
-  position: relative;
-  /* display: flex; */
-  width: calc(100% - 50px);
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 8px;
+  position: absolute;
+  min-width: 100%;
+  /* left: 40%; */
+  top: 0px;
   padding: 2.2vh 7.6%;
   background: #fff;
   border: 1px solid #F19F13;
   border-radius: 16px;
+  cursor: pointer;
+`;
+
+const NameBox = styled.div`
+  max-width: 200px; 
+  line-height: 22px;
+  size: 17px; 
+  font-size: 15px; 
+  margin: 0; 
+  padding: 0;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap; 
+
+  @media ${theme.device.mobileM} {
+    line-height: 20px; 
+    font-size: 15px; 
+  }
 `;
 
 const CountBox = styled.div`
