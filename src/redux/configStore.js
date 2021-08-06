@@ -37,7 +37,7 @@ if (env === "development") {
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  whitelist: ["cart", "recent"]
+  whitelist: ["cart", "recent", "record"]
 };
 
 // const persistConfigSession = {

@@ -38,7 +38,6 @@ const App = (props) => {
     window.onbeforeunload = () => {window.alert('종료')};
   }, [])
   
-
   return (
     <React.Fragment>
       <LazyLoad>

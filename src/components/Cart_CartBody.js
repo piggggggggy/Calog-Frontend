@@ -24,6 +24,7 @@ const CartBody = (props) => {
   const dispatch = useDispatch();
 // props
   const cart_list = useSelector((state) => state.cart.cart);
+  const is_login = useSelector((state) => state.user.is_login);
   const [type, setType] = useState("아침");
 // useEffect
 
@@ -53,8 +54,13 @@ const CartBody = (props) => {
 
   // 기록하기
   const write = () => {
-    dispatch(cartOut(type));
-    history.push('/record');
+    if(is_login) {
+      dispatch(cartOut(type));
+      history.push('/record');
+    } else {
+      let result = window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')
+      result ? history.push('/signsocial') : history.goBack('/');
+    }
   };
 
   return (
