@@ -98,7 +98,7 @@ const dispatch = useDispatch();
     <React.Fragment>
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
         
-        <div style={{textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+        <div>
           <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</Text>
         </div>
         
@@ -141,7 +141,7 @@ const FoodCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
+    
   }
 `;
 

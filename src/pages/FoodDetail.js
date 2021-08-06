@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 // elements & components
@@ -7,6 +7,8 @@ import { Grid, Text } from '../elements';
 import UnderBar from '../components/Main_UnderBar';
 // icons
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { IoStar } from 'react-icons/io5';
+import { BsFillPlusSquareFill } from 'react-icons/bs';
 // modules
 import { addCartRx } from '../redux/modules/cart';
 import { getDetailDB } from '../redux/modules/search';
@@ -23,12 +25,16 @@ const FoodDetail = (props) => {
   const dispatch = useDispatch();
 // props
   const foodInfo = useSelector((state) => state.search.detail);
+  const record = useSelector((state) => state.record.record);
   const foodId = props.match.params.foodId;
+
+  const bmr = record[0]?.bmr;
+  const foodRecord = record[0]?.foodRecords;
 // useEffect
   useEffect(() => {
     dispatch(getDetailDB(foodId))
   }, [])
-  console.log(foodInfo)
+  // console.log(foodInfo)
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
@@ -47,17 +53,33 @@ const FoodDetail = (props) => {
     dispatch(addCartRx(cartUnit));
   };
 
+  // 현재 남은(초과한) 칼로리 계산
+  const totalKcal = () => {
+    let result = 0
+    foodRecord.map((f, idx) => {
+      result += parseInt(f.amount) * f.resultKcal;
+    });
+    return result;
+  };
+
+  const is_over = () => {
+    if (bmr === totalKcal()) {
+      return "line";
+    } else if (bmr > totalKcal()) {
+      return "under";
+    } else if (bmr < totalKcal()) {
+      return "over";
+    }
+  };
+
+  
   return (
     <React.Fragment>
       <BtnHeader title="칼로리 상세"/>
 
       <BodyContainer>
         
-        <Grid margin="2.7vh 0" m_margin="2.7vh 0" padding= "0 7.6%">
-          <div><AiOutlinePlusCircle onClick={addCart} style={{cursor: "pointer"}} size="26px"/></div>
-        </Grid>
-        
-        <Grid is_flex padding= "0 7.6%">
+        <Grid padding= "1.7vh 7.6% 0 7.6%">
           <Grid>
             <Grid display="flex">
               <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</Text>
@@ -65,14 +87,22 @@ const FoodDetail = (props) => {
             </Grid>  
             <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6% 0" paddig="0">{foodInfo.kcal} kcal</Text>
           </Grid>
-          <Grid width="50%" display="flex" fd="column" jc="center" fw="wrap">
-            <Text size="17px" m_size="15px" color="#EC6262" padding="0" margin="0">오늘의 기준치</Text>
-            <Text size="17px" m_size="15px" color="#EC6262" bold padding="0" margin="0">100 kcal <span style={{fontWeight: "400"}}>를</span></Text>
-            <Text size="17px" m_size="15px" color="#EC6262" padding="0" margin="0">초과해요!</Text>
+          <Grid margin="1vh 0" m_margin="1vh 0">
+            <Text lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color="#EC6262" padding="0" margin="0">
+              {is_over() === "line" ? 
+              "현재까지 오늘의 기준치를 모두 채웠어요!" 
+              : is_over() === "over" ? 
+              `현재까지 기준치 ${totalKcal()-bmr} kcal 초과했어요!` 
+              : `아직 기준치까지 ${bmr-totalKcal()} kcal 남았어요!`}
+            </Text>
           </Grid>
         </Grid>
 
-        <Grid margin="7vh 0 0 0" m_margin="7vh 0 0 0" padding= "0 7.6%">
+        <Grid margin="1.7vh 0" m_margin="1.7vh 0" padding= "0 7.6%">
+          <div><BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/></div>
+        </Grid>
+
+        <Grid padding= "0 7.6%">
           <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
         </Grid>
         
