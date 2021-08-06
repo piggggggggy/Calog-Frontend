@@ -2,7 +2,7 @@
 // @담당자 : 김나영
 
 import { createSlice } from "@reduxjs/toolkit";
-//카트 삭제 액션
+//추가 액션
 import {delCartAll} from './cart';
 //전역 > 서버 배포
 import instance from "./instance";
@@ -16,7 +16,7 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
-        console.log(res)
+          console.log(res)
           const food_list = res.data.record
           dispatch(getRecord(food_list)) 
       })
@@ -127,9 +127,18 @@ const record = createSlice({
     ttlKcal : (state, action) => {
       state.kcal = action.payload
     },
+
+    // persist 기록 삭제하기
+    delRecord : (state, action) => {
+      state.record = []
+      state.workout = []
+      state.calendar = []
+      state.type = []
+      state.kcal = []
+    }
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal} = record.actions;
+export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, delRecord} = record.actions;
 
 export default record;
