@@ -89,17 +89,43 @@ const DashBoard = (props) => {
               </React.Fragment>
             )}
 
-            {/* 로그인 유저 - 초과해서 먹었을 경우 컬러 다르게 */}
+            {/* 로그인 유저 */}
             {is_login && (
               <React.Fragment>
-                {over_bmr ?
+
+                {/* case1) 초과해서 먹었을 경우 컬러 다르게 */}
+                {(over_bmr && bmr !== 0) ?
                   <Text size="22px" bold m_size="20px" color={'#E24444'}>{user.nickname}님!</Text> :
                   <Text size="22px" bold m_size="20px">{user.nickname}님!</Text>
                 }
+
+                {/* case2) 기록된 리스트가 없을 때 */}
                 {record?.length === 0 && <Text size="22px" bold m_size="20px">아직<br/>입력된 식단이 없어요🧐</Text>}
-                {(good && bmr !== 0) && <Text size="22px" bold m_size="20px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
-                {(record?.length !== 0 && extra_bmr) && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
-                {over_bmr && <Text size="22px" bold m_size="20px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
+
+                {/* case3) 기록된 리스트가 있을 때 */}
+                {record?.length !== 0 && (
+                  <React.Fragment>
+
+                    {/* case3-1) bmr 값이 있을 때 */}
+                      {bmr !== 0 ? (
+                        <React.Fragment>
+
+                          {/* case3-1-1) good일 때 */}
+                          {good  && <Text size="22px" bold m_size="20px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
+
+                          {/* case3-1-2) bad(over)일 때 */}
+                          {over_bmr && <Text size="22px" bold m_size="20px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
+
+                          {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
+                          {extra_bmr && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
+                        </React.Fragment>
+                      ) : (
+
+                        // case3-2) bmr 값이 없을 때
+                        <Text size="22px" bold m_size="20px">입력된 <br/>기초 대사량이 없어요🧐</Text>
+                      )}
+                  </React.Fragment>
+                )}
               </React.Fragment>
             )}
 
