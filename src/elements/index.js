@@ -1,4 +1,4 @@
-//elements
+// elements
 import Grid from "./Grid";
 import Button from "./Button";
 import Image from "./Image";

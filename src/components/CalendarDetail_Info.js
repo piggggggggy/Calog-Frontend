@@ -6,29 +6,34 @@ import theme from '../shared/theme';
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @역할 기록된 칼로리 양과 기초대사량을 비교하여 안내 메시지 컴포넌트
  * @필수값 : bmr, contents, foodRecords, totalCalories
  * @담당자 : 김나영
 */
 
 const CalenderDetail_Info = (props) => {
+  const {bmr, totalCalories} = props;
 
-  const {bmr, totalCalories} = props
+  // +,- 10%
+  const ten = bmr*0.1;
 
-  const ten = bmr*0.1
-  const twenty = bmr*0.2
+  // +,- 20%
+  const twenty = bmr*0.2;
 
-  //case 1-1-1) '잘 먹었어요'의 기준(bmr+-10)
+  //case 1) '잘 먹었어요'의 기준(bmr+-10)
   const good = ((bmr-ten) <= totalCalories) && (totalCalories <= (bmr+ten))
-  //case 1-1-2) '적당히 먹었어요'의 기준(bmr+-20)
+
+  //case 2) '적당히 먹었어요'의 기준(bmr+-20)
   const well = ((bmr-twenty) <= totalCalories && totalCalories < (bmr-ten)) || ((bmr+ten) < totalCalories && totalCalories <= (bmr+twenty))
-  //case 1-1-3) '너무 적게 또는 많이 먹었어요'의 기준(over)
+
+  //case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
   const bad = totalCalories < (bmr-twenty) || (bmr+twenty) < totalCalories
 
   //차이
   const _extra = Math.abs(bmr-totalCalories)
   const extra = Math.round(_extra)
 
+  // case 2) 적당히 먹었어요
   if(well) {
     return(
       <React.Fragment>
@@ -53,7 +58,10 @@ const CalenderDetail_Info = (props) => {
     )
   }
 
+  // case3)
   if(bad) {
+
+    // case3-1) 너무 적게 먹었을 경우
     if (bmr > totalCalories) {
       return(
       <React.Fragment>
@@ -77,6 +85,8 @@ const CalenderDetail_Info = (props) => {
       </React.Fragment>
       )
     } else {
+
+      // case3-2) 너무 많이 먹었을 경우
       return(
         <React.Fragment>
         <Wrap>
@@ -101,6 +111,7 @@ const CalenderDetail_Info = (props) => {
     }
   }
 
+  // case1) 잘 먹었을 경우
   return (
     <React.Fragment>
       <Wrap>
@@ -122,10 +133,6 @@ const CalenderDetail_Info = (props) => {
       </Wrap>
     </React.Fragment>
   );
-}
-
-CalenderDetail_Info.defaultProps = {
-
 }
 
 const Wrap = styled.div`

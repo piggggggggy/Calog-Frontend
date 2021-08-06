@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import theme from '../shared/theme'
+import theme from '../shared/theme';
 
 const Grid = (props) => {
-  //bg : background-color 
+  // bg : background-color 
   // is_flex : flex,justify-content,align-items 
   // jc : justify-content
   // ai : align-items
@@ -11,6 +11,7 @@ const Grid = (props) => {
   // grid_row : grid-template-row
   // grid_column : grid-template-column
   const {children, width, height, margin, padding, bg, border_radius, border, text_align, is_flex, _onClick, cursor, display, jc, ai, fd, fw, grid_row, grid_column, line_height,
+    
     //media
     m_margin
   } = props;
@@ -34,6 +35,7 @@ const Grid = (props) => {
     grid_row,
     grid_column,
     line_height,
+
     //media
     m_margin,
   };
@@ -67,6 +69,7 @@ Grid.defaultProps = {
   grid_column: false,
   _onClick: () => {},
   line_height: false,
+  
   //media
   m_margin: "0px",
 };
