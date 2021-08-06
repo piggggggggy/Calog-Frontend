@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Text, Grid } from "./index";
 
 const Input = (props) => {
-  //bg : background-color / type(혹시나 submit, file로 변경 가능성) / onSubmit(keypress Enter과 연결)
+  // bg : background-color / type(혹시나 submit, file로 변경 가능성) / onSubmit(keypress Enter과 연결)
   const { label, placeholder, width, bg, border, border_radius, padding, type, onSubmit, _onChange} = props;
 
   const styles = {
@@ -13,7 +13,7 @@ const Input = (props) => {
     border,
     border_radius,
     padding,
-  }
+  };
 
   return (
     <React.Fragment>

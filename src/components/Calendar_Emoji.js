@@ -1,43 +1,51 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from '../shared/theme';
-//날짜
-import moment from 'moment'
-//데이터
+
+// 날짜
+import moment from 'moment';
+
+// 데이터
 import {useSelector} from 'react-redux';
-//컴포넌트
+
+// 컴포넌트
 import Calendar_DayEmoji from './Calendar_DayEmoji';
 
 /** 
- * @param {*} props
- * @returns 설명적기
+ * @param {list} d
+ * @returns {list} d props로 넘어온 날짜와 데이터에 기록된 날짜를 비교하여 맞는 데이터의 리ㅡ트
  * @역할 : 캘린더 기초대사량에 따른 이모지 컴포넌트
- * @필수값 : 날짜
+ * @필수값 : day._d
  * @담당자 : 김나영
 */
 
 const Calendar_Emoji = (props) => {
-  //props 받는 날짜(전체)
-  const _date = props.day._d
 
-  //기준 : 오늘 날짜(일)
+  // props 받는 날짜(전체)
+  const _date = props.day._d;
+
+  // 기준 : 오늘 날짜(일)
   const today = moment().format('YYYYMMDD');
-  //비교 1 : props받는 날짜
-  const date = moment(_date).format('YYYYMMDD');
-  //비교 2 : 데이터
-  const data = useSelector((state) => state.record.calendar);
-  const format = moment(_date).format('YYYY-MM-DD')
-  const match = data.find((d) => d.date === format)
 
-  //입력값이 없을 때
-  //case 1) 당일 기준 이 전
+  // 비교 1 : props받는 날짜
+  const date = moment(_date).format('YYYYMMDD');
+
+  // 비교 2 : 데이터
+  const data = useSelector((state) => state.record.calendar);
+  const format = moment(_date).format('YYYY-MM-DD');
+  const match = data.find((d) => d.date === format);
+
+  // 입력값이 없을 때
+  // case 1) 당일 기준 이 전
   if(date < today) {
     return (
       <React.Fragment>
         {match ?
-          //case 1-1) 기록이 있을 때
+
+          // case 1-1) 기록이 있을 때
           <Calendar_DayEmoji item={match} day={date}/> :
-          //case 1-2) 기록이 없을 때
+
+          // case 1-2) 기록이 없을 때
           <Emoji>
             <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="22" cy="22" r="22" fill="#E4E4E4"/>
@@ -49,30 +57,32 @@ const Calendar_Emoji = (props) => {
         }
       </React.Fragment>
     )
-  }
+  };
 
-  //case 2) 당일
+  // case 2) 당일
   if(date === today) {
     return(
       <React.Fragment>
         {match ?
-          //case 2-1) 기록이 있을 때
+
+          // case 2-1) 기록이 있을 때
           <Calendar_DayEmoji item={match} day={date}/> :
-          //case 2-2) 기록이 없을 때
+
+          // case 2-2) 기록이 없을 때
           <DefaultEmoji />
         }
       </React.Fragment>
     )
-  }
+  };
 
-  //입력값이 없을 때
-  //case 3) 당일 기준 이 후
+  // 입력값이 없을 때
+  // case 3) 당일 기준 이 후
   return (
     <React.Fragment>
       <DefaultEmoji />
     </React.Fragment>
   );
-}
+};
 
 const DefaultEmoji = styled.div`
   width: 44px;
