@@ -5,8 +5,8 @@ import _ from 'lodash';
 import theme from '../shared/theme';
 import { history } from '../redux/configStore';
 // modules
-import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData } from '../redux/modules/search';
-import { searchRecentDB, getRecentDB, deleteRecentDB } from '../redux/modules/recent';
+import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData, addMostUsedKey } from '../redux/modules/search';
+import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -39,6 +39,8 @@ const MSBody = (props) => {
   const [filterMax, setMax] = useState(5000);
   const [sortType, setSort] = useState('정확도순');
   const recent_list = useSelector((state) => state.recent.recent);
+  const is_login = useSelector((state) => state.user.is_login);
+  console.log(is_login)
   const keyword = useRef();
 // useEffect
 
@@ -50,9 +52,35 @@ const MSBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    dispatch(countKeywordDB(keyword.current.value));
-    dispatch(searchRecentDB(keyword.current.value));
+    {is_login ? 
+      dispatch(countKeywordDB(keyword.current.value))
+      : dispatch(addMostUsedKey(keyword.current.value))};
+    {is_login ?
+      dispatch(searchRecentDB(keyword.current.value))
+      : dispatch(addRecent(keyword.current.value))};
     setHistory(true);
+  };
+  // 최근 검색어 검색
+  const recentSearch = (keyword) => {
+    const data = {
+      keyword: keyword,
+      min: filterMin,
+      max: filterMax
+    };
+    dispatch(searchKeywordDB(data));
+    {is_login ? 
+      dispatch(countKeywordDB(keyword))
+      : dispatch(addMostUsedKey(keyword))};
+    {is_login ?
+      dispatch(searchRecentDB(keyword))
+      : dispatch(addRecent(keyword))};
+    setHistory(true);
+    history.push('/search');
+  };
+  // 최근 검색어 삭제
+  const recentDelete = (keyword) => {
+    {is_login ? dispatch(deleteRecentDB(keyword)) 
+      : dispatch(deleteRecent(keyword))}
   };
 
   // 엔터 검색
@@ -133,7 +161,8 @@ const MSBody = (props) => {
           <SearchBox>
             <input 
             ref={keyword}
-            onFocus={()=>{setHistory(false)}} onBlur={()=>{setHistory(true)}} 
+            onFocus={()=>{setHistory(false)}} 
+            // onBlur={()=>{setHistory(true)}} 
             placeholder="어떤 칼로리가 궁금하신가요?"
             onKeyPress={onKeyPress}
             />
@@ -147,7 +176,7 @@ const MSBody = (props) => {
             </div>
           </SearchBox>
 
-          <SearchHistory style={styles}>
+          <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
               <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
@@ -157,10 +186,12 @@ const MSBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid is_flex padding="1.3vh 8%"  key={idx}>
-                        <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                      <Grid display="grid" grid_column="95% 5%" padding="1.3vh 8%" key={idx}>
+                        <Grid cursor _onClick={()=>{recentSearch(rec)}}>
+                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                        </Grid>                        
                         <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                          <TiDeleteOutline onClick={()=>{dispatch(deleteRecentDB(rec))}} size="15px" color="#737373"/>
+                          <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="15px" color="#737373"/>
                         </div>
                       </Grid>
                       <Line/>

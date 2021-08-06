@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // elements & components
 import MainBody from '../components/Main_MainBody';
 import LogoHeader from '../shared/LogoHeader';
+import BtnHeader from '../shared/BtnHeader';
 import MSBody from '../components/MainSearch_MSBody';
 // import 
 
@@ -21,7 +22,7 @@ const MainSearch = (props) => {
 
   return (
     <React.Fragment>
-      <LogoHeader/>
+      <BtnHeader title="검색결과"/>
       <MSBody/>
     </React.Fragment>
   );
