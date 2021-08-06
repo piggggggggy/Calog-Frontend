@@ -52,6 +52,7 @@ export const deleteNotiSV = (noticeId) => {
         .delete(`/api/notice/${noticeId}`, {data:{password:"zkffhfltm1@"}})
         .then((res) => {
             console.log(res);
+            history.push("/notice");
         })
         .catch((err) => {
             console.log(err);

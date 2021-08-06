@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Kakao from '../components/social/Kakao';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import KakaoLogin from '../components/social/Kakao';
+import NaverLogin from '../components/social/Naver';
+import GoogleButton from '../components/social/Google';
 import {Close} from "../img/svg";
 import _ from 'lodash';
 import { history } from '../redux/configStore';
@@ -31,20 +33,26 @@ const dispatch = useDispatch();
         </Header>
 
         <InputContainer>
+        <KakaoLogin></KakaoLogin>
+        <NaverLogin></NaverLogin>
+        <GoogleButton></GoogleButton>
         <InputBox>
-        <Button width="380px" height="56px" bg="#F9DF4A" border_radius="44px">
+        <Button width="380px" height="56px" bg="#F9DF4A" border_radius="44px"
+        _onClick={()=>{window.location.href = 'https://2k1.shop/api/auth_kakao/kakao';}}>
           <Text bold size="16px" lineheight="22px" color="#42282A">카카오로 시작하기</Text>
         </Button>
         </InputBox>
 
         <InputBox>
-        <Button width="380px" height="56px" bg="#E2635E" border_radius="44px">
+        <Button width="380px" height="56px" bg="#E2635E" border_radius="44px"
+        _onClick={()=>{window.location.href = 'https://2k1.shop/api/auth_google/google';}}>
           <Text bold size="16px" lineheight="22px" color="#FFFFFF">구글로 시작하기</Text>
         </Button>
         </InputBox>
 
         <InputBox>
-        <Button width="380px" height="56px" bg="#59C451" border_radius="44px">
+        <Button width="380px" height="56px" bg="#59C451" border_radius="44px"
+        _onClick={()=>{window.location.href = 'https://2k1.shop/api/auth_naver/naver';}}>
           <Text bold size="16px" lineheight="22px" color="#FFFFFF">네이버로 시작하기</Text>
         </Button>
         </InputBox>
