@@ -68,6 +68,7 @@ const recent = createSlice({
       state.recent = action.payload;
     },
 
+    // 리덕스 비우기
     delRecentAll : (state, action) => {
       state.recent = [];
     },
@@ -99,7 +100,7 @@ const recent = createSlice({
     // recent 제거
     deleteRecent : (state, action) => {
       let deleted_list = state.recent.filter((rec, idx) => {
-        if (rec.keyword !== action.payload) {
+        if (rec !== action.payload) {
           return rec
         };
       });

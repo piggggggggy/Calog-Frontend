@@ -140,8 +140,6 @@ const FoodCard = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 
   & > div {
-    /* display: flex;
-    align-items: center; */
     margin-top: auto;
     margin-bottom: auto;
     width: 100%;
