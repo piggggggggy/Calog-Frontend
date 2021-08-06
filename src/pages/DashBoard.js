@@ -98,7 +98,7 @@ const DashBoard = (props) => {
                 }
                 {record?.length === 0 && <Text size="22px" bold m_size="20px">아직<br/>입력된 식단이 없어요🧐</Text>}
                 {(good && bmr !== 0) && <Text size="22px" bold m_size="20px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
-                {extra_bmr && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
+                {(record?.length !== 0 && extra_bmr) && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
                 {over_bmr && <Text size="22px" bold m_size="20px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
               </React.Fragment>
             )}

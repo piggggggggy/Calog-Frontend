@@ -82,7 +82,13 @@ export const getRecordDB = (date) => {
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
         const record_list = res.data.record
-        record_list.length === 0 ? window.alert('기록된 칼로리가 없어요!') : dispatch(getRecord(record_list))
+
+        //기록이 없을 경우 alert, dashboard로 이동
+        //기록이 있을 경우 액션
+        if (record_list.length === 0) {
+          window.alert('기록된 칼로리가 없어요!')
+          history.push('/dashboard')
+        } else {dispatch(getRecord(record_list))}
       })
       .catch((err) => {
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
