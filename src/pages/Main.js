@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // modules
 import { getRecentDB } from '../redux/modules/recent';
 // elements & components
@@ -20,10 +20,13 @@ const Main = (props) => {
 // dispatch
   const dispatch = useDispatch();
 // props
+  const is_login = useSelector((state) => state.user.is_login);
 // useEffect
   useEffect(() => {
-    dispatch(getRecentDB());
-  }, []);
+    if (is_login) {
+      dispatch(getRecentDB());
+    }
+  }, [is_login]);
 
 
   return (

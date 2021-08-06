@@ -31,9 +31,12 @@ const CartBody = (props) => {
   // 장바구니에 담긴 food의 칼로리 합계
   const sumKcal = () => {
     let result = 0;
-    cart_list.map((cart, idx) => {
-      result = result + (cart.kcal*cart.amount)
-    });
+    // cart_list.map((cart, idx) => {
+    //   result = result + (cart.kcal * cart.amount)
+    // });
+    for (let i in cart_list) {
+      result += (i.kcal * i.amount);
+    }
     return result
   };
 
