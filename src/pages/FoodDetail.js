@@ -56,10 +56,15 @@ const FoodDetail = (props) => {
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
     let result = 0
-    foodRecord.map((f, idx) => {
-      result += parseInt(f.amount) * f.resultKcal;
-    });
-    return result;
+    if(foodRecord.length !== 0) {
+      foodRecord.map((f, idx) => {
+        result += parseInt(f.amount) * f.resultKcal;
+      });
+      return result;
+    } else {
+      return 0;
+    }
+    
   };
 
   const is_over = () => {

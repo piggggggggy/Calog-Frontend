@@ -25,7 +25,11 @@ const CartBody = (props) => {
 // props
   const cart_list = useSelector((state) => state.cart.cart);
   const is_login = useSelector((state) => state.user.is_login);
+  const record = useSelector((state) => state.record.record);
   const [type, setType] = useState("아침");
+
+  const bmr = record[0]?.bmr;
+  const foodRecord = record[0]?.foodRecords;
 // useEffect
 
   // 장바구니에 담긴 food의 칼로리 합계
@@ -64,6 +68,15 @@ const CartBody = (props) => {
       let result = window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')
       result ? history.push('/signsocial') : history.goBack('/');
     }
+  };
+
+  // 현재 남은(초과한) 칼로리 계산
+  const totalKcal = () => {
+    let result = 0
+    foodRecord.map((f, idx) => {
+      result += parseInt(f.amount) * f.resultKcal;
+    });
+    return result;
   };
 
   return (

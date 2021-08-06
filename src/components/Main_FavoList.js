@@ -38,6 +38,11 @@ const FavoList = (props) => {
     }
   };
 
+  console.log(favo_list)
+
+  if (favo_list.length === 0) {
+    return <div></div>;
+  };
   return (
     <React.Fragment>
       {is_login ?

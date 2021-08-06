@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { history } from '../redux/configStore';
 // elements & components
 import { Text } from '../elements';
 // modules
@@ -75,6 +76,7 @@ const MostButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export default MostUsedKey;
