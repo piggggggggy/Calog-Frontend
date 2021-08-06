@@ -23,9 +23,11 @@ const CardList = (props) => {
     <React.Fragment>
       <CardContainer>
         {search_list.map((result, idx) => {     
-            if (idx < 100) {
-              return <Card key={result.foodId} {...result}/>
-            }                  
+          if (idx >= 100) {
+            return;
+          }
+          return <Card key={result.foodId} {...result}/>
+            
           })}
       </CardContainer>
     </React.Fragment>

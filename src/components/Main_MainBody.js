@@ -16,7 +16,7 @@ import InfiniteScroll from './Main_InfiniteScroll';
 import CardList from './Main_CardList';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
-// import SearchHistory from './Main_SearchHistory';
+import RcmdList from './Main_RcmdList';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -42,6 +42,7 @@ const MainBody = (props) => {
   const [sortType, setSort] = useState('정확도순');
   const recent_list = useSelector((state) => state.recent.recent);
   const keyword = useRef();
+  // console.log(keyword.current.value) 
 // useEffect
 
   // 검색함수
@@ -140,7 +141,7 @@ const MainBody = (props) => {
               </div>
               : ''}
               <div onClick={()=>{search()}}>
-                <BiSearchAlt2 size="24px" color="#5F5F5F" />
+                <BiSearchAlt2 size="24px" color="#F19F13" />
               </div>
             </SearchBox>
   
@@ -182,22 +183,24 @@ const MainBody = (props) => {
             />
           </Grid>
   
-          {/* 모냥만 만들어논 정렬 탭 */}
-          <Grid margin="5vh 0 2vh 0" m_margin="5vh 0 2vh 0" padding="0 25px" display="flex" jc="flex-end">
-            <Grid display="flex" jc="flex-end" width="auto" cursor>
+          {/* 정렬 선택 박스! */}
+          <Grid margin="5vh 0 2vh 0" m_margin="5vh 0 2vh 0" padding="0 6%" display="flex" jc="flex-end">
+            <SortBox>
               <SortSelect onChange={sortChange}>
                 <SortOption value="정확도순">정확도순</SortOption>
                 <SortOption value="내림차순">칼로리높은순</SortOption>
                 <SortOption value="오름차순">칼로리낮은순</SortOption>
                 <SortOption value="가나다순">가나다순</SortOption>
               </SortSelect>
-              <Grid width="16px" height="16px" display="flex" jc="center">
+              <ButtonBox>
                 <IoIosArrowDown size="14px" color="8C8C8C"/>
-              </Grid>
-            </Grid>
+              </ButtonBox>
+            </SortBox>
           </Grid>
         </HeaderContainer>    
   
+
+
         <BodyContainer>
           {/* 검색결과가 들어가는 곳 */}
           <CardList search_list={search_list}/>
@@ -236,7 +239,7 @@ const MainBody = (props) => {
               </div>
               : ''}
               <div onClick={()=>{search()}}>
-                <BiSearchAlt2 size="24px" color="#5F5F5F" />
+                <BiSearchAlt2 size="24px" color="#F19F13" />
               </div>
             </SearchBox>
 
@@ -263,9 +266,14 @@ const MainBody = (props) => {
                 }) : ''}
               </div>
             </SearchHistory>
+            
+            {/* 인기검색어 */}
             <MostUsedKey/>
             
           </SearchGrid>
+
+          {/* 추천 푸드 */}
+          <RcmdList/>
   
           {/* {Range Slider // 수정해야함} */}
           <Grid padding="0 2.8vh" >
@@ -280,8 +288,10 @@ const MainBody = (props) => {
           <Grid padding="0 0 4vh 0"/>
         </HeaderContainer>    
   
+
+
         <BodyContainer>
-          {/* 검색결과가 들어가는 곳 */}
+          {/* 즐겨찾기가 들어가는 곳 */}
           <FavoList/>
   
           {/* 장바구니 탭 */}
@@ -300,20 +310,14 @@ MainBody.defaultProps = {
 
 }
 
-
-
 const HeaderContainer = styled.div`
   max-width: 100%;
-  /* overflow: hidden; */
-  /* overflow: hidden; */
-  
 `;
 
 const TopBack = styled.div`
   position: absolute;
   z-index: -100;
   width: 100%;
-  max-width: 420px;
   background-color: ${theme.color.light};
   height: 26.6vh;
   border-bottom-left-radius: 32px;
@@ -378,7 +382,7 @@ const SearchBox = styled.div`
     z-index: 210;
   }
 `;
-// 8.8
+
 const SearchHistory = styled.div`
   display: none;
   width: 100%;
@@ -396,12 +400,9 @@ const SearchHistory = styled.div`
     top: calc(11.1vh + 6.5px);
   }
 
-  
-
   & > div {
     width: 100%;
     height: 35vh;
-    /* overflow: scroll; */
     background: #fff;
     border-radius: 28px;
 
@@ -417,19 +418,35 @@ const Line = styled.div`
   border: 1px solid #FFE899;
 `;
 
+const SortBox = styled.div`
+  display: flex; 
+  justify-content: flex-end;
+  width: auto;
+  cursor: pointer;
+  position: relative;
+`;
+
 const SortSelect = styled.select`
-  /* width: 100%; */
   border: none;
   font-size: 13px;
   color: #8C8C8C; 
   line-height: 18px; 
   margin: 0;
-  padding: 0 5px 0 0;
+  padding: 0 20px 0 0;
   appearance: none;
 `;
 
 const SortOption = styled.option`
-
 `;
+
+const ButtonBox = styled.div`
+  position: absolute;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  `;
 
 export default MainBody;

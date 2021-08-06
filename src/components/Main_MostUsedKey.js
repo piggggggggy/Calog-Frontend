@@ -71,7 +71,7 @@ const MostButton = styled.div`
   padding: 2px 4px;
   border: none;
   border-radius: 12.5px;
-  background: rgba(255, 255, 255, 0.53);;
+  background: #fff7da;
   display: flex;
   justify-content: center;
   align-items: center;

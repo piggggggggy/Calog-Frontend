@@ -42,7 +42,7 @@ const FavoList = (props) => {
     <React.Fragment>
       {is_login ?
       <CardContainer>
-        <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0">
+        <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
           <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
         </Grid>
         {!moreFavo ? favo_list.slice(0,4).map((favo, idx) => {     
@@ -66,10 +66,10 @@ FavoList.defaultProps = {
 
 const CardContainer = styled.div`
   width: 100%;
-  padding: 0 6%;
   display: flex;
-  flex-wrap: wrap;
-  column-gap: 4%;
+  align-items: center;
+  flex-direction: column;
+  column-gap: 1.8vh;
 `;
 
 const MoreBtn = styled.div`
