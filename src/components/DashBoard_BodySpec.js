@@ -1,86 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
+
 /** 
- * @param {*} props
- * @returns 설명적기
- * @역할 : dashboard 바디스펙 표출 컴포넌트
+ * @역할 : 대시보드 바디스펙 컴포넌트
  * @필수값 : 유저의 바디스펙(키, 몸무게, bmr)
  * @담당자 : 김나영
 */
 
 const DashBoard_BodySpec = (props) => {
+  const {height, weight, bmr} = props;
 
-  const {height, weight, bmr} = props
+  // 키
+  const user_height = height;
 
-  //키
-  const user_height = height
-  //몸무게
-  const user_weight = weight
-  //bmr
-  const user_bmr = bmr
+  // 몸무게
+  const user_weight = weight;
 
-  //키 onoff
+  // bmr
+  const user_bmr = bmr;
+
+  // 키 on off
   const [heightShow, setHeightShow] = useState({
     hShow: "none",
     hHide: "block",
-  })
-  const {hShow, hHide} = heightShow
+  });
+  const {hShow, hHide} = heightShow;
   const heightOn = () => {
     setHeightShow({
       hShow: "none",
       hHide: "block",
     })
-  }
+  };
   const heightOff = () => {
     setHeightShow({
       hShow: "block",
       hHide: "none",
     })
-  }
+  };
 
-  //몸무게 onoff
+  // 몸무게 on off
   const [weightShow, setWeightShow] = useState({
     wShow: "none",
     wHide: "block",
-  })
-  const {wShow, wHide} = weightShow
+  });
+  const {wShow, wHide} = weightShow;
   const weightOn = () => {
     setWeightShow({
       wShow: "none",
       wHide: "block",
     })
-  }
+  };
   const weightOff = () => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
-  }
+  };
 
-  //기초대사량 onoff
+  // 기초대사량 on off
   const [kcalShow, setKcalShow] = useState({
     kShow: "none",
     kHide: "block",
-  })
-  const {kShow, kHide} = kcalShow
+  });
+  const {kShow, kHide} = kcalShow;
   const kcalOn = () => {
     setKcalShow({
       kShow: "none",
       kHide: "block",
     })
-  }
+  };
   const kcalOff = () => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
-  }
+  };
 
   return (
     <React.Fragment>
       <Wrap>
         <Grid is_flex text_align="center" padding="4.5% 0 0 0">
+
           {/* 키 */}
           <Grid>
             <Text size="12px" m_size="11px">키</Text>
@@ -90,6 +91,7 @@ const DashBoard_BodySpec = (props) => {
             <Grid display={hShow}>
                 <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
+
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
               <Grid display={hShow} _onClick={heightOn}>
@@ -104,6 +106,7 @@ const DashBoard_BodySpec = (props) => {
               </Grid>
             </Grid>
           </Grid> 
+
           {/* 몸무게 */}
           <Grid>
             <Text size="12px" m_size="11px">몸무게</Text>
@@ -113,6 +116,7 @@ const DashBoard_BodySpec = (props) => {
             <Grid display={wShow}>
                 <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
+
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
               <Grid display={wShow} _onClick={weightOn}>
@@ -127,6 +131,7 @@ const DashBoard_BodySpec = (props) => {
               </Grid>
             </Grid>
           </Grid> 
+
           {/* 기초대사량 */}
           <Grid>
             <Text size="12px" m_size="11px">기초대사량</Text>
@@ -136,6 +141,7 @@ const DashBoard_BodySpec = (props) => {
             <Grid display={kShow}>
                 <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
+            
             {/* 숨김/표시 버튼 */}
             <Grid margin="16% 0 0 0" m_margin="10% 0 0 0">
               <Grid display={kShow} _onClick={kcalOn}>
@@ -154,14 +160,14 @@ const DashBoard_BodySpec = (props) => {
       </Wrap>
     </React.Fragment>
   );
-}
+};
 
 DashBoard_BodySpec.defaultProps = {
-  "height" : 180,
-  "weight" : 80,
-  "bmr" : 1619,
+  "height" : 0,
+  "weight" : 0,
+  "bmr" : 0,
 
-}
+};
 
 const Wrap = styled.div`
   width: 88%;

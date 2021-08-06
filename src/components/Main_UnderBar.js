@@ -58,10 +58,12 @@ const UnderBar = (props) => {
             {cart_list.map((cart, idx) => {
               return (
                 <CartButton key={idx}>
-                  <Text line-height="18px" size="13px" m_size="13px" color="#2A2A2A" padding="0" margin="0">
+                  <Text line-height="18px" m_line-height="18px" size="13px" m_size="13px" color="#2A2A2A" padding="0" margin="0">
                     {cart.name}
                   </Text>
-                  <div onClick={()=>{deleteCart(cart.foodId)}}><TiDeleteOutline size="13px" color="#404040"/></div>
+                  <div onClick={()=>{deleteCart(cart.foodId)}} style={{paddingLeft: "1px"}}>
+                    <TiDeleteOutline size="17px" color="#404040"/>
+                  </div>
                 </CartButton>
               )
             })}
@@ -130,7 +132,6 @@ const CartButton = styled.div`
   align-items: center;
   justify-content: center;
   margin: 5px 1.2%;
-  /* gap: 2vw; */
 
   & > div {
     display: flex;

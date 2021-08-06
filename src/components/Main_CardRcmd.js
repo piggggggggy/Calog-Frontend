@@ -9,21 +9,20 @@ import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
 // elements & components
 import { Grid, Text } from '../elements';
 // icons
-import { IoStar } from 'react-icons/io5';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
-
+import { IoStar } from 'react-icons/io5';
 
 /** 
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 favorite_list, is_logtin
+ * @필수값 이 컴포넌트를 사용할 때 필수 props
  * @담당자 : 박용태
 */
 
-const Card = (props) => {
+const CardRcmd = (props) => {
 // dispatch
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 // props
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
@@ -50,7 +49,7 @@ const Card = (props) => {
     const cartCheck = cart_list.findIndex((c) => c.foodId === props.foodId);
     if (cartCheck !== -1) {
       return (
-        { backgroundColor: "#FFE899" }
+        { backgroundColor: "#FFE899", border: "0.2px solid #f19f13" }
         )
     }else{
       return (
@@ -94,76 +93,75 @@ const Card = (props) => {
       dispatch(deleteFavoriteDB(props.foodId));
     }
   };
-  
-  // 즐겨찾기 해제
-    
+
   return (
     <React.Fragment>
-
-      {/* 검색 결과 낱개 카드 */}
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
-
-        <BookmarkBox  onClick={addFavorite}>
-          <IoStar style={is_favorite()} size="21px"/>
+        
+        <div style={{textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+          <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</Text>
+        </div>
+        
+        <div>  
+          <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" padding="0" margin="0">{props.kcal} kcal</Text>
+        </div>
+        
+        {/* 즐겨찾기 버튼 */}
+        <BookmarkBox>
+          <IoStar  style={is_favorite()} size="21px" onClick={addFavorite}/>
         </BookmarkBox>
-
-        <div >
-          <Text size="15px" m_size="13px" lineheight="18px" m_lineheight="15px" margin="0" padding="0">{props.name}</Text>
-        </div>
-        <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
-          <Text size="17px" m_size="15px" lineheight="22px" m_lineheight="20px" bold margin="0" padding="0">{props.kcal} kcal</Text>
-        </div>
-
-        <CartBox onClick={addCart} style={{zIndex: "10"}}>
-          <BsFillPlusSquareFill color="#F19F13" size="17px"/>
+        
+        {/* 장바구니 버튼 */}
+        <CartBox onClick={addCart}>
+          <BsFillPlusSquareFill  color="#F19F13" size="17px"/>
         </CartBox>
 
       </FoodCard>
-
     </React.Fragment>
   );
 }
 
-Card.defaultProps = {
+CardRcmd.defaultProps = {
 
 }
 
 const FoodCard = styled.div`
   position: relative;
-  display: grid;
-  grid-template-columns: 10% 52% 26% 12%;
-  width: 87%;
-  height: 6.4vh;
-  margin-bottom: 16px;
-  border: 1px solid #F19F13;
-  border-radius: 16px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  min-width: 41%;
+  min-height: 13.5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 1.5vh 3.8%;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   & > div {
-    /* display: flex;
-    align-items: center; */
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
   }
 `;
 
 const BookmarkBox = styled.div`
+  position: absolute;
+  top: 1.3vh;
+  left: 9.3%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `;
 
 const CartBox = styled.div`
+  position: absolute;
+  bottom: 2vh;
+  right: 10.5%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `;
 
 
-export default Card;
+export default CardRcmd;
