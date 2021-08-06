@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, Text} from '../elements';
+import {Grid, Text, Button} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
 
@@ -16,6 +16,9 @@ import {getAllRecordDB} from '../redux/modules/record';
 // history
 import {history} from '../redux/configStore';
 
+// 비로그인 모달
+import { Confirm } from 'react-st-modal';
+
 /** 
  * @param {list} d
  * @returns {list} d 캘린더의 하루를 채울 수 있도록 맵이 돌아가는 요소
@@ -26,6 +29,9 @@ import {history} from '../redux/configStore';
 const Calendar_Calendar = (props) => {
   const dispatch = useDispatch();
 
+  // 로그인 체크
+  const {is_login} = props;
+
   // 날짜
   const [month, setMonth] = useState(moment());
 
@@ -34,7 +40,7 @@ const Calendar_Calendar = (props) => {
 
   // 화면 로딩 시 모든 기록 데이터 조회
   useEffect(() => {
-    dispatch(getAllRecordDB(monthFormat));
+    is_login && dispatch(getAllRecordDB(monthFormat));
   },[dispatch, monthFormat]);
 
   // 지난달 btn
@@ -101,7 +107,7 @@ const Calendar_Calendar = (props) => {
                 )
               };
             })
-          };
+          }
         </tr>
       )
     };
@@ -110,6 +116,8 @@ const Calendar_Calendar = (props) => {
 
     return (
       <React.Fragment>
+
+        {/* case1) 로그인 유저 */}
         <Grid padding="5% 2% 0 2%">
 
           {/* 헤더 */}
@@ -151,6 +159,25 @@ const Calendar_Calendar = (props) => {
             </tbody>
           </Table>
         </Grid>
+
+        {/* case2) 비로그인 유저 >> 로그인 이동하기 버튼 */}
+        {!is_login && (
+          <NeedLogin>
+            <Grid width="100%" height="30vh" bg={'rgba(255, 232, 153, 1)'} border_radius="15px" margin="auto" m_margin="auto" padding="15% 0">
+              <Modal>
+                <Grid text_align="center">
+                  <P>캘린더는<br/> 로그인이 필요한 기능이예요🧐</P>
+                  <Text size="15px" color={theme.color.gray_5} bold margin="3% 0 7% 0" m_size="13px">한 달 동안의 내 식생활에 대해서 알아볼까요?</Text>
+                </Grid>
+                <Button
+                  _onClick={() => history.push('/signsocial')}
+                  height="6vh" border_radius="60px" bg={theme.color.dark}>
+                  <Text size="16px" bold m_size="14px">로그인하기</Text>
+                </Button>
+              </Modal>
+            </Grid>
+          </NeedLogin>
+        )}
       </React.Fragment>
     );
 };
@@ -186,6 +213,32 @@ const NotToday = styled.div`
   text-align: center;
   margin: auto;
   line-height: 25px;
+`;
+
+const NeedLogin = styled.div`
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const Modal = styled.div`
+  width: 94%;
+  left: 10%;
+  top: 10%;
+  transform: translate(-0%, -8%);
+  margin: auto
+`;
+
+const P = styled.p`
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 130%;
+
+  @media ${theme.device.mobileM} {
+    font-size: 17px;
+  }
 `;
 
 export default Calendar_Calendar;

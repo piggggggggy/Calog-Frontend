@@ -28,7 +28,7 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            history.push("/body");
+            window.location.replace('/dashboard')
         };
         loginsv()
         .catch((err)=>{
@@ -108,6 +108,7 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
 export const _logOut = () => {
     return function(dispatch, getState, {history}){
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
+        window.location.replace('/')
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
         dispatch(delCartAll());
         dispatch(delRecentAll());
