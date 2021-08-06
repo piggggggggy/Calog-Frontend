@@ -16,9 +16,6 @@ import {getAllRecordDB} from '../redux/modules/record';
 // history
 import {history} from '../redux/configStore';
 
-// 비로그인 모달
-import { Confirm } from 'react-st-modal';
-
 /** 
  * @param {list} d
  * @returns {list} d 캘린더의 하루를 채울 수 있도록 맵이 돌아가는 요소
