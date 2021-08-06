@@ -34,8 +34,22 @@ const DashBoard = (props) => {
   // 유저정보
   const user = useSelector((state) => state.user.user_info);
 
+  // bmr
+  let bmr = useSelector((state) => state.record.bmr);
+
   // 기록리스트
-  const record = useSelector((state) => state.record.record[0]?.foodRecords);
+  let record = [];
+  
+  // case1) 기록이 없을 때
+  const record_list = useSelector((state) => state.record.record);
+  if(record_list?.length === 0) {
+    record = []
+  } else {
+
+    //case2) 기록이 있을 때
+    let yes_record = record_list[0]?.foodRecords
+    record = yes_record
+  };
 
   // 오늘 먹은 총 칼로리
   let today_kcal = 0;
@@ -43,21 +57,8 @@ const DashBoard = (props) => {
     let kcal = record[idx].resultKcal;
     today_kcal += kcal
   };
-
-  // 총 칼로리와 비교하여 상단 멘트 변동
-  const is_record = useSelector((state) => state.record.record);
   
-  // bmr
-  let bmr = is_record[0]?.bmr;
 
-  // 기록이 없어서 bmr이 없을 때
-  if(is_record?.length === 0) {
-    bmr=0
-    // const idx = (user.bmr?.length)-1
-    // const user_bmr = user?.bmr[idx]
-    // console.log(user_bmr)
-    // bmr = user.bmr[idx]?.bmr
-  }
 
   // good(bmr +- 10)
   const ten = bmr*0.1;
@@ -95,9 +96,9 @@ const DashBoard = (props) => {
                   <Text size="22px" bold m_size="20px" color={'#E24444'}>{user.nickname}님!</Text> :
                   <Text size="22px" bold m_size="20px">{user.nickname}님!</Text>
                 }
-                {is_record?.length === 0 && <Text size="22px" bold m_size="20px">아직<br/>입력된 식단이 없어요🧐</Text>}
+                {record?.length === 0 && <Text size="22px" bold m_size="20px">아직<br/>입력된 식단이 없어요🧐</Text>}
                 {(good && bmr !== 0) && <Text size="22px" bold m_size="20px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
-                {extra_bmr && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
+                {(record?.length !== 0 && extra_bmr) && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
                 {over_bmr && <Text size="22px" bold m_size="20px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
               </React.Fragment>
             )}

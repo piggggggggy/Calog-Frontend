@@ -4,15 +4,13 @@ import {Text} from '../elements';
 import theme from '../shared/theme';
 
 /** 
- * @param {*} props
- * @returns 설명적기
  * @역할 : 유저가 카트에 담은 칼로리의 리스트를 보여주는 컴포넌트
  * @필수값 : 카트 칼로리 리스트
  * @담당자 : 김나영
 */
 
 const Record_List = (props) => {
-  const { name, amount, kcal, grams} = props
+  const { name, amount, kcal, grams} = props;
 
   return (
     <React.Fragment>
@@ -31,7 +29,7 @@ Record_List.defaultProps = {
   quantity : 1,
   calorie: 4500,
   gram: 600,
-}
+};
 
 const Wrap = styled.div`
   width: 88%;
