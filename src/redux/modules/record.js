@@ -52,6 +52,7 @@ export const addRecordDB = (date, list, type, url, memo) => {
       .then((res) => {
         window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
         dispatch(delCartAll())
+        dispatch(typeChk(type))
         history.replace('/dashboard')
       })
       .catch((err) => {
