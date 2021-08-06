@@ -1,5 +1,4 @@
 import React from "react";
-import { FaLessThanEqual } from "react-icons/fa";
 import styled from "styled-components";
 import theme from '../shared/theme'
 
@@ -7,9 +6,9 @@ const Text = (props) => {
     // bold : font-weight / size : font-size / lineheight: line-height
     // to : text-overflow / ws : white-space
     const {children, width, bold, color, size, margin, lineheight, to, ws, overflow,
-        //media
-        m_size} = props;
 
+        // media
+        m_size} = props;
 
     const styles = {
         width,
@@ -21,7 +20,8 @@ const Text = (props) => {
         overflow,
         to,
         ws,
-        //media
+
+        // media
         m_size,
     };
 
@@ -30,7 +30,7 @@ const Text = (props) => {
             <DefaultText {...styles}> {children} </DefaultText>
         </React.Fragment>
     )
-}
+};
 
 Text.defaultProps = {
     children: null,
@@ -40,7 +40,8 @@ Text.defaultProps = {
     size: "1em",
     margin: "auto",
     lineheight: "null",
-    //media
+
+    // media
     m_size: "1em",
     overflow: false,
     to: false,

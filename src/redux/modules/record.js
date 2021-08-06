@@ -2,15 +2,18 @@
 // @담당자 : 김나영
 
 import { createSlice } from "@reduxjs/toolkit";
-//추가 액션
+
+// 추가 액션
 import {delCartAll} from './cart';
-//전역 > 서버 배포
+
+// 전역 > 서버 배포
 import instance from "./instance";
-//postman test용
+
+// postman test용
 import axios from 'axios'
 
 // middleware 
-//dashboard - db에서 오늘의 칼로리 리스트 가져오기
+// dashboard - db에서 오늘의 칼로리 리스트 가져오기
 export const getTodayRecordDB = () => {
   return function (dispatch, getState, {history}) {
     instance
@@ -27,7 +30,7 @@ export const getTodayRecordDB = () => {
   }
 };
 
-//dashboard - db에서 운동리스트 가져오기
+// dashboard - db에서 운동리스트 가져오기
 export const getWorkoutDB = () => {
   return function (dispatch, getState, {history}) {
     instance
@@ -39,9 +42,9 @@ export const getWorkoutDB = () => {
         console.log(err)
       }) 
   }
-}
+};
 
-//record - 기록하기
+// record - 기록하기
 export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
     instance
@@ -55,9 +58,9 @@ export const addRecordDB = (date, list, type, url, memo) => {
         window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
       })
   }
-}
+};
 
-//calendar - 전체 기록 불러오기
+// calendar - 전체 기록 불러오기
 export const getAllRecordDB = (monthFormat) => {
   return function (dispatch, getState, {history}) {
     instance
@@ -70,9 +73,9 @@ export const getAllRecordDB = (monthFormat) => {
         window.alert('게시글 로드에 문제가 발생했어요! 관리자에게 문의해주세요😿')
       }) 
   }
-}
+};
 
-//calendar - 특정 일자 기록 불러오기
+// calendar - 특정 일자 기록 불러오기
 export const getRecordDB = (date) => {
   return function (dispatch, getState, {history}) {
     instance
@@ -85,21 +88,29 @@ export const getRecordDB = (date) => {
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }
-}
+};
 
 
 // initial State 
 const initialState = {
-  //하루 칼로리 리스트(dashboard, calendar_detail)
+
+  // 하루 칼로리 리스트(dashboard, calendar_detail)
   record: [],
-  //추천 운동 리스트(dashboard)
+
+  // 추천 운동 리스트(dashboard)
   workout: [],
-  //한 달 캘린더(calendar)
+
+  // 한 달 캘린더(calendar)
   calendar: [],
-  //type
+
+  // type
   type: [],
-  //kcal
+
+  // kcal
   kcal: [],
+
+  // bmr
+  bmr: 0,
 }
 
 // redux
@@ -107,25 +118,35 @@ const record = createSlice({
   name: "record",
   initialState,
   reducers: {
-    //dashboard&calendar - 하루 기록 칼로리 리스트 가져오기
+
+    // dashboard&calendar - 하루 기록 칼로리 리스트 가져오기
     getRecord : (state, action) => {
       state.record = action.payload
     },
-    //dashboard - 운동 리스트 가져오기
+
+    // dashboard - 운동 리스트 가져오기
     getWorkout : (state, action) => {
 
     },
-    //calendar - 한 달 칼로리 가져오기
+
+    // calendar - 한 달 칼로리 가져오기
     getAllRecord : (state, action) => {
       state.calendar = action.payload
     },
-    //type chk
+
+    // type chk
     typeChk : (state, action) => {
       state.type = action.payload
     },
-    //ttl kcal
+
+    // ttl kcal
     ttlKcal : (state, action) => {
       state.kcal = action.payload
+    },
+
+    // bmr chk
+    bmrChk : (state, action) => {
+      state.bmr = action.payload
     },
 
     // persist 기록 삭제하기
@@ -139,6 +160,6 @@ const record = createSlice({
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, delRecord} = record.actions;
+export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, delRecord, bmrChk} = record.actions;
 
 export default record;

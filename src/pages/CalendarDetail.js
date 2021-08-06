@@ -2,47 +2,50 @@ import React, {useEffect} from 'react';
 import {Button, Grid, Image, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
-//history
+
+// history
 import {history} from '../redux/configStore';
-//컴포넌트
+
+// 컴포넌트
 import CalendarDetail_Date from'../components/CalendarDetail_Date';
 import CalendarDetail_Info from '../components/CalendarDetail_Info';
 import Record_When from '../components/Record_When';
 import CalendarDetail_Food from '../components/CalendarDetail_Food';
-//데이터
+
+// 데이터
 import {useDispatch, useSelector} from 'react-redux';
 import {getRecordDB} from '../redux/modules/record';
 
 /** 
- * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
+ * @역할 캘린더의 특정 날짜를 눌렀을 때 보이는 상세 컴포넌트
  * @담당자 : 김나영
 */
 
 const CalenderDetail = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  //날짜
-  const _SelectDate = history.location.pathname.split('/')
-  const SelectDate = _SelectDate[2]
+  // 날짜
+  const _SelectDate = history.location.pathname.split('/');
+  const SelectDate = _SelectDate[2];
 
-  //useEffect
+  // 화면 로딩 시 선택한 날짜의 기록 데이터 불러오기
   useEffect(() => {
     dispatch(getRecordDB(SelectDate))
-  },[])
+  },[]);
 
-  //기록
-  const record_list = useSelector((state) => state.record.record[0])
+  // 기록
+  const record_list = useSelector((state) => state.record.record[0]);
 
   return (
     <React.Fragment>
       <Grid>
+
         {/* 배경 */}
         <TopBack />
+
         {/* 헤더 */}
         <Grid is_flex padding="2.9vh 6.2%">
+
           {/* 뒤로가기 버튼 */}
           <Grid width="3vh" _onClick={() => history.goBack()}>  
             <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,10 +53,13 @@ const CalenderDetail = (props) => {
             </svg>
           </Grid>
         </Grid>
+
         {/* 캘린더 */}
         <CalendarDetail_Date SelectDate={SelectDate}/>
+
         {/* 안내 메시지 */}
         <CalendarDetail_Info {...record_list}/>
+
         {/* 기록 시기 */}
         <Grid margin="9.7% 0 0 2%" m_margin="9.7% 0 0 2%">
           <Record_When />
@@ -65,6 +71,7 @@ const CalenderDetail = (props) => {
             <Text size="13px" bold>식단</Text>
           </Button>
         </Grid>
+
         {/* 맵돌리기 */}
         <Grid width="80.9%" margin="4% auto 0 auto" m_margin="4% auto 0 auto">
           <CalendarDetail_Food />
@@ -76,6 +83,7 @@ const CalenderDetail = (props) => {
             <Text size="13px" bold>사진</Text>
           </Button>
         </Grid>
+
         {/* 이미지 */}
         <Grid margin="4% 9.7% 0 9.7%" bg={'#eee'} width="81%" height="221px" border_radius="8px" m_margin="4% 9.7% 0 9.7%">
           <Image height="221px" />
@@ -87,6 +95,7 @@ const CalenderDetail = (props) => {
             <Text size="13px" bold>메모</Text>
           </Button>
         </Grid>
+
         {/* 메모 */}
         <Grid margin="4% 9.7% 27% 9.7%" width="81%" m_margin="4% 9.7% 27% 9.7%">
           <Text>memo</Text>
@@ -94,11 +103,7 @@ const CalenderDetail = (props) => {
       </Grid>
     </React.Fragment>
   );
-}
-
-CalenderDetail.defaultProps = {
-
-}
+};
 
 const TopBack = styled.div`
   position: absolute;

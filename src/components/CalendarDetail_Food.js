@@ -6,9 +6,9 @@ import theme from '../shared/theme';
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @역할 캘린더 상세에서 기록된 칼로리 리스트
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 김나영
 */
 
 const CalendarDetail_Food = (props) => {
@@ -19,14 +19,17 @@ const CalendarDetail_Food = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="2.5% 0 2% 0">
+
           {/* 메뉴 */}
           <Grid width="63%">
             <Text size="15px" m_size="13px">계란프라이</Text>
           </Grid>
+
           {/* 칼로리 */}
           <Grid width="28%">
             <Text size="15px" bold m_size="13px">89kcal</Text>
           </Grid>
+
           {/* 수량 */}
           <Width>
             <Text size="15px" m_size="13px">X 1.5</Text>
@@ -34,10 +37,6 @@ const CalendarDetail_Food = (props) => {
         </Grid>
     </React.Fragment>
   );
-}
-
-CalendarDetail_Food.defaultProps = {
-
 }
 
 const Width = styled.div`

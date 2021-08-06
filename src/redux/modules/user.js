@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 import axios from "axios";
-//카트, 히스토리, 기록 삭제 액션
+//카트, 히스토리, bmr, 기록 삭제 액션
 import {delCartAll} from './cart';
 import { delRecentAll } from "./recent";
-import {delRecord} from './record';
+import {delRecord, bmrChk} from './record';
 
 
 const initialState = {
@@ -89,12 +89,14 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         instance
         .get('/api/user/me')
         .then((res) => {
+            let _bmr = res.data.user.bmr[(res.data.user.bmr.length)-1].bmr
             console.log("res of login check", res);
             console.log(res.data.user)
             if(!res.data.user){
                 return;
             };
             dispatch(SetUser(res.data.user));
+            dispatch(bmrChk(_bmr))
             console.log("디스패치 성공!");
         })
         .catch((err) => {
