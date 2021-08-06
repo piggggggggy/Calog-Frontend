@@ -318,6 +318,7 @@ const TopBack = styled.div`
   position: absolute;
   z-index: -100;
   width: 100%;
+  max-width: 420px;
   background-color: ${theme.color.light};
   height: 26.6vh;
   border-bottom-left-radius: 32px;
@@ -336,7 +337,7 @@ const BodyContainer = styled.div`
 `;
 
 const SearchGrid = styled.div`
-  padding: 1vh 0 3% 0;
+  padding: 1vh 0 0 0;
   width: 100%;
   position: relative;
 `;

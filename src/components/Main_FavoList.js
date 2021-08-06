@@ -51,9 +51,9 @@ const FavoList = (props) => {
         : favo_list.map((favo, idx) => {
             return <Card key={favo.foodId} {...favo}/>
         })}
-        <MoreBtn onClick={changeFavo}>
+        {favo_list?.length > 4 ? <MoreBtn onClick={changeFavo}>
           <Text size="13px" m_size="13px" padding="0" margin="0">{moreFavo ? "덜보기" : "더보기"}</Text>
-        </MoreBtn>
+        </MoreBtn> : ''}
       </CardContainer>
       : ''}
     </React.Fragment>
