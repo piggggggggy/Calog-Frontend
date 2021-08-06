@@ -140,7 +140,8 @@ const DashBoard_Chart = (props) => {
       "id": is_night,
       "value": night_kcal,
     },
-    {
+    { 
+      "id" : "잔여",
       "value": bmr-morning_kcal-lunch_kcal-dinner_kcal-snack_kcal-night_kcal,
     }
   ];
