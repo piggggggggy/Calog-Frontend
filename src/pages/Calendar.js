@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Grid, Text} from '../elements';
 //컴포넌트
 import Calendar_Calendar from '../components/Calendar_Calendar';
+//데이터
+import { useSelector } from 'react-redux';
+//history
+import {history} from '../redux/configStore'
 
 
 /** 
@@ -13,6 +17,16 @@ import Calendar_Calendar from '../components/Calendar_Calendar';
 
 const Calendar = (props) => {
 
+  // 로그인 체크
+  const is_login = useSelector((state) => state.user.is_login)
+
+  useEffect(() => {
+    if(!is_login) {
+      let result = window.confirm('로그인이 필요한 기능이예요!🙀 로그인 페이지로 이동할까요?')
+      result ? history.push('/signsocial') : history.push('/');
+    }
+  })
+
   return (
     <React.Fragment>
       {/* 헤더 */}
@@ -20,7 +34,7 @@ const Calendar = (props) => {
         <Text size="28px" bold m_size='22px'>캘린더</Text>
       </Grid>
       {/* 캘린더 */}
-      <Calendar_Calendar />
+      {is_login && <Calendar_Calendar />}
     </React.Fragment>
   );
 }

@@ -52,7 +52,7 @@ const DashBoard = (props) => {
 
   // 기록이 없어서 bmr이 없을 때
   if(is_record?.length === 0) {
-    bmr = 0
+    bmr=0
     // const idx = (user.bmr?.length)-1
     // const user_bmr = user?.bmr[idx]
     // console.log(user_bmr)
@@ -80,20 +80,21 @@ const DashBoard = (props) => {
         {/* 멘트 */}
         <Top>
           <Line>
-            {/* 초과해서 먹었을 경우 컬러 다르게 */}
-            {over_bmr ?
-              <Text size="22px" bold m_size="20px" color={'#E24444'}>{user.nickname}님!</Text> :
-              <Text size="22px" bold m_size="20px">{user.nickname}님!</Text>
-            }
-
             {/* 비로그인 유저 */}
             {!is_login && (
-              <Text size="22px" bold m_size="20px">로그인이<br/>필요한 기능이예요🧐</Text>
+              <React.Fragment>
+                <Text size="22px" bold m_size="20px">안녕하세요!</Text>
+                <Text size="22px" bold m_size="20px">로그인이<br/>필요한 기능이예요🧐</Text>
+              </React.Fragment>
             )}
 
-            {/* 로그인 유저 */}
+            {/* 로그인 유저 - 초과해서 먹었을 경우 컬러 다르게 */}
             {is_login && (
               <React.Fragment>
+                {over_bmr ?
+                  <Text size="22px" bold m_size="20px" color={'#E24444'}>{user.nickname}님!</Text> :
+                  <Text size="22px" bold m_size="20px">{user.nickname}님!</Text>
+                }
                 {is_record?.length === 0 && <Text size="22px" bold m_size="20px">아직<br/>입력된 식단이 없어요🧐</Text>}
                 {(good && bmr !== 0) && <Text size="22px" bold m_size="20px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
                 {extra_bmr && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
