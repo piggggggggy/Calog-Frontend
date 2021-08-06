@@ -33,9 +33,9 @@ const dispatch = useDispatch();
         </Header>
 
         <InputContainer>
-        <KakaoLogin></KakaoLogin>
+        {/* <KakaoLogin></KakaoLogin>
         <NaverLogin></NaverLogin>
-        <GoogleButton></GoogleButton>
+        <GoogleButton></GoogleButton> */}
         <InputBox>
         <Button width="380px" height="56px" bg="#F9DF4A" border_radius="44px"
         _onClick={()=>{window.location.href = 'https://2k1.shop/api/auth_kakao/kakao';}}>

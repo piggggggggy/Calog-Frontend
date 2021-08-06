@@ -61,9 +61,9 @@ const setBodySpec = () => {
             <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
             <hr color="#F5F5F5"/>
             <Version>
-            <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">현재 버전</Text>
-            <Text size="17px" margin="27px 20px 24px 0px" color="#F19F13">V9.9.9</Text>
-            </Version>
+          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="15px 0px 15px 20px">현재 버전</Text>
+          <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">V9.9.9</Text>
+          </Version>
             <hr color="#F5F5F5"/>
           </Bottombg>
       </Container>
@@ -114,8 +114,8 @@ return (
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
           <hr color="#F5F5F5"/>
           <Version>
-          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">현재 버전</Text>
-          <Text size="17px" margin="27px 20px 24px 0px" color="#F19F13">V9.9.9</Text>
+          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="15px 0px 15px 20px">현재 버전</Text>
+          <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">V9.9.9</Text>
           </Version>
           <hr color="#F5F5F5"/>
           <div onClick={logout}>
@@ -134,7 +134,7 @@ export default BodySpec;
 
 const Container = styled.div`
   padding-top: 120px;
-  height: 866px;
+  height: 860px;
   width: 420px;
   background-color: #FFE999;
   overflow-y: hidden;

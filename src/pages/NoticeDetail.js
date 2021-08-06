@@ -30,15 +30,16 @@ React.useEffect(()=>{
   return (
     <React.Fragment>
       <Container>
-          <Head>
-            <div onClick={()=>{history.push("/notice")}}>
-            <Tag>{Back}</Tag>
-            </div>
+
+      <Head>
+            <td onClick={()=>{history.push("/notice")}}>
+            <Grid>{Back}</Grid>
+            </td>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br/>
-          </Head>
+            <p>&emsp;&emsp;</p>
+      </Head>
           <hr color="#F5F5F5"/>
+
             <Post>
                 <Tag >
                 <Text size="17px" lineheight="22px">{noticeOne?.title}</Text>
@@ -47,6 +48,7 @@ React.useEffect(()=>{
                 <hr color="#F5F5F5"/>
                 <Content>{noticeOne?.contents}</Content>
             </Post>
+
             {admin_email==="cadmin@calories.com"?
             <Grid width="25%">
                 <Button bg="#FFE899" border_radius="15px"
@@ -62,7 +64,7 @@ React.useEffect(()=>{
 export default NotiDetail;
 
 const Container = styled.div`
-  height: 866px;
+  /* height: 2000px; */
   width: 420px;
   overflow-y: hidden;
 `;
@@ -70,13 +72,12 @@ const Container = styled.div`
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 400px;
-  margin: 18px 0px 0px 0px;
-  padding: 10px;
+  padding: 15px;
+  padding-top: 30px;
 `;
 
 const Post = styled.div`
-    padding-bottom: 10px;
+    padding: 0px 15px 10px 15px;
 `;
 
 const Tag = styled.a`

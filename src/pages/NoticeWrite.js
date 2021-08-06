@@ -25,14 +25,13 @@ console.log(noticelist);
   return (
     <React.Fragment>
       <Container>
-          <Head>
-            <div onClick={()=>{history.push("/notice")}}>
-            <Tag>{Back}</Tag>
-            </div>
-            <Text size="17px" lineheight="22px" bold color="#000000">공지사항 작성</Text>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br/>
-          </Head>
+      <Head>
+            <td onClick={()=>{history.push("/notice")}}>
+            <Grid>{Back}</Grid>
+            </td>
+            <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
+            <p>&emsp;&emsp;</p>
+      </Head>
           <hr color="#F5F5F5"/>
           <Body>
             <Grid width="80%" margin="20px 0px 0px 0px">
@@ -64,7 +63,7 @@ console.log(noticelist);
 export default NoticeWrite;
 
 const Container = styled.div`
-  height: 866px;
+  height: 800px;
   width: 420px;
   overflow-y: hidden;
 `;
@@ -72,25 +71,14 @@ const Container = styled.div`
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 400px;
-  margin: 28px 0px 0px 0px;
+  padding: 15px;
+  padding-top: 30px;
 `;
 
 const Body = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-const Post = styled.div`
-    padding-bottom: 10px;
-    
-`;
-
-const Tag = styled.a`
-  &:hover{
-    cursor: pointer;
-  }
 `;
 
 const TextWrite = styled.textarea`

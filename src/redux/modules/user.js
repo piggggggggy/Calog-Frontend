@@ -83,12 +83,10 @@ export const NickDuplicate = (nickname) => {
 
 export const LoginCheck = () => { //토큰 없어도 응답 옴
     return function(dispatch, getState, {history}){
-    console.log("click login check")
         instance
         .get('/api/user/me')
         .then((res) => {
             console.log("res of login check", res);
-            console.log(res.data.user)
             if(!res.data.user){
                 return;
             };
@@ -159,7 +157,7 @@ const user = createSlice({
     },
     // BodySpect: (state, action) => {
     //     state.user_info = action.payload;
-    // }
+    // };
   },
 });
 
