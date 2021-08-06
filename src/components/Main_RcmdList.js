@@ -62,7 +62,7 @@ RcmdList.defaultProps = [
 ];
 
 const RecommendContainer = styled.div`
-  margin: 1.8vh 0 0 0;
+  margin: 1.7vh 0 0 0;
   padding: 0 0 4.4vh 5.2%;
   display: flex;
   align-items: center;
