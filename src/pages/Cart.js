@@ -18,7 +18,7 @@ const Cart = (props) => {
 
   return (
     <React.Fragment>
-      <BtnHeader/>
+      <BtnHeader title="장바구니"/>
       <CartBody/>
     </React.Fragment>
   );

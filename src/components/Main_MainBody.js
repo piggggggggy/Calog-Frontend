@@ -152,7 +152,7 @@ const MainBody = (props) => {
             </div>
           </SearchBox>
 
-          <SearchHistory style={styles}>
+          <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
               <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
