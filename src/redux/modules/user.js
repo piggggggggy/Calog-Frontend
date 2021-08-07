@@ -24,6 +24,7 @@ export const LoginSV = (user_info) => {
             const res_user_info = await axios({
                 method: "get",
                 url: "https://2k1.shop/api/user/me",
+                // url: "http://52.78.155.48",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
@@ -85,13 +86,11 @@ export const NickDuplicate = (nickname) => {
 
 export const LoginCheck = () => { //토큰 없어도 응답 옴
     return function(dispatch, getState, {history}){
-    console.log("click login check")
         instance
         .get('/api/user/me')
         .then((res) => {
             let _bmr = res.data.user.bmr[(res.data.user.bmr.length)-1].bmr
             console.log("res of login check", res);
-            console.log(res.data.user)
             if(!res.data.user){
                 return;
             };
@@ -165,7 +164,7 @@ const user = createSlice({
     },
     // BodySpect: (state, action) => {
     //     state.user_info = action.payload;
-    // }
+    // };
   },
 });
 

@@ -24,18 +24,6 @@ const user_info = useSelector(state=>state.user.user_info);
 const logout = () => {
   dispatch(_logOut());
 }
-const [bodyInfo,setBodyInfo] = useState({});
-const {gender, weight, height, age} = bodyInfo;
-const [spec, setSpec] = useState(false);
-const bodyStore = () => {
-  dispatch(BodySpectSV(gender, weight, height, age));
-};
-const setBodySpec = () => {
-  spec?setSpec(false):setSpec(true);
-  console.log(spec);
-};
-  // dispatch(LoginCheck());
-  // dispatch(BodySpectModify("남자", 75, 180, 25));
 
   if(!is_login){
   return (
@@ -61,9 +49,9 @@ const setBodySpec = () => {
             <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
             <hr color="#F5F5F5"/>
             <Version>
-            <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">현재 버전</Text>
-            <Text size="17px" margin="27px 20px 24px 0px" color="#F19F13">V9.9.9</Text>
-            </Version>
+          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="15px 0px 15px 20px">현재 버전</Text>
+          <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">V9.9.9</Text>
+          </Version>
             <hr color="#F5F5F5"/>
           </Bottombg>
       </Container>
@@ -85,25 +73,11 @@ return (
           <BodyBox>
             <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
             <Button border_radius="12px" bg="#FFE899" width="348px" height="56px"
-            _onClick={setBodySpec}>
+            _onClick={()=>{history.push("/addspec")}}>
               <Text lineheight="22px" size="16px" bold>신체정보 등록하기</Text>
             </Button>
 
           </BodyBox>
-          {spec?
-            <Grid>
-              <Text>성별</Text>
-              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, gender: e.target.value})}/>
-              <Text>나이</Text>
-              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, age: e.target.value})}/>
-              <Text>키</Text>
-              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, height: e.target.value})}/>
-              <Text>몸무게</Text>
-              <Input _onChange={(e)=>setBodyInfo({...bodyInfo, weight: e.target.value})}/>
-              <Button bg="#FFE899"
-              _onClick={bodyStore}>등록!</Button>
-            </Grid>
-            :""}
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">
             <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
@@ -114,8 +88,8 @@ return (
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
           <hr color="#F5F5F5"/>
           <Version>
-          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px">현재 버전</Text>
-          <Text size="17px" margin="27px 20px 24px 0px" color="#F19F13">V9.9.9</Text>
+          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="15px 0px 15px 20px">현재 버전</Text>
+          <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">V9.9.9</Text>
           </Version>
           <hr color="#F5F5F5"/>
           <div onClick={logout}>
@@ -134,7 +108,7 @@ export default BodySpec;
 
 const Container = styled.div`
   padding-top: 120px;
-  height: 866px;
+  height: 860px;
   width: 420px;
   background-color: #FFE999;
   overflow-y: hidden;
