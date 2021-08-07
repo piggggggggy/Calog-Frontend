@@ -77,6 +77,11 @@ const Emoji = styled.div`
   height: 44px;
   border-radius: 50%;
   margin: 20% auto 0 auto;
+
+  @media only screen and (max-width: 300px) {
+    width: 30px;
+    height: 30px;
+  };
 `;
 
 const Svg = styled.svg`
@@ -86,7 +91,12 @@ const Svg = styled.svg`
   @media ${theme.device.mobileMini} {
     width: 35px;
     height: 35px;
-  }
+  };
+
+  @media only screen and (max-width: 300px) {
+    width: 30px;
+    height: 30px;
+  };
 `;
 
 export default Calendar_DayEmoji;

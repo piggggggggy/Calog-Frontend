@@ -43,7 +43,7 @@ const DashBoard_Food = (props) => {
         {/* 총 칼로리 */}
         <Grid margin="4.7% 0 0 8%" width="35%" m_margin="4.7% 0 0 8%">
           <Button height="36px" border_radius="20px" bg={theme.color.light}>
-            <Text size="20px" bold m_size="17px" color={'#6993FF'}>총 {data?.totalCalories}kcal</Text>
+            <P>총 {data?.totalCalories}kcal</P>
           </Button>
         </Grid>
 
@@ -95,6 +95,20 @@ const DashBoard_Food = (props) => {
 const List = styled.div`
   height: auto;
   padding: 4.8% 8% 0 8%;
+`;
+
+const P = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  color: #6993FF;
+
+  @media ${theme.device.mobileM} {
+    font-size: 17px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    font-size: 12px;
+  };
 `;
 
 export default DashBoard_Food;

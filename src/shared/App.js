@@ -73,7 +73,7 @@ const App = (props) => {
 }
 const Wrap = styled.div`
   max-width: 420px;
-  min-width: 320px;
+  min-width: 280px;
   margin: 0 auto 9% auto;
   overflow-y: auto;
 `;
