@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { BodySpectSV, LoginCheck, BodySpectModify } from '../redux/modules/user';
-import { ProfileDefault, Camera, Pen, Go } from '../img/svg';
+import { ProfileDefault, Camera, Go } from '../img/svg';
 import { _logOut } from '../redux/modules/user';
 import {history} from '../redux/configStore';
-import _ from 'lodash';
-import { et } from 'date-fns/locale';
+
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -20,6 +18,8 @@ const BodySpec = (props) => {
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
 const user_info = useSelector(state=>state.user.user_info);
+
+
 
 const logout = () => {
   dispatch(_logOut());
@@ -36,7 +36,7 @@ const logout = () => {
             <hr color="#FFE899"/>
             <div onClick={()=>{history.push("/signsocial")}}>
             <Grid display="flex">
-            <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
+            <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
             <Text  margin="92px 0px 16px 0px">{Go}</Text>
             </Grid>
             </div>
@@ -69,10 +69,10 @@ return (
     </Cameradiv>
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">{user_info?.nickname}</Text>
+          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 30px">{user_info?.nickname}</Text>
           <BodyBox>
             <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
-            <Button border_radius="12px" bg="#FFE899" width="348px" height="56px"
+            <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
             _onClick={()=>{history.push("/addspec")}}>
               <Text lineheight="22px" size="16px" bold>신체정보 등록하기</Text>
             </Button>
@@ -109,13 +109,13 @@ export default BodySpec;
 const Container = styled.div`
   padding-top: 120px;
   height: 860px;
-  width: 420px;
+  width: 100%;
   background-color: #FFE999;
   overflow-y: hidden;
 `;
 
 const Bottombg = styled.div`
-  width: 420px;
+  width: 100%;
   height: 746px;
   background-color: #FFFFFF;
   border-top-left-radius: 12px;
@@ -135,7 +135,7 @@ const Version = styled.div`
 `;
 
 const BodyBox = styled.div`
-  width: 380px;
+  width: 80%;
   height: 170px;
   margin: auto;
   margin-bottom: 32px;

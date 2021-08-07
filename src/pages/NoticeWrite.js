@@ -64,7 +64,7 @@ export default NoticeWrite;
 
 const Container = styled.div`
   height: 800px;
-  width: 420px;
+  width: 100%;
   overflow-y: hidden;
 `;
 

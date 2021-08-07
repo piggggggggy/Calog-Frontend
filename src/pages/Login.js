@@ -34,10 +34,10 @@ const login = () => {
             <Text size="17px" lineheight="22px" bold color="#000000" >로그인 하기</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </Head>
-          <Grid margin="47px 20px 0px 20px" width="380px">
+          <Grid margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
-          <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="300px"
+          <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text" value={user_info.email}
             _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}
             />
             {/* {user_info.email?dupliEmail?"":X:""} */}
@@ -52,10 +52,10 @@ const login = () => {
         <Text color="#FFFFFF" size="13px" lineheight="18px">*이메일을 입력해주세요.</Text>
         }
           </Grid>
-          <Grid margin="47px 20px 0px 20px" width="380px">
+          <Grid margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호</Text>
           <InputBox>
-          <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="300px" type="password"
+          <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.password}
              _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}
             />
           {user_info.password?pwdCheck(user_info.password)?"":X:""}
@@ -66,9 +66,9 @@ const login = () => {
           }
           </Grid>
 
-          <Grid display="flex" fd="row-reverse">
+          {/* <Grid display="flex" fd="row-reverse">
           <Text color="#8C8C8C" size="15px" lineheight="20px" width="95px" margin="10px">비밀번호 재설정</Text>
-          </Grid>
+          </Grid> */}
 
           {user_info.password&&user_info.email&&emailCheck(user_info.email)&&pwdCheck(user_info.password)?
                     <Grid display="flex" fd="column-reverse" height="100%">
@@ -94,8 +94,8 @@ const login = () => {
 export default Signup;
 
 const Container = styled.div`
-  height: 866px;
-  width: 420px;
+  height: 600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,7 +104,7 @@ const Container = styled.div`
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 95%;
   margin: 28px 0px 0px 0px;
 `;
 
