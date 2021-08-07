@@ -69,7 +69,7 @@ return (
     </Cameradiv>
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">{user_info?.nickname}</Text>
+          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 30px">{user_info?.nickname}</Text>
           <BodyBox>
             <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
             <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
