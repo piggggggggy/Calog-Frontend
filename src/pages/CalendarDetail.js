@@ -57,7 +57,8 @@ const CalenderDetail = (props) => {
 
   // 이미지 빈값 제외하기
   let image_list = []
-  for(let idx = 0; idx <record_list.url?.length; idx++) {
+  let image_url = record_list?.url
+  for(let idx = 0; idx <image_url?.length; idx++) {
     const url = record_list.url[idx]
     url !== "" && image_list.push(url)
   };
@@ -114,7 +115,7 @@ const CalenderDetail = (props) => {
 
         {/* 이미지 */}
         <Grid margin="4% 9.7% 0 9.7%" bg={'#eee'} width="81%" height="221px" border_radius="8px" m_margin="4% 9.7% 0 9.7%">
-          {(record_list.url?.length === 1 && record_list.url[0] === "") ?
+          {(image_url?.length === 1 && record_list.url[0] === "") ?
             (
               <Grid text_align="center" padding="30% 0">
                 <Text size="22px" m_size="18px" bold>업로드된 이미지가 없어요!</Text>
@@ -142,7 +143,7 @@ const CalenderDetail = (props) => {
 
         {/* 메모 */}
         <Grid margin="4% 9.7% 27% 9.7%" width="81%" m_margin="4% 9.7% 27% 9.7%">
-          {record_list.contents?.map((r, idx) => {
+          {record_list?.contents?.map((r, idx) => {
             return <Text margin="0 0 3% 0">{r}</Text>
           })}
         </Grid>
