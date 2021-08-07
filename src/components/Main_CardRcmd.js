@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import theme from '../shared/theme';
 // history
 import { history } from '../redux/configStore';
 // modules
@@ -100,12 +101,12 @@ const dispatch = useDispatch();
         
         {/* 이름 */}
         <div>
-          <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</Text>
+          <NameBox lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</NameBox>
         </div>
         
         {/* 칼로리 */}
         <div>  
-          <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" padding="0" margin="0">{props.kcal} kcal</Text>
+          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0">{props.kcal} kcal</Text>
         </div>
         
         {/* 즐겨찾기 버튼 */}
@@ -129,22 +130,36 @@ CardRcmd.defaultProps = {
 
 const FoodCard = styled.div`
   position: relative;
-  min-width: 41%;
+  min-width: 44%;
+  max-width: 44%;
   min-height: 13.5vh;
+  max-height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: 1.5vh 3.8%;
+  padding: calc(1.3vh + 20px) 3.8% 1.5vh 3.8%;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   & > div {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     
   }
+`;
+
+const NameBox = styled.div`
+  max-height: 30px;
+  min-height: 30px;
+  max-width: 100%;
+  min-width: 100px;
+  line-height: 15px;
+  font-size: 13px;
+  color: #000000;
+  padding: 0; 
+  margin: 0;
 `;
 
 const BookmarkBox = styled.div`
