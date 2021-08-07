@@ -29,6 +29,7 @@ const FoodDetail = (props) => {
   const record = useSelector((state) => state.record.record);
   const bmr = record.length === 0 ? 0 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+  console.log(record)
 
 // useEffect
   useEffect(() => {
@@ -63,7 +64,6 @@ const FoodDetail = (props) => {
     } else {
       return 0;
     }
-    
   };
 
   const is_over = () => {

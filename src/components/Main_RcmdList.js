@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useRef, useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import _, { throttle } from 'lodash';
 // elementc & components
 import { Grid, Text } from '../elements';
 import CardRcmd from './Main_CardRcmd';
+// modules
+import { getRecommendedDB } from '../redux/modules/search';
 
 /** 
  * @param {*} props
@@ -14,33 +18,50 @@ import CardRcmd from './Main_CardRcmd';
 
 const RcmdList = (props) => {
 // dispatch
+  const dispatch = useDispatch();
 // props
+  const recommended_list = useSelector((state) => state.search.recommend);
 // useEffect
+  useEffect(() => {
+    dispatch(getRecommendedDB())
+  }, [])
 
-  // 가라데이터
-  const rcmd_list = [
-    {
-      name: "쌀밥 (1공기)",
-      kcal: 100,
-      foodId: 44
-    },
-    {
-      name: "쌀밥 (1공기)",
-      kcal: 100,
-      foodId: 45
-    },
-    {
-      name: "쌀밥 (1공기)",
-      kcal: 100,
-      foodId: 46
-    },
-    {
-      name: "쌀밥 (1공기)",
-      kcal: 100,
-      foodId: 47
-    },
-  ]
-  
+
+  const refX = useRef(null);
+  const [isDrag, setDrag] = useState(false);
+  const [startX, setStart] = useState();
+
+  const dragStart = (e) => {
+    e.preventDefault();
+    setDrag(true);
+    setStart(e.pageX + refX.current.scrollLeft)
+  };
+
+  const dragEnd = (e) => {
+    setDrag(false);
+  };
+
+  const dragMove = (e) => {
+    if (isDrag) {
+      const { scrollWidth, clientWidth, scrollLeft } = refX.current;
+ 
+      refX.current.scrollLeft = startX - e.pageX;
+
+      if (scrollLeft === 0) {
+        setStart(e.pageX);
+      } else if (scrollWidth <= clientWidth + scrollLeft) {
+        setStart(e.pageX + scrollLeft);
+      }
+    }
+  };
+
+  const delay = 50;
+  const throttleDragMove = throttle(dragMove, delay);
+
+  console.log(recommended_list);
+  if (!recommended_list) {
+    return <></>;
+  };
 
   return (
     <React.Fragment>
@@ -51,8 +72,13 @@ const RcmdList = (props) => {
       </Grid>
 
       {/* 추천리스트 */}
-      <RecommendContainer>
-        {rcmd_list.map((r, idx) => {
+      <RecommendContainer 
+        onMouseDown={dragStart}
+        onMouseMove={isDrag ? throttleDragMove : null}
+        onMouseUp={dragEnd}
+        onMouseLeave={dragEnd}
+        ref={refX}>
+        {recommended_list && recommended_list.map((r, idx) => {
           return <CardRcmd key={r.foodId} {...r}/>
         })}
       </RecommendContainer>
@@ -71,6 +97,7 @@ const RecommendContainer = styled.div`
   align-items: center;
   gap: 2%;
   overflow-x: scroll;
+
   &::-webkit-scrollbar {
     display: none;
   } 

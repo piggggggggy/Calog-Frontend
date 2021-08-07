@@ -40,7 +40,6 @@ const MSBody = (props) => {
   const [sortType, setSort] = useState('정확도순');
   const recent_list = useSelector((state) => state.recent.recent);
   const is_login = useSelector((state) => state.user.is_login);
-  console.log(is_login)
   const keyword = useRef();
 // useEffect
 
@@ -237,7 +236,7 @@ const MSBody = (props) => {
 
 
       <BodyContainer>
-        
+
         {/* 검색결과가 들어가는 곳 */}
         <CardList search_list={search_list}/>
 
