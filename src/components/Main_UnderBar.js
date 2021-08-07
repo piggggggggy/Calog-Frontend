@@ -13,8 +13,8 @@ import { TiDeleteOutline } from 'react-icons/ti';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 장바구니 내역 및 버튼
+ * @역할 장바구니를 보여주는 언더바
  * @필수값 리덕스에서 오는 장바구니 목록
  * @담당자 : 박용태
 */
@@ -47,13 +47,14 @@ const UnderBar = (props) => {
       style={{ transform: `translate(0, ${barOnOff ? '0%' : 'calc(100% - 10vh)'})` }}
         >
 
+          {/* 언더바 버튼 */}
           <Grid _onClick={toggleCart} display="flex" jc="center" align-items="center" height="2.3vh" width="20px" margin="1.2vh auto" m_margin="1.2vh auto" cursor>
             {barOnOff ? 
             <IoIosArrowDown size="20px" color="#757575"/>
             : <IoIosArrowUp size="20px" color="#757575"/> }
           </Grid>
           
-          {/* 즐겨찾기 항목 (가라데이터) */}
+          {/* 즐겨찾기 항목 */}
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
             {cart_list.map((cart, idx) => {
               return (
@@ -69,6 +70,7 @@ const UnderBar = (props) => {
             })}
           </Grid>
           
+          {/* 계산하러가기 버튼 */}
           <CalcBox>
             <div onClick={()=>{history.push('/cart')}}>
               <Text size="17px" m_size="15px" bold padding="0" margin="0">계산하러가기</Text>

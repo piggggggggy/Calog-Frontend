@@ -4,9 +4,9 @@ import _ from 'lodash';
 /** 
  * @param {*} props
  * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @역할 살릴 수 있을지 모르겠어요...
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 박용태
 */
 
 // const InfiniteScroll = (props) => {

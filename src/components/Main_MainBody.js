@@ -2,33 +2,28 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
-import { useInView } from "react-intersection-observer";
 import theme from '../shared/theme';
 import { history } from '../redux/configStore';
 // modules
-import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData, addMostUsedKey } from '../redux/modules/search';
-import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+import { searchKeywordDB, countKeywordDB, addMostUsedKey, rangeFilter } from '../redux/modules/search';
+import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 // elements & components
 import { Grid, Text } from '../elements';
-import Card from './Main_Card';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
-import InfiniteScroll from './Main_InfiniteScroll';
-import CardList from './Main_CardList';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { IoIosArrowDown } from 'react-icons/io';
-import { TiDeleteOutline } from 'react-icons/ti';
 import { MdCancel } from 'react-icons/md';
+import { TiDeleteOutline } from 'react-icons/ti';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 search_list, recent_list
+ * @returns 검색결과와 구분되는 첫페이지
+ * @역할 말그대로 메인페이지의 body영역
+ * @필수값 recent_list, is_login
  * @담당자 : 박용태
 */
 
@@ -152,6 +147,7 @@ const MainBody = (props) => {
             </div>
           </SearchBox>
 
+          {/* 최근 검색어 영역 */}
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
               <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
@@ -180,13 +176,12 @@ const MainBody = (props) => {
           
           {/* 인기검색어 */}
           <MostUsedKey/>
-          
         </SearchGrid>
 
         {/* 추천 푸드 */}
         <RcmdList/>
 
-        {/* {Range Slider // 수정해야함} */}
+        {/* Range Slider */}
         <Grid padding="0 2.8vh" >
           <RangeSlider 
             min={0}

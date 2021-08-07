@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { history } from '../redux/configStore';
 // elements & components
 import { Text } from '../elements';
 // modules
@@ -9,9 +8,9 @@ import { getMostUsedKeyDB, searchKeywordDB, countKeywordDB, addMostUsedKey } fro
 import { searchRecentDB, addRecent } from '../redux/modules/recent';
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 most_list
+ * @returns 인기검색어 3개
+ * @역할 인기검색어를 보여주는
+ * @필수값 인기검색어 리스트
  * @담당자 : 박용태
 */
 
@@ -22,10 +21,12 @@ const MostUsedKey = (props) => {
   const most_list = useSelector((state) => state.search.most);
   const is_login = useSelector((state) => state.user.is_login);
 // useEffect
+  // 인기검색어 불러오기
   useEffect(() => {
     dispatch(getMostUsedKeyDB());
   }, []);
 
+  // 인기검색어 누르면 검색되게!
   const search = (keyword) => {
     const data = {
       keyword: keyword,

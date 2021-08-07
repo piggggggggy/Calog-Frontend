@@ -8,9 +8,9 @@ import { Grid, Text } from '../elements';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 min(number), max(number), onChange(func)
+ * @returns 레인지 슬라이더
+ * @역할 레인지 슬라이더 조절할 수 있게
+ * @필수값 min(number)최소값, max(number)최대값, onChange(func)함수
  * @담당자 : 박용태
 */
 
@@ -66,7 +66,6 @@ const RangeSlider = ({min, max, onChange}) => {
         <ThumbContainer >
           <Thumb
             type="range"
-            // style={{zIndex: "3"}}
             min={min}
             max={max}
             value={minVal}

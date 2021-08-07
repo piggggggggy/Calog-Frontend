@@ -176,6 +176,7 @@ const MSBody = (props) => {
             </div>
           </SearchBox>
 
+          {/* 최근 검색어 영역 */}
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
               <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
@@ -200,12 +201,13 @@ const MSBody = (props) => {
                 }
               }) : ''}
             </div>
-
           </SearchHistory>
+
+          {/* 인기검색어 */}
           <MostUsedKey/>
         </SearchGrid>
 
-        {/* {Range Slider // 수정해야함} */}
+        {/* Range Slider  */}
         <Grid padding="0 2.8vh" >
           <RangeSlider 
             min={0}
@@ -235,6 +237,7 @@ const MSBody = (props) => {
 
 
       <BodyContainer>
+        
         {/* 검색결과가 들어가는 곳 */}
         <CardList search_list={search_list}/>
 
