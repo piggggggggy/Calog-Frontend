@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import theme from '../shared/theme';
 // history
 import { history } from '../redux/configStore';
 // modules
@@ -108,10 +109,10 @@ const Card = (props) => {
         </BookmarkBox>
 
         <div >
-          <Text size="15px" m_size="13px" lineheight="18px" m_lineheight="15px" margin="0" padding="0">{props.name}</Text>
+          <NameBox>{props.name}</NameBox>
         </div>
         <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
-          <Text size="17px" m_size="15px" lineheight="22px" m_lineheight="20px" bold margin="0" padding="0">{props.kcal} kcal</Text>
+          <KcalBox>{props.kcal} kcal</KcalBox>
         </div>
 
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
@@ -131,9 +132,10 @@ Card.defaultProps = {
 const FoodCard = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 10% 52% 26% 12%;
+  grid-template-columns: 10% 50% 28% 12%;
   width: 87%;
   height: 6.4vh;
+  min-height: 40px;
   margin-bottom: 16px;
   border: 1px solid #F19F13;
   border-radius: 16px;
@@ -143,10 +145,45 @@ const FoodCard = styled.div`
     margin-top: auto;
     margin-bottom: auto;
     width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
   }
+`;
+
+const KcalBox = styled.div`
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+
+  @media ${theme.device.mobileM} {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  @media ${theme.device.mobileS} {
+    font-size: 13px;
+    line-height: 18px;
+  }
+`;
+
+const NameBox = styled.div`
+  font-size: 15px;
+  line-height: 18px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+
+  @media ${theme.device.mobileM} {
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  @media ${theme.device.mobileS} {
+    white-space: nowrap;
+  }
+  
 `;
 
 const BookmarkBox = styled.div`

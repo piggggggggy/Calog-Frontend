@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import theme from '../shared/theme';
 // elements & components
 import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
@@ -88,7 +89,7 @@ const FoodDetail = (props) => {
         <Grid padding= "1.7vh 7.6% 0 7.6%">
           <Grid>
             <Grid display="flex">
-              <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</Text>
+              <NameBox lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</NameBox>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
             <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6% 0" paddig="0">{foodInfo.kcal} kcal</Text>
@@ -190,15 +191,37 @@ const BodyContainer = styled.div`
   }
 `;
 
+const NameBox = styled.div`
+  line-height: 22px;
+  min-width: 160px;
+  font-weight: bold; 
+  font-size: 15px;
+  color: #5F5F5F;
+  margin: 0 10px 0 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+  @media ${theme.device.mobileH} {
+    font-size: 17px;
+  }
+`;
+
 const IngredientCircle = styled.div`
-  width: 12vh;
-  height: 12vh;
+  width: 84px;
+  height: 84px;
   border: 3px solid #F19F13;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media ${theme.device.mobileH} {
+    width: 12vh;
+    height: 12vh;
+  }
 `;
 
 const Line = styled.div`
