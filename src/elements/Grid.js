@@ -90,8 +90,8 @@ const DefaultGrid = styled.div`
   ${(props) => (props.ai ? `align-items: ${props.ai}` : "")};
   ${(props) => (props.fd ? `flex-direction: ${props.fd}` : "")};
   ${(props) => (props.fw ? `flex-wrap: ${props.fw}` : "")};
-  ${(props) => (props.grid_row ? `grid-template-row: ${props.grid_row}` : "")};
-  ${(props) => (props.grid_column ? `grid-template-column: ${props.grid_column}` : "")};
+  ${(props) => (props.grid_row ? `grid-template-rows: ${props.grid_row}` : "")};
+  ${(props) => (props.grid_column ? `grid-template-columns: ${props.grid_column}` : "")};
   ${(props) => (props.line_height ? `line-height: ${props.line_height}` : "")};
 
   @media ${theme.device.mobileM} {

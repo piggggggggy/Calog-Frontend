@@ -16,9 +16,6 @@ import {getAllRecordDB} from '../redux/modules/record';
 // history
 import {history} from '../redux/configStore';
 
-// 비로그인 모달
-import { Confirm } from 'react-st-modal';
-
 /** 
  * @param {list} d
  * @returns {list} d 캘린더의 하루를 채울 수 있도록 맵이 돌아가는 요소
@@ -221,14 +218,31 @@ const NeedLogin = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  max-width: 320px;
 `;
 
 const Modal = styled.div`
   width: 94%;
   left: 10%;
   top: 10%;
+  max-width: 420px;
   transform: translate(-0%, -8%);
-  margin: auto
+  margin: auto;
+
+  // iphone
+  @media only screen and (min-height: 800px) {
+    margin: 5% auto;
+  };
+
+  // ipad
+  @media only screen and (min-height: 1000px) {
+    margin: 10% auto;
+  };
+
+  // ipad pro
+  @media only screen and (min-height: 1366px) {
+    margin: 20% auto;
+  };
 `;
 
 const P = styled.p`

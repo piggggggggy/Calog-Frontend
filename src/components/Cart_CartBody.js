@@ -26,6 +26,12 @@ const CartBody = (props) => {
   const cart_list = useSelector((state) => state.cart.cart);
   const is_login = useSelector((state) => state.user.is_login);
   const [type, setType] = useState("아침");
+  
+// 대사량과 나의 칼로리 기록
+  const record = useSelector((state) => state.record.record);
+  const bmr = record.length === 0 ? 0 : record[0]?.bmr;
+  const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+
 // useEffect
 
   // 장바구니에 담긴 food의 칼로리 합계
@@ -66,6 +72,19 @@ const CartBody = (props) => {
     }
   };
 
+  // 현재 남은(초과한) 칼로리 계산
+  const totalKcal = () => {
+    let result = 0
+    if (foodRecord.length !== 0) {
+      foodRecord.map((f, idx) => {
+        result += parseInt(f.amount) * f.resultKcal;
+      });
+      return result;
+    } else {
+      return 0;
+    }
+  };
+
   return (
     <React.Fragment>
       <BodyContainer>
@@ -73,7 +92,9 @@ const CartBody = (props) => {
         {/* 상단 내용 // 모냥만 만든 상태 */}
         <Grid padding="0 9%">
           <Grid>
-            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 4px 0" paddig="0">100kcal 초과했어요!</Text>
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 4px 0" paddig="0">
+              {totalKcal() + sumKcal() >= bmr ? `오늘의 기준치를 ${totalKcal() + sumKcal()- bmr} kcal 초과해요!` : `먹어도 아직 ${bmr - (totalKcal() + sumKcal())} kcal 이나 더 먹을 수 있어요!`}
+            </Text>
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
           </Grid>
 
@@ -161,7 +182,7 @@ const CartListBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1vh;
+  gap: 2vh;
 
 `;
 

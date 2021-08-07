@@ -25,11 +25,13 @@ const FoodDetail = (props) => {
   const dispatch = useDispatch();
 // props
   const foodInfo = useSelector((state) => state.search.detail);
-  const record = useSelector((state) => state.record.record);
   const foodId = props.match.params.foodId;
 
-  const bmr = record[0]?.bmr;
-  const foodRecord = record[0]?.foodRecords;
+// 대사량과 나의 칼로리 기록
+  const record = useSelector((state) => state.record.record);
+  const bmr = record.length === 0 ? 0 : record[0]?.bmr;
+  const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+
 // useEffect
   useEffect(() => {
     dispatch(getDetailDB(foodId))
@@ -56,10 +58,15 @@ const FoodDetail = (props) => {
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
     let result = 0
-    foodRecord.map((f, idx) => {
-      result += parseInt(f.amount) * f.resultKcal;
-    });
-    return result;
+    if(foodRecord.length !== 0) {
+      foodRecord.map((f, idx) => {
+        result += parseInt(f.amount) * f.resultKcal;
+      });
+      return result;
+    } else {
+      return 0;
+    }
+    
   };
 
   const is_over = () => {

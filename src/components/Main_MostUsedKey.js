@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { history } from '../redux/configStore';
 // elements & components
 import { Text } from '../elements';
 // modules
-import { getMostUsedKeyDB, searchKeywordDB } from '../redux/modules/search';
-
+import { getMostUsedKeyDB, searchKeywordDB, countKeywordDB, addMostUsedKey } from '../redux/modules/search';
+import { searchRecentDB, addRecent } from '../redux/modules/recent';
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -19,10 +20,26 @@ const MostUsedKey = (props) => {
   const dispatch = useDispatch();
 // props
   const most_list = useSelector((state) => state.search.most);
+  const is_login = useSelector((state) => state.user.is_login);
 // useEffect
   useEffect(() => {
     dispatch(getMostUsedKeyDB());
-  }, [])
+  }, []);
+
+  const search = (keyword) => {
+    const data = {
+      keyword: keyword,
+      min: 0,
+      max: 5000
+    };
+    dispatch(searchKeywordDB(data));
+    {is_login ? 
+      dispatch(countKeywordDB(keyword))
+      : dispatch(addMostUsedKey(keyword))};
+    {is_login ?
+      dispatch(searchRecentDB(keyword))
+      : dispatch(addRecent(keyword))};
+  };
 
 
   return (
@@ -33,13 +50,7 @@ const MostUsedKey = (props) => {
             return (
               <MostButton 
                 onClick={()=>{
-                  dispatch(searchKeywordDB(
-                    {
-                      keyword: m.keyword,
-                      min: 0,
-                      max: 5000,
-                    }
-                  ));
+                  search(m.keyword);
                 }}
                 key={idx}>
                 <Text lineheight="12px" m_lineheight="12px" size="10px" m_size="10px" color="#404040" padding="0" margin="0">{m.keyword}</Text>
@@ -75,6 +86,7 @@ const MostButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export default MostUsedKey;

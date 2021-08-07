@@ -9,14 +9,21 @@ import {history} from '../redux/configStore';
 // 컴포넌트
 import CalendarDetail_Date from'../components/CalendarDetail_Date';
 import CalendarDetail_Info from '../components/CalendarDetail_Info';
-import Record_When from '../components/Record_When';
+import DashBoard_When from '../components/DashBoard_When';
 import CalendarDetail_Food from '../components/CalendarDetail_Food';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
 import {getRecordDB} from '../redux/modules/record';
 
+// slick
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 /** 
+ * @param {list} r
+ * @returns {list} r 유저가 기록한 foodRecords의 리스트를 반환
  * @역할 캘린더의 특정 날짜를 눌렀을 때 보이는 상세 컴포넌트
  * @담당자 : 김나영
 */
@@ -35,6 +42,26 @@ const CalenderDetail = (props) => {
 
   // 기록
   const record_list = useSelector((state) => state.record.record[0]);
+  const record_map = record_list?.foodRecords
+
+  console.log(record_list.url)
+  // slick setting
+  // dots 유 / 반복 유 / 속도 / 한 번에 보여줄 스크롤 / 스크롤 시 1장 / 자동 넘김 방지
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 2000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+  }
+
+  // 이미지 빈값 제외하기
+  let image_list = []
+  for(let idx = 0; idx <record_list.url?.length; idx++) {
+    const url = record_list.url[idx]
+    url !== "" && image_list.push(url)
+  };
 
   return (
     <React.Fragment>
@@ -62,7 +89,7 @@ const CalenderDetail = (props) => {
 
         {/* 기록 시기 */}
         <Grid margin="9.7% 0 0 2%" m_margin="9.7% 0 0 2%">
-          <Record_When />
+          <DashBoard_When />
         </Grid>
 
         {/* 식단title */}
@@ -74,7 +101,9 @@ const CalenderDetail = (props) => {
 
         {/* 맵돌리기 */}
         <Grid width="80.9%" margin="4% auto 0 auto" m_margin="4% auto 0 auto">
-          <CalendarDetail_Food />
+          {record_map?.map((r, idx) => {
+            return <CalendarDetail_Food key={r._id} {...r}/>
+          })}
         </Grid>
 
         {/* 사진title */}
@@ -86,7 +115,23 @@ const CalenderDetail = (props) => {
 
         {/* 이미지 */}
         <Grid margin="4% 9.7% 0 9.7%" bg={'#eee'} width="81%" height="221px" border_radius="8px" m_margin="4% 9.7% 0 9.7%">
-          <Image height="221px" />
+          {(record_list.url?.length === 1 && record_list.url[0] === "") ?
+            (
+              <Grid text_align="center" padding="30% 0">
+                <Text size="22px" m_size="18px" bold>업로드된 이미지가 없어요!</Text>
+              </Grid>
+            ) : (
+              <Slider {...settings}>
+                {image_list.map((r, idx) => {
+                  return (
+                    <React.Fragment>
+                      <Image height="221px" src={r} b_size="100% 100%"/> 
+                    </React.Fragment>
+                    )
+                })}
+              </Slider>
+            )
+          }
         </Grid>
 
         {/* 메모title */}
@@ -98,7 +143,9 @@ const CalenderDetail = (props) => {
 
         {/* 메모 */}
         <Grid margin="4% 9.7% 27% 9.7%" width="81%" m_margin="4% 9.7% 27% 9.7%">
-          <Text>memo</Text>
+          {record_list.contents?.map((r, idx) => {
+            return <Text margin="0 0 3% 0">{r}</Text>
+          })}
         </Grid>
       </Grid>
     </React.Fragment>

@@ -45,7 +45,7 @@ const App = (props) => {
           <GlobalStyles />
             <Wrap>
               <Route path="/" exact component={Main} />
-              {/* <Route path="/:keyword" exact component={MainSearch} /> */}
+              <Route path="/search" exact component={MainSearch} />
               <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
               <Route path="/cart" exact component={Cart} />
 
@@ -74,7 +74,7 @@ const App = (props) => {
 }
 const Wrap = styled.div`
   max-width: 420px;
-  min-width: 320px;
+  min-width: 280px;
   margin: 0 auto 9% auto;
   overflow-y: auto;
 `;
