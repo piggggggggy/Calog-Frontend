@@ -43,8 +43,7 @@ const CalenderDetail = (props) => {
   // 기록
   const record_list = useSelector((state) => state.record.record[0]);
   const record_map = record_list?.foodRecords
-
-  console.log(record_list.url)
+  
   // slick setting
   // dots 유 / 반복 유 / 속도 / 한 번에 보여줄 스크롤 / 스크롤 시 1장 / 자동 넘김 방지
   const settings = {
