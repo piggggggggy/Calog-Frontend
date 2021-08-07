@@ -167,6 +167,38 @@ const TopBack = styled.div`
   height: 26.6vh;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
+
+  // iphone 5/se
+  @media only screen and (min-height: 568px) {
+    height: 33vh;
+  };
+
+  // iphone 6,7,8 / galaxy fold
+  @media only screen and (min-height: 653px) {
+    height: 28vh;
+  };
+
+  // pixel2 / serface duo
+  @media only screen and (min-height: 720px) and (max-height: 811px) {
+    height: 32vh;
+  };
+
+  // iphone x
+  @media only screen and (height: 812px) {
+    height: 23vh;
+  };
+
+  // ipad
+  @media only screen and (min-height: 1024px) {
+    height: 23vh;
+  };
+
+  // ipad prop
+  @media only screen and (min-height: 1366px) {
+    height: 18vh;
+  };
+
+  
 `;
 
 const Top = styled.div`

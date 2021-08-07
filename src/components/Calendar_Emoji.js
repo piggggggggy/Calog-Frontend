@@ -95,7 +95,12 @@ const DefaultEmoji = styled.div`
     width: 35px;
     height: 35px;
     margin: 10% auto 0 auto;
-  }
+  };
+
+  @media only screen and (max-width: 300px) {
+    width: 30px;
+    height: 30px;
+  };
 `;
 
 const Emoji = styled.div`
@@ -108,7 +113,12 @@ const Emoji = styled.div`
     width: 35px;
     height: 35px;
     margin: 10% auto 0 auto;
-  }
+  };
+
+  @media only screen and (max-width: 300px) {
+    width: 30px;
+    height: 30px;
+  };
 `;
 
 const Svg = styled.svg`
@@ -118,7 +128,12 @@ const Svg = styled.svg`
   @media ${theme.device.mobileMini} {
     width: 35px;
     height: 35px;
-  }
+  };
+
+  @media only screen and (max-width: 300px) {
+    width: 30px;
+    height: 30px;
+  };
 `;
 
 export default Calendar_Emoji;

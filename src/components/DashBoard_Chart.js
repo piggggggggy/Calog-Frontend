@@ -141,7 +141,7 @@ const DashBoard_Chart = (props) => {
       "value": night_kcal,
     },
     { 
-      "id" : "잔여",
+      "id" : "",
       "value": bmr-morning_kcal-lunch_kcal-dinner_kcal-snack_kcal-night_kcal,
     }
   ];
@@ -220,6 +220,18 @@ const Title = styled.div`
   height: 200px;
   text-align: center;
   line-height: 200px;
+
+  @media only screen and (min-width: 700px) {
+    width: 26%;
+  }
+
+  @media only screen and (min-width: 500px) {
+    width: 37%;
+  }
+
+  @media only screen and (min-width: 1000px) {
+    width: 20%;
+  }
 `;
 
 export default DashBoard_Chart;
