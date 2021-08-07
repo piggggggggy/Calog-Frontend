@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {Button, Text, Grid, Input} from '../elements';
 import BodySpec from './BodySpec';
-
+import { useDispatch } from 'react-redux';
+import { BodySpectSV } from '../redux/modules/user';
+import { history } from '../redux/configStore';
 
 const AddSpec = () => {
+    const dispatch = useDispatch();
 //성별, 나이, 키, 몸무게
 const [bodyspec, SetSpec] = useState({});
+const {gender, weight, height, age} = bodyspec;
 const [page, Setpage] = useState(0);
 const nextPage = () => {
     Setpage(page+1);
 };
 const addspec = () => {
-    console.log("add spec")
+    dispatch(BodySpectSV(gender, weight, height, age));
+    history.push("/body");
 };
 const setMan = () => {
     SetSpec({...BodySpec, gender: "남자"});
@@ -52,10 +57,6 @@ console.log("body spec", bodyspec);
                 <Body>
 
                             {page===0?
-                            // <InputBox>
-                            // {/* &emsp;<Input border="none" width="80%"/> */}
-                            // <Strong>&emsp;</Strong>
-                            // </InputBox>
                             <Grid display="flex" jc="center">
                             <Gender onClick={setMan}>남</Gender>
                             <Gender onClick={setWoman}>여</Gender>
@@ -64,19 +65,21 @@ console.log("body spec", bodyspec);
                             :
                             page===1?
                             <InputBox>
-                            &emsp;<Input type="text" border="none" width="80%" value={""}
+                            &emsp;<Input border="none" width="80%" type="text" value={bodyspec.age} 
                             _onChange={(e)=>SetSpec({...bodyspec, age: e.target.value})}/>
                             <Strong>AGE&emsp;</Strong>
                             </InputBox>
                             :
                             page===2?
                             <InputBox>
-                            &emsp;<Input border="none" width="80%"/>
+                            &emsp;<Input border="none" width="80%" type="text" value={bodyspec.height}
+                            _onChange={(e)=>SetSpec({...bodyspec, height: e.target.value})}/>
                             <Strong>CM&emsp;</Strong>
                             </InputBox>
                             :
                             <InputBox>
-                            &emsp;<Input border="none" width="80%"/>
+                            &emsp;<Input border="none" width="80%" type="text" value={bodyspec.weight}
+                            _onChange={(e)=>SetSpec({...bodyspec, weight: e.target.value})}/>
                             <Strong>KG&emsp;</Strong>
                             </InputBox>
                             }
