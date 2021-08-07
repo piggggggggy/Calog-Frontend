@@ -18,7 +18,7 @@ window.Kakao.init("260d1c32075b38f17bb12e77e11aa4ca");
     window.Kakao.Auth.login({
         success: function(authObj) {
             console.log(authObj);
-            console.log(window);
+            console.log(window.API);
             window.Kakao.API.request({
                 url:'/v2/user/me',
                 success: res => {
