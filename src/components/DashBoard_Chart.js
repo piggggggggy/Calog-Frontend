@@ -151,10 +151,10 @@ const DashBoard_Chart = (props) => {
 
       {/* 전체 틀 */}
       <Grid margin="5.8% auto 0 auto" border_radius="20px" width="48%" height="200px" m_margin="0 auto">
-        <Title>
-          <Text size="13px" bold m_size="11px">나의 칼로리</Text>
-        </Title> 
 
+      <Title>
+          <Text size="13px" bold m_size="11px" margin="0">나의 칼로리</Text>
+      </Title> 
       {/**
         * data = 데이터
         * innerRadius = 도넛 안쪽 둥글기
@@ -210,28 +210,18 @@ const DashBoard_Chart = (props) => {
         </React.Fragment>
       )}
       </Grid>
+      
+      
     </React.Fragment>
   );
 };
 
 const Title = styled.div`
-  position: absolute;
-  width: 48%;
+  position: relative;
   height: 200px;
   text-align: center;
   line-height: 200px;
-
-  @media only screen and (min-width: 700px) {
-    width: 26%;
-  }
-
-  @media only screen and (min-width: 500px) {
-    width: 37%;
-  }
-
-  @media only screen and (min-width: 1000px) {
-    width: 20%;
-  }
+  margin-bottom: -200px;
 `;
 
 export default DashBoard_Chart;
