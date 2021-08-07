@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 // elements & components
@@ -6,16 +6,14 @@ import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
 import UnderBar from '../components/Main_UnderBar';
 // icons
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { IoStar } from 'react-icons/io5';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 // modules
 import { addCartRx } from '../redux/modules/cart';
 import { getDetailDB } from '../redux/modules/search';
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 기본정보, 영양정보, 칼로리 비교
+ * @역할  음식 상세정보를 표시
  * @필수값 푸드Id에 해당하는 상세 푸드 데이터
  * @담당자 : 박용태
 */
@@ -31,16 +29,16 @@ const FoodDetail = (props) => {
   const record = useSelector((state) => state.record.record);
   const bmr = record.length === 0 ? 0 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+  console.log(record)
 
 // useEffect
   useEffect(() => {
     dispatch(getDetailDB(foodId))
-  }, [])
-  // console.log(foodInfo)
+  }, []);
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
-  }
+  };
 
   // 장바구니 담기!
   const addCart = () => {
@@ -66,7 +64,6 @@ const FoodDetail = (props) => {
     } else {
       return 0;
     }
-    
   };
 
   const is_over = () => {
@@ -82,10 +79,12 @@ const FoodDetail = (props) => {
   
   return (
     <React.Fragment>
+      {/* 헤더 */}
       <BtnHeader title="칼로리 상세"/>
 
       <BodyContainer>
         
+        {/* 기본정보 */}
         <Grid padding= "1.7vh 7.6% 0 7.6%">
           <Grid>
             <Grid display="flex">
@@ -94,6 +93,7 @@ const FoodDetail = (props) => {
             </Grid>  
             <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6% 0" paddig="0">{foodInfo.kcal} kcal</Text>
           </Grid>
+          {/* 칼로리 비교정보 */}
           <Grid margin="1vh 0" m_margin="1vh 0">
             <Text lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color="#EC6262" padding="0" margin="0">
               {is_over() === "line" ? 
@@ -105,10 +105,12 @@ const FoodDetail = (props) => {
           </Grid>
         </Grid>
 
+        {/* 카트 버튼 */}
         <Grid margin="1.7vh 0" m_margin="1.7vh 0" padding= "0 7.6%">
           <div><BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/></div>
         </Grid>
 
+        {/* 영양성분 */}
         <Grid padding= "0 7.6%">
           <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
         </Grid>
@@ -164,12 +166,9 @@ const FoodDetail = (props) => {
             <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">459mg</Text>
           </Grid>
           <Line style={{border: "1px solid #F19F13"}}/>          
-          {/* <Grid is_flex padding="0.9vh 0.5vh">
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
-          </Grid> */}
         </Grid>
 
+        {/* 카트 탭 */}
         <UnderBar/>
 
       </BodyContainer>

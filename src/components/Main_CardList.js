@@ -1,21 +1,19 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useInView } from 'react-intersection-observer';
-import { useSelector, useDispatch } from 'react-redux';
+
 // elements & components
 import Card from './Main_Card';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 검색결과
+ * @역할 검색결과를 보여주는 컴포넌트
  * @필수값 검색 결과 search_list
  * @담당자 : 박용태
 */
 
 const CardList = (props) => {
 // dispatch
-  const dispatch = useDispatch();
 // props
   const search_list = props.search_list;
 
@@ -40,7 +38,6 @@ CardList.defaultProps = {
 
 const CardContainer = styled.div`
   width: 100%;
-  /* padding: 0 6%; */
   display: flex;
   flex-direction: column;
   align-items: center;

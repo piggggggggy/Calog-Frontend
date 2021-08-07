@@ -13,9 +13,9 @@ import { history } from '../redux/configStore';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 장바구니에 담은 값들
+ * @returns 장바구니 담긴 내용, 계산된 칼로리, 기초대사량과 비교
+ * @역할 장바구니 역할
+ * @필수값 장바구니에 담은 내용
  * @담당자 : 박용태
 */
 
@@ -40,9 +40,6 @@ const CartBody = (props) => {
     cart_list.map((cart, idx) => {
       result = result + (cart.kcal * cart.amount)
     });
-    // for (let i in cart_list) {
-    //   result = result + (i.kcal * i.amount);
-    // }
     return result
   };
 
@@ -89,8 +86,9 @@ const CartBody = (props) => {
     <React.Fragment>
       <BodyContainer>
         
-        {/* 상단 내용 // 모냥만 만든 상태 */}
+        
         <Grid padding="0 9%">
+          {/* 상단 내용 */}
           <Grid>
             <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 4px 0" paddig="0">
               {totalKcal() + sumKcal() >= bmr ? `오늘의 기준치를 ${totalKcal() + sumKcal()- bmr} kcal 초과해요!` : `먹어도 아직 ${bmr - (totalKcal() + sumKcal())} kcal 이나 더 먹을 수 있어요!`}
@@ -98,6 +96,7 @@ const CartBody = (props) => {
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
           </Grid>
 
+          {/* 푸드 시간 타입 */}
           <Grid display="flex" margin="3.5vh 0 0 0" m_margin="3.5vh 0 0 0">
             <div onClick={()=>{selectType("morning")}} style={{marginRight: "3vw" }}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
@@ -142,12 +141,14 @@ const CartBody = (props) => {
           </Grid>
         </Grid>
 
+        {/* 카트에 담긴 내용 */}
         <CartListBox>
           {cart_list.map((cart, idx) => {
             return <Card key={cart.foodId} {...cart}/>
           })}
         </CartListBox>
 
+        {/* 기록하러가기 버튼 */}
         <CalcBox>
           <div onClick={()=>{write()}}>
             <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>

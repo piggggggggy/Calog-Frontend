@@ -74,19 +74,37 @@ export const getMostUsedKeyDB = () => {
   }
 };
 
+  // 추천 검색어 가져오기
+export const getRecommendedDB = () => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .get('/api/home/recommend')
+      .then((res) => {
+        dispatch(getRecommended(res.data.randomList));
+      })
+      .catch((err) => {
+        console.log(err, "에러가 났읍니다.")
+      })
+  }
+};
+
 
 // initial State 
 const initialState = {
   // 상세 정보
   detail: [],
-  //검색 결과 리스트
+  // 검색 결과 리스트 (원본)
   list : [],
+  // 정렬 및 필터링된 결과
   filtered_list: [],
+  // 리덕스 무한스크롤
   export_list: [],
   paging: { start: 0, end: 20, next: true},
   is_loading: false,
   // 인기검색어
-  most: []
+  most: [],
+  // 추천검색어
+  recommend: []
 }
 
 // redux
@@ -183,11 +201,28 @@ const search = createSlice({
         return b.times - a.times;
       });
       state.most = desMost;
-    }
+    },
+
+    // 추천검색어 받기
+    getRecommended : (state, action) => {
+      state.recommend = action.payload;
+    },
 
   }
 });
 
-export const {searchKeyword, getMostUsedKey, addMostUsedKey, rangeFilter, ascendingSort, descendingSort, koreanSort, exactSort, getScrollData, getDetail} = search.actions;
+export const {
+  searchKeyword, 
+  getMostUsedKey, 
+  addMostUsedKey, 
+  rangeFilter, 
+  ascendingSort, 
+  descendingSort, 
+  koreanSort, 
+  exactSort, 
+  getScrollData, 
+  getDetail,
+  getRecommended
+} = search.actions;
 
 export default search;

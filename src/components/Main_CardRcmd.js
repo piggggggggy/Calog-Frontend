@@ -7,16 +7,16 @@ import { history } from '../redux/configStore';
 import { addCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
 // elements & components
-import { Grid, Text } from '../elements';
+import { Text } from '../elements';
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 import { IoStar } from 'react-icons/io5';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
+ * @returns 뚱뚱이 카드
+ * @역할 음식 추천에 활용할 뚱뚱한 카드
+ * @필수값 추천 음식의 기본정보
  * @담당자 : 박용태
 */
 
@@ -98,10 +98,12 @@ const dispatch = useDispatch();
     <React.Fragment>
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
         
+        {/* 이름 */}
         <div>
           <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</Text>
         </div>
         
+        {/* 칼로리 */}
         <div>  
           <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" padding="0" margin="0">{props.kcal} kcal</Text>
         </div>
