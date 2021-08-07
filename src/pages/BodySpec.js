@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ProfileDefault, Camera, Go } from '../img/svg';
 import { _logOut } from '../redux/modules/user';
 import {history} from '../redux/configStore';
-import axios from 'axios';
 
 /** 
  * @param {*} props
@@ -16,17 +15,6 @@ import axios from 'axios';
 */
 
 const BodySpec = (props) => {
-  React.useEffect(()=>{
-    console.log("20")
-    axios({
-      method: "post",
-      url: "http://52.78.155.48",
-      withCredentials: true,
-  })
-  .then((res) => {
-    console.log.length(res);
-  });
-  },[])
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
 const user_info = useSelector(state=>state.user.user_info);
@@ -48,7 +36,7 @@ const logout = () => {
             <hr color="#FFE899"/>
             <div onClick={()=>{history.push("/signsocial")}}>
             <Grid display="flex">
-            <Text bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
+            <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
             <Text  margin="92px 0px 16px 0px">{Go}</Text>
             </Grid>
             </div>
@@ -121,13 +109,13 @@ export default BodySpec;
 const Container = styled.div`
   padding-top: 120px;
   height: 860px;
-  width: 420px;
+  width: 100%;
   background-color: #FFE999;
   overflow-y: hidden;
 `;
 
 const Bottombg = styled.div`
-  width: 420px;
+  width: 100%;
   height: 746px;
   background-color: #FFFFFF;
   border-top-left-radius: 12px;

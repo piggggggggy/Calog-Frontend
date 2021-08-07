@@ -66,10 +66,11 @@ export default Notice;
 
 const Container = styled.div`
   height: 800px;
-  width: 405px;
+  width: 100%;
 `;
 
 const Head = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 15px;

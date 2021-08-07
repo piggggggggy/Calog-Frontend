@@ -33,7 +33,7 @@ debounce()
 useEffect(() => {
   const debounce = _.debounce(() => {
     dispatch(NickDuplicate(user_info.nickname));
-  },0);
+  },10);
   debounce()
   }, [user_info.nickname]);
 
@@ -61,11 +61,13 @@ const debounceNick = _.debounce((e) => {
             <Text size="17px" lineheight="22px" bold color="#000000" >이메일로 가입</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </Head>
-          <Grid margin="47px 20px 0px 20px" width="380px">
+          <Grid margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
-          <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="300px" type="text" value={user_info.email}
-            _onChange={(e)=>{debounceEmail(e)}}
+          <SubInput placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text"
+            onChange={
+              (e)=>{debounceEmail(e)}
+            }
             />
             {user_info.email?dupliEmail?"":X:""}
           </InputBox>
@@ -79,10 +81,10 @@ const debounceNick = _.debounce((e) => {
         <Text color="#FFFFFF" size="13px" lineheight="18px">*이메일을 입력해주세요.</Text>
         }
           </Grid>
-          <Grid margin="47px 20px 0px 20px" width="380px">
+          <Grid margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호</Text>
           <InputBox>
-          <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="300px" type="password" value={user_info.password}
+          <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.password}
              _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}
             />
           {user_info.password?pwdCheck(user_info.password)?"":X:""}
@@ -93,10 +95,10 @@ const debounceNick = _.debounce((e) => {
           }
           </Grid>
 
-          <Grid margin="47px 20px 0px 20px" width="380px">
+          <Grid margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호 확인</Text>
           <InputBox>
-          <Input border="none" placeholder="비밀번호를 다시 입력해주세요" bg="#E4E4E4" width="300px" type="password" value={user_info.pwdcheck}
+          <Input border="none" placeholder="비밀번호를 다시 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.pwdcheck}
              _onChange={(e)=>{setUserInfo({...user_info, pwdcheck: e.target.value})}}
             />
             {user_info.pwdcheck?pwdDupli(user_info.password, user_info.pwdcheck)?"":X:""}
@@ -107,11 +109,11 @@ const debounceNick = _.debounce((e) => {
         <Text color="#FFFFFF" size="13px" lineheight="18px">*비밀번호를 다시 입력해주세요.</Text>}
           </Grid>
 
-          <Grid margin="47px 20px 0px 20px" width="380px">
+          <Grid margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">닉네임</Text>
           <InputBox>
-          <Input border="none" placeholder="닉네임을 입력해주세요" bg="#E4E4E4" width="300px" type="text" value={user_info.nickname}
-            _onChange={(e)=>{debounceNick(e)}}
+          <SubInput border="none" placeholder="닉네임을 입력해주세요" width="100%" type="text"
+            onChange={(e)=>{debounceNick(e)}}
             />
             {user_info.nickname?NickCheck(user_info.nickname)?dupliNick?"":X:X:""}
           </InputBox>
@@ -132,7 +134,7 @@ const debounceNick = _.debounce((e) => {
           </Grid>
           :
           <Grid display="flex" fd="column-reverse" height="100%">
-          <Button bg="#E4E4E4" height="56px" margin="0px">
+          <Button bg="#E4E4E4" height="56px" margin="0px 0px 30px 0px">
             <Text color="#A9A9A9" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>
@@ -147,17 +149,18 @@ const debounceNick = _.debounce((e) => {
 export default Signup;
 
 const Container = styled.div`
-  height: 866px;
-  width: 420px;
+  height: 750px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: hidden;
 `;
 
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 95%;
   margin: 28px 0px 0px 0px;
 `;
 
@@ -165,7 +168,17 @@ const InputBox = styled.div`
   padding: 11px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 56px;
   background-color: #E4E4E4;
   border-radius: 8px;
+`;
+
+const SubInput = styled.input`
+border: none;
+background-color:#E4E4E4;
+width: 80%;
+:focus {
+      outline: none;
+    }
 `;
