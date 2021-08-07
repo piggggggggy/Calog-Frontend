@@ -23,8 +23,8 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
-                url: "https://2k1.shop/api/user/me",
-                // url: "http://52.78.155.48",
+                // url: "https://2k1.shop/api/user/me",
+                url: "http://52.78.155.48",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
