@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { BodySpectSV, LoginCheck, BodySpectModify } from '../redux/modules/user';
-import { ProfileDefault, Camera, Pen, Go } from '../img/svg';
+import { ProfileDefault, Camera, Go } from '../img/svg';
 import { _logOut } from '../redux/modules/user';
 import {history} from '../redux/configStore';
-import _ from 'lodash';
-import { et } from 'date-fns/locale';
+import axios from 'axios';
+
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -17,9 +16,22 @@ import { et } from 'date-fns/locale';
 */
 
 const BodySpec = (props) => {
+  React.useEffect(()=>{
+    console.log("20")
+    axios({
+      method: "post",
+      url: "http://52.78.155.48",
+      withCredentials: true,
+  })
+  .then((res) => {
+    console.log.length(res);
+  });
+  },[])
 const dispatch = useDispatch();
 const is_login = useSelector(state=>state.user.is_login);
 const user_info = useSelector(state=>state.user.user_info);
+
+
 
 const logout = () => {
   dispatch(_logOut());

@@ -64,7 +64,7 @@ const debounceNick = _.debounce((e) => {
           <Grid margin="47px 20px 0px 20px" width="380px">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
-          <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="300px"
+          <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="300px" type="text" value={user_info.email}
             _onChange={(e)=>{debounceEmail(e)}}
             />
             {user_info.email?dupliEmail?"":X:""}
@@ -82,7 +82,7 @@ const debounceNick = _.debounce((e) => {
           <Grid margin="47px 20px 0px 20px" width="380px">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호</Text>
           <InputBox>
-          <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="300px" type="password"
+          <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="300px" type="password" value={user_info.password}
              _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}
             />
           {user_info.password?pwdCheck(user_info.password)?"":X:""}
@@ -96,7 +96,7 @@ const debounceNick = _.debounce((e) => {
           <Grid margin="47px 20px 0px 20px" width="380px">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호 확인</Text>
           <InputBox>
-          <Input border="none" placeholder="비밀번호를 다시 입력해주세요" bg="#E4E4E4" width="300px" type="password"
+          <Input border="none" placeholder="비밀번호를 다시 입력해주세요" bg="#E4E4E4" width="300px" type="password" value={user_info.pwdcheck}
              _onChange={(e)=>{setUserInfo({...user_info, pwdcheck: e.target.value})}}
             />
             {user_info.pwdcheck?pwdDupli(user_info.password, user_info.pwdcheck)?"":X:""}
@@ -110,7 +110,7 @@ const debounceNick = _.debounce((e) => {
           <Grid margin="47px 20px 0px 20px" width="380px">
           <Text size="17px" color="#000000" lineheight="22px">닉네임</Text>
           <InputBox>
-          <Input border="none" placeholder="닉네임을 입력해주세요" bg="#E4E4E4" width="300px" 
+          <Input border="none" placeholder="닉네임을 입력해주세요" bg="#E4E4E4" width="300px" type="text" value={user_info.nickname}
             _onChange={(e)=>{debounceNick(e)}}
             />
             {user_info.nickname?NickCheck(user_info.nickname)?dupliNick?"":X:X:""}
