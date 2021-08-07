@@ -44,14 +44,14 @@ export default Alarm;
 
 const Container = styled.div`
   height: 866px;
-  width: 420px;
+  width: 100%;
   overflow-y: hidden;
 `;
 
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 100%;
   margin: 18px 0px 0px 0px;
   padding: 10px;
 `;

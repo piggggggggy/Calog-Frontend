@@ -64,8 +64,7 @@ React.useEffect(()=>{
 export default NotiDetail;
 
 const Container = styled.div`
-  /* height: 2000px; */
-  width: 420px;
+  width: 100%;
   overflow-y: hidden;
 `;
 

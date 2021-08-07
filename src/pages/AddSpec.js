@@ -38,8 +38,8 @@ console.log("body spec", bodyspec);
             <Container>
                 <Headers>
                     <Grid padding="12px">
-                        <Text size="28px" lineheight="34px"><Strong>이경미님</Strong>의</Text>
-                        <Text size="28px" lineheight="34px">
+                        <Text m_size="25px" size="28px" lineheight="34px"><Strong>이경미님</Strong>의</Text>
+                        <Text m_size="25px" size="28px" lineheight="34px">
                             {page===0?<Strong>성별</Strong>:
                             page===1?<Strong>나이</Strong>:
                             page===2?<Strong>신장 사이즈</Strong>:
@@ -49,7 +49,7 @@ console.log("body spec", bodyspec);
                     </Grid>
 
                     <Grid padding="12px">
-                        <Text size="15px" lineheight="20px" color="#5F5F5F">
+                        <Text m_size="11px" size="15px" lineheight="20px" color="#5F5F5F">
                         경미님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
                         신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.</Text>
                     </Grid>
@@ -84,7 +84,7 @@ console.log("body spec", bodyspec);
                             </InputBox>
                             }
                             {page<1?"":
-                        <Button bg="#FFE899" width="348px" height="56px" border_radius="60px"
+                        <Button bg="#FFE899" width="87%" height="56px" border_radius="60px"
                         _onClick={
                             page<3?
                             nextPage:
@@ -105,12 +105,12 @@ console.log("body spec", bodyspec);
 export default AddSpec;
 
 const Container = styled.div`
-    width: 420px;
+    width: 100%;
     height: 700px;
 `;
 
 const Headers = styled.div`
-margin: 150px 0px 64px 20px;
+margin: 150px 0px 64px 3%;
 `;
 
 const Body = styled.div`
@@ -121,7 +121,7 @@ const InputBox = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 348px;
+    width: 87%;
     height: 56px;
     border: 1px solid #F19F13;
     border-radius: 60px;
@@ -136,7 +136,7 @@ const Strong = styled.b`
 `;
 
 const Gender = styled.div`
-    width: 100px;
+    width: 25%;
     height: 100px;
     background-color: #F19F13;
     border-radius: 60px;
