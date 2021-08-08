@@ -23,7 +23,7 @@ const CalendarDetail_Food = (props) => {
 
       {/* DashBoard_When의 type(끼니)를 클릭 = 기록된 type과 일치한 경우 */}
       {(type === data_type) && (
-      <Grid display="flex" margin="2.5% 0 2% 0">
+      <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0">
 
           {/* 메뉴 */}
           <Grid width="63%">

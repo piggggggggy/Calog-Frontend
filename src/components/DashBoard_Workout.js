@@ -15,7 +15,7 @@ const DashBoard_Workout = (props) => {
 
   return (
     <React.Fragment>
-      <Grid bg={'white'} width="32.5%" height="168px" border_radius="28px">
+      <Grid bg={'white'} width="32.5%" height="168px" border_radius="28px" margin="0 0 9% 0" m_margin="0 0 9% 0">
         
         {/* 이미지 */}
         <Grid padding="19% 0 0 0" width="52%" margin="0 auto" m_margin="0 auto">

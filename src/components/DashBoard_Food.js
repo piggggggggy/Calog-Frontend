@@ -24,6 +24,8 @@ import {history} from '../redux/configStore';
 const DashBoard_Food = (props) => {
   const record = props[0];
 
+  console.log(record)
+
   // 각 type에 따른 칼로리의 합계
   const data = useSelector((state) => state.record.record[0]);
   
@@ -100,7 +102,6 @@ const List = styled.div`
 const P = styled.p`
   font-size: 20px;
   font-weight: bold;
-  color: #6993FF;
 
   @media ${theme.device.mobileM} {
     font-size: 17px;
