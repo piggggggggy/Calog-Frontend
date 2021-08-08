@@ -85,14 +85,16 @@ const FoodDetail = (props) => {
 
       <BodyContainer>
         
+        <TopBack/>
+        
         {/* 기본정보 */}
-        <Grid padding= "1.7vh 7.6% 0 7.6%">
+        <Grid padding= "2.4vh 7.6% 0 7.6%">
           <Grid>
             <Grid display="flex">
-              <NameBox lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</NameBox>
+              <NameBox>{foodInfo.name}</NameBox>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
-            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6% 0" paddig="0">{foodInfo.kcal} kcal</Text>
+            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{foodInfo.kcal} kcal</Text>
           </Grid>
           {/* 칼로리 비교정보 */}
           <Grid margin="1vh 0" m_margin="1vh 0">
@@ -185,23 +187,38 @@ const BodyContainer = styled.div`
   max-width: 420px;
   max-height: 80vh;
   padding-bottom: 10vh;
+  /* padding-top: 2.4vh; */
   overflow: scroll;
+
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
+const TopBack = styled.div`
+  position: absolute;
+  z-index: -100;
+  width: 100%;
+  min-width: 280px;
+  max-width: 420px;
+  background-color: ${theme.color.light};
+  height: 26.6vh;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+`;
+
 const NameBox = styled.div`
   line-height: 22px;
-  min-width: 160px;
+  /* min-width: 160px; */
   font-weight: bold; 
   font-size: 15px;
   color: #5F5F5F;
-  margin: 0 10px 0 0;
+  margin: 0 2% 0 0;
   padding: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  letter-spacing: -0.0041em;
   
   @media ${theme.device.mobileH} {
     font-size: 17px;
