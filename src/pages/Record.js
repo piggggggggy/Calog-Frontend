@@ -83,15 +83,26 @@ const Record = (props) => {
         ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
           if(data.status === 204) {
             let imgUrl = data.location
-            inputMemo === undefined ? window.alert('기록을 위해 간단한 메모를 입력해주세요✍🏻') : dispatch(addRecordDB(cart.date, cart_list, cart.type, [imgUrl], [inputMemo]))
+
+            // case1) 메모에 입력된 내용이 없을 때
+            inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [imgUrl], [""])) : 
+
+              // case2) 메모에 입력된 내용이 있을 때
+              dispatch(addRecordDB(cart.date, cart_list, cart.type, [imgUrl], [inputMemo]))
           } else {
             window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
           }
         });
       } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+
     //업로드 할 이미지가 없을 때
     } else {
-      inputMemo === undefined ? window.alert('메모를 입력해주세요!') : dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [inputMemo]))
+
+      // case1) 메모에 입력된 내용이 없을 때
+      inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [""])) : 
+
+      // case2) 메모에 입력된 내용이 있을 때
+      dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [inputMemo]))
     }
   }
 
