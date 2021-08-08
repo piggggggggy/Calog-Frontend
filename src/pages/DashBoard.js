@@ -73,68 +73,66 @@ const DashBoard = (props) => {
   const how_over = today_kcal - bmr;
 
   return (
-      <Grid margin="0 0 9% 0" m_margin="0 0 9% 0">
+      <Grid width="100%">
 
         {/* 배경 */}
-        <TopBack />
+        <Top/>
 
         {/* 멘트 */}
-        <Top>
-          <Line>
-            {/* 비로그인 유저 */}
-            {!is_login && (
+        <Line>
+          {/* 비로그인 유저 */}
+          {!is_login && (
+            <React.Fragment>
+              <Text size="22px" bold m_size="18px">안녕하세요!</Text>
+              <Text size="22px" bold m_size="18px">로그인이<br/>필요한 기능이예요🧐</Text>
+            </React.Fragment>
+          )}
+
+          {/* 로그인 유저 */}
+          {is_login && (
+            <React.Fragment>
+
+            {/* case1) 초과해서 먹었을 경우 컬러 다르게 */}
+            {(over_bmr && bmr !== 0) ?
+              <Text size="22px" bold m_size="18px" color={'#E24444'}>{user.nickname}님!</Text> :
+              <Text size="22px" bold m_size="18px">{user.nickname}님!</Text>
+            }
+
+            {/* case2) 기록된 리스트가 없을 때 */}
+            {record?.length === 0 && <Text size="22px" bold m_size="18px">아직<br/>입력된 식단이 없어요🧐</Text>}
+
+            {/* case3) 기록된 리스트가 있을 때 */}
+            {record?.length !== 0 && (
               <React.Fragment>
-                <Text size="22px" bold m_size="20px">안녕하세요!</Text>
-                <Text size="22px" bold m_size="20px">로그인이<br/>필요한 기능이예요🧐</Text>
+
+                {/* case3-1) bmr 값이 있을 때 */}
+                  {bmr !== 0 ? (
+                    <React.Fragment>
+
+                      {/* case3-1-1) good일 때 */}
+                      {good  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
+
+                      {/* case3-1-2) bad(over)일 때 */}
+                      {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
+
+                      {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
+                      {extra_bmr && <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
+                    </React.Fragment>
+                  ) : (
+
+                    // case3-2) bmr 값이 없을 때
+                    <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요🧐</Text>
+                  )}
               </React.Fragment>
             )}
+          </React.Fragment>    
+        )}    
 
-            {/* 로그인 유저 */}
-            {is_login && (
-              <React.Fragment>
-
-                {/* case1) 초과해서 먹었을 경우 컬러 다르게 */}
-                {(over_bmr && bmr !== 0) ?
-                  <Text size="22px" bold m_size="20px" color={'#E24444'}>{user.nickname}님!</Text> :
-                  <Text size="22px" bold m_size="20px">{user.nickname}님!</Text>
-                }
-
-                {/* case2) 기록된 리스트가 없을 때 */}
-                {record?.length === 0 && <Text size="22px" bold m_size="20px">아직<br/>입력된 식단이 없어요🧐</Text>}
-
-                {/* case3) 기록된 리스트가 있을 때 */}
-                {record?.length !== 0 && (
-                  <React.Fragment>
-
-                    {/* case3-1) bmr 값이 있을 때 */}
-                      {bmr !== 0 ? (
-                        <React.Fragment>
-
-                          {/* case3-1-1) good일 때 */}
-                          {good  && <Text size="22px" bold m_size="20px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
-
-                          {/* case3-1-2) bad(over)일 때 */}
-                          {over_bmr && <Text size="22px" bold m_size="20px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
-
-                          {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                          {extra_bmr && <Text size="22px" bold m_size="20px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
-                        </React.Fragment>
-                      ) : (
-
-                        // case3-2) bmr 값이 없을 때
-                        <Text size="22px" bold m_size="20px">입력된 <br/>기초 대사량이 없어요🧐</Text>
-                      )}
-                  </React.Fragment>
-                )}
-              </React.Fragment>
-            )}
-
-            {/* 먹은 칼로리의 총합 */}
-            <Grid margin="2% 0 0 0">
-              <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 {today_kcal}kcal 먹었어요.</Text>
-            </Grid>
-          </Line>
-        </Top>
+          {/* 먹은 칼로리의 총합 */}
+          <Grid padding="1vh 0 0 0;">
+                <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 {today_kcal}kcal 먹었어요.</Text>
+              </Grid>    
+        </Line>
 
         {/* 바디스펙 */}
         <DashBoard_BodySpec {...user} bmr={bmr}/>
@@ -146,7 +144,7 @@ const DashBoard = (props) => {
         <DashBoard_Food {...[record]} />
 
         {/* 운동 추천 */}
-        <Grid margin="11.5% 0 0 0" m_margin="10.5% 0 0 0" bg={'rgba(228, 228, 228, 0.1);'} padding="7.8% 0 7.8% 6.3%">
+        <Grid margin="11.5% 0 0 0" m_margin="10.5% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
           <Text size="20px" bold m_size="17px" margin="0 0 0 2%">{user.nickname}님, 이런 운동은 어때요?</Text>
           <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
 
@@ -158,62 +156,22 @@ const DashBoard = (props) => {
   );
 };
 
-const TopBack = styled.div`
-  position: absolute;
-  z-index: -100;
-  width: 100%;
-  max-width: 420px;
+const Top = styled.div`
+  position: relative;
   background-color: ${theme.color.light};
   height: 26.6vh;
+  min-width: 280px;
+  max-width: 420px;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
-
-  // iphone 5/se
-  @media only screen and (min-height: 568px) {
-    height: 33vh;
-  };
-
-  // iphone 6,7,8 / galaxy fold
-  @media only screen and (min-height: 653px) {
-    height: 28vh;
-  };
-
-  // pixel2 / serface duo
-  @media only screen and (min-height: 720px) and (max-height: 811px) {
-    height: 32vh;
-  };
-
-  // iphone x
-  @media only screen and (height: 812px) {
-    height: 23vh;
-  };
-
-  // ipad
-  @media only screen and (min-height: 1024px) {
-    height: 23vh;
-  };
-
-  // ipad prop
-  @media only screen and (min-height: 1366px) {
-    height: 18vh;
-  };
-
-  
-`;
-
-const Top = styled.div`
-  padding: 12.3% 0 0 7.7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media ${theme.device.mobileM} {
-    padding: 10% 0 0 7.7%;
-  }
 `;
 
 const Line = styled.div`
+  position: relative;
   line-height: 27px;
+  padding-left: 9.7%;
+  margin-top: -40%;
+  margin-bottom: 2%;
 
   @media ${theme.device.mobileM} {
     line-height: 20px;
