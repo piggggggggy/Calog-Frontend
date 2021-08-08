@@ -90,7 +90,7 @@ const CartBody = (props) => {
         <Grid padding="0 9%">
           {/* 상단 내용 */}
           <Grid>
-            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 4px 0" paddig="0">
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 10px 0" paddig="0">
               {totalKcal() + sumKcal() >= bmr ? `오늘의 기준치를 ${totalKcal() + sumKcal()- bmr} kcal 초과해요!` : `먹어도 아직 ${bmr - (totalKcal() + sumKcal())} kcal 이나 더 먹을 수 있어요!`}
             </Text>
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
@@ -169,7 +169,8 @@ const BodyContainer = styled.div`
   max-width: 420px;
   max-height: 80vh;
   overflow: scroll;
-  /* padding: 0 25px; */
+  padding-top: 2.4vh;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -178,13 +179,12 @@ const BodyContainer = styled.div`
 const CartListBox = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 2.7vh;
   padding-bottom: 14vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2vh;
-
 `;
 
 const CalcBox = styled.div`

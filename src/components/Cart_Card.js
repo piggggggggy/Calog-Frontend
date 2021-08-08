@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // elements & components
-import { Text } from '../elements';
+import { Grid, Text } from '../elements';
 // icons
 import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
 // modules
@@ -52,17 +52,19 @@ const Card = (props) => {
       <CardContainer>
         <FoodCard style={{left: "-300"}} onClick={handleSwipe}>
           
-          {/* 이름 */}
-          <NameBox>{props.name}</NameBox>
+          <Grid>
+            {/* 이름 */}
+            <NameBox>{props.name}</NameBox>
           
-          {/* kcal */}
-          <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="8px 0 0 0" padding="0">{props.kcal} kcal</Text>
+            {/* kcal */}
+            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">{props.kcal} kcal</Text>
+          </Grid>
           
           {/* 카운트 */}
           <CountBox>
-            <div onClick={downCount}><IoIosArrowDropleft color="gray" size="27px"/></div>
+            <div onClick={downCount}><IoIosArrowDropleft color="gray" size="5vw"/></div>
             <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" margin="0" padding="0">{count}</Text>
-            <div onClick={upCount}><IoIosArrowDropright color="gray" size="27px"/></div>
+            <div onClick={upCount}><IoIosArrowDropright color="gray" size="5vw"/></div>
           </CountBox>
 
         </FoodCard>
@@ -75,37 +77,41 @@ const Card = (props) => {
 Card.defaultProps = {
 
 }
+
 const CardContainer = styled.div`
   position: relative;
   min-width: 88%;
-  height: calc(4.4vh + 58px);
+  /* height: calc(4.4vh + 58px); */
 
   @media ${theme.device.mobileM} {
-    height: calc(4.4vh + 53px);
+    /* height: calc(4.4vh + 53px); */
   }
 `;
 
 const FoodCard = styled.div`
-  position: absolute;
+  position: relative;
   min-width: 100%;
   top: 0px;
-  padding: 2.2vh 7.6%;
+  display: grid;
+  grid-template-columns: 60% 32%;
+  gap: 8%;
+  padding: 2.2vh 4.8% 2.2vh 8.6%;
   background: #fff;
-  border: 1px solid #F19F13;
   border-radius: 16px;
   cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
 `;
 
 const NameBox = styled.div`
-  max-width: 200px; 
+  /* max-width: 200px;  */
   line-height: 22px;
   size: 17px; 
   font-size: 15px; 
   margin: 0; 
   padding: 0;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis;
   overflow: hidden; 
-  white-space: nowrap; 
+  white-space: nowrap;  */
 
   @media ${theme.device.mobileM} {
     line-height: 20px; 
@@ -114,18 +120,16 @@ const NameBox = styled.div`
 `;
 
 const CountBox = styled.div`
-  position: absolute;
-  right: 5%;
-  top: 4.5vh;
-  min-width: 32%;
-  max-width: 32%;
+  /* min-width: 32%;
+  max-width: 32%; */
+  /* padding: 0 4.8%; */
   display: flex;
   align-items: center;
   justify-content: space-between;  
 
   & > div {
-    width: 27px;
-    height: 27px;
+    width: 5vw;
+    height: 5vw;
     margin: 0;
     padding: 0;
     cursor: pointer;

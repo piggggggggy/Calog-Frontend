@@ -18,6 +18,7 @@ import RcmdList from './Main_RcmdList';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import { TiDeleteOutline } from 'react-icons/ti';
+// img
 
 /** 
  * @param {*} props
@@ -218,6 +219,7 @@ MainBody.defaultProps = {
 
 const HeaderContainer = styled.div`
   max-width: 100%;
+  /* overflow: hidden; */
 `;
 
 const TopBack = styled.div`
@@ -235,7 +237,7 @@ const TopBack = styled.div`
 const BodyContainer = styled.div`
   padding-top: 2vh;
   max-width: 100%;
-  max-height: 35vh;
+  max-height: 37vh;
   padding-bottom: 20vh;
   overflow: scroll;
   &::-webkit-scrollbar {
