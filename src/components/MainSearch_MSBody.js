@@ -32,7 +32,7 @@ import { push } from 'connected-react-router';
 const MSBody = (props) => {
 // dispatch
   const dispatch = useDispatch();
-// props  
+
   const search_list = useSelector((state) => state.search.filtered_list);
   const [_history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
@@ -41,7 +41,24 @@ const MSBody = (props) => {
   const recent_list = useSelector((state) => state.recent.recent);
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
-// useEffect
+
+  // 페이지네이션
+  const [paging, setPage] = useState({
+    page: 1,
+    start: 0,
+    end: 4,
+  });
+
+  const handleNext = () => {
+    const { page, start, end } = paging;
+    setPage({
+      page: page + 1,
+      start: start + 4,
+      end: end + 4,
+    })
+  }
+
+
 
   // 검색함수
   const search = () => {
@@ -51,15 +68,13 @@ const MSBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    // {is_login ? 
-    //   dispatch(countKeywordDB(keyword.current.value))
-    //   : dispatch(addMostUsedKey(keyword.current.value))};
     dispatch(countKeywordDB(keyword.current.value));
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
     setHistory(true);
   };
+
   // 최근 검색어 검색
   const recentSearch = (keyword) => {
     const data = {
@@ -68,9 +83,6 @@ const MSBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    // {is_login ? 
-    //   dispatch(countKeywordDB(keyword))
-      // : dispatch(addMostUsedKey(keyword))};
     dispatch(countKeywordDB(keyword));
     {is_login ?
       dispatch(searchRecentDB(keyword))
@@ -78,6 +90,7 @@ const MSBody = (props) => {
     setHistory(true);
     history.push('/search');
   };
+
   // 최근 검색어 삭제
   const recentDelete = (keyword) => {
     {is_login ? dispatch(deleteRecentDB(keyword)) 
