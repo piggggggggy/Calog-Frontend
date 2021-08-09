@@ -34,13 +34,12 @@ const login = () => {
             <Text size="17px" lineheight="22px" bold color="#000000" >로그인 하기</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </Head>
-          <Grid margin="47px 20px 0px 20px" width="90%">
+          <Grid m_margin margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
           <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text" value={user_info.email}
             _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}
             />
-            {/* {user_info.email?dupliEmail?"":X:""} */}
             {user_info.email?emailCheck(user_info.email)?"":X:""}
           </InputBox>
           {user_info.email?

@@ -63,7 +63,7 @@ const debounceNick = _.debounce((e) => {
             <Text size="17px" lineheight="22px" bold color="#000000" >이메일로 가입</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </Head>
-          <Grid margin="47px 20px 0px 20px" width="90%">
+          <Grid m_margin margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
           <SubInput placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text"

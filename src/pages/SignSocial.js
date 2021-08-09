@@ -72,7 +72,7 @@ const dispatch = useDispatch();
 export default SignSocial;
 
 const Container = styled.div`
-  height: 866px;
+  height: 800px;
   overflow-y: hidden;
 `;
 
