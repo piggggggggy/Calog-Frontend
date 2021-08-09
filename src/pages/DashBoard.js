@@ -25,10 +25,8 @@ const DashBoard = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   
   // 오늘의 기록 불러오기(로그인 유저)
-  useEffect(async () => {
-    is_login && (
-      await dispatch(getTodayRecordDB())
-    )
+  useEffect(() => {
+    is_login && dispatch(getTodayRecordDB())
   },[]);
   
   // 유저정보
@@ -166,7 +164,7 @@ const DashBoard = (props) => {
 const Top = styled.div`
   position: relative;
   background-color: ${theme.color.light};
-  height: 28vh;
+  height: 26vh;
   min-width: 280px;
   max-width: 420px;
   border-bottom-left-radius: 32px;
@@ -177,7 +175,7 @@ const Line = styled.div`
   position: relative;
   line-height: 27px;
   padding-left: 9.7%;
-  margin-top: -45%;
+  margin-top: -38%;
   margin-bottom: 2%;
 
   @media ${theme.device.mobileM} {

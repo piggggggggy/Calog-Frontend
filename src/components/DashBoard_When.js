@@ -21,10 +21,13 @@ const DashBoard_When = (props) => {
   
   // type chk
   const typeState = useSelector((state) => state.cart.type);
+
+  // 리스트에 아무것도 없는 경우 "아침"으로 default
+  const cart_type = typeState === null ? "아침" : typeState;
   const foodRecords = props[0];
 
   // type에 따른 css변경
-  const [type, setType] = useState(typeState);
+  const [type, setType] = useState(cart_type);
 
   // 기록 리스트(각 타입에 맞는 리스트와 총 칼로리 합계)
   // 아침
