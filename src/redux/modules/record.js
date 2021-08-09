@@ -46,20 +46,21 @@ export const getWorkoutDB = () => {
 
 // record - 기록하기
 export const addRecordDB = (date, list, type, url, memo) => {
-  console.log(date, list, type, url, memo)
-  // return function (dispatch, getState, {history}) {
-  //   instance
-  //     .post('/api/record', {date:date, foodList:list, type:type, url:url, contents:memo})
-  //     .then((res) => {
-  //       window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
-  //       dispatch(delCartAll())
-  //       dispatch(typeChk(type))
-  //       history.replace('/dashboard')
-  //     })
-  //     .catch((err) => {
-  //       window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
-  //     })
-  // }
+  return function (dispatch, getState, {history}) {
+    console.log(date, list, type, url, memo)
+    instance
+      .post('/api/record', {date:date, foodList:list, type:type, url:url, contents:memo})
+      .then((res) => {
+        window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
+        dispatch(delCartAll())
+        dispatch(delImgAll())
+        dispatch(typeChk(type))
+        history.replace('/dashboard')
+      })
+      .catch((err) => {
+        window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+      })
+  }
 };
 
 // calendar - 전체 기록 불러오기
@@ -122,8 +123,6 @@ const initialState = {
 
   // record_img
   img: [],
-
-  serveImg : [],
 }
 
 // redux
@@ -171,12 +170,12 @@ const record = createSlice({
       state.img.splice(action.payload, 1)
     },
 
-    serverImage : (state, action) => {
-      state.serveImg.push(action.payload)
+    delImgAll : (state, action) => {
+      state.img = []
     }
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, serverImage} = record.actions;
+export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll} = record.actions;
 
 export default record;
