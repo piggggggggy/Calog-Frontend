@@ -9,7 +9,7 @@ const BtnHeader = (props) => {
 
   return (
     <React.Fragment>
-      <Grid is_flex padding="2.9vh 6.2%">
+      <Grid is_flex padding="2.9vh 6.2%" bg={props.bg}>
         {/* 뒤로가기 버튼 */}
         <Grid width="3vh" _onClick={() => history.goBack()}>  
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">

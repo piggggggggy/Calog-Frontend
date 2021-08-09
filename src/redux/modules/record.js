@@ -19,7 +19,7 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
-          console.log(res)
+          console.log("안녕")
           const food_list = res.data.record
           dispatch(getRecord(food_list)) 
       })
@@ -155,18 +155,9 @@ const record = createSlice({
     bmrChk : (state, action) => {
       state.bmr = action.payload
     },
-
-    // persist 기록 삭제하기
-    delRecord : (state, action) => {
-      state.record = []
-      state.workout = []
-      state.calendar = []
-      state.type = []
-      state.kcal = []
-    }
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, delRecord, bmrChk} = record.actions;
+export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk} = record.actions;
 
 export default record;

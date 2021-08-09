@@ -25,10 +25,8 @@ const DashBoard = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   
   // 오늘의 기록 불러오기(로그인 유저)
-  useEffect(async () => {
-    is_login && (
-      await dispatch(getTodayRecordDB())
-    )
+  useEffect(() => {
+    is_login && dispatch(getTodayRecordDB())
   },[]);
   
   // 유저정보
@@ -85,6 +83,9 @@ const DashBoard = (props) => {
             <React.Fragment>
               <Text size="22px" bold m_size="18px">안녕하세요!</Text>
               <Text size="22px" bold m_size="18px">로그인이<br/>필요한 기능이예요🧐</Text>
+              <Grid padding="1vh 0 0 0;">
+                <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
+              </Grid> 
             </React.Fragment>
           )}
 
@@ -99,39 +100,46 @@ const DashBoard = (props) => {
             }
 
             {/* case2) 기록된 리스트가 없을 때 */}
-            {record?.length === 0 && <Text size="22px" bold m_size="18px">아직<br/>입력된 식단이 없어요🧐</Text>}
+            {record?.length === 0 && (
+              <React.Fragment>
+                <Text size="22px" bold m_size="18px">칼로리를<br/>등록해주세요🧐</Text>
+                <Grid padding="1vh 0 0 0;">
+                  <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
+                </Grid> 
+              </React.Fragment>
+            )}
 
             {/* case3) 기록된 리스트가 있을 때 */}
             {record?.length !== 0 && (
               <React.Fragment>
 
-                {/* case3-1) bmr 값이 있을 때 */}
-                  {bmr !== 0 ? (
-                    <React.Fragment>
+              {/* case3-1) bmr 값이 있을 때 */}
+                {bmr !== 0 ? (
+                  <React.Fragment>
 
-                      {/* case3-1-1) good일 때 */}
-                      {good  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
+                  {/* case3-1-1) good일 때 */}
+                  {good  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
 
-                      {/* case3-1-2) bad(over)일 때 */}
-                      {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
+                  {/* case3-1-2) bad(over)일 때 */}
+                  {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
 
-                      {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                      {extra_bmr && <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
-                    </React.Fragment>
+                  {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
+                  {extra_bmr && <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>}
+                  </React.Fragment>
                   ) : (
 
-                    // case3-2) bmr 값이 없을 때
-                    <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요🧐</Text>
-                  )}
+                  // case3-2) bmr 값이 없을 때
+                  <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요🧐</Text>
+                )}
+
+                {/* 먹은 칼로리의 총합 */}
+                <Grid padding="1vh 0 0 0;">
+                  <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 {today_kcal}kcal 먹었어요.</Text>
+                </Grid>  
               </React.Fragment>
             )}
           </React.Fragment>    
-        )}    
-
-          {/* 먹은 칼로리의 총합 */}
-          <Grid padding="1vh 0 0 0;">
-                <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 {today_kcal}kcal 먹었어요.</Text>
-              </Grid>    
+        )} 
         </Line>
 
         {/* 바디스펙 */}
@@ -144,7 +152,7 @@ const DashBoard = (props) => {
         <DashBoard_Food {...[record]} />
 
         {/* 운동 추천 */}
-        <Grid margin="11.5% 0 0 0" m_margin="10.5% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
+        <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
           <Text size="20px" bold m_size="17px" margin="0 0 0 2%">{user.nickname}님, 이런 운동은 어때요?</Text>
           <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
 
@@ -159,7 +167,7 @@ const DashBoard = (props) => {
 const Top = styled.div`
   position: relative;
   background-color: ${theme.color.light};
-  height: 26.6vh;
+  height: 29vh;
   min-width: 280px;
   max-width: 420px;
   border-bottom-left-radius: 32px;
@@ -170,7 +178,7 @@ const Line = styled.div`
   position: relative;
   line-height: 27px;
   padding-left: 9.7%;
-  margin-top: -40%;
+  margin-top: -45%;
   margin-bottom: 2%;
 
   @media ${theme.device.mobileM} {

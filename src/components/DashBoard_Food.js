@@ -24,8 +24,6 @@ import {history} from '../redux/configStore';
 const DashBoard_Food = (props) => {
   const record = props[0];
 
-  console.log(record)
-
   // 각 type에 따른 칼로리의 합계
   const data = useSelector((state) => state.record.record[0]);
   
@@ -61,8 +59,15 @@ const DashBoard_Food = (props) => {
   // case2) 기록이 없을 경우
   return (
     <React.Fragment>
-      <Grid width="88%" height="204px" bg={'rgba(255, 232, 153, 0.14)'} border_radius="15px" margin="4.5% auto 0 auto" m_margin="4.5% auto 0 auto">
-        <Grid width="51%" margin="0 auto" m_margin="0 auto" padding="11% 0 0 0" line_height="120%">
+
+      {/* type 버튼 */}
+      <Grid margin="9.7% 0 0 0" m_margin="9.7% 0 0 0">
+        <DashBoard_When {...props}/>
+      </Grid>
+
+      {/* 칼로리 등록하기 버튼 타이틀 */}
+      <Grid width="88%" border_radius="15px" margin="2% auto 0 auto" m_margin="2% auto 0 auto">
+        <Grid text_align="center" padding="11% 0 0 0" line_height="120%">
           <Text size="15px" m_size="13px">오늘의 칼로리를 등록하고<br/>나의 식단을 기록해보세요!</Text>
         </Grid>
 
@@ -70,7 +75,7 @@ const DashBoard_Food = (props) => {
         {is_login ? (
 
           // 칼로리 검색 페이지 이동 버튼
-          <Grid margin="7% auto" width="94%" m_margin="7% auto">
+          <Grid margin="6.5% auto" width="94%" m_margin="7% auto">
             <Button
               _onClick={() => history.push('/')}
               height="56px" border_radius="60px" bg={theme.color.light}>
@@ -81,7 +86,7 @@ const DashBoard_Food = (props) => {
 
           // case2-2) 비유저여서 기록이 없는 경우
           // 로그인 페이지 이동 버튼
-          <Grid margin="7% auto" width="94%" m_margin="7% auto">
+          <Grid margin="6.5% auto" width="94%" m_margin="7% auto">
             <Button
               _onClick={() => history.push('/signsocial')}
               height="56px" border_radius="60px" bg={theme.color.light}>

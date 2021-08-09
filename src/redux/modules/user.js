@@ -4,7 +4,7 @@ import axios from "axios";
 //카트, 히스토리, bmr, 기록 삭제 액션
 import {delCartAll} from './cart';
 import { delRecentAll } from "./recent";
-import {delRecord, bmrChk} from './record';
+import {bmrChk} from './record';
 
 
 const initialState = {
@@ -23,13 +23,14 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
-                url: "https://2k1.shop/api/user/me",
+                url: "http://54.180.133.171/api/user/me",
+                // url: "https://2k1.shop/api/user/me",
                 // url: "http://52.78.155.48",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            window.location.replace('/dashboard')
+            history.replace('/dashboard')
         };
         loginsv()
         .catch((err)=>{
@@ -107,11 +108,10 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
 export const _logOut = () => {
     return function(dispatch, getState, {history}){
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
-        window.location.replace('/')
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-        dispatch(delCartAll());
         dispatch(delRecentAll());
-        dispatch(delRecord());
+        sessionStorage.clear();
+        window.location.replace('/')
     };
 }
 
