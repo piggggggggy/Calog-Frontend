@@ -137,9 +137,9 @@ const FoodCard = styled.div`
   height: 6.4vh;
   min-height: 40px;
   margin-bottom: 16px;
-  border: 1px solid #F19F13;
+  /* border: 1px solid #F19F13; */
   border-radius: 16px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
 
   & > div {
     margin-top: auto;

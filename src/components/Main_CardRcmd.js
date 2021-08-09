@@ -160,6 +160,8 @@ const NameBox = styled.div`
   color: #000000;
   padding: 0; 
   margin: 0;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
 `;
 
 const BookmarkBox = styled.div`

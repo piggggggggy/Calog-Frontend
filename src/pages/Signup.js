@@ -30,6 +30,8 @@ const debounce = _.debounce(() => {
 debounce()
 }, [user_info.email]);
 
+console.log('d')
+
 useEffect(() => {
   const debounce = _.debounce(() => {
     dispatch(NickDuplicate(user_info.nickname));

@@ -6,11 +6,17 @@ import theme from '../shared/theme';
 import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
 import UnderBar from '../components/Main_UnderBar';
+import CalorieBar from '../components/FoodDetail_CalorieBar';
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 // modules
 import { addCartRx } from '../redux/modules/cart';
 import { getDetailDB } from '../redux/modules/search';
+// img
+import Carbo from '../img/C_carbohydrate.jpg';
+import Protein from '../img/C_protein.jpg';
+import Fat from '../img/C_fat.jpg';
+
 /** 
  * @param {*} props
  * @returns 기본정보, 영양정보, 칼로리 비교
@@ -28,7 +34,7 @@ const FoodDetail = (props) => {
 
 // 대사량과 나의 칼로리 기록
   const record = useSelector((state) => state.record.record);
-  const bmr = record.length === 0 ? 0 : record[0]?.bmr;
+  const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
   console.log(record)
 
@@ -63,111 +69,172 @@ const FoodDetail = (props) => {
       });
       return result;
     } else {
-      return 0;
+      return 200;
     }
   };
 
   const is_over = () => {
-    if (bmr === totalKcal()) {
+    if (bmr === totalKcal()+foodInfo.kcal) {
       return "line";
-    } else if (bmr > totalKcal()) {
+    } else if (bmr > totalKcal()+foodInfo.kcal) {
       return "under";
-    } else if (bmr < totalKcal()) {
+    } else if (bmr < totalKcal()+foodInfo.kcal) {
       return "over";
     }
   };
+
+  const colors = is_over() === "line" ? 
+  '#59C451' 
+  : is_over() === "over" ? '#EC6262' : '#6993FF' ;
 
   
   return (
     <React.Fragment>
       {/* 헤더 */}
-      <BtnHeader title="칼로리 상세"/>
+      <BtnHeader title="칼로리 상세" bg={theme.color.light}/>
 
       <BodyContainer>
         
+        <TopBack/>
+        
         {/* 기본정보 */}
-        <Grid padding= "1.7vh 7.6% 0 7.6%">
+        <Grid padding= "2.4vh 7.6% 0 7.6%">
           <Grid>
             <Grid display="flex">
-              <NameBox lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0 10px 0 0" paddig="0">{foodInfo.name}</NameBox>
+              <NameBox>{foodInfo.name}</NameBox>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
-            <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.6% 0" paddig="0">{foodInfo.kcal} kcal</Text>
+            <Grid is_flex>
+              <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{foodInfo.kcal} kcal</Text>
+              {/* 카트 버튼 */}
+
+              <div style={{height: "34px"}}>
+                <BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/>
+              </div>
+
+            </Grid>
           </Grid>
           {/* 칼로리 비교정보 */}
           <Grid margin="1vh 0" m_margin="1vh 0">
-            <Text lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color="#EC6262" padding="0" margin="0">
+            <Text lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
               {is_over() === "line" ? 
               "현재까지 오늘의 기준치를 모두 채웠어요!" 
               : is_over() === "over" ? 
-              `현재까지 기준치 ${totalKcal()-bmr} kcal 초과했어요!` 
-              : `아직 기준치까지 ${bmr-totalKcal()} kcal 남았어요!`}
+              `현재까지 기준치 ${totalKcal()+foodInfo.kcal-bmr} kcal 초과했어요!` 
+              : `아직 기준치까지 ${bmr-(totalKcal()+foodInfo.kcal)} kcal 남았어요!`}
             </Text>
           </Grid>
         </Grid>
 
-        {/* 카트 버튼 */}
-        <Grid margin="1.7vh 0" m_margin="1.7vh 0" padding= "0 7.6%">
-          <div><BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/></div>
-        </Grid>
+        
 
         {/* 영양성분 */}
-        <Grid padding= "0 7.6%">
-          <Text lineheight="22px" bold size="17px" m_size="15px" color="#5F5F5F" margin="0" padding="0">영양성분</Text>
-        </Grid>
-        
-        <Grid is_flex margin="2vh 0 6.25vh 0" m_margin="2vh 0 6.25vh 0" padding= "0 6%">
-          <IngredientCircle>
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
-            <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">63g</Text>
-          </IngredientCircle>
-          <IngredientCircle>
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">단백질</Text>
-            <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">6g</Text>
-          </IngredientCircle>
-          <IngredientCircle>
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">지방</Text>
-            <Text lineheight="28px" bold size="22px" m_size="20px" color="#000000" padding="0" margin="0">8g</Text>
-          </IngredientCircle>
-        </Grid>
+        <IngreBox>
+          <div>
+            <div style={{maxWidth: "34px"}}>
+              <img src={Carbo} width="100%" alt="carbohydrate"/>
+            </div>
+            <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">탄수화물</Text>
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">63g</Text> 
+          </div>
 
-        <Grid>
-          <Grid is_flex padding="0.9vh 9%">
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">탄수화물</Text>
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">63g</Text>
-          </Grid>
-          <Line style={{border: "1px solid #F19F13"}}/>
-          <Grid is_flex padding="0.9vh 9% 0.9vh 10.5%">
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">식이섬유</Text>
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">4g</Text>
-          </Grid>
-          <Line style={{border: "1px solid #FFE899"}}/>          
-          <Grid is_flex padding="0.9vh 9% 0.9vh 10.5%">
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">당</Text>
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">7g</Text>
-          </Grid>
-          <Line style={{border: "1px solid #FFE899"}}/>          
-          <Grid is_flex padding="0.9vh 9%">
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">단백질</Text>
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">459g</Text>
-          </Grid>
-          <Line style={{border: "1px solid #F19F13"}}/>          
-          <Grid is_flex padding="0.9vh 9% 0.9vh 10.5%">
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">나트륨</Text>
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">549g</Text>
-          </Grid>
-          <Line style={{border: "1px solid #FFE899"}}/>          
-          <Grid is_flex padding="0.9vh 9% 0.9vh 10.5%">
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0">칼륨</Text>
-            <Text lineheight="18px" size="13px" m_size="13px" color="#5F5F5F" padding="0" margin="0"></Text>
-          </Grid>
-          <Line style={{border: "1px solid #FFE899"}}/>          
-          <Grid is_flex padding="0.9vh 9%">
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">지방</Text>
-            <Text lineheight="18px" bold size="13px" m_size="13px" color="#404040" padding="0" margin="0">459mg</Text>
-          </Grid>
-          <Line style={{border: "1px solid #F19F13"}}/>          
-        </Grid>
+          <div>
+            <div style={{maxWidth: "34px"}}>
+              <img src={Protein} width="100%" alt="carbohydrate"/>
+            </div>
+            <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">단백질</Text>
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">6g</Text> 
+          </div>
+
+          <div>
+            <div style={{maxWidth: "34px"}}>
+              <img src={Fat} width="100%" alt="carbohydrate"/>
+            </div>
+            <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">지방</Text>
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">8g</Text> 
+          </div>
+        </IngreBox>
+
+        {/* 칼로리 수치 바 */}
+        <CalorieBar kcal={foodInfo.kcal}/>
+
+        {/* 영양정보 디테일 */}
+        <IngreDetailContainer>
+          {/* 탄수화물 */}
+          <IngreDetail>
+            <Grid is_flex padding="0 8.6% 0 6.5%">
+              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
+                <img src={Carbo} alt="carbohydrate"/>
+                <IngreText style={{fontWeight: "bold"}}>탄수화물</IngreText>
+              </div>
+              <div>
+               <IngreText style={{fontWeight: "bold"}}>63g</IngreText>
+              </div>
+            </Grid>
+            <Line/>
+
+            <Grid is_flex padding="0 8.6% 0 8.6%">
+              <IngreText>식이섬유</IngreText>
+              <IngreText>4g</IngreText>
+            </Grid>
+
+            <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
+              <IngreText>당</IngreText>
+              <IngreText>7g</IngreText>
+            </Grid>
+          </IngreDetail>
+
+          {/* 단백질 */}
+          <IngreDetail>
+            <Grid is_flex padding="0 8.6% 0 6.5%">
+              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
+                <img src={Protein} alt="protein"/>
+                <IngreText style={{fontWeight: "bold"}}>단백질</IngreText>
+              </div>
+              <div>
+               <IngreText style={{fontWeight: "bold"}}>63g</IngreText>
+              </div>
+            </Grid>
+            <Line/>
+
+            <Grid is_flex padding="0 8.6% 0 8.6%">
+              <IngreText>식이섬유</IngreText>
+              <IngreText>4g</IngreText>
+            </Grid>
+
+            <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
+              <IngreText>당</IngreText>
+              <IngreText>7g</IngreText>
+            </Grid>
+          </IngreDetail>
+
+          {/* 지방 */}
+          <IngreDetail>
+            <Grid is_flex padding="0 8.6% 0 6.5%">
+              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
+                <img src={Fat} alt="fat"/>
+                <IngreText style={{fontWeight: "bold"}}>지방</IngreText>
+              </div>
+              <div>
+               <IngreText style={{fontWeight: "bold"}}>63g</IngreText>
+              </div>
+            </Grid>
+            <Line/>
+
+            <Grid is_flex padding="0 8.6% 0 8.6%">
+              <IngreText>식이섬유</IngreText>
+              <IngreText>4g</IngreText>
+            </Grid>
+
+            <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
+              <IngreText>당</IngreText>
+              <IngreText>7g</IngreText>
+            </Grid>
+          </IngreDetail>
+
+        </IngreDetailContainer>
+        
+        
 
         {/* 카트 탭 */}
         <UnderBar/>
@@ -182,53 +249,104 @@ FoodDetail.defaultProps = {
 }
 
 const BodyContainer = styled.div`
+  position: relative;
   max-width: 420px;
   max-height: 80vh;
   padding-bottom: 10vh;
+  /* padding-top: 2.4vh; */
   overflow: scroll;
+
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
+const TopBack = styled.div`
+  position: absolute;
+  z-index: -100;
+  width: 100%;
+  min-width: 280px;
+  max-width: 420px;
+  background-color: ${theme.color.light};
+  height: 26.6vh;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+`;
+
 const NameBox = styled.div`
   line-height: 22px;
-  min-width: 160px;
+  /* min-width: 160px; */
   font-weight: bold; 
   font-size: 15px;
   color: #5F5F5F;
-  margin: 0 10px 0 0;
+  margin: 0 2% 0 0;
   padding: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  letter-spacing: -0.0041em;
   
   @media ${theme.device.mobileH} {
     font-size: 17px;
   }
 `;
 
-const IngredientCircle = styled.div`
-  width: 84px;
-  height: 84px;
-  border: 3px solid #F19F13;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const IngreBox = styled.div`
 
-  @media ${theme.device.mobileH} {
-    width: 12vh;
-    height: 12vh;
+  width: 87.6%;
+  margin: 4.4vh auto 0 auto;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 3vh 11% 2.2vh 11%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;  
+    min-width: 52px;
   }
 `;
 
-const Line = styled.div`
-  width: 87%;
-  height: 1px;
-  padding: 0;
-  margin: auto; 
+const IngreDetailContainer = styled.div`
+  /* height: 25vh;
+  overflow: scroll;
+  padding-bottom: 10vh; */
+
+  margin-top: 3.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9vh;
 `;
+
+const IngreDetail = styled.div`
+  width: 87.6%;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.3vh 0 1.8vh 0;
+  background: #ffffff;
+`;
+
+const IngreText = styled.div`
+  line-height: 18px; 
+  font-size: 13px; 
+  /* font-weight: bold; */
+  color: #404040;
+`;
+
+const Line = styled.div`
+  margin-top: 1.3vh;
+  margin-bottom: 1.8vh;
+  border: 1px solid #E4E4E4;
+  height: 1px;
+  width: 100%;
+`;
+
 
 export default FoodDetail;
