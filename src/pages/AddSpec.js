@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {Button, Text, Grid, Input} from '../elements';
 import BodySpec from './BodySpec';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BodySpectSV } from '../redux/modules/user';
 import { history } from '../redux/configStore';
 
 const AddSpec = () => {
     const dispatch = useDispatch();
+    const user_nickname = useSelector(state=>state.user.user_info.nickname);
 //성별, 나이, 키, 몸무게
 const [bodyspec, SetSpec] = useState({});
 const {gender, weight, height, age} = bodyspec;
@@ -38,7 +39,7 @@ console.log("body spec", bodyspec);
             <Container>
                 <Headers>
                     <Grid padding="12px">
-                        <Text m_size="25px" size="28px" lineheight="34px"><Strong>이경미님</Strong>의</Text>
+                        <Text m_size="25px" size="28px" lineheight="34px"><Strong>{user_nickname}</Strong>의</Text>
                         <Text m_size="25px" size="28px" lineheight="34px">
                             {page===0?<Strong>성별</Strong>:
                             page===1?<Strong>나이</Strong>:
@@ -106,11 +107,11 @@ export default AddSpec;
 
 const Container = styled.div`
     width: 100%;
-    height: 700px;
+    height: 100%;
 `;
 
 const Headers = styled.div`
-margin: 150px 0px 64px 3%;
+margin: 35% 0px 64px 3%;
 `;
 
 const Body = styled.div`

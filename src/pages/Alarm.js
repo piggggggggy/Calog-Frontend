@@ -43,7 +43,7 @@ const dispatch = useDispatch();
 export default Alarm;
 
 const Container = styled.div`
-  height: 866px;
+  height: 100%;
   width: 100%;
   overflow-y: hidden;
 `;

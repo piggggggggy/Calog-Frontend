@@ -65,7 +65,7 @@ React.useEffect(()=>{
 export default Notice;
 
 const Container = styled.div`
-  height: 800px;
+  height: 100%;
   width: 100%;
 `;
 

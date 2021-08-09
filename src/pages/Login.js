@@ -34,13 +34,12 @@ const login = () => {
             <Text size="17px" lineheight="22px" bold color="#000000" >로그인 하기</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </Head>
-          <Grid margin="47px 20px 0px 20px" width="90%">
+          <Grid m_margin margin="47px 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
           <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text" value={user_info.email}
             _onChange={(e)=>{setUserInfo({...user_info, email: e.target.value})}}
             />
-            {/* {user_info.email?dupliEmail?"":X:""} */}
             {user_info.email?emailCheck(user_info.email)?"":X:""}
           </InputBox>
           {user_info.email?
@@ -71,18 +70,22 @@ const login = () => {
           </Grid> */}
 
           {user_info.password&&user_info.email&&emailCheck(user_info.email)&&pwdCheck(user_info.password)?
+                    <LoginButton>
                     <Grid display="flex" fd="column-reverse" height="100%">
                     <Button bg="#FFE899" height="56px" margin="0px"
                     _onClick={login}>
                       <Text bold color="#404040" size="16px" lineheight="22px">로그인 하기</Text>
                     </Button>
                     </Grid>
+                    </LoginButton>
                     :
+                    <LoginButton>
                     <Grid display="flex" fd="column-reverse" height="100%">
                     <Button bg="#E4E4E4" height="56px" margin="0px">
                       <Text color="#A9A9A9" size="16px" lineheight="22px">로그인 하기</Text>
                     </Button>
                     </Grid>
+                    </LoginButton>
         }
 
       </Container>
@@ -94,11 +97,16 @@ const login = () => {
 export default Signup;
 
 const Container = styled.div`
-  height: 600px;
+
+  scrollbar-width: none;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media only screen and (max-width: 400px) {
+  height: 100%;
+  };
 `;
 
 const Head = styled.div`
@@ -115,4 +123,16 @@ const InputBox = styled.div`
   height: 56px;
   background-color: #E4E4E4;
   border-radius: 8px;
+`;
+
+const LoginButton = styled.div`
+  width: 100%;
+  margin-top: 109.7%;
+  @media only screen and (max-width: 400px) {
+    max-width: 420px;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  z-index: 1000;
+  };
 `;

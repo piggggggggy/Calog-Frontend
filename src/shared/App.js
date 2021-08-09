@@ -83,6 +83,7 @@ const Wrap = styled.div`
   min-width: 280px;
   margin: 0 auto 9% auto;
   overflow-y: auto;
+  
 `;
 export default App;
 

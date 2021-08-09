@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const accessToken = document.cookie.split("=")[1];
-
 const instance = axios.create({
   // baseURL : "http://54.180.133.171/",
   baseURL: "https://2k1.shop/",
