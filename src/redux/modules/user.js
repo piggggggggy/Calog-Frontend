@@ -30,10 +30,11 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            window.location.href('/dashboard')
+            window.location.href = '/dashboard'
         };
         loginsv()
         .catch((err)=>{
+            console.log(err);
             window.alert("이메일 또는 비밀번호가 일치하지 않습니다.")
         });
     };
