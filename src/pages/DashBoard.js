@@ -83,6 +83,9 @@ const DashBoard = (props) => {
             <React.Fragment>
               <Text size="22px" bold m_size="18px">안녕하세요!</Text>
               <Text size="22px" bold m_size="18px">로그인이<br/>필요한 기능이예요🧐</Text>
+              <Grid padding="1vh 0 0 0;">
+                <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
+              </Grid> 
             </React.Fragment>
           )}
 
@@ -164,7 +167,7 @@ const DashBoard = (props) => {
 const Top = styled.div`
   position: relative;
   background-color: ${theme.color.light};
-  height: 26vh;
+  height: 29vh;
   min-width: 280px;
   max-width: 420px;
   border-bottom-left-radius: 32px;
@@ -175,7 +178,7 @@ const Line = styled.div`
   position: relative;
   line-height: 27px;
   padding-left: 9.7%;
-  margin-top: -38%;
+  margin-top: -45%;
   margin-bottom: 2%;
 
   @media ${theme.device.mobileM} {

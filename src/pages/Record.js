@@ -50,16 +50,31 @@ const Record = (props) => {
   }
   //+ 리사이징 후 프리뷰
   const chgPreview = async (e) => {
-    //원본
-    const imageFile = e.target.files[0];
-    //리사이징
-    try {
-      const compressedFile = await imageCompression(imageFile, options);
-      const imageUrl = URL.createObjectURL(compressedFile);
-      setFileUrl(imageUrl)
-    } catch (error) {
-      window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+    const fileArr = e.target.files;
+
+    let fileUrls = [];
+
+    let file;
+    let filesLength = fileArr.length > 3 ? 3 : fileArr.length;
+
+    for (let idx = 0; idx < filesLength; idx++) {
+      file = fileArr[idx];
+
+      let reader = new FileReader();
+      reader.onload = () => {
+        console.log(reader.result)
+      }
     }
+    // //원본
+    // const imageFile = e.target.files[0];
+    // //리사이징
+    // try {
+    //   const compressedFile = await imageCompression(imageFile, options);
+    //   const imageUrl = URL.createObjectURL(compressedFile);
+    //   setFileUrl(imageUrl)
+    // } catch (error) {
+    //   window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+    // }
   }
   //이미지 업로드
   const fileUpload = useRef()
@@ -126,20 +141,26 @@ const Record = (props) => {
       <Grid>
         <LazyLoad>
           <label htmlFor="imgFile">
-              {!fileUrl ?
-              <Grid bg={'#FFFBED'} width="89%" height="236px" margin="4% auto 5% auto" border_radius="8px" padding="15% 0" m_margin="4% auto 5% auto">
-                <Image src={Camera} width="21%" height="62px" margin="auto"/>
-                <Grid text_align="center">
-                  <Text size="17px" bold color={'#aeaeae'} margin="6% auto 0 auto" m_size="13px">+ 여기를 눌러 사진 등록</Text>
-                </Grid>
-              </Grid> :
+            {/* 이미지 여러장 업로드 */}
+            <Grid display="flex">
+              <Grid bg={'#FFFBED'} width="27.3%" height="12.9vh" margin="4% 0 5% 5.6%" border_radius="8px" m_margin="4% 0 5% 5.6%">
                 <Image src={fileUrl} width="89%" height="236px" margin="4% auto 5% auto" b_size="100% 100%" border_radius="8px"/>
-              }
+              </Grid>
+
+              {/* 이미지 추가 */}
+              <Grid bg={'#FFFBED'} width="27.3%" height="12.9vh" margin="4% 0 5% 5.6%" border_radius="8px" m_margin="4% 0 5% 5.6%">
+                <Grid width="21%" margin="auto" padding="36% 0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12H23" stroke="#D2D2D2" stroke-linecap="round"/>
+                    <path d="M12 1L12 23" stroke="#D2D2D2" stroke-linecap="round"/>
+                  </svg>
+                </Grid>
+              </Grid>
+            </Grid>
           </label>
-          <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+          <FileBox type="file" multiple accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
         </LazyLoad>
       </Grid>
-      {/* TODO 메모 커서 올리면 같이 올라오게 가능? - (배포 후 체크) 메모 */}
       <Grid padding="1% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>메모하기</Text>
       </Grid>
