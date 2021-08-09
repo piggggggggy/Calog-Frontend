@@ -166,7 +166,7 @@ const record = createSlice({
 
     delImage : (state, action) => {
       state.img.splice(action.payload, 1)
-    }
+    },
   }
 });
 
