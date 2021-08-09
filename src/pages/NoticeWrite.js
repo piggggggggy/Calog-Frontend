@@ -36,12 +36,12 @@ console.log(noticelist);
           <Body>
             <Grid width="80%" margin="20px 0px 0px 0px">
             <Text>제목</Text>
-            <Input border_radius="5px"
+            <Input border_radius="5px" type="text" value={noticelist.title}
             _onChange={(e)=>{setNotice({...noticelist,title:e.target.value})}}/>
             </Grid>
             <Grid width="80%" margin="20px 0px 0px 0px">
             <Text>비밀번호</Text>
-            <Input border_radius="5px"
+            <Input border_radius="5px" type="password" value={noticelist.password}
             _onChange={(e)=>{setNotice({...noticelist,password:e.target.value})}}/>
             </Grid>
             <Grid width="80%" margin="20px 0px 0px 0px">

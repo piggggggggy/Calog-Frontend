@@ -157,6 +157,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: hidden;
+  @media only screen and (max-width: 400px) {
+  height: 100%;
+  };
 `;
 
 const Head = styled.div`
