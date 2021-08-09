@@ -60,7 +60,7 @@ const dispatch = useDispatch();
   };
 
   // 즐겨찾기 확인
-  const favoCheck = favorite_list.findIndex((f) => f.foodId === props.foodId);
+  const favoCheck = favorite_list && favorite_list.findIndex((f) => f.foodId === props.foodId);
  
   const is_favorite = () => {
     

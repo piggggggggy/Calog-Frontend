@@ -62,7 +62,7 @@ const Card = (props) => {
           
           {/* 카운트 */}
           <CountBox>
-            <div onClick={downCount}><IoIosArrowDropleft color="gray" size="5vw"/></div>
+            <div onClick={downCount}><IoIosArrowDropleft color="gray" size="18%"/></div>
             <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#000000" margin="0" padding="0">{count}</Text>
             <div onClick={upCount}><IoIosArrowDropright color="gray" size="5vw"/></div>
           </CountBox>

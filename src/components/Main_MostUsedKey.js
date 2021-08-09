@@ -20,7 +20,7 @@ const MostUsedKey = (props) => {
 // props
   const most_list = useSelector((state) => state.search.most);
   const is_login = useSelector((state) => state.user.is_login);
-// useEffect
+  // useEffect
   // 인기검색어 불러오기
   useEffect(() => {
     dispatch(getMostUsedKeyDB());

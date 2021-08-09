@@ -51,9 +51,10 @@ const MSBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    {is_login ? 
-      dispatch(countKeywordDB(keyword.current.value))
-      : dispatch(addMostUsedKey(keyword.current.value))};
+    // {is_login ? 
+    //   dispatch(countKeywordDB(keyword.current.value))
+    //   : dispatch(addMostUsedKey(keyword.current.value))};
+    dispatch(countKeywordDB(keyword.current.value));
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
@@ -67,9 +68,10 @@ const MSBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    {is_login ? 
-      dispatch(countKeywordDB(keyword))
-      : dispatch(addMostUsedKey(keyword))};
+    // {is_login ? 
+    //   dispatch(countKeywordDB(keyword))
+      // : dispatch(addMostUsedKey(keyword))};
+    dispatch(countKeywordDB(keyword));
     {is_login ?
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};

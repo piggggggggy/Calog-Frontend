@@ -51,6 +51,7 @@ export const countKeywordDB = (keyword) => {
       .post('/api/home/search/mostUsed',{keyword: keyword})
       .then((res) => {
         console.log(res);
+        console.log(keyword);
         dispatch(addMostUsedKey(keyword));
       })
       .catch((err) => {
@@ -65,7 +66,7 @@ export const getMostUsedKeyDB = () => {
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
       })
       .catch((err) => {
