@@ -87,6 +87,21 @@ const FoodDetail = (props) => {
   '#59C451' 
   : is_over() === "over" ? '#EC6262' : '#6993FF' ;
 
+
+  const StatusText = styled.div`
+  width: auto;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: bold; 
+  color: ${colors};
+  background: #fff;
+
+  @media ${theme.device.mobileS} {
+    line-height: 20px;
+    font-size: 13px;
+  }
+`;
+
   
   return (
     <React.Fragment>
@@ -115,14 +130,14 @@ const FoodDetail = (props) => {
             </Grid>
           </Grid>
           {/* 칼로리 비교정보 */}
-          <Grid margin="1vh 0" m_margin="1vh 0">
-            <Text lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
+          <Grid is_flex margin="1vh 0" m_margin="1vh 0">
+            <StatusText lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
               {is_over() === "line" ? 
               "현재까지 오늘의 기준치를 모두 채웠어요!" 
               : is_over() === "over" ? 
               `현재까지 기준치 ${totalKcal()+foodInfo.kcal-bmr} kcal 초과했어요!` 
               : `아직 기준치까지 ${bmr-(totalKcal()+foodInfo.kcal)} kcal 남았어요!`}
-            </Text>
+            </StatusText>
           </Grid>
         </Grid>
 
@@ -242,6 +257,8 @@ const FoodDetail = (props) => {
       </BodyContainer>
     </React.Fragment>
   );
+
+
 }
 
 FoodDetail.defaultProps = {

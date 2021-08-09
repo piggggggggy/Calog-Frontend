@@ -12,8 +12,6 @@ import { Grid, Text } from '../elements';
  * @담당자 : 박용태
 */
 
-let styleFunc = {};
-
 const CalorieBar = (props) => {
 // dispatch
 // props
@@ -21,7 +19,6 @@ const CalorieBar = (props) => {
   const kcal = props.kcal;
 // useEffect
 
-  console.log(record);
   const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
   const record_list = record.length === 0 ? false : record[0]?.foodRecord;
   const currentRec = () => {
@@ -37,26 +34,6 @@ const CalorieBar = (props) => {
     }
   };
 
-  const styles = currentRec() + kcal < bmr ?
-  {left: `${(currentRec()/bmr) * 100}%`, 
-  width: `${(kcal/bmr) * 100}%`,
-  background: "#6993FF"}
-  : 
-  {left: `${(currentRec()/bmr) * 100}%`, 
-  width: `${(100 - ((currentRec()/bmr) * 100))}%`,
-  background: "#EC6262"}
-  // const styles = currentRec() + kcal < bmr ?
-  // `left: ${(currentRec()/bmr) * 100}%; 
-  // width: ${(kcal/bmr) * 100}%;
-  // background: #6993FF;`
-  // : 
-  // `left: ${(currentRec()/bmr) * 100}%; 
-  // width: ${(100 - ((currentRec()/bmr) * 100))}%;
-  // background: #EC6262;`;
-  // const left = (currentRec()/bmr) * 100;
-  // const width = currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100));
-  // const background = currentRec() + kcal < bmr ? "#6993FF" : "#EC6262";
-
   const slide = keyframes`
     0% {
       width: 0%;
@@ -64,6 +41,18 @@ const CalorieBar = (props) => {
     100% {
       width: ${currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100))}%;
     }
+  `;
+
+  const CurrentData = styled.div`
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 10px;
+    background: #F19F13;
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    z-index: 10;
   `;
 
   const FoodData = styled.div`
@@ -74,6 +63,9 @@ const CalorieBar = (props) => {
     border: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+    ${currentRec() === 0 ?
+    'border-top-left-radius: 4px; border-bottom-left-radius: 4px;' 
+    : ''}
     z-index: 10;
     transition: 1s ease;
     left: ${(currentRec()/bmr) * 100}%;
@@ -95,11 +87,11 @@ const CalorieBar = (props) => {
       </BackgroundBar>
     </React.Fragment>
   );
-}
+};
 
 CalorieBar.defaultProps = {
   kcal: 335,
-}
+};
 
 const BackgroundBar = styled.div`
   position: relative;
@@ -112,32 +104,5 @@ const BackgroundBar = styled.div`
   z-index: 5;
 `;
 
-const CurrentData = styled.div`
-  position: relative;
-  left: 0;
-  top: 0;
-  height: 10px;
-  background: #F19F13;
-  border: none;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  z-index: 10;
-`;
-
-// const FoodData = styled.div`
-//   position: relative;
-//   top: -10px;
-//   height: 10px;
-//   background: #F19F13;
-//   border: none;
-//   border-top-right-radius: 4px;
-//   border-bottom-right-radius: 4px;
-//   z-index: 10;
-//   transition: 1s ease;
-
-//   &:after {
-
-//   }
-// `;
 
 export default CalorieBar;

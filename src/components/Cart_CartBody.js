@@ -86,14 +86,13 @@ const CartBody = (props) => {
     <React.Fragment>
       <BodyContainer>
         
-        
         <Grid padding="0 9%">
           {/* 상단 내용 */}
           <Grid>
-            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="0 0 10px 0" paddig="0">
+            <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="1.7vh 0 0 0" paddig="0">
               {totalKcal() + sumKcal() >= bmr ? `오늘의 기준치를 ${totalKcal() + sumKcal()- bmr} kcal 초과해요!` : `먹어도 아직 ${bmr - (totalKcal() + sumKcal())} kcal 이나 더 먹을 수 있어요!`}
             </Text>
-            <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{sumKcal()} kcal</Text>
           </Grid>
 
           {/* 푸드 시간 타입 */}
@@ -102,7 +101,7 @@ const CartBody = (props) => {
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
               <Dot>
                 <Grid display={type === "아침" ? 'block' : 'none'}>
-                  <FaCircle size="7px"/>
+                  <FaCircle color="#F19F13" size="7px"/>
                 </Grid>
               </Dot>
             </div>
@@ -110,7 +109,7 @@ const CartBody = (props) => {
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">점심</Text>
               <Dot>
                 <Grid display={type === "점심" ? 'block' : 'none'}>
-                  <FaCircle size="7px"/>
+                  <FaCircle color="#F19F13" size="7px"/>
                 </Grid>
               </Dot>
             </div>
@@ -118,7 +117,7 @@ const CartBody = (props) => {
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">저녁</Text>
               <Dot>
                 <Grid display={type === "저녁" ? 'block' : 'none'}>
-                  <FaCircle size="7px"/>
+                  <FaCircle color="#F19F13" size="7px"/>
                 </Grid>
               </Dot>
             </div>
@@ -126,7 +125,7 @@ const CartBody = (props) => {
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">간식</Text>
               <Dot>
                 <Grid display={type === "간식" ? 'block' : 'none'}>
-                  <FaCircle size="7px"/>
+                  <FaCircle color="#F19F13" size="7px"/>
                 </Grid>
               </Dot>
             </div>
@@ -134,7 +133,7 @@ const CartBody = (props) => {
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">야식</Text>
               <Dot>
                 <Grid display={type === "야식" ? 'block' : 'none'}>
-                  <FaCircle size="7px"/>
+                  <FaCircle color="#F19F13" size="7px"/>
                 </Grid>
               </Dot>
             </div>
@@ -169,7 +168,7 @@ const BodyContainer = styled.div`
   max-width: 420px;
   max-height: 80vh;
   overflow: scroll;
-  padding-top: 2.4vh;
+  padding-top: 3vh;
 
   &::-webkit-scrollbar {
     display: none;
