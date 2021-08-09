@@ -4,7 +4,7 @@ import axios from "axios";
 //카트, 히스토리, bmr, 기록 삭제 액션
 import {delCartAll} from './cart';
 import { delRecentAll } from "./recent";
-import {delRecord, bmrChk} from './record';
+import {bmrChk} from './record';
 
 
 const initialState = {
@@ -107,11 +107,10 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
 export const _logOut = () => {
     return function(dispatch, getState, {history}){
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
-        window.location.replace('/')
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-        dispatch(delCartAll());
         dispatch(delRecentAll());
-        dispatch(delRecord());
+        sessionStorage.clear();
+        window.location.replace('/')
     };
 }
 
