@@ -18,5 +18,25 @@ import Main from './Main';
 import FoodDetail from './FoodDetail';
 import Cart from './Cart';
 import MainSearch from './MainSearch';
+import Loading from './Loading';
 
-export {DashBoard, AddSpec, Login, Signup, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, Main, Calendar, FoodDetail, Cart, Record, MainSearch, CalendarDetail}
+export {
+  DashBoard, 
+  AddSpec, 
+  Login, 
+  Signup, 
+  SignSocial, 
+  BodySpec, 
+  Notice, 
+  NotiDetail, 
+  NoticeWrite, 
+  Alarm, 
+  Main, 
+  Calendar, 
+  FoodDetail, 
+  Cart, 
+  Record, 
+  MainSearch, 
+  CalendarDetail, 
+  Loading
+}
