@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Button, Grid, Text, Image } from '../elements';
+import { Button, Grid, Text } from '../elements';
 import styled from 'styled-components';
 //컴포넌트
 import BtnHeader from '../shared/BtnHeader';
@@ -7,14 +7,13 @@ import Record_Date from '../components/Record_Date';
 import Record_When from '../components/Record_When';
 import Record_ListBody from '../components/Record_ListBody';
 import theme from '../shared/theme';
-//이모지
-import Camera from '../img/Group.png'
+import Record_img from '../components/Record_img';
 //이미지 업로드(압축해서 s3)
 import S3upload from 'react-aws-s3';
 import imageCompression from "browser-image-compression";
 //for axios
 import {useSelector, useDispatch} from 'react-redux';
-import {addRecordDB} from '../redux/modules/record';
+import {addRecordDB, addImage} from '../redux/modules/record';
 //lazy loading
 import LazyLoad from 'react-lazyload';
 
@@ -40,75 +39,81 @@ const Record = (props) => {
   }
 
   //이미지
-  //preview
-  const [fileUrl, setFileUrl] = useState(null);
+  const [fileUrl, setFileUrl] = useState({
+    file : []
+  }) 
+  const {file} = fileUrl
+
   //리사이징 옵션
   const options = {
     maxSizeMB: 1,
     maxWidthOrHeight: 1920,
     useWebWorker: true
   }
-  //+ 리사이징 후 프리뷰
+
+  //리사이징 후 프리뷰
   const chgPreview = async (e) => {
-    const fileArr = e.target.files;
+    //원본
+    const imageFile = e.target.files;
 
-    let fileUrls = [];
+    let files = []
 
-    let file;
-    let filesLength = fileArr.length > 3 ? 3 : fileArr.length;
-
-    for (let idx = 0; idx < filesLength; idx++) {
-      file = fileArr[idx];
-
-      let reader = new FileReader();
-      reader.onload = () => {
-        console.log(reader.result)
+    for(let idx=0; idx<imageFile?.length; idx++) {
+      let image = imageFile[idx]
+      //리사이징
+      try {
+        const compressedFile = await imageCompression(image, options);
+        const imageUrl = URL.createObjectURL(compressedFile);
+        files.push(imageUrl)
+      } catch (error) {
+        window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
       }
     }
-    // //원본
-    // const imageFile = e.target.files[0];
-    // //리사이징
-    // try {
-    //   const compressedFile = await imageCompression(imageFile, options);
-    //   const imageUrl = URL.createObjectURL(compressedFile);
-    //   setFileUrl(imageUrl)
-    // } catch (error) {
-    //   window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
-    // }
+    setFileUrl({
+      file: files
+    })
+    dispatch(addImage(files))
   }
+
   //이미지 업로드
   const fileUpload = useRef()
   //upload btn
   const submitBtn = async (e) => {
     e.preventDefault();
-    let file = fileUpload.current.files[0];
+    let imageFile = fileUpload.current.files;
+
+    let files = []
+
     //업로드 할 이미지가 있을 때
     if (file) {
-      let newFileName = fileUpload.current.files[0].name;
-      const config = {
-        bucketName: process.env.REACT_APP_BUCKET_NAME,
-        region: process.env.REACT_APP_REGION,
-        accessKeyId: process.env.REACT_APP_ACCESS_ID,
-        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-      };
-      const ReactS3Client = new S3upload(config);
-      //리사이징하여 업로드
-      try {
-        const resizeFile = await imageCompression(file, options);
-        ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
-          if(data.status === 204) {
-            let imgUrl = data.location
+      for(let idx=0; idx<imageFile?.length; idx++) {
+        let newFileName = fileUpload.current.files[idx].name;
+        const config = {
+          bucketName: process.env.REACT_APP_BUCKET_NAME,
+          region: process.env.REACT_APP_REGION,
+          accessKeyId: process.env.REACT_APP_ACCESS_ID,
+          secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+        };
+        const ReactS3Client = new S3upload(config);
+        //리사이징하여 업로드
+        try {
+          const resizeFile = await imageCompression(file, options);
+          ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
+            if(data.status === 204) {
+              let imgUrl = data.location
+              files.push(imgUrl)
+            } else {
+              window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+            }
+          });
+        } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+      }
 
-            // case1) 메모에 입력된 내용이 없을 때
-            inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [imgUrl], [""])) : 
-
-              // case2) 메모에 입력된 내용이 있을 때
-              dispatch(addRecordDB(cart.date, cart_list, cart.type, [imgUrl], [inputMemo]))
-          } else {
-            window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
-          }
-        });
-      } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+      // case1) 메모에 입력된 내용이 없을 때
+      inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, files, [""])) : 
+  
+      // case2) 메모에 입력된 내용이 있을 때
+      dispatch(addRecordDB(cart.date, cart_list, cart.type, files, [inputMemo]))
 
     //업로드 할 이미지가 없을 때
     } else {
@@ -138,27 +143,15 @@ const Record = (props) => {
       <Grid padding="13.5% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
       </Grid>
-      <Grid>
+      <Grid margin="3.9% 0 7.3% 0" m_margin="3.9% 0 7.3% 0">
         <LazyLoad>
+          {/* 이미지 여러장 업로드 */}
           <label htmlFor="imgFile">
-            {/* 이미지 여러장 업로드 */}
-            <Grid display="flex">
-              <Grid bg={'#FFFBED'} width="27.3%" height="12.9vh" margin="4% 0 5% 5.6%" border_radius="8px" m_margin="4% 0 5% 5.6%">
-                <Image src={fileUrl} width="89%" height="236px" margin="4% auto 5% auto" b_size="100% 100%" border_radius="8px"/>
-              </Grid>
-
-              {/* 이미지 추가 */}
-              <Grid bg={'#FFFBED'} width="27.3%" height="12.9vh" margin="4% 0 5% 5.6%" border_radius="8px" m_margin="4% 0 5% 5.6%">
-                <Grid width="21%" margin="auto" padding="36% 0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 12H23" stroke="#D2D2D2" stroke-linecap="round"/>
-                    <path d="M12 1L12 23" stroke="#D2D2D2" stroke-linecap="round"/>
-                  </svg>
-                </Grid>
-              </Grid>
+            <Grid width="89%" margin="auto" m_margin="auto">
+              <Record_img />
             </Grid>
+            <FileBox type="file" multiple accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
           </label>
-          <FileBox type="file" multiple accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
         </LazyLoad>
       </Grid>
       <Grid padding="1% 7.7% 0 7.7%">
