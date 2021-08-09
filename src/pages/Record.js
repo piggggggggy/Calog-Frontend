@@ -77,15 +77,15 @@ const Record = (props) => {
 
   //이미지 업로드
   const fileUpload = useRef()
+
   //upload btn
   const submitBtn = async (e) => {
     e.preventDefault();
-    let imageFile = fileUpload.current.files;
-
-    let files = []
-
+    
     //업로드 할 이미지가 있을 때
     if (file) {
+      let imageFile = fileUpload.current.files;
+
       for(let idx=0; idx<imageFile?.length; idx++) {
         let newFileName = fileUpload.current.files[idx].name;
         const config = {
@@ -96,26 +96,24 @@ const Record = (props) => {
         };
         const ReactS3Client = new S3upload(config);
         //리사이징하여 업로드
-        try {
-          const resizeFile = await imageCompression(file, options);
+        try{
+          const resizeFile = await imageCompression(imageFile[idx], options);
           ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
-            if(data.status === 204) {
               let imgUrl = data.location
-              files.push(imgUrl)
-            } else {
-              window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
-            }
           });
-        } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+        } catch (err) {
+          window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+        }
       }
 
       // case1) 메모에 입력된 내용이 없을 때
-      inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, files, [""])) : 
-  
-      // case2) 메모에 입력된 내용이 있을 때
-      dispatch(addRecordDB(cart.date, cart_list, cart.type, files, [inputMemo]))
+      //   inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, file_list, [""])) : 
+      // // case2) 메모에 입력된 내용이 있을 때
+      //   dispatch(addRecordDB(cart.date, cart_list, cart.type, file_list, [inputMemo]))
 
-    //업로드 할 이미지가 없을 때
+      // console.log(_file_list)
+      
+    // 업로드 할 이미지가 없을 때
     } else {
 
       // case1) 메모에 입력된 내용이 없을 때
