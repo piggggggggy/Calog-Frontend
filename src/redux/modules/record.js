@@ -118,6 +118,9 @@ const initialState = {
 
   // bmr
   bmr: 0,
+
+  // record_img
+  img: [],
 }
 
 // redux
@@ -155,9 +158,18 @@ const record = createSlice({
     bmrChk : (state, action) => {
       state.bmr = action.payload
     },
+
+    // recordImg
+    addImage : (state, action) => {
+      state.img = action.payload
+    },
+
+    delImage : (state, action) => {
+      state.img.splice(action.payload, 1)
+    }
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk} = record.actions;
+export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage} = record.actions;
 
 export default record;
