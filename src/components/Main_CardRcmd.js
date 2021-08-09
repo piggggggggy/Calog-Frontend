@@ -152,7 +152,7 @@ const FoodCard = styled.div`
 
 const NameBox = styled.div`
   max-height: 30px;
-  min-height: 30px;
+  /* min-height: 30px; */
   max-width: 100%;
   min-width: 100px;
   line-height: 15px;

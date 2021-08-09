@@ -16,6 +16,8 @@ const color = {
 
 //반응형용 디바이스 사이즈
 const deviceSizes = {
+  //갤럭시 폴드
+  mobileF: "300px",
   //가로가 정말 작은 휴대폰
   mobileS: "360px",
   //가로가 작은 휴대폰(아이폰 5)
@@ -28,6 +30,7 @@ const deviceSizes = {
 
 //반응형용 디바이스
 const device = {
+  mobileF: `only screen and (max-width: ${deviceSizes.mobileF})`,
   mobileS: `only screen and (max-width: ${deviceSizes.mobileS})`,
   mobileM: `only screen and (max-width: ${deviceSizes.mobileM})`,
   mobileH: `only screen and (min-height: ${deviceSizes.mobileH})`,
