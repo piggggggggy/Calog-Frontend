@@ -79,7 +79,6 @@ const Record = (props) => {
   //이미지 업로드
   const fileUpload = useRef()
 
-<<<<<<< Updated upstream
   //upload btn
   const submitBtn = (e) => {
     e.preventDefault();
@@ -118,36 +117,6 @@ const Record = (props) => {
               }
             });
           } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
-=======
-  //upload btn  
-  const submitBtn = async (e) => {
-    e.preventDefault();
-
-    //업로드 할 이미지가 있을 때
-    if (file) {
-      let imageFile = fileUpload.current.files;
-
-      for(let idx=0; idx<imageFile?.length; idx++) {
-        let newFileName = fileUpload.current.files[idx].name;
-        const config = {
-          bucketName: process.env.REACT_APP_BUCKET_NAME,
-          region: process.env.REACT_APP_REGION,
-          accessKeyId: process.env.REACT_APP_ACCESS_ID,
-          secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-        };
-        const ReactS3Client = new S3upload(config);
-        //리사이징하여 업로드
-        try{
-          const resizeFile = await imageCompression(imageFile[idx], options);
-          console.log(resizeFile)
-          console.log(newFileName)
-          ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
-              let imgUrl = data.locatzsion
-
-          });
-        } catch (err) {
-          window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
->>>>>>> Stashed changes
         }
       } else {
         //업로드 할 이미지가 없을 때
