@@ -13,7 +13,7 @@ import S3upload from 'react-aws-s3';
 import imageCompression from "browser-image-compression";
 //for axios
 import {useSelector, useDispatch} from 'react-redux';
-import {addRecordDB, addImage} from '../redux/modules/record';
+import {addRecordDB, addImage, serverImage} from '../redux/modules/record';
 //lazy loading
 import LazyLoad from 'react-lazyload';
 
@@ -79,49 +79,52 @@ const Record = (props) => {
   const fileUpload = useRef()
 
   //upload btn
-  const submitBtn = async (e) => {
+  const submitBtn = (e) => {
     e.preventDefault();
-    
-    //업로드 할 이미지가 있을 때
-    if (file) {
-      let imageFile = fileUpload.current.files;
+    let file = fileUpload.current.files;
+      const config = {
+        bucketName: process.env.REACT_APP_BUCKET_NAME,
+        region: process.env.REACT_APP_REGION,
+        accessKeyId: process.env.REACT_APP_ACCESS_ID,
+        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+      };
+      const ReactS3Client = new S3upload(config);
 
-      for(let idx=0; idx<imageFile?.length; idx++) {
-        let newFileName = fileUpload.current.files[idx].name;
-        const config = {
-          bucketName: process.env.REACT_APP_BUCKET_NAME,
-          region: process.env.REACT_APP_REGION,
-          accessKeyId: process.env.REACT_APP_ACCESS_ID,
-          secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-        };
-        const ReactS3Client = new S3upload(config);
-        //리사이징하여 업로드
-        try{
-          const resizeFile = await imageCompression(imageFile[idx], options);
-          ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
-              let imgUrl = data.location
-          });
-        } catch (err) {
-          window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+      if (file?.length > 0) {
+        let image_list = []
+
+        for(let i=0; i<file?.length; i++) {
+          let newFileName = file[i].name
+
+          //리사이징하여 업로드
+          try {
+            const resizeFile = imageCompression(file[i], options);
+            ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
+              if(data.status === 204) {
+                let imgUrl = data.location
+                image_list.push(imgUrl)
+              } else {
+                window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+              }
+              if(i === file?.length-1) {
+                // case1) 메모에 입력된 내용이 없을 때
+                console.log(cart.date, cart_list, cart.type, image_list, [""])
+                // inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart?.type, [image_list], [""])) : 
+
+                // case2) 메모에 입력된 내용이 있을 때
+                dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, [inputMemo]))
+              }
+            });
+          } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
         }
+      } else {
+        //업로드 할 이미지가 없을 때
+        // case1) 메모에 입력된 내용이 없을 때
+        inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [""])) : 
+
+        // case2) 메모에 입력된 내용이 있을 때
+        dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [inputMemo]))
       }
-
-      // case1) 메모에 입력된 내용이 없을 때
-      //   inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, file_list, [""])) : 
-      // // case2) 메모에 입력된 내용이 있을 때
-      //   dispatch(addRecordDB(cart.date, cart_list, cart.type, file_list, [inputMemo]))
-
-      // console.log(_file_list)
-      
-    // 업로드 할 이미지가 없을 때
-    } else {
-
-      // case1) 메모에 입력된 내용이 없을 때
-      inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [""])) : 
-
-      // case2) 메모에 입력된 내용이 있을 때
-      dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [inputMemo]))
-    }
   }
 
   return (
