@@ -70,18 +70,22 @@ const login = () => {
           </Grid> */}
 
           {user_info.password&&user_info.email&&emailCheck(user_info.email)&&pwdCheck(user_info.password)?
+                    <LoginButton>
                     <Grid display="flex" fd="column-reverse" height="100%">
                     <Button bg="#FFE899" height="56px" margin="0px"
                     _onClick={login}>
                       <Text bold color="#404040" size="16px" lineheight="22px">로그인 하기</Text>
                     </Button>
                     </Grid>
+                    </LoginButton>
                     :
+                    <LoginButton>
                     <Grid display="flex" fd="column-reverse" height="100%">
                     <Button bg="#E4E4E4" height="56px" margin="0px">
                       <Text color="#A9A9A9" size="16px" lineheight="22px">로그인 하기</Text>
                     </Button>
                     </Grid>
+                    </LoginButton>
         }
 
       </Container>
@@ -93,7 +97,9 @@ const login = () => {
 export default Signup;
 
 const Container = styled.div`
-  height: 600px;
+
+  scrollbar-width: none;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -117,4 +123,16 @@ const InputBox = styled.div`
   height: 56px;
   background-color: #E4E4E4;
   border-radius: 8px;
+`;
+
+const LoginButton = styled.div`
+  width: 100%;
+  margin-top: 109.7%;
+  @media only screen and (max-width: 400px) {
+    max-width: 420px;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  z-index: 1000;
+  };
 `;

@@ -128,18 +128,22 @@ const debounceNick = _.debounce((e) => {
           <Text color="#FFFFFF" size="13px" lineheight="18px">*닉네임을 입력해주세요.</Text>}
           </Grid>
           {dupliEmail&&dupliNick&&pwdDupli(user_info.password, user_info.pwdcheck)&&pwdCheck(user_info.password)?
+          <LoginButton>
           <Grid display="flex" fd="column-reverse" height="100%">
           <Button bg="#FFE899" height="56px" margin="0px"
           _onClick={signup}>
             <Text bold color="#404040" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>
+          </LoginButton>
           :
+          <LoginButton>
           <Grid display="flex" fd="column-reverse" height="100%">
-          <Button bg="#E4E4E4" height="56px" margin="0px 0px 30px 0px">
+          <Button bg="#E4E4E4" height="56px">
             <Text color="#A9A9A9" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>
+          </LoginButton>
           }
 
       </Container>
@@ -151,12 +155,12 @@ const debounceNick = _.debounce((e) => {
 export default Signup;
 
 const Container = styled.div`
-  height: 750px;
+  height: 99%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   @media only screen and (max-width: 400px) {
   height: 100%;
   };
@@ -186,4 +190,17 @@ width: 80%;
 :focus {
       outline: none;
     }
+`;
+
+const LoginButton = styled.div`
+  max-width: 420px;
+  width: 100%;
+  margin-top: 41.6%;
+  @media only screen and (max-width: 400px) {
+    /* max-width: 420px; */
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  z-index: 1000;
+  }
 `;
