@@ -31,6 +31,8 @@ const Record = (props) => {
   const cart = useSelector((state) => state.cart)
   //카트 - 리스트
   const cart_list = cart.cart
+  //타입
+  const cart_type = cart.type
 
   //메모
   const [inputMemo, setInputMemo] = useState()
@@ -91,9 +93,8 @@ const Record = (props) => {
         secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
       };
       const ReactS3Client = new S3upload(config);
-
+      let image_list = []
       if (file?.length > 0) {
-        let image_list = []
 
         for(let i=0; i<file?.length; i++) {
           let newFileName = file[i].name
@@ -110,8 +111,7 @@ const Record = (props) => {
               }
               if(i === file?.length-1) {
                 // case1) 메모에 입력된 내용이 없을 때
-                console.log(cart.date, cart_list, cart.type, image_list, [""])
-                // inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart?.type, [image_list], [""])) : 
+                inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, [""])) :
 
                 // case2) 메모에 입력된 내용이 있을 때
                 dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, [inputMemo]))
