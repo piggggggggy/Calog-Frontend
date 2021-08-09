@@ -48,8 +48,8 @@ const Record_When = (props) => {
         <When onClick={()=> {selectType('morning')}}>
           <Text size="17px" bold color={type === "아침" ? 'black' : '#c4c4c4'} m_size="15px">아침</Text>
           <Dot>
-            <Grid display={type === "아침" ? 'block' : 'none'} color={type === "아침" ? 'black' : '#F19F13'}>
-              <FaCircle size="7px"/>
+            <Grid display={type === "아침" ? 'block' : 'none'}>
+              <FaCircle size="7px" color="#F19F13"/>
             </Grid>
           </Dot>
         </When>
@@ -59,7 +59,7 @@ const Record_When = (props) => {
           <Text size="17px" bold color={type === "점심" ? 'black' : '#c4c4c4'} m_size="15px">점심</Text>
           <Dot>
             <Grid display={type === "점심" ? 'block' : 'none'} >
-              <FaCircle size="7px" color={type === "점심" ? 'black' : '#F19F13'}/>
+              <FaCircle size="7px" color="#F19F13"/>
             </Grid>
           </Dot>
         </When>
@@ -69,7 +69,7 @@ const Record_When = (props) => {
           <Text size="17px" bold color={type === "저녁" ? 'black' : '#c4c4c4'}  m_size="15px" >저녁</Text>
           <Dot>
             <Grid display={type === "저녁" ? 'block' : 'none'} >
-              <FaCircle size="7px" color={type === "저녁" ? 'black' : '#F19F13'}/>
+              <FaCircle size="7px" color="#F19F13"/>
             </Grid>
           </Dot>
         </When>
@@ -79,7 +79,7 @@ const Record_When = (props) => {
           <Text size="17px" bold color={type === "간식" ? 'black' : '#c4c4c4'} m_size="15px">간식</Text>
           <Dot>
             <Grid display={type === "간식" ? 'block' : 'none'} >
-              <FaCircle size="7px" color={type === "간식" ? 'black' : '#F19F13'}/>
+              <FaCircle size="7px" color="#F19F13"/>
             </Grid>
           </Dot>
         </When>
@@ -89,7 +89,7 @@ const Record_When = (props) => {
           <Text size="17px" bold color={type === "야식" ? 'black' : '#c4c4c4'} m_size="15px">야식</Text>
           <Dot>
             <Grid display={type === "야식" ? 'block' : 'none'} >
-              <FaCircle size="7px" color={type === "야식" ? 'black' : '#F19F13'}/>
+              <FaCircle size="7px" color="#F19F13"/>
             </Grid>
           </Dot>
         </When>
