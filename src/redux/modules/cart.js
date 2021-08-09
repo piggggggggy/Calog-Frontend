@@ -42,7 +42,7 @@ const search = createSlice({
       state.cart = deleted_list;
     },
 
-    //카트 전체 삭제
+    //카트 전체 삭제(type, date는 그대로 둬야함! >> 대시보드 연결 시 사용됨)
     delCartAll : (state, action) => {
       state.cart = []
     },

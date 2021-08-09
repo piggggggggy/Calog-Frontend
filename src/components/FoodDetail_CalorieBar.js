@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import { useSelector } from 'react-redux';
 // elements & components
 import { Grid, Text } from '../elements';
@@ -11,6 +11,8 @@ import { Grid, Text } from '../elements';
  * @필수값 해당음식의 kcal
  * @담당자 : 박용태
 */
+
+let styleFunc = {};
 
 const CalorieBar = (props) => {
 // dispatch
@@ -31,7 +33,7 @@ const CalorieBar = (props) => {
       };
       return today_kcal;
     } else {
-      return 200;
+      return 0;
     }
   };
 
@@ -42,7 +44,43 @@ const CalorieBar = (props) => {
   : 
   {left: `${(currentRec()/bmr) * 100}%`, 
   width: `${(100 - ((currentRec()/bmr) * 100))}%`,
-  background: "#EC6262"};
+  background: "#EC6262"}
+  // const styles = currentRec() + kcal < bmr ?
+  // `left: ${(currentRec()/bmr) * 100}%; 
+  // width: ${(kcal/bmr) * 100}%;
+  // background: #6993FF;`
+  // : 
+  // `left: ${(currentRec()/bmr) * 100}%; 
+  // width: ${(100 - ((currentRec()/bmr) * 100))}%;
+  // background: #EC6262;`;
+  // const left = (currentRec()/bmr) * 100;
+  // const width = currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100));
+  // const background = currentRec() + kcal < bmr ? "#6993FF" : "#EC6262";
+
+  const slide = keyframes`
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: ${currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100))}%;
+    }
+  `;
+
+  const FoodData = styled.div`
+    position: relative;
+    top: -10px;
+    height: 10px;
+    background: #F19F13;
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 10;
+    transition: 1s ease;
+    left: ${(currentRec()/bmr) * 100}%;
+    background: ${currentRec() + kcal < bmr ? "#6993FF" : "#EC6262"};
+    width: ${currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100))}%;
+    animation: ${slide} 1s 1 ease;
+  `;
 
   return (
     <React.Fragment>
@@ -52,10 +90,8 @@ const CalorieBar = (props) => {
         <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{currentRec() + kcal < bmr ? "남은 양":""}</Text>
       </Grid>
       <BackgroundBar>
-        <CurrentData style={{width: `${(currentRec()/bmr) * 100}%`}} />
-        <FoodData 
-          style={styles} 
-        />
+        <CurrentData style={currentRec() <= bmr ? {width: `${(currentRec()/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} />
+        <FoodData/>
       </BackgroundBar>
     </React.Fragment>
   );
@@ -88,15 +124,20 @@ const CurrentData = styled.div`
   z-index: 10;
 `;
 
-const FoodData = styled.div`
-  position: relative;
-  top: -10px;
-  height: 10px;
-  background: #F19F13;
-  border: none;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  z-index: 10;
-`;
+// const FoodData = styled.div`
+//   position: relative;
+//   top: -10px;
+//   height: 10px;
+//   background: #F19F13;
+//   border: none;
+//   border-top-right-radius: 4px;
+//   border-bottom-right-radius: 4px;
+//   z-index: 10;
+//   transition: 1s ease;
+
+//   &:after {
+
+//   }
+// `;
 
 export default CalorieBar;

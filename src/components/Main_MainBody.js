@@ -52,9 +52,10 @@ const MainBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    {is_login ? 
-      dispatch(countKeywordDB(keyword.current.value))
-      : dispatch(addMostUsedKey(keyword.current.value))};
+    // {is_login ? 
+    //   dispatch(countKeywordDB(keyword.current.value))
+    //   : dispatch(addMostUsedKey(keyword.current.value))};
+    dispatch(countKeywordDB(keyword.current.value));
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
@@ -69,9 +70,10 @@ const MainBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    {is_login ? 
-      dispatch(countKeywordDB(keyword))
-      : dispatch(addMostUsedKey(keyword))};
+    // {is_login ? 
+    //   dispatch(countKeywordDB(keyword))
+    //   : dispatch(addMostUsedKey(keyword))};
+    dispatch(countKeywordDB(keyword));
     {is_login ?
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
@@ -157,7 +159,7 @@ const MainBody = (props) => {
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
               <Line/>
-              {recent_list[0] !== null ? recent_list.map((rec, idx) => {
+              {recent_list && recent_list[0] !== null ? recent_list.map((rec, idx) => {
                 if (idx < 5) {
                   return (
                     <>
@@ -270,6 +272,7 @@ const BodyContainer = styled.div`
 
 const SearchGrid = styled.div`
   padding: 1vh 0 0 0;
+  
   width: 100%;
   position: relative;
 `;
@@ -353,6 +356,7 @@ const Line = styled.div`
 
 const Mascort = styled.div`
   position: absolute;
+  max-width: 420px;
   width: 100%;
   bottom: 5%;
   background: #c7c7c7;

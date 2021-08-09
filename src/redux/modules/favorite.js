@@ -44,7 +44,7 @@ export const getFavoriteDB = () => {
     instance
       .get('/api/favorite/list')
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         dispatch(getFavorite(res.data));
       })
       .catch((err) => {
