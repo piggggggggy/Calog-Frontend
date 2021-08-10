@@ -30,7 +30,7 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            window.location.href = '/dashboard'
+            window.location.href = '/loading/dashboard'
         };
         loginsv()
         .catch((err)=>{

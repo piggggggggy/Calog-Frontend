@@ -30,12 +30,12 @@ React.useEffect(()=>{
     <React.Fragment>
       <Container>
           <Head>
-            <td onClick={()=>{history.push("/body")}}>
+            <td onClick={()=>{history.push("/loading/body")}}>
             <Grid>{Back}</Grid>
             </td>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
               {admin==="cadmin@calories.com"?
-              <Tag onClick={()=>{history.push("/notiwrite")}}>
+              <Tag onClick={()=>{history.push("/loading/notiwrite")}}>
               <Text size="13px" lineheight="25px"><u>쓰기</u></Text>
               </Tag>
               :

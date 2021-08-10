@@ -70,7 +70,7 @@ const Calendar_Calendar = (props) => {
               // 캘린더 상세 페이지 이동 버튼
               let date_format = days.format('YYYY-MM-DD');
               const detailBtn = () => {
-                history.push(`/calendar/${date_format}`)
+                history.push(`/loading/calendar/${date_format}`)
               };
 
               // case1) 오늘 날짜일 경우
@@ -167,7 +167,7 @@ const Calendar_Calendar = (props) => {
                   <Text size="15px" color={theme.color.gray_5} bold margin="3% 0 7% 0" m_size="13px">한 달 동안의 내 식생활에 대해서 알아볼까요?</Text>
                 </Grid>
                 <Button
-                  _onClick={() => history.push('/signsocial')}
+                  _onClick={() => history.push('/loading/signsocial')}
                   height="6vh" border_radius="60px" bg={theme.color.dark}>
                   <Text size="16px" bold m_size="14px">로그인하기</Text>
                 </Button>

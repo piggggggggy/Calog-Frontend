@@ -19,7 +19,7 @@ const dispatch = useDispatch();
     <React.Fragment>
       <Container>
           <Head>
-            <div onClick={()=>{history.push("/body")}}>
+            <div onClick={()=>{history.push("/loading/body")}}>
             <Tag>{Back}</Tag>
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">알람</Text>

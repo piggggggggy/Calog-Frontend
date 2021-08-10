@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid, Text, Image} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -39,7 +39,7 @@ const DashBoard = (props) => {
       dispatch(getTodayRecordDB())
       dispatch(getWorkoutDB())
     }
-  },[]);
+  },[is_login]);
   
   // 유저정보
   const user = useSelector((state) => state.user.user_info);

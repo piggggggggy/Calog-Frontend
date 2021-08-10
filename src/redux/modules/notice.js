@@ -24,7 +24,7 @@ export const postNoticeSV = (noticelist) => {
         instance
         .post('/api/notice', noticelist)
         .then((res) => {
-              history.push("/notice");
+              history.push("/loading/notice");
         })
         .catch((err) => {
             console.log(err);
@@ -52,7 +52,7 @@ export const deleteNotiSV = (noticeId) => {
         .delete(`/api/notice/${noticeId}`, {data:{password:"zkffhfltm1@"}})
         .then((res) => {
             console.log(res);
-            history.push("/notice");
+            history.push("/loading/notice");
         })
         .catch((err) => {
             console.log(err);

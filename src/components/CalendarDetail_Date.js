@@ -32,7 +32,7 @@ const CalendarDetail_Date = (props) => {
   const Change = (date) => {
     setDate(moment(date).format('M월 D일'))
     const Format = moment(date).format('YYYY-MM-DD')
-    window.location.replace(`/calendar/${Format}`)
+    window.location.replace(`/loading/calendar/${Format}`)
   };
 
   return (
