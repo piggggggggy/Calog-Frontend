@@ -80,11 +80,17 @@ const App = (props) => {
   );
 }
 const Wrap = styled.div`
+  width: 100%;
   max-width: 420px;
   min-width: 280px;
   margin: 0 auto 9% auto;
   overflow-y: auto;
   
+  //노트북 이상 웹페이지
+  @media only screen and (min-width: 1024px) {
+    margin: 0 30% 0 50%;
+  }
+
 `;
 export default App;
 

@@ -35,6 +35,9 @@ const CalenderDetail = (props) => {
   const _SelectDate = history.location.pathname.split('/');
   const SelectDate = _SelectDate[2];
 
+  // 타입
+  const type = useSelector((state) => state.record.type)
+
   // 화면 로딩 시 선택한 날짜의 기록 데이터 불러오기
   useEffect(() => {
     dispatch(getRecordDB(SelectDate))
@@ -62,7 +65,6 @@ const CalenderDetail = (props) => {
     const url = record_list.url[idx]
     url !== "" && image_list.push(url)
   };
-
   return (
     <React.Fragment>
       <Grid>
@@ -125,7 +127,13 @@ const CalenderDetail = (props) => {
                 {image_list.map((r, idx) => {
                   return (
                     <React.Fragment>
-                      <Image height="221px" src={r} b_size="100% 100%"/> 
+                    {type === r.type && (
+                      <React.Fragment>
+                        {r.url?.map((u, idx) => {
+                          <Image height="221px" src={u} b_size="100% 100%"/> 
+                        })}
+                      </React.Fragment>
+                    )}
                     </React.Fragment>
                     )
                 })}
@@ -142,11 +150,11 @@ const CalenderDetail = (props) => {
         </Grid>
 
         {/* 메모 */}
-        <Grid margin="4% 9.7% 27% 9.7%" width="81%" m_margin="4% 9.7% 27% 9.7%">
+        {/* <Grid margin="4% 9.7% 27% 9.7%" width="81%" m_margin="4% 9.7% 27% 9.7%">
           {record_list?.contents?.map((r, idx) => {
             return <Text margin="0 0 3% 0">{r}</Text>
           })}
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );
