@@ -13,16 +13,10 @@ import {useSelector} from 'react-redux';
 */
 
 const CalendarDetail_Food = (props) => {
-  const {amount, name, resultKcal, type} = props
-
-  // props와 비교할 타입
-  const data_type = useSelector((state) => state.record.type)
+  const {amount, name, resultKcal} = props
 
   return (
     <React.Fragment>
-
-      {/* DashBoard_When의 type(끼니)를 클릭 = 기록된 type과 일치한 경우 */}
-      {(type === data_type) && (
       <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0">
 
           {/* 메뉴 */}
@@ -40,7 +34,6 @@ const CalendarDetail_Food = (props) => {
             <Text size="15px" m_size="13px">X {amount}</Text>
           </Width>
         </Grid>
-      )}
     </React.Fragment>
   );
 }

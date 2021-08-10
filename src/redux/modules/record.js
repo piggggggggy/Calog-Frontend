@@ -19,7 +19,6 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
-          console.log("안녕")
           const food_list = res.data.record
           dispatch(getRecord(food_list)) 
       })
@@ -47,7 +46,6 @@ export const getWorkoutDB = () => {
 // record - 기록하기
 export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
-    console.log(date, list, type, url, memo)
     instance
       .post('/api/record', {date:date, foodList:list, type:type, url:url, contents:memo})
       .then((res) => {

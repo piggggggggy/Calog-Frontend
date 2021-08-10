@@ -37,7 +37,7 @@ const Calendar_Calendar = (props) => {
 
   // 화면 로딩 시 모든 기록 데이터 조회
   useEffect(() => {
-    dispatch(getAllRecordDB(monthFormat));
+    is_login && dispatch(getAllRecordDB(monthFormat))
   },[dispatch, monthFormat]);
 
   // 지난달 btn
