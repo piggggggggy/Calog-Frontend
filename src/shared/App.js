@@ -18,6 +18,9 @@ import LazyLoad from 'react-lazyload';
 // modules
 import { delCartAll } from '../redux/modules/cart';
 import { delRecentAll } from '../redux/modules/recent';
+//웹페이지 바탕
+import {Image} from '../elements';
+import webImg from '../img/web.png';
 
 const App = (props) => {
   // dispatch
@@ -46,6 +49,12 @@ const App = (props) => {
       <LazyLoad>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
+
+            {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
+            <WebVer>
+              <Image src={webImg} width="100vw" height="100vh" b_size="100% 100%"/>
+            </WebVer>
+
             <Wrap>
               <Route path="/" exact component={Main} />
               <Route path="/search" exact component={MainSearch} />
@@ -85,9 +94,10 @@ const Wrap = styled.div`
   width: 100%;
   max-width: 420px;
   min-width: 280px;
-  height: 90vh;
+  height: 91vh;
   margin: 0 auto;
   overflow-y: auto;
+  background-color: white;
 
   &::-webkit-scrollbar {
     display: none;
@@ -96,8 +106,19 @@ const Wrap = styled.div`
   //노트북 이상 웹페이지
   @media only screen and (min-width: 1024px) {
     margin: 0 30% 0 50%;
+    border: 1px solid #E4E4E4;
   }
-
 `;
+
+const WebVer = styled.div`
+  display: none;
+
+  @media only screen and (min-width: 1024px) {
+    display: block;
+    position: absolute;
+    z-index: -100;
+  }
+`;
+
 export default App;
 
