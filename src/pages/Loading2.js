@@ -19,7 +19,7 @@ const Loading2 = (props) => {
   useEffect(() => {
     setTimeout(() => (
           url?.length !== 4 ? history.replace(`/${url[2]}`) : history.replace(`/${url[2]}/${url[3]}`)
-          ), 1000);
+          ), 800);
   }, [history]);
 
   return (
