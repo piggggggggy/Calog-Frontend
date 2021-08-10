@@ -68,10 +68,15 @@ const search = createSlice({
     //날짜 변경하기
     addDate : (state, action) => {
       state.date = action.payload
+    },
+
+    // 타입 변경하기
+    chgType : (state, action) => {
+      state.type = action.payload
     }
   }
 });
 
-export const {addCartRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate} = search.actions;
+export const {addCartRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate, chgType} = search.actions;
 
 export default search;

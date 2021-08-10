@@ -7,7 +7,10 @@ import theme from '../shared/theme';
 import { FaCircle } from "react-icons/fa";
 
 // type chk
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+
+// 데이터
+import {chgType} from '../redux/modules/cart';
 
 /** 
  * @param {String} type
@@ -18,6 +21,7 @@ import {useSelector} from 'react-redux';
 */
 
 const Record_When = (props) => {
+  const dispatch = useDispatch()
   
   // type chk
   const typeState = useSelector((state) => state.cart.type);
@@ -29,14 +33,19 @@ const Record_When = (props) => {
   const selectType = (type) => {
     if(type === "morning") {
       setType("아침")
+      dispatch(chgType("아침"))
     }else if (type === "lunch") {
       setType("점심") 
+      dispatch(chgType("점심"))
     }else if (type === "dinner") {
       setType("저녁")
+      dispatch(chgType("저녁"))
     }else if (type === "snack") {
       setType("간식")
+      dispatch(chgType("간식"))
     }else if (type === "midnightSnack") {
       setType("야식")
+      dispatch(chgType("야식"))
     };
   };
 

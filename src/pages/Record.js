@@ -75,32 +75,34 @@ const Record = (props) => {
       file: files
     })
     dispatch(addImage(files))
-    console.log(files)
   }
+
+  
 
   //이미지 업로드
   const fileUpload = useRef()
 
   //upload btn
-  const submitBtn = (e) => {
+  const submitBtn = async (e) => {
     e.preventDefault();
     let file = fileUpload.current.files;
-      const config = {
-        bucketName: process.env.REACT_APP_BUCKET_NAME,
-        region: process.env.REACT_APP_REGION,
-        accessKeyId: process.env.REACT_APP_ACCESS_ID,
-        secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-      };
-      const ReactS3Client = new S3upload(config);
       let image_list = []
       if (file?.length > 0) {
 
         for(let i=0; i<file?.length; i++) {
-          let newFileName = file[i].name
+          let newFileName = cart.date + file[i].name
+
+          const config = {
+            bucketName: process.env.REACT_APP_BUCKET_NAME,
+            region: process.env.REACT_APP_REGION,
+            accessKeyId: process.env.REACT_APP_ACCESS_ID,
+            secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+          };
+          const ReactS3Client = new S3upload(config);
 
           //리사이징하여 업로드
           try {
-            const resizeFile = imageCompression(file[i], options);
+            const resizeFile = await imageCompression(file[i], options);
             ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
               if(data.status === 204) {
                 let imgUrl = data.location
@@ -110,10 +112,10 @@ const Record = (props) => {
               }
               if(i === file?.length-1) {
                 // case1) 메모에 입력된 내용이 없을 때
-                inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, [""])) :
+                inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 
                 // case2) 메모에 입력된 내용이 있을 때
-                dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, [inputMemo]))
+                dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
               }
             });
           } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
@@ -121,10 +123,10 @@ const Record = (props) => {
       } else {
         //업로드 할 이미지가 없을 때
         // case1) 메모에 입력된 내용이 없을 때
-        inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [""])) : 
+        inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], "")) : 
 
         // case2) 메모에 입력된 내용이 있을 때
-        dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], [inputMemo]))
+        dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], inputMemo))
       }
   }
 
@@ -163,7 +165,7 @@ const Record = (props) => {
       {/* btn */}
       <Button
         _onClick={submitBtn}
-        width="90%" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 11% auto">
+        width="90%" height="56px" border_radius="44px" bg={theme.color.light} margin="0 auto 13% auto">
         <Text size="16px" bold>기록하기</Text>
       </Button>
   </React.Fragment>
