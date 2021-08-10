@@ -5,6 +5,7 @@ import _, { throttle } from 'lodash';
 // elementc & components
 import { Grid, Text } from '../elements';
 import CardRcmd from './Main_CardRcmd';
+import Loading from '../pages/Loading2';
 // modules
 import { getRecommendedDB } from '../redux/modules/search';
 
@@ -56,6 +57,14 @@ const RcmdList = (props) => {
 
   const delay = 50;
   const throttleDragMove = throttle(dragMove, delay);
+
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
 
   if (!recommended_list) {
     return <></>;

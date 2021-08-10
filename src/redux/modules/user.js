@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 import axios from "axios";
-//카트, 히스토리, bmr, 기록 삭제 액션
-import {delCartAll} from './cart';
-import { delRecentAll } from "./recent";
+
+// 액션
 import {bmrChk} from './record';
 
 
@@ -30,7 +29,7 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            window.location.href = '/loading/dashboard'
+            window.location.href = '/dashboard'
         };
         loginsv()
         .catch((err)=>{

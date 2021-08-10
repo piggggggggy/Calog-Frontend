@@ -25,6 +25,9 @@ import { delRecentAll } from '../redux/modules/recent';
 import {Image} from '../elements';
 import webImg from '../img/web.png';
 
+//lazy loading
+import LazyLoad from 'react-lazyload';
+
 const App = (props) => {
   const dispatch = useDispatch();
 
@@ -51,7 +54,7 @@ const App = (props) => {
     <React.Fragment>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
-
+          <LazyLoad>
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
             <WebVer>
               <Image src={webImg} width="100vw" height="100vh" b_size="100% 100%"/>
@@ -62,6 +65,7 @@ const App = (props) => {
               <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
               <Route path="/cart" exact component={Cart} />
               {/* <Route path="/loading" exact component={Loading} /> */}
+              <Route path="/loading/" exact component={Loading2} />
               <Route path="/loading/:url" exact component={Loading2} />
               <Route path="/loading/:url/:date" exact component={Loading2} />
               {/* <Route path="/loading3" exact component={Loading3} /> */}
@@ -87,6 +91,7 @@ const App = (props) => {
 
               <Nav />
             </Wrap>
+          </LazyLoad>
         </ThemeProvider>
     </React.Fragment>
   );

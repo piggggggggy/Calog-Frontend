@@ -18,7 +18,7 @@ const nextPage = () => {
 };
 const addspec = () => {
     dispatch(BodySpectSV(gender, weight, height, age));
-    history.push("/loading/body");
+    history.push("/body");
 };
 const setMan = () => {
     SetSpec({...BodySpec, gender: "남자"});

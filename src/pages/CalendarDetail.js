@@ -12,6 +12,7 @@ import CalendarDetail_Info from '../components/CalendarDetail_Info';
 import DashBoard_When from '../components/DashBoard_When';
 import CalendarDetail_Food from '../components/CalendarDetail_Food';
 import CalendarDetail_Image from '../components/CalendarDetail_Image';
+import Loading from './Loading2';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
@@ -96,6 +97,13 @@ const CalenderDetail = (props) => {
     const list_type = memo[idx].type
     list_type === type && memo_list.push(memo[idx].contents)
   };
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
 
   return (
     <React.Fragment>

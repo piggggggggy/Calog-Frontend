@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import { Text } from '../elements';
+import Loading from '../pages/Loading2';
 // modules
 import { getMostUsedKeyDB, searchKeywordDB, countKeywordDB, addMostUsedKey } from '../redux/modules/search';
 import { searchRecentDB, addRecent } from '../redux/modules/recent';
@@ -41,6 +42,13 @@ const MostUsedKey = (props) => {
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
   };
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
 
 
   return (

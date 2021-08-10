@@ -16,11 +16,13 @@ import axios from 'axios'
 // dashboard - db에서 오늘의 칼로리 리스트 가져오기
 export const getTodayRecordDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get('/api/calendar/dash')
       .then((res) => {
           const food_list = res.data.record
           dispatch(getRecord(food_list)) 
+          dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err)
@@ -32,11 +34,13 @@ export const getTodayRecordDB = () => {
 // dashboard - db에서 운동리스트 가져오기
 export const getWorkoutDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get('/api/calendar/exercise')
       .then((res) => {
         const exercise_list = res.data.exercise
         dispatch(getExercise(exercise_list))
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err)
@@ -48,10 +52,12 @@ export const getWorkoutDB = () => {
 // dashboard - 바디스펙 저장하기
 export const addBodySpecDB = (W_boolean, h_boolean, b_boolean) => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .post('/api/calendar/blind')
       .then((res) => {
         console.log(res)
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         window.alert('바디스펙을 저장하는데 오류가 있어요! 관리자에게 문의해주세요😿')
@@ -69,7 +75,7 @@ export const addRecordDB = (date, list, type, url, memo) => {
         dispatch(delCartAll())
         dispatch(delImgAll())
         dispatch(typeChk(type))
-        history.replace('/loading/dashboard')
+        history.replace('/dashboard')
       })
       .catch((err) => {
         window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
@@ -95,6 +101,7 @@ export const getAllRecordDB = (monthFormat) => {
 // calendar - 특정 일자 기록 불러오기
 export const getRecordDB = (date) => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
@@ -104,8 +111,9 @@ export const getRecordDB = (date) => {
         //기록이 있을 경우 액션
         if (record_list.length === 0) {
           window.alert('기록된 칼로리가 없어요!')
-          history.push('/loading/dashboard')
+          history.push('/dashboard')
         } else {dispatch(getRecord(record_list))}
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
@@ -136,6 +144,9 @@ const initialState = {
 
   // record_img
   img: [],
+
+  // loading
+  is_loaded: false,
 }
 
 // redux
@@ -187,10 +198,14 @@ const record = createSlice({
     // record to dashboard >> all Img delete
     delImgAll : (state, action) => {
       state.img = []
+    },
+
+    isLoaded : (state, action) => {
+      state.is_loaded = action.payload
     }
   }
 });
 
-export const {getRecord, getExercise, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll} = record.actions;
+export const {getRecord, getExercise, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll, isLoaded} = record.actions;
 
 export default record;

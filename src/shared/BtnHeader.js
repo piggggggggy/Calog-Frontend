@@ -20,7 +20,7 @@ const BtnHeader = (props) => {
         <Text bold size="15px" m_size="15px" width="auto">{props.title}</Text>
         {/* 장바구니 이모지 유무 */}
         {props.display !== 'none' ? 
-        <Grid width="auto" _onClick={() => history.push('/loading/cart')}>
+        <Grid width="auto" _onClick={() => history.push('/cart')}>
           <FiShoppingCart size="3vh"/>
         </Grid> : <Grid width="3%"/>}
       </Grid>

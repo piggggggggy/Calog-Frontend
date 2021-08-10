@@ -5,6 +5,9 @@ import { createSlice } from "@reduxjs/toolkit";
 //전역 > 서버 배포
 import instance from "./instance";
 
+//loading
+import {isLoaded} from './record';
+
 // middleware 
 // 즐겨찾기
 export const addFavoriteDB = (data) => {
@@ -41,11 +44,13 @@ export const deleteFavoriteDB = (foodId) => {
 // 즐겨찾기 목록 가져오기
 export const getFavoriteDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get('/api/favorite/list')
       .then((res) => {
         // console.log(res);
         dispatch(getFavorite(res.data));
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")

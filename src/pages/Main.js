@@ -29,7 +29,6 @@ const Main = (props) => {
     }
   }, [is_login]);
 
-
   return (
     <React.Fragment>
       

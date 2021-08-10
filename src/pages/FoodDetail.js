@@ -7,6 +7,7 @@ import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
 import UnderBar from '../components/Main_UnderBar';
 import CalorieBar from '../components/FoodDetail_CalorieBar';
+import Loading from './Loading2';
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 // modules
@@ -44,6 +45,13 @@ const FoodDetail = (props) => {
   // if (!record) {
   //   return <div>  </div>
   // }
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
 
 
   const bmr = record.length === 0 ? 2000 : record[0]?.bmr;

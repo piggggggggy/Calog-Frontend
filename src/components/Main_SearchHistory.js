@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import { Grid, Text } from '../elements';
+import Loading from './Loading2';
 // icons
 import { TiDeleteOutline } from 'react-icons/ti';
 // modules
@@ -27,6 +28,14 @@ const SearchHistory = (props) => {
   useEffect(() => {
     dispatch(getRecentDB());
   }, []);
+
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
 
   return (
     <React.Fragment>

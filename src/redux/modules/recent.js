@@ -4,14 +4,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 
+//loading
+import {isLoaded} from './record';
+
   // 최신검색어 불러오기
   export const getRecentDB = (keyword) => {
     return function (dispatch, getState, {history}) {
+      dispatch(isLoaded(false))
       instance
         .get('/api/home/recentKey')
         .then((res) => {
           // console.log(res);
           dispatch(getRecent(res.data));
+          dispatch(isLoaded(true))
         })
         .catch((err) => {
           console.log(err, "에러가 났읍니다.")
@@ -22,11 +27,13 @@ import instance from "./instance";
   // 최신검색어 추가
   export const searchRecentDB = (keyword) => {
     return function (dispatch, getState, {history}) {
+      dispatch(isLoaded(false))
       instance
         .post('/api/home/recentKey',{keyword: keyword})
         .then((res) => {
           // console.log(res);
           dispatch(addRecent(keyword));
+          dispatch(isLoaded(true))
         })
         .catch((err) => {  
           console.log(err, "에러가 났읍니다.");
@@ -37,11 +44,13 @@ import instance from "./instance";
   // 최신검색어 제거
   export const deleteRecentDB = (keyword) => {
     return function (dispatch, getState, {history}) {
+      dispatch(isLoaded(false))
       instance
        .delete('/api/home/recentKey', {keyword: keyword})
        .then((res) => {
         //  console.log(res);
          dispatch(deleteRecent(keyword));
+         dispatch(isLoaded(true))
        })
        .catch((err) => {
          console.log(err, "에러가 났읍니다.")
