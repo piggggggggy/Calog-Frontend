@@ -90,7 +90,7 @@ const CalenderDetail = (props) => {
   }
 
   // 메모와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
-  const memo = record_list.contents
+  const memo = record_list?.contents
   let memo_list = []
   for(let idx = 0; idx <memo?.length; idx++) {
     const list_type = memo[idx].type

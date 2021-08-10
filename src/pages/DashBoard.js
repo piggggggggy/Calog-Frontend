@@ -11,7 +11,7 @@ import DashBoard_Food from '../components/DashBoard_Food';
 
 // 데이터
 import {useSelector, useDispatch} from 'react-redux';
-import {getTodayRecordDB} from '../redux/modules/record';
+import {getTodayRecordDB, getWorkoutDB} from '../redux/modules/record';
 
 //지방이들
 import good_icon from '../img/good.png';
@@ -32,7 +32,10 @@ const DashBoard = (props) => {
   
   // 오늘의 기록 불러오기(로그인 유저)
   useEffect(() => {
-    is_login && dispatch(getTodayRecordDB())
+    if(is_login) {
+      dispatch(getTodayRecordDB())
+      dispatch(getWorkoutDB())
+    }
   },[]);
   
   // 유저정보
@@ -62,8 +65,6 @@ const DashBoard = (props) => {
     today_kcal += kcal
   };
   
-
-
   // good(bmr +- 10)
   const ten = bmr*0.1;
   const good = ((bmr-ten) <= today_kcal) && (today_kcal <= (bmr+ten));
@@ -75,6 +76,9 @@ const DashBoard = (props) => {
   // bmr을 초과했을 때
   const over_bmr = today_kcal > (bmr+ten);
   const how_over = today_kcal - bmr;
+
+  // 운동리스트
+  const exercise_list = useSelector((state) => state.record.exercise)
 
   return (
       <Grid width="100%">
@@ -192,13 +196,14 @@ const DashBoard = (props) => {
 
         {/* 운동 추천 - 로그인 유저만 확인 가능 */}
         {is_login && (
-          <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
-            <Text size="20px" bold m_size="17px" margin="0 0 0 2%">{user.nickname}님, 이런 운동은 어때요?</Text>
-            <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
-
+          <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0">
+            <Text size="20px" bold m_size="17px" margin="0 0 0 8.3%">{user.nickname}님, 이런 운동은 어때요?</Text>
+            <Exercise_Wrap>
               {/* 운동 리스트 맵 */}
-              <DashBoard_Workout />
-            </Grid>
+              {exercise_list?.map((e, idx) => {
+                return <DashBoard_Workout key={e._id} {...e}/>
+              })}
+            </Exercise_Wrap>
           </Grid>
         )}
       </Grid>
@@ -218,10 +223,26 @@ const Line = styled.div`
   line-height: 27px;
   padding-left: 9.7%;
   margin-top: -45%;
-  margin-bottom: 2%;
 
   @media ${theme.device.mobileM} {
     line-height: 20px;
+  }
+`;
+
+const Exercise_Wrap = styled.div`
+  width: 100%;
+  min-width: 280px;
+  max-height: 480px;
+  display: flex;
+  margin: 7.8% 0 0 2.5%;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media ${theme.device.mobileM} {
+    margin-top: 4.8% 0 0 2.5%;
   }
 `;
 
