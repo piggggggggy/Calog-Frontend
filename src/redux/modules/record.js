@@ -33,12 +33,28 @@ export const getTodayRecordDB = () => {
 export const getWorkoutDB = () => {
   return function (dispatch, getState, {history}) {
     instance
-      .get('')
+      .get('/api/calendar/exercise')
+      .then((res) => {
+        const exercise_list = res.data.exercise
+        dispatch(getExercise(exercise_list))
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+  }
+};
+
+
+// dashboard - 바디스펙 저장하기
+export const addBodySpecDB = (W_boolean, h_boolean, b_boolean) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .post('/api/calendar/blind')
       .then((res) => {
         console.log(res)
       })
       .catch((err) => {
-        console.log(err)
+        window.alert('바디스펙을 저장하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }
 };
@@ -105,7 +121,7 @@ const initialState = {
   record: [],
 
   // 추천 운동 리스트(dashboard)
-  workout: [],
+  exercise: [],
 
   // 한 달 캘린더(calendar)
   calendar: [],
@@ -135,8 +151,8 @@ const record = createSlice({
     },
 
     // dashboard - 운동 리스트 가져오기
-    getWorkout : (state, action) => {
-
+    getExercise : (state, action) => {
+      state.exercise = action.payload
     },
 
     // calendar - 한 달 칼로리 가져오기
@@ -174,6 +190,6 @@ const record = createSlice({
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll} = record.actions;
+export const {getRecord, getExercise, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll} = record.actions;
 
 export default record;

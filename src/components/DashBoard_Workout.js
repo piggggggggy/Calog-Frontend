@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import {Grid, Text, Image} from '../elements';
 
 //이미지
@@ -10,28 +11,37 @@ import yoga from '../img/yoga 1.png';
  * @담당자 : 김나영
 */
 
-//TODO 데이터 들어오면 다시 정리 및 기능 붙이기
 const DashBoard_Workout = (props) => {
+
+  const {name, kcal} = props
 
   return (
     <React.Fragment>
-      <Grid bg={'white'} width="32.5%" height="168px" border_radius="28px">
+      <Wrap>
         
         {/* 이미지 */}
-        <Grid padding="19% 0 0 0" width="52%" margin="0 auto" m_margin="0 auto">
+        <Grid padding="19% 0 0 0" width="127px" margin="0 auto" m_margin="0 auto">
           <Image src={yoga} height="66px"/>
         </Grid>
         <Grid margin="14.5% 14% 0 14%" width="auto" m_margin="14.5% 14% 0 14%">
 
           {/* 시간 */}
-          <Text size="13px" m_size="11px">요가 30분</Text>
+          <Text size="13px" m_size="11px">{name} 30분</Text>
 
           {/* 소비 칼로리 */}
-          <Text margin="4.5% 0 0 0" color={'#6993FF'} size="17px" bold m_size="15px">-89kcal</Text>
+          <Text margin="4.5% 0 0 0" color={'#6993FF'} size="17px" bold m_size="15px">{kcal}kcal</Text>
         </Grid>
-      </Grid>
+      </Wrap>
     </React.Fragment>
   );
 };
+
+const Wrap = styled.div`
+  background-color: white;
+  width: 127px;
+  height: 168px;
+  border-radius: 28px;
+  margin: 0 0 0 4.3%;
+`;
 
 export default DashBoard_Workout;

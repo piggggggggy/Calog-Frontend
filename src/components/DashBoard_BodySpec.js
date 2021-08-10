@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
+// 데이터
+import {useDispatch} from 'react-redux';
+import {addBodySpecDB} from '../redux/modules/record';
+
 /** 
  * @역할 : 대시보드 바디스펙 컴포넌트
  * @필수값 : 유저의 바디스펙(키, 몸무게, bmr)
@@ -10,6 +14,8 @@ import theme from '../shared/theme';
 */
 
 const DashBoard_BodySpec = (props) => {
+  const dispatch = useDispatch()
+
   const {height, weight, bmr} = props;
 
   // 키
@@ -32,6 +38,7 @@ const DashBoard_BodySpec = (props) => {
       hShow: "none",
       hHide: "block",
     })
+    // dispatch(addBodySpecDB(false, true, false))
   };
   const heightOff = () => {
     setHeightShow({
@@ -175,13 +182,12 @@ const Wrap = styled.div`
   height: 92px;
   background-color: white;
   border-radius: 20px;
-  margin: 5% auto 0 auto;
+  margin: 7.8% auto 0 auto;
   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.05));
   padding: 4% 0;
 
   @media ${theme.device.mobileS} {  
     padding: 6% 0;
-
   }
 `;
 
