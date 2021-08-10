@@ -85,9 +85,13 @@ const Wrap = styled.div`
   width: 100%;
   max-width: 420px;
   min-width: 280px;
-  height: 100vh;
-  margin: 0 auto 9% auto;
+  height: 90vh;
+  margin: 0 auto;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   //노트북 이상 웹페이지
   @media only screen and (min-width: 1024px) {

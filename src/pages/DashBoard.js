@@ -14,9 +14,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getTodayRecordDB} from '../redux/modules/record';
 
 //지방이들
-import max_icon from '../img/max.png';
-import well_icon from '../img/well.png';
-import extra_icon from '../img/extra.png';
+import good_icon from '../img/good.png';
+import nope_icon from '../img/nope.png';
+import mid_icon from '../img/soso.png';
 import none_icon from '../img/none.png';
 
 /** 
@@ -81,10 +81,8 @@ const DashBoard = (props) => {
 
         {/* 배경 */}
         <Top>
-
-          <Emoji>
             {/* 비로그인 유저 */}
-            {!is_login && <Image src={none_icon}/>}
+            {!is_login && <Image src={none_icon} b_size="102% 100%"/>}
 
             {/* 로그인 유저 */}
             {is_login && (
@@ -94,24 +92,22 @@ const DashBoard = (props) => {
                 <React.Fragment>
 
                 {/* case3-1-1) good일 때 */}
-                {good  && <Image src={well_icon}/>}
+                {good  && <Image src={mid_icon} b_size="102% 100%"/>}
 
                 {/* case3-1-2) bad(over)일 때 */}
-                {over_bmr && <Image src={max_icon}/>}
+                {over_bmr && <Image src={nope_icon} b_size="102% 100%"/>}
 
                 {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                {extra_bmr && <Image src={extra_icon}/>}
+                {extra_bmr && <Image src={good_icon} b_size="102% 100%"/>}
                   </React.Fragment>
                   ) : (
 
                   // case3-2) bmr 값이 없을 때
-                  <Image src={none_icon}/>
+                  <Image src={none_icon} b_size="102% 100%"/>
                 )}
 
               </React.Fragment>
             )}
-            
-          </Emoji>
         </Top>
 
         {/* 멘트 */}
@@ -194,25 +190,25 @@ const DashBoard = (props) => {
         {/* 칼로리 리스트 */}
         <DashBoard_Food {...[record]} />
 
-        {/* 운동 추천 */}
-        <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
-          <Text size="20px" bold m_size="17px" margin="0 0 0 2%">{user.nickname}님, 이런 운동은 어때요?</Text>
-          <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
+        {/* 운동 추천 - 로그인 유저만 확인 가능 */}
+        {is_login && (
+          <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
+            <Text size="20px" bold m_size="17px" margin="0 0 0 2%">{user.nickname}님, 이런 운동은 어때요?</Text>
+            <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
 
-            {/* 운동 리스트 맵 */}
-            <DashBoard_Workout />
+              {/* 운동 리스트 맵 */}
+              <DashBoard_Workout />
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Grid>
   );
 };
 
 const Top = styled.div`
   position: relative;
-  background-color: ${theme.color.light};
+  width: 102%;
   height: 29vh;
-  min-width: 280px;
-  max-width: 420px;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
 `;
@@ -227,14 +223,6 @@ const Line = styled.div`
   @media ${theme.device.mobileM} {
     line-height: 20px;
   }
-`;
-
-const Emoji = styled.div`
-  width: 44%;
-  height: 23vh;
-  position: absolute;
-  right: -10%;
-  margin-top: 15%;
 `;
 
 export default DashBoard;
