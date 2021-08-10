@@ -7,6 +7,9 @@ import Calendar_Calendar from '../components/Calendar_Calendar';
 // 데이터
 import {useSelector} from 'react-redux'
 
+// helmet
+import {Helmet} from 'react-helmet';
+
 /** 
  * @역할 : 유저의 기초대사량을 토대로 한 달 식습관을 확인할 수 있는 페이지
  * @담당자 : 김나영
@@ -19,6 +22,14 @@ const Calendar = (props) => {
 
   return (
     <React.Fragment>
+      {/* 헬멧 */}
+      <Helmet>
+        <title>[Calog] 나의 한 달 캘린더</title>
+        <meta property="og:title" content="[Calog] 나의 한 달 캘린더"/>
+        <meta property="og:description" content="내가 이번 달 먹은 음식의 칼로리가 궁금하다면?" />
+        <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+      </Helmet>
+
       {/* 헤더 */}
       <Grid padding="13.5% 0 0 5.8%">
         <Text size="28px" bold m_size='22px'>캘린더</Text>
