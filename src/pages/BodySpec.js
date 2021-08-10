@@ -8,6 +8,10 @@ import {history} from '../redux/configStore';
 
 import instance from '../redux/modules/instance';
 import { getRecord } from '../redux/modules/record';
+
+// helmet
+import {Helmet} from 'react-helmet';
+
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -28,6 +32,14 @@ const logout = () => {
   if(!is_login){
   return (
     <React.Fragment>
+      {/* 헬멧 */}
+      <Helmet>
+        <title>[Calog] 칼로그 로그인/회원가입</title>
+        <meta property="og:title" content="[Calog] 칼로그 로그인/회원가입"/>
+        <meta property="og:description" content="로그인/회원가입 후 칼로그를 이용해보세요!" />
+        <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+      </Helmet>
+
       <Container>
       <Profile>
           {ProfileDefault}
@@ -40,7 +52,7 @@ const logout = () => {
             <Text  margin="92px 0px 16px 0px">{Go}</Text>
             </Grid>
             </div>
-            <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!</Text>
+            <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">회원이 되어 칼로그 서비스를 <br/> 자유롭게 이용해보세요!</Text>
             <hr color="#F5F5F5"/>
             <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag></Text>
             <hr color="#F5F5F5"/>
@@ -60,6 +72,14 @@ const logout = () => {
 }
 return (
   <React.Fragment>
+    {/* 헬멧 */}
+    <Helmet>
+      <title>[Calog] 마이페이지</title>
+      <meta property="og:title" content="[Calog] 마이페이지"/>
+      <meta property="og:description" content="공지사항, 알림, 의견 보내기를 할 수 있어요!" />
+      <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+    </Helmet>
+
     <Container>
     <Profile>
         {ProfileDefault}

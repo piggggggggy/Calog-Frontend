@@ -19,6 +19,9 @@ import nope_icon from '../img/nope.png';
 import mid_icon from '../img/soso.png';
 import none_icon from '../img/none.png';
 
+// helmet
+import {Helmet} from 'react-helmet';
+
 /** 
  * @역할 오늘의 기록에 대한 내역을 확인할 수 있는 대시보드 페이지
  * @담당자 김나영
@@ -82,6 +85,13 @@ const DashBoard = (props) => {
 
   return (
       <Grid width="100%">
+        {/* 헬멧 */}
+        <Helmet>
+          <title>[Calog] 오늘의 칼로리</title>
+          <meta property="og:title" content="[Calog] 오늘의 칼로리" />
+          <meta property="og:description" content="오늘 먹은 음식의 칼로리가 궁금하다면?" />
+          <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+        </Helmet>
 
         {/* 배경 */}
         <Top>
