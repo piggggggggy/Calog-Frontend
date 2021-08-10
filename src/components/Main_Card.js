@@ -194,7 +194,6 @@ const BookmarkBox = styled.div`
   cursor: pointer;
   padding-left: 25%;
   padding-right: 20%;
-  width
 `;
 
 const CartBox = styled.div`
