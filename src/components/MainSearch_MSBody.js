@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import theme from '../shared/theme';
 import { history } from '../redux/configStore';
+import { useInView } from 'react-intersection-observer';
 // modules
 import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData, addMostUsedKey } from '../redux/modules/search';
 import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
@@ -19,7 +20,6 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { MdCancel } from 'react-icons/md';
-import { push } from 'connected-react-router';
 
 /** 
  * @param {*} props
@@ -42,21 +42,7 @@ const MSBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
 
-  // 페이지네이션
-  const [paging, setPage] = useState({
-    page: 1,
-    start: 0,
-    end: 4,
-  });
 
-  const handleNext = () => {
-    const { page, start, end } = paging;
-    setPage({
-      page: page + 1,
-      start: start + 4,
-      end: end + 4,
-    })
-  }
 
 
 
@@ -253,6 +239,7 @@ const MSBody = (props) => {
       <BodyContainer>
 
         {/* 검색결과가 들어가는 곳 */}
+        {/* <CardList search_list={search_list}/> */}
         <CardList search_list={search_list}/>
 
         {/* 장바구니 탭 */}

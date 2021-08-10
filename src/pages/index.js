@@ -19,6 +19,9 @@ import FoodDetail from './FoodDetail';
 import Cart from './Cart';
 import MainSearch from './MainSearch';
 import Loading from './Loading';
+import Loading2 from './Loading2';
+import Loading3 from './Loading3';
+
 
 export {
   DashBoard, 
@@ -38,5 +41,7 @@ export {
   Record, 
   MainSearch, 
   CalendarDetail, 
-  Loading
+  Loading,
+  Loading2,
+  Loading3
 }

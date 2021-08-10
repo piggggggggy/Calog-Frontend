@@ -42,7 +42,6 @@ const UnderBar = (props) => {
     dispatch(deleteCartRx(foodId));
   };
 
-  console.log(cart_list);
 
   if ( cart_list.length === 0 ) {
     return <></>;
