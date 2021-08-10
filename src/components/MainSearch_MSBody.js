@@ -41,25 +41,7 @@ const MSBody = (props) => {
   const recent_list = useSelector((state) => state.recent.recent);
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
-  const [ref, inView] = useInView();
 
-  // 페이지네이션
-  const [paging, setPage] = useState({
-    page: 1,
-    start: 0,
-    end: 20,
-  });
-
-  const handleNext = () => {
-    const { page, start, end } = paging;
-    setPage({
-      page: page + 1,
-      start: start + 20,
-      end: end + 20,
-    })
-  };
-
-  const target_list = search_list.slice(paging.start, paging.end);
 
 
 
@@ -257,6 +239,7 @@ const MSBody = (props) => {
       <BodyContainer>
 
         {/* 검색결과가 들어가는 곳 */}
+        {/* <CardList search_list={search_list}/> */}
         <CardList search_list={search_list}/>
 
         {/* 장바구니 탭 */}

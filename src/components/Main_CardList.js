@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { useInView } from 'react-hook-inview';
 
 // elements & components
 import Card from './Main_Card';
@@ -14,17 +15,51 @@ import Card from './Main_Card';
 
 const CardList = (props) => {
 // dispatch
-// props
+
+
+
+
   const search_list = props.search_list;
 
+  // const [ref, inView] = useInView({
+  //   threshold: 1,
+  // });
+
+  // // 페이지네이션
+  // const [paging, setPage] = useState({
+  //   page: 1,
+  //   start: 0,
+  //   end: 20,
+  // });
+
+  // const handleNext = useCallback(() => {
+  //   const { page, start, end } = paging;
+  //   setPage({
+  //     page: page + 1,
+  //     start: start + 20,
+  //     end: end + 20,
+  //   })
+  // }, [paging]);
+
+  // useEffect(() => {
+  //   if (inView) {
+  //     handleNext();
+  //     console.log(inView);
+  //     console.log(paging);
+  //     console.log(target_list);
+  //   }
+  // }, [inView])
+
+  // const target_list = search_list.slice(paging.start, paging.end);
+  // console.log(target_list)
   return (
     <React.Fragment>
       <CardContainer>
-        {search_list.map((result, idx) => {     
+        {search_list && search_list.map((result, idx) => {     
           if (idx >= 100) {
             return;
           }
-          return <Card key={result.foodId} {...result}/>
+          return <Card key={result.foodId} {...result}/>;
             
           })}
       </CardContainer>
