@@ -46,7 +46,7 @@ const logout = () => {
           </Profile>
           <Bottombg>
             <hr color="#FFE899"/>
-            <div onClick={()=>{history.push("/signsocial")}}>
+            <div onClick={()=>{history.push("/loading/signsocial")}}>
             <Grid display="flex">
             <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
             <Text  margin="92px 0px 16px 0px">{Go}</Text>
@@ -95,17 +95,17 @@ return (
           <BodyBox>
             <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
             <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
-            _onClick={()=>{history.push("/addspec")}}>
+            _onClick={()=>{history.push("/loading/addspec")}}>
               <Text lineheight="22px" size="16px" bold>신체정보 등록하기</Text>
             </Button>
 
           </BodyBox>
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">
-            <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
+            <Tag onClick={()=>{history.push("/loading/notice")}}>공지사항</Tag>
             </Text>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
+          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/loading/alam")}}>알림</Tag></Text>
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
           <hr color="#F5F5F5"/>

@@ -69,7 +69,7 @@ export const addRecordDB = (date, list, type, url, memo) => {
         dispatch(delCartAll())
         dispatch(delImgAll())
         dispatch(typeChk(type))
-        history.replace('/dashboard')
+        history.replace('/loading/dashboard')
       })
       .catch((err) => {
         window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
@@ -104,7 +104,7 @@ export const getRecordDB = (date) => {
         //기록이 있을 경우 액션
         if (record_list.length === 0) {
           window.alert('기록된 칼로리가 없어요!')
-          history.push('/dashboard')
+          history.push('/loading/dashboard')
         } else {dispatch(getRecord(record_list))}
       })
       .catch((err) => {
@@ -112,7 +112,6 @@ export const getRecordDB = (date) => {
       }) 
   }
 };
-
 
 // initial State 
 const initialState = {
@@ -180,10 +179,12 @@ const record = createSlice({
       state.img = action.payload
     },
 
+    // record one Img delete
     delImage : (state, action) => {
       state.img.splice(action.payload, 1)
     },
 
+    // record to dashboard >> all Img delete
     delImgAll : (state, action) => {
       state.img = []
     }

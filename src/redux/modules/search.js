@@ -19,7 +19,7 @@ export const searchKeywordDB = (data) => {
           
           const new_data = {...data, data: res.data};
           dispatch(searchKeyword(new_data));
-          history.push('/search');
+          history.push('/loading/search');
         }
         
       })

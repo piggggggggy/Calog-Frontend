@@ -88,7 +88,7 @@ const DashBoard_Food = (props) => {
           // 로그인 페이지 이동 버튼
           <Grid margin="6.5% auto" width="94%" m_margin="7% auto">
             <Button
-              _onClick={() => history.push('/signsocial')}
+              _onClick={() => history.push('/loading/signsocial')}
               height="56px" border_radius="60px" bg={theme.color.light}>
               <Text size="16px" bold m_size="14px">로그인하기</Text>
             </Button>

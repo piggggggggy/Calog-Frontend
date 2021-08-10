@@ -9,7 +9,7 @@ const Google = async () => {
   };
 
     await tokenSave();
-    await window.location.replace('/body');
+    await window.location.replace('/loading/body');
 
 
   return (

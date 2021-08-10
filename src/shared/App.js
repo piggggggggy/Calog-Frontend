@@ -1,30 +1,33 @@
 import React, { useCallback, useEffect } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
+
 // 로그인 상태 전역 유지
 import { useDispatch } from 'react-redux';
 import { LoginCheck } from '../redux/modules/user';
-//라우팅
+
+// 라우팅
 import { Route } from "react-router-dom";
 import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail, Loading, Loading2, Loading3} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
 import Nav from './Nav';
-//테마
+
+// 테마
 import theme from './theme';
-//lazy loading
-import LazyLoad from 'react-lazyload';
+
 // modules
 import { delCartAll } from '../redux/modules/cart';
 import { delRecentAll } from '../redux/modules/recent';
-//웹페이지 바탕
+
+// 웹페이지 바탕
 import {Image} from '../elements';
 import webImg from '../img/web.png';
 
 const App = (props) => {
-  // dispatch
   const dispatch = useDispatch();
+
   // login check
   useEffect(() => {
     dispatch(LoginCheck());
@@ -46,7 +49,6 @@ const App = (props) => {
   
   return (
     <React.Fragment>
-      <LazyLoad>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
 
@@ -54,15 +56,15 @@ const App = (props) => {
             <WebVer>
               <Image src={webImg} width="100vw" height="100vh" b_size="100% 100%"/>
             </WebVer>
-
-            <Wrap>
+              <Wrap>
               <Route path="/" exact component={Main} />
               <Route path="/search" exact component={MainSearch} />
               <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
               <Route path="/cart" exact component={Cart} />
-              <Route path="/loading" exact component={Loading} />
-              <Route path="/loading2" exact component={Loading2} />
-              <Route path="/loading3" exact component={Loading3} />
+              {/* <Route path="/loading" exact component={Loading} /> */}
+              <Route path="/loading/:url" exact component={Loading2} />
+              <Route path="/loading/:url/:date" exact component={Loading2} />
+              {/* <Route path="/loading3" exact component={Loading3} /> */}
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
@@ -86,10 +88,10 @@ const App = (props) => {
               <Nav />
             </Wrap>
         </ThemeProvider>
-      </LazyLoad>
     </React.Fragment>
   );
 }
+
 const Wrap = styled.div`
   width: 100%;
   max-width: 420px;

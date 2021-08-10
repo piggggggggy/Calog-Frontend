@@ -32,7 +32,7 @@ React.useEffect(()=>{
       <Container>
 
       <Head>
-            <td onClick={()=>{history.push("/notice")}}>
+            <td onClick={()=>{history.push("/loading/notice")}}>
             <Grid>{Back}</Grid>
             </td>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
