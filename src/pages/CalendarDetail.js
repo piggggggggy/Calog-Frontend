@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Button, Grid, Image, Text} from '../elements';
+import React, {memo, useEffect} from 'react';
+import {Button, Grid, Text, Image} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
 
@@ -11,6 +11,7 @@ import CalendarDetail_Date from'../components/CalendarDetail_Date';
 import CalendarDetail_Info from '../components/CalendarDetail_Info';
 import DashBoard_When from '../components/DashBoard_When';
 import CalendarDetail_Food from '../components/CalendarDetail_Food';
+import CalendarDetail_Image from '../components/CalendarDetail_Image';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
@@ -20,6 +21,9 @@ import {getRecordDB} from '../redux/modules/record';
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+//img
+import noImg from '../img/noImg.png';
 
 /** 
  * @param {list} r
@@ -43,10 +47,6 @@ const CalenderDetail = (props) => {
     dispatch(getRecordDB(SelectDate))
   },[]);
 
-  // 기록
-  const record_list = useSelector((state) => state.record.record[0]);
-  const record_map = record_list?.foodRecords
-  
   // slick setting
   // dots 유 / 반복 유 / 속도 / 한 번에 보여줄 스크롤 / 스크롤 시 1장 / 자동 넘김 방지
   const settings = {
@@ -58,6 +58,17 @@ const CalenderDetail = (props) => {
     autoplay: false,
   }
 
+  // 기록
+  const record_list = useSelector((state) => state.record.record[0]);
+  const record_map = record_list?.foodRecords
+
+  // 푸드 리스트와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
+  let same_food = []
+  for (let idx=0; idx<record_map?.length; idx++) {
+    const list_type = record_map[idx].type
+    list_type === type && same_food.push(record_map[idx])
+  }
+
   // 이미지 빈값 제외하기
   let image_list = []
   let image_url = record_list?.url
@@ -65,34 +76,54 @@ const CalenderDetail = (props) => {
     const url = record_list.url[idx]
     url !== "" && image_list.push(url)
   };
+
+  // 이미지 리스트와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
+  let same_list = []
+  for (let idx=0; idx<image_url?.length; idx++) {
+    const list_type = image_url[idx].type
+    if(list_type === type) {
+      for (let list=0; list<image_url[idx].url.length; list++) {
+        const urlList = image_url[idx].url[list]
+        same_list.push(urlList)
+      }
+    }
+  }
+
+  // 메모와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
+  const memo = record_list.contents
+  let memo_list = []
+  for(let idx = 0; idx <memo?.length; idx++) {
+    const list_type = memo[idx].type
+    list_type === type && memo_list.push(memo[idx].contents)
+  };
+
   return (
     <React.Fragment>
-      <Grid>
-
-        {/* 배경 */}
-        <TopBack />
 
         {/* 헤더 */}
-        <Grid is_flex padding="2.9vh 6.2%">
+        <Grid padding="2.9vh 6.2%" bg={theme.color.light}>
 
           {/* 뒤로가기 버튼 */}
-          <Grid width="3vh" _onClick={() => history.goBack()}>  
+          <Grid _onClick={() => history.goBack()}>  
             <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.7695 18.23L9.99953 20L-0.000469208 10L9.99953 0L11.7695 1.77L3.53953 10L11.7695 18.23Z" fill="#757575"/>
             </svg>
           </Grid>
         </Grid>
 
-        {/* 캘린더 */}
-        <CalendarDetail_Date SelectDate={SelectDate}/>
+        <Wrap>
+          <TopBack/>
 
-        {/* 안내 메시지 */}
-        <CalendarDetail_Info {...record_list}/>
+          {/* 캘린더 */}
+          <CalendarDetail_Date SelectDate={SelectDate}/>
+        
+          {/* 안내 메시지 */}
+          <CalendarDetail_Info {...record_list}/>
 
-        {/* 기록 시기 */}
-        <Grid margin="9.7% 0 0 2%" m_margin="9.7% 0 0 2%">
-          <DashBoard_When />
-        </Grid>
+          {/* 기록 시기 */}
+          <Grid margin="9.7% 0 0 2%" m_margin="9.7% 0 0 2%">
+            <DashBoard_When />
+          </Grid>
 
         {/* 식단title */}
         <Grid margin="10% 9.7% 0 9.7%" width="13.5%" m_margin="10% 9.7% 0 9.7%">
@@ -103,9 +134,17 @@ const CalenderDetail = (props) => {
 
         {/* 맵돌리기 */}
         <Grid width="80.9%" margin="4% auto 0 auto" m_margin="4% auto 0 auto">
-          {record_map?.map((r, idx) => {
-            return <CalendarDetail_Food key={r._id} {...r}/>
-          })}
+          {same_food?.length > 0 ? (
+            <React.Fragment>
+              {same_food?.map((r, idx) => {
+                return <CalendarDetail_Food key={r._id} {...r}/>
+              })}
+            </React.Fragment>
+          ) : (
+            <Grid text_align="center">
+              <Text size="15px" m_size="13px">기록된 식단이 없어요😿</Text>
+            </Grid>
+          )}
         </Grid>
 
         {/* 사진title */}
@@ -117,32 +156,19 @@ const CalenderDetail = (props) => {
 
         {/* 이미지 */}
         <Grid margin="4% 9.7% 0 9.7%" bg={'#eee'} width="81%" height="221px" border_radius="8px" m_margin="4% 9.7% 0 9.7%">
-          {(image_url?.length === 1 && record_list.url[0] === "") ?
-            (
-              <Grid text_align="center" padding="30% 0">
-                <Text size="22px" m_size="18px" bold>업로드된 이미지가 없어요!</Text>
-              </Grid>
-            ) : (
-              <Slider {...settings}>
-                {image_list.map((r, idx) => {
-                  return (
-                    <React.Fragment>
-                    {type === r.type && (
-                      <React.Fragment>
-                        {r.url?.map((u, idx) => {
-                          <Image height="221px" src={u} b_size="100% 100%"/> 
-                        })}
-                      </React.Fragment>
-                    )}
-                    </React.Fragment>
-                    )
-                })}
-              </Slider>
-            )
-          }
+          {same_list?.length > 0 ? (
+            <Slider {...settings}>
+              {same_list?.map((i, idx) => {
+                return <CalendarDetail_Image key={i.url} {...[i]} />
+              })}
+            </Slider>
+          ) : (
+            <Image height="221px" src={noImg} b_size="100% 100%"/>
+          )}
         </Grid>
 
         {/* 메모title */}
+        <Grid height="3vh"/>
         <Grid margin="6.3% 9.7% 0 9.7%" width="13.5%" m_margin="6.3% 9.7% 0 9.7%">
           <Button height="25px" bg={theme.color.light} border_radius="15.5px">
             <Text size="13px" bold>메모</Text>
@@ -150,23 +176,43 @@ const CalenderDetail = (props) => {
         </Grid>
 
         {/* 메모 */}
-        {/* <Grid margin="4% 9.7% 27% 9.7%" width="81%" m_margin="4% 9.7% 27% 9.7%">
-          {record_list?.contents?.map((r, idx) => {
-            return <Text margin="0 0 3% 0">{r}</Text>
-          })}
-        </Grid> */}
-      </Grid>
+        <Grid margin="4% 9.7% 13% 9.7%" width="81%" m_margin="4% 9.7% 13% 9.7%">
+          {memo_list?.length > 0 ? (
+            <React.Fragment>
+              {memo_list?.map((r, idx) => {
+                return <Text margin="0 0 3% 0" size="15px" m_size="13px">{r}</Text>
+              })}
+            </React.Fragment>
+          ) : (
+            <Grid text_align="center">
+              <Text size="15px" m_size="13px">기록된 메모가 없어요😿</Text>
+            </Grid>
+          )}
+          
+        </Grid>
+
+        </Wrap>
     </React.Fragment>
   );
 };
 
 const TopBack = styled.div`
   position: absolute;
-  z-index: -100;
   width: 100%;
+  min-width: 280px;
   max-width: 420px;
   background-color: ${theme.color.light};
-  height: 30vh;
+  height: 21vh;
+`;
+
+const Wrap = styled.div`
+  position: relative;
+  max-width: 420px;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export default CalenderDetail;
