@@ -9,7 +9,7 @@ const Naver = async () => {
   };
 
     await tokenSave();
-    await window.location.replace('/loading/body');
+    await window.location.replace('/body');
 
 
   return (

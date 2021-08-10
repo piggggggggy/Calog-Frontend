@@ -14,12 +14,10 @@ const Loading2 = (props) => {
 
   const url = history.location.pathname.split('/')
 
-  console.log(url)
-
   useEffect(() => {
-    setTimeout(() => (
-          url?.length !== 4 ? history.replace(`/${url[2]}`) : history.replace(`/${url[2]}/${url[3]}`)
-          ), 800);
+    {(url[2] === "calendar") && (
+        setTimeout(() => (history.replace(`/${url[2]}`)), 500)
+      )}
   }, [history]);
 
   return (

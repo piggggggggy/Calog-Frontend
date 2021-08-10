@@ -3,6 +3,7 @@ import {Grid, Text} from '../elements';
 
 // 컴포넌트
 import Calendar_Calendar from '../components/Calendar_Calendar';
+import Loading from './Loading2';
 
 // 데이터
 import {useSelector} from 'react-redux'
@@ -20,6 +21,13 @@ const Calendar = (props) => {
   // 로그인 체크
   const is_login = useSelector((state) => state.user.is_login);
 
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
+  
   return (
     <React.Fragment>
       {/* 헬멧 */}

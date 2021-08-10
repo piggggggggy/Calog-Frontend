@@ -73,7 +73,7 @@ const MSBody = (props) => {
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
     setHistory(true);
-    history.push('/loading/search');
+    history.push('/search');
   };
 
   // 최근 검색어 삭제

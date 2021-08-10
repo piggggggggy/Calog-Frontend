@@ -8,6 +8,7 @@ import DashBoard_Chart from '../components/DashBoard_Chart';
 import DashBoard_Workout from '../components/DashBoard_Workout';
 import DashBoard_BodySpec from '../components/DashBoard_BodySpec';
 import DashBoard_Food from '../components/DashBoard_Food';
+import Loading from './Loading2';
 
 // 데이터
 import {useSelector, useDispatch} from 'react-redux';
@@ -32,14 +33,13 @@ const DashBoard = (props) => {
 
   // 로그인 유무 체크(미로그인 유저에게는 임시의 데이터를 보여준다) 
   const is_login = useSelector((state) => state.user.is_login);
-  
-  // 오늘의 기록 불러오기(로그인 유저)
+
   useEffect(() => {
     if(is_login) {
       dispatch(getTodayRecordDB())
       dispatch(getWorkoutDB())
     }
-  },[is_login]);
+  }, [is_login]);
   
   // 유저정보
   const user = useSelector((state) => state.user.user_info);
@@ -83,8 +83,15 @@ const DashBoard = (props) => {
   // 운동리스트
   const exercise_list = useSelector((state) => state.record.exercise)
 
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
+
   return (
-      <Grid width="100%">
+        <Grid width="100%">
         {/* 헬멧 */}
         <Helmet>
           <title>[Calog] 오늘의 칼로리</title>

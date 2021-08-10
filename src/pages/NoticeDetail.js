@@ -6,6 +6,8 @@ import {Back, X} from "../img/svg";
 import { history } from '../redux/configStore';
 import { getNotiDetailSV, deleteNotiSV } from '../redux/modules/notice';
 import _ from 'lodash';
+import Loading from './Loading2';
+
 /**
  * @param {*} props
  * @returns 설명적기
@@ -27,12 +29,20 @@ const notidelete = () => {
 React.useEffect(()=>{
   dispatch(getNotiDetailSV(notiId));
 },[]);
+
+// loading
+const is_loaded = useSelector((state) => state.record.is_loaded)
+
+if(!is_loaded) {
+  return (<Loading />);
+}
+
   return (
     <React.Fragment>
       <Container>
 
       <Head>
-            <td onClick={()=>{history.push("/loading/notice")}}>
+            <td onClick={()=>{history.push("/notice")}}>
             <Grid>{Back}</Grid>
             </td>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>

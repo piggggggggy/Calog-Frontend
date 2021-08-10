@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Grid, Button, Text } from '../elements';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {Close} from "../img/svg";
 import _ from 'lodash';
 import { history } from '../redux/configStore';

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Back} from "../img/svg";
 import { history } from '../redux/configStore';
 import { getNoticeSV, putNotiSV } from '../redux/modules/notice';
+import Loading from './Loading2';
 /**
  * @param {*} props
  * @returns 설명적기
@@ -25,17 +26,24 @@ React.useEffect(()=>{
   dispatch(getNoticeSV());
 },[]);
 
+// loading
+const is_loaded = useSelector((state) => state.record.is_loaded)
+
+if(!is_loaded) {
+  return (<Loading />);
+}
+
 
   return (
     <React.Fragment>
       <Container>
           <Head>
-            <td onClick={()=>{history.push("/loading/body")}}>
+            <td onClick={()=>{history.push("/body")}}>
             <Grid>{Back}</Grid>
             </td>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
               {admin==="cadmin@calories.com"?
-              <Tag onClick={()=>{history.push("/loading/notiwrite")}}>
+              <Tag onClick={()=>{history.push("/notiwrite")}}>
               <Text size="13px" lineheight="25px"><u>쓰기</u></Text>
               </Tag>
               :

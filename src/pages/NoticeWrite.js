@@ -26,7 +26,7 @@ console.log(noticelist);
     <React.Fragment>
       <Container>
       <Head>
-            <td onClick={()=>{history.push("/loading/notice")}}>
+            <td onClick={()=>{history.push("/notice")}}>
             <Grid>{Back}</Grid>
             </td>
             <Text size="17px" lineheight="22px" bold color="#000000">공지사항</Text>
