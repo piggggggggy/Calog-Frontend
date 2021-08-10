@@ -153,7 +153,7 @@ const Spinner4 = styled.div`
   width: 100%;
   border: none;
   z-index: 3;
-  animation: ${final} 5s 4.5s 1 ease;
+  animation: ${final} 4s 4.5s 1 ease;
 `;
 
 

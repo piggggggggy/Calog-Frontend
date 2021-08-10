@@ -30,7 +30,6 @@ const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 // useEffect
 
-  console.log(favorite_list);
   // 장바구니 담기!
   const addCart = (e) => {
     const cartUnit = {

@@ -10,7 +10,7 @@ import instance from "./instance";
       instance
         .get('/api/home/recentKey')
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           dispatch(getRecent(res.data));
         })
         .catch((err) => {
@@ -25,7 +25,7 @@ import instance from "./instance";
       instance
         .post('/api/home/recentKey',{keyword: keyword})
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           dispatch(addRecent(keyword));
         })
         .catch((err) => {  
@@ -40,7 +40,7 @@ import instance from "./instance";
       instance
        .delete('/api/home/recentKey', {keyword: keyword})
        .then((res) => {
-         console.log(res);
+        //  console.log(res);
          dispatch(deleteRecent(keyword));
        })
        .catch((err) => {
