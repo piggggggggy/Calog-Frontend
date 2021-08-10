@@ -33,15 +33,25 @@ const FoodDetail = (props) => {
   const foodId = props.match.params.foodId;
 
 // 대사량과 나의 칼로리 기록
-  const record = useSelector((state) => state.record.record);
-  const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
-  const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
-  console.log(record)
+  const _record = useSelector((state) => state.record.record);
+  const record = _record === undefined ? [] : _record;
 
-// useEffect
+
   useEffect(() => {
     dispatch(getDetailDB(foodId))
   }, []);
+
+  // if (!record) {
+  //   return <div>  </div>
+  // }
+
+
+  const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
+  const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+
+
+// useEffect
+
 
   if (foodId !== foodInfo.foodId) {
     return <></>;

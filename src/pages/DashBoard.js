@@ -27,7 +27,7 @@ const DashBoard = (props) => {
   // 오늘의 기록 불러오기(로그인 유저)
   useEffect(() => {
       dispatch(getTodayRecordDB())
-  },[]);
+  },[is_login]);
   
   // 유저정보
   const user = useSelector((state) => state.user.user_info);

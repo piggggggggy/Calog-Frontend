@@ -29,7 +29,6 @@ const Card = (props) => {
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
-// useEffect
 
   // 장바구니 담기!
   const addCart = (e) => {
@@ -105,7 +104,7 @@ const Card = (props) => {
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox  onClick={addFavorite}>
-          <IoStar style={is_favorite()} size="21px"/>
+          <IoStar style={is_favorite()} size="6vw"/>
         </BookmarkBox>
 
         <div >
@@ -132,18 +131,21 @@ Card.defaultProps = {
 const FoodCard = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 10% 50% 28% 12%;
+  grid-template-columns: 13% 50% 24% 13%;
   width: 87%;
-  height: 6.4vh;
+  padding-top: 1.7vh;
+  padding-bottom: 1.7vh;
   min-height: 40px;
+  /* max-height: 80px; */
   margin-bottom: 16px;
   /* border: 1px solid #F19F13; */
   border-radius: 16px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
 
   & > div {
-    margin-top: auto;
-    margin-bottom: auto;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
     width: 100%;
   }
 `;
@@ -189,8 +191,10 @@ const NameBox = styled.div`
 const BookmarkBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
+  padding-left: 25%;
+  padding-right: 20%;
+  width
 `;
 
 const CartBox = styled.div`

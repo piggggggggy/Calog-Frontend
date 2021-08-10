@@ -12,7 +12,7 @@ export const searchKeywordDB = (data) => {
     instance
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data === "") {
           window.alert('검색 결과가 없어요!');
         } else {
@@ -50,8 +50,7 @@ export const countKeywordDB = (keyword) => {
     instance
       .post('/api/home/search/mostUsed',{keyword: keyword})
       .then((res) => {
-        console.log(res);
-        console.log(keyword);
+        // console.log(res);
         dispatch(addMostUsedKey(keyword));
       })
       .catch((err) => {
@@ -66,7 +65,7 @@ export const getMostUsedKeyDB = () => {
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
       })
       .catch((err) => {

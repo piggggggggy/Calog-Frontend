@@ -44,7 +44,7 @@ export const getFavoriteDB = () => {
     instance
       .get('/api/favorite/list')
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(getFavorite(res.data));
       })
       .catch((err) => {
@@ -80,7 +80,12 @@ const favorite = createSlice({
     },
     // 즐겨찾기 목록 가져오기
     getFavorite : (state, action) => {
-      state.list = action.payload;
+      if (action.payload !=="") {
+        state.list = action.payload;
+      } else {
+        state.list = [];
+      }
+
     },
 
   }

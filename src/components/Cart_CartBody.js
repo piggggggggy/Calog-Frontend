@@ -28,7 +28,8 @@ const CartBody = (props) => {
   const [type, setType] = useState("아침");
   
 // 대사량과 나의 칼로리 기록
-  const record = useSelector((state) => state.record.record);
+  const _record = useSelector((state) => state.record.record);
+  const record = _record === undefined ? [] : _record;
   const bmr = record.length === 0 ? 0 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
 
