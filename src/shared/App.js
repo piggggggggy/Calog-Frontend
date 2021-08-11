@@ -17,12 +17,7 @@ import Nav from './Nav';
 // 테마
 import theme from './theme';
 
-// modules
-import { delCartAll } from '../redux/modules/cart';
-import { delRecentAll } from '../redux/modules/recent';
-
 // 웹페이지 바탕
-import {Image} from '../elements';
 import webImg from '../img/web.png';
 
 //lazy loading
@@ -51,7 +46,7 @@ const App = (props) => {
               <Route path="/loading/" exact component={Loading4} />
               <Route path="/loading/:url" exact component={Loading4} />
               <Route path="/loading/:url/:date" exact component={Loading4} />
-              
+
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
               <Route path="/calendar/:date" exact component={CalendarDetail}/>
