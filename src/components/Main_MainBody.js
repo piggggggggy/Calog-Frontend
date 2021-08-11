@@ -236,16 +236,17 @@ MainBody.defaultProps = {
 }
 
 const HeaderContainer = styled.div`
-  max-width: 100%;
+  position: relative;
+  max-width: 420px;
   /* overflow: hidden; */
 `;
 
 const TopBack = styled.div`
   position: absolute;
-  z-index: -100;
-  width: 100%;
+  z-index: 0;
+  width: 102%;
   min-width: 280px;
-  max-width: 418px;
+  /* max-width: 420px; */
   background-color: ${theme.color.light};
   height: 26.6vh;
   border-bottom-left-radius: 32px;
@@ -265,7 +266,6 @@ const BodyContainer = styled.div`
 
 const SearchGrid = styled.div`
   padding: 1vh 0 0 0;
-  
   width: 100%;
   position: relative;
 `;

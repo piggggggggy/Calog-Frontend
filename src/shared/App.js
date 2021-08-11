@@ -96,16 +96,17 @@ const Wrap = styled.div`
 
 const WebVer = styled.div`
   position: fixed;
-  display: none;
   width: 100vw;
   height: 100%;
   background-size: cover;
   background-position: 50% 50%;
   background-image: url(${webImg});
+
   z-index: -100;
 
-  @media only screen and (min-width: 1024px) {
-    display: block;
+  @media only screen and (max-width: 1024px) {
+    background: #FFE899;
+    opacity: 0.18;
   }
 `;
 

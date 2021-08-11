@@ -20,6 +20,8 @@ const RcmdList = (props) => {
 
   const dispatch = useDispatch();
   const recommended_list = useSelector((state) => state.search.recommend);
+  const user = useSelector((state) => state.user.user_info);
+  const is_login = useSelector((state) => state.user.is_login);
 
   useEffect(() => {
     dispatch(getRecommendedDB())
@@ -73,9 +75,9 @@ const RcmdList = (props) => {
     <React.Fragment>
 
       {/* 타이틀 */}
-      <Grid padding="0 0 0 8%" margin="2.6vh 0 0 0" m_margin="2.6vh 0 0 0">
-        <Text lineheight="24px" m_lineheight="20px" size="20px" m_size="17px" bold color="#2A2A2A" padding="0" margin="0">오늘 칼로리즈가 많이 먹은 음식</Text>
-      </Grid>
+      <TitleBox>
+        <Text lineheight="24px" m_lineheight="20px" size="20px" m_size="17px" bold color="#2A2A2A" padding="0" margin="0">{is_login ? `${user.nickname}님을 위한 추천 음식` : "추천 음식"}</Text>
+      </TitleBox>
 
       {/* 추천리스트 */}
       <RecommendContainer 
@@ -96,13 +98,21 @@ RcmdList.defaultProps = [
   
 ];
 
+const TitleBox = styled.div`
+  position: relative;
+  padding: 0 0 0 8%;
+  margin: 2.6vh 0 0 0;
+`;
+
 const RecommendContainer = styled.div`
+  position: relative;
   margin: 1.7vh 0 0 0;
   padding: 0 3% 3vh 5.2%;
   display: flex;
   align-items: center;
   gap: 2%;
   overflow-x: scroll;
+  z-index: 5;
 
   &::-webkit-scrollbar {
     display: none;
