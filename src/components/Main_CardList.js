@@ -1,10 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-hook-inview';
-// 이미지
-import fatty from '../img/fatty.png';
-import carby from '../img/carby.png';
-import protty from '../img/protty.png';
 // elements & components
 import Card from './Main_Card';
 import { Text } from '../elements';
@@ -28,7 +24,6 @@ const CardList = (props) => {
     <React.Fragment>
       {search_list.length === 0 ?
         <EmptyResult>
-          
             {getRandom(1, 4) === 1 ? 
               <Fats>
                 <svg viewBox="0 0 816 663" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,12 +74,6 @@ const CardList = (props) => {
             })}
         </CardContainer>
       }
-      
-
-      
-
-
-      
     </React.Fragment>
   );
 }

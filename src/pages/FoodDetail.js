@@ -38,6 +38,7 @@ const FoodDetail = (props) => {
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
   const record = _record === undefined ? [] : _record;
+  console.log(record)
 
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const FoodDetail = (props) => {
   // const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
   const bmr = !is_login ? 2000 : user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+  console.log(foodRecord);
 
 
   if (foodId !== foodInfo.foodId) {
@@ -79,13 +81,15 @@ const FoodDetail = (props) => {
     let result = 0
     if(foodRecord.length !== 0) {
       foodRecord.map((f, idx) => {
-        result += parseInt(f.amount) * f.resultKcal;
+        result += f.resultKcal;
       });
       return result;
     } else {
       return 0;
     }
   };
+
+  console.log(totalKcal())
 
   const is_over = () => {
     if (bmr === totalKcal()+foodInfo.kcal) {
@@ -189,7 +193,7 @@ const FoodDetail = (props) => {
         </IngreBox>
 
         {/* 칼로리 수치 바 */}
-        <CalorieBar bmr={bmr} kcal={foodInfo.kcal}/>
+        <CalorieBar bmr={bmr} kcal={foodInfo.kcal} totalKcal={totalKcal()}/>
 
         {/* 영양정보 디테일 */}
         <IngreDetailContainer>

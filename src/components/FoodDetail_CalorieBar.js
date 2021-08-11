@@ -14,34 +14,39 @@ import { Grid, Text } from '../elements';
 
 const CalorieBar = (props) => {
 
-  const _record = useSelector((state) => state.record.record);
-  // const user = useSelector((state) => state.user.user_info);
-  const record = _record === undefined ? [] : _record;
+  // const _record = useSelector((state) => state.record.record);
+  // // const user = useSelector((state) => state.user.user_info);
+  // const record = _record === undefined ? [] : _record;
   const kcal = props.kcal;
+  const totalKcal = props.totalKcal;
+  const bmr = props.bmr;
+  console.log(kcal)
+  console.log(totalKcal)
+  console.log(bmr)
 
 
   // const bmr = user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
-  const bmr = props.bmr;
-  const record_list = record.length === 0 ? false : record[0]?.foodRecord;
-  const currentRec = () => {
-    if (record_list) {
-      let today_kcal = 0;
-      for(let idx = 0; idx<record_list?.length; idx++) {
-        let kcal = record_list[idx].resultKcal;
-        today_kcal += kcal
-      };
-      return today_kcal;
-    } else {
-      return 0;
-    }
-  };
+  // const bmr = props.bmr;
+  // const record_list = record.length === 0 ? false : record[0]?.foodRecord;
+  // const currentRec = () => {
+  //   if (record_list) {
+  //     let today_kcal = 0;
+  //     for(let idx = 0; idx<record_list?.length; idx++) {
+  //       let kcal = record_list[idx].resultKcal;
+  //       today_kcal += kcal
+  //     };
+  //     return today_kcal;
+  //   } else {
+  //     return 0;
+  //   }
+  // };
 
   const slide = keyframes`
     0% {
       width: 0%;
     }
     100% {
-      width: ${currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100))}%;
+      width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     }
   `;
 
@@ -65,26 +70,26 @@ const CalorieBar = (props) => {
     border: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-    ${currentRec() === 0 ?
+    ${totalKcal === 0 ?
     'border-top-left-radius: 4px; border-bottom-left-radius: 4px;' 
     : ''}
     z-index: 10;
     transition: 1s ease;
-    left: ${(currentRec()/bmr) * 100}%;
-    background: ${currentRec() + kcal < bmr ? "#6993FF" : "#EC6262"};
-    width: ${currentRec() + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((currentRec()/bmr) * 100))}%;
+    left: ${(totalKcal/bmr) * 100}%;
+    background: ${totalKcal + kcal < bmr ? "#6993FF" : "#EC6262"};
+    width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     animation: ${slide} 1s 1 ease;
   `;
 
   return (
     <React.Fragment>
       <Grid is_flex margin="2.6vh 0 0 0" m_margin="2.6vh 0 0 0" padding="0 6.5%">
-        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {currentRec()} kcal</Text>
+        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text>
         <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text>
-        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{currentRec() + kcal < bmr ? "남은 양":""}</Text>
+        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text>
       </Grid>
       <BackgroundBar>
-        <CurrentData style={currentRec() <= bmr ? {width: `${(currentRec()/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} />
+        <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} />
         <FoodData/>
       </BackgroundBar>
     </React.Fragment>
