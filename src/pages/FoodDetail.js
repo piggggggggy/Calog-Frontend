@@ -27,11 +27,13 @@ import Fat from '../img/C_fat.jpg';
 */
 
 const FoodDetail = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
+  const is_login = useSelector((state) => state.user.is_login);
   const foodInfo = useSelector((state) => state.search.detail);
   const foodId = props.match.params.foodId;
+  const user = useSelector((state) => state.user.user_info);
+
 
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
@@ -42,11 +44,7 @@ const FoodDetail = (props) => {
     dispatch(getDetailDB(foodId))
   }, []);
 
-  // if (!record) {
-  //   return <div>  </div>
-  // }
 
-  // loading
   const is_loaded = useSelector((state) => state.record.is_loaded)
 
   if(!is_loaded) {
@@ -54,11 +52,9 @@ const FoodDetail = (props) => {
   }
 
 
-  const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
+  // const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
+  const bmr = !is_login ? 2000 : user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
-
-
-// useEffect
 
 
   if (foodId !== foodInfo.foodId) {
@@ -87,7 +83,7 @@ const FoodDetail = (props) => {
       });
       return result;
     } else {
-      return 200;
+      return 0;
     }
   };
 
@@ -131,7 +127,7 @@ const FoodDetail = (props) => {
         <TopBack/>
         
         {/* 기본정보 */}
-        <Grid padding= "2.4vh 7.6% 0 7.6%">
+        <HeaderBox>
           <Grid>
             <Grid display="flex">
               <NameBox>{foodInfo.name}</NameBox>
@@ -150,14 +146,18 @@ const FoodDetail = (props) => {
           {/* 칼로리 비교정보 */}
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
             <StatusText lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
-              {is_over() === "line" ? 
+              {is_login ? 
+              is_over() === "line" ? 
               "현재까지 오늘의 기준치를 모두 채웠어요!" 
               : is_over() === "over" ? 
               `현재까지 기준치 ${totalKcal()+foodInfo.kcal-bmr} kcal 초과했어요!` 
-              : `아직 기준치까지 ${bmr-(totalKcal()+foodInfo.kcal)} kcal 남았어요!`}
+              : `아직 기준치까지 ${bmr-(totalKcal()+foodInfo.kcal)} kcal 남았어요!`
+              : "로그인 하시면 더 많은 정보를 얻을 수 있어요!"}
+              
+              
             </StatusText>
           </Grid>
-        </Grid>
+        </HeaderBox>
 
         
 
@@ -189,7 +189,7 @@ const FoodDetail = (props) => {
         </IngreBox>
 
         {/* 칼로리 수치 바 */}
-        <CalorieBar kcal={foodInfo.kcal}/>
+        <CalorieBar bmr={bmr} kcal={foodInfo.kcal}/>
 
         {/* 영양정보 디테일 */}
         <IngreDetailContainer>
@@ -298,7 +298,7 @@ const BodyContainer = styled.div`
 
 const TopBack = styled.div`
   position: absolute;
-  z-index: -100;
+  z-index: 0;
   width: 100%;
   min-width: 280px;
   max-width: 420px;
@@ -306,6 +306,12 @@ const TopBack = styled.div`
   height: 26.6vh;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
+`;
+
+const HeaderBox = styled.div`
+  position: relative;
+  z-index: 1;
+  padding: 2.4vh 7.6% 0 7.6%;
 `;
 
 const NameBox = styled.div`
@@ -327,7 +333,8 @@ const NameBox = styled.div`
 `;
 
 const IngreBox = styled.div`
-
+  position: relative;
+  z-index: 1;
   width: 87.6%;
   margin: 4.4vh auto 0 auto;
   border: none;
