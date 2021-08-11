@@ -113,7 +113,10 @@ const BodySpec = (props) =>
             size="17px"
             color="#000000"
             margin="24px 0px 24px 20px">
-              <Tag>
+              <Tag onClick={()=>
+              {
+                history.push("/userfeedback")
+              }}>
                 의견 보내기
               </Tag>
             </Text>
@@ -130,7 +133,7 @@ const BodySpec = (props) =>
               size="17px"
               margin="17px 20px 15px 0px"
               color="#F19F13">
-                V9.9.9
+                V1.0.0
               </Text>
             </Version>
             <hr color="#F5F5F5"/>
@@ -153,9 +156,9 @@ return (
     <Profile>
         {ProfileDefault}
     </Profile>
-    <Cameradiv>
+    {/* <Cameradiv>
     {Camera}
-    </Cameradiv>
+    </Cameradiv> */}
         <Bottombg>
           <hr color="#FFE899"/>
           <Text
@@ -221,7 +224,10 @@ return (
           size="17px"
           color="#000000"
           margin="24px 0px 24px 20px">
-            <Tag>
+                <Tag onClick={()=>
+              {
+                history.push("/userfeedback")
+              }}>
               의견 보내기
             </Tag>
           </Text>
@@ -239,7 +245,7 @@ return (
             size="17px"
             margin="17px 20px 15px 0px"
             color="#F19F13">
-              V9.9.9
+              V1.0.0
             </Text>
           </Version>
           <hr color="#F5F5F5"/>
@@ -274,16 +280,25 @@ const Container = styled.div`
 
 const Bottombg = styled.div`
   width: 100%;
-  height: 746px;
+  height: 100%;
   background-color: #FFFFFF;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  margin-top: -18%;
+  @media only screen and (max-width: 400px){
+    margin-top: -20%;
+  height: 100%;
+  }
 `;
 
 const Profile = styled.div`
-  position: absolute;
-  margin-top: -61px;
+  margin-top: -14%;
   margin-left: 20px;
+  @media only screen and (max-width: 320px){
+    margin-top: -22%;
+    
+  }
+
 `;
 
 const Version = styled.div`
