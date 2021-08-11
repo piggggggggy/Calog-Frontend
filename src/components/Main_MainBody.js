@@ -18,23 +18,17 @@ import RcmdList from './Main_RcmdList';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import { TiDeleteOutline } from 'react-icons/ti';
-// img
-import Head from '../img/C_head.png';
-import Face from '../img/C_face.png';
-import Baloon from '../img/C_textBaloon.jpg';
 
 /** 
  * @param {*} props
  * @returns 검색결과와 구분되는 첫페이지
  * @역할 말그대로 메인페이지의 body영역
- * @필수값 recent_list, is_login
  * @담당자 : 박용태
 */
 
 const MainBody = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props  
   const [_history, setHistory] = useState(true);
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
@@ -42,7 +36,6 @@ const MainBody = (props) => {
   const favo_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
-// useEffect
 
   // 검색함수
   const search = () => {
@@ -252,7 +245,7 @@ const TopBack = styled.div`
   z-index: -100;
   width: 100%;
   min-width: 280px;
-  max-width: 420px;
+  max-width: 418px;
   background-color: ${theme.color.light};
   height: 26.6vh;
   border-bottom-left-radius: 32px;

@@ -17,11 +17,10 @@ import { getRecommendedDB } from '../redux/modules/search';
 */
 
 const RcmdList = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const recommended_list = useSelector((state) => state.search.recommend);
-// useEffect
+
   useEffect(() => {
     dispatch(getRecommendedDB())
   }, [])

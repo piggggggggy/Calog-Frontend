@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Input, Grid, Button, Text } from '../elements';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { ProfileDefault, Camera, Go } from '../img/svg';
-import { _logOut } from '../redux/modules/user';
-import {history} from '../redux/configStore';
+import React from 'react';
 
-import instance from '../redux/modules/instance';
-import { getRecord } from '../redux/modules/record';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configStore';
+
+import styled from 'styled-components';
+import { Grid, Button, Text } from '../elements';
+
+import { ProfileDefault, Camera, Go } from '../img/svg';
+
+import { _logOut } from '../redux/modules/user';
 
 // helmet
 import {Helmet} from 'react-helmet';
@@ -17,26 +18,27 @@ import {addBodySpecDB} from '../redux/modules/dashboard';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 마이 페이지
+ * @역할 마이 페이지
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 성수
 */
 
-const BodySpec = (props) => {
-const dispatch = useDispatch();
-const is_login = useSelector(state=>state.user.is_login);
-const user_info = useSelector(state=>state.user.user_info);
+const BodySpec = (props) => 
+{
+  const dispatch = useDispatch();
+  const is_login = useSelector(state=>state.user.is_login);
+  const user_info = useSelector(state=>state.user.user_info);
 
-// 바디스펙 blind 정보
-const weight_blind = useSelector(state=>state.dashboard.weight_blind)
-const height_blind = useSelector(state=>state.dashboard.height_blind)
-const bmr_blind = useSelector(state=>state.dashboard.bmr_blind)
+  // 바디스펙 blind 정보
+  const weight_blind = useSelector(state=>state.dashboard.weight_blind)
+  const height_blind = useSelector(state=>state.dashboard.height_blind)
+  const bmr_blind = useSelector(state=>state.dashboard.bmr_blind)
 
-const logout = () => {
-  dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
-  dispatch(_logOut());
-}
+  const logout = () => {
+    dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
+    dispatch(_logOut());
+  }
 
   if(!is_login){
   return (
@@ -53,26 +55,85 @@ const logout = () => {
       <Profile>
           {ProfileDefault}
           </Profile>
+          
           <Bottombg>
             <hr color="#FFE899"/>
+
             <div onClick={()=>{history.push("/signsocial")}}>
-            <Grid display="flex">
-            <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px"><Tag>회원가입/로그인하기</Tag></Text>
-            <Text  margin="92px 0px 16px 0px">{Go}</Text>
-            </Grid>
+              <Grid display="flex">
+                <Text
+                m_size="28px"
+                bold
+                lineheight="34px"
+                size="28px"
+                margin="92px 0px 16px 24px">
+                  <Tag>
+                    회원가입/로그인하기
+                  </Tag>
+                </Text>
+                <Text margin="92px 0px 16px 0px">
+                  {Go}
+                </Text>
+              </Grid>
             </div>
-            <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">회원이 되어 칼로그 서비스를 <br/> 자유롭게 이용해보세요!</Text>
+
+            <Text
+            lineheight="22px"
+            size="17px"
+            color="#8C8C8C"
+            margin="24px 0px 24px 24px">
+              회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!
+            </Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag></Text>
+            <Text
+            lineheight="22px"
+            size="17px"
+            color="#000000"
+            margin="24px 0px 24px 20px">
+              <Tag onClick={()=>
+                {
+                  history.push("/notice")
+                }}>공지사항
+              </Tag>
+            </Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
+            <Text
+            lineheight="22px"
+            size="17px"
+            color="#000000"
+            margin="24px 0px 24px 20px">
+              <Tag onClick={()=>
+                {
+                  history.push("/alam")
+                }}>알림
+              </Tag>
+            </Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
+            <Text
+            lineheight="22px"
+            size="17px"
+            color="#000000"
+            margin="24px 0px 24px 20px">
+              <Tag>
+                의견 보내기
+              </Tag>
+            </Text>
             <hr color="#F5F5F5"/>
             <Version>
-          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="15px 0px 15px 20px">현재 버전</Text>
-          <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">V9.9.9</Text>
-          </Version>
+              <Text
+              lineheight="22px"
+              size="17px"
+              color="#A9A9A9"
+              margin="15px 0px 15px 20px">
+                현재 버전
+              </Text>
+              <Text
+              size="17px"
+              margin="17px 20px 15px 0px"
+              color="#F19F13">
+                V9.9.9
+              </Text>
+            </Version>
             <hr color="#F5F5F5"/>
           </Bottombg>
       </Container>
@@ -98,40 +159,108 @@ return (
     </Cameradiv>
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
+          <Text
+          m_size="23px"
+          bold
+          lineheight="34px"
+          size="28px"
+          margin="92px 0px 16px 42px">
             {user_info?.nickname}
-            </Text>
-          <BodyBox>
-            <Text margin="30px">신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!</Text>
-            <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
-            _onClick={()=>{history.push("/addspec")}}>
-              <Text lineheight="22px" size="16px" bold>신체정보 등록하기</Text>
-            </Button>
+          </Text>
 
-          </BodyBox>
-          <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px">
-            <Tag onClick={()=>{history.push("/notice")}}>공지사항</Tag>
+        <BodyBox>
+          <Text margin="30px">
+            신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!
+          </Text>
+          <Button
+          border_radius="12px"
+          bg="#FFE899"
+          width="80%"
+          height="56px"
+          _onClick={()=>
+            {
+              history.push("/addspec")
+            }}>
+            <Text
+            lineheight="22px"
+            size="16px"
+            bold>
+              신체정보 등록하기
             </Text>
+          </Button>
+        </BodyBox>
+
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag onClick={()=>{history.push("/alam")}}>알림</Tag></Text>
+          <Text
+          lineheight="22px"
+          size="17px"
+          color="#000000"
+          margin="24px 0px 24px 20px">
+            <Tag onClick={()=>
+              {
+                history.push("/notice")
+              }}>
+                공지사항
+            </Tag>
+          </Text>
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000"  margin="24px 0px 24px 20px"><Tag>의견 보내기</Tag></Text>
+          <Text
+          lineheight="22px"
+          size="17px"
+          color="#000000"
+          margin="24px 0px 24px 20px">
+            <Tag onClick={()=>
+              {
+                history.push("/alam")
+              }}>
+              알림
+            </Tag>
+          </Text>
           <hr color="#F5F5F5"/>
+          <Text
+          lineheight="22px"
+          size="17px"
+          color="#000000"
+          margin="24px 0px 24px 20px">
+            <Tag>
+              의견 보내기
+            </Tag>
+          </Text>
+          <hr color="#F5F5F5"/>
+
           <Version>
-          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="15px 0px 15px 20px">현재 버전</Text>
-          <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">V9.9.9</Text>
+            <Text
+            lineheight="22px"
+            size="17px"
+            color="#A9A9A9"
+            margin="15px 0px 15px 20px">
+              현재 버전
+            </Text>
+            <Text
+            size="17px"
+            margin="17px 20px 15px 0px"
+            color="#F19F13">
+              V9.9.9
+            </Text>
           </Version>
           <hr color="#F5F5F5"/>
           <div onClick={logout}>
-          <Text lineheight="22px" size="17px" color="#A9A9A9"  margin="24px 0px 24px 20px"><Tag>로그아웃</Tag></Text>
+            <Text
+            lineheight="22px"
+            size="17px"
+            color="#A9A9A9"
+            margin="24px 0px 24px 20px">
+              <Tag>
+                로그아웃
+              </Tag>
+            </Text>
           </div>
           <hr color="#F5F5F5"/>
           <br/>
         </Bottombg>
-    </Container>
-  </React.Fragment>
-);
+      </Container>
+    </React.Fragment>
+  );
 }
 
 

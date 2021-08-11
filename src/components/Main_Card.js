@@ -18,14 +18,12 @@ import { BsFillPlusSquareFill } from 'react-icons/bs';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 favorite_list, is_logtin
  * @담당자 : 박용태
 */
 
 const Card = (props) => {
-// dispatch
+  
   const dispatch = useDispatch();
-// props
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
@@ -104,7 +102,7 @@ const Card = (props) => {
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox  onClick={addFavorite}>
-          <IoStar style={is_favorite()} size="6vw"/>
+          <IoStar style={is_favorite()} width="100%"/>
         </BookmarkBox>
 
         <div >
@@ -138,15 +136,17 @@ const FoodCard = styled.div`
   min-height: 40px;
   /* max-height: 80px; */
   margin-bottom: 16px;
-  /* border: 1px solid #F19F13; */
   border-radius: 16px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
 
   & > div {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     width: 100%;
+
+    & > svg {
+      width: 100%;
+    }
   }
 `;
 
