@@ -4,6 +4,7 @@ import axios from "axios";
 
 // 액션
 import {bmrChk} from './dashboard';
+import {addBodySpecDB} from './dashboard';
 
 
 const initialState = {
@@ -29,7 +30,7 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            window.location.href = '/dashboard'
+            window.location.replace('/loading/dashboard')
         };
         loginsv()
         .catch((err)=>{
@@ -105,8 +106,9 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
     };
 };
 
-export const _logOut = () => {
+export const _logOut = (weight_blind, height_blind, bmr_blind) => {
     return function(dispatch, getState, {history}){
+        dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
         sessionStorage.clear();

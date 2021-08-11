@@ -36,8 +36,7 @@ const BodySpec = (props) =>
   const bmr_blind = useSelector(state=>state.dashboard.bmr_blind)
 
   const logout = () => {
-    dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
-    dispatch(_logOut());
+    dispatch(_logOut(weight_blind, height_blind, bmr_blind));
   }
 
   if(!is_login){
