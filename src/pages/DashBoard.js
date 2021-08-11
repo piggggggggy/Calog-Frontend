@@ -104,7 +104,7 @@ const DashBoard = (props) => {
         {/* 배경 */}
         <Top>
             {/* 비로그인 유저 */}
-            {!is_login && <Image src={none_icon} b_size="102% 100%"/>}
+            {!is_login && <Image src={none_icon} b_size="100% 100%"/>}
 
             {/* 로그인 유저 */}
             {is_login && (
@@ -114,18 +114,18 @@ const DashBoard = (props) => {
                 <React.Fragment>
 
                 {/* case3-1-1) good일 때 */}
-                {good  && <Image src={mid_icon} b_size="102% 100%"/>}
+                {good  && <Image src={mid_icon} b_size="100% 100%"/>}
 
                 {/* case3-1-2) bad(over)일 때 */}
-                {over_bmr && <Image src={nope_icon} b_size="102% 100%"/>}
+                {over_bmr && <Image src={nope_icon} b_size="100% 100%"/>}
 
                 {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                {extra_bmr && <Image src={good_icon} b_size="102% 100%"/>}
+                {extra_bmr && <Image src={good_icon} b_size="100% 100%"/>}
                   </React.Fragment>
                   ) : (
 
                   // case3-2) bmr 값이 없을 때
-                  <Image src={none_icon} b_size="102% 100%"/>
+                  <Image src={none_icon} b_size="100% 100%"/>
                 )}
 
               </React.Fragment>
@@ -230,7 +230,7 @@ const DashBoard = (props) => {
 
 const Top = styled.div`
   position: relative;
-  width: 102%;
+  width: 100%;
   height: 29vh;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
@@ -248,7 +248,7 @@ const Line = styled.div`
 `;
 
 const Exercise_Wrap = styled.div`
-  width: 100%;
+  width: 95%;
   min-width: 280px;
   max-height: 480px;
   display: flex;
