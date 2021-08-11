@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
+
+//loading
+import {isLoaded} from './record';
+
 //cadmin@calories.com
 //zkffhfltm1@
 const initialState = {
@@ -8,10 +12,12 @@ const initialState = {
 
 export const getNoticeSV = () => {
     return function(dispatch, getState, {history}){
+        dispatch(isLoaded(false))
         instance
         .get('/api/notice')
         .then((res) => {
             dispatch(SetList(res.data.notice))
+            dispatch(isLoaded(true))
         })
         .catch((err) => {
             console.log(err);
@@ -24,7 +30,7 @@ export const postNoticeSV = (noticelist) => {
         instance
         .post('/api/notice', noticelist)
         .then((res) => {
-              history.push("/notice");
+            history.push("/notice");
         })
         .catch((err) => {
             console.log(err);
@@ -62,11 +68,13 @@ export const deleteNotiSV = (noticeId) => {
 
 export const getNotiDetailSV = (noticeId) => {
     return function(dispatch, getState, {history}){
+        dispatch(isLoaded(false))
         instance
         .get(`/api/notice/${noticeId}`)
         .then((res) => {
             console.log(res.data.notice);
             dispatch(SetListOne(res.data.notice));
+            dispatch(isLoaded(true))
         })
         .catch((err) => {
             console.log(err);

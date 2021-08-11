@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import Card from './Main_Card';
 import { Grid, Text } from '../elements';
+import Loading from '../pages/Loading2';
 // modules
 import { getFavoriteDB } from '../redux/modules/favorite';
 
@@ -29,6 +30,13 @@ const FavoList = (props) => {
       dispatch(getFavoriteDB());
     }
   }, [is_login])
+
+   // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
 
   // 즐겨찾기 덩보기, 더보기
   const changeFavo = () => {

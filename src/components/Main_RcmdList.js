@@ -5,6 +5,7 @@ import _, { throttle } from 'lodash';
 // elementc & components
 import { Grid, Text } from '../elements';
 import CardRcmd from './Main_CardRcmd';
+import Loading from '../pages/Loading2';
 // modules
 import { getRecommendedDB } from '../redux/modules/search';
 
@@ -12,7 +13,6 @@ import { getRecommendedDB } from '../redux/modules/search';
  * @param {*} props
  * @returns 추천음식
  * @역할 추천음식을 보여주는 컴포넌트
- * @필수값 추천검색 리스트
  * @담당자 : 박용태
 */
 
@@ -26,7 +26,7 @@ const RcmdList = (props) => {
     dispatch(getRecommendedDB())
   }, [])
 
-
+  // 횡 스와이프 구현!
   const refX = useRef(null);
   const [isDrag, setDrag] = useState(false);
   const [startX, setStart] = useState();
@@ -58,7 +58,14 @@ const RcmdList = (props) => {
   const delay = 50;
   const throttleDragMove = throttle(dragMove, delay);
 
-  console.log(recommended_list);
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
+
   if (!recommended_list) {
     return <></>;
   };

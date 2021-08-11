@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 import axios from "axios";
-//카트, 히스토리, bmr, 기록 삭제 액션
-import {delCartAll} from './cart';
-import { delRecentAll } from "./recent";
+
+// 액션
 import {bmrChk} from './record';
 
 
@@ -23,8 +22,8 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
-                // url: "http://54.180.133.171/api/user/me",
-                url: "https://2k1.shop/api/user/me",
+                url: "http://54.180.133.171/api/user/me",
+                // url: "https://2k1.shop/api/user/me",
                 // url: "http://52.78.155.48/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });

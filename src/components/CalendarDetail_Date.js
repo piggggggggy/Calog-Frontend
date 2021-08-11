@@ -36,7 +36,7 @@ const CalendarDetail_Date = (props) => {
   };
 
   return (
-    <Grid padding="9px 20px 7% 12px">
+    <Wrap>
       
       {/* 실제 DatePicker */}
       <DatePicker onDateChange={Change} locale={enGB} format=' '>
@@ -59,7 +59,7 @@ const CalendarDetail_Date = (props) => {
           </React.Fragment>
         )}
       </DatePicker>
-    </Grid>
+    </Wrap>
   )
 }
 
@@ -67,6 +67,11 @@ const Input = styled.input`
   border: none;
   position: absolute;
   background-color: transparent;
+`;
+
+const Wrap = styled.div`
+  position: relative;
+  padding: 9px 20px 7% 12px;
 `;
 
 export default CalendarDetail_Date;

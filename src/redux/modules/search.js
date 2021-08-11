@@ -5,14 +5,18 @@ import { createSlice } from "@reduxjs/toolkit";
 //전역 > 서버 배포
 import instance from "./instance";
 
+//loading
+import {isLoaded} from './record';
+
 // middleware 
 // DB에서 검색결과 가져오기
 export const searchKeywordDB = (data) => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data === "") {
           window.alert('검색 결과가 없어요!');
         } else {
@@ -21,6 +25,7 @@ export const searchKeywordDB = (data) => {
           dispatch(searchKeyword(new_data));
           history.push('/search');
         }
+        dispatch(isLoaded(true))
         
       })
       .catch((err) => {
@@ -32,11 +37,13 @@ export const searchKeywordDB = (data) => {
   // detail foodinfo 가져오기
 export const getDetailDB = (foodId) => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get(`/api/home/search/detail/${foodId}`)
       .then((res) => {
         // console.log(res)
         dispatch(getDetail(res.data.foodDetail));
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -50,8 +57,7 @@ export const countKeywordDB = (keyword) => {
     instance
       .post('/api/home/search/mostUsed',{keyword: keyword})
       .then((res) => {
-        console.log(res);
-        console.log(keyword);
+        // console.log(res);
         dispatch(addMostUsedKey(keyword));
       })
       .catch((err) => {
@@ -63,11 +69,13 @@ export const countKeywordDB = (keyword) => {
   // 인기검색어 조회
 export const getMostUsedKeyDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -78,10 +86,12 @@ export const getMostUsedKeyDB = () => {
   // 추천 검색어 가져오기
 export const getRecommendedDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get('/api/home/recommend')
       .then((res) => {
         dispatch(getRecommended(res.data.randomList));
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")

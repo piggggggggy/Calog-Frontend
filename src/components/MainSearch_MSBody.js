@@ -45,7 +45,6 @@ const MSBody = (props) => {
 
 
 
-
   // 검색함수
   const search = () => {
     const data = {
@@ -183,7 +182,7 @@ const MSBody = (props) => {
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
               <Line/>
-              {recent_list[0] !== null ? recent_list.map((rec, idx) => {
+              {recent_list ? recent_list.map((rec, idx) => {
                 if (idx < 5) {
                   return (
                     <>

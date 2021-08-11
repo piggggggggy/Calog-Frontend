@@ -37,8 +37,8 @@ const Calendar_Calendar = (props) => {
 
   // 화면 로딩 시 모든 기록 데이터 조회
   useEffect(() => {
-    dispatch(getAllRecordDB(monthFormat));
-  },[dispatch, monthFormat]);
+    is_login && dispatch(getAllRecordDB(monthFormat))
+  },[is_login]);
 
   // 지난달 btn
   const lastMonthBtn = () => {
@@ -70,7 +70,7 @@ const Calendar_Calendar = (props) => {
               // 캘린더 상세 페이지 이동 버튼
               let date_format = days.format('YYYY-MM-DD');
               const detailBtn = () => {
-                history.push(`/calendar/${date_format}`)
+                window.location.replace(`/calendar/${date_format}`)
               };
 
               // case1) 오늘 날짜일 경우

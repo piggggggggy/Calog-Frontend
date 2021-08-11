@@ -16,12 +16,13 @@ import axios from 'axios'
 // dashboard - db에서 오늘의 칼로리 리스트 가져오기
 export const getTodayRecordDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get('/api/calendar/dash')
       .then((res) => {
-          console.log("안녕")
           const food_list = res.data.record
           dispatch(getRecord(food_list)) 
+          dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err)
@@ -33,10 +34,13 @@ export const getTodayRecordDB = () => {
 // dashboard - db에서 운동리스트 가져오기
 export const getWorkoutDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
-      .get('')
+      .get('/api/calendar/exercise')
       .then((res) => {
-        console.log(res)
+        const exercise_list = res.data.exercise
+        dispatch(getExercise(exercise_list))
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err)
@@ -44,10 +48,26 @@ export const getWorkoutDB = () => {
   }
 };
 
+
+// dashboard - 바디스펙 저장하기
+export const addBodySpecDB = (W_boolean, h_boolean, b_boolean) => {
+  return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
+    instance
+      .post('/api/calendar/blind')
+      .then((res) => {
+        console.log(res)
+        dispatch(isLoaded(true))
+      })
+      .catch((err) => {
+        window.alert('바디스펙을 저장하는데 오류가 있어요! 관리자에게 문의해주세요😿')
+      }) 
+  }
+};
+
 // record - 기록하기
 export const addRecordDB = (date, list, type, url, memo) => {
   return function (dispatch, getState, {history}) {
-    console.log(date, list, type, url, memo)
     instance
       .post('/api/record', {date:date, foodList:list, type:type, url:url, contents:memo})
       .then((res) => {
@@ -81,6 +101,7 @@ export const getAllRecordDB = (monthFormat) => {
 // calendar - 특정 일자 기록 불러오기
 export const getRecordDB = (date) => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false))
     instance
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
@@ -92,13 +113,13 @@ export const getRecordDB = (date) => {
           window.alert('기록된 칼로리가 없어요!')
           history.push('/dashboard')
         } else {dispatch(getRecord(record_list))}
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }
 };
-
 
 // initial State 
 const initialState = {
@@ -107,7 +128,7 @@ const initialState = {
   record: [],
 
   // 추천 운동 리스트(dashboard)
-  workout: [],
+  exercise: [],
 
   // 한 달 캘린더(calendar)
   calendar: [],
@@ -123,6 +144,9 @@ const initialState = {
 
   // record_img
   img: [],
+
+  // loading
+  is_loaded: false,
 }
 
 // redux
@@ -137,8 +161,8 @@ const record = createSlice({
     },
 
     // dashboard - 운동 리스트 가져오기
-    getWorkout : (state, action) => {
-
+    getExercise : (state, action) => {
+      state.exercise = action.payload
     },
 
     // calendar - 한 달 칼로리 가져오기
@@ -166,16 +190,22 @@ const record = createSlice({
       state.img = action.payload
     },
 
+    // record one Img delete
     delImage : (state, action) => {
       state.img.splice(action.payload, 1)
     },
 
+    // record to dashboard >> all Img delete
     delImgAll : (state, action) => {
       state.img = []
+    },
+
+    isLoaded : (state, action) => {
+      state.is_loaded = action.payload
     }
   }
 });
 
-export const {getRecord, getWorkout, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll} = record.actions;
+export const {getRecord, getExercise, getAllRecord, typeChk, ttlKcal, bmrChk, addImage, delImage, delImgAll, isLoaded} = record.actions;
 
 export default record;

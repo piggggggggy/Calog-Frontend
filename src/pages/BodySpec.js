@@ -9,7 +9,9 @@ import { Grid, Button, Text } from '../elements';
 import { ProfileDefault, Camera, Go } from '../img/svg';
 
 import { _logOut } from '../redux/modules/user';
-// import { getRecord } from '../redux/modules/record';
+
+// helmet
+import {Helmet} from 'react-helmet';
 
 /** 
  * @param {*} props
@@ -29,12 +31,20 @@ const BodySpec = (props) =>
     dispatch(_logOut());
   }
 
-    if(!is_login){
-    return (
-      <React.Fragment>
-        <Container>
-          <Profile>
-            {ProfileDefault}
+  if(!is_login){
+  return (
+    <React.Fragment>
+      {/* 헬멧 */}
+      <Helmet>
+        <title>[Calog] 칼로그 로그인/회원가입</title>
+        <meta property="og:title" content="[Calog] 칼로그 로그인/회원가입"/>
+        <meta property="og:description" content="로그인/회원가입 후 칼로그를 이용해보세요!" />
+        <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+      </Helmet>
+
+      <Container>
+      <Profile>
+          {ProfileDefault}
           </Profile>
           
           <Bottombg>
@@ -117,22 +127,27 @@ const BodySpec = (props) =>
             </Version>
             <hr color="#F5F5F5"/>
           </Bottombg>
-        </Container>
-      </React.Fragment>
-    );
-  }
-  return (
-    <React.Fragment>
-      <Container>
+      </Container>
+    </React.Fragment>
+  );
+}
+return (
+  <React.Fragment>
+    {/* 헬멧 */}
+    <Helmet>
+      <title>[Calog] 마이페이지</title>
+      <meta property="og:title" content="[Calog] 마이페이지"/>
+      <meta property="og:description" content="공지사항, 알림, 의견 보내기를 할 수 있어요!" />
+      <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+    </Helmet>
 
-        <Profile>
-          {ProfileDefault}
-        </Profile>
-
-        <Cameradiv>
-          {Camera}
-        </Cameradiv>
-
+    <Container>
+    <Profile>
+        {ProfileDefault}
+    </Profile>
+    <Cameradiv>
+    {Camera}
+    </Cameradiv>
         <Bottombg>
           <hr color="#FFE899"/>
           <Text

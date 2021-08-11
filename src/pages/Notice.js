@@ -9,6 +9,7 @@ import { Grid, Text } from '../elements';
 
 import {Back} from "../img/svg";
 
+import Loading from './Loading2';
 /**
  * @param {*} props
  * @returns 공지사항
@@ -30,6 +31,13 @@ const Notice = (props) =>
   {
     dispatch(getNoticeSV());
   },[]);
+
+// loading
+const is_loaded = useSelector((state) => state.record.is_loaded)
+
+if(!is_loaded) {
+  return (<Loading />);
+}
 
 
   return (

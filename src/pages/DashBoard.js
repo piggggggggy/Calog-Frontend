@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Grid, Text} from '../elements';
+import React, {useEffect, useState} from 'react';
+import {Grid, Text, Image} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
 
@@ -8,10 +8,20 @@ import DashBoard_Chart from '../components/DashBoard_Chart';
 import DashBoard_Workout from '../components/DashBoard_Workout';
 import DashBoard_BodySpec from '../components/DashBoard_BodySpec';
 import DashBoard_Food from '../components/DashBoard_Food';
+import Loading from './Loading2';
 
 // 데이터
 import {useSelector, useDispatch} from 'react-redux';
-import {getTodayRecordDB} from '../redux/modules/record';
+import {getTodayRecordDB, getWorkoutDB} from '../redux/modules/record';
+
+//지방이들
+import good_icon from '../img/good.png';
+import nope_icon from '../img/nope.png';
+import mid_icon from '../img/soso.png';
+import none_icon from '../img/none.png';
+
+// helmet
+import {Helmet} from 'react-helmet';
 
 /** 
  * @역할 오늘의 기록에 대한 내역을 확인할 수 있는 대시보드 페이지
@@ -23,11 +33,13 @@ const DashBoard = (props) => {
 
   // 로그인 유무 체크(미로그인 유저에게는 임시의 데이터를 보여준다) 
   const is_login = useSelector((state) => state.user.is_login);
-  
-  // 오늘의 기록 불러오기(로그인 유저)
+
   useEffect(() => {
+    if(is_login) {
       dispatch(getTodayRecordDB())
-  },[]);
+      dispatch(getWorkoutDB())
+    }
+  }, [is_login]);
   
   // 유저정보
   const user = useSelector((state) => state.user.user_info);
@@ -56,8 +68,6 @@ const DashBoard = (props) => {
     today_kcal += kcal
   };
   
-
-
   // good(bmr +- 10)
   const ten = bmr*0.1;
   const good = ((bmr-ten) <= today_kcal) && (today_kcal <= (bmr+ten));
@@ -70,21 +80,55 @@ const DashBoard = (props) => {
   const over_bmr = today_kcal > (bmr+ten);
   const how_over = today_kcal - bmr;
 
+  // 운동리스트
+  const exercise_list = useSelector((state) => state.record.exercise)
+
+  // loading
+  const is_loaded = useSelector((state) => state.record.is_loaded)
+
+  if(!is_loaded) {
+    return (<Loading />);
+  }
+
   return (
-      <Grid width="100%">
+        <Grid width="100%">
+        {/* 헬멧 */}
+        <Helmet>
+          <title>[Calog] 오늘의 칼로리</title>
+          <meta property="og:title" content="[Calog] 오늘의 칼로리" />
+          <meta property="og:description" content="오늘 먹은 음식의 칼로리가 궁금하다면?" />
+          <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
+        </Helmet>
 
         {/* 배경 */}
         <Top>
-          <Emoji>
-            <svg width="171" height="186" viewBox="0 0 171 186" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M73.756 148.485C73.756 148.485 23.2267 130.778 4.7627 56.6099" stroke="#565656" stroke-width="3.70732" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M178.727 133.263C201.108 227.304 134.02 254.337 80.3994 254.337C26.7787 254.337 -15.0143 220.609 5.17243 133.263C21.8337 61.1631 28.5015 1 86.7436 1C144.986 1 162.217 63.8827 178.727 133.263Z" fill="#6993FF"/>
-              <path d="M54.6143 59.5232C55.5728 58.5964 56.1108 57.3428 56.1105 56.0363C56.1105 54.7304 55.5726 53.4775 54.6143 52.5513C53.6551 51.6285 52.3536 51.1095 50.9962 51.1084C49.6394 51.11 48.3387 51.629 47.3799 52.5513C46.4205 53.4769 45.8818 54.73 45.8818 56.0363C45.8813 57.3432 46.42 58.5971 47.3799 59.5232C48.3387 60.4455 49.6394 60.9644 50.9962 60.966C52.3536 60.9649 53.6551 60.4459 54.6143 59.5232Z" fill="white"/>
-              <path d="M80.1915 59.5232C79.2327 60.4455 77.9321 60.9644 76.5753 60.966C75.2185 60.9644 73.9178 60.4455 72.959 59.5232C71.9991 58.5971 71.4604 57.3432 71.4609 56.0363C71.4609 54.73 71.9995 53.4769 72.959 52.5513C73.9178 51.629 75.2185 51.11 76.5753 51.1084C77.9321 51.11 79.2327 51.629 80.1915 52.5513C81.151 53.4769 81.6896 54.73 81.6896 56.0363C81.6901 57.3432 81.1514 58.5971 80.1915 59.5232Z" fill="white"/>
-              <path d="M55.1924 69.6196C55.9708 70.0617 56.5348 70.7824 56.7606 71.6236C57.6519 74.4856 60.8301 75.7499 63.6935 75.7499C66.5569 75.7499 69.7389 74.4747 70.6264 71.6236C70.8652 70.7971 71.4316 70.0934 72.2041 69.6634C72.9753 69.2338 73.8914 69.1128 74.7546 69.3263C75.6188 69.5401 76.3614 70.0704 76.8235 70.8038C77.2871 71.5375 77.4328 72.4165 77.2293 73.2523C75.4639 78.9963 69.7806 82.3229 63.6935 82.3229C57.8396 82.3229 51.6539 79.0437 50.1577 73.2596C49.9373 72.4156 50.0737 71.5223 50.5369 70.7746C50.9967 70.0261 51.747 69.4836 52.6229 69.2662C53.4944 69.0544 54.4177 69.1814 55.1924 69.6196Z" fill="white"/>
-              <path d="M141.007 93.8018C141.007 93.8018 191.536 76.0944 210 1.92676" stroke="#565656" stroke-width="3.70732" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </Emoji>
+            {/* 비로그인 유저 */}
+            {!is_login && <Image src={none_icon} b_size="102% 100%"/>}
+
+            {/* 로그인 유저 */}
+            {is_login && (
+              <React.Fragment>
+
+              {bmr !== 0 ? (
+                <React.Fragment>
+
+                {/* case3-1-1) good일 때 */}
+                {good  && <Image src={mid_icon} b_size="102% 100%"/>}
+
+                {/* case3-1-2) bad(over)일 때 */}
+                {over_bmr && <Image src={nope_icon} b_size="102% 100%"/>}
+
+                {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
+                {extra_bmr && <Image src={good_icon} b_size="102% 100%"/>}
+                  </React.Fragment>
+                  ) : (
+
+                  // case3-2) bmr 값이 없을 때
+                  <Image src={none_icon} b_size="102% 100%"/>
+                )}
+
+              </React.Fragment>
+            )}
         </Top>
 
         {/* 멘트 */}
@@ -167,25 +211,26 @@ const DashBoard = (props) => {
         {/* 칼로리 리스트 */}
         <DashBoard_Food {...[record]} />
 
-        {/* 운동 추천 */}
-        <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0 7.8% 6.3%">
-          <Text size="20px" bold m_size="17px" margin="0 0 0 2%">{user.nickname}님, 이런 운동은 어때요?</Text>
-          <Grid margin="7.8% 0 0 0" m_margin="4.8% 0 0 0">
-
-            {/* 운동 리스트 맵 */}
-            <DashBoard_Workout />
+        {/* 운동 추천 - 로그인 유저만 확인 가능 */}
+        {is_login && (
+          <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0">
+            <Text size="20px" bold m_size="17px" margin="0 0 0 8.3%">{user.nickname}님, 이런 운동은 어때요?</Text>
+            <Exercise_Wrap>
+              {/* 운동 리스트 맵 */}
+              {exercise_list?.map((e, idx) => {
+                return <DashBoard_Workout key={e._id} {...e}/>
+              })}
+            </Exercise_Wrap>
           </Grid>
-        </Grid>
+        )}
       </Grid>
   );
 };
 
 const Top = styled.div`
   position: relative;
-  background-color: ${theme.color.light};
+  width: 102%;
   height: 29vh;
-  min-width: 280px;
-  max-width: 420px;
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
 `;
@@ -195,17 +240,27 @@ const Line = styled.div`
   line-height: 27px;
   padding-left: 9.7%;
   margin-top: -45%;
-  margin-bottom: 2%;
 
   @media ${theme.device.mobileM} {
     line-height: 20px;
   }
 `;
 
-const Emoji = styled.div`
-  position: absolute;
-  right: 0;
-  margin-top: 15%;
+const Exercise_Wrap = styled.div`
+  width: 100%;
+  min-width: 280px;
+  max-height: 480px;
+  display: flex;
+  margin: 7.8% 0 0 2.5%;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media ${theme.device.mobileM} {
+    margin-top: 4.8% 0 0 2.5%;
+  }
 `;
 
 export default DashBoard;
