@@ -3,7 +3,7 @@ import instance from "./instance";
 import axios from "axios";
 
 // 액션
-import {bmrChk} from './record';
+import {bmrChk} from './dashboard';
 
 
 const initialState = {

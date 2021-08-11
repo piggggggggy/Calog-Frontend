@@ -13,6 +13,9 @@ import { _logOut } from '../redux/modules/user';
 // helmet
 import {Helmet} from 'react-helmet';
 
+// 바디스펙 저장하기
+import {addBodySpecDB} from '../redux/modules/dashboard';
+
 /** 
  * @param {*} props
  * @returns 마이 페이지
@@ -27,7 +30,13 @@ const BodySpec = (props) =>
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
 
+  // 바디스펙 blind 정보
+  const weight_blind = useSelector(state=>state.dashboard.weight_blind)
+  const height_blind = useSelector(state=>state.dashboard.height_blind)
+  const bmr_blind = useSelector(state=>state.dashboard.bmr_blind)
+
   const logout = () => {
+    dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
     dispatch(_logOut());
   }
 

@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 
 // 데이터
 import {useDispatch} from 'react-redux';
-import {addBodySpecDB} from '../redux/modules/record';
+import {heightBlind, weightBlind, bmrBlind} from '../redux/modules/dashboard';
 
 /** 
  * @역할 : 대시보드 바디스펙 컴포넌트
@@ -38,13 +38,14 @@ const DashBoard_BodySpec = (props) => {
       hShow: "none",
       hHide: "block",
     })
-    // dispatch(addBodySpecDB(false, true, false))
+    dispatch(heightBlind(false))
   };
   const heightOff = () => {
     setHeightShow({
       hShow: "block",
       hHide: "none",
     })
+    dispatch(heightBlind(true))
   };
 
   // 몸무게 on off
@@ -58,12 +59,14 @@ const DashBoard_BodySpec = (props) => {
       wShow: "none",
       wHide: "block",
     })
+    dispatch(weightBlind(false))
   };
   const weightOff = () => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
+    dispatch(weightBlind(true))
   };
 
   // 기초대사량 on off
@@ -77,12 +80,14 @@ const DashBoard_BodySpec = (props) => {
       kShow: "none",
       kHide: "block",
     })
+    dispatch(bmrBlind(false))
   };
   const kcalOff = () => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
+    dispatch(bmrBlind(true))
   };
 
   return (
