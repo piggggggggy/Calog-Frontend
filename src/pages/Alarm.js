@@ -10,15 +10,16 @@ import {Back} from "../img/svg";
 
 /**
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
+ * @returns 알람 on/off 페이지
+ * @역할 알람 on/off
+ * @필수값 
  * @담당자 : 성수
 */
 
-const Alarm = (props) => {
+const Alarm = (props) => 
+{
 
-
+  
   return (
     <React.Fragment>
       <Container>

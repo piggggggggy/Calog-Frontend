@@ -1,56 +1,68 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Grid, Button, Text } from '../elements';
+
 import styled from 'styled-components';
+import { Input, Grid, Button, Text } from '../elements';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
-import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
 import { history } from '../redux/configStore';
+import { SignupSV, EmailDuplicate, NickDuplicate } from '../redux/modules/user';
+
+import {emailCheck, pwdCheck, pwdDupli, NickCheck} from "../shared/common";
+
 import {Back, X} from "../img/svg";
+
 import _ from 'lodash';
+
 /**
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 회원가입 페이지
+ * @역할 회원가입 페이지
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 성수
 */
 
-const Signup = (props) => {
-const dispatch = useDispatch();
-const dupliEmail = useSelector((state)=>state.user.email_dupli);
-const dupliNick = useSelector((state)=>state.user.nick_dupli);
-const [user_info, setUserInfo] = useState({});
-// 비밀번호 최소 글자 + 한,영,숫자 최소1개
-// 닉네임 최소 3글자
-// 입력 전엔 빨간색 글씨 띄우기 X
-useEffect(() => {
-const debounce = _.debounce(() => {
-  dispatch(EmailDuplicate(user_info.email));
-}, 10);
-debounce()
-}, [user_info.email]);
+const Signup = () => {
+  const dispatch = useDispatch();
+  const dupliEmail = useSelector((state)=>state.user.email_dupli);
+  const dupliNick = useSelector((state)=>state.user.nick_dupli);
+  const [user_info, setUserInfo] = useState({});
+  // 비밀번호 최소 글자 + 한,영,숫자 최소1개
+  // 닉네임 최소 3글자
+  // 입력 전엔 빨간색 글씨 띄우기 X
+  // 이메일, 닉네임 중복체크 함수
+  useEffect(() => 
+  {
+    const debounce = _.debounce(() => 
+    {
+      dispatch(EmailDuplicate(user_info.email));
+    }, 10);
+    debounce();
+  }, [user_info.email]);
 
-console.log('d')
-
-useEffect(() => {
-  const debounce = _.debounce(() => {
-    dispatch(NickDuplicate(user_info.nickname));
-  },10);
-  debounce()
+  useEffect(() => 
+  {
+    const debounce = _.debounce(() => 
+    {
+      dispatch(NickDuplicate(user_info.nickname));
+    },10);
+    debounce();
   }, [user_info.nickname]);
 
-const signup = () => {
-  dispatch(SignupSV(user_info));
-  history.push("/login");
-};
+  const signup = () => 
+  {
+    dispatch(SignupSV(user_info));
+    history.push("/login");
+  };
 
-const debounceEmail = _.debounce((e) => {
-  setUserInfo({...user_info, email: e.target.value})
-}, 600);
+  const debounceEmail = _.debounce((e) => 
+  {
+    setUserInfo({...user_info, email: e.target.value})
+  }, 600);
 
-const debounceNick = _.debounce((e) => {
-  setUserInfo({...user_info, nickname: e.target.value})
-}, 600);
+  const debounceNick = _.debounce((e) => 
+  {
+    setUserInfo({...user_info, nickname: e.target.value})
+  }, 600);
 
 
   return (
@@ -58,7 +70,7 @@ const debounceNick = _.debounce((e) => {
       <Container>
           <Head>
             <div>
-            {Back}
+              {Back}
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000" >이메일로 가입</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -67,9 +79,7 @@ const debounceNick = _.debounce((e) => {
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
           <SubInput placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text"
-            onChange={
-              (e)=>{debounceEmail(e)}
-            }
+            onChange={(e)=>{debounceEmail(e)}}
             />
             {user_info.email?dupliEmail?"":X:""}
           </InputBox>
@@ -127,6 +137,7 @@ const debounceNick = _.debounce((e) => {
           :
           <Text color="#FFFFFF" size="13px" lineheight="18px">*닉네임을 입력해주세요.</Text>}
           </Grid>
+          {/* 모든 요소 충족 시 버튼 표시 */}
           {dupliEmail&&dupliNick&&pwdDupli(user_info.password, user_info.pwdcheck)&&pwdCheck(user_info.password)?
           <LoginButton>
           <Grid display="flex" fd="column-reverse" height="100%">
@@ -145,7 +156,6 @@ const debounceNick = _.debounce((e) => {
           </Grid>
           </LoginButton>
           }
-
       </Container>
     </React.Fragment>
   );
