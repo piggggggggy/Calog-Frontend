@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
-// 데이터
-import {useSelector} from 'react-redux';
-
 /** 
- * @역할 : 대시보드 각 끼니에 기록된 칼로리 리스트
+ * @역할 : 캘린더 각 끼니에 기록된 칼로리 리스트
  * @필수값 : amount, name, resultKcal, type
  * @담당자 : 김나영
 */

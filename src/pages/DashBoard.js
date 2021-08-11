@@ -12,7 +12,8 @@ import Loading from './Loading2';
 
 // 데이터
 import {useSelector, useDispatch} from 'react-redux';
-import {getTodayRecordDB, getWorkoutDB} from '../redux/modules/record';
+import {getTodayRecordDB} from '../redux/modules/record';
+import {getWorkoutDB} from '../redux/modules/dashboard';
 
 //지방이들
 import good_icon from '../img/good.png';
@@ -45,7 +46,7 @@ const DashBoard = (props) => {
   const user = useSelector((state) => state.user.user_info);
 
   // bmr
-  let bmr = useSelector((state) => state.record.bmr);
+  let bmr = useSelector((state) => state.dashboard.bmr);
 
   // 기록리스트
   let record = [];
@@ -81,7 +82,7 @@ const DashBoard = (props) => {
   const how_over = today_kcal - bmr;
 
   // 운동리스트
-  const exercise_list = useSelector((state) => state.record.exercise)
+  const exercise_list = useSelector((state) => state.dashboard.exercise)
 
   // loading
   const is_loaded = useSelector((state) => state.record.is_loaded)
