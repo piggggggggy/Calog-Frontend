@@ -13,6 +13,7 @@ import NotiDetail from './NoticeDetail';
 import NoticeWrite from './NoticeWrite';
 import Alarm from './Alarm';
 import AddSpec from './AddSpec';
+import UserFeedback from './UserFeedback';
 //용태
 import Main from './Main';
 import FoodDetail from './FoodDetail';
@@ -34,7 +35,8 @@ export {
   Notice, 
   NotiDetail, 
   NoticeWrite, 
-  Alarm, 
+  Alarm,
+  UserFeedback,
   Main, 
   Calendar, 
   FoodDetail, 

@@ -8,7 +8,7 @@ import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail, Loading, Loading2, Loading3, Loading4,} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail, Loading, Loading2, Loading3, Loading4, UserFeedback,} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
@@ -61,6 +61,7 @@ const App = (props) => {
               <Route path="/notice/:postid" exact component={NotiDetail}/>
               <Route path="/notiwrite" exact component={NoticeWrite}/>
               <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
+              <Route path="/userfeedback" exact component={UserFeedback}/>
               <Route path="/alam" exact component={Alarm}/>
               <Route path="/naver" exact component={Naver}/>
               <Route path="/google" exact component={Google}/>
