@@ -252,7 +252,7 @@ const TopBack = styled.div`
   z-index: -100;
   width: 100%;
   min-width: 280px;
-  max-width: 420px;
+  max-width: 418px;
   background-color: ${theme.color.light};
   height: 26.6vh;
   border-bottom-left-radius: 32px;
