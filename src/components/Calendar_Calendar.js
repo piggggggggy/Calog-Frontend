@@ -70,7 +70,7 @@ const Calendar_Calendar = (props) => {
               // 캘린더 상세 페이지 이동 버튼
               let date_format = days.format('YYYY-MM-DD');
               const detailBtn = () => {
-                window.location.replace(`/calendar/${date_format}`)
+                history.push(`/loading/calendar/${date_format}`)
               };
 
               // case1) 오늘 날짜일 경우
