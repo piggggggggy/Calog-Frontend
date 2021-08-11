@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Input, Grid, Button, Text } from '../elements';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { ProfileDefault, Camera, Go } from '../img/svg';
-import { _logOut } from '../redux/modules/user';
-import {history} from '../redux/configStore';
+import React from 'react';
 
-import instance from '../redux/modules/instance';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configStore';
+
+import styled from 'styled-components';
+import { Grid, Button, Text } from '../elements';
+
+import { ProfileDefault, Camera, Go } from '../img/svg';
+
+import { _logOut } from '../redux/modules/user';
 import { getRecord } from '../redux/modules/record';
+
 /** 
  * @param {*} props
  * @returns 설명적기

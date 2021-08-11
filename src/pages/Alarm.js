@@ -1,37 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import { Input, Grid, Button, Text } from '../elements';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import {Back} from "../img/svg";
+import React from 'react';
+
+import { useDispatch } from 'react-redux';
 import { history } from '../redux/configStore';
+
+import styled from 'styled-components';
+import { Grid, Text } from '../elements';
+
+import {Back} from "../img/svg";
+
 /**
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 
+ * @담당자 : 성수
 */
 
 const Alarm = (props) => {
-const dispatch = useDispatch();
+
 
   return (
     <React.Fragment>
       <Container>
           <Head>
-            <div onClick={()=>{history.push("/body")}}>
-            <Tag>{Back}</Tag>
+
+            <div
+            onClick={()=>
+              {
+                history.push("/body")
+              }
+            }>
+              <Tag>{Back}</Tag>
             </div>
-            <Text size="17px" lineheight="22px" bold color="#000000">알람</Text>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br/>
+
+            <Text
+            size="17px"
+            lineheight="22px"
+            bold
+            color="#000000">
+              알람
+            </Text>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <br/>
           </Head>
+
           <hr color="#F5F5F5"/>
-          <Grid display="flex" padding="20px 15px" jc="space-between">
-          <Text size="17px" lineheight="22px" margin="10px">푸시 알림</Text>
-          {/* <PushBtn><Circle/></PushBtn> */}
-          <ClickBtn><ClickCircle/></ClickBtn>
+
+          <Grid
+          display="flex"
+          padding="20px 15px"
+          jc="space-between">
+            <Text
+            size="17px"
+            lineheight="22px"
+            margin="10px">
+              푸시 알림
+            </Text>
+            {/* <PushBtn><Circle/></PushBtn> */}
+            <ClickBtn><ClickCircle/></ClickBtn>
           </Grid>
+          
           <hr color="#F5F5F5"/>
 
       </Container>
@@ -62,6 +90,7 @@ const Tag = styled.a`
   }
 `;
 
+// 알람 켰을 때,껐을 때 두 가지 형태
 const PushBtn = styled.div`
   background-color: #C4C4C4;
   width: 40px;

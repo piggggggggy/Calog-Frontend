@@ -1,47 +1,76 @@
 import React, { useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configStore';
+import { BodySpectSV } from '../redux/modules/user';
+
 import styled from 'styled-components';
 import {Button, Text, Grid, Input} from '../elements';
-import BodySpec from './BodySpec';
-import { useDispatch, useSelector } from 'react-redux';
-import { BodySpectSV } from '../redux/modules/user';
-import { history } from '../redux/configStore';
 
-const AddSpec = () => {
+/**
+ * @param {*} props
+ * @returns 바디 스펙 페이지
+ * @역할 입력 받은 바디 스펙을 유저 정보에 저장
+ * @필수값 사용자에게 입력받는 state 값
+ * @담당자 : 성수
+*/
+
+const AddSpec = () => 
+{
     const dispatch = useDispatch();
     const user_nickname = useSelector(state=>state.user.user_info.nickname);
-//성별, 나이, 키, 몸무게
-const [bodyspec, SetSpec] = useState({});
-const {gender, weight, height, age} = bodyspec;
-const [page, Setpage] = useState(0);
-const nextPage = () => {
-    Setpage(page+1);
-};
-const addspec = () => {
-    dispatch(BodySpectSV(gender, weight, height, age));
-    history.push("/body");
-};
-const setMan = () => {
-    SetSpec({...BodySpec, gender: "남자"});
-    Setpage(page+1);
-};
-const setWoman = () => {
-    SetSpec({...BodySpec, gender: "여자"});
-    Setpage(page+1);
-};
-const setThirdGender = () => {
-    SetSpec({...BodySpec, gender: "미정"});
-    Setpage(page+1);
-};
-console.log("next page", page);
-console.log("body spec", bodyspec);
+
+    const [bodyspec, SetSpec] = useState({});
+    const {gender, weight, height, age} = bodyspec;
+    const [page, Setpage] = useState(0);
+
+    const nextPage = () => 
+    {
+        Setpage(page+1);
+    };
+
+    const addspec = () => 
+    {
+        dispatch(BodySpectSV(gender, weight, height, age));
+        history.push("/body");
+    };
+
+    const setMan = () => 
+    {
+        SetSpec({...bodyspec, gender: "남자"});
+        Setpage(page+1);
+    };
+    const setWoman = () => 
+    {
+        SetSpec({...bodyspec, gender: "여자"});
+        Setpage(page+1);
+    };
+    const setThirdGender = () => 
+    {
+        SetSpec({...bodyspec, gender: "미정"});
+        Setpage(page+1);
+    };
+
+
     return(
         <React.Fragment>
             <Container>
                 <Headers>
                     <Grid padding="12px">
-                        <Text m_size="25px" size="28px" lineheight="34px"><Strong>{user_nickname}</Strong>의</Text>
-                        <Text m_size="25px" size="28px" lineheight="34px">
-                            {page===0?<Strong>성별</Strong>:
+                        <Text
+                        m_size="25px"
+                        size="28px"
+                        lineheight="34px">
+                            <Strong>{user_nickname}</Strong>의
+                        </Text>
+
+                        <Text
+                        m_size="25px"
+                        size="28px"
+                        lineheight="34px">
+                            {/* 페이지에 따라 다른 주제 */}
+                            {
+                            page===0?<Strong>성별</Strong>:
                             page===1?<Strong>나이</Strong>:
                             page===2?<Strong>신장 사이즈</Strong>:
                            <Strong>몸무게</Strong>
@@ -50,58 +79,103 @@ console.log("body spec", bodyspec);
                     </Grid>
 
                     <Grid padding="12px">
-                        <Text m_size="11px" size="15px" lineheight="20px" color="#5F5F5F">
-                        경미님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
-                        신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.</Text>
+                        <Text
+                        m_size="11px"
+                        size="15px"
+                        lineheight="20px"
+                        color="#5F5F5F">
+                            {user_nickname}님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
+                            신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.
+                        </Text>
                     </Grid>
                 </Headers>
+
                 <Body>
-
-                            {page===0?
-                            <Grid display="flex" jc="center">
-                            <Gender onClick={setMan}>남</Gender>
-                            <Gender onClick={setWoman}>여</Gender>
-                            <Gender onClick={setThirdGender}>미정</Gender>
-                            </Grid>
-                            :
-                            page===1?
-                            <InputBox>
-                            &emsp;<Input border="none" width="80%" type="text" value={bodyspec.age} 
-                            _onChange={(e)=>SetSpec({...bodyspec, age: e.target.value})}/>
-                            <Strong>AGE&emsp;</Strong>
-                            </InputBox>
-                            :
-                            page===2?
-                            <InputBox>
-                            &emsp;<Input border="none" width="80%" type="text" value={bodyspec.height}
-                            _onChange={(e)=>SetSpec({...bodyspec, height: e.target.value})}/>
-                            <Strong>CM&emsp;</Strong>
-                            </InputBox>
-                            :
-                            <InputBox>
-                            &emsp;<Input border="none" width="80%" type="text" value={bodyspec.weight}
-                            _onChange={(e)=>SetSpec({...bodyspec, weight: e.target.value})}/>
-                            <Strong>KG&emsp;</Strong>
-                            </InputBox>
-                            }
-                            {page<1?"":
-                        <Button bg="#FFE899" width="87%" height="56px" border_radius="60px"
-                        _onClick={
-                            page<3?
-                            nextPage:
-                            addspec
-                            }>
+                    {/* 페이지에 따라 받아야하는 값이 다르므로 다른 input 박스 보여줌 */}
+                    {page===0?
+                    <Grid
+                    display="flex"
+                    jc="center">
+                        <GenderBox onClick={setMan}>남</GenderBox>
+                        <GenderBox onClick={setWoman}>여</GenderBox>
+                        <GenderBox onClick={setThirdGender}>미정</GenderBox>
+                    </Grid>
+                    :
+                    page===1?
+                    <InputBox>
+                        &emsp;
+                        <Input
+                        border="none"
+                        width="80%"
+                        type="text"
+                        value={bodyspec.age} 
+                        _onChange={
+                            (e) =>
+                            SetSpec({...bodyspec, age: e.target.value})
+                            }/>
+                        <Strong>AGE&emsp;</Strong>
+                    </InputBox>
+                    :
+                    page===2?
+                    <InputBox>
+                        &emsp;
+                        <Input
+                        border="none"
+                        width="80%"
+                        type="text"
+                        value={bodyspec.height}
+                        _onChange={
+                            (e) =>
+                            SetSpec({...bodyspec, height: e.target.value})
+                            }/>
+                        <Strong>CM&emsp;</Strong>
+                    </InputBox>
+                    :
+                    <InputBox>
+                        &emsp;
+                        <Input
+                        border="none"
+                        width="80%"
+                        type="text"
+                        value={bodyspec.weight}
+                        _onChange={
+                            (e) =>
+                            SetSpec({...bodyspec, weight: e.target.value})
+                            }/>
+                        <Strong>KG&emsp;</Strong>
+                    </InputBox>
+                    }
+                    {/* 페이지가 1이상일 때 버튼 나타냄 */}
+                    {page<1?
+                    "":
+                    <Button
+                    bg="#FFE899"
+                    width="87%"
+                    height="56px"
+                    border_radius="60px"
+                    _onClick=
+                    {
+                        page<3?
+                        nextPage:
+                        addspec
+                    }>
                         <Grid cursor>
-                            <Text color="#404040" size="16px" lineheight="22px" bold>다음</Text>
-                            </Grid>
-                            </Button>
-                            }
-
+                            <Text
+                            color="#404040"
+                            size="16px"
+                            lineheight="22px"
+                            bold>
+                                다음
+                            </Text>
+                        </Grid>
+                    </Button>
+                    }
                 </Body>
             </Container>
         </React.Fragment>
     )
 }
+
 
 export default AddSpec;
 
@@ -136,7 +210,7 @@ const Strong = styled.b`
     font-weight: 700;
 `;
 
-const Gender = styled.div`
+const GenderBox = styled.div`
     width: 25%;
     height: 100px;
     background-color: #F19F13;
