@@ -145,9 +145,9 @@ const MSBody = (props) => {
   }, [filterMin, filterMax]);
 
 
-  if (search_list?.length === 0) {
-    history.replace('/');
-  };
+  // if (search_list?.length === 0) {
+  //   history.replace('/');
+  // };
 
   return (
     <React.Fragment>

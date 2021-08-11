@@ -76,7 +76,7 @@ const RcmdList = (props) => {
 
       {/* 타이틀 */}
       <TitleBox>
-        <Text lineheight="24px" m_lineheight="20px" size="20px" m_size="17px" bold color="#2A2A2A" padding="0" margin="0">{is_login ? `${user.nickname}님을 위한 추천 음식` : "추천 음식"}</Text>
+        <Text lineheight="24px" m_lineheight="20px" size="20px" m_size="17px" bold color="#2A2A2A" padding="0" margin="0">{is_login ? `${user.nickname}님을 위한 추천 음식` : "칼로거님을 위한 추천 음식"}</Text>
       </TitleBox>
 
       {/* 추천리스트 */}

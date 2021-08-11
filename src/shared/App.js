@@ -118,4 +118,3 @@ const WebVer = styled.div`
 `;
 
 export default App;
-
