@@ -13,11 +13,26 @@ import {history} from '../redux/configStore';
 const Loading4 = (props) => {
 
   const url = history.location.pathname.split('/')
+  console.log(url)
 
   useEffect(() => {
+
+    // 미들웨어 외에 추가로 페이지에 스피너를 적용하고 싶을 경우 url 주소에 /loading 추가하여 들어오는 경우
     {(url[1] === "loading") && (
-        setTimeout(() => (history.replace(`/${url[2]}`)), 500)
-      )}
+
+      // 대시보드의 경우 바디 스펙을 적용시킬려면 렌더링이 아닌 새로고침을 했을 때에만 적용되어 /dashboard는 예외 처리
+      url[2] === "dashboard" ? (
+        setTimeout(() => (window.location.replace(`/dashboard`)), 500)
+      ) : (
+
+        // 캘린더 상세의 경우 url 형식이 /url/:date로 들어가서 예외 처리
+        !url[3] ? (
+          setTimeout(() => (history.replace(`/${url[2]}`)), 500)
+        ) : (
+          setTimeout(() => (history.replace(`/${url[2]}/${url[3]}`)), 500)
+        )
+      )
+    )}
   }, [history]);
 
   return (

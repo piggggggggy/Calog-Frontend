@@ -19,9 +19,7 @@ import WebSearch from './WebSearch';
 import theme from './theme';
 
 // 웹페이지 바탕
-import webImg from '../img/web.png';
-import webImg2 from '../img/web2.png';
-import webImg3 from '../img/web3.png';
+import webImg from '../img/backImg.png';
 
 //lazy loading
 import LazyLoad from 'react-lazyload';
@@ -38,10 +36,7 @@ const App = (props) => {
     <React.Fragment>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
-          <LazyLoad style={{position: "relative"}}>
-            <div>
-
-            </div>
+          <LazyLoad>
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
             <WebVer/>
             <WebSearch/>
@@ -87,9 +82,9 @@ const Wrap = styled.div`
   width: 100%;
   max-width: 420px;
   min-width: 280px;
-  height: 100vh;
+  height: 91vh;
   margin: 0 auto;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   background-color: white;
 
   &::-webkit-scrollbar {
@@ -99,10 +94,10 @@ const Wrap = styled.div`
   //노트북 이상 웹페이지
   @media only screen and (min-width: 1024px) {
     position: relative;
-    max-width: 422px;
-    /* margin: 0 30% 0 50%; */
-    border: 1px solid #E4E4E4;
     margin: 0 0 0 calc(50vw - 1px);
+    border: 1px solid #E4E4E4;
+    max-width: 422px;
+    position: relative;
   }
 `;
 
@@ -110,17 +105,16 @@ const WebVer = styled.div`
   position: fixed;
   width: 100vw;
   height: 100%;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-image: url(${webImg3});
-
   z-index: -100;
+  background: #FFE899;
+  opacity: 0.18;
 
-  @media only screen and (max-width: 1024px) {
-    background: #FFE899;
-    opacity: 0.18;
+  @media only screen and (min-width: 1024px) {
+    opacity: 1;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url(${webImg});
   }
 `;
 
 export default App;
-

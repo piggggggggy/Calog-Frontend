@@ -53,7 +53,8 @@ const DefaultText = styled.p`
     font-weight: ${(props) => (props.bold? "700" : "400")};
     color: ${(props) => props.color};
     font-size: ${(props) => props.size};
-    margin: ${(props) => props.margin};  
+    margin: ${(props) => props.margin};
+    cursor: pointer;
     ${(props) => props.lineheight ? `line-height: ${props.lineheight}` : ''};
     ${(props) => props.overflow ? `overflow: ${props.overflow}` : ''};
     ${(props) => props.to ? 'text-overflow: ellipsis' : ''};

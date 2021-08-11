@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Cart_Card';
+import UnderBar from './Cart_UnderBar';
 // icons
 import { FaCircle } from "react-icons/fa";
 // modules
@@ -24,6 +25,9 @@ const CartBody = (props) => {
   const cart_list = useSelector((state) => state.cart.cart);
   const is_login = useSelector((state) => state.user.is_login);
   const [type, setType] = useState("아침");
+  
+  // 최근삭제목록의 유무확인을 위한...
+  const recentDeleted_list = useSelector((state) => state.user);
   
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
@@ -144,12 +148,18 @@ const CartBody = (props) => {
           })}
         </CartListBox>
 
+        
+        {/* 최근 삭제 목록 및 버튼 */}
+        <UnderBar type={type}/>
+
+        
+        
         {/* 기록하러가기 버튼 */}
-        <CalcBox>
+        {/* <CalcBox>
           <div onClick={()=>{write()}}>
             <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
           </div>
-        </CalcBox>
+        </CalcBox> */}
 
       </BodyContainer>
     </React.Fragment>
