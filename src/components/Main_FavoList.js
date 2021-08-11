@@ -12,18 +12,16 @@ import { getFavoriteDB } from '../redux/modules/favorite';
  * @param {*} props
  * @returns 즐겨찾기 리스트
  * @역할 즐겨찾기 리스트
- * @필수값  즐겨찾기 리스트, 인기음식 리스트
  * @담당자 : 박용태
 */
 
 const FavoList = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const favo_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
   const [moreFavo, setFavo] = useState(false);
-// useEffect
+  
   // 즐겨찾기 목록 불러오기
   useEffect(() => {
     if(is_login) {

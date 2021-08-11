@@ -16,17 +16,14 @@ import { TiDeleteOutline } from 'react-icons/ti';
  * @param {*} props
  * @returns 장바구니 내역 및 버튼
  * @역할 장바구니를 보여주는 언더바
- * @필수값 리덕스에서 오는 장바구니 목록
  * @담당자 : 박용태
 */
 
 const UnderBar = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const cart_list = useSelector((state) => state.cart.cart);
   const [barOnOff, barSet] = useState(false);
-// useEffect
 
   // 열고 닫는 
   const toggleCart = () => {

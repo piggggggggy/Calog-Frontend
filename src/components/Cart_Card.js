@@ -14,17 +14,14 @@ import theme from '../shared/theme'
  * @param {*} props
  * @returns 푸드카드
  * @역할 검색결과, 즐겨찾기에 사용되는 푸드 카드
- * @필수값 카드에 들어갈 푸드 정보
  * @담당자 : 박용태
 */
 
 const Card = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const [count, setCount] = useState(props.amount);
   const [left, setLeft] = useState(false);
-// useEffect
 
   // 갯수 카운팅하기!
   const upCount = () => {

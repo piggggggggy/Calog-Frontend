@@ -15,15 +15,13 @@ import { Grid, Text } from '../elements';
 */
 
 const RangeSlider = ({min, max, onChange}) => {
-// dispatch
-// props
+
   const [minVal, setMin] = useState(min);
   const [maxVal, setMax] = useState(max);
   const minRef = useRef(min);
   const maxRef = useRef(max);
-
   const range = useRef();
-// useEffect & useCallback
+
   // percentage 변환 함수
   const getPercent = useCallback((value) => {
     return Math.round(((value-min) / (max - min)) * 100);

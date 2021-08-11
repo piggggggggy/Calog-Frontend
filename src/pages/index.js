@@ -21,6 +21,7 @@ import MainSearch from './MainSearch';
 import Loading from './Loading';
 import Loading2 from './Loading2';
 import Loading3 from './Loading3';
+import Loading4 from './Loading4';
 
 
 export {
@@ -43,5 +44,6 @@ export {
   CalendarDetail, 
   Loading,
   Loading2,
-  Loading3
+  Loading3,
+  Loading4
 }

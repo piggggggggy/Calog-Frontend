@@ -9,49 +9,15 @@ import Card from './Main_Card';
  * @param {*} props
  * @returns 검색결과
  * @역할 검색결과를 보여주는 컴포넌트
- * @필수값 검색 결과 search_list
  * @담당자 : 박용태
 */
 
 const CardList = (props) => {
-// dispatch
 
 
 
 
   const search_list = props.search_list;
-
-  // const [ref, inView] = useInView({
-  //   threshold: 1,
-  // });
-
-  // // 페이지네이션
-  // const [paging, setPage] = useState({
-  //   page: 1,
-  //   start: 0,
-  //   end: 20,
-  // });
-
-  // const handleNext = useCallback(() => {
-  //   const { page, start, end } = paging;
-  //   setPage({
-  //     page: page + 1,
-  //     start: start + 20,
-  //     end: end + 20,
-  //   })
-  // }, [paging]);
-
-  // useEffect(() => {
-  //   if (inView) {
-  //     handleNext();
-  //     console.log(inView);
-  //     console.log(paging);
-  //     console.log(target_list);
-  //   }
-  // }, [inView])
-
-  // const target_list = search_list.slice(paging.start, paging.end);
-  // console.log(target_list)
   return (
     <React.Fragment>
       <CardContainer>

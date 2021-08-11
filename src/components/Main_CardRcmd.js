@@ -17,18 +17,15 @@ import { IoStar } from 'react-icons/io5';
  * @param {*} props
  * @returns 뚱뚱이 카드
  * @역할 음식 추천에 활용할 뚱뚱한 카드
- * @필수값 추천 음식의 기본정보
  * @담당자 : 박용태
 */
 
 const CardRcmd = (props) => {
-// dispatch
-const dispatch = useDispatch();
-// props
+
+  const dispatch = useDispatch();
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
-// useEffect
 
   // 장바구니 담기!
   const addCart = (e) => {

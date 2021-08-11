@@ -13,18 +13,16 @@ import { getRecentDB, deleteRecentDB } from '../redux/modules/recent';
  * @param {*} props
  * @returns 설명적기
  * @역할 현재 독립되지 않고 붙여서 사용 중이라 독립시킬지 말지 고민중
- * @필수값 이 컴포넌트를 사용할 때 필수 props
  * @담당자 : 박용태
 */
 
 const SearchHistory = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const styles = props.style;
   const recent_list = useSelector((state) => state.recent.recent);
   console.log(recent_list);
-// useEffect
+
   useEffect(() => {
     dispatch(getRecentDB());
   }, []);
