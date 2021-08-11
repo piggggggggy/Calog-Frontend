@@ -8,7 +8,7 @@ import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail, Loading, Loading2, Loading3} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail, Loading, Loading2, Loading3, Loading4,} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
@@ -42,20 +42,16 @@ const App = (props) => {
           <GlobalStyles />
           <LazyLoad>
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
-            <WebVer>
-              {/* <Image src={webImg} width="100vw" height="100vh" b_size="100% 100%"/> */}
-            </WebVer>
+            <WebVer/>
               <Wrap>
               <Route path="/" exact component={Main} />
               <Route path="/search" exact component={MainSearch} />
               <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
               <Route path="/cart" exact component={Cart} />
-              {/* <Route path="/loading" exact component={Loading} /> */}
-              <Route path="/loading/" exact component={Loading2} />
-              <Route path="/loading/:url" exact component={Loading2} />
-              <Route path="/loading/:url/:date" exact component={Loading2} />
-              {/* <Route path="/loading3" exact component={Loading3} /> */}
-
+              <Route path="/loading/" exact component={Loading4} />
+              <Route path="/loading/:url" exact component={Loading4} />
+              <Route path="/loading/:url/:date" exact component={Loading4} />
+              
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
               <Route path="/calendar/:date" exact component={CalendarDetail}/>
