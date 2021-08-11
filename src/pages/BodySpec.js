@@ -114,7 +114,10 @@ const BodySpec = (props) =>
             size="17px"
             color="#000000"
             margin="24px 0px 24px 20px">
-              <Tag>
+              <Tag onClick={()=>
+              {
+                history.push("/userfeedback")
+              }}>
                 의견 보내기
               </Tag>
             </Text>
@@ -131,7 +134,7 @@ const BodySpec = (props) =>
               size="17px"
               margin="17px 20px 15px 0px"
               color="#F19F13">
-                V9.9.9
+                V1.0.0
               </Text>
             </Version>
             <hr color="#F5F5F5"/>
@@ -222,7 +225,10 @@ return (
           size="17px"
           color="#000000"
           margin="24px 0px 24px 20px">
-            <Tag>
+                <Tag onClick={()=>
+              {
+                history.push("/userfeedback")
+              }}>
               의견 보내기
             </Tag>
           </Text>
@@ -240,7 +246,7 @@ return (
             size="17px"
             margin="17px 20px 15px 0px"
             color="#F19F13">
-              V9.9.9
+              V1.0.0
             </Text>
           </Version>
           <hr color="#F5F5F5"/>
