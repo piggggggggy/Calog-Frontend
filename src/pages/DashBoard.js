@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Grid, Text, Image} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -14,6 +14,7 @@ import Loading from './Loading2';
 import {useSelector, useDispatch} from 'react-redux';
 import {getTodayRecordDB} from '../redux/modules/record';
 import {getWorkoutDB} from '../redux/modules/dashboard';
+import {history} from '../redux/configStore';
 
 //지방이들
 import good_icon from '../img/good.png';
@@ -29,7 +30,7 @@ import {Helmet} from 'react-helmet';
  * @담당자 김나영
 */
 
-const DashBoard = (props) => {
+const DashBoard = (props, {match}) => {
   const dispatch = useDispatch();
 
   // 로그인 유무 체크(미로그인 유저에게는 임시의 데이터를 보여준다) 
@@ -40,7 +41,7 @@ const DashBoard = (props) => {
       dispatch(getTodayRecordDB())
       dispatch(getWorkoutDB())
     }
-  }, [is_login]);
+  }, [history.location.pathname]);
   
   // 유저정보
   const user = useSelector((state) => state.user.user_info);

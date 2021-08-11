@@ -52,7 +52,7 @@ const CalenderDetail = (props) => {
   // 화면 로딩 시 선택한 날짜의 기록 데이터 불러오기
   useEffect(() => {
     dispatch(getRecordDB(SelectDate))
-  },[]);
+  },[history.location.pathname]);
 
   // slick setting
   // dots 유 / 반복 유 / 속도 / 한 번에 보여줄 스크롤 / 스크롤 시 1장 / 자동 넘김 방지
