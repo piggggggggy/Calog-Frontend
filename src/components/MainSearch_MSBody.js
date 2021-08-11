@@ -25,12 +25,11 @@ import { MdCancel } from 'react-icons/md';
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
- * @필수값 search_list, recent_list
  * @담당자 : 박용태
 */
 
 const MSBody = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
 
   const search_list = useSelector((state) => state.search.filtered_list);

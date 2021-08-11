@@ -11,17 +11,15 @@ import { searchRecentDB, addRecent } from '../redux/modules/recent';
  * @param {*} props
  * @returns 인기검색어 3개
  * @역할 인기검색어를 보여주는
- * @필수값 인기검색어 리스트
  * @담당자 : 박용태
 */
 
 const MostUsedKey = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const most_list = useSelector((state) => state.search.most);
   const is_login = useSelector((state) => state.user.is_login);
-  // useEffect
+
   // 인기검색어 불러오기
   useEffect(() => {
     dispatch(getMostUsedKeyDB());

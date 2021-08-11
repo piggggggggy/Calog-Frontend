@@ -15,14 +15,12 @@ import { history } from '../redux/configStore';
  * @param {*} props
  * @returns 장바구니 담긴 내용, 계산된 칼로리, 기초대사량과 비교
  * @역할 장바구니 역할
- * @필수값 장바구니에 담은 내용
  * @담당자 : 박용태
 */
 
 const CartBody = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const cart_list = useSelector((state) => state.cart.cart);
   const is_login = useSelector((state) => state.user.is_login);
   const [type, setType] = useState("아침");
@@ -32,8 +30,6 @@ const CartBody = (props) => {
   const record = _record === undefined ? [] : _record;
   const bmr = record.length === 0 ? 0 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
-
-// useEffect
 
   // 장바구니에 담긴 food의 칼로리 합계
   const sumKcal = () => {
@@ -98,7 +94,7 @@ const CartBody = (props) => {
 
           {/* 푸드 시간 타입 */}
           <Grid display="flex" margin="3.5vh 0 0 0" m_margin="3.5vh 0 0 0">
-            <div onClick={()=>{selectType("morning")}} style={{marginRight: "3vw" }}>
+            <div onClick={()=>{selectType("morning")}} style={{marginRight: "3%" }}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
               <Dot>
                 <Grid display={type === "아침" ? 'block' : 'none'}>
