@@ -13,7 +13,7 @@ import yoga from '../img/yoga 1.png';
 
 const DashBoard_Workout = (props) => {
 
-  const {name, kcal} = props
+  const {name, kcal, url} = props
 
   return (
     <React.Fragment>
@@ -21,7 +21,7 @@ const DashBoard_Workout = (props) => {
         
         {/* 이미지 */}
         <Grid padding="19% 0 0 0" width="127px" margin="0 auto" m_margin="0 auto">
-          <Image src={yoga} height="66px"/>
+          <Image src={url} height="66px"/>
         </Grid>
         <Grid margin="14.5% 14% 0 14%" width="auto" m_margin="14.5% 14% 0 14%">
 
