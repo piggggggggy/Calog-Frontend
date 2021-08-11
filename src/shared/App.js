@@ -35,20 +35,6 @@ const App = (props) => {
   useEffect(() => {
     dispatch(LoginCheck());
   }, []);
-
-  // 윈도우 종료 이벤트 (local 날리기)
-  const deletePersist = () => {
-    dispatch(delCartAll());
-    dispatch(delRecentAll());
-  };
-
-  const deletePersisitCB = useCallback(() => {
-    deletePersist();
-  }, [])
-  // window.addEventListener('beforeunload', ()=>{window.alert("종료")});
-  useEffect(() => {
-    window.onbeforeunload = () => {window.alert('종료')};
-  }, [])
   
   return (
     <React.Fragment>
@@ -57,7 +43,7 @@ const App = (props) => {
           <LazyLoad>
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
             <WebVer>
-              <Image src={webImg} width="100vw" height="100vh" b_size="100% 100%"/>
+              {/* <Image src={webImg} width="100vw" height="100vh" b_size="100% 100%"/> */}
             </WebVer>
               <Wrap>
               <Route path="/" exact component={Main} />
@@ -118,12 +104,17 @@ const Wrap = styled.div`
 `;
 
 const WebVer = styled.div`
+  position: fixed;
   display: none;
+  width: 100vw;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url(${webImg});
+  z-index: -100;
 
   @media only screen and (min-width: 1024px) {
     display: block;
-    position: absolute;
-    z-index: -100;
   }
 `;
 
