@@ -21,9 +21,9 @@ const Loading4 = (props) => {
     {(url[1] === "loading") && (
 
       // 대시보드의 경우 바디 스펙을 적용시킬려면 렌더링이 아닌 새로고침을 했을 때에만 적용되어 /dashboard는 예외 처리
-      url[2] === "dashboard" ? (
-        setTimeout(() => (window.location.replace(`/dashboard`)), 500)
-      ) : (
+      // url[2] === "dashboard" ? (
+      //   setTimeout(() => (window.location.replace(`/dashboard`)), 500)
+      // ) : (
 
         // 캘린더 상세의 경우 url 형식이 /url/:date로 들어가서 예외 처리
         !url[3] ? (
@@ -31,7 +31,7 @@ const Loading4 = (props) => {
         ) : (
           setTimeout(() => (history.replace(`/${url[2]}/${url[3]}`)), 500)
         )
-      )
+      // )
     )}
   }, [history]);
 
