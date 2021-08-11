@@ -4,8 +4,8 @@ import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
 // 데이터
-import {useDispatch} from 'react-redux';
-import {addBodySpecDB} from '../redux/modules/record';
+import {useDispatch, useSelector} from 'react-redux';
+import {heightBlind, weightBlind, bmrBlind} from '../redux/modules/dashboard';
 
 /** 
  * @역할 : 대시보드 바디스펙 컴포넌트
@@ -27,10 +27,13 @@ const DashBoard_BodySpec = (props) => {
   // bmr
   const user_bmr = bmr;
 
+  // 바디스펙 블라인드 체크 여부
+  const BlindChk = useSelector((state) => state.dashboard.bodySpec)
+
   // 키 on off
   const [heightShow, setHeightShow] = useState({
-    hShow: "none",
-    hHide: "block",
+    hShow: BlindChk.heightBlind === true ? "block" : "none",
+    hHide: BlindChk.heightBlind === true ? "none" : "block"
   });
   const {hShow, hHide} = heightShow;
   const heightOn = () => {
@@ -38,19 +41,20 @@ const DashBoard_BodySpec = (props) => {
       hShow: "none",
       hHide: "block",
     })
-    // dispatch(addBodySpecDB(false, true, false))
+    dispatch(heightBlind(false))
   };
   const heightOff = () => {
     setHeightShow({
       hShow: "block",
       hHide: "none",
     })
+    dispatch(heightBlind(true))
   };
 
   // 몸무게 on off
   const [weightShow, setWeightShow] = useState({
-    wShow: "none",
-    wHide: "block",
+    wShow: BlindChk.weightBlind === true ? "block" : "none",
+    wHide: BlindChk.weightBlind === true ? "none" : "block"
   });
   const {wShow, wHide} = weightShow;
   const weightOn = () => {
@@ -58,18 +62,20 @@ const DashBoard_BodySpec = (props) => {
       wShow: "none",
       wHide: "block",
     })
+    dispatch(weightBlind(false))
   };
   const weightOff = () => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
+    dispatch(weightBlind(true))
   };
 
   // 기초대사량 on off
   const [kcalShow, setKcalShow] = useState({
-    kShow: "none",
-    kHide: "block",
+    kShow: BlindChk.bmrBlind === true ? "block" : "none",
+    kHide: BlindChk.bmrBlind === true ? "none" : "block"
   });
   const {kShow, kHide} = kcalShow;
   const kcalOn = () => {
@@ -77,12 +83,14 @@ const DashBoard_BodySpec = (props) => {
       kShow: "none",
       kHide: "block",
     })
+    dispatch(bmrBlind(false))
   };
   const kcalOff = () => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
+    dispatch(bmrBlind(true))
   };
 
   return (

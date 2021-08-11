@@ -13,6 +13,9 @@ import { _logOut } from '../redux/modules/user';
 // helmet
 import {Helmet} from 'react-helmet';
 
+// 바디스펙 저장하기
+import {addBodySpecDB} from '../redux/modules/dashboard';
+
 /** 
  * @param {*} props
  * @returns 마이 페이지
@@ -27,8 +30,13 @@ const BodySpec = (props) =>
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
 
+  // 바디스펙 blind 정보
+  const weight_blind = useSelector(state=>state.dashboard.weight_blind)
+  const height_blind = useSelector(state=>state.dashboard.height_blind)
+  const bmr_blind = useSelector(state=>state.dashboard.bmr_blind)
+
   const logout = () => {
-    dispatch(_logOut());
+    dispatch(_logOut(weight_blind, height_blind, bmr_blind));
   }
 
   if(!is_login){
@@ -105,7 +113,10 @@ const BodySpec = (props) =>
             size="17px"
             color="#000000"
             margin="24px 0px 24px 20px">
-              <Tag>
+              <Tag onClick={()=>
+              {
+                history.push("/userfeedback")
+              }}>
                 의견 보내기
               </Tag>
             </Text>
@@ -122,7 +133,7 @@ const BodySpec = (props) =>
               size="17px"
               margin="17px 20px 15px 0px"
               color="#F19F13">
-                V9.9.9
+                V1.0.0
               </Text>
             </Version>
             <hr color="#F5F5F5"/>
@@ -145,9 +156,9 @@ return (
     <Profile>
         {ProfileDefault}
     </Profile>
-    <Cameradiv>
+    {/* <Cameradiv>
     {Camera}
-    </Cameradiv>
+    </Cameradiv> */}
         <Bottombg>
           <hr color="#FFE899"/>
           <Text
@@ -213,7 +224,10 @@ return (
           size="17px"
           color="#000000"
           margin="24px 0px 24px 20px">
-            <Tag>
+                <Tag onClick={()=>
+              {
+                history.push("/userfeedback")
+              }}>
               의견 보내기
             </Tag>
           </Text>
@@ -231,7 +245,7 @@ return (
             size="17px"
             margin="17px 20px 15px 0px"
             color="#F19F13">
-              V9.9.9
+              V1.0.0
             </Text>
           </Version>
           <hr color="#F5F5F5"/>
@@ -266,16 +280,25 @@ const Container = styled.div`
 
 const Bottombg = styled.div`
   width: 100%;
-  height: 746px;
+  height: 100%;
   background-color: #FFFFFF;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  margin-top: -18%;
+  @media only screen and (max-width: 400px){
+    margin-top: -20%;
+  height: 100%;
+  }
 `;
 
 const Profile = styled.div`
-  position: absolute;
-  margin-top: -61px;
+  margin-top: -14%;
   margin-left: 20px;
+  @media only screen and (max-width: 320px){
+    margin-top: -22%;
+    
+  }
+
 `;
 
 const Version = styled.div`

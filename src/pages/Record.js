@@ -13,7 +13,7 @@ import S3upload from 'react-aws-s3';
 import imageCompression from "browser-image-compression";
 //for axios
 import {useSelector, useDispatch} from 'react-redux';
-import {addRecordDB, addImage, serverImage} from '../redux/modules/record';
+import {addRecordDB, addImage} from '../redux/modules/record';
 //lazy loading
 import LazyLoad from 'react-lazyload';
 
