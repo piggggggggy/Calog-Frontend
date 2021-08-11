@@ -104,7 +104,7 @@ const DashBoard = (props) => {
         {/* 배경 */}
         <Top>
             {/* 비로그인 유저 */}
-            {!is_login && <Image src={none_icon} width="100vw" b_size="100% 100%"/>}
+            {!is_login && <Image src={none_icon} b_size="100% 100%"/>}
 
             {/* 로그인 유저 */}
             {is_login && (
@@ -114,13 +114,13 @@ const DashBoard = (props) => {
                 <React.Fragment>
 
                 {/* case3-1-1) good일 때 */}
-                {good  && <Image src={mid_icon} width="100vw" b_size="100% 100%"/>}
+                {good  && <Image src={mid_icon} b_size="100% 100%"/>}
 
                 {/* case3-1-2) bad(over)일 때 */}
-                {over_bmr && <Image src={nope_icon} width="100vw" b_size="100% 100%"/>}
+                {over_bmr && <Image src={nope_icon} b_size="100% 100%"/>}
 
                 {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                {extra_bmr && <Image src={good_icon} width="100vw" b_size="100% 100%"/>}
+                {extra_bmr && <Image src={good_icon} b_size="100% 100%"/>}
                   </React.Fragment>
                   ) : (
 
