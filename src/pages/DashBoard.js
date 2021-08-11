@@ -138,7 +138,7 @@ const DashBoard = (props) => {
           {!is_login && (
             <React.Fragment>
               <Text size="22px" bold m_size="18px">안녕하세요!</Text>
-              <Text size="22px" bold m_size="18px">로그인이<br/>필요한 기능이예요🧐</Text>
+              <Text size="22px" bold m_size="18px">로그인이<br/>필요한 기능이예요</Text>
               <Grid padding="1vh 0 0 0;">
                 <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
               </Grid> 
@@ -158,7 +158,7 @@ const DashBoard = (props) => {
             {/* case2) 기록된 리스트가 없을 때 */}
             {record?.length === 0 && (
               <React.Fragment>
-                <Text size="22px" bold m_size="18px">칼로리를<br/>등록해주세요🧐</Text>
+                <Text size="22px" bold m_size="18px">칼로리를<br/>등록해주세요</Text>
                 <Grid padding="1vh 0 0 0;">
                   <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
                 </Grid> 
@@ -174,15 +174,15 @@ const DashBoard = (props) => {
                   <React.Fragment>
 
                   {/* case3-1-1) good일 때 */}
-                  {good  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요😻</Text>}
+                  {good  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요</Text>}
 
                   {/* case3-1-2) bad(over)일 때 */}
-                  {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요🙀</Text>}
+                  {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요</Text>}
 
                   {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
                   {extra_bmr && (
                     <Grid>
-                      <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요👍🏻</Text>
+                      <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요</Text>
                       
                     </Grid>
                   )}
@@ -190,7 +190,7 @@ const DashBoard = (props) => {
                   ) : (
 
                   // case3-2) bmr 값이 없을 때
-                  <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요🧐</Text>
+                  <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요</Text>
                 )}
 
                 {/* 먹은 칼로리의 총합 */}
