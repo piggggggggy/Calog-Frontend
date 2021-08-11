@@ -13,11 +13,16 @@ import {history} from '../redux/configStore';
 const Loading4 = (props) => {
 
   const url = history.location.pathname.split('/')
+  console.log(url)
 
   useEffect(() => {
     {(url[1] === "loading") && (
+      url[2] === "dashboard" ? (
+        setTimeout(() => (window.location.replace(`/dashboard`)), 500)
+        ) : (
         setTimeout(() => (history.replace(`/${url[2]}`)), 500)
-      )}
+        )
+    )}
   }, [history]);
 
   return (
