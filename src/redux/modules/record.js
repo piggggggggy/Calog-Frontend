@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // 추가 액션
 import {delCartAll} from './cart';
+import {getSpecBlind} from './dashboard';
 
 // 전역 > 서버 배포
 import instance from "./instance";
@@ -20,7 +21,7 @@ export const addRecordDB = (date, list, type, url, memo) => {
         dispatch(delCartAll())
         dispatch(delImgAll())
         dispatch(typeChk(type))
-        history.replace('/dashboard')
+        history.replace('/loading/dashboard')
       })
       .catch((err) => {
         window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
@@ -36,7 +37,9 @@ export const getTodayRecordDB = () => {
       .get('/api/calendar/dash')
       .then((res) => {
           const food_list = res.data.record
-          dispatch(getRecord(food_list)) 
+          const bodySpec_blind = res.data.blind
+          dispatch(getRecord(food_list))
+          dispatch(getSpecBlind(bodySpec_blind))
           dispatch(isLoaded(true))
       })
       .catch((err) => {
