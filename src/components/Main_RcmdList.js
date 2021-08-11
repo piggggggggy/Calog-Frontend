@@ -110,7 +110,7 @@ const RecommendContainer = styled.div`
   padding: 0 3% 3vh 5.2%;
   display: flex;
   align-items: center;
-  gap: 2%;
+  gap: 1.7vh;
   overflow-x: scroll;
   z-index: 5;
 

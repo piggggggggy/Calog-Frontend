@@ -185,7 +185,7 @@ const MSBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid display="grid" grid_column="95% 5%" padding="1.3vh 8%" key={idx}>
+                      <Grid is_flex padding="1.3vh 8%" key={idx}>
                         <Grid cursor _onClick={()=>{recentSearch(rec)}}>
                           <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
                         </Grid>                        
@@ -302,6 +302,10 @@ const SearchBox = styled.div`
     @media ${theme.device.mobileMini} {
       font-size: 13px;
     }
+
+    @media screen and (max-width: 320px) {
+      font-size: 11px;
+    }
   }
 
   & > div {
@@ -338,6 +342,7 @@ const SearchHistory = styled.div`
   & > div {
     width: 100%;
     height: 35vh;
+    min-height: 250px;
     background: #fff;
     border-radius: 28px;
 
