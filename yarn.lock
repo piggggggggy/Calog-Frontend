@@ -4588,6 +4588,14 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
+cardon@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/cardon/-/cardon-1.0.2.tgz#94ce786a203659eeea55eca66c2d58bcb3c6f4a5"
+  integrity sha512-Pp7PVOyxLsITh6G5Hf6/hkp/F1GOoBIpsi3Pujgcm9p40MmGEZp6y3SG1wBqT6KxXVaZJwJdxV1avDqIsv0Kpg==
+  dependencies:
+    react ">=16.8.0"
+    react-dom ">=16.8.0"
+
 case-sensitive-paths-webpack-plugin@2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.3.0.tgz"
@@ -11501,7 +11509,7 @@ react-dev-utils@^11.0.3:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^17.0.2:
+react-dom@>=16.8.0, react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -11768,7 +11776,7 @@ react-tween-state@^0.1.5:
     raf "^3.1.0"
     tween-functions "^1.0.1"
 
-react@^17.0.2:
+react@>=16.8.0, react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==

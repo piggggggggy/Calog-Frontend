@@ -68,7 +68,7 @@ const Input = styled.input`
 
 const Wrap = styled.div`
   position: relative;
-  padding: 9px 20px 7% 12px;
+  padding: 9px 20px 0 12px;
 `;
 
 export default CalendarDetail_Date;

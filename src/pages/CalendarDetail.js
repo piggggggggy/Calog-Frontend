@@ -1,4 +1,4 @@
-import React, {memo, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Grid, Text, Image} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -16,7 +16,7 @@ import Loading from './Loading2';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
-import {getRecordDB} from '../redux/modules/record';
+import {getRecordDB, delRecordDB} from '../redux/modules/record';
 
 // slick
 import Slider from 'react-slick'
@@ -25,6 +25,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 //img
 import noImg from '../img/noImg.png';
+
+//moment
+import moment from 'moment'
+
+// modal
+import { Confirm } from 'react-st-modal';
 
 /** 
  * @param {list} r
@@ -60,8 +66,15 @@ const CalenderDetail = (props) => {
   }
 
   // 기록
-  const record_list = useSelector((state) => state.record.record[0]);
+  const record_list = useSelector((state) => state.record.record[0])
   const record_map = record_list?.foodRecords
+
+  // 기록한 날짜
+  const record_date = record_list?.date
+  const date = moment(record_date).format('M월 D일')
+
+  // 기록한 시기의 bmr
+  const record_bmr = record_list?.bmr
 
   // 푸드 리스트와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
   let same_food = []
@@ -69,6 +82,8 @@ const CalenderDetail = (props) => {
     const list_type = record_map[idx].type
     list_type === type && same_food.push(record_map[idx])
   }
+
+  console.log(same_food)
 
   // 이미지 빈값 제외하기
   let image_list = []
@@ -105,11 +120,28 @@ const CalenderDetail = (props) => {
     return (<Loading />);
   }
 
+  // 기록 삭제 버튼
+  const delRecord = (async () => {
+      const result = await Confirm('선택된 기록을 삭제하시겠어요?', 
+        '추가 기록이 확인되면 리스트는 삭제됩니다.');
+      const record_id = record_list?._id
+      
+      if (result) {
+        dispatch(delRecordDB(record_id, record_date, type))
+      }
+  })
+    // let result = window.confirm('선택된 기록을 삭제하시겠어요? 추가 기록이 확인되면 리스트는 삭제됩니다.')
+    // const record_id = record_list?._id
+    //   result && (
+    //     dispatch(delRecordDB(record_id, record_date, type))
+    //   )
+    
+
   return (
     <React.Fragment>
 
         {/* 헤더 */}
-        <Grid padding="2.9vh 6.2%" bg={theme.color.light}>
+        <Grid padding="3.6vh 6.2%" bg={theme.color.light}>
 
           {/* 뒤로가기 버튼 */}
           <Grid _onClick={() => history.goBack()}>  
@@ -124,7 +156,12 @@ const CalenderDetail = (props) => {
 
           {/* 캘린더 */}
           <CalendarDetail_Date SelectDate={SelectDate}/>
-        
+
+          {/* bmr info */}
+          <BmrInfo>
+            <Text color={'rgba(158, 135, 55, 0.6)'}>{date} 기초대사량 {record_bmr}kcal</Text> 
+          </BmrInfo>
+
           {/* 안내 메시지 */}
           <CalendarDetail_Info {...record_list}/>
 
@@ -184,7 +221,7 @@ const CalenderDetail = (props) => {
         </Grid>
 
         {/* 메모 */}
-        <Grid margin="4% 9.7% 13% 9.7%" width="81%" m_margin="4% 9.7% 13% 9.7%">
+        <Grid margin="4% 9.7% 8% 9.7%" width="81%" m_margin="4% 9.7% 8% 9.7%">
           {memo_list?.length > 0 ? (
             <React.Fragment>
               {memo_list?.map((r, idx) => {
@@ -196,8 +233,15 @@ const CalenderDetail = (props) => {
               <Text size="15px" m_size="13px">기록된 메모가 없어요😿</Text>
             </Grid>
           )}
-          
         </Grid>
+
+        {/* 삭제하기 버튼 */}
+        {/* 식단 기록이 있는 경우에만 활성화 */}
+        {same_food?.length > 0 && (
+          <Button bg={"white"} margin="0 auto 7% auto" width="auto" _onClick={delRecord}>
+            <DelTitle>{type} 정보 전체 삭제</DelTitle>
+          </Button>
+        )}
 
         </Wrap>
     </React.Fragment>
@@ -221,6 +265,22 @@ const Wrap = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const BmrInfo = styled.div`
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 5.8%;
+  margin-bottom: 2%;
+  font-size: 13px;
+`;
+
+const DelTitle = styled.p`
+  font-size: 13px;
+  border-bottom: 1px solid ${theme.color.gray_5};
+  color: ${theme.color.gray_5};
+  width: auto;
 `;
 
 export default CalenderDetail;
