@@ -10,9 +10,6 @@ import '../styles/css/nice_date.css'
 // moment
 import moment from 'moment';
 
-// history
-import {history} from '../redux/configStore';
-
 /** 
  * @param {String} date
  * @returns {String} date 선택된 날짜

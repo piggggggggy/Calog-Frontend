@@ -13,9 +13,10 @@ import {history} from '../redux/configStore';
 const Loading2 = (props) => {
 
   const url = history.location.pathname.split('/')
+  console.log(url)
 
   useEffect(() => {
-    {(url[2] === "calendar") && (
+    {(url[1] === "loading") && (
         setTimeout(() => (history.replace(`/${url[2]}`)), 500)
       )}
   }, [history]);
