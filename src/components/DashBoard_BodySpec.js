@@ -28,12 +28,14 @@ const DashBoard_BodySpec = (props) => {
   const user_bmr = bmr;
 
   // 바디스펙 블라인드 체크 여부
-  const BlindChk = useSelector((state) => state.dashboard.bodySpec)
+  const _heightBlind = useSelector((state) => state.user.user_info.heightBlind)
+  const _weightBlind = useSelector((state) => state.user.user_info.weightBlind)
+  const _bmrBlind = useSelector((state) => state.user.user_info.bmrBlind)
 
   // 키 on off
   const [heightShow, setHeightShow] = useState({
-    hShow: BlindChk.heightBlind === true ? "block" : "none",
-    hHide: BlindChk.heightBlind === true ? "none" : "block"
+    hShow: _heightBlind === true ? "block" : "none",
+    hHide: _heightBlind === true ? "none" : "block"
   });
   const {hShow, hHide} = heightShow;
   const heightOn = () => {
@@ -53,8 +55,8 @@ const DashBoard_BodySpec = (props) => {
 
   // 몸무게 on off
   const [weightShow, setWeightShow] = useState({
-    wShow: BlindChk.weightBlind === true ? "block" : "none",
-    wHide: BlindChk.weightBlind === true ? "none" : "block"
+    wShow: _weightBlind === true ? "block" : "none",
+    wHide: _weightBlind === true ? "none" : "block"
   });
   const {wShow, wHide} = weightShow;
   const weightOn = () => {
@@ -74,8 +76,8 @@ const DashBoard_BodySpec = (props) => {
 
   // 기초대사량 on off
   const [kcalShow, setKcalShow] = useState({
-    kShow: BlindChk.bmrBlind === true ? "block" : "none",
-    kHide: BlindChk.bmrBlind === true ? "none" : "block"
+    kShow: _bmrBlind === true ? "block" : "none",
+    kHide: _bmrBlind === true ? "none" : "block"
   });
   const {kShow, kHide} = kcalShow;
   const kcalOn = () => {

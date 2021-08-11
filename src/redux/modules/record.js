@@ -29,6 +29,21 @@ export const addRecordDB = (date, list, type, url, memo) => {
   }
 };
 
+// 기록 삭제하기
+export const delRecordDB = (id, date, type) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .delete(`/api/record/${id}`, {data : {date:date, type:type}})
+      .then((res) => {
+        dispatch(delRecord(type))
+        history.push('/loading/calendar')
+      })
+      .catch((err) => {
+        window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+      })
+  }
+};
+
 // db에서 오늘의 칼로리 리스트 가져오기(dashboard)
 export const getTodayRecordDB = () => {
   return function (dispatch, getState, {history}) {
@@ -120,6 +135,15 @@ const record = createSlice({
       state.record = action.payload
     },
 
+    // 기록 삭제하기
+    delRecord : (state, action) => {
+      const food_list = state.record[0].foodRecords
+      let idx = food_list.findIndex((f) => f.type === action.payload)
+      if (idx !== -1) {
+        food_list.splice(idx, 1);
+      }
+    },
+
     // calendar - 한 달 칼로리 가져오기
     getAllRecord : (state, action) => {
       state.calendar = action.payload
@@ -157,6 +181,6 @@ const record = createSlice({
   }
 });
 
-export const {getRecord, getAllRecord, typeChk, ttlKcal, addImage, delImage, delImgAll, isLoaded} = record.actions;
+export const {getRecord, delRecord, getAllRecord, typeChk, ttlKcal, addImage, delImage, delImgAll, isLoaded} = record.actions;
 
 export default record;
