@@ -75,7 +75,7 @@ const CartBody = (props) => {
     let result = 0
     if (foodRecord.length !== 0) {
       foodRecord.map((f, idx) => {
-        result += parseInt(f.amount) * f.resultKcal;
+        result += f.resultKcal;
       });
       return result;
     } else {
