@@ -45,9 +45,6 @@ const MainBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    // {is_login ? 
-    //   dispatch(countKeywordDB(keyword.current.value))
-    //   : dispatch(addMostUsedKey(keyword.current.value))};
     dispatch(countKeywordDB(keyword.current.value));
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
@@ -63,9 +60,6 @@ const MainBody = (props) => {
       max: filterMax
     };
     dispatch(searchKeywordDB(data));
-    // {is_login ? 
-    //   dispatch(countKeywordDB(keyword))
-    //   : dispatch(addMostUsedKey(keyword))};
     dispatch(countKeywordDB(keyword));
     {is_login ?
       dispatch(searchRecentDB(keyword))
@@ -156,7 +150,7 @@ const MainBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid display="grid" grid_column="95% 5%" padding="1.1vh 8%" key={idx}>
+                      <Grid is_flex padding="1.1vh 8%" key={idx}>
                         <Grid cursor _onClick={()=>{recentSearch(rec)}}>
                           <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
                         </Grid>
@@ -236,16 +230,17 @@ MainBody.defaultProps = {
 }
 
 const HeaderContainer = styled.div`
-  max-width: 100%;
+  position: relative;
+  max-width: 420px;
   /* overflow: hidden; */
 `;
 
 const TopBack = styled.div`
   position: absolute;
-  z-index: -100;
+  z-index: 0;
   width: 100%;
   min-width: 280px;
-  max-width: 418px;
+  /* max-width: 420px; */
   background-color: ${theme.color.light};
   height: 26.6vh;
   border-bottom-left-radius: 32px;
@@ -265,7 +260,6 @@ const BodyContainer = styled.div`
 
 const SearchGrid = styled.div`
   padding: 1vh 0 0 0;
-  
   width: 100%;
   position: relative;
 `;
@@ -295,6 +289,10 @@ const SearchBox = styled.div`
 
     @media ${theme.device.mobileMini} {
       font-size: 13px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 11px;
     }
   }
 
@@ -332,6 +330,7 @@ const SearchHistory = styled.div`
   & > div {
     width: 100%;
     height: 35vh;
+    min-height: 250px;
     background: #fff;
     border-radius: 28px;
 

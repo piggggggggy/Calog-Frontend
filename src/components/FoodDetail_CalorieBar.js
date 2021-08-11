@@ -15,11 +15,13 @@ import { Grid, Text } from '../elements';
 const CalorieBar = (props) => {
 
   const _record = useSelector((state) => state.record.record);
+  // const user = useSelector((state) => state.user.user_info);
   const record = _record === undefined ? [] : _record;
   const kcal = props.kcal;
 
 
-  const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
+  // const bmr = user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
+  const bmr = props.bmr;
   const record_list = record.length === 0 ? false : record[0]?.foodRecord;
   const currentRec = () => {
     if (record_list) {

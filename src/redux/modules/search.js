@@ -19,6 +19,7 @@ export const searchKeywordDB = (data) => {
         // console.log(res);
         if (res.data === "") {
           window.alert('검색 결과가 없어요!');
+          history.goBack();
         } else {
           
           const new_data = {...data, data: res.data};
