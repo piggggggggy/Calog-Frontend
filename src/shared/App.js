@@ -21,6 +21,7 @@ import theme from './theme';
 // 웹페이지 바탕
 import webImg from '../img/web.png';
 import webImg2 from '../img/web2.png';
+import webImg3 from '../img/web3.png';
 
 //lazy loading
 import LazyLoad from 'react-lazyload';
@@ -111,7 +112,7 @@ const WebVer = styled.div`
   height: 100%;
   background-size: cover;
   background-position: 50% 50%;
-  background-image: url(${webImg2});
+  background-image: url(${webImg3});
 
   z-index: -100;
 
