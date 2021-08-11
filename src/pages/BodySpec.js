@@ -145,9 +145,9 @@ return (
     <Profile>
         {ProfileDefault}
     </Profile>
-    <Cameradiv>
+    {/* <Cameradiv>
     {Camera}
-    </Cameradiv>
+    </Cameradiv> */}
         <Bottombg>
           <hr color="#FFE899"/>
           <Text
@@ -266,16 +266,25 @@ const Container = styled.div`
 
 const Bottombg = styled.div`
   width: 100%;
-  height: 746px;
+  height: 100%;
   background-color: #FFFFFF;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  margin-top: -18%;
+  @media only screen and (max-width: 400px){
+    margin-top: -20%;
+  height: 100%;
+  }
 `;
 
 const Profile = styled.div`
-  position: absolute;
-  margin-top: -61px;
+  margin-top: -14%;
   margin-left: 20px;
+  @media only screen and (max-width: 320px){
+    margin-top: -22%;
+    
+  }
+
 `;
 
 const Version = styled.div`
