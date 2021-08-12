@@ -13,7 +13,7 @@ import {history} from '../redux/configStore';
 const Loading4 = (props) => {
 
   const url = history.location.pathname.split('/')
-  console.log(url)
+  // console.log(url)
 
   useEffect(() => {
 

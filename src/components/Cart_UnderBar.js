@@ -10,6 +10,7 @@ import { Grid, Text } from '../elements';
 // icons
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 import { TiDeleteOutline } from 'react-icons/ti';
+import { BiPlusCircle } from 'react-icons/bi';
 
 
 /** 
@@ -22,11 +23,11 @@ import { TiDeleteOutline } from 'react-icons/ti';
 const UnderBar = (props) => {
 
   const dispatch = useDispatch();
-  const recentDeleted_list = useSelector((state) => state.cart.cart);
   const [barOnOff, barSet] = useState(false);
   const type = props.type;
   const is_login = useSelector((state) => state.user.is_login);
-
+  const recentDeleted_list = props.recentDeleted_list;
+  console.log(recentDeleted_list)
 
   // 열고 닫는 
   const toggleCart = () => {
@@ -55,9 +56,9 @@ const UnderBar = (props) => {
   };
 
 
-  if ( recentDeleted_list.length === 0 ) {
-    return <></>;
-  }
+  // if ( recentDeleted_list[0]?.length === 0 ) {
+  //   return <></>;
+  // }
   return (
     <React.Fragment>
       <RecentDeletedContainer 
@@ -78,12 +79,10 @@ const UnderBar = (props) => {
           </Grid>
           
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
-            {recentDeleted_list.map((recentDeleted, idx) => {
+            {recentDeleted_list[0]?.map((recentDeleted, idx) => {
               const data = {
                 foodId: recentDeleted.foodId,
                 name: recentDeleted.name,
-                forOne: recentDeleted.forOne,
-                grams: recentDeleted.grams,
                 kcal: recentDeleted.kcal,
                 amount: 1,
               };
@@ -92,6 +91,9 @@ const UnderBar = (props) => {
                   key={idx}
                   onClick={()=>{addCart(data)}}
                 >
+                  <div>
+                    <BiPlusCircle size="17px" color="#404040"/>
+                  </div>
                   <RecentDeletedText>
                     {recentDeleted.name}
                   </RecentDeletedText>
@@ -171,9 +173,11 @@ const RecentDeletedText = styled.div`
   line-height: 18px;
   font-size: 13px;
   color: #2A2A2A;
+  margin-left: 6px;
+
 
   @media ${theme.device.mobileS} {
-    margin-right: 3px;
+    margin-left: 3px;
   }
 `;
 
