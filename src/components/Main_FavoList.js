@@ -21,20 +21,21 @@ const FavoList = (props) => {
   const favo_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
   const [moreFavo, setFavo] = useState(false);
+  console.log(is_login)
   
   // 즐겨찾기 목록 불러오기
   useEffect(() => {
     if(is_login) {
       dispatch(getFavoriteDB());
     }
-  }, [is_login])
+  }, [])
 
    // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  // const is_loaded = useSelector((state) => state.record.is_loaded)
 
-  if(!is_loaded) {
-    return (<Loading />);
-  }
+  // if(!is_loaded) {
+  //   return (<Loading />);
+  // }
 
   // 즐겨찾기 덩보기, 더보기
   const changeFavo = () => {
@@ -45,14 +46,9 @@ const FavoList = (props) => {
     }
   };
 
-  // 이걸 다른방식으로 바꿔보자!
-  if (favo_list.length === 0) {
-    return <div></div>;
-  };
-
   return (
     <React.Fragment>
-      {is_login ?
+      {is_login || favo_list.length !== 0 ?
       <CardContainer>
 
         {/* 이름 */}

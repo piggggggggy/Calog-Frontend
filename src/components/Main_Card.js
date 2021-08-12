@@ -99,7 +99,7 @@ const Card = (props) => {
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/loading/${props.foodId}`)}}>
+      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props._id}`)}}>
 
         <BookmarkBox  onClick={addFavorite}>
           <IoStar style={is_favorite()} width="100%"/>

@@ -53,7 +53,7 @@ const CalorieBar = (props) => {
     
     & > div {
       position: absolute;
-      left: ${(totalKcal + kcal/bmr) * 100}%;
+      /* left: ${(totalKcal + kcal/bmr) * 100}%; */
       top: -4vh;
       z-index: 5;
       opacity: 0;

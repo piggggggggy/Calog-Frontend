@@ -46,11 +46,11 @@ const FoodDetail = (props) => {
   }, []);
 
 
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  // const is_loaded = useSelector((state) => state.record.is_loaded)
 
-  if(!is_loaded) {
-    return (<Loading />);
-  }
+  // if(!is_loaded) {
+  //   return (<Loading />);
+  // }
 
 
   // const bmr = record.length === 0 ? 2000 : record[0]?.bmr;

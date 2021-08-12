@@ -10,6 +10,7 @@ import { Grid, Text } from '../elements';
 // icons
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 import { TiDeleteOutline } from 'react-icons/ti';
+import { BiPlusCircle } from 'react-icons/bi';
 
 
 /** 
@@ -26,7 +27,8 @@ const UnderBar = (props) => {
   const [barOnOff, barSet] = useState(false);
   const type = props.type;
   const is_login = useSelector((state) => state.user.is_login);
-
+  const recentDeleted_list2 = useSelector((state) => state.user);
+  console.log(recentDeleted_list2);
 
   // 열고 닫는 
   const toggleCart = () => {
@@ -92,6 +94,9 @@ const UnderBar = (props) => {
                   key={idx}
                   onClick={()=>{addCart(data)}}
                 >
+                  <div>
+                    <BiPlusCircle size="17px" color="#404040"/>
+                  </div>
                   <RecentDeletedText>
                     {recentDeleted.name}
                   </RecentDeletedText>
@@ -171,9 +176,11 @@ const RecentDeletedText = styled.div`
   line-height: 18px;
   font-size: 13px;
   color: #2A2A2A;
+  margin-left: 6px;
+
 
   @media ${theme.device.mobileS} {
-    margin-right: 3px;
+    margin-left: 3px;
   }
 `;
 

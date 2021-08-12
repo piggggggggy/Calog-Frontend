@@ -16,15 +16,18 @@ export const searchKeywordDB = (data) => {
     instance
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
-        // console.log(res);
-        if (res.data.food === "") {
-          window.alert('검색 결과가 없어요!');
-          // history.goBack();
-        } else {
-          const new_data = {...data, data: res.data.food};
-          dispatch(searchKeyword(new_data));
-          history.push(`/loading/search/${data.keyword}`);
-        }
+        
+        // if (res.data.food === undefined) {
+        //   window.alert('검색 결과가 없어요!');
+        // } else {
+        //   const new_data = {...data, data: res.data.food};
+        //   dispatch(searchKeyword(new_data));
+        // }
+
+        const new_data = {...data, data: res.data.food};
+        dispatch(searchKeyword(new_data));
+        
+        history.push(`/loading/search/${data.keyword}`);
         dispatch(isLoaded(true))
         
       })
@@ -106,12 +109,12 @@ export const getMostUsedKeyDB = () => {
   // 추천 검색어 가져오기
 export const getRecommendedDB = () => {
   return function (dispatch, getState, {history}) {
-    // dispatch(isLoaded(false))
+    dispatch(isLoaded(false))
     instance
       .get('/api/home/recommend')
       .then((res) => {
         dispatch(getRecommended(res.data.randomList));
-        // dispatch(isLoaded(true))
+        dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -145,14 +148,18 @@ const search = createSlice({
   reducers: {
     // 검색하기
     searchKeyword : (state, action) => {
-      state.list = action.payload.data;
-      const filtered = action.payload.data.filter((food, idx) => {
-        if (parseInt(food.kcal) >= action.payload.data.min && parseInt(food.kcal) <= action.payload.data.max){
-          return food;
-        };
-      });
-      
-      state.filtered_list = filtered
+      if(action.payload.data === undefined) {
+        return;
+      } else {
+        state.list = action.payload.data;
+        const filtered = action.payload.data.filter((food, idx) => {
+          if (parseInt(food.kcal) >= action.payload.data.min && parseInt(food.kcal) <= action.payload.data.max){
+            return food;
+          };
+        });
+        
+        state.filtered_list = filtered
+      }
     },
 
     // 무한스크롤
@@ -238,6 +245,7 @@ const search = createSlice({
 
     // 추천검색어 받기
     getRecommended : (state, action) => {
+      // console.log(action.payload)
       state.recommend = action.payload;
     },
 

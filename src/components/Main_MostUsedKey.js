@@ -42,11 +42,11 @@ const MostUsedKey = (props) => {
   };
 
   // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  // const is_loaded = useSelector((state) => state.record.is_loaded)
 
-  if(!is_loaded) {
-    return (<Loading />);
-  }
+  // if(!is_loaded) {
+  //   return (<Loading />);
+  // }
 
 
   return (
