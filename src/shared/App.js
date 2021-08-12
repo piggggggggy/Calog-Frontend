@@ -14,6 +14,7 @@ import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
 import Nav from './Nav';
 import WebSearch from './WebSearch';
+import Modal from '../components/Modal';
 
 // 테마
 import theme from './theme';
@@ -53,6 +54,7 @@ const App = (props) => {
               <Route path="/calendar" exact component={Calendar}/>
               <Route path="/calendar/:date" exact component={CalendarDetail}/>
               <Route path="/record" exact component={Record}/>
+              <Route path="/modal" exact component={Modal}/>
 
               <Route path="/login" exact component={Login}/>
               <Route path="/signup" exact component={Signup}/>
