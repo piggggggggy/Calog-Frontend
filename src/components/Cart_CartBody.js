@@ -27,7 +27,9 @@ const CartBody = (props) => {
   const [type, setType] = useState("아침");
   
   // 최근삭제목록의 유무확인을 위한...
-  const recentDeleted_list = useSelector((state) => state.user);
+  const recentDeleted_list = useSelector((state) => state.user.user_info.deleteList);
+  console.log(recentDeleted_list)
+
   
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
@@ -149,17 +151,19 @@ const CartBody = (props) => {
         </CartListBox>
 
         
-        {/* 최근 삭제 목록 및 버튼 */}
-        <UnderBar type={type}/>
+        {/* 최근 삭제 목록 및 버튼  & 기록하기 버튼*/}
+        {recentDeleted_list.length !== 0 ?
+          <UnderBar recentDeleted_list={recentDeleted_list} type={type}/>
+          :
+          <CalcBox>
+            <div onClick={()=>{write()}}>
+              <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
+            </div>
+          </CalcBox>
+        }
+        
 
         
-        
-        {/* 기록하러가기 버튼 */}
-        {/* <CalcBox>
-          <div onClick={()=>{write()}}>
-            <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
-          </div>
-        </CalcBox> */}
 
       </BodyContainer>
     </React.Fragment>

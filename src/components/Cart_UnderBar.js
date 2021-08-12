@@ -23,12 +23,11 @@ import { BiPlusCircle } from 'react-icons/bi';
 const UnderBar = (props) => {
 
   const dispatch = useDispatch();
-  const recentDeleted_list = useSelector((state) => state.cart.cart);
   const [barOnOff, barSet] = useState(false);
   const type = props.type;
   const is_login = useSelector((state) => state.user.is_login);
-  const recentDeleted_list2 = useSelector((state) => state.user);
-  console.log(recentDeleted_list2);
+  const recentDeleted_list = props.recentDeleted_list;
+  console.log(recentDeleted_list)
 
   // 열고 닫는 
   const toggleCart = () => {
@@ -57,9 +56,9 @@ const UnderBar = (props) => {
   };
 
 
-  if ( recentDeleted_list.length === 0 ) {
-    return <></>;
-  }
+  // if ( recentDeleted_list[0]?.length === 0 ) {
+  //   return <></>;
+  // }
   return (
     <React.Fragment>
       <RecentDeletedContainer 
@@ -80,12 +79,10 @@ const UnderBar = (props) => {
           </Grid>
           
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
-            {recentDeleted_list.map((recentDeleted, idx) => {
+            {recentDeleted_list[0]?.map((recentDeleted, idx) => {
               const data = {
                 foodId: recentDeleted.foodId,
                 name: recentDeleted.name,
-                forOne: recentDeleted.forOne,
-                grams: recentDeleted.grams,
                 kcal: recentDeleted.kcal,
                 amount: 1,
               };
