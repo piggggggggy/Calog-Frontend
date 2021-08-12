@@ -31,27 +31,27 @@ const Record_img = (props) => {
     <React.Fragment>
       {url_list?.length === 0 && (
         <Grid is_flex>
-          <Grid bg={'#FFFBED'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
+          <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
             <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 12H23" stroke="#D2D2D2" stroke-linecap="round"/>
-                <path d="M12 1L12 23" stroke="#D2D2D2" stroke-linecap="round"/>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 13H24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M13 2L13 24" stroke="white" stroke-width="4" stroke-linecap="round"/>
               </svg>
             </Grid>
           </Grid>
-          <Grid bg={'#FFFBED'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
+          <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
             <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 12H23" stroke="#D2D2D2" stroke-linecap="round"/>
-                <path d="M12 1L12 23" stroke="#D2D2D2" stroke-linecap="round"/>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 13H24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M13 2L13 24" stroke="white" stroke-width="4" stroke-linecap="round"/>
               </svg>
             </Grid>
           </Grid>
-          <Grid bg={'#FFFBED'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
+          <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
             <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 12H23" stroke="#D2D2D2" stroke-linecap="round"/>
-                <path d="M12 1L12 23" stroke="#D2D2D2" stroke-linecap="round"/>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 13H24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                <path d="M13 2L13 24" stroke="white" stroke-width="4" stroke-linecap="round"/>
               </svg>
             </Grid>
           </Grid> 
