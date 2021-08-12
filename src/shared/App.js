@@ -42,7 +42,7 @@ const App = (props) => {
             <WebSearch/>
             <Wrap>
               <Route path="/" exact component={Main} />
-              <Route path="/search" exact component={MainSearch} />
+              <Route path="/search/:keyword" exact component={MainSearch} />
               <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
               <Route path="/cart" exact component={Cart} />
               <Route path="/loading/" exact component={Loading4} />

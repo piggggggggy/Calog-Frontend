@@ -50,7 +50,7 @@ const MainBody = (props) => {
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
     setHistory(true);
-    history.push('/search');
+    history.push(`/search/loading/${keyword.current.value}`);
   };
   // 최근 검색어 검색
   const recentSearch = (keyword) => {
@@ -65,7 +65,7 @@ const MainBody = (props) => {
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
     setHistory(true);
-    history.push('/search');
+    history.push(`/search/loading/${keyword}`);
   };
   // 최근 검색어 삭제
   const recentDelete = (keyword) => {

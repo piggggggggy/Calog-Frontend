@@ -69,7 +69,7 @@ const CardList = (props) => {
             if (idx >= 100) {
               return;
             }
-            return <Card key={result.foodId} {...result}/>;
+            return <Card key={result._id} {...result}/>;
               
             })}
         </CardContainer>

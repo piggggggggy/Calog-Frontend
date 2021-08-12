@@ -40,7 +40,7 @@ const WebSearch = (props) => {
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
-    history.push('/loading/search');
+      history.push(`/search/${keyword.current.value}`);
   };
 
   // 엔터 검색

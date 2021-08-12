@@ -16,13 +16,13 @@ export const searchKeywordDB = (data) => {
     instance
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
-        // console.log(res);
-        if (res.data === "") {
+        console.log(res);
+        if (res.data.food === "") {
           window.alert('검색 결과가 없어요!');
           history.goBack();
         } else {
           
-          const new_data = {...data, data: res.data};
+          const new_data = {...data, data: res.data.food};
           dispatch(searchKeyword(new_data));
           history.push('/search');
         }
@@ -126,9 +126,9 @@ const search = createSlice({
   reducers: {
     // 검색하기
     searchKeyword : (state, action) => {
-      state.list = action.payload.data;
+      state.list = action.payload.data.food;
       state.filtered_list = state.list.filter((food, idx) => {
-        if (food.kcal >= action.payload.min && food.kcal <= action.payload.max){
+        if (food.kcal >= action.payload.data.min && food.kcal <= action.payload.data.max){
           return food;
         };
       });
