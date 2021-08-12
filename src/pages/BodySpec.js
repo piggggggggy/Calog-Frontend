@@ -104,7 +104,7 @@ const BodySpec = (props) =>
                 }}>알림
               </Tag>
             </Text>
-            <hr color="#F5F5F5"/>
+            {/* <hr color="#F5F5F5"/>
             <Text
             lineheight="22px"
             size="17px"
@@ -116,7 +116,7 @@ const BodySpec = (props) =>
               }}>
                 의견 보내기
               </Tag>
-            </Text>
+            </Text> */}
             <hr color="#F5F5F5"/>
             <Version>
               <Text

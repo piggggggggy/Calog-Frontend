@@ -31,7 +31,8 @@ const Feedback = (props) =>
       instance
       .post('/api/notice/feedback', {title, contents, date})
       .then((res)=>
-      {console.log(res)})
+      {history.replace('/body')
+       window.alert("의견이 전달되었어요.")})
       .catch((err)=>
       {console.log(err)});
   }
