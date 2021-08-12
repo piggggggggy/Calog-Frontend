@@ -13,10 +13,11 @@ import DashBoard_When from '../components/DashBoard_When';
 import CalendarDetail_Food from '../components/CalendarDetail_Food';
 import CalendarDetail_Image from '../components/CalendarDetail_Image';
 import Loading from './Loading2';
+import Modal from '../components/Modal';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
-import {getRecordDB, delRecordDB} from '../redux/modules/record';
+import {getRecordDB} from '../redux/modules/record';
 
 // slick
 import Slider from 'react-slick'
@@ -41,6 +42,9 @@ import { Confirm } from 'react-st-modal';
 
 const CalenderDetail = (props) => {
   const dispatch = useDispatch();
+
+  // Modal
+  const [ modalOpen, setModalOpen ] = useState(false);
 
   // 날짜
   const _SelectDate = history.location.pathname.split('/');
@@ -83,8 +87,6 @@ const CalenderDetail = (props) => {
     list_type === type && same_food.push(record_map[idx])
   }
 
-  console.log(same_food)
-
   // 이미지 빈값 제외하기
   let image_list = []
   let image_url = record_list?.url
@@ -122,24 +124,12 @@ const CalenderDetail = (props) => {
 
   // 기록 삭제 버튼
   const delRecord = (async () => {
-      const result = await Confirm('선택된 기록을 삭제하시겠어요?', 
-        '추가 기록이 확인되면 리스트는 삭제됩니다.');
-      const record_id = record_list?._id
-      
-      if (result) {
-        dispatch(delRecordDB(record_id, record_date, type))
-      }
+    setModalOpen(true)
   })
-    // let result = window.confirm('선택된 기록을 삭제하시겠어요? 추가 기록이 확인되면 리스트는 삭제됩니다.')
-    // const record_id = record_list?._id
-    //   result && (
-    //     dispatch(delRecordDB(record_id, record_date, type))
-    //   )
-    
 
   return (
     <React.Fragment>
-
+      <Wrap>
         {/* 헤더 */}
         <Grid padding="3.6vh 6.2%" bg={theme.color.light}>
 
@@ -151,7 +141,7 @@ const CalenderDetail = (props) => {
           </Grid>
         </Grid>
 
-        <Wrap>
+        
           <TopBack/>
 
           {/* 캘린더 */}
@@ -242,6 +232,7 @@ const CalenderDetail = (props) => {
             <DelTitle>{type} 정보 전체 삭제</DelTitle>
           </Button>
         )}
+        <Modal open={modalOpen} title="삭제"/>
 
         </Wrap>
     </React.Fragment>

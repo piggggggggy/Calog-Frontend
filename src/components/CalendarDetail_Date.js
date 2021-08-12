@@ -64,6 +64,10 @@ const Input = styled.input`
   border: none;
   position: absolute;
   background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  caret-color: #FFE899;
+  color: #FFE899;
 `;
 
 const Wrap = styled.div`

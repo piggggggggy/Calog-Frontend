@@ -23,14 +23,14 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
-                url: "http://54.180.133.171/api/user/me",
-                // url: "https://2k1.shop/api/user/me",
+                // url: "http://54.180.133.171/api/user/me",
+                url: "https://2k1.shop/api/user/me",
                 // url: "http://52.78.155.48/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            window.location.replace('/loading/dashboard')
+            history.replace('/loading/dashboard');
         };
         loginsv()
         .catch((err)=>{
@@ -130,19 +130,19 @@ export const BodySpectSV = (gender, weight, height, age) => {
     }
 };
 
-export const BodySpectModify = (gender, weight, height, age) => {
-    return function(dispatch, getState, {history}){
-        console.log(gender, weight, height, age)
-        instance
-        .put('/api/user/bodySpec/edit', {gender, weight, height, age})
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    }
-};
+// export const BodySpectModify = (gender, weight, height, age) => {
+//     return function(dispatch, getState, {history}){
+//         console.log(gender, weight, height, age)
+//         instance
+//         .put('/api/user/bodySpec/edit', {gender, weight, height, age})
+//         .then((res) => {
+//             console.log(res);
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+//     }
+// };
 
 //리덕스
 const user = createSlice({
