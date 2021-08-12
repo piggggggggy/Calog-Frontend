@@ -13,9 +13,6 @@ import { _logOut } from '../redux/modules/user';
 // helmet
 import {Helmet} from 'react-helmet';
 
-// 바디스펙 저장하기
-import {addBodySpecDB} from '../redux/modules/dashboard';
-
 /** 
  * @param {*} props
  * @returns 마이 페이지
