@@ -23,8 +23,8 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
-                // url: "http://54.180.133.171/api/user/me",
-                url: "https://2k1.shop/api/user/me",
+                url: "http://54.180.133.171/api/user/me",
+                // url: "https://2k1.shop/api/user/me",
                 // url: "http://52.78.155.48/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
@@ -112,7 +112,7 @@ export const _logOut = (weight_blind, height_blind, bmr_blind) => {
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
         sessionStorage.clear();
-        window.location.replace('/')
+        history.replace('/')
     };
 };
 

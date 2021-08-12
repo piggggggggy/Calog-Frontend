@@ -51,6 +51,7 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
+        console.log(res)
           const food_list = res.data.record
           const bodySpec_blind = res.data.blind
           dispatch(getRecord(food_list))
