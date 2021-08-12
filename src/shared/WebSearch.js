@@ -11,6 +11,7 @@ import {
   searchRecentDB,
   addRecent
 } from '../redux/modules/recent';
+import { isLoaded } from '../redux/modules/record';
 // 이미지
 import SearchBar from '../img/Searchbar_p.png';
 
@@ -40,7 +41,7 @@ const WebSearch = (props) => {
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
-      history.push(`/search/${keyword.current.value}`);
+      // history.push(`/search/${keyword.current.value}`);
   };
 
   // 엔터 검색

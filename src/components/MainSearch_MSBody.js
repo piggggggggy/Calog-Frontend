@@ -41,9 +41,7 @@ const MSBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
 
-  console.log(search_list)
-
-
+  
 
   // 검색함수
   const search = () => {
@@ -58,7 +56,6 @@ const MSBody = (props) => {
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
     setHistory(true);
-    history.push(`/search/loading/${keyword}`);
   };
 
   // 최근 검색어 검색
@@ -74,7 +71,6 @@ const MSBody = (props) => {
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
     setHistory(true);
-    history.push(`/search/loading/${keyword}`);
   };
 
   // 최근 검색어 삭제
@@ -146,6 +142,10 @@ const MSBody = (props) => {
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
 
+
+  if (search_list.length === 0) {
+    return 
+  }
 
   return (
     <React.Fragment>
