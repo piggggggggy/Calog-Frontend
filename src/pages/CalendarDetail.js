@@ -17,7 +17,7 @@ import Modal from '../components/Modal';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
-import {getRecordDB, delRecordDB} from '../redux/modules/record';
+import {getRecordDB} from '../redux/modules/record';
 
 // slick
 import Slider from 'react-slick'
@@ -126,12 +126,6 @@ const CalenderDetail = (props) => {
   const delRecord = (async () => {
     setModalOpen(true)
   })
-    // let result = window.confirm('선택된 기록을 삭제하시겠어요? 추가 기록이 확인되면 리스트는 삭제됩니다.')
-    // const record_id = record_list?._id
-    //   result && (
-    //     dispatch(delRecordDB(record_id, record_date, type))
-    //   )
-    
 
   return (
     <React.Fragment>
