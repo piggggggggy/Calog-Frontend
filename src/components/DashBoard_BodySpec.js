@@ -28,9 +28,9 @@ const DashBoard_BodySpec = (props) => {
   const user_bmr = bmr;
 
   // 바디스펙 블라인드 체크 여부
-  const _heightBlind = useSelector((state) => state.user.user_info.heightBlind)
-  const _weightBlind = useSelector((state) => state.user.user_info.weightBlind)
-  const _bmrBlind = useSelector((state) => state.user.user_info.bmrBlind)
+  const _heightBlind = useSelector((state) => state.user.user_info?.heightBlind)
+  const _weightBlind = useSelector((state) => state.user.user_info?.weightBlind)
+  const _bmrBlind = useSelector((state) => state.user.user_info?.bmrBlind)
 
   // 키 on off
   const [heightShow, setHeightShow] = useState({
