@@ -5,9 +5,21 @@ import _ from 'lodash';
 import theme from '../shared/theme';
 import { history } from '../redux/configStore';
 import { useInView } from 'react-intersection-observer';
+
 // modules
-import { searchKeywordDB, countKeywordDB, ascendingSort, descendingSort, koreanSort, exactSort, rangeFilter, getScrollData, addMostUsedKey } from '../redux/modules/search';
+import { 
+  searchKeywordDB, 
+  countKeywordDB, 
+  ascendingSort, 
+  descendingSort, 
+  koreanSort, 
+  exactSort, 
+  rangeFilter, 
+  getScrollData, 
+  addMostUsedKey 
+} from '../redux/modules/search';
 import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Main_Card';
@@ -15,6 +27,8 @@ import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
 import CardList from './Main_CardList';
 import MostUsedKey from './Main_MostUsedKey';
+
+
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -143,9 +157,7 @@ const MSBody = (props) => {
   }, [filterMin, filterMax]);
 
 
-  if (search_list.length === 0) {
-    return 
-  }
+
 
   return (
     <React.Fragment>

@@ -11,7 +11,6 @@ import {
   searchRecentDB,
   addRecent
 } from '../redux/modules/recent';
-import { isLoaded } from '../redux/modules/record';
 // 이미지
 import SearchBar from '../img/Searchbar_p.png';
 

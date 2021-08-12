@@ -1,9 +1,13 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { useInView } from 'react-hook-inview';
+
 // elements & components
 import Card from './Main_Card';
 import { Text } from '../elements';
+import Loading from '../pages/Loading3';
+
 
 /** 
  * @param {*} props
@@ -14,11 +18,12 @@ import { Text } from '../elements';
 
 const CardList = (props) => {
 
-
-
-
   const search_list = props.search_list;
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+  if (search_list.length === 0) {
+    return <Loading/>;
+  };
 
   return (
     <React.Fragment>
