@@ -59,9 +59,8 @@ const DashBoard = (props, {match}) => {
   } else {
 
     //case2) 기록이 있을 때
-    // let yes_record = record_list[0]?.foodRecords
-    // record = yes_record
-    console.log(record_list)
+    let yes_record = record_list[0]?.foodRecords
+    record = yes_record
   };
 
   // 오늘 먹은 총 칼로리
