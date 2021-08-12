@@ -112,7 +112,7 @@ export const _logOut = (weight_blind, height_blind, bmr_blind) => {
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
         sessionStorage.clear();
-        history.replace('/')
+        history.replace('/');
     };
 };
 
