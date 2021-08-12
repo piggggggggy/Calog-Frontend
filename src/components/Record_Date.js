@@ -56,6 +56,7 @@ const Record_Date = (props) => {
 
             {/* datePicker 안보이게 숨김 처리 */}
             <Input
+            readOnly
             className={'input' + (focused ? ' -focused' : '')}
             {...inputProps}
             />
@@ -71,6 +72,10 @@ const Input = styled.input`
   border: none;
   position: absolute;
   background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  caret-color: white;
+  color: white;
 `;
 
 export default Record_Date;
