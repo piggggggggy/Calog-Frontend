@@ -132,7 +132,7 @@ const record = createSlice({
 
     // dashboard&calendar - 하루 기록 칼로리 리스트 가져오기
     getRecord : (state, action) => {
-      state.record = action.payload
+      state.record = action.payload;
     },
 
     // 기록 삭제하기

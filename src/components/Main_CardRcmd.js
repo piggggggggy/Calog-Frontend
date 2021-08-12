@@ -26,7 +26,7 @@ const CardRcmd = (props) => {
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
-
+  
   // 장바구니 담기!
   const addCart = (e) => {
     const cartUnit = {

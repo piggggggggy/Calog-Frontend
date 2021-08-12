@@ -2,10 +2,12 @@ import React, {useRef, useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import _, { throttle } from 'lodash';
+
 // elementc & components
 import { Grid, Text } from '../elements';
 import CardRcmd from './Main_CardRcmd';
 import Loading from '../pages/Loading2';
+
 // modules
 import { getRecommendedDB } from '../redux/modules/search';
 
@@ -22,6 +24,7 @@ const RcmdList = (props) => {
   const recommended_list = useSelector((state) => state.search.recommend);
   const user = useSelector((state) => state.user.user_info);
   const is_login = useSelector((state) => state.user.is_login);
+  const is_loaded = useSelector((state) => state.record.is_loaded);
 
   useEffect(() => {
     dispatch(getRecommendedDB())
@@ -61,14 +64,14 @@ const RcmdList = (props) => {
 
 
   // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  // const is_loaded = useSelector((state) => state.record.is_loaded)
 
-  if(!is_loaded) {
-    return (<Loading />);
-  }
+  // if(!is_loaded) {
+  //   return (<Loading />);
+  // }
 
-  if (!recommended_list) {
-    return <></>;
+  if (!is_loaded && recommended_list.length === 0) {
+    return <Loading />;
   };
 
   return (

@@ -16,16 +16,18 @@ export const searchKeywordDB = (data) => {
     instance
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
-        // console.log(res);
-        if (res.data === "") {
-          window.alert('검색 결과가 없어요!');
-          history.goBack();
-        } else {
-          
-          const new_data = {...data, data: res.data};
-          dispatch(searchKeyword(new_data));
-          history.push('/search');
-        }
+        
+        // if (res.data.food === undefined) {
+        //   window.alert('검색 결과가 없어요!');
+        // } else {
+        //   const new_data = {...data, data: res.data.food};
+        //   dispatch(searchKeyword(new_data));
+        // }
+
+        const new_data = {...data, data: res.data.food};
+        dispatch(searchKeyword(new_data));
+        
+        history.push(`/loading/search/${data.keyword}`);
         dispatch(isLoaded(true))
         
       })
@@ -34,6 +36,26 @@ export const searchKeywordDB = (data) => {
       }) 
   }
 };
+
+// export const searchKeywordDB = (data) => 
+//   async (dispatch, getState, {history}) => {
+//     // dispatch(isLoaded(false))
+//     try {
+//       const { res } = await instance.get(`/api/home/search/${data.keyword}`);
+//       console.log(res);
+//       // return;
+//       if (res.data.food === "") {
+//         window.alert('검색 결과가 없어요!');
+//       } else {
+//         const new_data = {...data, data: res.data.food};
+//         console.log(new_data)
+//         dispatch(searchKeyword(new_data));
+//       }
+//       history.push(`/loading/search/${data.keyword}`);
+//     } catch (err) {
+//       console.log(err, "에러가 났읍니다.")
+//     }
+//   };
 
   // detail foodinfo 가져오기
 export const getDetailDB = (foodId) => {
@@ -70,13 +92,13 @@ export const countKeywordDB = (keyword) => {
   // 인기검색어 조회
 export const getMostUsedKeyDB = () => {
   return function (dispatch, getState, {history}) {
-    dispatch(isLoaded(false))
+    // dispatch(isLoaded(false))
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
         // console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
-        dispatch(isLoaded(true))
+        // dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -109,10 +131,10 @@ const initialState = {
   list : [],
   // 정렬 및 필터링된 결과
   filtered_list: [],
-  // 리덕스 무한스크롤
-  export_list: [],
-  paging: { start: 0, end: 20, next: true},
-  is_loading: false,
+  // // 리덕스 무한스크롤
+  // export_list: [],
+  // paging: { start: 0, end: 20, next: true},
+  // is_loading: false,
   // 인기검색어
   most: [],
   // 추천검색어
@@ -126,12 +148,18 @@ const search = createSlice({
   reducers: {
     // 검색하기
     searchKeyword : (state, action) => {
-      state.list = action.payload.data;
-      state.filtered_list = state.list.filter((food, idx) => {
-        if (food.kcal >= action.payload.min && food.kcal <= action.payload.max){
-          return food;
-        };
-      });
+      if(action.payload.data === undefined) {
+        return;
+      } else {
+        state.list = action.payload.data;
+        const filtered = action.payload.data.filter((food, idx) => {
+          if (parseInt(food.kcal) >= action.payload.data.min && parseInt(food.kcal) <= action.payload.data.max){
+            return food;
+          };
+        });
+        
+        state.filtered_list = filtered
+      }
     },
 
     // 무한스크롤
@@ -217,6 +245,7 @@ const search = createSlice({
 
     // 추천검색어 받기
     getRecommended : (state, action) => {
+      // console.log(action.payload)
       state.recommend = action.payload;
     },
 
