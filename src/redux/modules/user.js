@@ -30,7 +30,7 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            history.replace('/loading/dashboard')
+            history.replace('/loading/dashboard');
         };
         loginsv()
         .catch((err)=>{
@@ -130,19 +130,19 @@ export const BodySpectSV = (gender, weight, height, age) => {
     }
 };
 
-export const BodySpectModify = (gender, weight, height, age) => {
-    return function(dispatch, getState, {history}){
-        console.log(gender, weight, height, age)
-        instance
-        .put('/api/user/bodySpec/edit', {gender, weight, height, age})
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    }
-};
+// export const BodySpectModify = (gender, weight, height, age) => {
+//     return function(dispatch, getState, {history}){
+//         console.log(gender, weight, height, age)
+//         instance
+//         .put('/api/user/bodySpec/edit', {gender, weight, height, age})
+//         .then((res) => {
+//             console.log(res);
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+//     }
+// };
 
 //리덕스
 const user = createSlice({
