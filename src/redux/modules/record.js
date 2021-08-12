@@ -36,7 +36,7 @@ export const delRecordDB = (id, date, type) => {
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
         dispatch(delRecord(type))
-        history.push('/loading/calendar')
+        history.push('/cart')
       })
       .catch((err) => {
         window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')

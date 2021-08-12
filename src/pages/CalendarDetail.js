@@ -129,7 +129,7 @@ const CalenderDetail = (props) => {
 
   return (
     <React.Fragment>
-
+      <Wrap>
         {/* 헤더 */}
         <Grid padding="3.6vh 6.2%" bg={theme.color.light}>
 
@@ -141,7 +141,7 @@ const CalenderDetail = (props) => {
           </Grid>
         </Grid>
 
-        <Wrap>
+        
           <TopBack/>
 
           {/* 캘린더 */}
