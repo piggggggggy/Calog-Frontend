@@ -22,7 +22,7 @@ const DashBoard_FoodItem = (props) => {
       {/* record에서 기록하고 넘어온 경우 state 안에 데이터값과 props값이 다르다.(버튼을 누르지 않았기 때문!) */}
 
       {/* DashBoard_When의 type(끼니)를 클릭 = 기록된 type과 일치한 경우 */}
-      {(type === data_type) && (
+      {(type === data_type || data_type?.length === 0) && (
         <Grid display="flex" margin="2.5% 0 0 0">
 
           {/* 메뉴 */}

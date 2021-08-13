@@ -7,6 +7,8 @@ import { FaCircle } from "react-icons/fa";
 // type chk
 import {useDispatch, useSelector} from 'react-redux';
 import {typeChk, ttlKcal} from '../redux/modules/record';
+//history
+import { history } from '../redux/configStore';
 
 /** 
  * @param {list} r
@@ -23,7 +25,7 @@ const DashBoard_When = (props) => {
   const typeState = useSelector((state) => state.cart.type);
 
   // 리스트에 아무것도 없는 경우 "아침"으로 default
-  const cart_type = typeState === null ? "아침" : typeState;
+  const cart_type = (typeState === null || history.location.pathname.includes('calendar')) ? "아침" : typeState;
   const foodRecords = props[0];
 
   // type에 따른 css변경
