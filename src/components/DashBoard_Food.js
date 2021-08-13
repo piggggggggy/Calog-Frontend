@@ -25,8 +25,7 @@ const DashBoard_Food = (props) => {
   const record = props[0];
 
   // 각 type에 따른 칼로리의 합계
-  const data = []
-  // const data = useSelector((state) => state.record.record[0]);
+  const data = useSelector((state) => state.record.record[0]);
   
   // 로그인 유무 체크
   const is_login = useSelector((state) => state.user.is_login);

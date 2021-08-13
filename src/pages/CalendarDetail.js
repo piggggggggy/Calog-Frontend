@@ -84,7 +84,9 @@ const CalenderDetail = (props) => {
   let same_food = []
   for (let idx=0; idx<record_map?.length; idx++) {
     const list_type = record_map[idx].type
-    list_type === type && same_food.push(record_map[idx])
+    if(list_type === type || (type?.length === 0 && list_type === "아침")) {
+      same_food.push(record_map[idx])
+    }
   }
 
   // 이미지 빈값 제외하기
@@ -99,7 +101,7 @@ const CalenderDetail = (props) => {
   let same_list = []
   for (let idx=0; idx<image_url?.length; idx++) {
     const list_type = image_url[idx].type
-    if(list_type === type) {
+    if(list_type === type || (type?.length === 0 && list_type === "아침")) {
       for (let list=0; list<image_url[idx].url.length; list++) {
         const urlList = image_url[idx].url[list]
         same_list.push(urlList)
@@ -112,7 +114,9 @@ const CalenderDetail = (props) => {
   let memo_list = []
   for(let idx = 0; idx <memo?.length; idx++) {
     const list_type = memo[idx].type
-    list_type === type && memo_list.push(memo[idx].contents)
+    if(list_type === type || (type?.length === 0 && list_type === "아침")) {
+      memo_list.push(memo[idx].contents)
+    }
   };
 
   // loading

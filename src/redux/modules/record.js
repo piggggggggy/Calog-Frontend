@@ -36,7 +36,7 @@ export const delRecordDB = (id, date, type) => {
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
         dispatch(delRecord(type))
-        history.push('/cart')
+        history.push('/loading/calendar')
       })
       .catch((err) => {
         window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')
@@ -138,9 +138,11 @@ const record = createSlice({
     // 기록 삭제하기
     delRecord : (state, action) => {
       const food_list = state.record[0].foodRecords
-      let idx = food_list.findIndex((f) => f.type === action.payload)
-      if (idx !== -1) {
-        food_list.splice(idx, 1);
+      for(let idx = 0; idx<food_list?.length; idx++) {
+        let food_idx = food_list.findIndex((f) => f.type === action.payload)
+        if (food_idx !== -1) {
+          food_list.splice(food_idx, 1);
+        }
       }
     },
 
