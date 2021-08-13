@@ -1,10 +1,13 @@
 import React, {useState,  useEffect} from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import { history } from '../redux/configStore';
+
 // elements & components
 import Card from './Main_Card';
 import { Grid, Text } from '../elements';
 import Loading from '../pages/Loading2';
+
 // modules
 import { getFavoriteDB } from '../redux/modules/favorite';
 
@@ -27,7 +30,7 @@ const FavoList = (props) => {
     if(is_login) {
       dispatch(getFavoriteDB());
     }
-  }, [])
+  }, [history.location.pathname])
 
    // loading
   // const is_loaded = useSelector((state) => state.record.is_loaded)
@@ -47,7 +50,7 @@ const FavoList = (props) => {
 
   return (
     <React.Fragment>
-      {is_login || favo_list.length !== 0 ?
+      {favo_list.length !== 0 ?
       <CardContainer>
 
         {/* 이름 */}
