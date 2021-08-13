@@ -48,7 +48,7 @@ const Card = (props) => {
     const cartCheck = cart_list.findIndex((c) => c.foodId === props.foodId);
     if (cartCheck !== -1) {
       return (
-        { backgroundColor: "#FFE899" }
+        { backgroundColor: "#FFFBD9", border: "1px solid #F19F13" }
         )
     }else{
       return (

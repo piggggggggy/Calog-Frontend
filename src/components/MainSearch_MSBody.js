@@ -230,10 +230,10 @@ const MSBody = (props) => {
         <Grid margin="5vh 0 2vh 0" m_margin="5vh 0 2vh 0" padding="0 6%" display="flex" jc="flex-end">
           <SortBox>
             <SortSelect onChange={sortChange}>
-              <option value="정확도순">정확도순</option>
-              <option value="내림차순">칼로리높은순</option>
-              <option value="오름차순">칼로리낮은순</option>
-              <option value="가나다순">가나다순</option>
+              <SortOption value="정확도순">정확도순</SortOption>
+              <SortOption value="내림차순">칼로리높은순</SortOption>
+              <SortOption value="오름차순">칼로리낮은순</SortOption>
+              <SortOption value="가나다순">가나다순</SortOption>
             </SortSelect>
             <ButtonBox>
               <IoIosArrowDown size="14px" color="8C8C8C"/>
@@ -384,6 +384,9 @@ const SortSelect = styled.select`
   margin: 0;
   padding: 0 20px 0 0;
   appearance: none;
+`;
+
+const SortOption = styled.option`
 `;
 
 const ButtonBox = styled.div`

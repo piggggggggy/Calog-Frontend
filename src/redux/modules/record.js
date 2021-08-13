@@ -9,6 +9,7 @@ import {getSpecBlind} from './dashboard';
 
 // 전역 > 서버 배포
 import instance from "./instance";
+import { recordDeleted, clearDeleted } from "./user";
 
 // middleware
 // 기록하기
@@ -21,6 +22,8 @@ export const addRecordDB = (date, list, type, url, memo) => {
         dispatch(delCartAll())
         dispatch(delImgAll())
         dispatch(typeChk(type))
+        // 최근삭제기록 날리기
+        dispatch(clearDeleted())
         history.replace('/loading/dashboard')
       })
       .catch((err) => {
@@ -35,8 +38,18 @@ export const delRecordDB = (id, date, type) => {
     instance
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
-        dispatch(delRecord(type))
-        history.push('/loading/calendar')
+        // 삭제목록 보내주기 - 용태추가부분
+        let deleted_list = getState().record.record[0].foodRecords;
+        let result = deleted_list.filter((d,idx) => {
+          if (d.type === type) {
+            return d;
+          }
+        });
+        dispatch(recordDeleted(result));
+
+        // 기존 삭제
+        dispatch(delRecord(type));
+        history.push('/loading/calendar');
       })
       .catch((err) => {
         window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')

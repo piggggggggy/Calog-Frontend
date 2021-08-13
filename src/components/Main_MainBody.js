@@ -41,7 +41,8 @@ const MainBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
   const user = useSelector((state) => state.user);
-  console.log(is_login);
+  console.log("체크:", is_login);
+  console.log("user:", user)
 
   // 검색함수
   const search = () => {
@@ -152,7 +153,7 @@ const MainBody = (props) => {
           {/* 최근 검색어 영역 */}
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
-              <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
+              <Grid is_flex padding="4.5vh 6% 2vh 6%">
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
               <Line/>
@@ -160,12 +161,12 @@ const MainBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid is_flex padding="1.1vh 8%" key={idx}>
+                      <Grid is_flex padding="1.1vh 11% 1.1vh 8%" key={idx}>
                         <Grid cursor _onClick={()=>{recentSearch(rec)}}>
                           <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
                         </Grid>
                         <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                          <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="15px" color="#737373"/>
+                          <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="18px" color="#737373"/>
                         </div>
                       </Grid>
                       <Line/>
@@ -354,6 +355,7 @@ const Line = styled.div`
   width: 87%;
   margin: auto;
   border: 1px solid #FFE899;
+  border-radius: 0.5px;
 `;
 
 const Mascort = styled.div`

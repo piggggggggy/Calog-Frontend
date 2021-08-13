@@ -149,7 +149,8 @@ const search = createSlice({
     // 검색하기
     searchKeyword : (state, action) => {
       if(action.payload.data === undefined) {
-        return;
+        state.list = [];
+        state.filtered_list = [];
       } else {
         state.list = action.payload.data;
         const filtered = action.payload.data.filter((food, idx) => {
@@ -157,8 +158,7 @@ const search = createSlice({
             return food;
           };
         });
-        
-        state.filtered_list = filtered
+        state.filtered_list = filtered;
       }
     },
 

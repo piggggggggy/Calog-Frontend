@@ -72,6 +72,7 @@ const CalenderDetail = (props) => {
   // 기록
   const record_list = useSelector((state) => state.record.record[0])
   const record_map = record_list?.foodRecords
+  console.log(record_list);
 
   // 기록한 날짜
   const record_date = record_list?.date
