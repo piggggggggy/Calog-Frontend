@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import GlobalStyles from './GlobalStyles';
+import { history } from '../redux/configStore';
 
 // 로그인 상태 전역 유지
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
@@ -27,10 +28,13 @@ import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
   const dispatch = useDispatch();
-
   // login check
   useEffect(() => {
-    dispatch(LoginCheck());
+
+    history.listen(() => {
+      dispatch(LoginCheck());
+    })
+ 
   }, []);
   
   return (
