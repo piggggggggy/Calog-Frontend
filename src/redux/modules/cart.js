@@ -74,6 +74,7 @@ const search = createSlice({
     chgType : (state, action) => {
       state.type = action.payload
     }
+    
   }
 });
 

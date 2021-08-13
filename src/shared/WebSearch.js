@@ -100,7 +100,7 @@ const Container = styled.div`
   /* background: #F19F13; */
   /* border: 5px solid black; */
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;

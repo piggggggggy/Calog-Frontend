@@ -40,6 +40,8 @@ const MainBody = (props) => {
   const favo_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   // 검색함수
   const search = () => {
