@@ -94,7 +94,7 @@ const Wrap = styled.div`
   }
   
   //노트북 이상 웹페이지
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1025px) {
     position: relative;
     margin: 0 0 0 calc(50vw - 1px);
     border: 1px solid #E4E4E4;
@@ -111,7 +111,7 @@ const WebVer = styled.div`
   background: #FFE899;
   opacity: 0.18;
 
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1025px) {
     opacity: 1;
     background-size: cover;
     background-position: 50% 50%;

@@ -18,6 +18,9 @@ const CalorieBar = (props) => {
   const kcal = props.kcal;
   const totalKcal = props.totalKcal;
   const bmr = props.bmr;
+  
+  // 로그인 유무
+  const is_login = useSelector((state) => state.user.is_login);
 
   // 현재 음식의 칼로리바 애니메이션
   const slide = keyframes`
@@ -77,12 +80,12 @@ const CalorieBar = (props) => {
   return (
     <React.Fragment>
       <Grid is_flex margin="2.6vh 0 0 0" m_margin="2.6vh 0 0 0" padding="0 6.5%">
-        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text>
+        {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> : ''}
         {/* <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text> */}
         <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text>
       </Grid>
       <BackgroundBar>
-        <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} />
+        {is_login ? <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} />: ''}
         <FoodData>
           <div>
             <Text size="15px" m_size="15px" bold>{kcal} kcal</Text>
