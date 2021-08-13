@@ -41,7 +41,7 @@ const MainBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
   const user = useSelector((state) => state.user);
-  console.log(user);
+  console.log(is_login);
 
   // 검색함수
   const search = () => {
@@ -200,13 +200,13 @@ const MainBody = (props) => {
 
       <BodyContainer>
         {/* 즐겨찾기가 들어가는 곳 */}
-        <FavoList/>
+        {is_login && favo_list.length !== 0 ? <FavoList/> : ''}
 
         {/* 장바구니 탭 */}
         <UnderBar/>
       </BodyContainer>
       
-      {favo_list.length === 0 ? 
+      {!is_login || favo_list.length === 0 ? 
       <Mascort>
         <MFace>
           <svg width="227" height="254" viewBox="0 0 227 254" fill="none" xmlns="http://www.w3.org/2000/svg">
