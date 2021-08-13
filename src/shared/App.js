@@ -34,7 +34,7 @@ const App = (props) => {
     history.listen(() => {
       dispatch(LoginCheck());
     })
- 
+    dispatch(LoginCheck());
   }, []);
   
   return (
