@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import theme from '../shared/theme';
 import { history } from '../redux/configStore';
+
 // modules
 import { searchKeywordDB, countKeywordDB, addMostUsedKey, rangeFilter } from '../redux/modules/search';
 import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+
 // elements & components
 import { Grid, Text } from '../elements';
 import RangeSlider from './Main_RangeSlider';
@@ -14,6 +16,8 @@ import UnderBar from './Main_UnderBar';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
+import Loading from '../pages/Loading4';
+
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
@@ -109,6 +113,10 @@ const MainBody = (props) => {
     };
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
+
+  // if (is_loaded) {
+  //   return <Loading/>
+  // }
 
   return (
     <React.Fragment>

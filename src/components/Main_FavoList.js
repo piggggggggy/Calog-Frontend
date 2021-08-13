@@ -21,7 +21,6 @@ const FavoList = (props) => {
   const favo_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
   const [moreFavo, setFavo] = useState(false);
-  console.log(is_login)
   
   // 즐겨찾기 목록 불러오기
   useEffect(() => {

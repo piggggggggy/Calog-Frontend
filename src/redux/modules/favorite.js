@@ -86,7 +86,7 @@ const favorite = createSlice({
     },
     // 즐겨찾기 목록 가져오기
     getFavorite : (state, action) => {
-      if (action.payload !=="") {
+      if (action.payload !== undefined) {
         state.list = action.payload;
       } else {
         state.list = [];
