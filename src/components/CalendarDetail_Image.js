@@ -1,6 +1,9 @@
 import React from 'react';
 import {Grid, Image} from '../elements';
 
+//img
+import noImg from '../img/noImg.png';
+
 /** 
  * @param {*} props
  * @returns 설명적기
@@ -12,12 +15,19 @@ import {Grid, Image} from '../elements';
 const CalendarDetail_Image = (props) => {
 
   const url = props
-
+  
   return (
     <React.Fragment>
+      {url[0] === "" ? (
+        <Grid height="221px">
+          <Image height="221px" src={noImg} b_size="100% 100%"/>
+        </Grid>
+      ) : (
         <Grid height="221px">
           <Image height="221px" src={url[0]} b_size="100% 100%"/>
         </Grid>
+      )}
+        
     </React.Fragment>
   );
 }
