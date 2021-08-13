@@ -84,7 +84,7 @@ const UnderBar = (props) => {
               const data = {
                 foodId: recentDeleted.foodId,
                 name: recentDeleted.name,
-                kcal: recentDeleted.kcal,
+                kcal: Math.round(recentDeleted.kcal * 10)/10,
                 amount: 1,
               };
               return (

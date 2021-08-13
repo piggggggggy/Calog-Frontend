@@ -54,7 +54,7 @@ const Card = (props) => {
             <NameBox>{props.name}</NameBox>
           
             {/* kcal */}
-            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">{props.kcal} kcal</Text>
+            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">{Math.round(props.kcal * 10)/10} kcal</Text>
           </Grid>
           
           {/* 카운트 */}

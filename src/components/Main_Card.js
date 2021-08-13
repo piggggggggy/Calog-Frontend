@@ -27,15 +27,17 @@ const Card = (props) => {
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
+  // console.log(props);
+  // console.log(cart_list);
 
   // 장바구니 담기!
   const addCart = (e) => {
     const cartUnit = {
-      foodId: props.foodId,
+      foodId: props._id,
       name: props.name,
       forOne: props.forOne,
       grams: props.grams,
-      kcal: props.kcal,
+      kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };
     e.preventDefault();
@@ -45,7 +47,7 @@ const Card = (props) => {
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899
   const is_picked = () => {
-    const cartCheck = cart_list.findIndex((c) => c.foodId === props.foodId);
+    const cartCheck = cart_list && cart_list.findIndex((c) => c.foodId === props._id);
     if (cartCheck !== -1) {
       return (
         { backgroundColor: "#FFFBD9", border: "1px solid #F19F13" }
@@ -85,7 +87,7 @@ const Card = (props) => {
       let data = {
         foodId : props.foodId,
         name: props.name,
-        kcal: props.kcal
+        kcal: Math.round(props.kcal * 10)/10
       };
       dispatch(addFavoriteDB(data));
     } else {
@@ -109,7 +111,7 @@ const Card = (props) => {
           <NameBox>{props.name}</NameBox>
         </div>
         <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
-          <KcalBox>{props.kcal} kcal</KcalBox>
+          <KcalBox>{Math.round(props.kcal * 10)/10} kcal</KcalBox>
         </div>
 
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
