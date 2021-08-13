@@ -80,9 +80,11 @@ const CalorieBar = (props) => {
   return (
     <React.Fragment>
       <Grid is_flex margin="2.6vh 0 0 0" m_margin="2.6vh 0 0 0" padding="0 6.5%">
-        {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> : ''}
-        {/* <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text> */}
-        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text>
+        {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> 
+        : <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text>}
+        
+        {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text> : ''}
+        
       </Grid>
       <BackgroundBar>
         {is_login ? <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} /> : ''}

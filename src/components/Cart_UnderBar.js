@@ -26,8 +26,9 @@ const UnderBar = (props) => {
   const [barOnOff, barSet] = useState(false);
   const type = props.type;
   const is_login = useSelector((state) => state.user.is_login);
-  const recentDeleted_list = props.recentDeleted_list;
-  console.log(recentDeleted_list)
+  const _recentDeleted_list = props.recentDeleted_list;
+  const recentDeleted_list = _recentDeleted_list.length === 0 ? [] : _recentDeleted_list[0];
+  // console.log(_recentDeleted_list);
 
   // 열고 닫는 
   const toggleCart = () => {
@@ -79,7 +80,7 @@ const UnderBar = (props) => {
           </Grid>
           
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
-            {recentDeleted_list[0]?.map((recentDeleted, idx) => {
+            {recentDeleted_list.map((recentDeleted, idx) => {
               const data = {
                 foodId: recentDeleted.foodId,
                 name: recentDeleted.name,

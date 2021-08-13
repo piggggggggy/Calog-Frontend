@@ -27,6 +27,7 @@ const CartBody = (props) => {
   const [type, setType] = useState("아침");
   const user = useSelector((state) => state.user);
   console.log(user);
+
   
   // 최근삭제목록의 유무확인을 위한...
   const _recentDeleted_list = useSelector((state) => state.user.user_info.deleteList);
@@ -156,14 +157,14 @@ const CartBody = (props) => {
 
         
         {/* 최근 삭제 목록 및 버튼  & 기록하기 버튼*/}
-        {recentDeleted_list.length !== 0 ?
-          <UnderBar recentDeleted_list={recentDeleted_list} type={type}/>
-          :
+        {!is_login || recentDeleted_list.length === 0 ?
           <CalcBox>
             <div onClick={()=>{write()}}>
               <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
             </div>
           </CalcBox>
+          :
+          <UnderBar recentDeleted_list={recentDeleted_list} type={type}/>
         }
         
 
