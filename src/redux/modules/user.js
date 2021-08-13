@@ -8,7 +8,7 @@ import {addBodySpecDB} from './dashboard';
 
 
 const initialState = {
-  user_info: {email: "email", nickname: "nickname"},
+  user_info: {email: "email", nickname: "nickname", },
   is_login: false,
   email_dupli: false,
   nick_dupli: false,
@@ -30,7 +30,7 @@ export const LoginSV = (user_info) => {
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
             dispatch(SetUser(res_user_info.data.user));
-            history.replace('/loading/dashboard');
+            history.replace('/loading/');
         };
         loginsv()
         .catch((err)=>{
@@ -167,8 +167,20 @@ const user = createSlice({
     // BodySpect: (state, action) => {
     //     state.user_info = action.payload;
     // };
+
+    
+    // 최근삭제목록 리듀서
+    // 삭제목록 저장하기
+    recordDeleted: (state, action) => {
+        state.user_info.deleteList = action.payload;
+    },
+    // 삭제목록 날리기
+    clearDeleted: state => {
+        state.user_info.deleteList = [];
+    },
+
   },
 });
 
-export const {SetUser, LogOut, EmailDupli, NickDupli} = user.actions
+export const {SetUser, LogOut, EmailDupli, NickDupli, recordDeleted, clearDeleted} = user.actions;
 export default user;
