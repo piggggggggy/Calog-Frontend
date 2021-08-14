@@ -3,11 +3,8 @@ import instance from "./instance";
 import axios from "axios";
 
 // 액션
-import {bmrChk, delDashboardAll} from './dashboard';
+import {bmrChk} from './dashboard';
 import {addBodySpecDB} from './dashboard';
-import { delCartAll } from "./cart";
-import { delRecentAll } from "./recent";
-import { delRecordAll } from "./record";
 
 
 const initialState = {
@@ -114,14 +111,8 @@ export const _logOut = (bodySpec) => {
         await dispatch(addBodySpecDB(bodySpec))
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-        // window.sessionStorage.clear();
-        // 수동으로 지우기
-        dispatch(delCartAll());
-        dispatch(delRecentAll());
-        dispatch(delRecordAll());
-        dispatch(delDashboardAll());
-        
-        history.replace('/body');
+        window.sessionStorage.clear();
+        history.replace('/');
     };
 };
 
