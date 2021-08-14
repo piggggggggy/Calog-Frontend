@@ -3,8 +3,11 @@ import instance from "./instance";
 import axios from "axios";
 
 // 액션
-import {bmrChk} from './dashboard';
+import {bmrChk, delDashboardAll} from './dashboard';
 import {addBodySpecDB} from './dashboard';
+import { delCartAll } from "./cart";
+import { delRecentAll } from "./recent";
+import { delRecordAll } from "./record";
 
 
 const initialState = {
@@ -106,13 +109,17 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
     };
 };
 
-export const _logOut = (weight_blind, height_blind, bmr_blind) => {
+export const _logOut = (bodySpec) => {
     return async function(dispatch, getState, {history}){
-        await dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
+        await dispatch(addBodySpecDB(bodySpec))
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-        sessionStorage.clear();
-        history.replace('/');
+        dispatch(delCartAll());
+        dispatch(delRecentAll());
+        dispatch(delRecordAll());
+        dispatch(delDashboardAll());
+        
+        history.replace('/body');
     };
 };
 
@@ -156,7 +163,7 @@ const user = createSlice({
     LogOut: (state, action) => {
         state.user_info = null;
         state.is_login = false;
-        sessionStorage.clear();
+        // sessionStorage.clear();
     },
     EmailDupli: (state, action) => {
         state.email_dupli = action.payload;
@@ -178,9 +185,19 @@ const user = createSlice({
     clearDeleted: state => {
         state.user_info.deleteList = [];
     },
+    // 장바구니에서 삭제목록 올렸을 때 지우기
+    removeDeleted: (state, action) => {
+        const deleted_list = action.payload.list;
+        const result = deleted_list.filter((del, idx) => {
+            if (del.foodId !== action.payload.foodId) {
+                return del;
+            }
+        })
+        state.user_info.deleteList[0] = result;
+    },
 
   },
 });
 
-export const {SetUser, LogOut, EmailDupli, NickDupli, recordDeleted, clearDeleted} = user.actions;
+export const {SetUser, LogOut, EmailDupli, NickDupli, recordDeleted, clearDeleted, removeDeleted} = user.actions;
 export default user;

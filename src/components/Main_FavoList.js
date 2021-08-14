@@ -21,16 +21,19 @@ import { getFavoriteDB } from '../redux/modules/favorite';
 const FavoList = (props) => {
 
   const dispatch = useDispatch();
-  const favo_list = useSelector((state) => state.favorite.list);
-  const is_login = useSelector((state) => state.user.is_login);
+  // const favo_list = useSelector((state) => state.favorite.list);
+  const favo_list = props.favo_list;
+  // const is_login = useSelector((state) => state.user.is_login);
   const [moreFavo, setFavo] = useState(false);
-  
+  console.log(favo_list)
   // 즐겨찾기 목록 불러오기
-  useEffect(() => {
-    if(is_login) {
-      dispatch(getFavoriteDB());
-    }
-  }, [history.location.pathname])
+  // useEffect(() => {
+  //   history.listen(() => {
+  //     if(is_login) {
+  //       dispatch(getFavoriteDB());
+  //     }
+  //   })
+  // }, [])
 
    // loading
   // const is_loaded = useSelector((state) => state.record.is_loaded)

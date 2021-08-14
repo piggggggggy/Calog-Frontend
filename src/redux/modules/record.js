@@ -143,6 +143,15 @@ const record = createSlice({
   initialState,
   reducers: {
 
+    // 세션 클리어용
+    delRecordAll: state => {
+      state.record = [];
+      state.calendar = [];
+      state.type = [];
+      state.kcal = [];
+      state.img = [];
+    },
+
     // dashboard&calendar - 하루 기록 칼로리 리스트 가져오기
     getRecord : (state, action) => {
       state.record = action.payload;
@@ -196,6 +205,6 @@ const record = createSlice({
   }
 });
 
-export const {getRecord, delRecord, getAllRecord, typeChk, ttlKcal, addImage, delImage, delImgAll, isLoaded} = record.actions;
+export const {getRecord, delRecord, getAllRecord, typeChk, ttlKcal, addImage, delImage, delImgAll, isLoaded, delRecordAll} = record.actions;
 
 export default record;

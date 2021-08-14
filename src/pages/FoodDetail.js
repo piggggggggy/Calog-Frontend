@@ -70,7 +70,7 @@ const FoodDetail = (props) => {
       name: foodInfo.name,
       forOne: foodInfo.forOne,
       grams: foodInfo.grams,
-      kcal: foodInfo.kcal,
+      kcal: Math.round(foodInfo.kcal * 10)/10,
       amount: 1,
     };
     dispatch(addCartRx(cartUnit));
@@ -92,11 +92,11 @@ const FoodDetail = (props) => {
   console.log(totalKcal())
 
   const is_over = () => {
-    if (bmr === totalKcal()+foodInfo.kcal) {
+    if (bmr === totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
       return "line";
-    } else if (bmr > totalKcal()+foodInfo.kcal) {
+    } else if (bmr > totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
       return "under";
-    } else if (bmr < totalKcal()+foodInfo.kcal) {
+    } else if (bmr < totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
       return "over";
     }
   };
@@ -138,7 +138,7 @@ const FoodDetail = (props) => {
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
             <Grid is_flex>
-              <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{foodInfo.kcal} kcal</Text>
+              <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{Math.round(foodInfo.kcal * 10)/10} kcal</Text>
               {/* 카트 버튼 */}
 
               <div style={{height: "34px"}}>
@@ -154,8 +154,8 @@ const FoodDetail = (props) => {
               is_over() === "line" ? 
               "현재까지 오늘의 기준치를 모두 채웠어요!" 
               : is_over() === "over" ? 
-              `현재까지 기준치 ${totalKcal()+foodInfo.kcal-bmr} kcal 초과했어요!` 
-              : `아직 기준치까지 ${bmr-(totalKcal()+foodInfo.kcal)} kcal 남았어요!`
+              `현재까지 기준치 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal 초과했어요!` 
+              : `아직 기준치까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요!`
               : "로그인 하시면 더 많은 정보를 얻을 수 있어요!"}
               
               
@@ -193,7 +193,7 @@ const FoodDetail = (props) => {
         </IngreBox>
 
         {/* 칼로리 수치 바 */}
-        <CalorieBar bmr={bmr} kcal={foodInfo.kcal} totalKcal={totalKcal()}/>
+        <CalorieBar bmr={bmr} kcal={Math.round(foodInfo.kcal * 10)/10} totalKcal={totalKcal()}/>
 
         {/* 영양정보 디테일 */}
         <IngreDetailContainer>

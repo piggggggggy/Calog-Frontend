@@ -1,26 +1,23 @@
 import React, {useEffect} from 'react';
-import {Grid, Text, Image} from '../elements';
+
+// css
+import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
 
-// 임포트
+// components
+import DashBoard_Title from '../components/DashBoard_Title';
 import DashBoard_Chart from '../components/DashBoard_Chart';
 import DashBoard_Workout from '../components/DashBoard_Workout';
 import DashBoard_BodySpec from '../components/DashBoard_BodySpec';
 import DashBoard_Food from '../components/DashBoard_Food';
 import Loading from './Loading2';
 
-// 데이터
+// redux
 import {useSelector, useDispatch} from 'react-redux';
 import {getTodayRecordDB} from '../redux/modules/record';
 import {getWorkoutDB} from '../redux/modules/dashboard';
 import {history} from '../redux/configStore';
-
-//지방이들
-import good_icon from '../img/good.png';
-import nope_icon from '../img/nope.png';
-import mid_icon from '../img/soso.png';
-import none_icon from '../img/none.png';
 
 // helmet
 import {Helmet} from 'react-helmet';
@@ -30,11 +27,8 @@ import {Helmet} from 'react-helmet';
  * @담당자 김나영
 */
 
-const DashBoard = (props, {match}) => {
+const DashBoard = (props) => {
   const dispatch = useDispatch();
-
-  // 로그인 유무 체크(미로그인 유저에게는 임시의 데이터를 보여준다) 
-  const is_login = useSelector((state) => state.user.is_login);
 
   useEffect(() => {
     if(is_login) {
@@ -42,18 +36,18 @@ const DashBoard = (props, {match}) => {
       dispatch(getWorkoutDB())
     }
   }, [history.location.pathname]);
-  
-  // 유저정보
-  const user = useSelector((state) => state.user.user_info);
 
-  // bmr
+  // 로그인 상태 체크 >> 로그인 유무에 따라 유저에게 보여지는 화면이 다르기 때문 
+  const is_login = useSelector((state) => state.user.is_login);
+
+  // bmr >> 유저의 기초대사량을 바탕으로 현재 섭취한 칼로리를 비교(user - loginChk 시 bmr 받아옴 >> 가장 최신의 데이터)
   let bmr = useSelector((state) => state.dashboard.bmr);
 
   // 기록리스트
   let record = [];
-  
-  // case1) 기록이 없을 때
   const record_list = useSelector((state) => state.record.record);
+
+  // case1) 기록이 없을 때
   if(record_list?.length === 0) {
     record = []
   } else {
@@ -62,25 +56,9 @@ const DashBoard = (props, {match}) => {
     let yes_record = record_list[0]?.foodRecords
     record = yes_record
   };
-
-  // 오늘 먹은 총 칼로리
-  let today_kcal = 0;
-  for(let idx = 0; idx<record?.length; idx++) {
-    let kcal = record[idx].resultKcal;
-    today_kcal += kcal
-  };
   
-  // good(bmr +- 10)
-  const ten = bmr*0.1;
-  const good = ((bmr-ten) <= today_kcal) && (today_kcal <= (bmr+ten));
-
-  // bmr이 남았을 때
-  const extra_bmr = today_kcal < (bmr-ten);
-  const how_extra = bmr - today_kcal;
-
-  // bmr을 초과했을 때
-  const over_bmr = today_kcal > (bmr+ten);
-  const how_over = today_kcal - bmr;
+  // 유저정보
+  const user = useSelector((state) => state.user.user_info);
 
   // 운동리스트
   const exercise_list = useSelector((state) => state.dashboard.exercise)
@@ -94,6 +72,7 @@ const DashBoard = (props, {match}) => {
 
   return (
         <Grid width="100%">
+
         {/* 헬멧 */}
         <Helmet>
           <title>[Calog] 오늘의 칼로리</title>
@@ -102,107 +81,8 @@ const DashBoard = (props, {match}) => {
           <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
         </Helmet>
 
-        {/* 배경 */}
-        <Top>
-            {/* 비로그인 유저 */}
-            {!is_login && <Image src={none_icon} b_size="100% 100%"/>}
-
-            {/* 로그인 유저 */}
-            {is_login && (
-              <React.Fragment>
-
-              {bmr !== 0 ? (
-                <React.Fragment>
-
-                {/* case3-1-1) good일 때 */}
-                {good  && <Image src={mid_icon} b_size="100% 100%"/>}
-
-                {/* case3-1-2) bad(over)일 때 */}
-                {over_bmr && <Image src={nope_icon} b_size="100% 100%"/>}
-
-                {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                {extra_bmr && <Image src={good_icon} b_size="100% 100%"/>}
-                  </React.Fragment>
-                  ) : (
-
-                  // case3-2) bmr 값이 없을 때
-                  <Image src={none_icon} b_size="100% 100%"/>
-                )}
-
-              </React.Fragment>
-            )}
-        </Top>
-
-        {/* 멘트 */}
-        <Line>
-          {/* 비로그인 유저 */}
-          {!is_login && (
-            <React.Fragment>
-              <Text size="22px" bold m_size="18px">안녕하세요!</Text>
-              <Text size="22px" bold m_size="18px">로그인이<br/>필요한 기능이예요</Text>
-              <Grid padding="1vh 0 0 0;">
-                <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
-              </Grid> 
-            </React.Fragment>
-          )}
-
-          {/* 로그인 유저 */}
-          {is_login && (
-            <React.Fragment>
-
-            {/* case1) 초과해서 먹었을 경우 컬러 다르게 */}
-            {(over_bmr && bmr !== 0) ?
-              <Text size="22px" bold m_size="18px" color={'#E24444'}>{user.nickname}님!</Text> :
-              <Text size="22px" bold m_size="18px">{user.nickname}님!</Text>
-            }
-
-            {/* case2) 기록된 리스트가 없을 때 */}
-            {record?.length === 0 && (
-              <React.Fragment>
-                <Text size="22px" bold m_size="18px">칼로리를<br/>등록해주세요</Text>
-                <Grid padding="1vh 0 0 0;">
-                  <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 오늘은 어떤 음식을 드실건가요?</Text>
-                </Grid> 
-              </React.Fragment>
-            )}
-
-            {/* case3) 기록된 리스트가 있을 때 */}
-            {record?.length !== 0 && (
-              <React.Fragment>
-
-              {/* case3-1) bmr 값이 있을 때 */}
-                {bmr !== 0 ? (
-                  <React.Fragment>
-
-                  {/* case3-1-1) good일 때 */}
-                  {good  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요</Text>}
-
-                  {/* case3-1-2) bad(over)일 때 */}
-                  {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요</Text>}
-
-                  {/* case3-1-3) 기초대사량보다 덜 먹었을 때 */}
-                  {extra_bmr && (
-                    <Grid>
-                      <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요</Text>
-                      
-                    </Grid>
-                  )}
-                  </React.Fragment>
-                  ) : (
-
-                  // case3-2) bmr 값이 없을 때
-                  <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요</Text>
-                )}
-
-                {/* 먹은 칼로리의 총합 */}
-                <Grid padding="1vh 0 0 0;">
-                  <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 {today_kcal}kcal 먹었어요.</Text>
-                </Grid>  
-              </React.Fragment>
-            )}
-          </React.Fragment>    
-        )} 
-        </Line>
+        {/* 상단 bmr 관련 타이틀 */}
+        <DashBoard_Title is_login={is_login} bmr={bmr} record={record} user_info={user}/>
 
         {/* 바디스펙 */}
         <DashBoard_BodySpec {...user} bmr={bmr}/>
@@ -228,25 +108,6 @@ const DashBoard = (props, {match}) => {
       </Grid>
   );
 };
-
-const Top = styled.div`
-  position: relative;
-  width: 100%;
-  height: 29vh;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-`;
-
-const Line = styled.div`
-  position: relative;
-  line-height: 27px;
-  padding-left: 9.7%;
-  margin-top: -45%;
-
-  @media ${theme.device.mobileM} {
-    line-height: 20px;
-  }
-`;
 
 const Exercise_Wrap = styled.div`
   width: 95%;

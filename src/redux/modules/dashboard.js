@@ -19,6 +19,7 @@ export const getWorkoutDB = () => {
       .then((res) => {
         const exercise_list = res.data.exercise
         dispatch(getExercise(exercise_list))
+        
         dispatch(isLoaded(true))
       })
       .catch((err) => {
@@ -28,10 +29,13 @@ export const getWorkoutDB = () => {
 };
 
 // dashboard - 바디스펙 저장하기
-export const addBodySpecDB = (W_boolean, h_boolean, b_boolean) => {
+export const addBodySpecDB = (bodySpec) => {
+  const W = bodySpec.weight_blind
+  const H = bodySpec.height_blind
+  const B = bodySpec.bmr_blind
   return function (dispatch, getState, {history}) {
     instance
-      .put('/api/calendar/blind', {weightBlind:W_boolean, heightBlind: h_boolean, bmrBlind:b_boolean})
+      .put('/api/calendar/blind', {weightBlind:W, heightBlind: H, bmrBlind:B})
       .then((res) => {
       })
       .catch((err) => {
@@ -48,23 +52,30 @@ const initialState = {
   // bmr
   bmr: 0,
 
-  // height blind
-  height_blind : false,
-
-  // weight blind
-  weight_blind : false,
-
-  // bmr blind
-  bmr_blind : false,
-
   // bodySpec
-  bodySpec: [],
+  specBlind: {
+    height_blind : false,
+    weight_blind : false,
+    bmr_blind : false,
+  },
 }
 
 const dashboard = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
+
+    // 세션 클리어용
+    delDashboardAll: state => {
+      state.exercise = [];
+      state.bmr = 0;
+      state.specBlind = {
+        height_blind : false,
+        weight_blind : false,
+        bmr_blind : false,
+      };
+    },
+
 
     // dashboard - 운동 리스트 가져오기
     getExercise : (state, action) => {
@@ -77,30 +88,29 @@ const dashboard = createSlice({
     },
 
     // show/hide height
-    heightBlind : (state, action) => {
-      action.payload === true ? (state.height_blind = true) : (state.height_blind = false);
+    heightBlindDB : (state, action) => {
+      action.payload === true ? (state.specBlind.height_blind = true) : (state.specBlind.height_blind = false);
     },
 
     // show/hide weight
-    weightBlind : (state, action) => {
-      action.payload === true ? (state.weight_blind = true) : (state.weight_blind = false);
+    weightBlindDB : (state, action) => {
+      action.payload === true ? (state.specBlind.weight_blind = true) : (state.specBlind.weight_blind = false);
     },
 
     // show/hide bmr
-    bmrBlind : (state, action) => {
-      action.payload === true ? (state.bmr_blind = true) : (state.bmr_blind = false);
+    bmrBlindDB : (state, action) => {
+      action.payload === true ? (state.specBlind.bmr_blind = true) : (state.specBlind.bmr_blind = false);
     },
 
     // getBodySpec
     getSpecBlind : (state, action) => {
-      state.bodySpec = action.payload
-      state.height_blind = action.payload.heightBlind
-      state.weight_blind = action.payload.weightBlind
-      state.bmr_blind = action.payload.bmrBlind
+      state.specBlind.height_blind = action.payload.heightBlind
+      state.specBlind.weight_blind = action.payload.weightBlind
+      state.specBlind.bmr_blind = action.payload.bmrBlind
     }
   }
 });
 
-export const {getExercise, bmrChk, heightBlind, weightBlind, bmrBlind, getSpecBlind} = dashboard.actions;
+export const {getExercise, bmrChk, heightBlindDB, weightBlindDB, bmrBlindDB, getSpecBlind, delDashboardAll} = dashboard.actions;
 
 export default dashboard;

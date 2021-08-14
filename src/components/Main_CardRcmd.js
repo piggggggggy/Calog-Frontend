@@ -34,7 +34,7 @@ const CardRcmd = (props) => {
       name: props.name,
       forOne: props.forOne,
       grams: props.grams,
-      kcal: props.kcal,
+      kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };
     e.preventDefault();
@@ -84,7 +84,7 @@ const CardRcmd = (props) => {
       let data = {
         foodId : props.foodId,
         name: props.name,
-        kcal: props.kcal
+        kcal: Math.round(props.kcal * 10)/10
       };
       dispatch(addFavoriteDB(data));
     } else {
@@ -103,7 +103,7 @@ const CardRcmd = (props) => {
         
         {/* 칼로리 */}
         <div>  
-          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0">{props.kcal} kcal</Text>
+          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0">{Math.round(props.kcal * 10)/10} kcal</Text>
         </div>
         
         {/* 즐겨찾기 버튼 */}

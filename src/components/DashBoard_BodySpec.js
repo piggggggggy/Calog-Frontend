@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
-import {heightBlind, weightBlind, bmrBlind} from '../redux/modules/dashboard';
+import {heightBlindDB, weightBlindDB, bmrBlindDB} from '../redux/modules/dashboard';
 
 /** 
  * @역할 : 대시보드 바디스펙 컴포넌트
@@ -14,28 +14,17 @@ import {heightBlind, weightBlind, bmrBlind} from '../redux/modules/dashboard';
 */
 
 const DashBoard_BodySpec = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const {height, weight, bmr} = props;
 
-  // 키
-  const user_height = height;
-
-  // 몸무게
-  const user_weight = weight;
-
-  // bmr
-  const user_bmr = bmr;
-
-  // 바디스펙 블라인드 체크 여부
-  const _heightBlind = useSelector((state) => state.user.user_info?.heightBlind)
-  const _weightBlind = useSelector((state) => state.user.user_info?.weightBlind)
-  const _bmrBlind = useSelector((state) => state.user.user_info?.bmrBlind)
+  // 바디스펙 블라인드 >> dashboard 모듈에서 가져옴(로그아웃 시 서버로 전송하기 때문에 user_info에 있는 데이터는 업데이트가 되지 않아 사용 불가)
+  const bodySpec = useSelector((state) => state.dashboard.specBlind)
 
   // 키 on off
   const [heightShow, setHeightShow] = useState({
-    hShow: _heightBlind === true ? "block" : "none",
-    hHide: _heightBlind === true ? "none" : "block"
+    hShow: bodySpec.height_blind === true ? "block" : "none",
+    hHide: bodySpec.height_blind === true ? "none" : "block"
   });
   const {hShow, hHide} = heightShow;
   const heightOn = () => {
@@ -43,20 +32,20 @@ const DashBoard_BodySpec = (props) => {
       hShow: "none",
       hHide: "block",
     })
-    dispatch(heightBlind(false))
+    dispatch(heightBlindDB(false))
   };
   const heightOff = () => {
     setHeightShow({
       hShow: "block",
       hHide: "none",
     })
-    dispatch(heightBlind(true))
+    dispatch(heightBlindDB(true))
   };
 
   // 몸무게 on off
   const [weightShow, setWeightShow] = useState({
-    wShow: _weightBlind === true ? "block" : "none",
-    wHide: _weightBlind === true ? "none" : "block"
+    wShow: bodySpec.weight_blind === true ? "block" : "none",
+    wHide: bodySpec.weight_blind === true ? "none" : "block"
   });
   const {wShow, wHide} = weightShow;
   const weightOn = () => {
@@ -64,20 +53,20 @@ const DashBoard_BodySpec = (props) => {
       wShow: "none",
       wHide: "block",
     })
-    dispatch(weightBlind(false))
+    dispatch(weightBlindDB(false))
   };
   const weightOff = () => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
-    dispatch(weightBlind(true))
+    dispatch(weightBlindDB(true))
   };
 
   // 기초대사량 on off
   const [kcalShow, setKcalShow] = useState({
-    kShow: _bmrBlind === true ? "block" : "none",
-    kHide: _bmrBlind === true ? "none" : "block"
+    kShow: bodySpec.bmr_blind === true ? "block" : "none",
+    kHide: bodySpec.bmr_blind === true ? "none" : "block"
   });
   const {kShow, kHide} = kcalShow;
   const kcalOn = () => {
@@ -85,14 +74,14 @@ const DashBoard_BodySpec = (props) => {
       kShow: "none",
       kHide: "block",
     })
-    dispatch(bmrBlind(false))
+    dispatch(bmrBlindDB(false))
   };
   const kcalOff = () => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
-    dispatch(bmrBlind(true))
+    dispatch(bmrBlindDB(true))
   };
 
   return (
@@ -104,10 +93,10 @@ const DashBoard_BodySpec = (props) => {
           <Grid>
             <Text size="12px" m_size="11px">키</Text>
             <Grid display={hHide} m_margin="11% 0 0 0">
-              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_height}cm</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{height}cm</Text>
             </Grid>
             <Grid display={hShow}>
-                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
 
             {/* 숨김/표시 버튼 */}
@@ -129,10 +118,10 @@ const DashBoard_BodySpec = (props) => {
           <Grid>
             <Text size="12px" m_size="11px">몸무게</Text>
             <Grid display={wHide} m_margin="11% 0 0 0">
-              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_weight}kg</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{weight}kg</Text>
             </Grid>
             <Grid display={wShow}>
-                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
 
             {/* 숨김/표시 버튼 */}
@@ -154,10 +143,10 @@ const DashBoard_BodySpec = (props) => {
           <Grid>
             <Text size="12px" m_size="11px">기초대사량</Text>
             <Grid display={kHide} m_margin="11% 0 0 0">
-              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{user_bmr}kcal</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{bmr}kcal</Text>
             </Grid>
             <Grid display={kShow}>
-                <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
             </Grid>
             
             {/* 숨김/표시 버튼 */}
@@ -184,7 +173,6 @@ DashBoard_BodySpec.defaultProps = {
   "height" : 0,
   "weight" : 0,
   "bmr" : 0,
-
 };
 
 const Wrap = styled.div`

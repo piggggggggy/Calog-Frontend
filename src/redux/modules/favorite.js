@@ -29,9 +29,8 @@ export const addFavoriteDB = (data) => {
 export const deleteFavoriteDB = (foodId) => {
   return function (dispatch, getState, {history}) {
     instance
-      .delete('/api/favorite/delete', {foodId: foodId})
+    .delete('/api/favorite/delete', {data: {foodId: foodId}})
       .then((res) => {
-        // console.log(res);
         dispatch(deleteFavorite(foodId));
         window.alert("즐겨찾기 해제!");
       })

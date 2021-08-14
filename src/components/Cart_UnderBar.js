@@ -3,10 +3,14 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
 import theme from '../shared/theme';
+
 // modules
 import { deleteCartRx, addCartRx, cartOut } from '../redux/modules/cart';
+import { removeDeleted } from '../redux/modules/user';
+
 // elements & components
 import { Grid, Text } from '../elements';
+
 // icons
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 import { TiDeleteOutline } from 'react-icons/ti';
@@ -28,7 +32,8 @@ const UnderBar = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const _recentDeleted_list = props.recentDeleted_list;
   const recentDeleted_list = _recentDeleted_list.length === 0 ? [] : _recentDeleted_list[0];
-  // console.log(_recentDeleted_list);
+  // console.log("_:",_recentDeleted_list);
+  // console.log(recentDeleted_list);
 
   // 열고 닫는 
   const toggleCart = () => {
@@ -39,9 +44,10 @@ const UnderBar = (props) => {
     }
   };
 
-  // 장바구니 담기!
+  // 장바구니 담기 & 장바구니에서 삭제
   const addCart = (data) => {
     dispatch(addCartRx(data));
+    dispatch(removeDeleted({...data, list: recentDeleted_list}));
   };
   
 
@@ -84,7 +90,7 @@ const UnderBar = (props) => {
               const data = {
                 foodId: recentDeleted.foodId,
                 name: recentDeleted.name,
-                kcal: recentDeleted.kcal,
+                kcal: Math.round(recentDeleted.kcal * 10)/10,
                 amount: 1,
               };
               return (

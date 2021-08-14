@@ -35,7 +35,7 @@ const Card = (props) => {
       name: props.name,
       forOne: props.forOne,
       grams: props.grams,
-      kcal: props.kcal,
+      kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };
     e.preventDefault();
@@ -45,7 +45,7 @@ const Card = (props) => {
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899
   const is_picked = () => {
-    const cartCheck = cart_list.findIndex((c) => c.foodId === props.foodId);
+    const cartCheck = cart_list && cart_list.findIndex((c) => c.foodId === props.foodId);
     if (cartCheck !== -1) {
       return (
         { backgroundColor: "#FFFBD9", border: "1px solid #F19F13" }
@@ -85,7 +85,7 @@ const Card = (props) => {
       let data = {
         foodId : props.foodId,
         name: props.name,
-        kcal: props.kcal
+        kcal: Math.round(props.kcal * 10)/10
       };
       dispatch(addFavoriteDB(data));
     } else {
@@ -99,7 +99,7 @@ const Card = (props) => {
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props._id}`)}}>
+      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox  onClick={addFavorite}>
           <IoStar style={is_favorite()} width="100%"/>
@@ -109,7 +109,7 @@ const Card = (props) => {
           <NameBox>{props.name}</NameBox>
         </div>
         <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
-          <KcalBox>{props.kcal} kcal</KcalBox>
+          <KcalBox>{Math.round(props.kcal * 10)/10} kcal</KcalBox>
         </div>
 
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
@@ -129,7 +129,7 @@ Card.defaultProps = {
 const FoodCard = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 13% 50% 24% 13%;
+  grid-template-columns: 13% 48% 26% 13%;
   width: 87%;
   padding-top: 1.7vh;
   padding-bottom: 1.7vh;
