@@ -36,7 +36,7 @@ if (env === "development") {
 
 // persist
 const persistConfig = {
-  key: "root",
+  key: "auth",
   storage: storageSession,
   whitelist: ["cart", "recent", "record", "dashboard"]
 };

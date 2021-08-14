@@ -32,6 +32,7 @@ export const deleteFavoriteDB = (foodId) => {
       .delete('/api/favorite/delete', {foodId: foodId})
       .then((res) => {
         // console.log(res);
+
         dispatch(deleteFavorite(foodId));
         window.alert("즐겨찾기 해제!");
       })

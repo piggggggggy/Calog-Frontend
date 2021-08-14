@@ -8,6 +8,7 @@ import { history } from '../redux/configStore';
 // modules
 import { searchKeywordDB, countKeywordDB, addMostUsedKey, rangeFilter } from '../redux/modules/search';
 import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+import { getFavoriteDB } from '../redux/modules/favorite';
 
 // elements & components
 import { Grid, Text } from '../elements';
@@ -41,8 +42,8 @@ const MainBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const keyword = useRef();
   const user = useSelector((state) => state.user);
-  console.log("체크:", is_login);
-  console.log("user:", user)
+  // console.log("체크:", is_login);
+  // console.log("user:", user)
 
   // 검색함수
   const search = () => {
@@ -116,6 +117,14 @@ const MainBody = (props) => {
     };
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
+
+  useEffect(() => {
+    history.listen(() => {
+      if(is_login) {
+        dispatch(getFavoriteDB());
+      }
+    })
+  }, [])
 
   // if (is_loaded) {
   //   return <Loading/>
@@ -201,7 +210,7 @@ const MainBody = (props) => {
 
       <BodyContainer>
         {/* 즐겨찾기가 들어가는 곳 */}
-        {is_login && favo_list.length !== 0 ? <FavoList/> : ''}
+        {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
 
         {/* 장바구니 탭 */}
         <UnderBar/>

@@ -32,8 +32,8 @@ const UnderBar = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const _recentDeleted_list = props.recentDeleted_list;
   const recentDeleted_list = _recentDeleted_list.length === 0 ? [] : _recentDeleted_list[0];
-  console.log("_:",_recentDeleted_list);
-  console.log(recentDeleted_list);
+  // console.log("_:",_recentDeleted_list);
+  // console.log(recentDeleted_list);
 
   // 열고 닫는 
   const toggleCart = () => {

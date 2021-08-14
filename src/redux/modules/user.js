@@ -111,7 +111,7 @@ export const _logOut = (weight_blind, height_blind, bmr_blind) => {
         await dispatch(addBodySpecDB(weight_blind, height_blind, bmr_blind))
         document.cookie = `TOKEN=; expires=${new Date("2020-3-22").toUTCString()}`;
         dispatch(LogOut()); // action payload 가 undefined 괜찮은지
-        sessionStorage.clear();
+        window.sessionStorage.clear();
         history.replace('/');
     };
 };
@@ -156,7 +156,7 @@ const user = createSlice({
     LogOut: (state, action) => {
         state.user_info = null;
         state.is_login = false;
-        sessionStorage.clear();
+        // sessionStorage.clear();
     },
     EmailDupli: (state, action) => {
         state.email_dupli = action.payload;
@@ -186,7 +186,6 @@ const user = createSlice({
                 return del;
             }
         })
-        console.log(result);
         state.user_info.deleteList[0] = result;
     },
 
