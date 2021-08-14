@@ -131,7 +131,7 @@ Card.defaultProps = {
 const FoodCard = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 13% 50% 24% 13%;
+  grid-template-columns: 13% 48% 26% 13%;
   width: 87%;
   padding-top: 1.7vh;
   padding-bottom: 1.7vh;

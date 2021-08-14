@@ -19,6 +19,7 @@ import {
   addMostUsedKey 
 } from '../redux/modules/search';
 import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+import { isLoaded } from '../redux/modules/record';
 
 // elements & components
 import { Grid, Text } from '../elements';
@@ -154,7 +155,7 @@ const MSBody = (props) => {
       max: filterMax
     };
     debounceRangeCB(data);
-  }, [filterMin, filterMax]);
+  }, [filterMin, filterMax]); 
 
 
 

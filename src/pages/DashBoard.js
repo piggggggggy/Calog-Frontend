@@ -54,12 +54,15 @@ const DashBoard = (props, {match}) => {
   
   // case1) 기록이 없을 때
   const record_list = useSelector((state) => state.record.record);
+
+  console.log(record_list)
   if(record_list?.length === 0) {
     record = []
   } else {
 
     //case2) 기록이 있을 때
     let yes_record = record_list[0]?.foodRecords
+    // let yes_record = []
     record = yes_record
   };
 

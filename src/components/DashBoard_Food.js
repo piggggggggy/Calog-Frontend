@@ -25,7 +25,10 @@ const DashBoard_Food = (props) => {
   const record = props[0];
 
   // 각 type에 따른 칼로리의 합계
-  const data = useSelector((state) => state.record.record[0]);
+  // const data = useSelector((state) => state.record.record[0]);
+  const _data = useSelector((state) => state.record.record);
+  const data = _data.length === 0 ? [] : _data[0].totalCalories; 
+  // const data = 50;
   
   // 로그인 유무 체크
   const is_login = useSelector((state) => state.user.is_login);
@@ -43,7 +46,8 @@ const DashBoard_Food = (props) => {
         {/* 총 칼로리 */}
         <Grid margin="4.7% 0 0 8%" width="35%" m_margin="4.7% 0 0 8%">
           <Button height="36px" border_radius="20px" bg={theme.color.light}>
-            <P>총 {data?.totalCalories}kcal</P>
+            {/* <P>총 {data?.totalCalories}kcal</P> */}
+            <P>총 {data}kcal</P>
           </Button>
         </Grid>
 

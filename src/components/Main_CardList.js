@@ -19,11 +19,12 @@ import Loading from '../pages/Loading3';
 
 const CardList = (props) => {
 
-  const search_list = props.search_list;
+  // const search_list = props.search_list;
+  const search_list = useSelector((state) => state.search.filtered_list);
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
-  if (!is_loaded) {
+  if (!is_loaded || search_list.length === 0) {
     return <Loading/>;
   };
 
