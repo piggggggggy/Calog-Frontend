@@ -69,7 +69,11 @@ const dashboard = createSlice({
     delDashboardAll: state => {
       state.exercise = [];
       state.bmr = 0;
-      state.bodySpec = [];
+      state.specBlind = {
+        height_blind : false,
+        weight_blind : false,
+        bmr_blind : false,
+      };
     },
 
 
