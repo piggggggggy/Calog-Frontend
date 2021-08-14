@@ -27,13 +27,13 @@ const Card = (props) => {
   const cart_list = useSelector((state) => state.cart.cart);
   const favorite_list = useSelector((state) => state.favorite.list);
   const is_login = useSelector((state) => state.user.is_login);
-  // console.log(props);
+  console.log(props);
   // console.log(cart_list);
 
   // 장바구니 담기!
   const addCart = (e) => {
     const cartUnit = {
-      foodId: props._id,
+      foodId: props.foodId,
       name: props.name,
       forOne: props.forOne,
       grams: props.grams,
@@ -47,7 +47,7 @@ const Card = (props) => {
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899
   const is_picked = () => {
-    const cartCheck = cart_list && cart_list.findIndex((c) => c.foodId === props._id);
+    const cartCheck = cart_list && cart_list.findIndex((c) => c.foodId === props.foodId);
     if (cartCheck !== -1) {
       return (
         { backgroundColor: "#FFFBD9", border: "1px solid #F19F13" }
@@ -101,7 +101,7 @@ const Card = (props) => {
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props._id}`)}}>
+      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
         <BookmarkBox  onClick={addFavorite}>
           <IoStar style={is_favorite()} width="100%"/>

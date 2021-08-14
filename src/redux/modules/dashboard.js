@@ -66,6 +66,13 @@ const dashboard = createSlice({
   initialState,
   reducers: {
 
+    // 세션 클리어용
+    delDashboardAll: state => {
+      state.exercise = [];
+      state.bmr = 0;
+      state.bodySpec = [];
+    },
+
     // dashboard - 운동 리스트 가져오기
     getExercise : (state, action) => {
       state.exercise = action.payload
@@ -101,6 +108,6 @@ const dashboard = createSlice({
   }
 });
 
-export const {getExercise, bmrChk, heightBlind, weightBlind, bmrBlind, getSpecBlind} = dashboard.actions;
+export const {getExercise, bmrChk, heightBlind, weightBlind, bmrBlind, getSpecBlind, delDashboardAll} = dashboard.actions;
 
 export default dashboard;
