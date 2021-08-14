@@ -23,6 +23,16 @@ const CardList = (props) => {
   const search_list = useSelector((state) => state.search.filtered_list);
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const is_loaded = useSelector((state) => state.record.is_loaded);
+  const [page, setPage] = useState({
+    start: 0,
+    end: 40,
+  })
+
+  const nextPage = useCallback(() => {
+    setPage({
+      page: page.start + 20
+    })
+  }, [search_list])
 
   if (!is_loaded || search_list.length === 0) {
     return <Loading/>;
