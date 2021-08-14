@@ -178,9 +178,20 @@ const user = createSlice({
     clearDeleted: state => {
         state.user_info.deleteList = [];
     },
+    // 장바구니에서 삭제목록 올렸을 때 지우기
+    removeDeleted: (state, action) => {
+        const deleted_list = action.payload.list;
+        const result = deleted_list.filter((del, idx) => {
+            if (del.foodId !== action.payload.foodId) {
+                return del;
+            }
+        })
+        console.log(result);
+        state.user_info.deleteList[0] = result;
+    },
 
   },
 });
 
-export const {SetUser, LogOut, EmailDupli, NickDupli, recordDeleted, clearDeleted} = user.actions;
+export const {SetUser, LogOut, EmailDupli, NickDupli, recordDeleted, clearDeleted, removeDeleted} = user.actions;
 export default user;
