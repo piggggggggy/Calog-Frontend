@@ -28,12 +28,10 @@ const BodySpec = (props) =>
   const user_info = useSelector(state=>state.user.user_info);
 
   // 바디스펙 blind 정보
-  const weight_blind = useSelector(state=>state.dashboard.weight_blind)
-  const height_blind = useSelector(state=>state.dashboard.height_blind)
-  const bmr_blind = useSelector(state=>state.dashboard.bmr_blind)
+  const bodySpec = useSelector(state=>state.dashboard.specBlind)
 
   const logout = () => {
-    dispatch(_logOut(weight_blind, height_blind, bmr_blind));
+    dispatch(_logOut(bodySpec));
   }
 
   if(!is_login){
