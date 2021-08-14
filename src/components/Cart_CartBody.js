@@ -26,14 +26,14 @@ const CartBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const [type, setType] = useState("아침");
   const user = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
 
   
   // 최근삭제목록의 유무확인을 위한...
   const _recentDeleted_list = useSelector((state) => state.user.user_info.deleteList);
   const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
-  console.log(recentDeleted_list)
+  // console.log(recentDeleted_list)
 
   
 // 대사량과 나의 칼로리 기록
