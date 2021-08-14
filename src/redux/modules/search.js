@@ -17,13 +17,6 @@ export const searchKeywordDB = (data) => {
       .get(`/api/home/search/${data.keyword}`)
       .then((res) => {
         
-        // if (res.data.food === undefined) {
-        //   window.alert('검색 결과가 없어요!');
-        // } else {
-        //   const new_data = {...data, data: res.data.food};
-        //   dispatch(searchKeyword(new_data));
-        // }
-
         const new_data = {...data, data: res.data.food};
         dispatch(searchKeyword(new_data));
         
@@ -36,26 +29,6 @@ export const searchKeywordDB = (data) => {
       }) 
   }
 };
-
-// export const searchKeywordDB = (data) => 
-//   async (dispatch, getState, {history}) => {
-//     // dispatch(isLoaded(false))
-//     try {
-//       const { res } = await instance.get(`/api/home/search/${data.keyword}`);
-//       console.log(res);
-//       // return;
-//       if (res.data.food === "") {
-//         window.alert('검색 결과가 없어요!');
-//       } else {
-//         const new_data = {...data, data: res.data.food};
-//         console.log(new_data)
-//         dispatch(searchKeyword(new_data));
-//       }
-//       history.push(`/loading/search/${data.keyword}`);
-//     } catch (err) {
-//       console.log(err, "에러가 났읍니다.")
-//     }
-//   };
 
   // detail foodinfo 가져오기
 export const getDetailDB = (foodId) => {

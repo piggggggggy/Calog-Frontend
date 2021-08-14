@@ -25,14 +25,17 @@ const CardList = (props) => {
   const is_loaded = useSelector((state) => state.record.is_loaded);
   const [page, setPage] = useState({
     start: 0,
-    end: 40,
+    end: 20,
   })
 
-  const nextPage = useCallback(() => {
+  const nextPage = () => {
     setPage({
-      page: page.start + 20
+      start: page.start,
+      end: page.end + 20,
     })
-  }, [search_list])
+  }
+
+  console.log(page.end);
 
   if (!is_loaded || search_list.length === 0) {
     return <Loading/>;
@@ -92,13 +95,14 @@ const CardList = (props) => {
         </EmptyResult>
         :
         <CardContainer>
-          {search_list && search_list.map((result, idx) => {     
-            if (idx >= 100) {
-              return;
-            }
+          {search_list && search_list.slice(page.start, page.end).map((result, idx) => {     
             return <Card key={result.foodId} {...result}/>;
-              
             })}
+          {search_list?.length > page.end ? 
+            <MoreBtn onClick={nextPage}>
+              <Text size="13px" m_size="13px" padding="0" margin="0">더보기</Text>
+            </MoreBtn> 
+          : ''}
         </CardContainer>
       }
     </React.Fragment>
@@ -136,6 +140,16 @@ const Fats = styled.div`
     width: 60%;
     height: 30vh;
   } 
+`;
+
+const MoreBtn = styled.div`
+  width: 100%;
+  height: 4vh;
+  padding: 1.1vh 6%;
+  background: rgba(196, 196, 196, 0.19);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default CardList;

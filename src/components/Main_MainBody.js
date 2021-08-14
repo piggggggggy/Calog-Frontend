@@ -124,6 +124,9 @@ const MainBody = (props) => {
         dispatch(getFavoriteDB());
       }
     })
+    if(is_login) {
+      dispatch(getFavoriteDB());
+    }
   }, [])
 
   // if (is_loaded) {
