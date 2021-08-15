@@ -49,6 +49,9 @@ const MainBody = (props) => {
   
   // 로그인체크 
   const is_login = useSelector((state) => state.user.is_login);
+
+  // 스피너
+  const is_loaded = useSelector((state) => state.record.is_loaded)
   
   // 검색 키워드
   const keyword = useRef();
@@ -136,6 +139,10 @@ const MainBody = (props) => {
   //   };
   //   debounceRangeCB(data);
   // }, [filterMin, filterMax]);
+
+  if (!is_loaded) {
+    return <Loading/>
+  }
 
   return (
     <React.Fragment>
