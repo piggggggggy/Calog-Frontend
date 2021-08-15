@@ -91,7 +91,7 @@ const DashBoard = (props) => {
         <DashBoard_Chart {...[record]} bmr={bmr}/>
 
         {/* 칼로리 리스트 */}
-        <DashBoard_Food {...[record]} />
+        <DashBoard_Food _data={record_list} is_login={is_login} {...[record]} />
 
         {/* 운동 추천 - 로그인 유저만 확인 가능 */}
         {is_login && (
