@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import theme from '../shared/theme';
-import { history } from '../redux/configStore';
-import { useInView } from 'react-intersection-observer';
 
 // modules
 import { 
@@ -13,17 +11,13 @@ import {
   ascendingSort, 
   descendingSort, 
   koreanSort, 
-  exactSort, 
   rangeFilter, 
-  getScrollData, 
-  addMostUsedKey 
 } from '../redux/modules/search';
 import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 import { isLoaded } from '../redux/modules/record';
 
 // elements & components
 import { Grid, Text } from '../elements';
-import Card from './Main_Card';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
 import CardList from './Main_CardList';
@@ -38,8 +32,8 @@ import { MdCancel } from 'react-icons/md';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 검색결과 페이지
+ * @역할 검색결과 페이지의 body
  * @담당자 : 박용태
 */
 
@@ -68,9 +62,7 @@ const MSBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   
   // 검색키워드
-  const keyword = useRef();
-
-  
+  const keyword = useRef(); 
 
   // 검색함수
   const search = () => {
@@ -170,9 +162,6 @@ const MSBody = (props) => {
     };
     debounceRangeCB(data);
   }, [filterMin, filterMax]); 
-
-
-
 
   return (
     <React.Fragment>

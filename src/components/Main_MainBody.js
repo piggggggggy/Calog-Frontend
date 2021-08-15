@@ -33,6 +33,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 
 const MainBody = (props) => {
 
+  // dispatch
   const dispatch = useDispatch();
 
   // 검색히스토리 on off
@@ -41,8 +42,6 @@ const MainBody = (props) => {
   // 칼로리 range
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
-  console.log(filterMin,filterMax)
-  
 
   // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
@@ -118,9 +117,9 @@ const MainBody = (props) => {
     setMin(n);
     setMax(x);
   }, 1000);
-  // const debounceCB = useCallback((n, x) => {
-  //   debounce(n, x);
-  // }, [filterMin, filterMax])
+  const debounceCB = useCallback((n, x) => {
+    debounce(n, x);
+  }, [])
 
 
   // range 요청
@@ -138,21 +137,6 @@ const MainBody = (props) => {
     };
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
-
-  // useEffect(() => {
-  //   history.listen(() => {
-  //     if(is_login) {
-  //       dispatch(getFavoriteDB());
-  //     }
-  //   })
-  //   if(is_login) {
-  //     dispatch(getFavoriteDB());
-  //   }
-  // }, [])
-
-  if (is_loaded) {
-    return <Loading/>
-  }
 
   return (
     <React.Fragment>
@@ -223,8 +207,8 @@ const MainBody = (props) => {
             min={0}
             max={5000}
             onChange={({ min, max }) => {
-              debounce(min, max);
-              // debounceCB(min, max);
+              // debounce(min, max);
+              debounceCB(min, max);
             }}
           />
         </Grid>

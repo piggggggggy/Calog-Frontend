@@ -19,7 +19,8 @@ import Loading from '../pages/Loading3';
 const CardList = (props) => {
 
   // 검색결과
-  const search_list = useSelector((state) => state.search.filtered_list);
+  // const search_list = useSelector((state) => state.search.filtered_list);
+  const search_list = props.search_list;
   
   // 검색결과가 없어요! 난수생성
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);

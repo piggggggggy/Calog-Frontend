@@ -111,17 +111,22 @@ const Card = (props) => {
       {/* 검색 결과 낱개 카드 */}
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
 
+        {/* 즐겨찾기 */}
         <BookmarkBox  onClick={addFavorite}>
           <IoStar style={is_favorite()} width="100%"/>
         </BookmarkBox>
 
+        {/* 이름 */}
         <div >
-          <NameBox>{props.name}</NameBox>
+          <Name>{props.name}</Name>
         </div>
+
+        {/* 칼로리 */}
         <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
           <KcalBox>{Math.round(props.kcal * 10)/10} kcal</KcalBox>
         </div>
 
+        {/* 장바구니 */}
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
           <BsFillPlusSquareFill color="#F19F13" size="17px"/>
         </CartBox>
@@ -178,7 +183,8 @@ const KcalBox = styled.div`
   }
 `;
 
-const NameBox = styled.div`
+
+const Name = styled.div`
   font-size: 15px;
   line-height: 18px;
   margin: 0;
