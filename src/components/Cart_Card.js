@@ -77,6 +77,7 @@ Card.defaultProps = {
 
 const CardContainer = styled.div`
   position: relative;
+  max-width: 369.6px;
   min-width: 88%;
   /* height: calc(4.4vh + 58px); */
 
@@ -106,6 +107,9 @@ const NameBox = styled.div`
   font-size: 15px; 
   margin: 0; 
   padding: 0;
+  max-height: 44px;
+  min-height: 44px;
+  vertical-align: bottom;
   /* text-overflow: ellipsis;
   overflow: hidden; 
   white-space: nowrap;  */
@@ -113,6 +117,8 @@ const NameBox = styled.div`
   @media ${theme.device.mobileM} {
     line-height: 20px; 
     font-size: 15px; 
+    max-height: 40px;
+    min-height: 40px;
   }
 `;
 

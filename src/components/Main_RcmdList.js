@@ -26,9 +26,9 @@ const RcmdList = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
-  useEffect(() => {
-    dispatch(getRecommendedDB())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getRecommendedDB())
+  // }, [])
 
   // 횡 스와이프 구현!
   const refX = useRef(null);
