@@ -26,7 +26,7 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
-                url: "http://54.180.133.171/api/user/me",
+                url: "http://52.79.110.219/api/user/me",
                 // url: "https://2k1.shop/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });

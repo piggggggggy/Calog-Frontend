@@ -20,16 +20,16 @@ const CalenderDetail_Info = (props) => {
   // +,- 20%
   const twenty = bmr*0.2;
 
-  //case 1) '잘 먹었어요'의 기준(bmr+-10)
+  // case 1) '잘 먹었어요'의 기준(bmr+-10)
   const good = ((bmr-ten) <= totalCalories) && (totalCalories <= (bmr+ten))
 
-  //case 2) '적당히 먹었어요'의 기준(bmr+-20)
+  // case 2) '적당히 먹었어요'의 기준(bmr+-20)
   const well = ((bmr-twenty) <= totalCalories && totalCalories < (bmr-ten)) || ((bmr+ten) < totalCalories && totalCalories <= (bmr+twenty))
 
-  //case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
+  // case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
   const bad = totalCalories < (bmr-twenty) || (bmr+twenty) < totalCalories
 
-  //차이
+  // 차이
   const _extra = Math.abs(bmr-totalCalories)
   const extra = Math.round(_extra)
 
@@ -40,7 +40,7 @@ const CalenderDetail_Info = (props) => {
           <Grid is_flex padding="0 9%">
             <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
               <P>입력된<br/>기초대사량이<br/>없어요!</P>
-              <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">{totalCalories}kcal만큼 섭취했어요🧐</Text>
+              <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">{totalCalories}kcal만큼 섭취했어요</Text>
             </Grid>
             <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
               <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +63,7 @@ const CalenderDetail_Info = (props) => {
           <Grid is_flex padding="0 9%">
             <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
               <P>조금 더 노력하면<br/>기초대사량에 맞추어<br/>먹을 수 있던 하루!</P>
-              <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량과 {extra}kcal만큼 차이나요🧐</Text>
+              <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량과 {extra}kcal만큼 차이나요</Text>
             </Grid>
             <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
               <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +90,7 @@ const CalenderDetail_Info = (props) => {
         <Wrap>
           <Grid is_flex padding="0 9%">
             <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
-              <P>Bad<br/>기초대사량에 많이<br/>못미치는 하루였어요😿</P>
+              <P>Bad<br/>기초대사량에 많이<br/>못미치는 하루였어요</P>
               <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량까지 {extra}kcal 모자라요</Text>
             </Grid>
             <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
@@ -115,7 +115,7 @@ const CalenderDetail_Info = (props) => {
             <Wrap>
             <Grid is_flex padding="0 9%">
               <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
-                <P>Bad<br/>기초대사량을 많이<br/>초과한 하루였네요😿</P>
+                <P>Bad<br/>기초대사량을 많이<br/>초과한 하루였네요</P>
                 <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량보다 {extra}kcal 많이 섭취했어요</Text>
               </Grid>
               <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
@@ -142,7 +142,7 @@ const CalenderDetail_Info = (props) => {
         <Grid is_flex padding="0 9%">
           <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
             <P>Good<br/>기초대사량을<br/>충분히 채운 하루네요!</P>
-            <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량과 {extra}kcal만큼 차이나요🧐</Text>
+            <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량과 {extra}kcal만큼 차이나요</Text>
           </Grid>
           <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
             <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">

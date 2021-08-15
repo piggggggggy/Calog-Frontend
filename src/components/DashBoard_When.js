@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 // 이모지
 import { FaCircle } from "react-icons/fa";
 // type chk
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {typeChk, ttlKcal} from '../redux/modules/record';
 //history
 import { history } from '../redux/configStore';
@@ -19,19 +19,29 @@ import { history } from '../redux/configStore';
 */
 
 const DashBoard_When = (props) => {
-  const foodRecords = props[0];
+
+  // 대시보드와 캘린더 상세에서 들어오는 props값이 달라서 구분
+  const foodRecords = history.location.pathname.includes('dashboard') ? props[0] : props?.foodRecords;
   const {data_type} = props
 
   const dispatch = useDispatch();
-  
-  // type chk
-  const typeState = useSelector((state) => state.cart.type);
 
-  // 리스트에 아무것도 없는 경우 "아침"으로 default
-  const cart_type = data_type?.length !== "" && typeState
+  // 대시보드와 캘린더 상세 페이지로 나눠서 각 경우에 맞게 사용
+  let btn_type = ""
+
+  // 대시보드
+  if(history.location.pathname.includes('dashboard')) {
+
+    // 처음 로그인하고 들어왔을 때는 스토어에 type이 지정되어있지 않음(아직 버튼을 안눌렀기 때문)
+    data_type?.length === 0 ? btn_type = "" : btn_type = data_type
+
+    // 캘린더 상세
+  } else {
+    btn_type = "아침"
+  }
 
   // type에 따른 css변경
-  const [type, setType] = useState(cart_type);
+  const [type, setType] = useState(btn_type);
 
   // 기록 리스트(각 타입에 맞는 리스트와 총 칼로리 합계)
   // 아침
