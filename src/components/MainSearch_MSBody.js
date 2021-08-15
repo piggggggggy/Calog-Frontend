@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import _ from 'lodash';
+
+// theme
 import theme from '../shared/theme';
-import { history } from '../redux/configStore';
-import { useInView } from 'react-intersection-observer';
+
+// lodash
+import _ from 'lodash';
 
 // modules
 import { 
@@ -13,17 +15,13 @@ import {
   ascendingSort, 
   descendingSort, 
   koreanSort, 
-  exactSort, 
   rangeFilter, 
-  getScrollData, 
-  addMostUsedKey 
 } from '../redux/modules/search';
 import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 import { isLoaded } from '../redux/modules/record';
 
 // elements & components
 import { Grid, Text } from '../elements';
-import Card from './Main_Card';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
 import CardList from './Main_CardList';
@@ -38,8 +36,8 @@ import { MdCancel } from 'react-icons/md';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 검색결과 페이지
+ * @역할 검색결과 페이지의 body
  * @담당자 : 박용태
 */
 
@@ -68,16 +66,15 @@ const MSBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   
   // 검색키워드
-  const keyword = useRef();
+  const keyword = useRef(); 
 
-  
 
   // 검색함수
   const search = () => {
     const data = {
       keyword: keyword.current.value,
       min: filterMin,
-      max: filterMax
+      max: filterMax  
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
@@ -117,8 +114,14 @@ const MSBody = (props) => {
   };
 
   // 검색어 삭제
+  const [key, setKey] = useState();
+  const _setKey = _.debounce((e) => {
+    setKey(e.target.value);
+  }, 800)
+  
   const deleteKeyword = () => {
     keyword.current.value = '';
+    setKey('');
   };
 
   // 정렬 선택
@@ -171,9 +174,6 @@ const MSBody = (props) => {
     debounceRangeCB(data);
   }, [filterMin, filterMax]); 
 
-
-
-
   return (
     <React.Fragment>
 
@@ -188,8 +188,9 @@ const MSBody = (props) => {
             // onBlur={()=>{setHistory(true)}} 
             placeholder="어떤 칼로리가 궁금하신가요?"
             onKeyPress={onKeyPress}
+            onChange={_setKey}
             />
-            {keyword ? 
+            {key ? 
             <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
               <MdCancel size="16px" color="#C4C4C4"/>
             </div>

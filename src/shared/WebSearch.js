@@ -1,7 +1,11 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
+
+// loadsh
+import _ from 'lodash';
+
 // modules
 import { 
   searchKeywordDB, 
@@ -11,6 +15,10 @@ import {
   searchRecentDB,
   addRecent
 } from '../redux/modules/recent';
+
+// icons
+import { MdCancel } from 'react-icons/md';
+
 // 이미지
 import SearchBar from '../img/Searchbar_p.png';
 
@@ -52,8 +60,14 @@ const WebSearch = (props) => {
   };
 
   // 검색어 삭제
+  const [key, setKey] = useState();
+  const _setKey = _.debounce((e) => {
+    setKey(e.target.value);
+  }, 800)
+  
   const deleteKeyword = () => {
     keyword.current.value = '';
+    setKey('');
   };
 
 
@@ -71,13 +85,20 @@ const WebSearch = (props) => {
             <input 
             onKeyPress={onKeyPress}
             ref={keyword} 
+            onChange={_setKey}
             placeholder="어떤 칼로리가 궁금하신가요?"
             />
-            <button onClick={deleteKeyword}/>
+            {key ?
+            // <button onClick={deleteKeyword}/>
+            <div onClick={()=>{deleteKeyword()}}>
+              <MdCancel size="24px" color="#C4C4C4"/>
+            </div>
+            : ''}
           </SearchContents>
 
           {/* 버튼 */}
-          <SearchBtn onClick={()=>search()}/>
+ 
+            <SearchBtn onClick={()=>search()}/>
 
         </SearchBox>
 
@@ -135,14 +156,14 @@ const SearchContents = styled.div`
     padding: 1px 2px;
   }
 
-  & > button {
+  & > div {
     position: absolute;
     /* display: none; */
     width: 24px;
     height: 24px;
-    right: 74px;
-    background: #E4E4E4;
-    border-radius: 50%;
+    right: 65px;
+    /* background: #E4E4E4;
+    border-radius: 50%; */
     border: none;
     padding: 0;
     cursor: pointer;

@@ -62,18 +62,6 @@ const RcmdList = (props) => {
   const delay = 50;
   const throttleDragMove = throttle(dragMove, delay);
 
-
-  // loading
-  // const is_loaded = useSelector((state) => state.record.is_loaded)
-
-  // if(!is_loaded) {
-  //   return (<Loading />);
-  // }
-
-  if (!is_loaded && recommended_list.length === 0) {
-    return <Loading />;
-  };
-
   return (
     <React.Fragment>
 

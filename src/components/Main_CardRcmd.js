@@ -97,9 +97,9 @@ const CardRcmd = (props) => {
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
         
         {/* 이름 */}
-        <div>
+        <NameContainer>
           <NameBox lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</NameBox>
-        </div>
+        </NameContainer>
         
         {/* 칼로리 */}
         <div>  
@@ -140,11 +140,18 @@ const FoodCard = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   & > div {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-start; */
     
   }
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 30px;
 `;
 
 const NameBox = styled.div`

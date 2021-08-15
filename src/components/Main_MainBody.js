@@ -33,6 +33,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 
 const MainBody = (props) => {
 
+  // dispatch
   const dispatch = useDispatch();
 
   // 검색히스토리 on off
@@ -41,8 +42,6 @@ const MainBody = (props) => {
   // 칼로리 range
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
-  console.log(filterMin,filterMax)
-  
 
   // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
@@ -106,8 +105,14 @@ const MainBody = (props) => {
   };
   
   // 검색어 삭제
+  const [key, setKey] = useState();
+  const _setKey = _.debounce((e) => {
+    setKey(e.target.value);
+  }, 800)
+  
   const deleteKeyword = () => {
     keyword.current.value = '';
+    setKey('');
   };
 
   // history tab 관리
@@ -118,9 +123,9 @@ const MainBody = (props) => {
     setMin(n);
     setMax(x);
   }, 1000);
-  // const debounceCB = useCallback((n, x) => {
-  //   debounce(n, x);
-  // }, [filterMin, filterMax])
+  const debounceCB = useCallback((n, x) => {
+    debounce(n, x);
+  }, [])
 
 
   // range 요청
@@ -138,21 +143,6 @@ const MainBody = (props) => {
     };
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
-
-  // useEffect(() => {
-  //   history.listen(() => {
-  //     if(is_login) {
-  //       dispatch(getFavoriteDB());
-  //     }
-  //   })
-  //   if(is_login) {
-  //     dispatch(getFavoriteDB());
-  //   }
-  // }, [])
-
-  if (is_loaded) {
-    return <Loading/>
-  }
 
   return (
     <React.Fragment>
@@ -172,8 +162,9 @@ const MainBody = (props) => {
             // onBlur={()=>{setHistory(true)}}
             placeholder="어떤 칼로리가 궁금하신가요?"
             onKeyPress={onKeyPress}
+            onChange={_setKey}
             />
-            {keyword ? 
+            {key ? 
             <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
               <MdCancel size="16px" color="#C4C4C4"/>
             </div>
@@ -223,8 +214,8 @@ const MainBody = (props) => {
             min={0}
             max={5000}
             onChange={({ min, max }) => {
-              debounce(min, max);
-              // debounceCB(min, max);
+              // debounce(min, max);
+              debounceCB(min, max);
             }}
           />
         </Grid>
