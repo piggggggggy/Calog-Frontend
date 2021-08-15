@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
-import {heightBlindDB, weightBlindDB, bmrBlindDB} from '../redux/modules/dashboard';
+import {addBodySpecDB} from '../redux/modules/dashboard';
 
 /** 
  * @역할 : 대시보드 바디스펙 컴포넌트
@@ -16,15 +16,12 @@ import {heightBlindDB, weightBlindDB, bmrBlindDB} from '../redux/modules/dashboa
 const DashBoard_BodySpec = (props) => {
   const dispatch = useDispatch();
 
-  const {height, weight, bmr} = props;
-
-  // 바디스펙 블라인드 >> dashboard 모듈에서 가져옴(로그아웃 시 서버로 전송하기 때문에 user_info에 있는 데이터는 업데이트가 되지 않아 사용 불가)
-  const bodySpec = useSelector((state) => state.dashboard.specBlind)
+  const {height, weight, bmr, heightBlind, weightBlind, bmrBlind} = props;
 
   // 키 on off
   const [heightShow, setHeightShow] = useState({
-    hShow: bodySpec.height_blind === true ? "block" : "none",
-    hHide: bodySpec.height_blind === true ? "none" : "block"
+    hShow: heightBlind === true ? "block" : "none",
+    hHide: heightBlind === true ? "none" : "block"
   });
   const {hShow, hHide} = heightShow;
   const heightOn = () => {
@@ -32,20 +29,20 @@ const DashBoard_BodySpec = (props) => {
       hShow: "none",
       hHide: "block",
     })
-    dispatch(heightBlindDB(false))
+    dispatch(addBodySpecDB("height_false"))
   };
   const heightOff = () => {
     setHeightShow({
       hShow: "block",
       hHide: "none",
     })
-    dispatch(heightBlindDB(true))
+    dispatch(addBodySpecDB("height_true"))
   };
 
   // 몸무게 on off
   const [weightShow, setWeightShow] = useState({
-    wShow: bodySpec.weight_blind === true ? "block" : "none",
-    wHide: bodySpec.weight_blind === true ? "none" : "block"
+    wShow: weightBlind === true ? "block" : "none",
+    wHide: weightBlind === true ? "none" : "block"
   });
   const {wShow, wHide} = weightShow;
   const weightOn = () => {
@@ -53,20 +50,20 @@ const DashBoard_BodySpec = (props) => {
       wShow: "none",
       wHide: "block",
     })
-    dispatch(weightBlindDB(false))
+    dispatch(addBodySpecDB("weight_false"))
   };
   const weightOff = () => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
-    dispatch(weightBlindDB(true))
+    dispatch(addBodySpecDB("weight_true"))
   };
 
   // 기초대사량 on off
   const [kcalShow, setKcalShow] = useState({
-    kShow: bodySpec.bmr_blind === true ? "block" : "none",
-    kHide: bodySpec.bmr_blind === true ? "none" : "block"
+    kShow: bmrBlind === true ? "block" : "none",
+    kHide: bmrBlind === true ? "none" : "block"
   });
   const {kShow, kHide} = kcalShow;
   const kcalOn = () => {
@@ -74,14 +71,14 @@ const DashBoard_BodySpec = (props) => {
       kShow: "none",
       kHide: "block",
     })
-    dispatch(bmrBlindDB(false))
+    dispatch(addBodySpecDB("bmr_false"))
   };
   const kcalOff = () => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
-    dispatch(bmrBlindDB(true))
+    dispatch(addBodySpecDB("bmr_true"))
   };
 
   return (
