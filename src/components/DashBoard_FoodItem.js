@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid, Text } from '../elements';
 
-// 데이터
-import {useSelector} from 'react-redux';
+// history
+import { history } from '../redux/configStore';
 
 /** 
  * @역할 : 대시보드 각 끼니에 기록된 칼로리 리스트
@@ -11,18 +11,14 @@ import {useSelector} from 'react-redux';
 */
 
 const DashBoard_FoodItem = (props) => {
-  const {amount, name, resultKcal, type} = props
-
-  // props와 비교할 타입
-  const data_type = useSelector((state) => state.record.type)
+  const {amount, name, resultKcal, type, data_type} = props
 
   return (
     <React.Fragment>
 
       {/* record에서 기록하고 넘어온 경우 state 안에 데이터값과 props값이 다르다.(버튼을 누르지 않았기 때문!) */}
-
       {/* DashBoard_When의 type(끼니)를 클릭 = 기록된 type과 일치한 경우 */}
-      {(type === data_type || data_type?.length === 0) && (
+      {(type === data_type) && (
         <Grid display="flex" margin="2.5% 0 0 0">
 
           {/* 메뉴 */}

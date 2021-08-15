@@ -19,14 +19,16 @@ import { history } from '../redux/configStore';
 */
 
 const DashBoard_When = (props) => {
+  const foodRecords = props[0];
+  const {data_type} = props
+
   const dispatch = useDispatch();
   
   // type chk
   const typeState = useSelector((state) => state.cart.type);
 
   // 리스트에 아무것도 없는 경우 "아침"으로 default
-  const cart_type = (typeState === null || history.location.pathname.includes('calendar')) ? "아침" : typeState;
-  const foodRecords = props[0];
+  const cart_type = data_type?.length !== "" && typeState
 
   // type에 따른 css변경
   const [type, setType] = useState(cart_type);
@@ -109,58 +111,92 @@ const DashBoard_When = (props) => {
 
   return (
     <React.Fragment>
-      <Wrap>
 
-        {/* 아침 */}
-        <When onClick={()=> {selectType('morning')}}>
-          <Text size="17px" bold color={type === "아침" ? 'black' : '#c4c4c4'} m_size="15px">아침</Text>
-          <Dot>
-            <Grid display={type === "아침" ? 'block' : 'none'}>
-              <FaCircle size="7px" color="#F19F13"/>
-            </Grid>
-          </Dot>
-        </When>
+      {/* 기록된 리스트가 있을 경우에만 버튼 클릭 활성화 */}
+      {foodRecords?.length > 0 ? (
+        <Wrap>
 
-        {/* 점심 */}
-        <When onClick={()=> {selectType('lunch')}}>
-          <Text size="17px" bold color={type === "점심" ? 'black' : '#c4c4c4'} m_size="15px">점심</Text>
-          <Dot>
-            <Grid display={type === "점심" ? 'block' : 'none'}>
-              <FaCircle size="7px" color="#F19F13"/>
-            </Grid>
-          </Dot>
-        </When>
+          {/* 아침 */}
+          <When onClick={()=> {selectType('morning')}}>
+            <Text size="17px" bold color={type === "아침" ? 'black' : '#c4c4c4'} m_size="15px">아침</Text>
+            <Dot>
+              <Grid display={type === "아침" ? 'block' : 'none'}>
+                <FaCircle size="7px" color="#F19F13"/>
+              </Grid>
+            </Dot>
+          </When>
 
-        {/* 저녁 */}
-        <When onClick={()=> {selectType('dinner')}} >
-          <Text size="17px" bold color={type === "저녁" ? 'black' : '#c4c4c4'} m_size="15px">저녁</Text>
-          <Dot>
-            <Grid display={type === "저녁" ? 'block' : 'none'}>
-              <FaCircle size="7px" color="#F19F13"/>
-            </Grid>
-          </Dot>
-        </When>
+          {/* 점심 */}
+          <When onClick={()=> {selectType('lunch')}}>
+            <Text size="17px" bold color={type === "점심" ? 'black' : '#c4c4c4'} m_size="15px">점심</Text>
+            <Dot>
+              <Grid display={type === "점심" ? 'block' : 'none'}>
+                <FaCircle size="7px" color="#F19F13"/>
+              </Grid>
+            </Dot>
+          </When>
 
-        {/* 간식 */}
-        <When onClick={()=> {selectType('snack')}} >
-          <Text size="17px" bold color={type === "간식" ? 'black' : '#c4c4c4'} m_size="15px">간식</Text>
-          <Dot>
-            <Grid display={type === "간식" ? 'block' : 'none'}>
-              <FaCircle size="7px" color="#F19F13"/>
-            </Grid>
-          </Dot>
-        </When>
+          {/* 저녁 */}
+          <When onClick={()=> {selectType('dinner')}} >
+            <Text size="17px" bold color={type === "저녁" ? 'black' : '#c4c4c4'} m_size="15px">저녁</Text>
+            <Dot>
+              <Grid display={type === "저녁" ? 'block' : 'none'}>
+                <FaCircle size="7px" color="#F19F13"/>
+              </Grid>
+            </Dot>
+          </When>
 
-        {/* 야식 */}
-        <When onClick={()=> {selectType('midnightSnack')}}>
-          <Text size="17px" bold color={type === "야식" ? 'black' : '#c4c4c4'} m_size="15px">야식</Text>
-          <Dot>
-            <Grid display={type === "야식" ? 'block' : 'none'}>
-              <FaCircle size="7px" color="#F19F13"/>
-            </Grid>
-          </Dot>
-        </When>
-      </Wrap>
+          {/* 간식 */}
+          <When onClick={()=> {selectType('snack')}} >
+            <Text size="17px" bold color={type === "간식" ? 'black' : '#c4c4c4'} m_size="15px">간식</Text>
+            <Dot>
+              <Grid display={type === "간식" ? 'block' : 'none'}>
+                <FaCircle size="7px" color="#F19F13"/>
+              </Grid>
+            </Dot>
+          </When>
+
+          {/* 야식 */}
+          <When onClick={()=> {selectType('midnightSnack')}}>
+            <Text size="17px" bold color={type === "야식" ? 'black' : '#c4c4c4'} m_size="15px">야식</Text>
+            <Dot>
+              <Grid display={type === "야식" ? 'block' : 'none'}>
+                <FaCircle size="7px" color="#F19F13"/>
+              </Grid>
+            </Dot>
+          </When>
+        </Wrap>
+      ) : (
+
+        // 기록이 없을 경우에는 버튼 클릭 비활성화
+        <Wrap>
+
+          {/* 아침 */}
+          <When>
+            <Text size="17px" bold color={'#c4c4c4'} m_size="15px">아침</Text>
+          </When>
+
+          {/* 점심 */}
+          <When>
+            <Text size="17px" bold color={'#c4c4c4'} m_size="15px">점심</Text>
+          </When>
+
+          {/* 저녁 */}
+          <When>
+            <Text size="17px" bold color={'#c4c4c4'} m_size="15px">저녁</Text>
+          </When>
+
+          {/* 간식 */}
+          <When>
+            <Text size="17px" bold color={'#c4c4c4'} m_size="15px">간식</Text>
+          </When>
+
+          {/* 야식 */}
+          <When>
+            <Text size="17px" bold color={'#c4c4c4'} m_size="15px">야식</Text>
+          </When>
+        </Wrap>
+      )}
     </React.Fragment>
   );
 };
