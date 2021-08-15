@@ -28,13 +28,19 @@ import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
   const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
+
   // login check
   useEffect(() => {
 
     history.listen(() => {
-      dispatch(LoginCheck());
+      if (is_login) {
+        dispatch(LoginCheck());
+      }
     })
-    dispatch(LoginCheck());
+    if (is_login) {
+      dispatch(LoginCheck());
+    }
   }, []);
   
   return (
