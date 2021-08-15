@@ -23,8 +23,8 @@ const DashBoard_BodySpec = (props) => {
 
   // 키 on off
   // debounce
-  const height_debounce = _.debounce((k) => 
-    (k === "hShow" ? dispatch(addBodySpecDB("height_false")) : dispatch(addBodySpecDB("height_true"))), 500);
+  const height_debounce = _.debounce((k) =>
+    k === "hHide" ? dispatch(addBodySpecDB("height_true")) : dispatch(addBodySpecDB("height_false")), 300);
   const height_keyPress = useCallback(height_debounce, []);
 
   const [heightShow, setHeightShow] = useState({
@@ -38,6 +38,7 @@ const DashBoard_BodySpec = (props) => {
       hHide: "block",
     })
     height_keyPress(e.target.id);
+    // dispatch(addBodySpecDB("height_false"))
   };
   const heightOff = (e) => {
     setHeightShow({
@@ -45,14 +46,14 @@ const DashBoard_BodySpec = (props) => {
       hHide: "none",
     })
     height_keyPress(e.target.id);
+    // dispatch(addBodySpecDB("height_true"))
   };
 
   // 몸무게 on off
   // debounce
-  const weight_false_debounce = _.debounce((k) => dispatch(addBodySpecDB("weight_false")), 1000);
-  const weight_false_keyPress = useCallback(weight_false_debounce, []);
-  const weight_true_debounce = _.debounce((k) => dispatch(addBodySpecDB("weight_true")), 1000);
-  const weight_true_keyPress = useCallback(weight_true_debounce, []);
+  const weight_debounce = _.debounce((k) =>
+    k === "wHide" ? dispatch(addBodySpecDB("weight_true")) : dispatch(addBodySpecDB("weight_false")), 300);
+  const weight_keyPress = useCallback(weight_debounce, []);
 
   const [weightShow, setWeightShow] = useState({
     wShow: weightBlind === true ? "block" : "none",
@@ -64,22 +65,23 @@ const DashBoard_BodySpec = (props) => {
       wShow: "none",
       wHide: "block",
     })
-    weight_false_keyPress(e.target.value);
+    weight_keyPress(e.target.id);
+    // dispatch(addBodySpecDB("weight_false"))
   };
   const weightOff = (e) => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
-    weight_true_keyPress(e.target.value);
+    weight_keyPress(e.target.id);
+    // dispatch(addBodySpecDB("weight_true"))
   };
 
   // 기초대사량 on off
   // debounce
-  const bmr_false_debounce = _.debounce((k) => dispatch(addBodySpecDB("bmr_false")), 1000);
-  const bmr_false_keyPress = useCallback(bmr_false_debounce, []);
-  const bmr_true_debounce = _.debounce((k) => dispatch(addBodySpecDB("bmr_true")), 1000);
-  const bmr_true_keyPress = useCallback(bmr_true_debounce, []);
+  const bmr_debounce = _.debounce((k) =>
+    k === "kHide" ? dispatch(addBodySpecDB("bmr_true")) : dispatch(addBodySpecDB("bmr_false")), 300);
+  const bmr_keyPress = useCallback(bmr_debounce, []);
 
   const [kcalShow, setKcalShow] = useState({
     kShow: bmrBlind === true ? "block" : "none",
@@ -91,14 +93,16 @@ const DashBoard_BodySpec = (props) => {
       kShow: "none",
       kHide: "block",
     })
-    bmr_false_keyPress(e.target.value);
+    bmr_keyPress(e.target.id);
+    // dispatch(addBodySpecDB("bmr_false"))
   };
   const kcalOff = (e) => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
-    bmr_true_keyPress(e.target.value);
+    bmr_keyPress(e.target.id);
+    // dispatch(addBodySpecDB("bmr_true"))
   };
 
   return (
