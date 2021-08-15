@@ -30,9 +30,6 @@ import noImg from '../img/noImg.png';
 //moment
 import moment from 'moment'
 
-// modal
-import { Confirm } from 'react-st-modal';
-
 /** 
  * @param {list} r
  * @returns {list} r 유저가 기록한 foodRecords의 리스트를 반환
@@ -72,7 +69,6 @@ const CalenderDetail = (props) => {
   // 기록
   const record_list = useSelector((state) => state.record.record[0])
   const record_map = record_list?.foodRecords
-  console.log(record_list);
 
   // 기록한 날짜
   const record_date = record_list?.date
@@ -162,7 +158,7 @@ const CalenderDetail = (props) => {
 
           {/* 기록 시기 */}
           <Grid margin="9.7% 0 0 2%" m_margin="9.7% 0 0 2%">
-            <DashBoard_When />
+            <DashBoard_When data_type={type} {...record_list}/>
           </Grid>
 
         {/* 식단title */}
@@ -177,7 +173,7 @@ const CalenderDetail = (props) => {
           {same_food?.length > 0 ? (
             <React.Fragment>
               {same_food?.map((r, idx) => {
-                return <CalendarDetail_Food key={r._id} {...r}/>
+                return <CalendarDetail_Food data_type={type} key={r._id} {...r}/>
               })}
             </React.Fragment>
           ) : (

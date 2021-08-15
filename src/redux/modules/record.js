@@ -49,7 +49,7 @@ export const delRecordDB = (id, date, type) => {
 
         // 기존 삭제
         dispatch(delRecord(type));
-        history.push('/loading/calendar');
+        history.push(`/loading/calendar/${date}`);
       })
       .catch((err) => {
         window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')

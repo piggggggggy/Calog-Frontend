@@ -11,7 +11,7 @@ import Calendar_Emoji from './Calendar_Emoji';
 
 // 데이터
 import {useDispatch} from 'react-redux'
-import {getAllRecordDB} from '../redux/modules/record';
+import {getAllRecordDB, typeChk} from '../redux/modules/record';
 
 // history
 import {history} from '../redux/configStore';
@@ -71,6 +71,7 @@ const Calendar_Calendar = (props) => {
               let date_format = days.format('YYYY-MM-DD');
               const detailBtn = () => {
                 history.push(`/loading/calendar/${date_format}`)
+                dispatch(typeChk("아침"))
               };
 
               // case1) 오늘 날짜일 경우
