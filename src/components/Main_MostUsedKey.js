@@ -26,9 +26,9 @@ const MostUsedKey = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 
   // 인기검색어 불러오기
-  useEffect(() => {
-    dispatch(getMostUsedKeyDB());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getMostUsedKeyDB());
+  // }, []);
 
   // 인기검색어 누르면 검색되게!
   const search = (keyword) => {

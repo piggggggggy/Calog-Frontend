@@ -46,20 +46,12 @@ const MainBody = (props) => {
   // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
   const favo_list = useSelector((state) => state.favorite.list);
-  console.log(favo_list)
   
   // 로그인체크 
   const is_login = useSelector((state) => state.user.is_login);
   
   // 검색 키워드
   const keyword = useRef();
-
-  // 스피너
-  const is_loaded = useSelector((state) => state.record.is_loaded);
-  
-  // const user = useSelector((state) => state.user);
-  // console.log("체크:", is_login);
-  // console.log("user:", user)
 
   // 검색함수
   const search = () => {
@@ -130,20 +122,20 @@ const MainBody = (props) => {
 
 
   // range 요청
-  const debounceRange = _.debounce((e) => {
-    dispatch(rangeFilter(e));
-  }, 500);
-  const debounceRangeCB = useCallback((e) => {
-    debounceRange(e);
-  }, []);
+  // const debounceRange = _.debounce((e) => {
+  //   dispatch(rangeFilter(e));
+  // }, 500);
+  // const debounceRangeCB = useCallback((e) => {
+  //   debounceRange(e);
+  // }, []);
 
-  useEffect(() => {
-    const data = {
-      min: filterMin,
-      max: filterMax
-    };
-    debounceRangeCB(data);
-  }, [filterMin, filterMax]);
+  // useEffect(() => {
+  //   const data = {
+  //     min: filterMin,
+  //     max: filterMax
+  //   };
+  //   debounceRangeCB(data);
+  // }, [filterMin, filterMax]);
 
   return (
     <React.Fragment>
