@@ -34,14 +34,30 @@ import { TiDeleteOutline } from 'react-icons/ti';
 const MainBody = (props) => {
 
   const dispatch = useDispatch();
+
+  // 검색히스토리 on off
   const [_history, setHistory] = useState(true);
+
+  // 칼로리 range
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
+  console.log(filterMin,filterMax)
+  
+
+  // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
   const favo_list = useSelector((state) => state.favorite.list);
+  
+  // 로그인체크 
   const is_login = useSelector((state) => state.user.is_login);
+  
+  // 검색 키워드
   const keyword = useRef();
-  const user = useSelector((state) => state.user);
+
+  // 스피너
+  const is_loaded = useSelector((state) => state.record.is_loaded);
+  
+  // const user = useSelector((state) => state.user);
   // console.log("체크:", is_login);
   // console.log("user:", user)
 
@@ -58,9 +74,9 @@ const MainBody = (props) => {
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
     setHistory(true);
-    // history.push(`/search/loading/${keyword.current.value}`);
   };
-  // 최근 검색어 검색
+
+  // 최근 검색어 검색 (클릭)
   const recentSearch = (keyword) => {
     const data = {
       keyword: keyword,
@@ -73,8 +89,8 @@ const MainBody = (props) => {
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
     setHistory(true);
-    // history.push(`/search/loading/${keyword}`);
   };
+
   // 최근 검색어 삭제
   const recentDelete = (keyword) => {
     {is_login ? dispatch(deleteRecentDB(keyword)) 
@@ -88,6 +104,7 @@ const MainBody = (props) => {
       keyword.current.vlaue = '';
     }
   };
+  
   // 검색어 삭제
   const deleteKeyword = () => {
     keyword.current.value = '';
@@ -100,7 +117,11 @@ const MainBody = (props) => {
   const debounce = _.debounce((n, x) => {
     setMin(n);
     setMax(x);
-  }, 500);
+  }, 1000);
+  // const debounceCB = useCallback((n, x) => {
+  //   debounce(n, x);
+  // }, [filterMin, filterMax])
+
 
   // range 요청
   const debounceRange = _.debounce((e) => {
@@ -118,17 +139,20 @@ const MainBody = (props) => {
     debounceRangeCB(data);
   }, [filterMin, filterMax]);
 
-  useEffect(() => {
-    history.listen(() => {
-      if(is_login) {
-        dispatch(getFavoriteDB());
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   history.listen(() => {
+  //     if(is_login) {
+  //       dispatch(getFavoriteDB());
+  //     }
+  //   })
+  //   if(is_login) {
+  //     dispatch(getFavoriteDB());
+  //   }
+  // }, [])
 
-  // if (is_loaded) {
-  //   return <Loading/>
-  // }
+  if (is_loaded) {
+    return <Loading/>
+  }
 
   return (
     <React.Fragment>
@@ -200,6 +224,7 @@ const MainBody = (props) => {
             max={5000}
             onChange={({ min, max }) => {
               debounce(min, max);
+              // debounceCB(min, max);
             }}
           />
         </Grid>

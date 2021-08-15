@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+
+// theme
 import theme from '../shared/theme';
+
 // history
 import { history } from '../redux/configStore';
+
 // modules
 import { addCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
-// elements & components
-import { Grid, Text } from '../elements';
+
 // icons
 import { IoStar } from 'react-icons/io5';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
@@ -16,16 +19,23 @@ import { BsFillPlusSquareFill } from 'react-icons/bs';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
+ * @returns 카드
+ * @역할 검색결과 카드 / 즐겨찾기 카드
  * @담당자 : 박용태
 */
 
 const Card = (props) => {
   
+  // dispatch
   const dispatch = useDispatch();
+  
+  // 장바구니 체크용
   const cart_list = useSelector((state) => state.cart.cart);
+
+  // 즐겨찾기 체크용 
   const favorite_list = useSelector((state) => state.favorite.list);
+  
+  // 로그인 체크
   const is_login = useSelector((state) => state.user.is_login);
 
   // 장바구니 담기!

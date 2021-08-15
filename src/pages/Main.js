@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+
 // modules
 import { getRecentDB } from '../redux/modules/recent';
+import { getFavoriteDB } from '../redux/modules/favorite';
+
 // elements & components
 import MainBody from '../components/Main_MainBody';
 import LogoHeader from '../shared/LogoHeader';
+
 // helmet
 import {Helmet} from 'react-helmet';
 
@@ -18,14 +22,14 @@ import {Helmet} from 'react-helmet';
 */
 
 const Main = (props) => {
-// dispatch
+
   const dispatch = useDispatch();
-// props
   const is_login = useSelector((state) => state.user.is_login);
-// useEffect
+
   useEffect(() => {
     if (is_login) {
       dispatch(getRecentDB());
+      dispatch(getFavoriteDB());
     }
   }, [is_login]);
 

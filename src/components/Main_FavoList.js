@@ -20,7 +20,7 @@ import { getFavoriteDB } from '../redux/modules/favorite';
 
 const FavoList = (props) => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const favo_list = useSelector((state) => state.favorite.list);
   const favo_list = props.favo_list;
   // const is_login = useSelector((state) => state.user.is_login);

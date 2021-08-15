@@ -16,8 +16,13 @@ import { searchRecentDB, addRecent } from '../redux/modules/recent';
 
 const MostUsedKey = (props) => {
 
+  // dispatch
   const dispatch = useDispatch();
+  
+  // 인기검색어 목록
   const most_list = useSelector((state) => state.search.most);
+
+  // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
 
   // 인기검색어 불러오기
@@ -40,14 +45,6 @@ const MostUsedKey = (props) => {
       dispatch(searchRecentDB(keyword))
       : dispatch(addRecent(keyword))};
   };
-
-  // loading
-  // const is_loaded = useSelector((state) => state.record.is_loaded)
-
-  // if(!is_loaded) {
-  //   return (<Loading />);
-  // }
-
 
   return (
     <React.Fragment>
