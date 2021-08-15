@@ -63,7 +63,7 @@ const WebSearch = (props) => {
   const [key, setKey] = useState();
   const _setKey = _.debounce((e) => {
     setKey(e.target.value);
-  }, 800)
+  }, 500)
   
   const deleteKeyword = () => {
     keyword.current.value = '';

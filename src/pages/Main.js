@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // modules
 import { getRecentDB } from '../redux/modules/recent';
 import { getFavoriteDB } from '../redux/modules/favorite';
+import { getRecommendedDB } from '../redux/modules/search';
 
 // elements & components
 import MainBody from '../components/Main_MainBody';
@@ -31,7 +32,8 @@ const Main = (props) => {
       dispatch(getRecentDB());
       dispatch(getFavoriteDB());
     }
-  }, [is_login]);
+    dispatch(getRecommendedDB())
+  }, []);
 
   return (
     <React.Fragment>

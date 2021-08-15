@@ -34,13 +34,9 @@ const App = (props) => {
   useEffect(() => {
 
     history.listen(() => {
-      if (is_login) {
         dispatch(LoginCheck());
-      }
     })
-    if (is_login) {
-      dispatch(LoginCheck());
-    }
+    dispatch(LoginCheck());
   }, []);
   
   return (

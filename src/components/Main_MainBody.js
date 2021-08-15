@@ -46,6 +46,7 @@ const MainBody = (props) => {
   // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
   const favo_list = useSelector((state) => state.favorite.list);
+  console.log(favo_list)
   
   // 로그인체크 
   const is_login = useSelector((state) => state.user.is_login);
@@ -108,7 +109,7 @@ const MainBody = (props) => {
   const [key, setKey] = useState();
   const _setKey = _.debounce((e) => {
     setKey(e.target.value);
-  }, 800)
+  }, 500)
   
   const deleteKeyword = () => {
     keyword.current.value = '';
@@ -181,7 +182,7 @@ const MainBody = (props) => {
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
               <Line/>
-              {recent_list && recent_list[0] !== null ? recent_list.map((rec, idx) => {
+              {recent_list.length !== 0 ? recent_list.map((rec, idx) => {
                 if (idx < 5) {
                   return (
                     <>

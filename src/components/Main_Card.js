@@ -117,9 +117,9 @@ const Card = (props) => {
         </BookmarkBox>
 
         {/* 이름 */}
-        <div >
+        <NameContainer >
           <Name>{props.name}</Name>
-        </div>
+        </NameContainer>
 
         {/* 칼로리 */}
         <div style={{display: "flex", alignItems: "center", justifyContent: 'flex-end'}}>
@@ -183,6 +183,13 @@ const KcalBox = styled.div`
   }
 `;
 
+const NameContainer = styled.div`
+  height: 36px;
+  
+  @media ${theme.device.mobileM} {
+    height: 30px;
+  }
+`;
 
 const Name = styled.div`
   font-size: 15px;
