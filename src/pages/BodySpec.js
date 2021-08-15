@@ -26,8 +26,11 @@ const BodySpec = (props) =>
   const dispatch = useDispatch();
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
-  const confirmSpec = useSelector(state=>state.user);
-  console.log(confirmSpec.user_info)
+  const {gender, age, height, weight} = user_info;
+  console.log(gender&&age&&height&&weight?"":1);
+  // if(gender&&age&&height&&weight===){
+  //   console.log("df");
+  // }
   // 바디스펙 blind 정보
   const bodySpec = useSelector(state=>state.dashboard.specBlind);
 
@@ -183,7 +186,7 @@ return (
             lineheight="22px"
             size="16px"
             bold>
-              신체정보 등록하기
+              {gender&&age&&height&&weight?"신체정보 수정하기":"신체정보 등록하기"}
             </Text>
           </Button>
         </BodyBox>
