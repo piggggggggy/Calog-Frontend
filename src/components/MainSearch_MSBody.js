@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import _ from 'lodash';
+
+// theme
 import theme from '../shared/theme';
+
+// lodash
+import _ from 'lodash';
 
 // modules
 import { 
@@ -64,12 +68,13 @@ const MSBody = (props) => {
   // 검색키워드
   const keyword = useRef(); 
 
+
   // 검색함수
   const search = () => {
     const data = {
       keyword: keyword.current.value,
       min: filterMin,
-      max: filterMax
+      max: filterMax  
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
@@ -109,8 +114,14 @@ const MSBody = (props) => {
   };
 
   // 검색어 삭제
+  const [key, setKey] = useState();
+  const _setKey = _.debounce((e) => {
+    setKey(e.target.value);
+  }, 800)
+  
   const deleteKeyword = () => {
     keyword.current.value = '';
+    setKey('');
   };
 
   // 정렬 선택
@@ -177,8 +188,9 @@ const MSBody = (props) => {
             // onBlur={()=>{setHistory(true)}} 
             placeholder="어떤 칼로리가 궁금하신가요?"
             onKeyPress={onKeyPress}
+            onChange={_setKey}
             />
-            {keyword ? 
+            {key ? 
             <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
               <MdCancel size="16px" color="#C4C4C4"/>
             </div>
