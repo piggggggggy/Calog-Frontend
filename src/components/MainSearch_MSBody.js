@@ -45,15 +45,29 @@ import { MdCancel } from 'react-icons/md';
 
 const MSBody = (props) => {
 
+  // dispatch
   const dispatch = useDispatch();
 
+  // 검색결과
   const search_list = useSelector((state) => state.search.filtered_list);
+  
+  // 검색 히스토리 on off
   const [_history, setHistory] = useState(true);
+  
+  // 칼로리 range 필터
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(5000);
+  
+  // 정렬
   const [sortType, setSort] = useState('정확도순');
+  
+  // 최근검색어
   const recent_list = useSelector((state) => state.recent.recent);
+  
+  // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
+  
+  // 검색키워드
   const keyword = useRef();
 
   

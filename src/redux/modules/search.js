@@ -65,13 +65,11 @@ export const countKeywordDB = (keyword) => {
   // 인기검색어 조회
 export const getMostUsedKeyDB = () => {
   return function (dispatch, getState, {history}) {
-    // dispatch(isLoaded(false))
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
         // console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
-        // dispatch(isLoaded(true))
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -82,12 +80,12 @@ export const getMostUsedKeyDB = () => {
   // 추천 검색어 가져오기
 export const getRecommendedDB = () => {
   return function (dispatch, getState, {history}) {
-    dispatch(isLoaded(false))
+    dispatch(isLoaded(true));
     instance
       .get('/api/home/recommend')
       .then((res) => {
         dispatch(getRecommended(res.data.randomList));
-        dispatch(isLoaded(true))
+        dispatch(isLoaded(false));
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
