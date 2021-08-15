@@ -59,7 +59,7 @@ Grid.defaultProps = {
   border:false,
   text_align: false,
   is_flex: false,
-  cursor: null,
+  cursor: false,
   display: null,
   jc: false,
   ai: "center",
