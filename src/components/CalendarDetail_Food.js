@@ -5,16 +5,17 @@ import theme from '../shared/theme';
 
 /** 
  * @역할 : 캘린더 각 끼니에 기록된 칼로리 리스트
- * @필수값 : amount, name, resultKcal, type
+ * @필수값 : amount, name, resultKcal, data_type
  * @담당자 : 김나영
 */
 
 const CalendarDetail_Food = (props) => {
-  const {amount, name, resultKcal} = props
+  const {amount, name, resultKcal, data_type, type} = props
 
   return (
     <React.Fragment>
-      <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0">
+      {data_type === type && (
+        <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0">
 
           {/* 메뉴 */}
           <Grid width="63%">
@@ -31,6 +32,7 @@ const CalendarDetail_Food = (props) => {
             <Text size="15px" m_size="13px">X {amount}</Text>
           </Width>
         </Grid>
+      )}
     </React.Fragment>
   );
 }
