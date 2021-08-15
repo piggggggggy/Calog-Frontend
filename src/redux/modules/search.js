@@ -21,12 +21,13 @@ export const searchKeywordDB = (data) => {
         dispatch(searchKeyword(new_data));
         
         history.push(`/loading/search/${data.keyword}`);
-        dispatch(isLoaded(true))
+    dispatch(isLoaded(true))
         
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
       }) 
+
   }
 };
 

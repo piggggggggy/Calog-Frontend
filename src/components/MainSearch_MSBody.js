@@ -159,12 +159,9 @@ const MSBody = (props) => {
   }, [])
 
   // range 요청
-  const debounceRange = _.debounce((e) => {
-    dispatch(rangeFilter(e));
-  }, 500);
   const debounceRangeCB = useCallback((e) => {
-    debounceRange(e);
-  }, []);
+    dispatch(rangeFilter(e));
+  }, [])
 
   useEffect(() => {
     const data = {

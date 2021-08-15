@@ -43,9 +43,9 @@ const CardList = (props) => {
 
 
   // 스피너
-  if (!is_loaded || search_list.length === 0) {
-    return <Loading/>;
-  };
+  // if (!is_loaded) {
+  //   return <Loading/>;
+  // };
 
   return (
     <React.Fragment>
