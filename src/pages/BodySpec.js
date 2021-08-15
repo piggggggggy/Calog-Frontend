@@ -26,9 +26,10 @@ const BodySpec = (props) =>
   const dispatch = useDispatch();
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
-
+  const confirmSpec = useSelector(state=>state.user);
+  console.log(confirmSpec.user_info)
   // 바디스펙 blind 정보
-  const bodySpec = useSelector(state=>state.dashboard.specBlind)
+  const bodySpec = useSelector(state=>state.dashboard.specBlind);
 
   const logout = () => {
     dispatch(_logOut(bodySpec));

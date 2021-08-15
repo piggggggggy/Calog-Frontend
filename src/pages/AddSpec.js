@@ -32,6 +32,7 @@ const AddSpec = () =>
     const addspec = () => 
     {
         dispatch(BodySpectSV(gender, weight, height, age));
+        window.alert("신체 정보가 저장되었습니다!");
         history.push("/body");
     };
 

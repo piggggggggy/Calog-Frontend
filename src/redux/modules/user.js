@@ -11,7 +11,13 @@ import { delRecordAll } from "./record";
 
 
 const initialState = {
-  user_info: {email: "email", nickname: "nickname", },
+  user_info: {
+    email: "",
+    nickname: "",
+    gender: "",
+    height: "",
+    age: 0,
+},
   is_login: false,
   email_dupli: false,
   nick_dupli: false,
