@@ -81,10 +81,12 @@ export const getMostUsedKeyDB = () => {
   // 추천 검색어 가져오기
 export const getRecommendedDB = () => {
   return function (dispatch, getState, {history}) {
+    dispatch(isLoaded(false));
     instance
       .get('/api/home/recommend')
       .then((res) => {
         dispatch(getRecommended(res.data.randomList));
+        dispatch(isLoaded(true));
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
