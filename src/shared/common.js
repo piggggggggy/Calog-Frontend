@@ -43,3 +43,9 @@ export const IdCheck = (id) => {
           return true;
       }
   }
+
+  export const Number = (number) => {
+    let _reg = /^[0-9]+$/;
+    
+    return _reg.test(number);
+  }

@@ -7,6 +7,8 @@ import { BodySpectSV } from '../redux/modules/user';
 import styled from 'styled-components';
 import {Button, Text, Grid, Input} from '../elements';
 
+import { Number } from '../shared/common';
+
 /**
  * @param {*} props
  * @returns 바디 스펙 페이지
@@ -24,14 +26,33 @@ const AddSpec = () =>
     const {gender, weight, height, age} = bodyspec;
     const [page, Setpage] = useState(0);
 
-    const nextPage = () => 
+    const nextPage1 = () => 
     {
+        if(!Number(parseInt(age))){
+            SetSpec({...bodyspec, age: ""});
+            window.alert("나이에 숫자를 입력해주세요!");
+            return;
+        }
         Setpage(page+1);
     };
-
+    const nextPage2 = () => 
+    {
+        if(!Number(parseInt(height))){
+            SetSpec({...bodyspec, height: ""});
+            window.alert("키에 숫자를 입력해주세요!");
+            return;
+        }
+        Setpage(page+1);
+    };
     const addspec = () => 
     {
+        if(!Number(parseInt(weight))){
+            SetSpec({...bodyspec, weight: ""});
+            window.alert("몸무게에 숫자를 입력해주세요!");
+            return;
+        }
         dispatch(BodySpectSV(gender, weight, height, age));
+        window.alert("신체 정보가 저장되었습니다!");
         history.push("/body");
     };
 
@@ -155,8 +176,10 @@ const AddSpec = () =>
                     border_radius="60px"
                     _onClick=
                     {
-                        page<3?
-                        nextPage:
+                        page===1?
+                        nextPage1:
+                        page===2?
+                        nextPage2:
                         addspec
                     }>
                         <Grid cursor>

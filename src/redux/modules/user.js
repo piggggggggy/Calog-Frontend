@@ -11,7 +11,13 @@ import { delRecordAll } from "./record";
 
 
 const initialState = {
-  user_info: {email: "email", nickname: "nickname", },
+  user_info: {
+    email: "",
+    nickname: "",
+    gender: "",
+    height: "",
+    age: 0,
+},
   is_login: false,
   email_dupli: false,
   nick_dupli: false,
@@ -128,6 +134,8 @@ export const BodySpectSV = (gender, weight, height, age) => {
         .post('/api/user/bodySpec', {gender, weight, height, age})
         .then((res) => {
             console.log(res);
+            const user_info = {gender, weight, height, age};
+            dispatch(BodySpect(user_info));
         })
         .catch((err) => {
             console.log(err);
@@ -135,19 +143,6 @@ export const BodySpectSV = (gender, weight, height, age) => {
     }
 };
 
-// export const BodySpectModify = (gender, weight, height, age) => {
-//     return function(dispatch, getState, {history}){
-//         console.log(gender, weight, height, age)
-//         instance
-//         .put('/api/user/bodySpec/edit', {gender, weight, height, age})
-//         .then((res) => {
-//             console.log(res);
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-//     }
-// };
 
 //리덕스
 const user = createSlice({
@@ -169,9 +164,13 @@ const user = createSlice({
     NickDupli: (state, action) => {
         state.nick_dupli = action.payload;
     },
-    // BodySpect: (state, action) => {
-    //     state.user_info = action.payload;
-    // };
+    BodySpect: (state, action) => {
+        // state.user_info = action.payload;
+        state.user_info.gender = action.payload.gender;
+        state.user_info.age = action.payload.age;
+        state.user_info.height = action.payload.height;
+        state.user_info.weight = action.payload.weight;
+    },
 
     
     // 최근삭제목록 리듀서
@@ -197,5 +196,5 @@ const user = createSlice({
   },
 });
 
-export const {SetUser, LogOut, EmailDupli, NickDupli, recordDeleted, clearDeleted, removeDeleted} = user.actions;
+export const {SetUser, LogOut, EmailDupli, NickDupli, BodySpect, recordDeleted, clearDeleted, removeDeleted} = user.actions;
 export default user;
