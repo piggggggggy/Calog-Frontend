@@ -27,11 +27,8 @@ const BodySpec = (props) =>
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
 
-  // 바디스펙 blind 정보
-  const bodySpec = useSelector(state=>state.dashboard.specBlind)
-
   const logout = () => {
-    dispatch(_logOut(bodySpec));
+    dispatch(_logOut());
   }
 
   if(!is_login){
