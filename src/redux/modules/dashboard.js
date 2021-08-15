@@ -30,12 +30,13 @@ export const getWorkoutDB = () => {
 
 // dashboard - 바디스펙 저장하기
 export const addBodySpecDB = (bodySpec) => {
-  const W = bodySpec.weight_blind
-  const H = bodySpec.height_blind
-  const B = bodySpec.bmr_blind
+  let heightBlindDB = bodySpec.includes('height') ? (bodySpec === "height_true" ? true : false) : undefined
+  let weightBlindDB = bodySpec.includes('weight') ? (bodySpec === "weight_true" ? true : false) : undefined
+  let bmrBlindDB = bodySpec.includes('bmr') ? (bodySpec === "bmr_true" ? true : false) : undefined
+
   return function (dispatch, getState, {history}) {
     instance
-      .put('/api/calendar/blind', {weightBlind:W, heightBlind: H, bmrBlind:B})
+      .put('/api/calendar/blind', {weightBlind: weightBlindDB, heightBlind: heightBlindDB , bmrBlind: bmrBlindDB})
       .then((res) => {
       })
       .catch((err) => {
@@ -85,21 +86,6 @@ const dashboard = createSlice({
     // bmr chk
     bmrChk : (state, action) => {
       state.bmr = action.payload
-    },
-
-    // show/hide height
-    heightBlindDB : (state, action) => {
-      action.payload === true ? (state.specBlind.height_blind = true) : (state.specBlind.height_blind = false);
-    },
-
-    // show/hide weight
-    weightBlindDB : (state, action) => {
-      action.payload === true ? (state.specBlind.weight_blind = true) : (state.specBlind.weight_blind = false);
-    },
-
-    // show/hide bmr
-    bmrBlindDB : (state, action) => {
-      action.payload === true ? (state.specBlind.bmr_blind = true) : (state.specBlind.bmr_blind = false);
     },
 
     // getBodySpec
