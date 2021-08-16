@@ -42,8 +42,6 @@ const Main = (props) => {
       {/* 헬멧 */}
       <Helmet>
         <title>[Calog] 칼로리 검색</title>
-        <meta property="og:title" content="[Calog] 칼로리 검색" />
-        <meta property="og:description" content="내가 먹는 모든 음식의 칼로리가 궁금하다면?" />
         <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
       </Helmet>
 

@@ -76,9 +76,6 @@ const DashBoard = (props) => {
         {/* 헬멧 */}
         <Helmet>
           <title>[Calog] 오늘의 칼로리</title>
-          <meta property="og:title" content="[Calog] 오늘의 칼로리" />
-          <meta property="og:description" content="오늘 먹은 음식의 칼로리가 궁금하다면?" />
-          <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
         </Helmet>
 
         {/* 상단 bmr 관련 타이틀 */}
