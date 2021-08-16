@@ -44,7 +44,7 @@ export const IdCheck = (id) => {
       }
   }
 
-  export const Number = (number) => {
+  export const _Number = (number) => {
     let _reg = /^[0-9]+$/;
     
     return _reg.test(number);

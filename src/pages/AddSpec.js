@@ -7,7 +7,7 @@ import { BodySpectSV } from '../redux/modules/user';
 import styled from 'styled-components';
 import {Button, Text, Grid, Input} from '../elements';
 
-import { Number } from '../shared/common';
+import { _Number } from '../shared/common';
 
 /**
  * @param {*} props
@@ -28,7 +28,7 @@ const AddSpec = () =>
 
     const nextPage1 = () => 
     {
-        if(!Number(parseInt(age))){
+        if(!_Number(Number(age))){
             SetSpec({...bodyspec, age: ""});
             window.alert("나이에 숫자를 입력해주세요!");
             return;
@@ -37,7 +37,7 @@ const AddSpec = () =>
     };
     const nextPage2 = () => 
     {
-        if(!Number(parseInt(height))){
+        if(!_Number(Number(height))){
             SetSpec({...bodyspec, height: ""});
             window.alert("키에 숫자를 입력해주세요!");
             return;
@@ -46,7 +46,7 @@ const AddSpec = () =>
     };
     const addspec = () => 
     {
-        if(!Number(parseInt(weight))){
+        if(!_Number(Number(weight))){
             SetSpec({...bodyspec, weight: ""});
             window.alert("몸무게에 숫자를 입력해주세요!");
             return;
