@@ -53,7 +53,7 @@ const SignSocial = () => {
             </Button>
           </InputBox>
 
-          <Grid margin="41px 0px 24px 0px" width="23px">
+          <Grid margin="41px 0px 24px 0px" width="30px">
             <Text m_size="10px" size="13px" lineheight="18px" color="#C5C5C5">또는</Text>
           </Grid>
         </InputContainer>
