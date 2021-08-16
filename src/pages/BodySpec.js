@@ -26,7 +26,11 @@ const BodySpec = (props) =>
   const dispatch = useDispatch();
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
-  const {gender, age, height, weight} = user_info;
+  
+  const gender = user_info?.gender;
+  const age = user_info?.age;
+  const height = user_info?.height;
+  const weight = user_info?.weight;
 
   const logout = () => {
     dispatch(_logOut());
