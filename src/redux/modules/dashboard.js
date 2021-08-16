@@ -52,13 +52,6 @@ const initialState = {
 
   // bmr
   bmr: 0,
-
-  // bodySpec
-  specBlind: {
-    height_blind : false,
-    weight_blind : false,
-    bmr_blind : false,
-  },
 }
 
 const dashboard = createSlice({
@@ -87,16 +80,9 @@ const dashboard = createSlice({
     bmrChk : (state, action) => {
       state.bmr = action.payload
     },
-
-    // getBodySpec
-    getSpecBlind : (state, action) => {
-      state.specBlind.height_blind = action.payload.heightBlind
-      state.specBlind.weight_blind = action.payload.weightBlind
-      state.specBlind.bmr_blind = action.payload.bmrBlind
-    }
   }
 });
 
-export const {getExercise, bmrChk, heightBlindDB, weightBlindDB, bmrBlindDB, getSpecBlind, delDashboardAll} = dashboard.actions;
+export const {getExercise, bmrChk, delDashboardAll} = dashboard.actions;
 
 export default dashboard;

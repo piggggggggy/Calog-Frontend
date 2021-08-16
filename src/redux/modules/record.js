@@ -5,7 +5,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // 추가 액션
 import {delCartAll} from './cart';
-import {getSpecBlind} from './dashboard';
 
 // 전역 > 서버 배포
 import instance from "./instance";
@@ -65,9 +64,7 @@ export const getTodayRecordDB = () => {
       .get('/api/calendar/dash')
       .then((res) => {
           const food_list = res.data.record
-          const bodySpec_blind = res.data.blind
           dispatch(getRecord(food_list))
-          dispatch(getSpecBlind(bodySpec_blind))
           dispatch(isLoaded(true))
       })
       .catch((err) => {
