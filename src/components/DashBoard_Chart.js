@@ -150,7 +150,7 @@ const DashBoard_Chart = (props) => {
     <React.Fragment>
 
       {/* 전체 틀 */}
-      <Grid margin="9.6% auto 0 auto" border_radius="20px" width="48%" height="200px" m_margin="0 auto">
+      <Grid margin="9.6% auto 0 auto" border_radius="20px" width="48%" height="200px" m_margin="5% auto 0 auto">
 
       <Title>
           <Text size="13px" bold m_size="11px" margin="0">나의 칼로리</Text>

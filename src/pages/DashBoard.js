@@ -82,7 +82,7 @@ const DashBoard = (props) => {
         <DashBoard_Title is_login={is_login} bmr={bmr} record={record} user_info={user}/>
 
         {/* 바디스펙 */}
-        <DashBoard_BodySpec {...user} bmr={bmr}/>
+        <DashBoard_BodySpec {...user} bmr={bmr} is_login={is_login}/>
 
         {/* 칼로리 분석 */}
         <DashBoard_Chart {...[record]} bmr={bmr}/>
