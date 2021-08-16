@@ -17,7 +17,7 @@ import {
   koreanSort, 
   rangeFilter, 
 } from '../redux/modules/search';
-import { searchRecentDB, getRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 import { isLoaded } from '../redux/modules/record';
 
 // elements & components

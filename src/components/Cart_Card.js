@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+
 // elements & components
 import { Grid, Text } from '../elements';
+
 // icons
 import { IoIosArrowDropleft,IoIosArrowDropright } from 'react-icons/io';
+
 // modules
 import { setUpAmount, setDownAmount } from '../redux/modules/cart';
+
 // theme
 import theme from '../shared/theme'
 

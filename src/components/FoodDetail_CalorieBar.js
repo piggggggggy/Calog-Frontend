@@ -14,7 +14,7 @@ import { Grid, Text } from '../elements';
 
 const CalorieBar = (props) => {
 
-  // props
+  // props 음식칼로리, 내 전체칼로리 기록, 기초대사량
   const kcal = props.kcal;
   const totalKcal = props.totalKcal;
   const bmr = props.bmr;
@@ -31,8 +31,6 @@ const CalorieBar = (props) => {
       width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     }
   `;
-
-
 
   // 함수 내 변수를 사용하기 위해 함수안에서 styled-components 선언
   const FoodData = styled.div`
@@ -83,11 +81,15 @@ const CalorieBar = (props) => {
         {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> 
         : <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text>}
         
-        {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text> : ''}
+        {is_login ? 
+        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text> 
+        : ''}
         
       </Grid>
       <BackgroundBar>
-        {is_login ? <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} /> : ''}
+        {is_login ? 
+        <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} /> 
+        : ''}
         <FoodData>
           <div>
             <Text size="15px" m_size="15px" bold>{kcal} kcal</Text>

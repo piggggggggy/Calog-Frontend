@@ -22,18 +22,17 @@ import { history } from '../redux/configStore';
 const CartBody = (props) => {
 
   const dispatch = useDispatch();
-  const cart_list = useSelector((state) => state.cart.cart);
-  const is_login = useSelector((state) => state.user.is_login);
-  const [type, setType] = useState("아침");
-  const user = useSelector((state) => state.user);
-  // console.log(user);
 
+  // 카드 담긴 내용
+  const cart_list = useSelector((state) => state.cart.cart);
+  
+  const is_login = useSelector((state) => state.user.is_login);
+  
+  const user = useSelector((state) => state.user);
   
   // 최근삭제목록의 유무확인을 위한...
   const _recentDeleted_list = useSelector((state) => state.user.user_info.deleteList);
   const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
-
-  // console.log(recentDeleted_list)
 
   
 // 대사량과 나의 칼로리 기록
@@ -52,6 +51,8 @@ const CartBody = (props) => {
   };
 
   // 아침/점심/저녁/간식/야식 선택
+  const [type, setType] = useState("아침");
+
   const selectType = (type) => {
     if(type === "morning") {
       setType("아침")
@@ -99,7 +100,9 @@ const CartBody = (props) => {
           <Grid>
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{Math.round(sumKcal() * 10)/10} kcal</Text>
             <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="1.7vh 0 0 0" paddig="0">
-              {totalKcal() + sumKcal() >= bmr ? `오늘의 기준치를 ${Math.round((totalKcal() + sumKcal()- bmr)*10)/10} kcal 초과해요!` : `먹어도 아직 ${Math.round((bmr - (totalKcal() + sumKcal()))*10)/10} kcal 이나 더 먹을 수 있어요!`}
+              {totalKcal() + sumKcal() >= bmr ? 
+              `오늘의 기준치를 ${Math.round((totalKcal() + sumKcal()- bmr)*10)/10} kcal 초과해요!` 
+              : `먹어도 아직 ${Math.round((bmr - (totalKcal() + sumKcal()))*10)/10} kcal 이나 더 먹을 수 있어요!`}
             </Text>
           </Grid>
 

@@ -123,23 +123,6 @@ const MainBody = (props) => {
     debounce(n, x);
   }, [])
 
-
-  // range 요청
-  // const debounceRange = _.debounce((e) => {
-  //   dispatch(rangeFilter(e));
-  // }, 500);
-  // const debounceRangeCB = useCallback((e) => {
-  //   debounceRange(e);
-  // }, []);
-
-  // useEffect(() => {
-  //   const data = {
-  //     min: filterMin,
-  //     max: filterMax
-  //   };
-  //   debounceRangeCB(data);
-  // }, [filterMin, filterMax]);
-
   if (!is_loaded) {
     return <Loading/>
   }
