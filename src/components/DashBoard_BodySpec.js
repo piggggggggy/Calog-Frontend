@@ -19,12 +19,12 @@ import _ from "lodash";
 const DashBoard_BodySpec = (props) => {
   const dispatch = useDispatch();
 
-  const {height, weight, bmr, heightBlind, weightBlind, bmrBlind} = props;
+  const {height, weight, bmr, heightBlind, weightBlind, bmrBlind, is_login} = props;
 
   // 키 on off
   // debounce
   const height_debounce = _.debounce((k) =>
-    k === "hHide" ? dispatch(addBodySpecDB("height_true")) : dispatch(addBodySpecDB("height_false")), 300);
+    is_login && (k === "hHide" ? dispatch(addBodySpecDB("height_true")) : dispatch(addBodySpecDB("height_false")), 300));
   const height_keyPress = useCallback(height_debounce, []);
 
   const [heightShow, setHeightShow] = useState({
@@ -52,7 +52,7 @@ const DashBoard_BodySpec = (props) => {
   // 몸무게 on off
   // debounce
   const weight_debounce = _.debounce((k) =>
-    k === "wHide" ? dispatch(addBodySpecDB("weight_true")) : dispatch(addBodySpecDB("weight_false")), 300);
+    is_login && (k === "wHide" ? dispatch(addBodySpecDB("weight_true")) : dispatch(addBodySpecDB("weight_false")), 300));
   const weight_keyPress = useCallback(weight_debounce, []);
 
   const [weightShow, setWeightShow] = useState({
@@ -80,7 +80,7 @@ const DashBoard_BodySpec = (props) => {
   // 기초대사량 on off
   // debounce
   const bmr_debounce = _.debounce((k) =>
-    k === "kHide" ? dispatch(addBodySpecDB("bmr_true")) : dispatch(addBodySpecDB("bmr_false")), 300);
+    is_login && (k === "kHide" ? dispatch(addBodySpecDB("bmr_true")) : dispatch(addBodySpecDB("bmr_false")), 300));
   const bmr_keyPress = useCallback(bmr_debounce, []);
 
   const [kcalShow, setKcalShow] = useState({
@@ -114,7 +114,7 @@ const DashBoard_BodySpec = (props) => {
           <Grid>
             <Text size="12px" m_size="11px">키</Text>
             <Grid display={hHide} m_margin="11% 0 0 0">
-              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{height}cm</Text>
+              <Text size="13px" bold margin="10% 0 0 0" m_size="12px">{height === "" ? 0 : height}cm</Text>
             </Grid>
             <Grid display={hShow}>
               <Text size="13px" bold margin="10% 0 0 0" m_size="12px">나만의 비밀☝🏻</Text>
