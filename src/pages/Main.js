@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 // modules
@@ -16,9 +15,8 @@ import {Helmet} from 'react-helmet';
 
 /** 
  * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
+ * @returns Header, MainBody
+ * @역할 Main 페이지
  * @담당자 : 박용태
 */
 
@@ -27,6 +25,7 @@ const Main = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
+  // 최근검색어, 즐겨찾기, 추천음식, 인기검색어
   useEffect(() => {
     if (is_login) {
       dispatch(getRecentDB());

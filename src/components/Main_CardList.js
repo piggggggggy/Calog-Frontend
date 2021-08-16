@@ -41,12 +41,6 @@ const CardList = (props) => {
     })
   }, [page])
 
-
-  // 스피너
-  // if (!is_loaded) {
-  //   return <Loading/>;
-  // };
-
   return (
     <React.Fragment>
       {search_list.length === 0 ?

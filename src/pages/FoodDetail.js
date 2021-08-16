@@ -2,17 +2,21 @@ import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import theme from '../shared/theme';
+
 // elements & components
 import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
 import UnderBar from '../components/Main_UnderBar';
 import CalorieBar from '../components/FoodDetail_CalorieBar';
 import Loading from './Loading2';
+
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
+
 // modules
 import { addCartRx } from '../redux/modules/cart';
 import { getDetailDB } from '../redux/modules/search';
+
 // img
 import Carbo from '../img/C_carbohydrate.jpg';
 import Protein from '../img/C_protein.jpg';
@@ -22,7 +26,6 @@ import Fat from '../img/C_fat.jpg';
  * @param {*} props
  * @returns 기본정보, 영양정보, 칼로리 비교
  * @역할  음식 상세정보를 표시
- * @필수값 푸드Id에 해당하는 상세 푸드 데이터
  * @담당자 : 박용태
 */
 
@@ -45,15 +48,6 @@ const FoodDetail = (props) => {
     dispatch(getDetailDB(foodId))
   }, []);
 
-
-  // const is_loaded = useSelector((state) => state.record.is_loaded)
-
-  // if(!is_loaded) {
-  //   return (<Loading />);
-  // }
-
-
-  // const bmr = record.length === 0 ? 2000 : record[0]?.bmr;
   const bmr = !is_login ? 2000 : user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
   console.log(foodRecord);

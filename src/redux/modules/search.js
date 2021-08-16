@@ -103,10 +103,6 @@ const initialState = {
   list : [],
   // 정렬 및 필터링된 결과
   filtered_list: [],
-  // // 리덕스 무한스크롤
-  // export_list: [],
-  // paging: { start: 0, end: 20, next: true},
-  // is_loading: false,
   // 인기검색어
   most: [],
   // 추천검색어
@@ -133,27 +129,6 @@ const search = createSlice({
         state.filtered_list = filtered;
       }
     },
-
-    // 무한스크롤
-    getScrollData : state => {
-      state.is_loading = true;
-      let sliceData = state.filtered_list.slice(state.paging.start, state.paging.end);
-      if (sliceData.length === 21) {
-        let paging = {
-          start: state.paging.start + 20,
-          end: state.paging.end + 20,
-          next: true
-        };
-        state.paging = paging;
-        sliceData.pop();
-        state.export_list = [...state.export_list, ...sliceData];
-      } else {
-        state.export_list = [...state.export_list, ...sliceData];
-        state.paging.next = false;
-      };
-      state.is_loading = false;
-    },
-
 
     // 칼로리 Range 필터
     rangeFilter : (state, action) => {

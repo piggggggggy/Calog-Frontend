@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
 import theme from '../shared/theme';
 
 // modules
-import { deleteCartRx, addCartRx, cartOut } from '../redux/modules/cart';
+import { addCartRx, cartOut } from '../redux/modules/cart';
 import { removeDeleted } from '../redux/modules/user';
 
 // elements & components
@@ -13,7 +13,6 @@ import { Grid, Text } from '../elements';
 
 // icons
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
-import { TiDeleteOutline } from 'react-icons/ti';
 import { BiPlusCircle } from 'react-icons/bi';
 
 
@@ -27,15 +26,20 @@ import { BiPlusCircle } from 'react-icons/bi';
 const UnderBar = (props) => {
 
   const dispatch = useDispatch();
-  const [barOnOff, barSet] = useState(false);
+  
+  // props 기록으로 보내주기 위해!
   const type = props.type;
+
+  // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
+
+  // 최근 삭제목록 
   const _recentDeleted_list = props.recentDeleted_list;
   const recentDeleted_list = _recentDeleted_list.length === 0 ? [] : _recentDeleted_list[0];
-  // console.log("_:",_recentDeleted_list);
-  // console.log(recentDeleted_list);
 
   // 열고 닫는 
+  const [barOnOff, barSet] = useState(false);
+
   const toggleCart = () => {
     if (barOnOff === false) {
       barSet(true);
@@ -50,7 +54,6 @@ const UnderBar = (props) => {
     dispatch(removeDeleted({...data, list: recentDeleted_list}));
   };
   
-
   // 기록하기
   const write = () => {
     if(is_login) {
@@ -62,10 +65,6 @@ const UnderBar = (props) => {
     }
   };
 
-
-  // if ( recentDeleted_list[0]?.length === 0 ) {
-  //   return <></>;
-  // }
   return (
     <React.Fragment>
       <RecentDeletedContainer 

@@ -5,9 +5,7 @@ import thunk from "redux-thunk";
 
 // redux-persist
 import { persistReducer, persistStore } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
-// => localStorage에 저장!
 
 // reducers
 import user from "./modules/user";
@@ -40,13 +38,6 @@ const persistConfig = {
   storage: storageSession,
   whitelist: ["cart", "recent", "record", "dashboard"]
 };
-
-// const persistConfigSession = {
-//   key: "root",
-//   storage: sessionStorage,
-//   whitelist: ["recent"]
-//   // blacklist: ["cart"]
-// };
 
 const reducer = combineReducers({
   user: user.reducer,

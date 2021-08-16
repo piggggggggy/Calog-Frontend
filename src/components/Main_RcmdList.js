@@ -20,16 +20,15 @@ import { getRecommendedDB } from '../redux/modules/search';
 
 const RcmdList = (props) => {
 
-  const dispatch = useDispatch();
+  // 추천 리스트
   const recommended_list = useSelector((state) => state.search.recommend);
+  
+  // 이름 가져오기위해!
   const user = useSelector((state) => state.user.user_info);
+
+  // 로그인 체크
   const is_login = useSelector((state) => state.user.is_login);
-  const is_loaded = useSelector((state) => state.record.is_loaded);
-
-  // useEffect(() => {
-  //   dispatch(getRecommendedDB())
-  // }, [])
-
+  
   // 횡 스와이프 구현!
   const refX = useRef(null);
   const [isDrag, setDrag] = useState(false);
@@ -67,7 +66,9 @@ const RcmdList = (props) => {
 
       {/* 타이틀 */}
       <TitleBox>
-        <Text lineheight="24px" m_lineheight="20px" size="20px" m_size="17px" bold color="#2A2A2A" padding="0" margin="0">{is_login ? `${user.nickname}님을 위한 추천 음식` : "칼로거님을 위한 추천 음식"}</Text>
+        <Text lineheight="24px" m_lineheight="20px" size="20px" m_size="17px" bold color="#2A2A2A" padding="0" margin="0">
+          {is_login ? `${user.nickname}님을 위한 추천 음식` : "칼로거님을 위한 추천 음식"}
+        </Text>
       </TitleBox>
 
       {/* 추천리스트 */}

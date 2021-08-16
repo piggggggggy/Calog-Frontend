@@ -22,10 +22,13 @@ import { TiDeleteOutline } from 'react-icons/ti';
 const UnderBar = (props) => {
 
   const dispatch = useDispatch();
+
+  // 카트리스트
   const cart_list = useSelector((state) => state.cart.cart);
-  const [barOnOff, barSet] = useState(false);
 
   // 열고 닫는 
+  const [barOnOff, barSet] = useState(false);
+
   const toggleCart = () => {
     if (barOnOff === false) {
       barSet(true);

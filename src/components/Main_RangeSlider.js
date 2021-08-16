@@ -61,6 +61,7 @@ const RangeSlider = ({min, max, onChange}) => {
 
       <SliderContainer>
 
+        {/* 양쪽 thumb */}
         <ThumbContainer >
           <Thumb
             type="range"
@@ -88,6 +89,7 @@ const RangeSlider = ({min, max, onChange}) => {
           />
         </ThumbContainer>
 
+        {/* 작대기 배경 및 작대기 */}
         <Slider>
           <SliderTrack/>
           <SliderRange ref={range}/>
