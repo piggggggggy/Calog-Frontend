@@ -134,7 +134,7 @@ const Signup = (props) =>
             color="#F05C5C"
             size="13px"
             lineheight="18px">
-              *비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이내로 입력해주세요.
+              *비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상 입력해주세요.
             </Text>
             :
             <Text

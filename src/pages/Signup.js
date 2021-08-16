@@ -103,7 +103,7 @@ const Signup = () => {
           {user_info.password?pwdCheck(user_info.password)?"":X:""}
           </InputBox>
           {user_info.password?pwdCheck(user_info.password)?<Text color="#E4E4E4" size="13px" lineheight="18px">*사용가능한 비밀번호입니다.</Text>:
-          <Text color="#F05C5C" size="13px" lineheight="18px">*비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이내로 입력해주세요.</Text>:
+          <Text color="#F05C5C" size="13px" lineheight="18px">*비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상 입력해주세요.</Text>:
           <Text color="#FFFFFF" size="13px" lineheight="18px">*비밀번호를 입력해주세요.</Text>
           }
           </Grid>
