@@ -232,7 +232,7 @@ const MSBody = (props) => {
         <Grid padding="0 2.8vh" >
           <RangeSlider 
             min={0}
-            max={5000}
+            max={2000}
             onChange={({ min, max }) => {
               debounceCB(min, max);
             }}

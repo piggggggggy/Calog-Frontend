@@ -17,7 +17,7 @@ export const addFavoriteDB = (data) => {
       .then((res) => {
         // console.log(res);
         dispatch(addFavorite(data));
-        window.alert("즐겨찾기 추가!");
+        // window.alert("즐겨찾기 추가!");
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")
@@ -32,7 +32,7 @@ export const deleteFavoriteDB = (foodId) => {
     .delete('/api/favorite/delete', {data: {foodId: foodId}})
       .then((res) => {
         dispatch(deleteFavorite(foodId));
-        window.alert("즐겨찾기 해제!");
+        // window.alert("즐겨찾기 해제!");
       })
       .catch((err) => {
         console.log(err, "에러가 났읍니다.")

@@ -11,6 +11,10 @@ import {isLoaded} from './record';
 // middleware 
 // DB에서 검색결과 가져오기
 export const searchKeywordDB = (data) => {
+  if (data.keyword === '') {
+    window.alert('키워드를 입력하세요!');
+    return;
+  }
   return function (dispatch, getState, {history}) {
     dispatch(isLoaded(false))
     instance
@@ -21,7 +25,7 @@ export const searchKeywordDB = (data) => {
         dispatch(searchKeyword(new_data));
         
         history.push(`/loading/search/${data.keyword}`);
-    dispatch(isLoaded(true))
+        dispatch(isLoaded(true))
         
       })
       .catch((err) => {
