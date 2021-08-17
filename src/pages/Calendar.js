@@ -33,9 +33,6 @@ const Calendar = (props) => {
       {/* 헬멧 */}
       <Helmet>
         <title>[Calog] 나의 한 달 캘린더</title>
-        <meta property="og:title" content="[Calog] 나의 한 달 캘린더"/>
-        <meta property="og:description" content="내가 이번 달 먹은 음식의 칼로리가 궁금하다면?" />
-        <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
       </Helmet>
 
       {/* 헤더 */}

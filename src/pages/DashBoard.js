@@ -76,16 +76,13 @@ const DashBoard = (props) => {
         {/* 헬멧 */}
         <Helmet>
           <title>[Calog] 오늘의 칼로리</title>
-          <meta property="og:title" content="[Calog] 오늘의 칼로리" />
-          <meta property="og:description" content="오늘 먹은 음식의 칼로리가 궁금하다면?" />
-          <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
         </Helmet>
 
         {/* 상단 bmr 관련 타이틀 */}
         <DashBoard_Title is_login={is_login} bmr={bmr} record={record} user_info={user}/>
 
         {/* 바디스펙 */}
-        <DashBoard_BodySpec {...user} bmr={bmr}/>
+        <DashBoard_BodySpec {...user} bmr={bmr} is_login={is_login}/>
 
         {/* 칼로리 분석 */}
         <DashBoard_Chart {...[record]} bmr={bmr}/>

@@ -42,9 +42,6 @@ const BodySpec = (props) =>
       {/* 헬멧 */}
       <Helmet>
         <title>[Calog] 칼로그 로그인/회원가입</title>
-        <meta property="og:title" content="[Calog] 칼로그 로그인/회원가입"/>
-        <meta property="og:description" content="로그인/회원가입 후 칼로그를 이용해보세요!" />
-        <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
       </Helmet>
 
       <Container>
