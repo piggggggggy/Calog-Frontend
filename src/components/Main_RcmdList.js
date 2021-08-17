@@ -77,7 +77,8 @@ const RcmdList = (props) => {
         onMouseMove={isDrag ? throttleDragMove : null}
         onMouseUp={dragEnd}
         onMouseLeave={dragEnd}
-        ref={refX}>
+        ref={refX}
+        >
         {recommended_list && recommended_list.map((r, idx) => {
           return <CardRcmd key={r.foodId} {...r}/>
         })}

@@ -56,7 +56,7 @@ const RangeSlider = ({min, max, onChange}) => {
   return (
     <React.Fragment>
       <RangeText>
-        <Text size="13px" m_size="13px" color="#8C8C8C" bold>{minVal} kacl ~ {maxVal} kcal</Text>
+        <Text size="13px" m_size="13px" color="#8C8C8C" bold>{Math.round(minVal/100)*100} kacl ~ {Math.round(maxVal/100)*100} kcal</Text>
       </RangeText>
 
       <SliderContainer>

@@ -28,7 +28,7 @@ const search = createSlice({
         return;
       }else{
         state.cart.unshift(action.payload);
-        window.alert('과식은 건강에 해롭습니다.');
+        // window.alert('과식은 건강에 해롭습니다.');
       };
     },
 
@@ -43,7 +43,7 @@ const search = createSlice({
     },
 
     //카트 전체 삭제(type, date는 그대로 둬야함! >> 대시보드 연결 시 사용됨)
-    delCartAll : (state, action) => {
+    delCartAll : state => {
       state.cart = []
     },
 
