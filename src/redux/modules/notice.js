@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
+import moment from "moment";
 
 //loading
 import {isLoaded} from './record';
@@ -78,6 +79,22 @@ export const getNotiDetailSV = (noticeId) => {
         })
         .catch((err) => {
             console.log(err);
+        });
+    };
+};
+
+export const foodFeedBack = (contents) => {
+    return function(dispatch, getState, {history}) {
+        instance
+        .post('/api/notice/feedbackFood',{
+            contents: contents,
+            date: moment().format('YYYY-MM-DD'),
+        })
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err, '에너 났어요');
         });
     };
 };

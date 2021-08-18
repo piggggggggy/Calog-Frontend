@@ -16,14 +16,13 @@ import MSBody from '../components/MainSearch_MSBody';
 */
 
 const MainSearch = (props) => {
-// dispatch
-// props
-// useEffect
+
+  const keyword = props.match.params.keyword;
 
   return (
     <React.Fragment>
       <BtnHeader title="검색결과"/>
-      <MSBody/>
+      <MSBody keyword={keyword}/>
     </React.Fragment>
   );
 }

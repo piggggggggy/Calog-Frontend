@@ -1,49 +1,35 @@
 import React, {useCallback, useState} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import theme from '../shared/theme';
 
 // elements & components
-import Card from './Main_Card';
 import { Text } from '../elements';
-import Loading from '../pages/Loading3';
+import { foodFeedBack } from '../redux/modules/notice';
 
 
 /** 
  * @param {*} props
- * @returns 검색결과
- * @역할 검색결과를 보여주는 컴포넌트
+ * @returns 검색결과 없음
+ * @역할 검색결과가 없을 때 보여지는 컴포넌트
  * @담당자 : 박용태
 */
 
-const CardList = (props) => {
+const NotResult = (props) => {
 
-  // 검색결과
-  // const search_list = useSelector((state) => state.search.filtered_list);
-  const search_list = props.search_list;
-  
+  const dispatch = useDispatch();
+
+  // props params
+  const keyword = props.keyword;
   // 검색결과가 없어요! 난수생성
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
-  
-  // 로그인 체크
-  const is_loaded = useSelector((state) => state.record.is_loaded);
-  
-  // 페이지네이션
-  const [page, setPage] = useState({
-    start: 0,
-    end: 20,
-  })
 
-  const nextPage = useCallback(() => {
-    setPage({
-      start: page.start,
-      end: page.end + 20,
-    })
-  }, [page])
+  const feedBack = () => {
+    dispatch(foodFeedBack(keyword))
+  };
 
   return (
     <React.Fragment>
-      {search_list.length === 0 ?
         <EmptyResult>
 
             {/* 검색결과가 없다면? */}
@@ -92,42 +78,27 @@ const CardList = (props) => {
               </Fats>
           }
           
-          <Text size="28px" m_size="22px" bold margin="7vh 0 2vh 0" >앗! 검색결과가 없어요 ㅠㅠ</Text>
-          <Text size="17px" m_size="15px" bold>다른 키워드를 검색해주세요!</Text>
+          <Text size="28px" m_size="22px" bold margin="4.7vh 0 0 0" >앗! 검색결과가 없어요 ㅠㅠ</Text>
+
+          <FeedBackContainer>
+            <FeedBackText>이 키워드를 등록하고싶으시다면?</FeedBackText>
+            <FeedBackBtn onClick={feedBack}>
+              <div>의견 보내기</div>
+            </FeedBackBtn>
+          </FeedBackContainer>
+
         </EmptyResult>
-        :
-
-        // 검색결과
-        <CardContainer>
-          {search_list && search_list.slice(page.start, page.end).map((result, idx) => {     
-            return <Card key={result.foodId} {...result}/>;
-            })}
-
-          {/* 더보기 버튼  */}
-          {search_list?.length > page.end ? 
-            <MoreBtn onClick={nextPage}>
-              <Text size="13px" m_size="13px" padding="0" margin="0">더보기</Text>
-            </MoreBtn> 
-          : ''}
-        </CardContainer>
-      }
     </React.Fragment>
   );
 }
 
-CardList.defaultProps = {
+NotResult.defaultProps = {
 
 }
 
-const CardContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  column-gap: 1.8vh;
-`;
 
 const EmptyResult = styled.div`
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -148,14 +119,39 @@ const Fats = styled.div`
   } 
 `;
 
-const MoreBtn = styled.div`
+const FeedBackContainer = styled.div`
   width: 100%;
-  height: 4vh;
-  padding: 1.1vh 6%;
-  background: rgba(196, 196, 196, 0.19);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 0.9vh;
+  padding-top: 5vh;
 `;
 
-export default CardList;
+const FeedBackText = styled.div`
+  font-size: 15px;
+  line-height: 22px;
+`;
+
+const FeedBackBtn = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFE899;
+  border: none;
+  border-radius: 44px;
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
+  cursor: pointer;
+
+  & > div {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+  }
+`;
+
+
+
+export default NotResult;
