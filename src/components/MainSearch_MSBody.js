@@ -24,8 +24,9 @@ import { isLoaded } from '../redux/modules/record';
 import { Grid, Text } from '../elements';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
-import CardList from './Main_CardList';
+import CardList from './MainSearch_CardList';
 import MostUsedKey from './Main_MostUsedKey';
+import NotResult from './MainSearch_NotResult';
 
 
 // icon
@@ -45,6 +46,9 @@ const MSBody = (props) => {
 
   // dispatch
   const dispatch = useDispatch();
+
+  //props params
+  const _keyword = props.keyword;
 
   // 검색결과
   const search_list = useSelector((state) => state.search.filtered_list);
@@ -261,7 +265,9 @@ const MSBody = (props) => {
 
         {/* 검색결과가 들어가는 곳 */}
         {/* <CardList search_list={search_list}/> */}
+        {search_list.length !== 0 ? 
         <CardList search_list={search_list}/>
+        : <NotResult keyword={_keyword}/>}
 
         {/* 장바구니 탭 */}
         <UnderBar/>
@@ -285,7 +291,7 @@ const HeaderContainer = styled.div`
 const BodyContainer = styled.div`
   padding-top: 2vh;
   max-width: 100%;
-  max-height: 53vh;
+  max-height: 57vh;
   padding-bottom: 5vh;
   overflow: scroll;
   &::-webkit-scrollbar {
