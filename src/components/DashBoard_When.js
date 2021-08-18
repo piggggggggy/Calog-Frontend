@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 // 이모지
 import { FaCircle } from "react-icons/fa";
 // type chk
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {typeChk, ttlKcal} from '../redux/modules/record';
 //history
 import { history } from '../redux/configStore';
@@ -19,12 +19,11 @@ import { history } from '../redux/configStore';
 */
 
 const DashBoard_When = (props) => {
+  const dispatch = useDispatch();
 
   // 대시보드와 캘린더 상세에서 들어오는 props값이 달라서 구분
   const foodRecords = history.location.pathname.includes('dashboard') ? props[0] : props?.foodRecords;
   const {data_type} = props
-
-  const dispatch = useDispatch();
 
   // 대시보드와 캘린더 상세 페이지로 나눠서 각 경우에 맞게 사용
   let btn_type = ""
@@ -32,8 +31,10 @@ const DashBoard_When = (props) => {
   // 대시보드
   if(history.location.pathname.includes('dashboard')) {
 
-    // 처음 로그인하고 들어왔을 때는 스토어에 type이 지정되어있지 않음(아직 버튼을 안눌렀기 때문)
-    data_type?.length === 0 ? btn_type = "" : btn_type = data_type
+    foodRecords && (
+      // 처음 로그인하고 들어왔을 때는 스토어에 type이 지정되어있지 않음(아직 버튼을 안눌렀기 때문)
+      data_type === null ? btn_type = "" : btn_type = data_type
+    )
 
     // 캘린더 상세
   } else {
