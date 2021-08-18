@@ -100,15 +100,32 @@ const DashBoard_Title = (props) => {
               <React.Fragment>
 
               {/* case1-1-1) 적당히 섭취했을 때 */}
-              {Average  && <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요</Text>}
+              {Average  && (
+                <React.Fragment>
+                  <Text size="22px" bold m_size="18px">오늘의 칼로리를<br/>충분히 채웠어요</Text>
+                  <Grid padding="1vh 0 0 0;">
+                    <Text size="15px" bold color={theme.color.gray_6} m_size="13px">오늘처럼 꾸준히 노력해봐요!</Text>
+                  </Grid> 
+                </React.Fragment>
+              )}
 
               {/* case1-1-2) 더 많이 섭취했을 때 */}
-              {over_bmr && <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요</Text>}
+              {over_bmr && (
+                <React.Fragment>
+                  <Text size="22px" bold m_size="18px" color={'#E24444'}>{how_over}kcal<br/>초과했어요</Text>
+                  <Grid padding="1vh 0 0 0;">
+                    <Text size="15px" bold color={theme.color.gray_6} m_size="13px">조금만 더 줄여보는건 어떨까요?</Text>
+                  </Grid> 
+                </React.Fragment>
+              )}
 
               {/* case1-1-3) 덜 섭취했을 때 */}
               {extra_bmr && (
                 <Grid>
                   <Text size="22px" bold m_size="18px">{how_extra}kcal<br/>더 먹을 수 있어요</Text>
+                  <Grid padding="1vh 0 0 0;">
+                    <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 어떤 음식을 더 먹어볼까요?</Text>
+                  </Grid> 
                 </Grid>
               )}
               </React.Fragment>
@@ -117,11 +134,6 @@ const DashBoard_Title = (props) => {
               // case1-1-2) bmr 값이 없을 때
               <Text size="22px" bold m_size="18px">입력된 <br/>기초 대사량이 없어요</Text>
             )}
-
-            {/* 먹은 칼로리의 총합 */}
-            <Grid padding="1vh 0 0 0;">
-              <Text size="15px" bold color={theme.color.gray_6} m_size="13px"> 현재까지 {today_kcal}kcal 먹었어요.</Text>
-            </Grid>  
           </React.Fragment>
         ) : (
           <React.Fragment>

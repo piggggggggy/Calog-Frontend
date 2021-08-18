@@ -23,6 +23,13 @@ const DashBoard_Chart = (props) => {
 
   // 배열로 만들어 반복문을 사용하기 위해
   const foodRecords = props[0];
+
+  // 오늘 먹은 총 칼로리
+  let today_kcal = 0;
+  for(let idx = 0; idx<foodRecords?.length; idx++) {
+    let kcal = foodRecords[idx].resultKcal;
+    today_kcal += kcal
+  };
   
   // 기록 리스트(각 타입에 맞는 리스트와 총 칼로리 합계)
   // 아침
@@ -153,7 +160,7 @@ const DashBoard_Chart = (props) => {
       <Grid margin="9.6% auto 0 auto" border_radius="20px" width="48%" height="200px" m_margin="5% auto 0 auto">
 
       <Title>
-          <Text size="13px" bold m_size="11px" margin="0">나의 칼로리</Text>
+          <Text size="13px" bold m_size="11px" margin="0">{today_kcal}kcal</Text>
       </Title> 
       {/**
         * data = 데이터

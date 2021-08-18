@@ -25,11 +25,14 @@ const DashBoard_Food = (props) => {
   const record = props[0];
   const {is_login, _data} = props
 
-  // 각 type에 따른 칼로리의 합계
-  const data = _data.length === 0 ? 0 : _data[0].totalCalories;
-
   // props와 비교할 타입
   const data_type = useSelector((state) => state.record.type)
+
+  // 각 type 리스트 칼로리의 합계
+  let list_kcal = 0
+  for(let idx=0; idx<record?.length; idx++) {
+    record[idx]?.type === data_type && (list_kcal += record[idx]?.resultKcal)
+  }
 
   // case1) 기록이 있을 경우
   if(record?.length > 0) {
@@ -44,7 +47,7 @@ const DashBoard_Food = (props) => {
         {/* 총 칼로리 */}
         <Grid margin="4.7% 0 0 8%" width="35%" m_margin="4.7% 0 0 8%">
           <Button height="36px" border_radius="20px" bg={theme.color.light}>
-            <P>총 {data}kcal</P>
+            <P>{list_kcal}kcal</P>
           </Button>
         </Grid>
 
@@ -52,7 +55,7 @@ const DashBoard_Food = (props) => {
         <List>
 
           {/* data_type이 없는 경우 >> 로그인 후 아무 버튼도 누르지 않았을 때 */}
-          {data_type?.length === 0 ? (
+          {data_type === null ? (
             <Grid text_align="center" margin="2.5% 0 0 0">
               <Text size="15px" m_size="13px">버튼을 눌러 식단을 확인해보세요.</Text>
             </Grid>

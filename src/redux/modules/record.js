@@ -48,7 +48,7 @@ export const delRecordDB = (id, date, type) => {
 
         // 기존 삭제
         dispatch(delRecord(type));
-        history.push(`/loading/calendar/${date}`);
+        history.push(`/loading/calendar`);
       })
       .catch((err) => {
         window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')
@@ -122,7 +122,7 @@ const initialState = {
   calendar: [],
 
   // type
-  type: [],
+  type: null,
 
   // kcal
   kcal: [],
@@ -144,7 +144,7 @@ const record = createSlice({
     delRecordAll: state => {
       state.record = [];
       state.calendar = [];
-      state.type = [];
+      state.type = null;
       state.kcal = [];
       state.img = [];
     },
