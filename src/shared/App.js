@@ -17,6 +17,9 @@ import Nav from './Nav';
 import WebSearch from './WebSearch';
 import Modal from '../components/Modal';
 
+// 피드백 버튼
+import FloatedBtn from './FloatedBtn';
+
 // 테마
 import theme from './theme';
 
@@ -46,6 +49,7 @@ const App = (props) => {
           <LazyLoad>
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
             <WebVer/>
+            <FloatedBtn/>
             <WebSearch/>
             <Wrap>
               <Route path="/" exact component={Main} />
