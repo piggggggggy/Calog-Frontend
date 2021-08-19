@@ -14,7 +14,7 @@ export const IdCheck = (id) => {
   };
 
   export const pwdCheck = (pwd="") => {
-    let _reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
+    let _reg = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
     if(pwd.length<8){
         return false;
     }
