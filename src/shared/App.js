@@ -55,6 +55,10 @@ const App = (props) => {
               <Route path="/loading/" exact component={Loading4} />
               <Route path="/loading/:url" exact component={Loading4} />
               <Route path="/loading/:url/:date" exact component={Loading4} />
+              {/* <Route path="/loading1/" exact component={Loading} />
+              <Route path="/loading2/" exact component={Loading2} />
+              <Route path="/loading3/" exact component={Loading3} /> */}
+
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
