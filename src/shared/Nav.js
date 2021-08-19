@@ -9,11 +9,13 @@ import {useSelector} from 'react-redux';
 
 const Nav = (props) => {
   
-  const [url, setUrl] = useState();
   const currentUrl = window.location.pathname;
+  const [url, setUrl] = useState(currentUrl);
   
   useEffect(() => {
-    setUrl(currentUrl);
+    history.listen(() => {
+      setUrl(currentUrl);
+    })
   }, [currentUrl])
 
   const navOn = (url) => {
