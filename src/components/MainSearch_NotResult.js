@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import theme from '../shared/theme';
 
+//history
+import { history } from '../redux/configStore';
+
 // elements & components
-import { Text } from '../elements';
+import { Text, Grid } from '../elements';
 import { foodFeedBack } from '../redux/modules/notice';
 
 
@@ -19,13 +22,22 @@ const NotResult = (props) => {
 
   const dispatch = useDispatch();
 
+  // 모달 onoff
+  const [modal, setModal] = useState(false);
+
+  const clickModal = () => {
+    setModal(false);
+    history.push('/');
+  }
+
   // props params
   const keyword = props.keyword;
   // 검색결과가 없어요! 난수생성
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
   const feedBack = () => {
-    dispatch(foodFeedBack(keyword))
+    dispatch(foodFeedBack(keyword));
+    setModal(true);
   };
 
   return (
@@ -86,6 +98,18 @@ const NotResult = (props) => {
               <div>의견 보내기</div>
             </FeedBackBtn>
           </FeedBackContainer>
+
+          <FeedbackModalWrap style={modal? {display: "block"} : {display: "none"}}>
+            <div>
+              <Text lineheight="34px" m_lineheight="30px" size="24px" m_size="22px" bold color="#2A2A2A" margin="5vh 0 0.9vh 0" padding="0">의견 보내기 완료!</Text>
+              <Text lineheight="22px" m_lineheight="18px" size="15px" m_size="13px" bold color="#2A2A2A" margin="0 0 0.2vh 0" padding="0">이 키워드를 조만간 등록할게요!</Text>
+              <Text lineheight="22px" m_lineheight="18px" size="15px" m_size="13px" bold color="#2A2A2A" margin="0 0 0 0" padding="0">잠시만 기다려주세요.</Text>
+              <ModalBtn onClick={()=>{clickModal()}}>
+                <div>홈으로 돌아가기</div>
+              </ModalBtn>
+            </div>
+          </FeedbackModalWrap>
+
 
         </EmptyResult>
     </React.Fragment>
@@ -150,6 +174,66 @@ const FeedBackBtn = styled.div`
     line-height: 22px;
     font-weight: bold;
   }
+`;
+
+
+
+const FeedbackModalWrap = styled.div`
+  top: 0;
+  left: 0;
+  position: absolute;
+  /* background: #00000048; */
+  width: 100%;
+  height: 100vh;
+  animation: modal-bg-show .3s;
+
+  @keyframes modal-bg-show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
+
+  & > div {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: 26vh;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+const ModalBtn = styled.div`
+  height: 5vh;
+  width: 86%;
+  background: #FFE899;
+  border: none;
+  border-radius: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3.2vh 0 2.4vh 0;
+  cursor: pointer;
+
+  & > div {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 22px;
+    
+    @media ${theme.device.mobileS} {
+      font-size: 15px;
+      line-height: 18px;
+    }
+  }
+  
 `;
 
 
