@@ -34,7 +34,7 @@ const SignSocial = () => {
         <InputContainer>
           <InputBox>
             <Button width="380px" height="56px" bg="#F9DF4A" border_radius="44px"
-            _onClick={()=>{window.location.href='https://2k1.shop/api/auth_kakao/kakao'}}>
+            _onClick={()=>{window.location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=https%3A%2F%2F2k1.shop%2Fapi%2Fauth_kakao%2Foauth&client_id=1f8c2e0458ce362b52f0a86f8e15dc83'}}>
               <Text m_size="16px" bold size="16px" lineheight="22px" color="#42282A">카카오로 시작하기</Text>
             </Button>
           </InputBox>
@@ -48,7 +48,7 @@ const SignSocial = () => {
 
           <InputBox>
             <Button width="380px" height="56px" bg="#59C451" border_radius="44px"
-            _onClick={()=>{window.location.href = "https://2k1.shop/api/auth_naver/naver";}}>
+            _onClick={()=>{window.location.href = "https://nid.naver.com/oauth2.0/authorize?response_type=code&redirect_uri=https%3A%2F%2F2k1.shop%2Fapi%2Fauth_naver%2Foauth&client_id=pDmnerWgsXOSSsgzvfim";}}>
               <Text m_size="16px" bold size="16px" lineheight="22px" color="#FFFFFF">네이버로 시작하기</Text>
             </Button>
           </InputBox>
