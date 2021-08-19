@@ -6,7 +6,6 @@ import { Text } from '../elements';
 
 // modules
 
-
 /** 
  * @param {*} props
  * @returns 플롯버튼
@@ -18,6 +17,8 @@ const FloatedBtn = (props) => {
 
   return (
     <React.Fragment>
+
+      {/* 플롯버튼 */}
       <ButtonContainer>
         <FloatedBody>
           <Text size="13px" lineheight="20px" bold color="#737373" padding="0" margin="0">더 나은 서비스를 위하여</Text>
@@ -33,6 +34,9 @@ const FloatedBtn = (props) => {
           </svg>
         </FloatCircle>
       </ButtonContainer>
+
+      {/* 피드백 모달 */}
+
     </React.Fragment>
   );
 }
@@ -43,14 +47,23 @@ FloatedBtn.defaultProps = {
 
 const ButtonContainer = styled.div`
   position: fixed;
-  right: 2%;
+  right: 6%;
   bottom: 30px;
   width: 320px;
   height: 90px;
 
-  @media only screen and (max-width: 1540px) {
-    right: 4%;
+  @media only screen and (max-width: 1750px) {
+    right: 5%;
+  }
+  @media only screen and (max-width: 1650px) {
+    right: 3%;
+  }
+  @media only screen and (max-width: 1580px) {
+    right: 5%;
   } 
+  @media only screen and (max-width: 1450px) {
+    right: 3%;
+  }
   @media only screen and (max-width: 1240px) {
     right: 2%;
   } 
@@ -75,7 +88,7 @@ const FloatedBody = styled.div`
   justify-content: center;
   padding-left: 40px;
 
-  @media only screen and (max-width: 1540px) {
+  @media only screen and (max-width: 1580px) {
     display: none;
   } 
 `;
@@ -100,8 +113,7 @@ const FloatCircle = styled.div`
     width: 8.9vw;
     height: 8.9vw;
   } 
-
-
 `;
+
 
 export default FloatedBtn;
