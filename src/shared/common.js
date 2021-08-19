@@ -14,7 +14,7 @@ export const IdCheck = (id) => {
   };
 
   export const pwdCheck = (pwd="") => {
-    let _reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]/;
+    let _reg = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
     if(pwd.length<8){
         return false;
     }
@@ -31,7 +31,6 @@ export const IdCheck = (id) => {
 
   export const emailCheck = (email) => {
     let _reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    // let _reg = /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-z])*.([a-zA-Z])*/;
   
     return _reg.test(email);
   };
