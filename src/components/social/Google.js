@@ -1,7 +1,8 @@
 import React from 'react';
+import { history } from '../../redux/configStore';
 
 
-const Google = async () => 
+const Google = () => 
 {
   const tokenSave = () =>
   {
@@ -10,9 +11,15 @@ const Google = async () =>
 
       document.cookie = `TOKEN=${token};`;
   };
-    //에러 처리 어떻게?
-    await tokenSave();
-    await window.location.replace('/body');
+
+  try {
+      tokenSave();
+      window.location.replace('/body');
+    }
+    catch {
+      window.alert("소셜 로그인 실패, 다시 로그인 해주세요!");
+      history.replace("/body");
+    };
 
 
   return (
