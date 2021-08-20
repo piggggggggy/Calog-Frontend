@@ -21,7 +21,6 @@ export const addRecordDB = (date, list, type, url, memo) => {
         dispatch(delCartAll())
         dispatch(delImgAll())
         dispatch(typeChk(type))
-        // 최근삭제기록 날리기
         dispatch(clearDeleted())
         history.replace('/loading/dashboard')
       })
@@ -37,7 +36,6 @@ export const delRecordDB = (id, date, type) => {
     instance
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
-        // 삭제목록 보내주기 - 용태추가부분
         let deleted_list = getState().record.record[0].foodRecords;
         let result = deleted_list.filter((d,idx) => {
           if (d.type === type) {
@@ -98,8 +96,8 @@ export const getRecordDB = (date) => {
       .then((res) => {
         const record_list = res.data.record
 
-        //기록이 없을 경우 alert, dashboard로 이동
-        //기록이 있을 경우 액션
+        // 기록이 없을 경우 alert, dashboard로 이동
+        // 기록이 있을 경우 액션
         if (record_list.length === 0) {
           window.alert('기록된 칼로리가 없어요!')
           history.push('/dashboard')

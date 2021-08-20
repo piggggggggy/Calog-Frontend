@@ -3,9 +3,9 @@ import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 
 // date picker
-import { enGB } from 'date-fns/locale'
-import { DatePicker } from 'react-nice-dates'
-import '../styles/css/nice_date.css'
+import { enGB } from 'date-fns/locale';
+import { DatePicker } from 'react-nice-dates';
+import '../styles/css/nice_date.css';
 
 // moment
 import moment from 'moment';
@@ -13,9 +13,9 @@ import moment from 'moment';
 /** 
  * @param {String} date
  * @returns {String} date 선택된 날짜
- * @역할 : 현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
- * @필수값 : 유저가 선택한 날짜(변경 가능)
- * @담당자 : 김나영
+ * @역할  현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
+ * @필수값  유저가 선택한 날짜(변경 가능)
+ * @담당자  김나영
 */
 
 const CalendarDetail_Date = (props) => {

@@ -21,7 +21,7 @@ import {chgType} from '../redux/modules/cart';
 */
 
 const Record_When = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   
   // type chk
   const typeState = useSelector((state) => state.cart.type);

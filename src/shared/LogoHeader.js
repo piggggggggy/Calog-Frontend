@@ -1,12 +1,8 @@
 import React from 'react';
 import {Grid} from '../elements';
 
-//history
+// history
 import {history} from '../redux/configStore';
-
-// icons
-import { FiShoppingCart } from "react-icons/fi";
-
 
 const LogoHeader = (props) => {
   return (

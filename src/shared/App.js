@@ -26,7 +26,7 @@ import theme from './theme';
 // 웹페이지 바탕
 import webImg from '../img/backImg.png';
 
-//lazy loading
+// lazy loading
 import LazyLoad from 'react-lazyload';
 
 const App = (props) => {
@@ -47,6 +47,7 @@ const App = (props) => {
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <LazyLoad>
+
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
             <WebVer/>
             <FloatedBtn/>
@@ -91,7 +92,7 @@ const App = (props) => {
         </ThemeProvider>
     </React.Fragment>
   );
-}
+};
 
 const Wrap = styled.div`
   position: relative;

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
-// history
-import {history} from '../redux/configStore'
-
 // middleware
 import {useDispatch, useSelector} from 'react-redux';
 import {delRecordDB} from '../redux/modules/record';
@@ -18,34 +15,35 @@ import {delRecordDB} from '../redux/modules/record';
 */
 
 const Modal = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {open, title} = props
+  const {open, title} = props;
 
   // 모달 열고 닫기
-  const [display, setDisplay] = useState("block")
+  const [display, setDisplay] = useState("block");
 
   // 삭제 모달 시 필요 - id, 날짜, 타입
-  const record = useSelector((state) => state.record)
-  const record_list = record.record[0]
+  const record = useSelector((state) => state.record);
+  const record_list = record.record[0];
 
   // id
-  const record_id = record_list?._id
+  const record_id = record_list?._id;
 
   // 날짜
-  const record_date = record_list?.date
+  const record_date = record_list?.date;
 
   // 타입
-  const type = record.type
+  const type = record.type;
 
   // 취소 버튼
   const xBtn = () => {
     setDisplay("none")
-  }
+  };
 
+  // 삭제 버튼
   const delBtn = () => {
     dispatch(delRecordDB(record_id, record_date, type))
-  }
+  };
 
   return (
     <Grid display={open ? display : "none"}>
@@ -92,7 +90,7 @@ const Modal = (props) => {
       </Wrap>
     </Grid>
   );
-}
+};
 
 const Wrap = styled.div`
   top: 0;
