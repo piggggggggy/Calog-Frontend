@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
@@ -7,13 +7,10 @@ import theme from '../shared/theme';
 import {useDispatch} from 'react-redux';
 import {addBodySpecDB} from '../redux/modules/dashboard';
 
-// 바디스펙 무한클릭 막기
-import _ from "lodash";
-
 /** 
- * @역할 : 대시보드 바디스펙 컴포넌트
- * @필수값 : 유저의 바디스펙(키, 몸무게, bmr)
- * @담당자 : 김나영
+ * @역할  대시보드 바디스펙 컴포넌트
+ * @필수값  유저의 바디스펙(키, 몸무게, bmr)
+ * @담당자  김나영
 */
 
 const DashBoard_BodySpec = (props) => {
@@ -23,9 +20,10 @@ const DashBoard_BodySpec = (props) => {
 
   // 키 on off
   // debounce
-  const height_debounce = _.debounce((k) =>
-    is_login && (k === "hHide" ? dispatch(addBodySpecDB("height_true")) : dispatch(addBodySpecDB("height_false")), 300));
-  const height_keyPress = useCallback(height_debounce, []);
+  // TODO 우선 배포 후 상황에 따라 디바운스 유지
+  // const height_debounce = _.debounce((k) =>
+  //   is_login && (k === "hHide" ? dispatch(addBodySpecDB("height_true")) : dispatch(addBodySpecDB("height_false")), 300));
+  // const height_keyPress = useCallback(height_debounce, []);
 
   const [heightShow, setHeightShow] = useState({
     hShow: heightBlind === true ? "block" : "none",
@@ -37,23 +35,24 @@ const DashBoard_BodySpec = (props) => {
       hShow: "none",
       hHide: "block",
     })
-    height_keyPress(e.target.id);
-    // dispatch(addBodySpecDB("height_false"))
+    // height_keyPress(e.target.id);
+    is_login && dispatch(addBodySpecDB("height_false"))
   };
   const heightOff = (e) => {
     setHeightShow({
       hShow: "block",
       hHide: "none",
     })
-    height_keyPress(e.target.id);
-    // dispatch(addBodySpecDB("height_true"))
+    // height_keyPress(e.target.id);
+    is_login && dispatch(addBodySpecDB("height_true"))
   };
 
   // 몸무게 on off
   // debounce
-  const weight_debounce = _.debounce((k) =>
-    is_login && (k === "wHide" ? dispatch(addBodySpecDB("weight_true")) : dispatch(addBodySpecDB("weight_false")), 300));
-  const weight_keyPress = useCallback(weight_debounce, []);
+  // TODO 우선 배포 후 상황에 따라 디바운스 유지
+  // const weight_debounce = _.debounce((k) =>
+  //   is_login && (k === "wHide" ? dispatch(addBodySpecDB("weight_true")) : dispatch(addBodySpecDB("weight_false")), 300));
+  // const weight_keyPress = useCallback(weight_debounce, []);
 
   const [weightShow, setWeightShow] = useState({
     wShow: weightBlind === true ? "block" : "none",
@@ -65,23 +64,24 @@ const DashBoard_BodySpec = (props) => {
       wShow: "none",
       wHide: "block",
     })
-    weight_keyPress(e.target.id);
-    // dispatch(addBodySpecDB("weight_false"))
+    // weight_keyPress(e.target.id);
+    is_login && dispatch(addBodySpecDB("weight_false"))
   };
   const weightOff = (e) => {
     setWeightShow({
       wShow: "block",
       wHide: "none",
     })
-    weight_keyPress(e.target.id);
-    // dispatch(addBodySpecDB("weight_true"))
+    // weight_keyPress(e.target.id);
+    is_login && dispatch(addBodySpecDB("weight_true"))
   };
 
   // 기초대사량 on off
   // debounce
-  const bmr_debounce = _.debounce((k) =>
-    is_login && (k === "kHide" ? dispatch(addBodySpecDB("bmr_true")) : dispatch(addBodySpecDB("bmr_false")), 300));
-  const bmr_keyPress = useCallback(bmr_debounce, []);
+  // TODO 우선 배포 후 상황에 따라 디바운스 유지
+  // const bmr_debounce = _.debounce((k) =>
+  //   is_login && (k === "kHide" ? dispatch(addBodySpecDB("bmr_true")) : dispatch(addBodySpecDB("bmr_false")), 300));
+  // const bmr_keyPress = useCallback(bmr_debounce, []);
 
   const [kcalShow, setKcalShow] = useState({
     kShow: bmrBlind === true ? "block" : "none",
@@ -93,16 +93,16 @@ const DashBoard_BodySpec = (props) => {
       kShow: "none",
       kHide: "block",
     })
-    bmr_keyPress(e.target.id);
-    // dispatch(addBodySpecDB("bmr_false"))
+    // bmr_keyPress(e.target.id);
+    is_login && dispatch(addBodySpecDB("bmr_false"))
   };
   const kcalOff = (e) => {
     setKcalShow({
       kShow: "block",
       kHide: "none",
     })
-    bmr_keyPress(e.target.id);
-    // dispatch(addBodySpecDB("bmr_true"))
+    // bmr_keyPress(e.target.id);
+    is_login && dispatch(addBodySpecDB("bmr_true"))
   };
 
   return (

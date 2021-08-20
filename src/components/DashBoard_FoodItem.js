@@ -1,17 +1,14 @@
 import React from 'react';
 import { Grid, Text } from '../elements';
 
-// history
-import { history } from '../redux/configStore';
-
 /** 
- * @역할 : 대시보드 각 끼니에 기록된 칼로리 리스트
- * @필수값 : amount, name, resultKcal, type
- * @담당자 : 김나영
+ * @역할  대시보드 각 끼니에 기록된 칼로리 리스트
+ * @필수값  amount, name, resultKcal, type
+ * @담당자  김나영
 */
 
 const DashBoard_FoodItem = (props) => {
-  const {amount, name, resultKcal, type, data_type} = props
+  const {amount, name, resultKcal, type, data_type} = props;
 
   return (
     <React.Fragment>

@@ -6,29 +6,38 @@ import styled from 'styled-components';
 import {delImage} from '../redux/modules/record';
 import {useDispatch, useSelector} from 'react-redux';
 
+/** 
+ * @역할 기록 페이지에서 이미지 미리보기 컴포넌트
+ * @담당자 : 김나영
+*/
+
 
 const Record_img = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const url_list = useSelector((state) => state.record.img)
+  // 유저가 셀렉한 이미지 미리보기 리스트
+  const url_list = useSelector((state) => state.record.img);
 
+  // 각 미리보기의 삭제 버튼 >> 이미지를 셀렉했을 때마다 미리보기가 추가되는게 아닌 default 박스가 있고 거기에 채워지는 방식으로 디자인됨
   const delBtnA = (e) => {
     e.preventDefault();
     dispatch(delImage(0))
-  }
+  };
 
   const delBtnB = (e) => {
     e.preventDefault();
     dispatch(delImage(1))
-  }
+  };
 
   const delBtnC = (e) => {
     e.preventDefault();
     dispatch(delImage(2))
-  }
+  };
 
   return (
     <React.Fragment>
+
+      {/* 미리보기 이미지 리스트가 없을 때 */}
       {url_list?.length === 0 && (
         <Grid is_flex>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
@@ -155,7 +164,7 @@ const Record_img = (props) => {
       )}
     </React.Fragment>
   );
-}
+};
 
 const DelBtn = styled.div`
   position: relative;

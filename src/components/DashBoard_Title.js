@@ -13,13 +13,13 @@ import default_icon from '../img/none.png';
 
 /** 
  * @역할 대시보드 상단 오늘 섭취한 칼로리와 bmr을 비교하여 이미지와 멘트를 나타내는 컴포넌트
- * @필수값 : is_login, bmr, record, user_info
- * @담당자 : 김나영
+ * @필수값  is_login, bmr, record, user_info
+ * @담당자  김나영
 */
 
 const DashBoard_Title = (props) => {
 
-  const {is_login, bmr, record, user_info} = props
+  const {is_login, bmr, record, user_info} = props;
 
   // bmr과의 비교 대상 - 오늘 먹은 총 칼로리
   let today_kcal = 0;
@@ -161,7 +161,7 @@ const DashBoard_Title = (props) => {
 
     </React.Fragment>
   );
-}
+};
 
 const Top = styled.div`
   position: relative;

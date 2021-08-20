@@ -17,9 +17,9 @@ import {addDate} from '../redux/modules/cart';
 /** 
  * @param {String} date
  * @returns {String} date 날짜
- * @역할 : 현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
- * @필수값 : 오늘 날짜(변경 가능)
- * @담당자 : 김나영
+ * @역할  현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
+ * @필수값  오늘 날짜(변경 가능)
+ * @담당자  김나영
 */
 
 const Record_Date = (props) => {
