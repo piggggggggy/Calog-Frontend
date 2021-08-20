@@ -32,7 +32,7 @@ const Signup = () => {
     const debounce = _.debounce(() => 
     {
       dispatch(EmailDuplicate(user_info.email));
-    }, 10);
+    }, 3);
     debounce();
   }, [user_info.email]);
 
@@ -41,7 +41,7 @@ const Signup = () => {
     const debounce = _.debounce(() => 
     {
       dispatch(NickDuplicate(user_info.nickname));
-    },10);
+    },3);
     debounce();
   }, [user_info.nickname]);
 
@@ -55,12 +55,12 @@ const Signup = () => {
   const debounceEmail = _.debounce((e) => 
   {
     setUserInfo({...user_info, email: e.target.value})
-  }, 600);
+  }, 400);
 
   const debounceNick = _.debounce((e) => 
   {
     setUserInfo({...user_info, nickname: e.target.value})
-  }, 600);
+  }, 400);
 
 
   return (
@@ -73,7 +73,7 @@ const Signup = () => {
             <Text size="17px" lineheight="22px" bold color="#000000" >이메일로 가입</Text>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </Head>
-          <Grid m_margin margin="47px 20px 0px 20px" width="90%">
+          <Grid m_margin margin="5vh 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">이메일</Text>
           <InputBox>
           <SubInput placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text"
@@ -91,7 +91,7 @@ const Signup = () => {
         <Text color="#FFFFFF" size="13px" lineheight="18px">*이메일을 입력해주세요.</Text>
         }
           </Grid>
-          <Grid margin="47px 20px 0px 20px" width="90%">
+          <Grid margin="5vh 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호</Text>
           <InputBox>
           <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.password}
@@ -105,7 +105,7 @@ const Signup = () => {
           }
           </Grid>
 
-          <Grid margin="47px 20px 0px 20px" width="90%">
+          <Grid margin="5vh 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px" >비밀번호 확인</Text>
           <InputBox>
           <Input border="none" placeholder="비밀번호를 다시 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.pwdcheck}
@@ -119,7 +119,7 @@ const Signup = () => {
         <Text color="#FFFFFF" size="13px" lineheight="18px">*비밀번호를 다시 입력해주세요.</Text>}
           </Grid>
 
-          <Grid margin="47px 20px 0px 20px" width="90%">
+          <Grid margin="5vh 20px 0px 20px" width="90%">
           <Text size="17px" color="#000000" lineheight="22px">닉네임</Text>
           <InputBox>
           <SubInput border="none" placeholder="닉네임을 입력해주세요" width="100%" type="text"
