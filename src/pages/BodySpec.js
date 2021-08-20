@@ -54,12 +54,7 @@ const BodySpec = (props) =>
 
             <div onClick={()=>{history.push("/signsocial")}}>
               <Grid display="flex">
-                <Text
-                m_size="28px"
-                bold
-                lineheight="34px"
-                size="28px"
-                margin="92px 0px 16px 24px">
+                <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">
                   <Tag>
                     회원가입/로그인하기
                   </Tag>
@@ -70,19 +65,11 @@ const BodySpec = (props) =>
               </Grid>
             </div>
 
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#8C8C8C"
-            margin="24px 0px 24px 24px">
+            <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">
               회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!
             </Text>
             <hr color="#F5F5F5"/>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#000000"
-            margin="24px 0px 24px 20px">
+            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
               <Tag onClick={()=>
                 {
                   history.push("/notice")
@@ -90,23 +77,16 @@ const BodySpec = (props) =>
               </Tag>
             </Text>
             <hr color="#F5F5F5"/>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#000000"
-            margin="24px 0px 24px 20px">
+            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
               <Tag onClick={()=>
                 {
                   history.push("/alam")
-                }}>알림
+                }}>
+                  알림
               </Tag>
             </Text>
             {/* <hr color="#F5F5F5"/>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#000000"
-            margin="24px 0px 24px 20px">
+            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
               <Tag onClick={()=>
               {
                 history.push("/userfeedback")
@@ -116,17 +96,10 @@ const BodySpec = (props) =>
             </Text> */}
             <hr color="#F5F5F5"/>
             <Version>
-              <Text
-              lineheight="22px"
-              size="17px"
-              color="#A9A9A9"
-              margin="15px 0px 15px 20px">
+              <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
                 현재 버전
               </Text>
-              <Text
-              size="17px"
-              margin="17px 20px 15px 0px"
-              color="#F19F13">
+              <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">
                 V1.2.1
               </Text>
             </Version>
@@ -155,12 +128,7 @@ return (
     </Cameradiv> */}
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text
-          m_size="23px"
-          bold
-          lineheight="34px"
-          size="28px"
-          margin="92px 0px 16px 42px">
+          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
             {user_info?.nickname}
           </Text>
 
@@ -168,30 +136,19 @@ return (
           <Text margin="30px">
             신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!
           </Text>
-          <Button
-          border_radius="12px"
-          bg="#FFE899"
-          width="80%"
-          height="56px"
+          <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
           _onClick={()=>
             {
               history.push("/addspec")
             }}>
-            <Text
-            lineheight="22px"
-            size="16px"
-            bold>
+            <Text lineheight="22px" size="16px" bold>
               {gender&&age&&height&&weight?"신체정보 수정하기":"신체정보 등록하기"}
             </Text>
           </Button>
         </BodyBox>
 
           <hr color="#F5F5F5"/>
-          <Text
-          lineheight="22px"
-          size="17px"
-          color="#000000"
-          margin="24px 0px 24px 20px">
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
             <Tag onClick={()=>
               {
                 history.push("/notice")
@@ -200,11 +157,7 @@ return (
             </Tag>
           </Text>
           <hr color="#F5F5F5"/>
-          <Text
-          lineheight="22px"
-          size="17px"
-          color="#000000"
-          margin="24px 0px 24px 20px">
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
             <Tag onClick={()=>
               {
                 history.push("/alam")
@@ -213,11 +166,7 @@ return (
             </Tag>
           </Text>
           <hr color="#F5F5F5"/>
-          <Text
-          lineheight="22px"
-          size="17px"
-          color="#000000"
-          margin="24px 0px 24px 20px">
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
                 <Tag onClick={()=>
               {
                 history.push("/userfeedback")
@@ -228,27 +177,16 @@ return (
           <hr color="#F5F5F5"/>
 
           <Version>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#A9A9A9"
-            margin="15px 0px 15px 20px">
+            <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
               현재 버전
             </Text>
-            <Text
-            size="17px"
-            margin="17px 20px 15px 0px"
-            color="#F19F13">
+            <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">
               V1.2.1
             </Text>
           </Version>
           <hr color="#F5F5F5"/>
           <div onClick={logout}>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#A9A9A9"
-            margin="24px 0px 24px 20px">
+            <Text lineheight="22px" size="17px" color="#A9A9A9" margin="24px 0px 24px 20px">
               <Tag>
                 로그아웃
               </Tag>
