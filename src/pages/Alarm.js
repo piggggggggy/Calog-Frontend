@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
 import { history } from '../redux/configStore';
 
 import styled from 'styled-components';
@@ -16,7 +15,7 @@ import {Back} from "../img/svg";
  * @담당자 : 성수
 */
 
-const Alarm = (props) => 
+const Alarm = () => 
 {
 
   
@@ -34,11 +33,7 @@ const Alarm = (props) =>
               <Tag>{Back}</Tag>
             </div>
 
-            <Text
-            size="17px"
-            lineheight="22px"
-            bold
-            color="#000000">
+            <Text size="17px" lineheight="22px" bold color="#000000">
               알람
             </Text>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,14 +42,8 @@ const Alarm = (props) =>
 
           <hr color="#F5F5F5"/>
 
-          <Grid
-          display="flex"
-          padding="20px 15px"
-          jc="space-between">
-            <Text
-            size="17px"
-            lineheight="22px"
-            margin="10px">
+          <Grid display="flex" padding="20px 15px" jc="space-between">
+            <Text size="17px" lineheight="22px" margin="10px">
               푸시 알림
             </Text>
             {/* <PushBtn><Circle/></PushBtn> */}
