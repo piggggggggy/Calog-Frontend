@@ -66,11 +66,7 @@ const AddSpec = () =>
         SetSpec({...bodyspec, gender: "여자"});
         Setpage(page+1);
     };
-    const setThirdGender = () => 
-    {
-        SetSpec({...bodyspec, gender: "미정"});
-        Setpage(page+1);
-    };
+
 
 
     return(
@@ -104,10 +100,9 @@ const AddSpec = () =>
                 <Body>
                     {/* 페이지에 따라 받아야하는 값이 다르므로 다른 input 박스 보여줌 */}
                     {page===0?
-                    <Grid display="flex" jc="center">
+                    <Grid display="flex" jc="space-around">
                         <GenderBox onClick={setMan}>남</GenderBox>
                         <GenderBox onClick={setWoman}>여</GenderBox>
-                        <GenderBox onClick={setThirdGender}>미정</GenderBox>
                     </Grid>
                     :page===1?
                     <InputBox>
@@ -204,7 +199,7 @@ const GenderBox = styled.div`
     width: 25%;
     height: 100px;
     background-color: #F19F13;
-    border-radius: 60px;
+    border-radius: 50%;
     margin: 15px;
     display: flex;
     justify-content: center;
