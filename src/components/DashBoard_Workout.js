@@ -2,18 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import {Grid, Text, Image} from '../elements';
 
-//이미지
-import yoga from '../img/yoga 1.png';
-
 /** 
- * @역할 : 대시보드에서 유저에게 운동리스트를 추천해주는 맵 컴포넌트
- * @필수값 : 운동 리스트
- * @담당자 : 김나영
+ * @역할  대시보드에서 유저에게 운동리스트를 추천해주는 맵 컴포넌트
+ * @필수값  운동 리스트
+ * @담당자  김나영
 */
 
 const DashBoard_Workout = (props) => {
 
-  const {name, kcal, url} = props
+  const {name, kcal, url} = props;
 
   return (
     <React.Fragment>

@@ -22,14 +22,16 @@ const Calendar = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 
   // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  const is_loaded = useSelector((state) => state.record.is_loaded);
 
+  // 스피너
   if(!is_loaded) {
     return (<Loading />);
-  }
+  };
   
   return (
     <React.Fragment>
+
       {/* 헬멧 */}
       <Helmet>
         <title>[Calog] 나의 한 달 캘린더</title>

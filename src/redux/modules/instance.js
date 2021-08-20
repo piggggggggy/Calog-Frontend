@@ -6,8 +6,12 @@ const getToken = () => {
 };
 
 const instance = axios.create({
-  // baseURL : "http://52.79.110.219/",
-  baseURL: "https://2k1.shop/",
+
+  // test
+  baseURL : "http://52.79.110.219/",
+
+  // deploy
+  // baseURL: "https://2k1.shop/",
 });
 
 instance.interceptors.request.use(config => {

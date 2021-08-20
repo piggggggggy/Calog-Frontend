@@ -4,13 +4,13 @@ import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
 /** 
- * @역할 : 캘린더 각 끼니에 기록된 칼로리 리스트
- * @필수값 : amount, name, resultKcal, data_type
- * @담당자 : 김나영
+ * @역할  캘린더 각 끼니에 기록된 칼로리 리스트
+ * @필수값  amount, name, resultKcal, data_type
+ * @담당자  김나영
 */
 
 const CalendarDetail_Food = (props) => {
-  const {amount, name, resultKcal, data_type, type} = props
+  const {amount, name, resultKcal, data_type, type} = props;
 
   return (
     <React.Fragment>

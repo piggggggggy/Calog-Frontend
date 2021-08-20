@@ -1,37 +1,37 @@
 import React from 'react';
 import theme from '../shared/theme';
 
-//날짜
+// 날짜
 import styled from 'styled-components';
 
 /** 
- * @역할 : 각 날짜의 bmr과 kcal를 비교하여 이모지를 다르게 주기 위한 컴포넌트
- * @필수값 : record_list(date, bmr, list_kcal)
- * @담당자 : 김나영
+ * @역할  각 날짜의 bmr과 kcal를 비교하여 이모지를 다르게 주기 위한 컴포넌트
+ * @필수값  record_list(date, bmr, list_kcal)
+ * @담당자  김나영
 */
 
 const Calendar_DayEmoji = (props) => {
 
-  //기록된 기초대사량
+  // 기록된 기초대사량
   const bmr = props.item.bmr;
 
-  //가록된 칼로리의 합
+  // 가록된 칼로리의 합
   const kcal = props.item.totalCalories;
 
-  //범위
-  //+,- 10
+  // 범위
+  // +,- 10
   const ten = bmr*0.1;
 
-  //+,- 20
+  // +,- 20
   const twenty = bmr*0.2;
 
-  //case 1) '잘 먹었어요'의 기준(bmr+-10)
+  // case 1) '잘 먹었어요'의 기준(bmr+-10)
   const good = ((bmr-ten) <= kcal) && (kcal <= (bmr+ten));
 
-  //case 2) '적당히 먹었어요'의 기준(bmr+-20)
+  // case 2) '적당히 먹었어요'의 기준(bmr+-20)
   const well = ((bmr-twenty) <= kcal && kcal < (bmr-ten)) || ((bmr+ten) < kcal && kcal <= (bmr+twenty));
 
-  //case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
+  // case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
   const bad = kcal < (bmr-twenty) || (bmr+twenty) < kcal;
 
   return (

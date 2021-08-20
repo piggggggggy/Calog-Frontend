@@ -4,8 +4,6 @@ import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
 /** 
- * @param {*} props
- * @returns 설명적기
  * @역할 기록된 칼로리 양과 기초대사량을 비교하여 안내 메시지 컴포넌트
  * @필수값 : bmr, contents, foodRecords, totalCalories
  * @담당자 : 김나영
@@ -21,17 +19,17 @@ const CalenderDetail_Info = (props) => {
   const twenty = bmr*0.2;
 
   // case 1) '잘 먹었어요'의 기준(bmr+-10)
-  const good = ((bmr-ten) <= totalCalories) && (totalCalories <= (bmr+ten))
+  const good = ((bmr-ten) <= totalCalories) && (totalCalories <= (bmr+ten));
 
   // case 2) '적당히 먹었어요'의 기준(bmr+-20)
-  const well = ((bmr-twenty) <= totalCalories && totalCalories < (bmr-ten)) || ((bmr+ten) < totalCalories && totalCalories <= (bmr+twenty))
+  const well = ((bmr-twenty) <= totalCalories && totalCalories < (bmr-ten)) || ((bmr+ten) < totalCalories && totalCalories <= (bmr+twenty));
 
   // case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
-  const bad = totalCalories < (bmr-twenty) || (bmr+twenty) < totalCalories
+  const bad = totalCalories < (bmr-twenty) || (bmr+twenty) < totalCalories;
 
   // 차이
-  const _extra = Math.abs(bmr-totalCalories)
-  const extra = Math.round(_extra)
+  const _extra = Math.abs(bmr-totalCalories);
+  const extra = Math.round(_extra);
 
   // case 0) bmr이 없어서 비교할 대상이 없는 경우
   if(bmr === 0) {
@@ -157,7 +155,7 @@ const CalenderDetail_Info = (props) => {
       </Wrap>
     </React.Fragment>
   );
-}
+};
 
 const Wrap = styled.div`
   background-color: white;

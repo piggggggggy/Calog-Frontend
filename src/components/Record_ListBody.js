@@ -5,8 +5,8 @@ import { Grid } from '../elements';
 import Record_List from '../components/Record_List';
 
 /** 
- * @param {list} c
- * @returns {list} c 카트에 담긴 리스트
+ * @param {object} c
+ * @returns {object} c 카트에 담긴 리스트
  * @역할 : 칼로리 리스트 갯수에 따라 표출되는 리스트의 idx, 버튼 값의 변동을 모아놓은 컴포넌트
  * @필수값 : cart_list
  * @담당자 : 김나영
@@ -73,8 +73,7 @@ const Record_ListBody = (props) => {
       </Grid>
     </React.Fragment>
   );
-}
-
+};
 
 
 export default Record_ListBody;

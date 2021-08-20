@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect} from 'react';
 
 // css
 import {Grid, Text} from '../elements';
@@ -61,14 +61,15 @@ const DashBoard = (props) => {
   const user = useSelector((state) => state.user.user_info);
 
   // 운동리스트
-  const exercise_list = useSelector((state) => state.dashboard.exercise)
+  const exercise_list = useSelector((state) => state.dashboard.exercise);
 
   // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  const is_loaded = useSelector((state) => state.record.is_loaded);
 
+  // 스피너
   if(!is_loaded) {
     return (<Loading />);
-  }
+  };
 
   return (
         <Grid width="100%">
@@ -95,6 +96,7 @@ const DashBoard = (props) => {
           <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0">
             <Text size="20px" bold m_size="17px" margin="0 0 0 8.3%">{user.nickname}님, 이런 운동은 어때요?</Text>
             <Exercise_Wrap>
+
               {/* 운동 리스트 맵 */}
               {exercise_list?.map((e, idx) => {
                 return <DashBoard_Workout key={e._id} {...e}/>
