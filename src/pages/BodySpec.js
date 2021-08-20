@@ -127,7 +127,7 @@ const BodySpec = (props) =>
               size="17px"
               margin="17px 20px 15px 0px"
               color="#F19F13">
-                V1.2.0
+                V1.2.1
               </Text>
             </Version>
             <hr color="#F5F5F5"/>
@@ -239,7 +239,7 @@ return (
             size="17px"
             margin="17px 20px 15px 0px"
             color="#F19F13">
-              V1.2.0
+              V1.2.1
             </Text>
           </Version>
           <hr color="#F5F5F5"/>
