@@ -26,10 +26,7 @@ const Signup = () => {
   const dupliEmail = useSelector((state)=>state.user.email_dupli);
   const dupliNick = useSelector((state)=>state.user.nick_dupli);
   const [user_info, setUserInfo] = useState({});
-  // 비밀번호 최소 글자 + 한,영,숫자 최소1개
-  // 닉네임 최소 3글자
-  // 입력 전엔 빨간색 글씨 띄우기 X
-  // 이메일, 닉네임 중복체크 함수
+
   useEffect(() => 
   {
     const debounce = _.debounce(() => 
