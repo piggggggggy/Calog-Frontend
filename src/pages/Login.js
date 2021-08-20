@@ -17,7 +17,7 @@ import {Back, X} from "../img/svg";
  * @담당자 : 성수
 */
 
-const Signup = (props) => 
+const Login = (props) => 
 {
   const dispatch = useDispatch();
   const [user_info, setUserInfo] = useState({});
@@ -131,7 +131,7 @@ const Signup = (props) =>
 }
 
 
-export default Signup;
+export default Login;
 
 
 const Container = styled.div`
@@ -164,7 +164,7 @@ const InputBox = styled.div`
 
 const LoginButton = styled.div`
   width: 100%;
-  margin-top: 109.7%;
+  margin-top: 52%;
   @media only screen and (max-width: 400px) {
     max-width: 420px;
   width: 100%;
