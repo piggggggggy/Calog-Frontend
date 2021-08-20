@@ -6,21 +6,22 @@ import reportWebVitals from './reportWebVitals';
 //history 라우팅
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./redux/configStore";
-//리덕스 store
-import store from "./redux/configStore";
+//리덕스
 import { Provider } from "react-redux";
+// redux-persist
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/configStore';
 
 ReactDOM.render(
   <Provider store={store}>
-      <ConnectedRouter history={history}>
-          <App />
-      </ConnectedRouter>
+    <ConnectedRouter history={history}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>    
+    </ConnectedRouter>
   </Provider>
     ,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
