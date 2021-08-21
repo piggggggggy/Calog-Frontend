@@ -72,7 +72,6 @@ const DashBoard = (props) => {
   const [startX, setStart] = useState();
 
   const dragStart = (e) => {
-    e.preventDefault();
     setDrag(true);
     setStart(e.pageX + refX.current.scrollLeft)
   };
@@ -156,6 +155,8 @@ const Exercise_Wrap = styled.div`
   display: flex;
   margin: 7.8% 0 0 2.5%;
   overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 
   &::-webkit-scrollbar {
     display: none;
