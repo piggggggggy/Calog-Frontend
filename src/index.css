@@ -10,47 +10,34 @@ code {
     monospace;
 }
 
-@font-face {
-	font-family: 'Pretendard';
+  /* @font-face {
+  font-family: 'Pretendard';
   font-style: normal;
-	font-weight: 700;
-	src: local('Pretendard Bold'),
+  font-weight: normal;
+  src: local('Pretendard Bold'),
+  url('./styles/fonts/Pretendard-Regular.woff2') format('woff2'),
+  url('./styles/fonts/Pretendard-Regular.woff') format('woff'),
+  }
+
+  @font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Pretendard Bold'),
   url('./styles/fonts/Pretendard-Bold.woff2') format('woff2'),
-  url('./styles/fonts/Pretendard-Bold.woff') format('woff');
+  url('./styles/fonts/Pretendard-Bold.woff') format('woff'),
+  } */
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: bold;
+    font-display: swap;
+    src: local('Pretendard Bold'), url('../src/styles/fonts/Pretendard-Bold.woff2') format('woff2'), url('../src/styles/fonts/Pretendard-Bold.woff') format('woff');
 }
 
 @font-face {
-	font-family: 'Pretendard';
-  font-style: normal;
-	font-weight: 500;
-	src: local('Pretendard Medium'),
-  url('./styles/fonts/Pretendard-Medium.woff2') format('woff2'),
-  url('./styles/fonts/Pretendard-Medium.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'Pretendard';
-  font-style: normal;
-	font-weight: 100;
-	src: local('Pretendard Thin'),
-  url('./styles/fonts/Pretendard-Thin.woff2') format('woff2'),
-  url('./styles/fonts/Pretendard-Thin.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'Pretendard';
-  font-style: normal;
-	font-weight: bold;
-	src: local('Pretendard Medium'),
-  url('./styles/fonts/Pretendard-Medium.woff2') format('woff2'),
-  url('./styles/fonts/Pretendard-Medium.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'Pretendard';
-  font-style: normal;
-	font-weight: normal;
-	src: local('Pretendard Medium'),
-  url('./styles/fonts/Pretendard-Medium.woff2') format('woff2'),
-  url('./styles/fonts/Pretendard-Medium.woff') format('woff');
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-display: swap;
+    src: local('Pretendard Regular'), url('../src/styles/fonts/Pretendard-Regular.woff2') format('woff2'), url('../src/styles/fonts/Pretendard-Regular.woff') format('woff');
 }

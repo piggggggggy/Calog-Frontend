@@ -49,6 +49,7 @@ Text.defaultProps = {
 };
 
 const DefaultText = styled.p`
+    font-family: 'Pretendard';  
     width: ${(props) => props.width};
     font-weight: ${(props) => (props.bold? "700" : "400")};
     color: ${(props) => props.color};
@@ -63,6 +64,20 @@ const DefaultText = styled.p`
     @media ${theme.device.mobileM} {
         font-size: ${(props) => props.m_size};
         ${(props) => props.m_lineheight ? `line-height: ${props.m_lineheight}` : ''};
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: bold;
+        font-display: swap;
+        src: local('Pretendard Bold'), url('../src/styles/fonts/Pretendard-Bold.woff2') format('woff2'), url('../src/styles/fonts/Pretendard-Bold.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 400;
+        font-display: swap;
+        src: local('Pretendard Regular'), url('../src/styles/fonts/Pretendard-Regular.woff2') format('woff2'), url('../src/styles/fonts/Pretendard-Regular.woff') format('woff');
     }
 `;
 
