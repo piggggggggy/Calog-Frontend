@@ -25,11 +25,15 @@ const CalendarDetail_Date = (props) => {
   const Date = moment(SelectDate).format('M월 D일');
   const [date, setDate] = useState(Date);
 
-  // 날짜를 변경할 때 onChange
+  // 날짜를 변경했을 경우 onChange
   const Change = (date) => {
-    setDate(moment(date).format('M월 D일'))
-    const Format = moment(date).format('YYYY-MM-DD')
-    window.location.replace(`/calendar/${Format}`)
+    if (moment(date).format('YYYYMMDD') > moment(SelectDate).format('YYYYMMDD')) {
+      window.alert('오늘 이 전의 날짜만 확인할 수 있어요!')
+    } else {
+      setDate(moment(date).format('M월 D일'))
+      const Format = moment(date).format('YYYY-MM-DD')
+      window.location.replace(`/calendar/${Format}`)
+    }
   };
 
   return (
