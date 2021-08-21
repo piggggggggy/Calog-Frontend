@@ -82,7 +82,7 @@ const Wrap = styled.div`
   min-height: 9.3%;
   position: fixed;
   bottom: 0;
-  z-index: 500;
+  z-index: 99;
 `;
 
 export default Nav;
