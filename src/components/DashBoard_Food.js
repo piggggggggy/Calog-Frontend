@@ -41,7 +41,7 @@ const DashBoard_Food = (props) => {
 
         {/* type 버튼 */}
         <Grid margin="9.8% 0 0 0" m_margin="9.8% 0 0 0">
-          <DashBoard_When data_type={data_type} {...props}/>
+          <DashBoard_When {...props}/>
         </Grid>
 
         {/* 총 칼로리 */}
