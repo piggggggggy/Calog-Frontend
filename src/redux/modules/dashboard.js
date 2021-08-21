@@ -9,6 +9,9 @@ import instance from "./instance";
 // loading
 import {isLoaded} from './record';
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 // middleware 
 // dashboard - db에서 운동리스트 가져오기
 export const getWorkoutDB = () => {
@@ -23,6 +26,7 @@ export const getWorkoutDB = () => {
         dispatch(isLoaded(true))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err)
       }) 
   }
@@ -40,6 +44,7 @@ export const addBodySpecDB = (bodySpec) => {
       .then((res) => {
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('바디스펙을 저장하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }

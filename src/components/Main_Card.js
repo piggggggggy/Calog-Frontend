@@ -44,8 +44,8 @@ const Card = (props) => {
     const cartUnit = {
       foodId: props.foodId,
       name: props.name,
-      forOne: props.forOne,
-      grams: props.grams,
+      // forOne: props.forOne,
+      // grams: props.grams,
       kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };

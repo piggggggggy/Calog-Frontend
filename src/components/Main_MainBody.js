@@ -114,18 +114,10 @@ const MainBody = (props) => {
   // history tab 관리
   const styles = _history ? {display: "none"} : {display: "block"};
 
-  // range debounce  함수
-  // const debounce = _.debounce((n, x) => {
-  //   setMin(n);
-  //   setMax(x);
-  // }, 1000);
-  // const debounceCB = useCallback((n, x) => {
-  //   debounce(n, x);
-  // }, [])
-
-  if (!is_loaded) {
-    return <Loading/>
-  }
+  // if (!is_loaded) {
+  //   return <Loading/>
+  // }
+  // return <button onClick={methodDoesNotExist}>Break the world</button>;
 
   return (
     <React.Fragment>
@@ -142,7 +134,6 @@ const MainBody = (props) => {
 
             ref={keyword}
             onFocus={()=>{setHistory(false)}} 
-            // onBlur={()=>{setHistory(true)}}
             placeholder="어떤 칼로리가 궁금하신가요?"
             onKeyPress={onKeyPress}
             onChange={_setKey}
@@ -190,19 +181,6 @@ const MainBody = (props) => {
 
         {/* 추천 푸드 */}
         <RcmdList/>
-
-        {/* Range Slider */}
-        {/* <Grid padding="0 2.8vh" >
-          <RangeSlider 
-            min={0}
-            max={2000}
-            onChange={({ min, max }) => {
-              // debounce(min, max);
-              debounceCB(min, max);
-            }}
-          />
-        </Grid>
-        <Grid padding="0 0 4vh 0"/> */}
 
       </HeaderContainer>    
 

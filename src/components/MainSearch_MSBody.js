@@ -58,7 +58,7 @@ const MSBody = (props) => {
   
   // 칼로리 range 필터
   const [filterMin, setMin] = useState(0);
-  const [filterMax, setMax] = useState(5000);
+  const [filterMax, setMax] = useState(2000);
   
   // 정렬
   const [sortType, setSort] = useState('정확도순');

@@ -10,6 +10,9 @@ import {delCartAll} from './cart';
 import instance from "./instance";
 import { recordDeleted, clearDeleted } from "./user";
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 // middleware
 // 기록하기
 export const addRecordDB = (date, list, type, url, memo) => {
@@ -25,6 +28,7 @@ export const addRecordDB = (date, list, type, url, memo) => {
         history.replace('/loading/dashboard')
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
       })
   }
@@ -49,6 +53,7 @@ export const delRecordDB = (id, date, type) => {
         history.push(`/loading/calendar`);
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('게시글 삭제에 오류가 발생했어요! 관리자에게 문의해주세요😿')
       })
   }
@@ -66,6 +71,7 @@ export const getTodayRecordDB = () => {
           dispatch(isLoaded(true))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err)
         window.alert('기록을 불러오는데 오류가 발생했어요! 관리자에게 문의해주세요😿')
       }) 
@@ -82,6 +88,7 @@ export const getAllRecordDB = (monthFormat) => {
         dispatch(getAllRecord(data_list))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('게시글 로드에 문제가 발생했어요! 관리자에게 문의해주세요😿')
       }) 
   }
@@ -105,6 +112,7 @@ export const getRecordDB = (date) => {
         dispatch(isLoaded(true))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
       }) 
   }

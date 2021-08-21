@@ -72,7 +72,7 @@ const ButtonContainer = styled.div`
   } 
   @media only screen and (max-width: 1025px) {
     display: none;
-  } 
+  }  
 `;
 
 const FloatedBody = styled.div`

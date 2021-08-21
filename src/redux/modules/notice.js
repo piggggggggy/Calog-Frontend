@@ -5,6 +5,9 @@ import moment from "moment";
 //loading
 import {isLoaded} from './record';
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 //cadmin@calories.com
 //zkffhfltm1@
 const initialState = {
@@ -21,6 +24,7 @@ export const getNoticeSV = () => {
             dispatch(isLoaded(true))
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
         });
     };
@@ -34,6 +38,7 @@ export const postNoticeSV = (noticelist) => {
             history.push("/notice");
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
         });
     };
@@ -48,6 +53,7 @@ export const putNotiSV = (updatelist, noticeId) => {
             console.log(res);
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
         });
     };
@@ -62,6 +68,7 @@ export const deleteNotiSV = (noticeId) => {
             history.push("/notice");
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
         });
     };
@@ -78,6 +85,7 @@ export const getNotiDetailSV = (noticeId) => {
             dispatch(isLoaded(true))
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
         });
     };
@@ -94,6 +102,7 @@ export const foodFeedBack = (contents) => {
             console.log(res);
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err, '에너 났어요');
         });
     };
