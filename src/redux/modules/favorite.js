@@ -8,6 +8,9 @@ import instance from "./instance";
 //loading
 import {isLoaded} from './record';
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 // middleware 
 // 즐겨찾기
 export const addFavoriteDB = (data) => {
@@ -20,6 +23,7 @@ export const addFavoriteDB = (data) => {
         // window.alert("즐겨찾기 추가!");
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       }) 
   }
@@ -35,6 +39,7 @@ export const deleteFavoriteDB = (foodId) => {
         // window.alert("즐겨찾기 해제!");
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       }) 
   }
@@ -50,6 +55,7 @@ export const getFavoriteDB = () => {
         dispatch(getFavorite(res.data.foodList));
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       }) 
   }

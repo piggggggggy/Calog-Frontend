@@ -7,6 +7,9 @@ import instance from "./instance";
 //loading
 import {isLoaded} from './record';
 
+// sentry
+import * as Sentry from '@sentry/react';
+
   // 최신검색어 불러오기
   export const getRecentDB = (keyword) => {
     return function (dispatch, getState, {history}) {
@@ -17,6 +20,7 @@ import {isLoaded} from './record';
           dispatch(getRecent(res.data));
         })
         .catch((err) => {
+          Sentry.captureException(`Catched Error : ${err}`);
           console.log(err, "에러가 났읍니다.")
         })
     }
@@ -32,6 +36,7 @@ import {isLoaded} from './record';
           dispatch(addRecent(keyword));
         })
         .catch((err) => {  
+          Sentry.captureException(`Catched Error : ${err}`);
           console.log(err, "에러가 났읍니다.");
         })
     }
@@ -47,7 +52,8 @@ import {isLoaded} from './record';
          dispatch(deleteRecent(keyword));
        })
        .catch((err) => {
-         console.log(err, "에러가 났읍니다.")
+        Sentry.captureException(`Catched Error : ${err}`);
+        console.log(err, "에러가 났읍니다.")
        })
     }
   };

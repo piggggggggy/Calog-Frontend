@@ -41,7 +41,6 @@ const FoodDetail = (props) => {
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
   const record = _record === undefined ? [] : _record;
-  console.log(record)
 
 
   useEffect(() => {
@@ -50,8 +49,6 @@ const FoodDetail = (props) => {
 
   const bmr = !is_login ? 2000 : user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
-  console.log(foodRecord);
-
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
@@ -62,8 +59,8 @@ const FoodDetail = (props) => {
     const cartUnit = {
       foodId: foodInfo.foodId,
       name: foodInfo.name,
-      forOne: foodInfo.forOne,
-      grams: foodInfo.grams,
+      // forOne: foodInfo.forOne,
+      // grams: foodInfo.grams,
       kcal: Math.round(foodInfo.kcal * 10)/10,
       amount: 1,
     };
@@ -82,9 +79,7 @@ const FoodDetail = (props) => {
       return 0;
     }
   };
-
-  console.log(totalKcal())
-
+  
   const is_over = () => {
     if (bmr === totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
       return "line";

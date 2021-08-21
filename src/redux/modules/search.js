@@ -8,6 +8,9 @@ import instance from "./instance";
 //loading
 import {isLoaded} from './record';
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 // middleware 
 // DB에서 검색결과 가져오기
 export const searchKeywordDB = (data) => {
@@ -29,6 +32,7 @@ export const searchKeywordDB = (data) => {
         
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       }) 
 
@@ -47,6 +51,7 @@ export const getDetailDB = (foodId) => {
         dispatch(isLoaded(true))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       })
   }
@@ -62,6 +67,7 @@ export const countKeywordDB = (keyword) => {
         dispatch(addMostUsedKey(keyword));
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.");
       })
   }
@@ -77,6 +83,7 @@ export const getMostUsedKeyDB = () => {
         dispatch(getMostUsedKey(res.data.mostUsedKey));
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       })
   }
@@ -93,6 +100,7 @@ export const getRecommendedDB = () => {
         dispatch(isLoaded(true));
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err, "에러가 났읍니다.")
       })
   }
