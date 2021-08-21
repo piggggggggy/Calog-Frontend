@@ -32,11 +32,14 @@ const Record_Date = (props) => {
   
   // 날짜를 변경했을 경우 onChange
   const Change = (date) => {
-    setDate(moment(date).format('M월 D일'))
-
-    // 백엔드 날짜로 data형식 맞추어 전송
-    const chgDateFormat = moment(date).format('YYYY-MM-DD')
-    dispatch(addDate(chgDateFormat))
+    if (moment(date).format('YYYYMMDD') > moment(_SelectDate).format('YYYYMMDD')) {
+      window.alert('오늘 이 전의 날짜만 기록할 수 있어요!')
+    } else {
+      setDate(moment(date).format('M월 D일'))
+      // 백엔드 날짜로 data형식 맞추어 전송
+      const chgDateFormat = moment(date).format('YYYY-MM-DD')
+      dispatch(addDate(chgDateFormat))
+    }
   };
 
   return (

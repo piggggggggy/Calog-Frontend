@@ -33,7 +33,7 @@ const Record_ListBody = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto" display={short}>
+      <Grid margin="47% auto 24px auto" height="auto" m_margin="50% auto 24px auto" display={short}>
         {cart_list.map((c, idx) => {
 
           // 리스트가 6개 이상일 경우
@@ -50,7 +50,7 @@ const Record_ListBody = (props) => {
       </Grid>
 
       {/* 더보기 버튼 눌렀을 때 활성화 */}
-      <Grid margin="46% auto 24px auto" height="auto" m_margin="50% auto 24px auto" display={long}>
+      <Grid margin="47% auto 24px auto" height="auto" m_margin="50% auto 24px auto" display={long}>
         {cart_list.map((c, idx) => {
           return <Record_List key={c.foodId} {...c}/>
         })}

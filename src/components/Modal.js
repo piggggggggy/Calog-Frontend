@@ -25,25 +25,19 @@ const Modal = (props) => {
   // 삭제 모달 시 필요 - id, 날짜, 타입
   const record = useSelector((state) => state.record);
   const record_list = record.record[0];
-
-  // id
   const record_id = record_list?._id;
-
-  // 날짜
   const record_date = record_list?.date;
-
-  // 타입
   const type = record.type;
+  const delBtn = () => {
+    dispatch(delRecordDB(record_id, record_date, type))
+  };
 
   // 취소 버튼
   const xBtn = () => {
     setDisplay("none")
   };
 
-  // 삭제 버튼
-  const delBtn = () => {
-    dispatch(delRecordDB(record_id, record_date, type))
-  };
+  
 
   return (
     <Grid display={open ? display : "none"}>
