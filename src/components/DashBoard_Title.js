@@ -87,8 +87,8 @@ const DashBoard_Title = (props) => {
 
         {/* 닉네임 >> 초과해서 먹었을 경우에만 색을 다르게 */}
         {(over_bmr && bmr !== 0) ?
-          <Text size="22px" bold m_size="18px" color={'#E24444'}>{user_info.nickname}님!</Text> :
-          <Text size="22px" bold m_size="18px">{user_info.nickname}님!</Text>
+          <Text size="22px" m_size="18px" color={'#E24444'}>{user_info.nickname}님!</Text> :
+          <Text size="22px" m_size="18px">{user_info.nickname}님!</Text>
         }
 
         {/* case1-1) 기록된 리스트가 있을 때 */}
