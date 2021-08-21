@@ -158,9 +158,9 @@ const Exercise_Wrap = styled.div`
   overflow-y: hidden;
   white-space: nowrap;
 
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 
   @media ${theme.device.mobileM} {
     margin-top: 4.8% 0 0 2.5%;
