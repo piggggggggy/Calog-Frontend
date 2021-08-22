@@ -159,14 +159,15 @@ const CartBody = (props) => {
         </CartListBox>
 
         
-        {/* 최근 삭제 목록 및 버튼  & 기록하기 버튼*/}
-        {!is_login || recentDeleted_list.length === 0 ?
-          <CalcBox>
+        {/* 기록하기 버튼*/}
+          <CalcBox style={!is_login || recentDeleted_list.length === 0 ? {bottom: "9%"} : {bottom: "21%"}}>
             <div onClick={()=>{write()}}>
-              <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
             </div>
           </CalcBox>
-          :
+
+        {/* 최근삭제목록 */}
+        {(is_login && recentDeleted_list.length !== 0) &&
           <UnderBar recentDeleted_list={recentDeleted_list} type={type}/>
         }
         
@@ -198,7 +199,7 @@ const CartListBox = styled.div`
   position: relative;
   width: 100%;
   margin-top: 2.7vh;
-  padding-bottom: 14vh;
+  padding-bottom: 24vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -207,10 +208,12 @@ const CartListBox = styled.div`
 
 const CalcBox = styled.div`
   position: fixed;
-  bottom: 9%;
+  /* bottom: 21%; */
   max-width: 420px;
   width: 100%;
-  padding: 2.8vh 20px;
+  padding: 2vh 20px 2.8vh 20px;
+  z-index: 60;
+  background: #FFFFFF;
 
   & > div {
     width: 100%;
@@ -221,8 +224,6 @@ const CalcBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
   }
 `;
