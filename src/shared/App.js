@@ -29,6 +29,8 @@ import webImg from '../img/backImg.png';
 // lazy loading
 import LazyLoad from 'react-lazyload';
 
+import { get_csrf_token } from './api';
+
 const App = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
@@ -40,6 +42,8 @@ const App = (props) => {
         dispatch(LoginCheck());
     })
     dispatch(LoginCheck());
+    // csrf 토큰 요청
+    get_csrf_token();
   }, []);
   
   return (
