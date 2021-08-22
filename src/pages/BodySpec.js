@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
@@ -30,15 +30,22 @@ const BodySpec = (props) =>
   const user_info = useSelector(state=>state.user.user_info);
 
   const profile = useRef();
-  const profile_url = profile.current?.files[0];
+  
+  const store_profile = () => {
+    const profile_url = profile.current.files[0];
 
-  const _upload = storage
-  .ref(`profiles/${profile_url.name}${new Date().getTime()}`)
-  .put(profile_url);
-_upload.then((snap) => {
-  snap.ref.getDownloadURL().then((url) => {
+    const _upload = storage
+    .ref(`profiles/${profile_url.name}${new Date().getTime()}`)
+    .put(profile_url);
+  _upload
+  .then((snap) => {
+    snap.ref.getDownloadURL().then((url) => {
+      console.log(url);
+    });
   });
-});
+  }
+
+
   
   const gender = user_info?.gender;
   const age = user_info?.age;
@@ -128,10 +135,11 @@ return (
         {ProfileDefault}
     </Profile>
       <label htmlFor="profile_img">
-      <Cameradiv onClick={()=>console.log(profile.current.files)}>
+      <Cameradiv>
       {Camera}
       </Cameradiv>
-      <File_box type="file" id="profile_img" ref={profile}/>
+      <File_box type="file" id="profile_img" ref={profile} multiple onChange={store_profile}
+      />
       </label>
         <Bottombg>
           <hr color="#FFE899"/>
