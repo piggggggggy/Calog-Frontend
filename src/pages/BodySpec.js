@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
+
+import { storage } from '../shared/firebase';
 
 import styled from 'styled-components';
 import { Grid, Button, Text } from '../elements';
@@ -27,6 +29,24 @@ const BodySpec = (props) =>
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
 
+  const profile = useRef();
+  
+  const store_profile = () => {
+    const profile_url = profile.current.files[0];
+
+    const _upload = storage
+    .ref(`profiles/${profile_url.name}${new Date().getTime()}`)
+    .put(profile_url);
+  _upload
+  .then((snap) => {
+    snap.ref.getDownloadURL().then((url) => {
+      console.log(url);
+    });
+  });
+  }
+
+
+  
   const gender = user_info?.gender;
   const age = user_info?.age;
   const height = user_info?.height;
@@ -85,15 +105,6 @@ const BodySpec = (props) =>
                   알림
               </Tag>
             </Text>
-            {/* <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-              <Tag onClick={()=>
-              {
-                history.push("/userfeedback")
-              }}>
-                의견 보내기
-              </Tag>
-            </Text> */}
             <hr color="#F5F5F5"/>
             <Version>
               <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
@@ -123,9 +134,13 @@ return (
     <Profile>
         {ProfileDefault}
     </Profile>
-    {/* <Cameradiv>
-    {Camera}
-    </Cameradiv> */}
+      <label htmlFor="profile_img">
+      <Cameradiv>
+      {Camera}
+      </Cameradiv>
+      <File_box type="file" id="profile_img" ref={profile} multiple onChange={store_profile}
+      />
+      </label>
         <Bottombg>
           <hr color="#FFE899"/>
           <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
@@ -251,11 +266,19 @@ const BodyBox = styled.div`
 
 const Cameradiv = styled.div`
   position: absolute;
-  margin: 30px 0px 0px 110px;
+  margin: -35px 0px 0px 110px;
 `;
 
 const Tag = styled.a`
   &:hover{
     cursor: pointer;
   }
+`;
+
+const Profile_url = styled.div`
+  
+`;
+
+const File_box = styled.input`
+  display: none;
 `;
