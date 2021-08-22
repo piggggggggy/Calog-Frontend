@@ -54,17 +54,6 @@ const UnderBar = (props) => {
     dispatch(removeDeleted({...data, list: recentDeleted_list}));
   };
   
-  // 기록하기
-  const write = () => {
-    if(is_login) {
-      dispatch(cartOut(type));
-      history.push('/record');
-    } else {
-      let result = window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')
-      result ? history.push('/signsocial') : history.goBack('/');
-    }
-  };
-
   return (
     <React.Fragment>
       <RecentDeletedContainer 
@@ -80,9 +69,9 @@ const UnderBar = (props) => {
           
           
           {/* 최근 삭제 목록 */}
-          <Grid padding="0 7% 3% 7%;">
+          <RecentDeleteText>
             <Text size="15px" bold padding="0" margin="0">최근 삭제 목록</Text>
-          </Grid>
+          </RecentDeleteText>
           
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
             {recentDeleted_list.map((recentDeleted, idx) => {
@@ -109,11 +98,11 @@ const UnderBar = (props) => {
           </Grid>
           
           {/* 기록하러가기 버튼 */}
-          <RecordBox>
+          {/* <RecordBox>
             <div onClick={()=>{write()}}>
               <Text size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
             </div>
-          </RecordBox>
+          </RecordBox> */}
 
         </RecentDeletedContainer>
     </React.Fragment>
@@ -142,24 +131,19 @@ const RecentDeletedContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
 `;
 
-const RecordBox = styled.div`
+const RecentDeleteText = styled.div`
   width: 100%;
-  padding: 3.8vh 20px 2.8vh 20px;
+  padding: 0 7% 3% 7%;
 
-  & > div {
-    width: 100%;
-    height: 6.25vh;
-    background: #FFE899;
-    border: none;
-    border-radius: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+  @media only screen and (max-height: 700px) {
+    padding: 0 7% 1% 7%;
+  }
+
+  @media only screen and (max-height: 600px) {
+    padding: 0 7%;
   }
 `;
 
@@ -187,6 +171,9 @@ const RecentDeletedText = styled.div`
   color: #2A2A2A;
   margin-left: 6px;
 
+  @media only screen and (max-height: 750px) {
+    line-height: 15px;
+  }
 
   @media ${theme.device.mobileS} {
     margin-left: 3px;

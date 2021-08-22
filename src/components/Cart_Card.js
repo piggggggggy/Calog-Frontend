@@ -109,10 +109,6 @@ Card.defaultProps = {
 const CardContainer = styled.div`
   position: relative;
   width: 100%;
-
-  @media ${theme.device.mobileM} {
-    /* height: calc(4.4vh + 53px); */
-  }
 `;
 
 const DeleteBar = styled.div`
