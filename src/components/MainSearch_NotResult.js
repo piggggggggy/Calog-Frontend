@@ -90,12 +90,12 @@ const NotResult = (props) => {
               </Fats>
           }
           
-          <Text size="28px" m_size="22px" bold margin="4.7vh 0 0 0" >앗! 검색결과가 없어요 ㅠㅠ</Text>
+          <Text size="28px" m_size="22px" bold margin="3.7vh 0 0 0" color="#2A2A2A" >앗! 검색결과가 없어요 ㅠㅠ</Text>
 
           <FeedBackContainer>
-            <FeedBackText>이 키워드를 등록하고싶으시다면?</FeedBackText>
+            <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             <FeedBackBtn onClick={feedBack}>
-              <div>의견 보내기</div>
+              <div>키워드 등록 요청하기</div>
             </FeedBackBtn>
           </FeedBackContainer>
 
@@ -148,13 +148,15 @@ const FeedBackContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.9vh;
-  padding-top: 5vh;
+  margin-top: 3.7vh;
 `;
 
 const FeedBackText = styled.div`
   font-size: 15px;
   line-height: 22px;
+  margin-bottom: 0.9vh;
+  color: #5F5F5F;
+  font-weight: bold;
 `;
 
 const FeedBackBtn = styled.div`
@@ -173,6 +175,7 @@ const FeedBackBtn = styled.div`
     font-size: 16px;
     line-height: 22px;
     font-weight: bold;
+    color: #404040;
   }
 `;
 
