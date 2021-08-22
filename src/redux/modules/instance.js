@@ -2,7 +2,14 @@ import axios from "axios";
 
 const getToken = () => {
   const token = `${document.cookie}`;
-  return token.split("=")[1];
+  const jwt_token = token.split("; ").find(row => row.startsWith('TOKEN'))?.split("=")[1];
+    return jwt_token;
+};
+
+const getToken_csrf = () => {
+  const token = `${document.cookie}`;
+  const csrf_token = token.split("; ").find(row => row.startsWith('CSRF_TOKEN')).split("=")[1];
+    return csrf_token;
 };
 
 const instance = axios.create({
@@ -15,7 +22,8 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
-  config.headers = { authorization: `Bearer ${getToken()}` };
+  config.headers = { authorization: `Bearer ${getToken()}`,
+                     '_csrf-token': `${getToken_csrf()}` };
   return config;
 });
 
