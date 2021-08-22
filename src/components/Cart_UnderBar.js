@@ -173,6 +173,12 @@ const RecentDeletedButton = styled.div`
   justify-content: space-between;
   margin: 5px 1%;
   cursor: pointer;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const RecentDeletedText = styled.div`
