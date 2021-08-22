@@ -135,7 +135,7 @@ const RecentDeletedContainer = styled.div`
   border-top-right-radius: 24px;
   box-shadow: 0px -5px 22px -8px rgba(0, 0, 0, 0.14);
   background: #fff;
-  z-index: 300;
+  z-index: 70;
   transition: 1s ease;
 
   display: flex;
