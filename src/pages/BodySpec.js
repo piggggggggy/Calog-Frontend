@@ -3,6 +3,8 @@ import React, {useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
 
+import { storage } from '../shared/firebase';
+
 import styled from 'styled-components';
 import { Grid, Button, Text } from '../elements';
 
@@ -29,6 +31,14 @@ const BodySpec = (props) =>
 
   const profile = useRef();
   const profile_url = profile.current?.files[0];
+
+  const _upload = storage
+  .ref(`profiles/${profile_url.name}${new Date().getTime()}`)
+  .put(profile_url);
+_upload.then((snap) => {
+  snap.ref.getDownloadURL().then((url) => {
+  });
+});
   
   const gender = user_info?.gender;
   const age = user_info?.age;
