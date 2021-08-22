@@ -165,7 +165,7 @@ const RecordBox = styled.div`
 
 const RecentDeletedButton = styled.div`
   height: 4vh;
-  padding: 5px 1.9% 5px 2.8%;
+  padding: calc((4vh - 17px)/2) 2.8% calc((4vh - 17px)/2) 1.9%;
   background: #E4E4E4;
   border-radius: 24px;
   display: flex;
