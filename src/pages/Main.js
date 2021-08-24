@@ -71,7 +71,7 @@ const Main = (props) => {
       <LogoHeader/>
       <MainBody/>
 
-    {window.navigator.standalone === {display} && (
+    {window.navigator.standalone === false && (
       <Add onClick={close} >
         <AddHome className="info">
           <Grid is_flex width="95%" margin="auto" m_margin="auto">
