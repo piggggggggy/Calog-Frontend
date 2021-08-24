@@ -8,7 +8,7 @@ import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
 import UnderBar from '../components/Main_UnderBar';
 import CalorieBar from '../components/FoodDetail_CalorieBar';
-import Loading from './Loading2';
+import Loading from './Loading4';
 
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
@@ -36,6 +36,7 @@ const FoodDetail = (props) => {
   const foodInfo = useSelector((state) => state.search.detail);
   const foodId = props.match.params.foodId;
   const user = useSelector((state) => state.user.user_info);
+  const is_loaded = useSelector((state) => state.record.is_loaded);
 
 
 // 대사량과 나의 칼로리 기록
@@ -96,20 +97,25 @@ const FoodDetail = (props) => {
 
 
   const StatusText = styled.div`
-  width: auto;
-  line-height: 22px;
-  font-size: 15px;
-  font-weight: bold; 
-  color: ${colors};
-  background: #fff;
+    width: auto;
+    line-height: 22px;
+    font-size: 15px;
+    font-weight: bold; 
+    color: ${colors};
+    background: #fff;
 
-  @media ${theme.device.mobileS} {
-    line-height: 20px;
-    font-size: 13px;
-  }
-`;
+    @media ${theme.device.mobileS} {
+      line-height: 20px;
+      font-size: 13px;
+    }
+  `;
 
-  
+
+  // 스피너
+  if (!is_loaded) {
+    return <Loading/>
+  };
+
   return (
     <React.Fragment>
       {/* 헤더 */}
