@@ -87,7 +87,6 @@ const Record = (props) => {
   const submitBtn = async (e) => {
     e.preventDefault();
     let file = fileUpload.current.files;
-    console.log(file)
       let image_list = []
       if (file?.length > 0) {
 
@@ -113,12 +112,11 @@ const Record = (props) => {
                 window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
               }
               if(i === file?.length-1) {
-
                 // case1) 메모에 입력된 내용이 없을 때
-                // inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
+                inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 
                 // case2) 메모에 입력된 내용이 있을 때
-                // dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
+                dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
               }
             });
           } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
@@ -127,10 +125,10 @@ const Record = (props) => {
 
         // 업로드 할 이미지가 없을 때
         // case1) 메모에 입력된 내용이 없을 때
-        // inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], "")) : 
+        inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], "")) : 
 
         // case2) 메모에 입력된 내용이 있을 때
-        // dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], inputMemo))
+        dispatch(addRecordDB(cart.date, cart_list, cart.type, [""], inputMemo))
       }
   };
 
