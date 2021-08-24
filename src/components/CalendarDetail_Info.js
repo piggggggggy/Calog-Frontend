@@ -178,6 +178,7 @@ const Svg = styled.svg`
 `;
 
 const P = styled.p`
+  font-family: 'Pretendard';
   font-size: 22px;
   font-weight: bold;
   line-height: 28px;

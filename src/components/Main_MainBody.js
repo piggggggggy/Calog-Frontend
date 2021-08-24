@@ -402,6 +402,7 @@ const TextBaloon = styled.div`
   }
 
   & > div {
+    font-family: 'Pretendard';  
     position: absolute;
     left: 0;
     top: 0;

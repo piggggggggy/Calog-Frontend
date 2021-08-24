@@ -156,6 +156,7 @@ const NameContainer = styled.div`
 `;
 
 const NameBox = styled.div`
+  font-family: 'Pretendard';  
   max-height: 30px;
   /* min-height: 30px; */
   max-width: 100%;
