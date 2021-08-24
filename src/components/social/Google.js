@@ -14,7 +14,7 @@ const Google = () =>
 
   try {
       tokenSave();
-      window.location.replace('/body');
+      window.location.replace('/dashboard');
     }
     catch {
       window.alert("소셜 로그인 실패, 다시 로그인 해주세요!");
