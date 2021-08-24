@@ -34,11 +34,6 @@ const Nav = (props) => {
 
   return (
     <React.Fragment>
-      {window.navigator.standalone === false && (
-        <AddHome>
-          안녕
-        </AddHome>
-      )}
       <Wrap>
 
         {/* 칼로리 사전 */}
@@ -88,15 +83,6 @@ const Wrap = styled.div`
   position: fixed;
   bottom: 0;
   z-index: 99;
-`;
-
-const AddHome = styled.div`
-  position: absolute;
-  background-color: violet;
-  width: 90%;
-  height: 20px;
-  bottom: 0;
-  margin: auto;
 `;
 
 export default Nav;
