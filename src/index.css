@@ -9,7 +9,7 @@ html, body, code {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: normal;
-    src: url("styles/fonts/Pretendard-Regular.woff2") format('woff2'),
+    src: 
     url("styles/fonts/Pretendard-Regular.woff") format('woff'),
     url("styles/fonts/Pretendard-Regular.otf") format('truetype'),
     url('styles/fonts/Pretendard-Regular.ttf') format('truetype');
@@ -19,7 +19,7 @@ html, body, code {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: bold;
-    src: url("styles/fonts/Pretendard-Bold.woff2") format('woff2'),
+    src: 
     url("styles/fonts/Pretendard-Bold.woff") format('woff'),
     url("styles/fonts/Pretendard-Bold.otf") format('truetype'),
     url('styles/fonts/Pretendard-Bold.ttf') format('truetype');
