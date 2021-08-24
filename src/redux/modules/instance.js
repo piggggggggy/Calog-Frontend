@@ -22,8 +22,13 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
-  config.headers = { authorization: `Bearer ${getToken()}`,
-                     '_csrf-token': `${getToken_csrf()}` };
+  config.headers = { 
+    'Content-Type': 'application/json; charset=utf-8',
+    'X-Requested-With': 'XMLHttpRequest',
+    authorization: `Bearer ${getToken()}`,
+    'x-csrf-token': `${getToken_csrf()}`,
+  };
+  config.headers.Accept = 'application/json';
   return config;
 });
 
