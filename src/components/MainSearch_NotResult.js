@@ -35,6 +35,7 @@ const NotResult = (props) => {
   // 검색결과가 없어요! 난수생성
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
+  // 피드백 보내기
   const feedBack = () => {
     dispatch(foodFeedBack(keyword));
     setModal(true);

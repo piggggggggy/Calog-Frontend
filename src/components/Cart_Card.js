@@ -25,18 +25,28 @@ import theme from '../shared/theme'
 const Card = (props) => {
 
   const dispatch = useDispatch();
-
+  
 
   // 갯수 카운팅하기!
   const [count, setCount] = useState(props.amount);
+  console.log(count);
   const upCount = () => {
-    setCount(count + 0.5);
-    dispatch(setUpAmount(props.foodId));
+    if (count >= 0.5){
+      setCount(count + 0.5);
+      dispatch(setUpAmount(props.foodId));
+    } else {
+      setCount(Number((count + 0.1).toFixed(1)));
+      dispatch(setUpAmount(props.foodId));
+    }
+
   };
 
   const downCount = () => {
     if(count > 0.5){
       setCount(count - 0.5);
+      dispatch(setDownAmount(props.foodId));
+    } else if (count > 0.1) {
+      setCount(Number((count - 0.1).toFixed(1)));
       dispatch(setDownAmount(props.foodId));
     }
   };
@@ -110,6 +120,7 @@ Card.defaultProps = {
 const CardContainer = styled.div`
   position: relative;
   width: 100%;
+  margin-bottom: 2vh;
 `;
 
 const DeleteBar = styled.div`

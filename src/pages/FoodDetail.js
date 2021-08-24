@@ -32,22 +32,22 @@ import Fat from '../img/C_fat.jpg';
 const FoodDetail = (props) => {
 
   const dispatch = useDispatch();
+  const foodId = props.match.params.foodId;
   const is_login = useSelector((state) => state.user.is_login);
   const foodInfo = useSelector((state) => state.search.detail);
-  const foodId = props.match.params.foodId;
   const user = useSelector((state) => state.user.user_info);
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
 
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
-  const record = _record === undefined ? [] : _record;
 
 
   useEffect(() => {
     dispatch(getDetailDB(foodId))
   }, []);
 
+  const record = _record === undefined ? [] : _record;
   const bmr = !is_login ? 2000 : user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
 
@@ -147,11 +147,11 @@ const FoodDetail = (props) => {
             <StatusText lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
               {is_login ? 
               is_over() === "line" ? 
-              "현재까지 오늘의 기준치를 모두 채웠어요!" 
+              " 현재까지 오늘의 기준치를 모두 채웠어요! " 
               : is_over() === "over" ? 
-              `현재까지 기준치 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal 초과했어요!` 
-              : `아직 기준치까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요!`
-              : "로그인 하시면 더 많은 정보를 얻을 수 있어요!"}
+              ` 현재까지 기준치 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal 초과했어요! ` 
+              : ` 아직 기준치까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요! `
+              : " 로그인 하시면 더 많은 정보를 얻을 수 있어요! "}
               
               
             </StatusText>

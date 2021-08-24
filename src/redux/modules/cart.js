@@ -24,7 +24,7 @@ const search = createSlice({
     addCartRx : (state, action) => {
       let index = state.cart.findIndex((cart) => cart.foodId === action.payload.foodId)
       if (index !== -1) {
-        window.alert('이미 담았잖아!!!');
+        window.alert('이미 장바구니에 담으셨어요!');
         return;
       }else{
         state.cart.unshift(action.payload);
@@ -50,13 +50,23 @@ const search = createSlice({
     // 푸드 up카운팅
     setUpAmount : (state, action) => {
       const index = state.cart.findIndex((cart) => cart.foodId === action.payload);
-      state.cart[index].amount += 0.5;
+      if (state.cart[index].amount >= 0.5) {
+        state.cart[index].amount += 0.5;
+      } else {
+        state.cart[index].amount = Number((state.cart[index].amount + 0.1).toFixed(1));
+      }
+      
     },
 
     // 푸드 down카운팅
     setDownAmount : (state, action) => {
       const index = state.cart.findIndex((cart) => cart.foodId === action.payload);
-      state.cart[index].amount -= 0.5;
+      if (state.cart[index].amount > 0.5) {
+        state.cart[index].amount -= 0.5;
+      } else if (state.cart[index].amount > 0.1) {
+        state.cart[index].amount = Number((state.cart[index].amount - 0.1).toFixed(1));
+      }
+      
     },
 
     // 기록하기 => type 넘겨주기
