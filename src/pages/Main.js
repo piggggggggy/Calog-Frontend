@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // css
-import {Grid, Text} from '../elements';
+import {Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
 import { MdAddBox } from "react-icons/md";
@@ -16,7 +16,6 @@ import { getRecommendedDB, getMostUsedKeyDB } from '../redux/modules/search';
 import MainBody from '../components/Main_MainBody';
 import LogoHeader from '../shared/LogoHeader';
 import Loading from './Loading4';
-import Modal from '../components/Modal';
 
 // helmet
 import {Helmet} from 'react-helmet';
@@ -71,16 +70,16 @@ const Main = (props) => {
       <LogoHeader/>
       <MainBody/>
 
-    {window.navigator.standalone === false && (
+    {/* {window.navigator.standalone === false && ( */}
       <Add onClick={close} >
         <AddHome className="info">
-          <Grid is_flex width="95%" margin="auto" m_margin="auto">
+          <FlexBox>
             <MdAddBox size="30px" color={theme.color.gray_7}/>
             <Text margin="auto 2%" m_size="12px">홈 화면에 추가하면 앱처럼 사용할 수 있어요!</Text>
-          </Grid>
+          </FlexBox>
         </AddHome>
       </Add>
-    )}
+    {/* )} */}
     </React.Fragment>
   );
 }
@@ -95,6 +94,7 @@ const Add = styled.div`
   background-color: rgba(30, 30, 30, 0.3);
   z-index: 1000;
   text-align: center;
+  
 `;
 
 const AddHome = styled.div`
@@ -106,12 +106,30 @@ const AddHome = styled.div`
   left: 1%;
   right: 1%;
   margin: 0 auto 5% auto;
-  padding: 3.5% 6%;
   border-radius: 10px;
   z-index: 200;
 
   @media ${theme.device.mobileM} {
     padding: 2% 6%;
+  }
+`;
+
+const FlexBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  line-height: 8vh;
+  
+  @media ${theme.device.mobileS} {
+    width: 94%;
+    line-height: 6vh;
+  }
+
+  @media ${theme.device.mobileM} {
+    width: 94%;
+    line-height: 6vh;
   }
 `;
 
