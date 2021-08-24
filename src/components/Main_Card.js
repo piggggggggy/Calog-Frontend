@@ -193,6 +193,7 @@ const NameContainer = styled.div`
 `;
 
 const Name = styled.div`
+  font-family: 'Pretendard';  
   font-size: 15px;
   line-height: 18px;
   margin: 0;

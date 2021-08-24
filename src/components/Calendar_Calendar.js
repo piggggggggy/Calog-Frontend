@@ -203,6 +203,10 @@ const Today = styled.div`
   text-align: center;
   margin: auto;
   line-height: 25px;
+
+  & span {
+    font-family: 'Pretendard';  
+  }
 `;
 
 const NotToday = styled.div`
@@ -211,6 +215,10 @@ const NotToday = styled.div`
   text-align: center;
   margin: auto;
   line-height: 25px;
+
+  & span {
+    font-family: 'Pretendard';  
+  }
 `;
 
 const NeedLogin = styled.div`
@@ -247,6 +255,7 @@ const Modal = styled.div`
 `;
 
 const P = styled.p`
+  font-family: 'Pretendard';  
   font-size: 22px;
   font-weight: bold;
   line-height: 130%;

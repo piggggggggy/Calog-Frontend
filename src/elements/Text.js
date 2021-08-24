@@ -65,20 +65,6 @@ const DefaultText = styled.p`
         font-size: ${(props) => props.m_size};
         ${(props) => props.m_lineheight ? `line-height: ${props.m_lineheight}` : ''};
     }
-
-    @font-face {
-        font-family: 'Pretendard';
-        font-weight: bold;
-        font-display: swap;
-        src: local('Pretendard Bold'), url('../src/styles/fonts/Pretendard-Bold.woff2') format('woff2'), url('../src/styles/fonts/Pretendard-Bold.woff') format('woff');
-    }
-
-    @font-face {
-        font-family: 'Pretendard';
-        font-weight: 400;
-        font-display: swap;
-        src: local('Pretendard Regular'), url('../src/styles/fonts/Pretendard-Regular.woff2') format('woff2'), url('../src/styles/fonts/Pretendard-Regular.woff') format('woff');
-    }
 `;
 
 export default Text;
