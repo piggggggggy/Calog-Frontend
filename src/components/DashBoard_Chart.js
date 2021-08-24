@@ -9,11 +9,11 @@ import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
 /** 
- * @param {list} r
- * @returns {list} r 유저가 기록한 foodRecords의 리스트를 반환
- * @역할 : 대시보드에서 유저에게 조금 더 시각적으로 기록을 보여주기 위한 그래프
- * @필수값 : 각 끼니마다의 칼로리 목록(foodRecords), bmr
- * @담당자 : 김나영
+ * @param {object} r
+ * @returns {object} r 유저가 기록한 foodRecords의 리스트를 반환
+ * @역할  대시보드에서 유저에게 조금 더 시각적으로 기록을 보여주기 위한 그래프
+ * @필수값  각 끼니마다의 칼로리 목록(foodRecords), bmr
+ * @담당자  김나영
 */
 
 const DashBoard_Chart = (props) => {

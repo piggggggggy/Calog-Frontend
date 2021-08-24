@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
+
+import { storage } from '../shared/firebase';
 
 import styled from 'styled-components';
 import { Grid, Button, Text } from '../elements';
@@ -26,6 +28,24 @@ const BodySpec = (props) =>
   const dispatch = useDispatch();
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);
+
+  const profile = useRef();
+  
+  const store_profile = () => {
+    const profile_url = profile.current.files[0];
+
+    const _upload = storage
+    .ref(`profiles/${profile_url.name}${new Date().getTime()}`)
+    .put(profile_url);
+  _upload
+  .then((snap) => {
+    snap.ref.getDownloadURL().then((url) => {
+      console.log(url);
+    });
+  });
+  }
+
+
   
   const gender = user_info?.gender;
   const age = user_info?.age;
@@ -54,12 +74,7 @@ const BodySpec = (props) =>
 
             <div onClick={()=>{history.push("/signsocial")}}>
               <Grid display="flex">
-                <Text
-                m_size="28px"
-                bold
-                lineheight="34px"
-                size="28px"
-                margin="92px 0px 16px 24px">
+                <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">
                   <Tag>
                     회원가입/로그인하기
                   </Tag>
@@ -70,63 +85,32 @@ const BodySpec = (props) =>
               </Grid>
             </div>
 
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#8C8C8C"
-            margin="24px 0px 24px 24px">
+            <Text lineheight="22px" size="17px" color="#8C8C8C" margin="24px 0px 24px 24px">
               회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!
             </Text>
             <hr color="#F5F5F5"/>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#000000"
-            margin="24px 0px 24px 20px">
+            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
               <Tag onClick={()=>
                 {
                   history.push("/notice")
                 }}>공지사항
               </Tag>
             </Text>
-            <hr color="#F5F5F5"/>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#000000"
-            margin="24px 0px 24px 20px">
+            {/* <hr color="#F5F5F5"/>
+            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
               <Tag onClick={()=>
                 {
                   history.push("/alam")
-                }}>알림
-              </Tag>
-            </Text>
-            {/* <hr color="#F5F5F5"/>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#000000"
-            margin="24px 0px 24px 20px">
-              <Tag onClick={()=>
-              {
-                history.push("/userfeedback")
-              }}>
-                의견 보내기
+                }}>
+                  알림
               </Tag>
             </Text> */}
             <hr color="#F5F5F5"/>
             <Version>
-              <Text
-              lineheight="22px"
-              size="17px"
-              color="#A9A9A9"
-              margin="15px 0px 15px 20px">
+              <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
                 현재 버전
               </Text>
-              <Text
-              size="17px"
-              margin="17px 20px 15px 0px"
-              color="#F19F13">
+              <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">
                 V1.2.1
               </Text>
             </Version>
@@ -150,17 +134,16 @@ return (
     <Profile>
         {ProfileDefault}
     </Profile>
-    {/* <Cameradiv>
-    {Camera}
-    </Cameradiv> */}
+      <label htmlFor="profile_img">
+      <Cameradiv>
+      {Camera}
+      </Cameradiv>
+      <File_box type="file" id="profile_img" ref={profile} multiple onChange={store_profile}
+      />
+      </label>
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text
-          m_size="23px"
-          bold
-          lineheight="34px"
-          size="28px"
-          margin="92px 0px 16px 42px">
+          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
             {user_info?.nickname}
           </Text>
 
@@ -168,30 +151,19 @@ return (
           <Text margin="30px">
             신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!
           </Text>
-          <Button
-          border_radius="12px"
-          bg="#FFE899"
-          width="80%"
-          height="56px"
+          <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
           _onClick={()=>
             {
               history.push("/addspec")
             }}>
-            <Text
-            lineheight="22px"
-            size="16px"
-            bold>
+            <Text lineheight="22px" size="16px" bold>
               {gender&&age&&height&&weight?"신체정보 수정하기":"신체정보 등록하기"}
             </Text>
           </Button>
         </BodyBox>
 
           <hr color="#F5F5F5"/>
-          <Text
-          lineheight="22px"
-          size="17px"
-          color="#000000"
-          margin="24px 0px 24px 20px">
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
             <Tag onClick={()=>
               {
                 history.push("/notice")
@@ -199,25 +171,17 @@ return (
                 공지사항
             </Tag>
           </Text>
-          <hr color="#F5F5F5"/>
-          <Text
-          lineheight="22px"
-          size="17px"
-          color="#000000"
-          margin="24px 0px 24px 20px">
+          {/* <hr color="#F5F5F5"/>
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
             <Tag onClick={()=>
               {
                 history.push("/alam")
               }}>
               알림
             </Tag>
-          </Text>
+          </Text> */}
           <hr color="#F5F5F5"/>
-          <Text
-          lineheight="22px"
-          size="17px"
-          color="#000000"
-          margin="24px 0px 24px 20px">
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
                 <Tag onClick={()=>
               {
                 history.push("/userfeedback")
@@ -228,27 +192,16 @@ return (
           <hr color="#F5F5F5"/>
 
           <Version>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#A9A9A9"
-            margin="15px 0px 15px 20px">
+            <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
               현재 버전
             </Text>
-            <Text
-            size="17px"
-            margin="17px 20px 15px 0px"
-            color="#F19F13">
+            <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">
               V1.2.1
             </Text>
           </Version>
           <hr color="#F5F5F5"/>
           <div onClick={logout}>
-            <Text
-            lineheight="22px"
-            size="17px"
-            color="#A9A9A9"
-            margin="24px 0px 24px 20px">
+            <Text lineheight="22px" size="17px" color="#A9A9A9" margin="24px 0px 24px 20px">
               <Tag>
                 로그아웃
               </Tag>
@@ -313,11 +266,19 @@ const BodyBox = styled.div`
 
 const Cameradiv = styled.div`
   position: absolute;
-  margin: 30px 0px 0px 110px;
+  margin: -35px 0px 0px 110px;
 `;
 
 const Tag = styled.a`
   &:hover{
     cursor: pointer;
   }
+`;
+
+const Profile_url = styled.div`
+  
+`;
+
+const File_box = styled.input`
+  display: none;
 `;

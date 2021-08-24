@@ -9,6 +9,9 @@ import { delCartAll } from "./cart";
 import { delRecentAll } from "./recent";
 import { delRecordAll } from "./record";
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 
 const initialState = {
   user_info: {
@@ -32,7 +35,11 @@ export const LoginSV = (user_info) => {
             console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
+
+                // test
                 // url: "http://52.79.110.219/api/user/me",
+
+                // deploy
                 url: "https://2k1.shop/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
@@ -42,6 +49,7 @@ export const LoginSV = (user_info) => {
         };
         loginsv()
         .catch((err)=>{
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
             window.alert("이메일 또는 비밀번호가 일치하지 않습니다.")
         });
@@ -58,6 +66,7 @@ export const SignupSV = (user_info) => {
             console.log("res of SignupDB", res);
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log("err of SignupDB", err);
         })
     };
@@ -74,6 +83,7 @@ export const EmailDuplicate = (email) => { //undefined 도 됨
             }
         })
         .catch((err) => {
+            // Sentry.captureException(`Catched Error : ${err}`);
             dispatch(EmailDupli(false));
         })
     };
@@ -89,6 +99,7 @@ export const NickDuplicate = (nickname) => {
             }
         })
         .catch((err) => {
+            // Sentry.captureException(`Catched Error : ${err}`);
             dispatch(NickDupli(false));
         })
     };
@@ -109,6 +120,8 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
             console.log("디스패치 성공!");
         })
         .catch((err) => {
+            // Sentry.captureException(`Catched Error : ${err}`);
+            Sentry.captureException(err);
             console.log("err of login check", err);
         })
     };
@@ -138,6 +151,7 @@ export const BodySpectSV = (gender, weight, height, age) => {
             dispatch(BodySpect(user_info));
         })
         .catch((err) => {
+            Sentry.captureException(`Catched Error : ${err}`);
             console.log(err);
         });
     }

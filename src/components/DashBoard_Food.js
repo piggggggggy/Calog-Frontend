@@ -14,25 +14,25 @@ import {useSelector} from 'react-redux';
 import {history} from '../redux/configStore';
 
 /** 
- * @param {list} r
- * @returns {list} r 유저가 기록한 foodRecords의 리스트를 반환
- * @역할 : 유저가 기록한 칼로리 상세 리스트를 확인하는 대시보드의 컴포넌트(
- * @필수값 : 각 끼니마다의 칼로리 목록(foodRecords), is_login, 기록 리스트
- * @담당자 : 김나영
+ * @param {object} r
+ * @returns {object} r 유저가 기록한 foodRecords의 리스트를 반환
+ * @역할  유저가 기록한 칼로리 상세 리스트를 확인하는 대시보드의 컴포넌트(
+ * @필수값  각 끼니마다의 칼로리 목록(foodRecords), is_login
+ * @담당자  김나영
 */
 
 const DashBoard_Food = (props) => {
   const record = props[0];
-  const {is_login, _data} = props
+  const {is_login} = props;
 
   // props와 비교할 타입
-  const data_type = useSelector((state) => state.record.type)
+  const data_type = useSelector((state) => state.record.type);
 
   // 각 type 리스트 칼로리의 합계
-  let list_kcal = 0
+  let list_kcal = 0;
   for(let idx=0; idx<record?.length; idx++) {
     record[idx]?.type === data_type && (list_kcal += record[idx]?.resultKcal)
-  }
+  };
 
   // case1) 기록이 있을 경우
   if(record?.length > 0) {
@@ -41,7 +41,7 @@ const DashBoard_Food = (props) => {
 
         {/* type 버튼 */}
         <Grid margin="9.8% 0 0 0" m_margin="9.8% 0 0 0">
-          <DashBoard_When data_type={data_type} {...props}/>
+          <DashBoard_When {...props}/>
         </Grid>
 
         {/* 총 칼로리 */}

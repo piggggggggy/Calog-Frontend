@@ -46,11 +46,7 @@ const NotiDetail = (props) =>
               {Back}
             </Grid>
           </td>
-          <Text
-          size="17px"
-          lineheight="22px"
-          bold
-          color="#000000">
+          <Text size="17px" lineheight="22px" bold color="#000000">
             공지사항
           </Text>
           <p>&emsp;&emsp;</p>
@@ -70,9 +66,7 @@ const NotiDetail = (props) =>
         {/* 관리자 아이디 삭제 버튼 표시 / 관리자 아이디 숨겨야함 */}
         {admin_email==="cadmin@calories.com"?
         <Grid width="25%">
-            <Button
-            bg="#FFE899"
-            border_radius="15px"
+            <Button bg="#FFE899" border_radius="15px"
             _onClick={notidelete}>
               삭제
             </Button>

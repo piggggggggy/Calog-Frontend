@@ -24,7 +24,7 @@ const middlewares = [
     history,
   }),
 ];
- 
+
 const env = process.env.NODE_ENV;
 
 if (env === "development") {

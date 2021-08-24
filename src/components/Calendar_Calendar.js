@@ -10,16 +10,16 @@ import moment from 'moment';
 import Calendar_Emoji from './Calendar_Emoji';
 
 // 데이터
-import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux';
 import {getAllRecordDB, typeChk} from '../redux/modules/record';
 
 // history
 import {history} from '../redux/configStore';
 
 /** 
- * @param {list} d
- * @returns {list} d 캘린더의 하루를 채울 수 있도록 맵이 돌아가는 요소
- * @역할  캘린더  컴포넌트
+ * @param {object} d
+ * @returns {object} d 캘린더의 하루를 채울 수 있도록 맵이 돌아가는 요소
+ * @역할  캘린더 컴포넌트
  * @담당자  김나영
 */
 
@@ -32,7 +32,7 @@ const Calendar_Calendar = (props) => {
   // 날짜
   const [month, setMonth] = useState(moment());
 
-  //axios 데이터 전송 시 YYYY-MM 넣어 요청 보내기
+  // axios 데이터 전송 시 YYYY-MM 넣어 요청 보내기
   const monthFormat = moment(month._d).format('YYYY-MM');
 
   // 화면 로딩 시 모든 기록 데이터 조회

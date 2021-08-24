@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 
 // css
 import {Grid, Text} from '../elements';
@@ -21,6 +21,9 @@ import {history} from '../redux/configStore';
 
 // helmet
 import {Helmet} from 'react-helmet';
+
+// 횡 스와이프
+import _, { throttle } from 'lodash';
 
 /** 
  * @역할 오늘의 기록에 대한 내역을 확인할 수 있는 대시보드 페이지
@@ -61,14 +64,46 @@ const DashBoard = (props) => {
   const user = useSelector((state) => state.user.user_info);
 
   // 운동리스트
-  const exercise_list = useSelector((state) => state.dashboard.exercise)
+  const exercise_list = useSelector((state) => state.dashboard.exercise);
+
+  // 운동리스트 횡 스와이프 >> 웹에서 확인할 때 매직마우스만 횡 스와이프 구현이 가능하여 별도로 추가
+  const refX = useRef(null);
+  const [isDrag, setDrag] = useState(false);
+  const [startX, setStart] = useState();
+
+  const dragStart = (e) => {
+    setDrag(true);
+    setStart(e.pageX + refX.current.scrollLeft)
+  };
+
+  const dragEnd = (e) => {
+    setDrag(false);
+  };
+
+  const dragMove = (e) => {
+    if (isDrag) {
+      const { scrollWidth, clientWidth, scrollLeft } = refX.current;
+ 
+      refX.current.scrollLeft = startX - e.pageX;
+
+      if (scrollLeft === 0) {
+        setStart(e.pageX);
+      } else if (scrollWidth <= clientWidth + scrollLeft) {
+        setStart(e.pageX + scrollLeft);
+      }
+    }
+  };
+
+  const delay = 50;
+  const throttleDragMove = throttle(dragMove, delay);
 
   // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  const is_loaded = useSelector((state) => state.record.is_loaded);
 
+  // 스피너
   if(!is_loaded) {
     return (<Loading />);
-  }
+  };
 
   return (
         <Grid width="100%">
@@ -94,7 +129,14 @@ const DashBoard = (props) => {
         {is_login && (
           <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0">
             <Text size="20px" bold m_size="17px" margin="0 0 0 8.3%">{user.nickname}님, 이런 운동은 어때요?</Text>
-            <Exercise_Wrap>
+            <Exercise_Wrap
+              onMouseDown={dragStart}
+              onMouseMove={isDrag ? throttleDragMove : null}
+              onMouseUp={dragEnd}
+              onMouseLeave={dragEnd}
+              ref={refX}
+            >
+
               {/* 운동 리스트 맵 */}
               {exercise_list?.map((e, idx) => {
                 return <DashBoard_Workout key={e._id} {...e}/>
@@ -113,6 +155,8 @@ const Exercise_Wrap = styled.div`
   display: flex;
   margin: 7.8% 0 0 2.5%;
   overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 
   &::-webkit-scrollbar {
     display: none;

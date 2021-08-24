@@ -24,6 +24,7 @@ const Notice = (props) =>
   const admin = useSelector((state)=>state.user.user_info?.email);
   const notilist = useSelector(state=>state.notice.list);
   const notilist_reverse =[];
+
   // 공지사항 리스트 배열 뒤집기
   notilist.map((i)=>{notilist_reverse.unshift(i)});
 
@@ -52,11 +53,7 @@ if(!is_loaded) {
               {Back}
             </Grid>
           </td>
-          <Text
-          size="17px"
-          lineheight="22px"
-          bold
-          color="#000000">
+          <Text size="17px" lineheight="22px" bold color="#000000">
             공지사항
           </Text>
           {/* 관리자 아이디만 쓰기 버튼 표시 */}
@@ -82,15 +79,10 @@ if(!is_loaded) {
           return(
             <Post key={l._id}>
                 <Tag onClick={()=>{history.push(`/notice/${l.id}`)}}>
-                  <Text
-                  size="17px" 
-                  ineheight="22px">
+                  <Text size="17px"  ineheight="22px">
                     {l.title}
                   </Text>
-                  <Text
-                  size="17px"
-                  lineheight="22px"
-                  color="#A9A9A9">
+                  <Text size="17px" lineheight="22px" color="#A9A9A9">
                     {l.date}
                   </Text>
                 </Tag>

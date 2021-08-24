@@ -1,20 +1,18 @@
 import React from 'react';
 import {Grid, Image} from '../elements';
 
-//img
+// img
 import noImg from '../img/noImg.png';
 
 /** 
- * @param {*} props
- * @returns 설명적기
- * @역할 ~~~하는 컴포넌트
- * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 김나영
+ * @역할 유저가 기록한 이미지 유무에 따라 캘린더 상세 페이지에서 다르게 표시되기 위한 컴포넌트
+ * @필수값 url
+ * @담당자 김나영
 */
 
 const CalendarDetail_Image = (props) => {
 
-  const url = props
+  const url = props;
   
   return (
     <React.Fragment>
@@ -30,6 +28,6 @@ const CalendarDetail_Image = (props) => {
         
     </React.Fragment>
   );
-}
+};
 
 export default CalendarDetail_Image;

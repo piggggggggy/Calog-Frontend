@@ -22,11 +22,10 @@ import moment from 'moment';
 
 const Feedback = (props) =>
 {
-  const dispatch = useDispatch();
   const [feedback, setFeed] = useState({});
   const {title, contents} = feedback;
   const date = moment().format('YYYY-MM-DD');
-  console.log(title, contents, date);
+  
   const sendfeedback = () => {
       instance
       .post('/api/notice/feedback', {title, contents, date})
@@ -57,11 +56,7 @@ if(!is_loaded) {
               {Back}
             </Grid>
           </td>
-          <Text
-          size="17px"
-          lineheight="22px"
-          bold
-          color="#000000">
+          <Text size="17px" lineheight="22px" bold color="#000000">
             의견 보내기
           </Text>
           <p>&emsp;&emsp;</p>
@@ -69,24 +64,17 @@ if(!is_loaded) {
         <hr color="#F5F5F5"/>
 
         <Body>
-          <Grid
-          width="80%"
-          margin="20px 0px 0px 0px">
+          <Grid width="80%" margin="20px 0px 0px 0px">
             <Text>
               제목
             </Text>
-            <Input
-            border_radius="5px"
-            type="text"
-            value={feedback.title}
+            <Input border_radius="5px" type="text" value={feedback.title}
             _onChange={(e)=>
             {
               setFeed({...feedback,title:e.target.value})
             }}/>
           </Grid>
-          <Grid
-          width="80%"
-          margin="20px 0px 0px 0px">
+          <Grid width="80%" margin="20px 0px 0px 0px">
             <Text>내용</Text>
             <TextWrite rows="10"
             onChange={(e)=>
@@ -94,14 +82,8 @@ if(!is_loaded) {
               setFeed({...feedback,contents:e.target.value})
             }}/>
           </Grid>
-          <Grid
-          width="80%"
-          margin="20px 0px 0px 0px"
-          display="flex">
-            <Button
-            bg="#FFE899"
-            height="40px"
-            border_radius="26px"
+          <Grid width="80%" margin="20px 0px 0px 0px" display="flex">
+            <Button bg="#FFE899" height="40px" border_radius="26px"
             _onClick={sendfeedback}>
               작성하기
             </Button>

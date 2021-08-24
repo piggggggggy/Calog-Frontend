@@ -2,20 +2,22 @@ import React, {useState} from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
+
 // 이모지
 import { FaCircle } from "react-icons/fa";
+
 // type chk
 import {useDispatch, useSelector} from 'react-redux';
 import {typeChk, ttlKcal} from '../redux/modules/record';
-//history
+
+// history
 import { history } from '../redux/configStore';
 
 /** 
- * @param {list} r
- * @returns {list} r 유저가 기록한 foodRecords의 리스트를 반환
- * @역할 : dashboard에서 기록할 칼로리의 시점 컴포넌트
- * @필수값 : 기록할 칼로리의 시점
- * @담당자 : 김나영
+ * @param {object} r
+ * @returns {object} r 유저가 기록한 foodRecords의 리스트를 반환
+ * @역할  dashboard에서 기록할 칼로리의 시점 컴포넌트
+ * @담당자  김나영
 */
 
 const DashBoard_When = (props) => {
@@ -23,23 +25,24 @@ const DashBoard_When = (props) => {
 
   // 대시보드와 캘린더 상세에서 들어오는 props값이 달라서 구분
   const foodRecords = history.location.pathname.includes('dashboard') ? props[0] : props?.foodRecords;
-  const {data_type} = props
+  const data_type = useSelector((state) => state.record.type)
 
   // 대시보드와 캘린더 상세 페이지로 나눠서 각 경우에 맞게 사용
-  let btn_type = ""
+  let btn_type = "";
 
   // 대시보드
   if(history.location.pathname.includes('dashboard')) {
 
-    foodRecords && (
+    // foodRecords && (
+
       // 처음 로그인하고 들어왔을 때는 스토어에 type이 지정되어있지 않음(아직 버튼을 안눌렀기 때문)
       data_type === null ? btn_type = "" : btn_type = data_type
-    )
+    // )
 
     // 캘린더 상세
   } else {
     btn_type = "아침"
-  }
+  };
 
   // type에 따른 css변경
   const [type, setType] = useState(btn_type);

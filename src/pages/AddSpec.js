@@ -66,11 +66,7 @@ const AddSpec = () =>
         SetSpec({...bodyspec, gender: "여자"});
         Setpage(page+1);
     };
-    const setThirdGender = () => 
-    {
-        SetSpec({...bodyspec, gender: "미정"});
-        Setpage(page+1);
-    };
+
 
 
     return(
@@ -78,17 +74,11 @@ const AddSpec = () =>
             <Container>
                 <Headers>
                     <Grid padding="12px">
-                        <Text
-                        m_size="25px"
-                        size="28px"
-                        lineheight="34px">
+                        <Text m_size="25px" size="28px" lineheight="34px">
                             <Strong>{user_nickname}</Strong>의
                         </Text>
 
-                        <Text
-                        m_size="25px"
-                        size="28px"
-                        lineheight="34px">
+                        <Text  m_size="25px" size="28px" lineheight="34px">
                             {/* 페이지에 따라 다른 주제 */}
                             {
                             page===0?<Strong>성별</Strong>:
@@ -100,11 +90,7 @@ const AddSpec = () =>
                     </Grid>
 
                     <Grid padding="12px">
-                        <Text
-                        m_size="11px"
-                        size="15px"
-                        lineheight="20px"
-                        color="#5F5F5F">
+                        <Text m_size="11px" size="15px" lineheight="20px" color="#5F5F5F">
                             {user_nickname}님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
                             신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.
                         </Text>
@@ -114,66 +100,46 @@ const AddSpec = () =>
                 <Body>
                     {/* 페이지에 따라 받아야하는 값이 다르므로 다른 input 박스 보여줌 */}
                     {page===0?
-                    <Grid
-                    display="flex"
-                    jc="center">
+                    <Grid display="flex" jc="space-around">
                         <GenderBox onClick={setMan}>남</GenderBox>
                         <GenderBox onClick={setWoman}>여</GenderBox>
-                        <GenderBox onClick={setThirdGender}>미정</GenderBox>
                     </Grid>
-                    :
-                    page===1?
+                    :page===1?
                     <InputBox>
                         &emsp;
-                        <Input
-                        border="none"
-                        width="80%"
-                        type="text"
-                        value={bodyspec.age} 
-                        _onChange={
-                            (e) =>
-                            SetSpec({...bodyspec, age: e.target.value})
-                            }/>
+                        <Input border="none" width="80%" type="text" value={bodyspec.age} 
+                        _onChange=
+                        {
+                            (e) => SetSpec({...bodyspec, age: e.target.value})
+                        }/>
                         <Strong>AGE&emsp;</Strong>
                     </InputBox>
-                    :
-                    page===2?
+                    :page===2?
                     <InputBox>
                         &emsp;
-                        <Input
-                        border="none"
-                        width="80%"
-                        type="text"
-                        value={bodyspec.height}
-                        _onChange={
-                            (e) =>
-                            SetSpec({...bodyspec, height: e.target.value})
-                            }/>
+                        <Input border="none" width="80%" type="text" value={bodyspec.height}
+                        _onChange=
+                        {
+                            (e) => SetSpec({...bodyspec, height: e.target.value})
+                        }/>
                         <Strong>CM&emsp;</Strong>
                     </InputBox>
                     :
                     <InputBox>
                         &emsp;
-                        <Input
-                        border="none"
-                        width="80%"
-                        type="text"
-                        value={bodyspec.weight}
-                        _onChange={
-                            (e) =>
-                            SetSpec({...bodyspec, weight: e.target.value})
-                            }/>
+                        <Input border="none" width="80%" type="text" value={bodyspec.weight}
+                        _onChange=
+                        {
+                            (e) => SetSpec({...bodyspec, weight: e.target.value})
+                        }/>
                         <Strong>KG&emsp;</Strong>
                     </InputBox>
                     }
                     {/* 페이지가 1이상일 때 버튼 나타냄 */}
                     {page<1?
-                    "":
-                    <Button
-                    bg="#FFE899"
-                    width="87%"
-                    height="56px"
-                    border_radius="60px"
+                    ""
+                    :
+                    <Button bg="#FFE899" width="87%" height="56px" border_radius="60px"
                     _onClick=
                     {
                         page===1?
@@ -183,11 +149,7 @@ const AddSpec = () =>
                         addspec
                     }>
                         <Grid cursor>
-                            <Text
-                            color="#404040"
-                            size="16px"
-                            lineheight="22px"
-                            bold>
+                            <Text color="#404040" size="16px" lineheight="22px" bold>
                                 다음
                             </Text>
                         </Grid>
@@ -237,7 +199,7 @@ const GenderBox = styled.div`
     width: 25%;
     height: 100px;
     background-color: #F19F13;
-    border-radius: 60px;
+    border-radius: 50%;
     margin: 15px;
     display: flex;
     justify-content: center;

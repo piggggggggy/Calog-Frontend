@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Grid} from '../elements';
 import styled from 'styled-components';
-//history
+
+// history
 import {history} from '../redux/configStore';
-//redux
+
+// redux
 import {useSelector} from 'react-redux';
 
 
@@ -33,6 +35,7 @@ const Nav = (props) => {
   return (
     <React.Fragment>
       <Wrap>
+
         {/* 칼로리 사전 */}
           <Grid width="auto" margin="auto 0" _onClick={() => navOn('/')}>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +43,7 @@ const Nav = (props) => {
                 fill={url === "/" || url === "/loading/" ? '#F19F13' : "black"}/>
             </svg>
           </Grid>
+
         {/* 대시보드 */}
           <Grid width="auto" margin="auto 0" _onClick={() => navOn('/loading/dashboard')}>
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +51,7 @@ const Nav = (props) => {
                 fill={url === "/dashboard" || url === "/loading/dashboard" ? '#F19F13' : "black"}/>
             </svg>
           </Grid>
+
         {/* 캘린더 */}
           <Grid width="auto" margin="auto 0" _onClick={CalendarBtn}>
             <svg width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,6 +59,7 @@ const Nav = (props) => {
                 fill={url === "/calendar" || url === "/loading/calendar" ? '#F19F13' : "black"}/>
             </svg>
           </Grid>
+          
         {/* 마이페이지 */}
           <Grid width="auto" margin="auto 0" _onClick={() => navOn('/body')}>
             <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +82,7 @@ const Wrap = styled.div`
   min-height: 9.3%;
   position: fixed;
   bottom: 0;
-  z-index: 500;
+  z-index: 99;
 `;
 
 export default Nav;

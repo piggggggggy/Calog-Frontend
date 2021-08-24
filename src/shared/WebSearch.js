@@ -41,7 +41,7 @@ const WebSearch = (props) => {
     const data = {
       keyword: keyword.current.value,
       min: 0,
-      max: 5000
+      max: 2000
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));

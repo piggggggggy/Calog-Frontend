@@ -26,8 +26,10 @@ import theme from './theme';
 // 웹페이지 바탕
 import webImg from '../img/backImg.png';
 
-//lazy loading
+// lazy loading
 import LazyLoad from 'react-lazyload';
+
+import { get_csrf_token } from './api';
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -36,10 +38,12 @@ const App = (props) => {
   // login check
   useEffect(() => {
 
-    history.listen(() => {
-        dispatch(LoginCheck());
-    })
+    // history.listen(() => {
+    //     dispatch(LoginCheck());
+    // })
     dispatch(LoginCheck());
+    // csrf 토큰 요청
+    get_csrf_token();
   }, []);
   
   return (
@@ -47,6 +51,7 @@ const App = (props) => {
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <LazyLoad>
+
             {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
             <WebVer/>
             <FloatedBtn/>
@@ -59,10 +64,6 @@ const App = (props) => {
               <Route path="/loading/" exact component={Loading4} />
               <Route path="/loading/:url" exact component={Loading4} />
               <Route path="/loading/:url/:date" exact component={Loading4} />
-              {/* <Route path="/loading1/" exact component={Loading} />
-              <Route path="/loading2/" exact component={Loading2} />
-              <Route path="/loading3/" exact component={Loading3} /> */}
-
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
@@ -91,7 +92,7 @@ const App = (props) => {
         </ThemeProvider>
     </React.Fragment>
   );
-}
+};
 
 const Wrap = styled.div`
   position: relative;

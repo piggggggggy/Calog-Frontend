@@ -12,11 +12,11 @@ import {useSelector} from 'react-redux';
 import Calendar_DayEmoji from './Calendar_DayEmoji';
 
 /** 
- * @param {list} d
- * @returns {list} d props로 넘어온 날짜와 데이터에 기록된 날짜를 비교하여 맞는 데이터의 리ㅡ트
- * @역할 : 캘린더 기초대사량에 따른 이모지 컴포넌트
- * @필수값 : day._d
- * @담당자 : 김나영
+ * @param {object} d
+ * @returns {object} d props로 넘어온 날짜와 데이터에 기록된 날짜를 비교하여 맞는 데이터의 리스트
+ * @역할  캘린더 기초대사량에 따른 이모지 컴포넌트
+ * @필수값  day._d
+ * @담당자  김나영
 */
 
 const Calendar_Emoji = (props) => {

@@ -20,7 +20,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getRecordDB} from '../redux/modules/record';
 
 // slick
-import Slider from 'react-slick'
+import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -28,11 +28,11 @@ import "slick-carousel/slick/slick-theme.css";
 import noImg from '../img/noImg.png';
 
 //moment
-import moment from 'moment'
+import moment from 'moment';
 
 /** 
- * @param {list} r
- * @returns {list} r 유저가 기록한 foodRecords의 리스트를 반환
+ * @param {object} r
+ * @returns {object} r 유저가 기록한 foodRecords의 리스트를 반환
  * @역할 캘린더의 특정 날짜를 눌렀을 때 보이는 상세 컴포넌트
  * @담당자 : 김나영
 */
@@ -48,7 +48,7 @@ const CalenderDetail = (props) => {
   const SelectDate = _SelectDate[2];
 
   // 타입
-  const type = useSelector((state) => state.record.type)
+  const type = useSelector((state) => state.record.type);
 
   // 화면 로딩 시 선택한 날짜의 기록 데이터 불러오기
   useEffect(() => {
@@ -64,38 +64,38 @@ const CalenderDetail = (props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: false,
-  }
+  };
 
   // 기록
-  const record_list = useSelector((state) => state.record.record[0])
-  const record_map = record_list?.foodRecords
+  const record_list = useSelector((state) => state.record.record[0]);
+  const record_map = record_list?.foodRecords;
 
   // 기록한 날짜
-  const record_date = record_list?.date
-  const date = moment(record_date).format('M월 D일')
+  const record_date = record_list?.date;
+  const date = moment(record_date).format('M월 D일');
 
   // 기록한 시기의 bmr
-  const record_bmr = record_list?.bmr
+  const record_bmr = record_list?.bmr;
 
   // 푸드 리스트와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
-  let same_food = []
+  let same_food = [];
   for (let idx=0; idx<record_map?.length; idx++) {
     const list_type = record_map[idx].type
     if(list_type === type || (type?.length === 0 && list_type === "아침")) {
       same_food.push(record_map[idx])
     }
-  }
+  };
 
   // 이미지 빈값 제외하기
-  let image_list = []
-  let image_url = record_list?.url
+  let image_list = [];
+  let image_url = record_list?.url;
   for(let idx = 0; idx <image_url?.length; idx++) {
     const url = record_list.url[idx]
     url !== "" && image_list.push(url)
   };
 
   // 이미지 리스트와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
-  let same_list = []
+  let same_list = [];
   for (let idx=0; idx<image_url?.length; idx++) {
     const list_type = image_url[idx].type
     if(list_type === type || (type?.length === 0 && list_type === "아침")) {
@@ -104,11 +104,11 @@ const CalenderDetail = (props) => {
         same_list.push(urlList)
       }
     }
-  }
+  };
 
   // 메모와 현재 버튼 타입이 일치하는 목록을 맵 돌리기
-  const memo = record_list?.contents
-  let memo_list = []
+  const memo = record_list?.contents;
+  let memo_list = [];
   for(let idx = 0; idx <memo?.length; idx++) {
     const list_type = memo[idx].type
     if(list_type === type || (type?.length === 0 && list_type === "아침")) {
@@ -117,20 +117,21 @@ const CalenderDetail = (props) => {
   };
 
   // loading
-  const is_loaded = useSelector((state) => state.record.is_loaded)
+  const is_loaded = useSelector((state) => state.record.is_loaded);
 
   if(!is_loaded) {
     return (<Loading />);
-  }
+  };
 
   // 기록 삭제 버튼
   const delRecord = (async () => {
     setModalOpen(true)
-  })
+  });
 
   return (
     <React.Fragment>
       <Wrap>
+
         {/* 헤더 */}
         <Grid padding="3.6vh 6.2%" bg={theme.color.light}>
 

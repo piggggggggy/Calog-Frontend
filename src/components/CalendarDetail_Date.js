@@ -3,9 +3,9 @@ import {Grid, Text} from '../elements';
 import styled from 'styled-components';
 
 // date picker
-import { enGB } from 'date-fns/locale'
-import { DatePicker } from 'react-nice-dates'
-import '../styles/css/nice_date.css'
+import { enGB } from 'date-fns/locale';
+import { DatePicker } from 'react-nice-dates';
+import '../styles/css/nice_date.css';
 
 // moment
 import moment from 'moment';
@@ -13,9 +13,9 @@ import moment from 'moment';
 /** 
  * @param {String} date
  * @returns {String} date 선택된 날짜
- * @역할 : 현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
- * @필수값 : 유저가 선택한 날짜(변경 가능)
- * @담당자 : 김나영
+ * @역할  현재 기록하려는 칼로리를 언제 섭취했는지 날짜를 선택할 수 있는 컴포넌트
+ * @필수값  유저가 선택한 날짜(변경 가능)
+ * @담당자  김나영
 */
 
 const CalendarDetail_Date = (props) => {
@@ -25,11 +25,15 @@ const CalendarDetail_Date = (props) => {
   const Date = moment(SelectDate).format('M월 D일');
   const [date, setDate] = useState(Date);
 
-  // 날짜를 변경할 때 onChange
+  // 날짜를 변경했을 경우 onChange
   const Change = (date) => {
-    setDate(moment(date).format('M월 D일'))
-    const Format = moment(date).format('YYYY-MM-DD')
-    window.location.replace(`/calendar/${Format}`)
+    if (moment(date).format('YYYYMMDD') > moment(SelectDate).format('YYYYMMDD')) {
+      window.alert('오늘 이 전의 날짜만 확인할 수 있어요!')
+    } else {
+      setDate(moment(date).format('M월 D일'))
+      const Format = moment(date).format('YYYY-MM-DD')
+      window.location.replace(`/calendar/${Format}`)
+    }
   };
 
   return (
