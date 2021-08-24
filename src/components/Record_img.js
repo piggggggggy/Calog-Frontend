@@ -43,24 +43,24 @@ const Record_img = (props) => {
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
             <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 13H24" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                <path d="M13 2L13 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M2 13H24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M13 2L13 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
               </svg>
             </Grid>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
             <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 13H24" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                <path d="M13 2L13 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M2 13H24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M13 2L13 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
               </svg>
             </Grid>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
             <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 13H24" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                <path d="M13 2L13 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M2 13H24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M13 2L13 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
               </svg>
             </Grid>
           </Grid> 

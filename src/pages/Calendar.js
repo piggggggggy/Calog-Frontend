@@ -3,7 +3,7 @@ import {Grid, Text} from '../elements';
 
 // 컴포넌트
 import Calendar_Calendar from '../components/Calendar_Calendar';
-import Loading from './Loading2';
+import Loading from './Loading4';
 
 // 데이터
 import {useSelector} from 'react-redux'
