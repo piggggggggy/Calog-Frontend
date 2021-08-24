@@ -1,11 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
 // elements & components
-import MainBody from '../components/Main_MainBody';
-import LogoHeader from '../shared/LogoHeader';
 import BtnHeader from '../shared/BtnHeader';
 import MSBody from '../components/MainSearch_MSBody';
-// import 
+import Loading from './Loading4';
 
 /** 
  * @param {*} props
@@ -18,6 +17,12 @@ import MSBody from '../components/MainSearch_MSBody';
 const MainSearch = (props) => {
 
   const keyword = props.match.params.keyword;
+  const is_loaded = useSelector((state) => state.record.is_loaded);
+
+  // 스피너
+  if (!is_loaded) {
+    return <Loading/>
+  }
 
   return (
     <React.Fragment>
