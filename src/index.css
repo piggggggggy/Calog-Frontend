@@ -4,21 +4,23 @@ html, body, code {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+  
   @font-face {
     font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: normal;
+    src: url("styles/fonts/Pretendard-Regular.woff2") format('woff2'),
+    url("styles/fonts/Pretendard-Regular.woff") format('woff'),
+    url("styles/fonts/Pretendard-Regular.otf") format('truetype'),
+    url('styles/fonts/Pretendard-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    font-style: normal;
     font-weight: bold;
-    font-display: swap;
-    src: local('Pretendard Bold'),
-      url('./fonts/Pretendard-Bold.woff2') format('woff2'),
-      url('./fonts/Pretendard-Bold.woff') format('font-woff');
-}
-
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-display: swap;
-    src: local('Pretendard Regular'),
-      url('./fonts/Pretendard-Regular.woff2') format('woff2'),
-      url('./fonts/Pretendard-Regular.woff') format('font-woff');
+    src: url("styles/fonts/Pretendard-Bold.woff2") format('woff2'),
+    url("styles/fonts/Pretendard-Bold.woff") format('woff'),
+    url("styles/fonts/Pretendard-Bold.otf") format('truetype'),
+    url('styles/fonts/Pretendard-Bold.ttf') format('truetype');
   }
