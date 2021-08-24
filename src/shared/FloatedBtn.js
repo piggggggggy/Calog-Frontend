@@ -229,7 +229,7 @@ const FeedbackModal = styled.div`
   display: grid;
   grid-template-rows: 443px 70px;
 
-  animation: ${FadeIn} 1s ease;
+  animation: ${FadeIn} 0.5s ease;
 `;
 
 const ModalTop = styled.div`
