@@ -96,7 +96,7 @@ const BodySpec = (props) =>
                 }}>공지사항
               </Tag>
             </Text>
-            <hr color="#F5F5F5"/>
+            {/* <hr color="#F5F5F5"/>
             <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
               <Tag onClick={()=>
                 {
@@ -104,7 +104,7 @@ const BodySpec = (props) =>
                 }}>
                   알림
               </Tag>
-            </Text>
+            </Text> */}
             <hr color="#F5F5F5"/>
             <Version>
               <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
@@ -171,7 +171,7 @@ return (
                 공지사항
             </Tag>
           </Text>
-          <hr color="#F5F5F5"/>
+          {/* <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
             <Tag onClick={()=>
               {
@@ -179,7 +179,7 @@ return (
               }}>
               알림
             </Tag>
-          </Text>
+          </Text> */}
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
                 <Tag onClick={()=>

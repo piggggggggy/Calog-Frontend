@@ -53,7 +53,9 @@ const Login = (props) =>
                 }}
               />
               {/* 이메일 입력+이메일 유효성 검사 통과 시 X 버튼 사라짐 */}
-                {user_info.email?emailCheck(user_info.email)?"":X:""}
+                {user_info.email?emailCheck(user_info.email)?"":
+                <div onClick={()=>{setUserInfo({...user_info, email: ""})}}>{X}</div>
+                :""}
             </InputBox>
             {/* 이메일 입력+이메일 유효성 검사 통과 시 밑 줄 사라짐 */}
             {user_info.email?
@@ -84,7 +86,9 @@ const Login = (props) =>
                 }}
               />
               {/* 비밀번호 입력+비밀번호 유효성 검사 통과 시 X 사라짐 */}
-              {user_info.password?pwdCheck(user_info.password)?"":X:""}
+              {user_info.password?pwdCheck(user_info.password)?"":
+                <div onClick={()=>{setUserInfo({...user_info, password: ""})}}>{X}</div>
+              :""}
             </InputBox>
             {/* 비밀번호 입력+비밀번호 유효성 검사 통과 시 밑 줄 사라짐 */}
             {user_info.password?
