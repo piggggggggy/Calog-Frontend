@@ -157,6 +157,19 @@ export const BodySpectSV = (gender, weight, height, age) => {
     }
 };
 
+export const ProfileSV = (url) => {
+    return function(dispatch){
+        console.log(url);
+        instance
+        .post('/api/user/update-profile-image', {url})
+        .then((res) => {
+            dispatch(Profile(url));
+        })
+        .catch((err)=>{console.log(err)});
+        console.log("프로필 이미지 추가!");
+    }
+};
+
 
 //리덕스
 const user = createSlice({
@@ -185,6 +198,9 @@ const user = createSlice({
         state.user_info.height = action.payload.height;
         state.user_info.weight = action.payload.weight;
     },
+    Profile: (state, action) => {
+        state.user_info.profile_image = action.payload;
+    },
 
     
     // 최근삭제목록 리듀서
@@ -210,5 +226,5 @@ const user = createSlice({
   },
 });
 
-export const {SetUser, LogOut, EmailDupli, NickDupli, BodySpect, recordDeleted, clearDeleted, removeDeleted} = user.actions;
+export const {SetUser, LogOut, EmailDupli, NickDupli, BodySpect, Profile, recordDeleted, clearDeleted, removeDeleted} = user.actions;
 export default user;
