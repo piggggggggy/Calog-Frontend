@@ -9,7 +9,7 @@ import { Grid, Text } from '../elements';
 
 import {Back} from "../img/svg";
 
-import Loading from './Loading2';
+import Loading from './Loading4';
 /**
  * @param {*} props
  * @returns 공지사항
