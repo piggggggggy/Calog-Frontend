@@ -1,6 +1,6 @@
 import React,{useRef, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 // moment
 import moment from 'moment';
@@ -205,6 +205,15 @@ const FloatCircle = styled.div`
   } 
 `;
 
+const FadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 1;
+}
+`;
+
 const FeedbackModal = styled.div`
   position: fixed;
   right: 6%;
@@ -219,6 +228,8 @@ const FeedbackModal = styled.div`
 
   display: grid;
   grid-template-rows: 443px 70px;
+
+  animation: ${FadeIn} 1s ease;
 `;
 
 const ModalTop = styled.div`
