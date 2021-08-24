@@ -79,7 +79,6 @@ const Signup = () => {
           <SubInput placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text"
             onChange={(e)=>{debounceEmail(e)}}
             />
-            {user_info.email?dupliEmail?"":X:""}
           </InputBox>
           {user_info.email?
                   emailCheck(user_info.email)?
@@ -97,7 +96,9 @@ const Signup = () => {
           <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.password}
              _onChange={(e)=>{setUserInfo({...user_info, password: e.target.value})}}
             />
-          {user_info.password?pwdCheck(user_info.password)?"":X:""}
+          {user_info.password?pwdCheck(user_info.password)?"":
+                <div onClick={()=>{setUserInfo({...user_info, password: ""})}}>{X}</div>
+          :""}
           </InputBox>
           {user_info.password?pwdCheck(user_info.password)?<Text color="#E4E4E4" size="13px" lineheight="18px">*사용가능한 비밀번호입니다.</Text>:
           <Text color="#F05C5C" size="13px" lineheight="18px">*비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상 입력해주세요.</Text>:
@@ -111,7 +112,9 @@ const Signup = () => {
           <Input border="none" placeholder="비밀번호를 다시 입력해주세요" bg="#E4E4E4" width="80%" type="password" value={user_info.pwdcheck}
              _onChange={(e)=>{setUserInfo({...user_info, pwdcheck: e.target.value})}}
             />
-            {user_info.pwdcheck?pwdDupli(user_info.password, user_info.pwdcheck)?"":X:""}
+            {user_info.pwdcheck?pwdDupli(user_info.password, user_info.pwdcheck)?"":
+                <div onClick={()=>{setUserInfo({...user_info, pwdcheck: ""})}}>{X}</div>
+            :""}
           </InputBox>
           {user_info.pwdcheck?pwdDupli(user_info.password, user_info.pwdcheck)?<Text color="#E4E4E4" size="13px" lineheight="18px">*비밀번호가 일치합니다.</Text>:
           <Text color="#F05C5C" size="13px" lineheight="18px">*비밀번호가 일치하지 않습니다.</Text>
@@ -125,7 +128,6 @@ const Signup = () => {
           <SubInput border="none" placeholder="닉네임을 입력해주세요" width="100%" type="text"
             onChange={(e)=>{debounceNick(e)}}
             />
-            {user_info.nickname?NickCheck(user_info.nickname)?dupliNick?"":X:X:""}
           </InputBox>
           {user_info.nickname?NickCheck(user_info.nickname)?
                     dupliNick?<Text color="#E4E4E4" size="13px" lineheight="18px">*사용가능한 닉네임입니다.</Text>:
