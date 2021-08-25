@@ -22,9 +22,9 @@ const SignSocial = () => {
     <React.Fragment>
       <Container>
         <Grid display="flex" fd="row-reverse" padding="20px">
-          <Tag>
+          <Hover>
             {Close}
-          </Tag>
+          </Hover>
         </Grid>
         <Header>
           <Text m_size="27px" size="34px" lineheight="41px">회원가입/로그인하고</Text>
@@ -33,23 +33,24 @@ const SignSocial = () => {
 
         <InputContainer>
           <InputBox>
+          
             <Button width="380px" height="56px" bg="#F9DF4A" border_radius="44px"
             _onClick={()=>{window.location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&redirect_uri=https%3A%2F%2F2k1.shop%2Fapi%2Fauth_kakao%2Foauth&client_id=1f8c2e0458ce362b52f0a86f8e15dc83'}}>
-              <Text m_size="16px" bold size="16px" lineheight="22px" color="#42282A">카카오로 시작하기</Text>
+              <Hover><Text m_size="16px" bold size="16px" lineheight="22px" color="#42282A">카카오로 시작하기</Text></Hover>
             </Button>
           </InputBox>
 
           <InputBox>
             <Button width="380px" height="56px" bg="#E2635E" border_radius="44px"
             _onClick={()=>{window.location.href = 'https://2k1.shop/api/auth_google/google';}}>
-              <Text m_size="16px" bold size="16px" lineheight="22px" color="#FFFFFF">구글로 시작하기</Text>
+              <Hover><Text m_size="16px" bold size="16px" lineheight="22px" color="#FFFFFF">구글로 시작하기</Text></Hover>
             </Button>
           </InputBox>
 
           <InputBox>
             <Button width="380px" height="56px" bg="#59C451" border_radius="44px"
             _onClick={()=>{window.location.href = "https://nid.naver.com/oauth2.0/authorize?response_type=code&redirect_uri=https%3A%2F%2F2k1.shop%2Fapi%2Fauth_naver%2Foauth&client_id=pDmnerWgsXOSSsgzvfim";}}>
-              <Text m_size="16px" bold size="16px" lineheight="22px" color="#FFFFFF">네이버로 시작하기</Text>
+              <Hover><Text m_size="16px" bold size="16px" lineheight="22px" color="#FFFFFF">네이버로 시작하기</Text></Hover>
             </Button>
           </InputBox>
 
@@ -61,9 +62,9 @@ const SignSocial = () => {
         <Grid dislpay="flex" ai="flex-end" >
           <Text m_size="13px" size="13px" lineheight="18px" color="#8C8C8C" width="200px">
             &nbsp;
-            <Tag onClick={()=>{history.push("/login")}}>이메일로 로그인</Tag>
+            <Hover onClick={()=>{history.push("/login")}}>이메일로 로그인</Hover>
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-            <Tag onClick={()=>{history.push("/signup")}}>이메일로 가입</Tag>
+            <Hover onClick={()=>{history.push("/signup")}}>이메일로 가입</Hover>
            </Text>
         </Grid>
       </Container>
@@ -112,7 +113,7 @@ const Header = styled.div`
   };
 `;
 
-const Tag = styled.a`
+const Hover = styled.a`
   &:hover{
     cursor: pointer;
   }

@@ -30,7 +30,7 @@ const Alarm = () =>
                 history.push("/body")
               }
             }>
-              <Tag>{Back}</Tag>
+              <Hover>{Back}</Hover>
             </div>
 
             <Text size="17px" lineheight="22px" bold color="#000000">
@@ -74,7 +74,7 @@ const Head = styled.div`
   padding: 10px;
 `;
 
-const Tag = styled.a`
+const Hover = styled.a`
   &:hover{
     cursor: pointer;
   }
