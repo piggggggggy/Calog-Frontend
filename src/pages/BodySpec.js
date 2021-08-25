@@ -41,7 +41,6 @@ const BodySpec = (props) =>
   .then((snap) => {
     snap.ref.getDownloadURL()
     .then((url) => {
-      console.log(url);
       dispatch(ProfileSV(url));
     })
     .catch((err)=>{window.alert("업로드에 실패했습니다!")});
