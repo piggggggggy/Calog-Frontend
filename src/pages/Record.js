@@ -107,26 +107,23 @@ const Record = (props) => {
           const ReactS3Client = new S3upload(config);
           
           // 리사이징하여 업로드
-          // try {
+          try {
             console.log(image_list)
             const resizeFile = await imageCompression(file[i], options);
             ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
               if(data.status === 204) {
-                console.log(data)
                 let imgUrl = data.location
-                console.log(imgUrl)
                 image_list.push(imgUrl)
                 if(i === file?.length-1) {
-                console.log(image_list)
                 // case1) 메모에 입력된 내용이 없을 때
-                // inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
+                inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 
                 // case2) 메모에 입력된 내용이 있을 때
-                // dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
+                dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
                 }
               }
             });
-          // } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+          } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
         }
       } else {
 
