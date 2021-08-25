@@ -20,7 +20,7 @@ const DashBoard_FoodItem = (props) => {
 
           {/* 메뉴 */}
           <Grid width="63%">
-            <Text size="15px" m_size="13px">{name}</Text>
+            <Text size="15px" m_size="13px">{name.split(':')[1]}</Text>
           </Grid>
 
           {/* 칼로리 */}
