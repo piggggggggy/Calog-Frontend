@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Image} from '../elements';
 import styled from 'styled-components';
+import theme from '../shared/theme';
 
 //del Image
 import {delImage} from '../redux/modules/record';
@@ -41,28 +42,28 @@ const Record_img = (props) => {
       {url_list?.length === 0 && (
         <Grid is_flex>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
-            <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
+            <PlusSvg>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 13H24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
                 <path d="M13 2L13 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
               </svg>
-            </Grid>
+            </PlusSvg>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
-            <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
+            <PlusSvg>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 13H24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
                 <path d="M13 2L13 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
               </svg>
-            </Grid>
+            </PlusSvg>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
-            <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
+            <PlusSvg>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 13H24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
                 <path d="M13 2L13 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
               </svg>
-            </Grid>
+            </PlusSvg>
           </Grid> 
         </Grid>
       )}
@@ -80,20 +81,20 @@ const Record_img = (props) => {
             </DelBtn>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
-            <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
+            <PlusSvg>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 13H24" stroke="white" stroke-width="3" stroke-linecap="round"/>
                 <path d="M13 2L13 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
               </svg>
-            </Grid>
+            </PlusSvg>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
-            <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
+            <PlusSvg>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 13H24" stroke="white" stroke-width="3" stroke-linecap="round"/>
                 <path d="M13 2L13 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
               </svg>
-            </Grid>
+            </PlusSvg>
           </Grid> 
         </Grid>
       )}
@@ -120,12 +121,12 @@ const Record_img = (props) => {
             </DelBtn>
           </Grid>
           <Grid bg={'#EEEEEE'} width="31%" height="12.9vh" margin="4% 0 5% 0%" border_radius="8px" m_margin="4% 0 5% 0%">
-            <Grid width="21%" margin="auto" padding="36% 0" m_margin="auto">
+            <PlusSvg>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 13H24" stroke="white" stroke-width="3" stroke-linecap="round"/>
                 <path d="M13 2L13 24" stroke="white" stroke-width="3" stroke-linecap="round"/>
               </svg>
-            </Grid>
+            </PlusSvg>
           </Grid> 
         </Grid>
       )}
@@ -171,6 +172,25 @@ const DelBtn = styled.div`
   float: right;
   margin-top: -102%;
   margin-right: -4%;
+`;
+
+const PlusSvg = styled.div`
+  max-height: 12.9vh;
+  width: 26px;
+  margin: auto;
+  padding: 36% 0;
+
+  @media only screen and (max-width: 414px) {
+    padding: 30% 0;
+  }
+
+  @media ${theme.device.mobileM} {
+    padding: 28% 0;
+  }
+
+  @media ${theme.device.mobileF} {
+    padding: 40% 0;
+  }
 `;
 
 export default Record_img;

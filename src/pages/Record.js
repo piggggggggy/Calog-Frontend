@@ -189,6 +189,7 @@ const FixTop = styled.div`
   top: 0;
   width: 100%;
   max-width: 420px;
+  z-index: 100;
 
   @media ${theme.device.mobileH} {
     height: 21%

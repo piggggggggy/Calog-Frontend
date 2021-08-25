@@ -129,6 +129,11 @@ const When = styled.div`
   @media ${theme.device.mobileM} {
     width: 13%;
   }
+
+  @media ${theme.device.mobileF} {
+    width: 15%;
+    margin: 0 8px 0 0;
+  }
 `;
 
 export default Record_When;
