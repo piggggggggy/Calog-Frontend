@@ -205,10 +205,12 @@ width: 80%;
 const SignupButton = styled.div`
   max-width: 420px;
   width: 100%;
-  margin-top: 41.6%;
+  height: 100%;
+  margin-top: 20.6%;
   bottom: 0;
   @media only screen and (max-width: 400px) {
-  margin: -50%;
+  margin: -30%;
+  height: auto;
   width: 100%;
   bottom: 0;
   position: absolute;
