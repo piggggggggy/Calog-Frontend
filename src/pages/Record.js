@@ -91,7 +91,7 @@ const Record = (props) => {
       if (file?.length > 0) {
 
         for(let i=0; i<file?.length; i++) {
-          let newFileName = cart.date + file[i].name
+          let newFileName = file[i].name
 
           const config = {
             bucketName: process.env.REACT_APP_BUCKET_NAME,
