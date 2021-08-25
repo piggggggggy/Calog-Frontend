@@ -70,7 +70,7 @@ const MostContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.9%;
+  column-gap: 1.9%;
   margin-top: 1.2vh;
   min-height: 3.4vh;
 `;
