@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { getRecentDB } from '../redux/modules/recent';
 import { getFavoriteDB } from '../redux/modules/favorite';
 import { getRecommendedDB, getMostUsedKeyDB } from '../redux/modules/search';
+import { ChkModal } from '../redux/modules/dashboard';
 
 // elements & components
 import MainBody from '../components/Main_MainBody';
@@ -43,14 +44,15 @@ const Main = (props) => {
   }, []);
 
   // 홈 화면 추가 안내
-  const [addHome, setAddHome] = useState(false)
+  const ModalState = useSelector((state) => state.dashboard.chk_modal)
+  const [addHome, setAddHome] = useState(ModalState)
   const [modal, setModal] = useState(true)
   const close = (e) => {
     const clicked = e.target.closest('.info');
     if (clicked) return;
     else {
       setModal(false)
-      setAddHome(true)
+      dispatch(ChkModal(true))
     }
   }
 

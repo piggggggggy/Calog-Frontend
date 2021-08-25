@@ -57,6 +57,9 @@ const initialState = {
 
   // bmr
   bmr: 0,
+
+  // 최초 1회 홈 화면 추가 모달 체크
+  chk_modal: false,
 }
 
 const dashboard = createSlice({
@@ -75,7 +78,6 @@ const dashboard = createSlice({
       };
     },
 
-
     // dashboard - 운동 리스트 가져오기
     getExercise : (state, action) => {
       state.exercise = action.payload
@@ -85,9 +87,14 @@ const dashboard = createSlice({
     bmrChk : (state, action) => {
       state.bmr = action.payload
     },
+
+    // 최초 1회 홈 화면 추가 모달 체크
+    ChkModal: (state, action) => {
+      state.chk_modal = action.payload;
+    },
   }
 });
 
-export const {getExercise, bmrChk, delDashboardAll} = dashboard.actions;
+export const {getExercise, bmrChk, delDashboardAll, ChkModal} = dashboard.actions;
 
 export default dashboard;
