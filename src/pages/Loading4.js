@@ -87,12 +87,8 @@ const SpinnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* column-gap: 10%; */
   overflow: hidden;
-  
-  /* & > div {
-    width: 10%;
-  } */
+
 `;
 
 const ddonddon = keyframes`
