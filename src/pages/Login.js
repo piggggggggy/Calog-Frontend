@@ -168,10 +168,10 @@ const InputBox = styled.div`
 
 const LoginButton = styled.div`
   width: 100%;
-  height: 100%;
+  /* margin-top: 52%; */
   bottom: 0;
   @media only screen and (max-width: 400px) {
-    max-width: 420px;
+  max-width: 420px;
   width: 100%;
   bottom: 0;
   position: absolute;
