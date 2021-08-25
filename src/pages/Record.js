@@ -107,7 +107,7 @@ const Record = (props) => {
           const ReactS3Client = new S3upload(config);
           
           // 리사이징하여 업로드
-          try {
+          // try {
             console.log(image_list)
             const resizeFile = await imageCompression(file[i], options);
             ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
@@ -126,7 +126,7 @@ const Record = (props) => {
                 }
               }
             });
-          } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+          // } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
         }
       } else {
 
