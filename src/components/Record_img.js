@@ -191,6 +191,10 @@ const PlusSvg = styled.div`
   @media ${theme.device.mobileF} {
     padding: 40% 0;
   }
+
+  @media ${theme.device.mobileH} {
+    padding: 31% 0;
+  }
 `;
 
 export default Record_img;
