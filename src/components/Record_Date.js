@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Text} from '../elements';
 import styled from 'styled-components';
+import theme from '../shared/theme';
 
 // date picker
 import { enGB } from 'date-fns/locale';
@@ -49,7 +50,7 @@ const Record_Date = (props) => {
       <DatePicker onDateChange={Change} locale={enGB} format=' '>
         {({ inputProps, focused }) => (
           <React.Fragment>
-          <Grid display="flex">
+          <Wrap>
 
             {/* datePicker 실제로 보이는 부분 */}
             <Text width="24%" margin="0 8px 0 29px" size="22px" bold>{date}</Text>
@@ -63,13 +64,21 @@ const Record_Date = (props) => {
             className={'input' + (focused ? ' -focused' : '')}
             {...inputProps}
             />
-          </Grid>
+          </Wrap>
           </React.Fragment>
         )}
       </DatePicker>
     </Grid>
   )
 };
+
+const Wrap = styled.div`
+  display: flex;
+
+  @media ${theme.device.mobileF} {
+    width: 105%;
+  }
+`;
 
 const Input = styled.input`
   border: none;
