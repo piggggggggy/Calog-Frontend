@@ -75,7 +75,7 @@ const CardList = (props) => {
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             {feedback ? 
               <FeedbackInput>
-                <input ref={ref} placeholder="요청할 키워드를 입력하세요!"></input>
+                <input ref={ref} placeholder="요청할 키워드를 입력"></input>
               </FeedbackInput>
             : ''}
             <FeedBackBtn onClick={()=>{!feedback ? setFeedback(true) : feedBack()}}>
@@ -134,7 +134,7 @@ const FeedBackText = styled.div`
 const FeedbackInput = styled.div`
   width: 80%;
   margin: auto;
-  border: 1px solid #F19F13;
+  border: 1px solid #DADADA;
   border-radius: 10px;
   padding: 1.3vh 25px;
   margin-bottom: 1vh;
@@ -142,6 +142,8 @@ const FeedbackInput = styled.div`
   & > input {
     border: none;
     outline: none;
+    color: #A9A9A9;
+    font-size: 16px;
   }
 `;
 
