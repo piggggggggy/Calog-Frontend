@@ -64,13 +64,12 @@ const Main = (props) => {
       {/* 헬멧 */}
       <Helmet>
         <title>[Calog] 칼로리 검색</title>
-        <meta property="og:image" content="%PUBLIC_URL%/icons/helmet.png" />
       </Helmet>
 
       <LogoHeader/>
       <MainBody/>
 
-    {/* {window.navigator.standalone === false && ( */}
+    {window.navigator.standalone === display && (
       <Add onClick={close} >
         <AddHome className="info">
           <FlexBox>
@@ -79,7 +78,7 @@ const Main = (props) => {
           </FlexBox>
         </AddHome>
       </Add>
-    {/* )} */}
+    )}
     </React.Fragment>
   );
 }
