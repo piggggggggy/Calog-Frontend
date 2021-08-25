@@ -98,7 +98,7 @@ const Wrap = styled.div`
   top: 0;
   left: 0;
   position: absolute;
-  background-color: rgba(30, 30, 30, 0.2);
+  background-color: rgba(30, 30, 30, 0.5);
   width: 100%;
   height: 100%;
   animation: modal-bg-show .3s;
