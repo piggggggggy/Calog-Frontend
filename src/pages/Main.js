@@ -33,6 +33,10 @@ const Main = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
+  // 카트목록의 유무 확인
+  const cart_list = useSelector((state) => state.cart.cart);
+
+
   // 최근검색어, 즐겨찾기, 추천음식, 인기검색어
   useEffect(() => {
     if (is_login) {
@@ -72,7 +76,7 @@ const Main = (props) => {
       <LogoHeader/>
       <MainBody/>
 
-      <FloatFeedback>
+      <FloatFeedback style={cart_list.length === 0 ? {bottom: "11%"} : {bottom: "20%"}}>
         <svg onClick={()=>{history.push("/userfeedback")}} width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d)">
           <circle cx="48" cy="45" r="40" fill="white"/>
@@ -128,6 +132,7 @@ const FloatFeedback = styled.div`
   width: 12vh;
   height: 12vh;
   cursor: pointer;
+  z-index: 500;
 
   & > svg {
     cursor: pointer;
