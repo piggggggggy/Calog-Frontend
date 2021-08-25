@@ -8,8 +8,7 @@ import {isLoaded} from './record';
 // sentry
 import * as Sentry from '@sentry/react';
 
-//cadmin@calories.com
-//zkffhfltm1@
+
 const initialState = {
   list: [],
 };

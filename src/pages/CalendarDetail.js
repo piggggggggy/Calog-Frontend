@@ -60,7 +60,7 @@ const CalenderDetail = (props) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: false,

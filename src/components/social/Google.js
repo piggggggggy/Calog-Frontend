@@ -1,6 +1,8 @@
 import React from 'react';
 import { history } from '../../redux/configStore';
 
+import Loading from '../../pages/Loading4';
+
 
 const Google = () => 
 {
@@ -14,18 +16,17 @@ const Google = () =>
 
   try {
       tokenSave();
-      window.location.replace('/dashboard');
+      window.location.href = '/dashboard';
     }
     catch {
       window.alert("소셜 로그인 실패, 다시 로그인 해주세요!");
-      history.replace("/body");
+      window.location.href = '/body';
+
     };
 
 
   return (
-    <div>
-        구글
-    </div>
+        <Loading/>
   );
 }
 

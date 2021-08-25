@@ -83,24 +83,29 @@ const Record = (props) => {
   // 이미지 업로드
   const fileUpload = useRef();
 
+  const S3_BUCKET = process.env.REACT_APP_BUCKET_NAME;
+  const REGION = process.env.REACT_APP_REGION;
+  const ACCESS_KEY = process.env.REACT_APP_ACCESS_ID;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+
+  const config = {
+    bucketName: S3_BUCKET,
+    region: REGION,
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+  }
+
   // upload btn
   const submitBtn = async (e) => {
     e.preventDefault();
     let file = fileUpload.current.files;
-      let image_list = []
+    let image_list = []
       if (file?.length > 0) {
 
         for(let i=0; i<file?.length; i++) {
-          let newFileName = cart.date + file[i].name
-
-          const config = {
-            bucketName: process.env.REACT_APP_BUCKET_NAME,
-            region: process.env.REACT_APP_REGION,
-            accessKeyId: process.env.REACT_APP_ACCESS_ID,
-            secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-          };
+          let newFileName = file[i].name;
           const ReactS3Client = new S3upload(config);
-
+          
           // 리사이징하여 업로드
           try {
             const resizeFile = await imageCompression(file[i], options);
@@ -108,15 +113,13 @@ const Record = (props) => {
               if(data.status === 204) {
                 let imgUrl = data.location
                 image_list.push(imgUrl)
-              } else {
-                window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
-              }
-              if(i === file?.length-1) {
+                if(i === file?.length-1) {
                 // case1) 메모에 입력된 내용이 없을 때
                 inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 
                 // case2) 메모에 입력된 내용이 있을 때
                 dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
+                }
               }
             });
           } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
@@ -189,6 +192,7 @@ const FixTop = styled.div`
   top: 0;
   width: 100%;
   max-width: 420px;
+  z-index: 100;
 
   @media ${theme.device.mobileH} {
     height: 21%
