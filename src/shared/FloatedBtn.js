@@ -49,9 +49,7 @@ const FloatedBtn = (props) => {
       date
     })
     .then((res)=>{
-      // setModal(true);
       setComplete(true);  
-      // window.alert("의견이 전달되었어요.")
     })
     .catch((err)=>{
       Sentry.captureException(`Catched Error : ${err}`);
