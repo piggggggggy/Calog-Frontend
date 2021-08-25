@@ -20,7 +20,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/configStore';
 
 // sentry 설정
-console.log(process.env.REACT_APP_SENTRY_DSN);
 Sentry.init({
   // 환경에 상관없이
   dsn: process.env.REACT_APP_SENTRY_DSN,
