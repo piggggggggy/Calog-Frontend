@@ -207,7 +207,8 @@ const MainBody = (props) => {
               <path fillRule="evenodd" clipRule="evenodd" d="M221.101 7.69592C222.638 10.711 222.638 14.6579 222.638 22.5517V45.2713C222.65 51.2921 222.777 54.5387 224.07 57.0774C224.612 58.1411 225.293 59.1194 226.089 59.9893C222.836 59.8802 219.791 58.944 217.16 57.3843C214.93 59.0284 212.173 60 209.189 60H22.5517C14.6579 60 10.711 60 7.69591 58.4638C5.0438 57.1124 2.88756 54.9562 1.53624 52.3041C0 49.289 0 45.3421 0 37.4483V22.5517C0 14.6579 0 10.711 1.53624 7.69592C2.88756 5.04381 5.0438 2.88757 7.69591 1.53625C10.711 7.62939e-06 14.6579 7.62939e-06 22.5517 7.62939e-06H200.086C207.98 7.62939e-06 211.927 7.62939e-06 214.942 1.53625C217.594 2.88757 219.75 5.04381 221.101 7.69592Z" fill="#EFAF00" fillOpacity="0.5"/>
             </svg>
             <div>
-              내가 자주먹는 음식을 등록해서 볼 수 있어요!
+              내가 자주먹는 음식을 등록해서
+              <br/>볼 수 있어요!
             </div>
           </TextBaloon>
         </MFace>
@@ -406,8 +407,9 @@ const TextBaloon = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    padding: 4% 5% 4% 3%;
+    padding: 2% 5% 4% 3%;
     width: 100%;
+    height: 100%;
     font-size: 15px;
     line-height: 20px;
     color: #5F5F5F;
@@ -417,19 +419,19 @@ const TextBaloon = styled.div`
     justify-content: center;
 
     @media ${theme.device.mobileM} {
-      font-size: 13px;
+      font-size: 15px;
       line-height: 15px;
-      padding: 5% 8% 4% 7%;
+      padding: 3% 6% 3% 4%;
     }
     @media ${theme.device.mobileS} {
-      font-size: 11px;
+      font-size: 13px;
       line-height: 13px;
-      padding: 5% 8% 4% 8%;
+      padding: 3% 5% 3% 3%;
     }
     @media ${theme.device.mobileF} {
-      font-size: 11px;
+      font-size: 12px;
       line-height: 13px;
-      padding: 5% 5% 4% 5%;
+      padding: 3% 5% 3% 3%;
     }
   }
 `;

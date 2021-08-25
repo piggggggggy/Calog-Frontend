@@ -32,8 +32,10 @@ const FloatedBtn = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 
   // feedback contents
-  const title = useRef();
-  const contents = useRef();
+  const phoneNum = useRef();
+  const contents1 = useRef();
+  const contents2 = useRef();
+  const instagramId = useRef();
   const date = moment().format('YYYY-MM-DD');
 
   // modal on off
@@ -41,22 +43,25 @@ const FloatedBtn = (props) => {
 
   // feedback  
   const sendFeedback = () => {
-    
-    instance
-    .post('/api/notice/feedback', {
-      title: title.current.value, 
-      contents: contents.current.value, 
-      date
-    })
-    .then((res)=>{
-      // setModal(true);
-      setComplete(true);  
-      // window.alert("의견이 전달되었어요.")
-    })
-    .catch((err)=>{
-      Sentry.captureException(`Catched Error : ${err}`);
-      console.log("피드백전송에 오류가 있어요!",err)
-    });
+    if(contents1.current.value && contents2.current.value && phoneNum.current.value) {
+      instance
+      .post('/api/notice/feedback', {
+        title: "피드백",
+        contents: contents1.current.value + contents2.current.value,
+        date: date,
+        phoneNum: phoneNum.current.value,
+        instagramId: instagramId.current.value,
+      })
+      .then((res)=>{
+        setComplete(true);  
+      })
+      .catch((err)=>{
+        Sentry.captureException(`Catched Error : ${err}`);
+        console.log("피드백전송에 오류가 있어요!",err)
+      });
+    } else {
+      window.alert("필수항목을 모두 입력해주세요!")
+    }
   }
 
 
@@ -105,14 +110,12 @@ const FloatedBtn = (props) => {
         <FeedbackModal>
         {complete ?
           <>
-            <ModalTop>
+            <ModalComplete>
               <Text size="22px" lineheight="30.5px" bold color="#FFFFFF" padding="0" margin="0">소중한 의견</Text>
               <Text size="22px" lineheight="30.5px" bold color="#FFFFFF" padding="0" margin="0">감사드립니다 :)</Text>
               <Text size="22px" lineheight="30.5px" color="#FFFFFF" padding="0" margin="0">더 좋은 서비스로</Text>
               <Text size="22px" lineheight="30.5px" color="#FFFFFF" padding="0" margin="0">보답하겠습니다!</Text>
-            </ModalTop>
-            <ConpletedBottom>
-              <div>
+              <Fats>
                 <div>
                   <svg width="113" height="92" viewBox="0 0 113 92" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M72.4297 40.2256C72.4297 40.2256 93.348 40.0124 110.648 65.6132" stroke="#565656" strokeWidth="2.72985" strokeLinecap="round" strokeLinejoin="round"/>
@@ -144,34 +147,55 @@ const FloatedBtn = (props) => {
                     <path d="M57.1611 47.8555C57.1611 47.8555 76.8174 40.6854 84 10.6533" stroke="#565656" strokeWidth="2.72985" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-              </div>
-            </ConpletedBottom>
+              </Fats>
+            </ModalComplete>
           </>
         :
           <>
-            <ModalTop>
+            <ModalContainer>
               <ModalText>칼로그<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>를 위한</span></ModalText>
-              <ModalText>다양한 피드백<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>들을 작성해주세요!</span></ModalText>
-              <Grid margin="22px 0 0 0" m_margin="22px 0 0 0" padding="9px 28px" bg="#FFFFFF" border="none" border_radius="25px">
-                <ModalInput ref={title} type="text" placeholder="제목을 입력해주세요 :)"></ModalInput>
-              </Grid>
-              <Grid margin="18px 0 0 0" m_margin="18px 0 0 0" padding="16px 28px" bg="#FFFFFF" border="none" border_radius="25px" height="223px">
-                <ModalTextarea ref={contents} placeholder="내용을 입력해주세요 :)"></ModalTextarea>
-              </Grid>
-            </ModalTop>
-            <ModalBottom>
-              <div onClick={()=>{sendFeedback()}}>
+              <ModalText style={{marginBottom: "28px"}}>다양한 피드백<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>들을 작성해주세요!</span></ModalText>
+              
+              <InputForm>
+                <p>전화번호<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
+                <div>
+                  <ModalInput ref={phoneNum} type="text" placeholder="'-'빼고 전화번호 입력"></ModalInput>
+                </div>
+              </InputForm>
+
+              <InputForm>
+                <p>칼로그 장점<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
+                <div style={{padding: "14px"}}>
+                  <ModalTextarea ref={contents1} type="text" placeholder="칼로그 장점을 작성해주세요."></ModalTextarea>
+                </div>
+              </InputForm>
+
+              <InputForm>
+                <p>칼로그 불편한 점<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
+                <div style={{padding: "14px"}}>
+                  <ModalTextarea ref={contents2} type="text" placeholder="칼로그의 불편한 점을 작성해주세요."></ModalTextarea>
+                </div>
+              </InputForm>
+
+              <InputForm>
+                <p>인스타그램 아이디(선택)</p>
+                <div>
+                  <ModalInput ref={instagramId} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
+                </div>
+              </InputForm>
+
+              <SubmitBtn onClick={()=>{sendFeedback()}}>
                 <div style={{fontSize: "16px", fontWeight: "bold", lineHeight: "22px"}}>
                   작성하기
                 </div>
-              </div>
-            </ModalBottom>
+              </SubmitBtn>
+            </ModalContainer>
           </>
         }
           <CloseModal onClick={()=>{offModal()}}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.77832 23.335L23.3347 7.77861" stroke="white" stroke-width="3" stroke-linecap="round"/>
-              <path d="M7.77832 7.77832L23.3347 23.3347" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              <path d="M7.77832 23.335L23.3347 7.77861" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+              <path d="M7.77832 7.77832L23.3347 23.3347" stroke="white" strokeWidth="3" strokeLinecap="round"/>
             </svg>
           </CloseModal>
         </FeedbackModal>
@@ -228,6 +252,7 @@ const FloatedBody = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-left: 40px;
+  
 
   @media only screen and (max-width: 1580px) {
     display: none;
@@ -269,7 +294,7 @@ const FeedbackModal = styled.div`
   position: fixed;
   right: 6%;
   bottom: 30px;
-  height: 513px;
+  height: 763px;
   width: 397px;
   box-shadow: 0px 4px 38px 3px rgba(0, 0, 0, 0.06);
   border: none;
@@ -277,19 +302,18 @@ const FeedbackModal = styled.div`
   background: #FFFFFF;
   z-index: 100;
 
-  display: grid;
-  grid-template-rows: 443px 70px;
+  /* display: grid;
+  grid-template-rows: 443px 70px; */
 
   animation: ${FadeIn} 0.5s ease;
 `;
 
-const ModalTop = styled.div`
+const ModalContainer = styled.div`
   position: relative;
   background: linear-gradient(180deg, #6993FF 28.86%, rgba(216, 215, 215, 0) 97.27%);
   border: none;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  padding: 40px 25px 25px 25px;
+  border-radius: 20px;
+  padding: 46px 33px 35px 33px;
 `;
 
 const ModalText = styled.div`
@@ -300,50 +324,81 @@ const ModalText = styled.div`
   color: #FFFFFF;
 `;
 
+const InputForm = styled.div`
+  width: 100%;
+  margin-bottom: 18px;
+
+  & > p {
+    font-size: 15px;
+    line-height: 19px;
+    padding: 0;
+    margin: 0 0 7px 0;
+    color: #FFFFFF;
+  }
+
+  & > div {
+    width: 100%;
+    border: none;
+    border-radius: 5.3px;
+    background: #FFFFFF;
+    padding: 11px 14px;
+  }
+`;
+
 const ModalInput = styled.input`
-  font-size: 15px;
-  line-height: 34px;
+  font-size: 14px;
+  line-height: 21px;
   border: none;
   outline: none;
   
   &::placeholder {
-    color: #8C8C8C;
+    color: #A9A9A9;
   }
 `;
 
 const ModalTextarea = styled.textarea`
   width: 100%;
-  height: 100%;
-  font-size: 15px;
-  line-height: 34px;
+  height: 106px;;
+  font-size: 14px;
+  line-height: 21px;
   border: none;
   outline: none;
   resize: none;
 
   &::placeholder {
-    color: #8C8C8C;
+    color: #A9A9A9;
   }
 `;
 
-
-const ModalBottom = styled.div`
-  position: relative;
-  border: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  padding: 0 35px 18px 35px;
-  height: 100%;
-
-  & > div {
+const SubmitBtn = styled.div`
     width: 100%;
-    height: 100%;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #FFE899;
     border: none;
     border-radius: 60px;
-  }
+`;
+
+const ModalComplete = styled.div`
+  position: relative;
+  height: 100%;
+  width:100%;
+  background: linear-gradient(180deg, #6993FF 28.86%, rgba(216, 215, 215, 0) 97.27%);
+  border: none;
+  border-radius: 20px;
+  padding: 46px 33px 30px 33px;
+
+`;
+
+const Fats = styled.div`
+  position: absolute;
+  bottom: 30px;
+  width: 83.3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 
 const CloseModal = styled.div`
@@ -353,22 +408,5 @@ const CloseModal = styled.div`
   width: 30px;
   height: 30px;
 `;
-
-const ConpletedBottom = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 3vh;
-
-  & > div {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-`;
-
 
 export default FloatedBtn;
