@@ -60,7 +60,7 @@ const FloatedBtn = (props) => {
         console.log("피드백전송에 오류가 있어요!",err)
       });
     } else {
-      window.alert("전화번호, 칼로그 장점, 칼로그 불편한 점은 필수로 입력해주세요!")
+      window.alert("필수항목을 모두 입력해주세요!")
     }
   }
 
