@@ -76,22 +76,22 @@ if(!is_loaded) {
       </Grid>
 
       {/* body */}
-      <Grid margin="8% 6%">
+      <Grid margin="8% 6%" m_margin="8% 6%" >
 
         {/* 전화번호 */}
-        <Text size="17px" margin="0 0 2% 0">전화번호<span style={{color:"#FD0000"}}>*</span></Text>
+        <Text size="17px" margin="0 0 2% 0" m_size="15px">전화번호<span style={{color:"#FD0000"}}>*</span></Text>
         <InputBox placeholder="'-'빼고 전화번호 입력" ref={phone}/>
 
         {/* 장점 */}
-        <Text size="17px" margin="6% 0 2% 0">칼로그 장점<span style={{color:"#FD0000"}}>*</span></Text>
+        <Text size="17px" margin="6% 0 2% 0" m_size="15px">칼로그 장점<span style={{color:"#FD0000"}}>*</span></Text>
         <TextBox rows={8} placeholder="칼로그 장점을 작성해주세요" ref={good}/>
 
         {/* 불편한 점 */}
-        <Text size="17px" margin="6% 0 2% 0">칼로그 불편한 점<span style={{color:"#FD0000"}}>*</span></Text>
+        <Text size="17px" margin="6% 0 2% 0" m_size="15px">칼로그 불편한 점<span style={{color:"#FD0000"}}>*</span></Text>
         <TextBox rows={8} placeholder="칼로그의 불편한 점을 작성해주세요" ref={bad}/>
 
         {/* 인스타 */}
-        <Text size="17px" margin="6% 0 2% 0">인스타그램 아이디(선택)</Text>
+        <Text size="17px" margin="6% 0 2% 0" m_size="15px">인스타그램 아이디(선택)</Text>
         <InputBox placeholder="인스타그램 아이디 입력" ref={instagram}/>
 
         {/* 작성하기 버튼 */}
@@ -120,6 +120,10 @@ const InputBox = styled.input`
   ::placeholder {
     color: ${theme.color.gray_4};
     font-size: 16px;
+
+    @media ${theme.device.mobileM} {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -133,5 +137,9 @@ const TextBox = styled.textarea`
   ::placeholder {
     color: ${theme.color.gray_4};
     font-size: 16px;
+
+    @media ${theme.device.mobileM} {
+      font-size: 13px;
+    }
   }
 `;
