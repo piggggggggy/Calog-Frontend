@@ -70,7 +70,7 @@ const MostContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 1.9%;
+  /* column-gap: 1.9%; */
   margin-top: 1.2vh;
   min-height: 3.4vh;
 `;
@@ -86,6 +86,7 @@ const MostButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin: 0 1%;
 `;
 
 export default MostUsedKey;

@@ -362,7 +362,7 @@ const IngreDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.9vh;
+  /* gap: 0.9vh; */
 `;
 
 const IngreDetail = styled.div`
@@ -372,6 +372,7 @@ const IngreDetail = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   padding: 1.3vh 0 1.8vh 0;
   background: #ffffff;
+  margin-bottom: 0.9vh;
 `;
 
 const IngreText = styled.div`

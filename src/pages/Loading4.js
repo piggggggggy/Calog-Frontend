@@ -48,6 +48,7 @@ const Loading4 = (props) => {
               <path d="M290 319C290 319 136.744 317.438 10 505" stroke="#565656" strokeWidth="20" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </Spinner1>
+          <div/>
           <Spinner2>
             <svg viewBox="0 0 589 663" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M574.562 331.5C646.548 559.804 434.747 663 262.27 663C89.7933 663 -48.6102 543.547 16.3182 331.5C69.9125 156.462 107.084 0 279.561 0C452.038 0 521.455 163.064 574.562 331.5Z" fill="#FFE899"/>
@@ -59,6 +60,7 @@ const Loading4 = (props) => {
               <path d="M336 239C336 239 305.721 227.423 311.809 201" stroke="#F19F13" strokeWidth="19" strokeMiterlimit="10" strokeLinecap="round"/>
             </svg> 
           </Spinner2>
+          <div/>
           <Spinner3>
             <svg viewBox="0 0 626 752" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M207.633 410.649C207.633 410.649 63.6229 358.118 11 138.091" stroke="#565656" strokeWidth="20" strokeLinecap="round" strokeLinejoin="round"/>
@@ -85,9 +87,12 @@ const SpinnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 10%;
+  /* column-gap: 10%; */
   overflow: hidden;
   
+  /* & > div {
+    width: 10%;
+  } */
 `;
 
 const ddonddon = keyframes`
@@ -130,6 +135,7 @@ const Spinner1 = styled.div`
   width: 70px;
   border: none;
   animation: ${ddonddon} 0.8s 0s infinite ease;
+  margin: 0 5%;
 `;
 
 const Spinner2 = styled.div`
@@ -137,6 +143,7 @@ const Spinner2 = styled.div`
   width: 60px;
   border: none;
   animation: ${ddonddon} 0.8s -0.2s infinite ease;
+  margin: 0 5%;
 `;
 
 const Spinner3 = styled.div`
@@ -144,6 +151,7 @@ const Spinner3 = styled.div`
   width: 60px;
   border: none;
   animation: ${ddonddon} 0.8s 0s infinite ease;
+  margin: 0 5%;
 `;
 
 const Spinner4 = styled.div`
