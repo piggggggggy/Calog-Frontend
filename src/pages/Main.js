@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../redux/configStore';
 
 // css
 import styled from 'styled-components';
@@ -72,7 +73,7 @@ const Main = (props) => {
       <MainBody/>
 
       <FloatFeedback>
-        <svg width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg onClick={()=>{history.push("/userfeedback")}} width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d)">
           <circle cx="48" cy="45" r="40" fill="white"/>
           </g>
@@ -127,6 +128,10 @@ const FloatFeedback = styled.div`
   width: 12vh;
   height: 12vh;
   cursor: pointer;
+
+  & > svg {
+    cursor: pointer;
+  }
 
   & > div {
     position: absolute;
