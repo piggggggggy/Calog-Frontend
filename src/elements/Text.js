@@ -55,7 +55,6 @@ const DefaultText = styled.p`
     color: ${(props) => props.color};
     font-size: ${(props) => props.size};
     margin: ${(props) => props.margin};
-    cursor: pointer;
     ${(props) => props.lineheight ? `line-height: ${props.lineheight}` : ''};
     ${(props) => props.overflow ? `overflow: ${props.overflow}` : ''};
     ${(props) => props.to ? 'text-overflow: ellipsis' : ''};

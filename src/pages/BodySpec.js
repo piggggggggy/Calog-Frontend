@@ -74,9 +74,9 @@ const BodySpec = (props) =>
             <div onClick={()=>{history.push("/signsocial")}}>
               <Grid display="flex">
                 <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">
-                  <Tag>
+                  <Hover>
                     회원가입/로그인하기
-                  </Tag>
+                  </Hover>
                 </Text>
                 <Text margin="92px 0px 16px 0px">
                   {Go}
@@ -89,11 +89,11 @@ const BodySpec = (props) =>
             </Text>
             <hr color="#F5F5F5"/>
             <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-              <Tag onClick={()=>
+              <Hover onClick={()=>
                 {
                   history.push("/notice")
                 }}>공지사항
-              </Tag>
+              </Hover>
             </Text>
             {/* <hr color="#F5F5F5"/>
             <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
@@ -154,43 +154,46 @@ return (
           <Text margin="30px">
             신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!
           </Text>
+          
           <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
           _onClick={()=>
             {
               history.push("/addspec")
             }}>
+          <Hover>
             <Text lineheight="22px" size="16px" bold>
               {gender&&age&&height&&weight?"신체정보 수정하기":"신체정보 등록하기"}
             </Text>
+          </Hover>
           </Button>
         </BodyBox>
 
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-            <Tag onClick={()=>
+            <Hover onClick={()=>
               {
                 history.push("/notice")
               }}>
                 공지사항
-            </Tag>
+            </Hover>
           </Text>
           {/* <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-            <Tag onClick={()=>
+            <Hover onClick={()=>
               {
                 history.push("/alam")
               }}>
               알림
-            </Tag>
+            </Hover>
           </Text> */}
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-                <Tag onClick={()=>
+                <Hover onClick={()=>
               {
                 history.push("/userfeedback")
               }}>
               의견 보내기
-            </Tag>
+            </Hover>
           </Text>
           <hr color="#F5F5F5"/>
 
@@ -205,9 +208,9 @@ return (
           <hr color="#F5F5F5"/>
           <div onClick={logout}>
             <Text lineheight="22px" size="17px" color="#A9A9A9" margin="24px 0px 24px 20px">
-              <Tag>
+              <Hover>
                 로그아웃
-              </Tag>
+              </Hover>
             </Text>
           </div>
           <hr color="#F5F5F5"/>
@@ -270,9 +273,12 @@ const BodyBox = styled.div`
 const Cameradiv = styled.div`
   position: absolute;
   margin: -35px 0px 0px 110px;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
-const Tag = styled.a`
+const Hover = styled.a`
   &:hover{
     cursor: pointer;
   }
