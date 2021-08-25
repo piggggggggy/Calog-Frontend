@@ -78,21 +78,23 @@ if(!is_loaded) {
       {/* body */}
       <Grid margin="8% 6%" m_margin="8% 6%" >
 
-        {/* 전화번호 */}
-        <Text size="17px" margin="0 0 2% 0" m_size="15px">전화번호</Text>
-        <InputBox placeholder="'-'빼고 전화번호 입력" ref={phone}/>
-
         {/* 장점 */}
-        <Text size="17px" margin="6% 0 2% 0" m_size="15px">칼로그 장점<span style={{color:"#FD0000"}}>*</span></Text>
+        <Text size="17px" margin="0 0 2% 0" m_size="15px">칼로그 장점<span style={{color:"#FD0000"}}>*</span></Text>
         <TextBox rows={8} placeholder="칼로그 장점을 작성해주세요" ref={good}/>
 
         {/* 불편한 점 */}
         <Text size="17px" margin="6% 0 2% 0" m_size="15px">칼로그 불편한 점<span style={{color:"#FD0000"}}>*</span></Text>
         <TextBox rows={8} placeholder="칼로그의 불편한 점을 작성해주세요" ref={bad}/>
 
+        {/* 전화번호 */}
+        <Text size="17px" margin="6% 0 2% 0" m_size="15px">전화번호(선택)</Text>
+        <InputBox placeholder="'-'빼고 전화번호 입력" ref={phone}/>
+        <Text size="13px" m_size="13px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
+
         {/* 인스타 */}
         <Text size="17px" margin="6% 0 2% 0" m_size="15px">인스타그램 아이디(선택)</Text>
         <InputBox placeholder="인스타그램 아이디 입력" ref={instagram}/>
+        <Text size="13px" m_size="13px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
 
         {/* 작성하기 버튼 */}
         <Button margin="6% 0 0 0" width="90%" height="50px" bg={theme.color.light} border_radius="60px" _onClick={sendFeedback}>
