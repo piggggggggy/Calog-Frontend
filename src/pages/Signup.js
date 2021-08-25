@@ -80,12 +80,12 @@ const Signup = () => {
             onChange={(e)=>{debounceEmail(e)}}
             />
           </InputBox>
-          {user_info.email?
-                  emailCheck(user_info.email)?
-                  dupliEmail?<Text color="#E4E4E4" size="13px" lineheight="18px">*사용가능한 이메일입니다.</Text>:
-                  <Text color="#F05C5C" size="13px" lineheight="18px">*이미 존재하는 이메일입니다.</Text>
-                  :
-                  <Text color="#F05C5C" size="13px" lineheight="18px">*이메일 형식이 올바르지 않습니다.</Text>
+        {user_info.email?
+        emailCheck(user_info.email)?
+        dupliEmail?<Text color="#E4E4E4" size="13px" lineheight="18px">*사용가능한 이메일입니다.</Text>:
+        <Text color="#F05C5C" size="13px" lineheight="18px">*이미 존재하는 이메일입니다.</Text>
+        :
+        <Text color="#F05C5C" size="13px" lineheight="18px">*이메일 형식이 올바르지 않습니다.</Text>
         :
         <Text color="#FFFFFF" size="13px" lineheight="18px">*이메일을 입력해주세요.</Text>
         }
@@ -139,22 +139,22 @@ const Signup = () => {
           </Grid>
           {/* 모든 요소 충족 시 버튼 표시 */}
           {dupliEmail&&dupliNick&&pwdDupli(user_info.password, user_info.pwdcheck)&&pwdCheck(user_info.password)?
-          <LoginButton>
+          <SignupButton>
           <Grid display="flex" fd="column-reverse" height="100%">
           <Button bg="#FFE899" height="56px" margin="0px"
           _onClick={signup}>
             <Text bold color="#404040" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>
-          </LoginButton>
+          </SignupButton>
           :
-          <LoginButton>
+          <SignupButton>
           <Grid display="flex" fd="column-reverse" height="100%">
           <Button bg="#E4E4E4" height="56px">
             <Text color="#A9A9A9" size="16px" lineheight="22px">회원가입 하기</Text>
           </Button>
           </Grid>
-          </LoginButton>
+          </SignupButton>
           }
       </Container>
     </React.Fragment>
@@ -202,12 +202,13 @@ width: 80%;
     }
 `;
 
-const LoginButton = styled.div`
+const SignupButton = styled.div`
   max-width: 420px;
   width: 100%;
   margin-top: 41.6%;
+  bottom: 0;
   @media only screen and (max-width: 400px) {
-    /* max-width: 420px; */
+  margin: -50%;
   width: 100%;
   bottom: 0;
   position: absolute;

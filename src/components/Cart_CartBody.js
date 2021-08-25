@@ -72,7 +72,7 @@ const CartBody = (props) => {
   const write = () => {
     if(is_login) {
       dispatch(cartOut(type));
-      window.location.href='/record';
+      history.push('/record');
     } else {
       let result = window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')
       result ? history.push('/signsocial') : history.goBack('/');
