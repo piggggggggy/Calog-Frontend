@@ -92,13 +92,20 @@ const CardRcmd = (props) => {
     }
   };
 
+  // 브랜드명 분리
+  const NameNBrand = props.name.indexOf('[') === 0 ? props.name.split(':') : false;
+  const brand = props.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = props.name.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+  
+
   return (
     <React.Fragment>
       <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
         
         {/* 이름 */}
         <NameContainer>
-          <NameBox lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" color="#000000" padding="0" margin="0">{props.name}</NameBox>
+          <NameBox>{brand}</NameBox>
+          <NameBox>{name}</NameBox>
         </NameContainer>
         
         {/* 칼로리 */}
@@ -166,7 +173,8 @@ const NameBox = styled.div`
   color: #000000;
   padding: 0; 
   margin: 0;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 `;
 

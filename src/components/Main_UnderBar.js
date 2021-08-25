@@ -43,6 +43,7 @@ const UnderBar = (props) => {
   };
 
 
+
   if ( cart_list.length === 0 ) {
     return <></>;
   }
@@ -62,10 +63,15 @@ const UnderBar = (props) => {
           {/* 즐겨찾기 항목 */}
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
             {cart_list.map((cart, idx) => {
+              // 브랜드명 분리
+              const NameNBrand = cart.name.indexOf('[') === 0 ? cart.name.split(':') : false;
+              // const brand = cart.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+              const name = cart.name.indexOf('[') === 0 ? NameNBrand[1] : cart.name;
+
               return (
                 <CartButton key={idx}>
                   <CartText>
-                    {cart.name}
+                    {name}
                   </CartText>
                   <div onClick={()=>{deleteCart(cart.foodId)}}>
                     <TiDeleteOutline size="17px" color="#404040"/>

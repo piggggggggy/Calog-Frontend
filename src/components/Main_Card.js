@@ -104,8 +104,11 @@ const Card = (props) => {
     }
   };
   
-  // 즐겨찾기 해제
-    
+  // 브랜드명 분리
+  const NameNBrand = props.name.indexOf('[') === 0 ? props.name.split(':') : false;
+  const brand = props.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = props.name.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+
   return (
     <React.Fragment>
 
@@ -119,7 +122,8 @@ const Card = (props) => {
 
         {/* 이름 */}
         <NameContainer >
-          <Name>{props.name}</Name>
+          <Name>{brand}</Name>
+          <Name>{name}</Name>
         </NameContainer>
 
         {/* 칼로리 */}
@@ -198,7 +202,8 @@ const Name = styled.div`
   line-height: 18px;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   
 
