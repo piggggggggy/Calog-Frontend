@@ -7,6 +7,8 @@ import theme from '../shared/theme';
 import {useDispatch, useSelector} from 'react-redux';
 import {delRecordDB} from '../redux/modules/record';
 
+// css
+import { FiShare } from "react-icons/fi";
 
 /** 
  * @역할 모달 카드
@@ -36,8 +38,6 @@ const Modal = (props) => {
   const xBtn = () => {
     setDisplay("none")
   };
-
-  
 
   return (
     <Grid display={open ? display : "none"}>
@@ -75,12 +75,20 @@ const Modal = (props) => {
                 </Btn>
               </DelBtns>
             )}
+
+            {/* 홈 화면 추가 모달인 경우 */}
+            {title === "addHome" && (
+              <React.Fragment>
+                <Grid margin="0 0 0 8.5%" m_margin="0 0 0 8.5%">
+                  <FiShare size="25px" color={theme.color.gray_7}/>
+                  <Grid margin="2% 0 0 0" m_margin="2% 0 0 0">
+                    <Text size="18px" bold color={theme.color.gray_6} m_size="14px">홈 화면에 추가하면 앱처럼 사용할 수 있어요!</Text>
+                  </Grid>
+                </Grid>
+              </React.Fragment>
+            )}
           </Grid>
-
-          
-
         </InnerBox>
-
       </Wrap>
     </Grid>
   );
@@ -90,7 +98,7 @@ const Wrap = styled.div`
   top: 0;
   left: 0;
   position: absolute;
-  background-color: rgba(30, 30, 30, 0.1);
+  background-color: rgba(30, 30, 30, 0.5);
   width: 100%;
   height: 100%;
   animation: modal-bg-show .3s;
