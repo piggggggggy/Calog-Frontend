@@ -108,7 +108,6 @@ const Record = (props) => {
           
           // 리사이징하여 업로드
           try {
-            console.log(image_list)
             const resizeFile = await imageCompression(file[i], options);
             ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
               if(data.status === 204) {
