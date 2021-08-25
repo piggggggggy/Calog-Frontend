@@ -75,6 +75,11 @@ const UnderBar = (props) => {
           
           <Grid padding="0 5% 3% 5%" display="flex" fw="wrap">
             {recentDeleted_list.map((recentDeleted, idx) => {
+              // 브랜드명 분리
+              const NameNBrand = recentDeleted.name.indexOf('[') === 0 ? recentDeleted.name.split(':') : false;
+              // const brand = cart.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+              const name = recentDeleted.name.indexOf('[') === 0 ? NameNBrand[1] : recentDeleted.name;
+
               const data = {
                 foodId: recentDeleted.foodId,
                 name: recentDeleted.name,
@@ -90,7 +95,7 @@ const UnderBar = (props) => {
                     <BiPlusCircle size="17px" color="#404040"/>
                   </div>
                   <RecentDeletedText>
-                    {recentDeleted.name}
+                    {name}
                   </RecentDeletedText>
                 </RecentDeletedButton>
               )

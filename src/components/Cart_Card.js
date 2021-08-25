@@ -67,6 +67,10 @@ const Card = (props) => {
     dispatch(deleteCartRx(props.foodId))
   }
 
+  // 브랜드명 분리
+  const NameNBrand = props.name.indexOf('[') === 0 ? props.name.split(':') : false;
+  const brand = props.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = props.name.indexOf('[') === 0 ? NameNBrand[1] : props.name;
 
   return (
     <React.Fragment>
@@ -78,7 +82,8 @@ const Card = (props) => {
           
           <Grid>
             {/* 이름 */}
-            <NameBox>{props.name}</NameBox>
+            <NameBox>{brand}</NameBox>
+            <NameBox>{name}</NameBox>
           
             {/* kcal */}
             <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">{Math.round(props.kcal * 10)/10} kcal</Text>
@@ -173,23 +178,18 @@ const FoodCard = styled.div`
 
 const NameBox = styled.div`
   /* max-width: 200px;  */
-  line-height: 22px;
-  size: 17px; 
+  line-height: 20px;
   font-size: 15px; 
   margin: 0; 
   padding: 0;
-  max-height: 44px;
-  min-height: 44px;
   vertical-align: bottom;
-  /* text-overflow: ellipsis;
-  overflow: hidden; 
-  white-space: nowrap;  */
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   @media ${theme.device.mobileM} {
-    line-height: 20px; 
-    font-size: 15px; 
-    max-height: 40px;
-    min-height: 40px;
+    line-height: 18px; 
+    font-size: 13px; 
   }
 `;
 

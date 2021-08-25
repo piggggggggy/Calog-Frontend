@@ -248,7 +248,7 @@ const TopBack = styled.div`
 const BodyContainer = styled.div`
   padding-top: 2vh;
   max-width: 100%;
-  max-height: 37vh;
+  max-height: 45vh;
   padding-bottom: 20vh;
   overflow: scroll;
   &::-webkit-scrollbar {

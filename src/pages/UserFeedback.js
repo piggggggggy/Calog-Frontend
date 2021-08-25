@@ -34,7 +34,7 @@ const Feedback = (props) =>
     const goodContents = good.current.value;
     const badContents = bad.current.value;
 
-    if(!phoneNum || !goodContents || !badContents) {
+    if(!goodContents || !badContents) {
       window.alert('필수항목을 모두 입력해주세요!')
     } else {
       instance
@@ -62,7 +62,7 @@ if(!is_loaded) {
       <Grid bg={theme.color.light} height="23.5%">
 
         {/* 닫기 버튼 */}
-        <CloseBtn>
+        <CloseBtn onClick={()=>{history.goBack()}}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="24" height="24" fill="#FFE899"/>
             <path d="M11.5 9.78274L17.9271 3.35566C18.4013 2.88145 19.1701 2.88145 19.6443 3.35566C20.1186 3.82986 20.1186 4.59871 19.6443 5.07291L13.2173 11.5L19.6443 17.9271C20.1186 18.4013 20.1186 19.1701 19.6443 19.6443C19.1701 20.1186 18.4013 20.1186 17.9271 19.6443L11.5 13.2173L5.07291 19.6443C4.59871 20.1186 3.82986 20.1186 3.35566 19.6443C2.88145 19.1701 2.88145 18.4013 3.35566 17.9271L9.78274 11.5L3.35566 5.07291C2.88145 4.59871 2.88145 3.82986 3.35566 3.35566C3.82986 2.88145 4.59871 2.88145 5.07291 3.35566L11.5 9.78274Z" fill="#8C8C8C"/>
@@ -79,7 +79,7 @@ if(!is_loaded) {
       <Grid margin="8% 6%" m_margin="8% 6%" >
 
         {/* 전화번호 */}
-        <Text size="17px" margin="0 0 2% 0" m_size="15px">전화번호<span style={{color:"#FD0000"}}>*</span></Text>
+        <Text size="17px" margin="0 0 2% 0" m_size="15px">전화번호</Text>
         <InputBox placeholder="'-'빼고 전화번호 입력" ref={phone}/>
 
         {/* 장점 */}

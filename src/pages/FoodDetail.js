@@ -110,11 +110,19 @@ const FoodDetail = (props) => {
     }
   `;
 
+  // 브랜드명 분리
+  const NameNBrand = foodInfo.name.indexOf('[') === 0 ? foodInfo.name.split(':') : false;
+  const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
+
+  console.log(foodInfo);
 
   // 스피너
   if (!is_loaded) {
     return <Loading/>
   };
+
+  
 
   return (
     <React.Fragment>
@@ -128,8 +136,9 @@ const FoodDetail = (props) => {
         {/* 기본정보 */}
         <HeaderBox>
           <Grid>
+            <Text size="17px" m_size="17px" lineheight="22px" m_lineheight="20px" bold color="#5F5F5F">{brand}</Text>
             <Grid display="flex">
-              <NameBox>{foodInfo.name}</NameBox>
+              <NameBox>{name}</NameBox>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
             <Grid is_flex>
@@ -167,7 +176,7 @@ const FoodDetail = (props) => {
               <img src={Carbo} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">탄수화물</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">63g</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.carbo}</Text> 
           </div>
 
           <div>
@@ -175,7 +184,7 @@ const FoodDetail = (props) => {
               <img src={Protein} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">단백질</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">6g</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.protein}</Text> 
           </div>
 
           <div>
@@ -183,7 +192,7 @@ const FoodDetail = (props) => {
               <img src={Fat} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">지방</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">8g</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.fat}</Text> 
           </div>
         </IngreBox>
 
@@ -200,7 +209,7 @@ const FoodDetail = (props) => {
                 <IngreText style={{fontWeight: "bold"}}>탄수화물</IngreText>
               </div>
               <div>
-               <IngreText style={{fontWeight: "bold"}}>63g</IngreText>
+               <IngreText style={{fontWeight: "bold"}}>{foodInfo.carbo}</IngreText>
               </div>
             </Grid>
             <Line/>
@@ -212,7 +221,7 @@ const FoodDetail = (props) => {
 
             <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
               <IngreText>당</IngreText>
-              <IngreText>7g</IngreText>
+              <IngreText>{foodInfo.sugars}</IngreText>
             </Grid>
           </IngreDetail>
 
@@ -224,7 +233,7 @@ const FoodDetail = (props) => {
                 <IngreText style={{fontWeight: "bold"}}>단백질</IngreText>
               </div>
               <div>
-               <IngreText style={{fontWeight: "bold"}}>63g</IngreText>
+               <IngreText style={{fontWeight: "bold"}}>{foodInfo.protein}</IngreText>
               </div>
             </Grid>
             <Line/>
@@ -248,19 +257,19 @@ const FoodDetail = (props) => {
                 <IngreText style={{fontWeight: "bold"}}>지방</IngreText>
               </div>
               <div>
-               <IngreText style={{fontWeight: "bold"}}>63g</IngreText>
+               <IngreText style={{fontWeight: "bold"}}>{foodInfo.fat}</IngreText>
               </div>
             </Grid>
             <Line/>
 
             <Grid is_flex padding="0 8.6% 0 8.6%">
-              <IngreText>식이섬유</IngreText>
-              <IngreText>4g</IngreText>
+              <IngreText>포화지방</IngreText>
+              <IngreText>{foodInfo.carbo}</IngreText>
             </Grid>
 
             <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
-              <IngreText>당</IngreText>
-              <IngreText>7g</IngreText>
+              <IngreText>트랜스지방</IngreText>
+              <IngreText>{foodInfo.carbo}</IngreText>
             </Grid>
           </IngreDetail>
 
