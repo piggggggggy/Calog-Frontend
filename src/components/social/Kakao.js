@@ -16,11 +16,11 @@ const Kakao = () =>
 
   try {
       tokenSave();
-      window.location.replace('/dashboard');
+      window.location.href = '/dashboard';
     }
     catch {
       window.alert("소셜 로그인 실패, 다시 로그인 해주세요!");
-      history.replace("/body");
+      window.location.href = '/body';
     };
 
 
