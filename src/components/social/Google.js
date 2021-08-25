@@ -1,6 +1,7 @@
 import React from 'react';
 import { history } from '../../redux/configStore';
 
+import Loading from '../../pages/Loading4';
 
 const Google = () => 
 {
@@ -23,9 +24,7 @@ const Google = () =>
 
 
   return (
-    <div>
-        구글
-    </div>
+        <Loading/>
   );
 }
 
