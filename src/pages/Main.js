@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // css
-import {Text} from '../elements';
 import styled from 'styled-components';
-import theme from '../shared/theme';
-import { MdAddBox } from "react-icons/md";
 
 // modules
 import { getRecentDB } from '../redux/modules/recent';
@@ -16,6 +13,7 @@ import { getRecommendedDB, getMostUsedKeyDB } from '../redux/modules/search';
 import MainBody from '../components/Main_MainBody';
 import LogoHeader from '../shared/LogoHeader';
 import Loading from './Loading4';
+import Modal from '../components/Modal';
 
 // helmet
 import {Helmet} from 'react-helmet';
@@ -45,12 +43,14 @@ const Main = (props) => {
   }, []);
 
   // 홈 화면 추가 안내
-  const [display, setDisplay] = useState(false)
+  const [addHome, setAddHome] = useState(false)
+  const [modal, setModal] = useState(true)
   const close = (e) => {
     const clicked = e.target.closest('.info');
     if (clicked) return;
     else {
-      setDisplay(true);
+      setModal(false)
+      setAddHome(true)
     }
   }
 
@@ -69,14 +69,9 @@ const Main = (props) => {
       <LogoHeader/>
       <MainBody/>
 
-    {window.navigator.standalone === display && (
+    {window.navigator.standalone === addHome && (
       <Add onClick={close} >
-        <AddHome className="info">
-          <FlexBox>
-            <MdAddBox size="30px" color={theme.color.gray_7}/>
-            <Text margin="auto 2%" m_size="12px">홈 화면에 추가하면 앱처럼 사용할 수 있어요!</Text>
-          </FlexBox>
-        </AddHome>
+        <Modal title="addHome" open={modal} className="info"/>
       </Add>
     )}
     </React.Fragment>
@@ -89,47 +84,7 @@ const Add = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  margin-bottom: 13%;
-  background-color: rgba(30, 30, 30, 0.3);
   z-index: 1000;
-  text-align: center;
-  
-`;
-
-const AddHome = styled.div`
-  position: absolute;
-  background-color: ${theme.color.light};
-  width: 98%;
-  height: 8vh;
-  bottom: 0;
-  left: 1%;
-  right: 1%;
-  margin: 0 auto 5% auto;
-  border-radius: 10px;
-  z-index: 200;
-
-  @media ${theme.device.mobileM} {
-    padding: 2% 6%;
-  }
-`;
-
-const FlexBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: auto;
-  line-height: 8vh;
-  
-  @media ${theme.device.mobileS} {
-    width: 94%;
-    line-height: 6vh;
-  }
-
-  @media ${theme.device.mobileM} {
-    width: 94%;
-    line-height: 6vh;
-  }
 `;
 
 export default Main;
