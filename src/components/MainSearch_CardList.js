@@ -41,9 +41,18 @@ const CardList = (props) => {
   }, [page])
 
   // 피드백 보내기
+  const [feedback, setFeedback] = useState(false);
+  
   const ref = useRef()
   const feedBack = () => {
-    dispatch(foodFeedBack(ref.current.value));
+    if (ref.current.value) {
+      dispatch(foodFeedBack(ref.current.value));
+      setFeedback(false);
+      window.alert("요청되었습니다!")
+    } else {
+      window.alert("입력된 키워드가 없어요!")
+    }
+
   };
 
   return (
@@ -64,8 +73,13 @@ const CardList = (props) => {
           {/* 피드백보내기 */}
           <FeedBackContainer>
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
-            <FeedBackBtn onClick={feedBack}>
-              <div>키워드 등록 요청하기</div>
+            {feedback ? 
+              <FeedbackInput>
+                <input ref={ref} placeholder="요청할 키워드를 입력하세요!"></input>
+              </FeedbackInput>
+            : ''}
+            <FeedBackBtn onClick={()=>{!feedback ? setFeedback(true) : feedBack()}}>
+              <div>{!feedback ? "키워드 입력하기" : "키워드 등록 요청하기"}</div>
             </FeedBackBtn>
           </FeedBackContainer>
 
@@ -115,6 +129,20 @@ const FeedBackText = styled.div`
   margin-bottom: 0.9vh;
   color: #5F5F5F;
   font-weight: bold;
+`;
+
+const FeedbackInput = styled.div`
+  width: 80%;
+  margin: auto;
+  border: 1px solid #F19F13;
+  border-radius: 10px;
+  padding: 1.3vh 25px;
+  margin-bottom: 1vh;
+
+  & > input {
+    border: none;
+    outline: none;
+  }
 `;
 
 const FeedBackBtn = styled.div`
