@@ -10,7 +10,7 @@ import { Grid, Button, Text } from '../elements';
 
 import { ProfileDefault, Camera, Go } from '../img/svg';
 
-import { _logOut } from '../redux/modules/user';
+import { _logOut, ProfileSV } from '../redux/modules/user';
 
 // helmet
 import {Helmet} from 'react-helmet';
@@ -39,14 +39,15 @@ const BodySpec = (props) =>
     .put(profile_url);
   _upload
   .then((snap) => {
-    snap.ref.getDownloadURL().then((url) => {
+    snap.ref.getDownloadURL()
+    .then((url) => {
       console.log(url);
-    });
+      dispatch(ProfileSV(url));
+    })
+    .catch((err)=>{window.alert("업로드에 실패했습니다!")});
   });
   }
 
-
-  
   const gender = user_info?.gender;
   const age = user_info?.age;
   const height = user_info?.height;
@@ -65,13 +66,12 @@ const BodySpec = (props) =>
       </Helmet>
 
       <Container>
-      <Profile>
+        <Profile>
           {ProfileDefault}
-          </Profile>
-          
+        </Profile>
+            
           <Bottombg>
             <hr color="#FFE899"/>
-
             <div onClick={()=>{history.push("/signsocial")}}>
               <Grid display="flex">
                 <Text m_size="28px" bold lineheight="34px" size="28px" margin="92px 0px 16px 24px">
@@ -132,8 +132,11 @@ return (
 
     <Container>
     <Profile>
-        {ProfileDefault}
+      {user_info.profile_image==="없음"?ProfileDefault:
+      <img style={{width: "124px", height: "124px", borderRadius: "50%"}} src={user_info?.profile_image}/>
+      }
     </Profile>
+
       <label htmlFor="profile_img">
       <Cameradiv>
       {Camera}
@@ -141,6 +144,7 @@ return (
       <File_box type="file" id="profile_img" ref={profile} multiple onChange={store_profile}
       />
       </label>
+
         <Bottombg>
           <hr color="#FFE899"/>
           <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
@@ -273,10 +277,6 @@ const Tag = styled.a`
   &:hover{
     cursor: pointer;
   }
-`;
-
-const Profile_url = styled.div`
-  
 `;
 
 const File_box = styled.input`

@@ -89,7 +89,7 @@ const Card = (props) => {
     e.preventDefault();
     e.stopPropagation();
     if (!is_login) {
-      window.alert("로그인부터 하세요.")
+      window.alert("로그인이 필요한 기능이에요!")
       return;
     }
     if (favoCheck === -1) {
@@ -193,6 +193,7 @@ const NameContainer = styled.div`
 `;
 
 const Name = styled.div`
+  font-family: 'Pretendard';  
   font-size: 15px;
   line-height: 18px;
   margin: 0;

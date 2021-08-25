@@ -40,6 +40,7 @@ const CartBody = (props) => {
   const record = _record === undefined ? [] : _record;
   const bmr = record.length === 0 ? 0 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+  console.log(cart_list);
 
   // 장바구니에 담긴 food의 칼로리 합계
   const sumKcal = () => {
@@ -203,7 +204,7 @@ const CartListBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2vh;
+  /* gap: 2vh; */
 `;
 
 const CalcBox = styled.div`

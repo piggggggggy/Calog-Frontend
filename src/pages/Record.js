@@ -112,7 +112,6 @@ const Record = (props) => {
                 window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
               }
               if(i === file?.length-1) {
-
                 // case1) 메모에 입력된 내용이 없을 때
                 inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 

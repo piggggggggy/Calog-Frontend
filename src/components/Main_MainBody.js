@@ -114,10 +114,8 @@ const MainBody = (props) => {
   // history tab 관리
   const styles = _history ? {display: "none"} : {display: "block"};
 
-  // if (!is_loaded) {
-  //   return <Loading/>
-  // }
-  // return <button onClick={methodDoesNotExist}>Break the world</button>;
+
+
 
   return (
     <React.Fragment>
@@ -404,6 +402,7 @@ const TextBaloon = styled.div`
   }
 
   & > div {
+    font-family: 'Pretendard';  
     position: absolute;
     left: 0;
     top: 0;

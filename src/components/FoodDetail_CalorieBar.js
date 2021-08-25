@@ -102,9 +102,9 @@ const CalorieBar = (props) => {
   );
 };
 
-CalorieBar.defaultProps = {
-  kcal: 335,
-};
+// CalorieBar.defaultProps = {
+//   kcal: 335,
+// };
 
 const BackgroundBar = styled.div`
   position: relative;

@@ -77,7 +77,7 @@ const CardRcmd = (props) => {
     e.preventDefault();
     e.stopPropagation();
     if (!is_login) {
-      window.alert("로그인부터 하세요.")
+      window.alert("로그인이 필요한 기능이에요!")
       return;
     }
     if (favoCheck === -1) {
@@ -156,6 +156,7 @@ const NameContainer = styled.div`
 `;
 
 const NameBox = styled.div`
+  font-family: 'Pretendard';  
   max-height: 30px;
   /* min-height: 30px; */
   max-width: 100%;

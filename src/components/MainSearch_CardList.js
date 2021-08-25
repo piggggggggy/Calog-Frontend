@@ -1,12 +1,15 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import theme from '../shared/theme';
 
 // elements & components
 import Card from './Main_Card';
 import { Text } from '../elements';
 import Loading from '../pages/Loading3';
+
+// modulse
+  import { foodFeedBack } from '../redux/modules/notice';
 
 
 /** 
@@ -17,6 +20,8 @@ import Loading from '../pages/Loading3';
 */
 
 const CardList = (props) => {
+
+  const dispatch = useDispatch();
 
   // 검색결과
   // const search_list = useSelector((state) => state.search.filtered_list);
@@ -35,6 +40,12 @@ const CardList = (props) => {
     })
   }, [page])
 
+  // 피드백 보내기
+  const ref = useRef()
+  const feedBack = () => {
+    dispatch(foodFeedBack(ref.current.value));
+  };
+
   return (
     <React.Fragment>
         {/* 검색결과 */}
@@ -49,7 +60,19 @@ const CardList = (props) => {
               <Text size="13px" m_size="13px" padding="0" margin="0">더보기</Text>
             </MoreBtn> 
           : ''}
+
+          {/* 피드백보내기 */}
+          <FeedBackContainer>
+            <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
+            <FeedBackBtn onClick={feedBack}>
+              <div>키워드 등록 요청하기</div>
+            </FeedBackBtn>
+          </FeedBackContainer>
+
         </CardContainer>
+
+
+
     </React.Fragment>
   );
 }
@@ -64,6 +87,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   column-gap: 1.8vh;
+  margin-bottom: 20vh;
 `;
 
 const MoreBtn = styled.div`
@@ -75,5 +99,43 @@ const MoreBtn = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+
+const FeedBackContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.7vh;
+`;
+
+const FeedBackText = styled.div`
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 0.9vh;
+  color: #5F5F5F;
+  font-weight: bold;
+`;
+
+const FeedBackBtn = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFE899;
+  border: none;
+  border-radius: 44px;
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
+  cursor: pointer;
+
+  & > div {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+    color: #404040;
+  }
+`;
+
 
 export default CardList;
