@@ -159,7 +159,7 @@ const FoodCard = styled.div`
   border-radius: 16px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
 
-  & > div {
+  /* & > div {
     display: flex;
     align-items: center;
     width: 100%;
@@ -167,7 +167,7 @@ const FoodCard = styled.div`
     & > svg {
       width: 100%;
     }
-  }
+  } */
 `;
 
 const KcalBox = styled.div`
@@ -190,6 +190,9 @@ const KcalBox = styled.div`
 
 const NameContainer = styled.div`
   height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   
   @media ${theme.device.mobileM} {
     height: 30px;
@@ -222,8 +225,13 @@ const BookmarkBox = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  width: 100%;
   padding-left: 25%;
   padding-right: 20%;
+
+  & > svg {
+    width: 100%;
+  }
 `;
 
 const CartBox = styled.div`
