@@ -1,6 +1,8 @@
 import React from 'react';
 import { history } from '../../redux/configStore';
 
+import Loading from '../../pages/Loading4';
+
 
 const Kakao = () => 
 {
@@ -23,9 +25,7 @@ const Kakao = () =>
 
 
   return (
-    <div>
-        카카오
-    </div>
+    <Loading/>
   );
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { history } from '../../redux/configStore';
 
+import Loading from '../../pages/Loading4';
+
 
 const Naver = () => 
 {
@@ -23,9 +25,7 @@ const Naver = () =>
 
 
   return (
-    <div>
-        네이버
-    </div>
+    <Loading/>
   );
 }
 
