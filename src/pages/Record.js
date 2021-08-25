@@ -99,24 +99,27 @@ const Record = (props) => {
   const submitBtn = async (e) => {
     e.preventDefault();
     let file = fileUpload.current.files;
+    console.log(file)
       let image_list = []
       if (file?.length > 0) {
 
         for(let i=0; i<file?.length; i++) {
-          let newFileName = file[i].name
 
           // 리사이징하여 업로드
           try {
             const resizeFile = await imageCompression(file[i], options);
             S3FileUpload.uploadFile(resizeFile, config).then(data => {
+              console.log(data)
               let imgUrl = data.location
+              console.log(imgUrl)
               image_list.push(imgUrl)
               if(i === file?.length-1) {
+                console.log(image_list)
                 // case1) 메모에 입력된 내용이 없을 때
-                inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
+                // inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 
                 // case2) 메모에 입력된 내용이 있을 때
-                dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
+                // dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
               }
             });
           } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
