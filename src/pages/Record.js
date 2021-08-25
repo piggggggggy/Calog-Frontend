@@ -11,7 +11,7 @@ import theme from '../shared/theme';
 import Record_img from '../components/Record_img';
 
 // 이미지 업로드(압축해서 s3)
-import S3upload from 'react-aws-s3';
+import S3FileUpload from 'react-s3'
 import imageCompression from "browser-image-compression";
 
 // redux
@@ -83,6 +83,18 @@ const Record = (props) => {
   // 이미지 업로드
   const fileUpload = useRef();
 
+  const S3_BUCKET = process.env.REACT_APP_BUCKET_NAME;
+  const REGION = process.env.REACT_APP_REGION;
+  const ACCESS_KEY = process.env.REACT_APP_ACCESS_ID;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+
+  const config = {
+    bucketName: S3_BUCKET,
+    region: REGION,
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+  }
+
   // upload btn
   const submitBtn = async (e) => {
     e.preventDefault();
@@ -93,24 +105,12 @@ const Record = (props) => {
         for(let i=0; i<file?.length; i++) {
           let newFileName = file[i].name
 
-          const config = {
-            bucketName: process.env.REACT_APP_BUCKET_NAME,
-            region: process.env.REACT_APP_REGION,
-            accessKeyId: process.env.REACT_APP_ACCESS_ID,
-            secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-          };
-          const ReactS3Client = new S3upload(config);
-
           // 리사이징하여 업로드
           try {
             const resizeFile = await imageCompression(file[i], options);
-            ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
-              if(data.status === 204) {
-                let imgUrl = data.location
-                image_list.push(imgUrl)
-              } else {
-                window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
-              }
+            S3FileUpload.uploadFile(resizeFile, config).then(data => {
+              let imgUrl = data.location
+              image_list.push(imgUrl)
               if(i === file?.length-1) {
                 // case1) 메모에 입력된 내용이 없을 때
                 inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
