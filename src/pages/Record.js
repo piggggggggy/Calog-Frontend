@@ -11,7 +11,7 @@ import theme from '../shared/theme';
 import Record_img from '../components/Record_img';
 
 // 이미지 업로드(압축해서 s3)
-import S3FileUpload from 'react-s3'
+import S3upload from 'react-aws-s3';
 import imageCompression from "browser-image-compression";
 
 // redux
@@ -99,24 +99,27 @@ const Record = (props) => {
   const submitBtn = async (e) => {
     e.preventDefault();
     let file = fileUpload.current.files;
-      let image_list = []
+    let image_list = []
       if (file?.length > 0) {
 
         for(let i=0; i<file?.length; i++) {
-          let newFileName = file[i].name
-
+          let newFileName = file[i].name;
+          const ReactS3Client = new S3upload(config);
+          
           // 리사이징하여 업로드
           try {
             const resizeFile = await imageCompression(file[i], options);
-            S3FileUpload.uploadFile(resizeFile, config).then(data => {
-              let imgUrl = data.location
-              image_list.push(imgUrl)
-              if(i === file?.length-1) {
+            ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
+              if(data.status === 204) {
+                let imgUrl = data.location
+                image_list.push(imgUrl)
+                if(i === file?.length-1) {
                 // case1) 메모에 입력된 내용이 없을 때
                 inputMemo === undefined ? dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, "")) :
 
                 // case2) 메모에 입력된 내용이 있을 때
                 dispatch(addRecordDB(cart.date, cart_list, cart.type, image_list, inputMemo))
+                }
               }
             });
           } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
