@@ -209,19 +209,14 @@ const FoodDetail = (props) => {
                 <IngreText style={{fontWeight: "bold"}}>탄수화물</IngreText>
               </div>
               <div>
-               <IngreText style={{fontWeight: "bold"}}>{foodInfo.carbo}</IngreText>
+                <IngreText style={{fontWeight: "bold"}}>{foodInfo.carbo}g</IngreText>
               </div>
             </Grid>
             <Line/>
 
-            <Grid is_flex padding="0 8.6% 0 8.6%">
-              <IngreText>식이섬유</IngreText>
-              <IngreText>4g</IngreText>
-            </Grid>
-
             <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
               <IngreText>당</IngreText>
-              <IngreText>{foodInfo.sugars}</IngreText>
+              <IngreText>{foodInfo.sugars}g</IngreText>
             </Grid>
           </IngreDetail>
 
@@ -233,19 +228,8 @@ const FoodDetail = (props) => {
                 <IngreText style={{fontWeight: "bold"}}>단백질</IngreText>
               </div>
               <div>
-               <IngreText style={{fontWeight: "bold"}}>{foodInfo.protein}</IngreText>
+                <IngreText style={{fontWeight: "bold"}}>{foodInfo.protein}g</IngreText>
               </div>
-            </Grid>
-            <Line/>
-
-            <Grid is_flex padding="0 8.6% 0 8.6%">
-              <IngreText>식이섬유</IngreText>
-              <IngreText>4g</IngreText>
-            </Grid>
-
-            <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
-              <IngreText>당</IngreText>
-              <IngreText>7g</IngreText>
             </Grid>
           </IngreDetail>
 
@@ -257,19 +241,48 @@ const FoodDetail = (props) => {
                 <IngreText style={{fontWeight: "bold"}}>지방</IngreText>
               </div>
               <div>
-               <IngreText style={{fontWeight: "bold"}}>{foodInfo.fat}</IngreText>
+                <IngreText style={{fontWeight: "bold"}}>{foodInfo.fat}g</IngreText>
               </div>
             </Grid>
             <Line/>
 
             <Grid is_flex padding="0 8.6% 0 8.6%">
               <IngreText>포화지방</IngreText>
-              <IngreText>{foodInfo.carbo}</IngreText>
+              <IngreText>{foodInfo.fattyAcid}g</IngreText>
             </Grid>
 
             <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
               <IngreText>트랜스지방</IngreText>
-              <IngreText>{foodInfo.carbo}</IngreText>
+              <IngreText>{foodInfo.transFattyAcid}g</IngreText>
+            </Grid>
+
+            <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
+              <IngreText>불포화지방</IngreText>
+              <IngreText>{foodInfo.unFattyAcid}g</IngreText>
+            </Grid>
+          </IngreDetail>
+
+          {/* 콜레스테롤 */}
+          <IngreDetail>
+            <Grid is_flex padding="0 8.6% 0 6.5%">
+              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
+                <IngreText style={{fontWeight: "bold"}}>콜레스테롤</IngreText>
+              </div>
+              <div>
+                <IngreText style={{fontWeight: "bold"}}>{foodInfo.cholesterol}mg</IngreText>
+              </div>
+            </Grid>
+          </IngreDetail>
+
+          {/* 나트륨 */}
+          <IngreDetail>
+            <Grid is_flex padding="0 8.6% 0 6.5%">
+              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
+                <IngreText style={{fontWeight: "bold"}}>나트륨</IngreText>
+              </div>
+              <div>
+                <IngreText style={{fontWeight: "bold"}}>{foodInfo.natrium}mg</IngreText>
+              </div>
             </Grid>
           </IngreDetail>
 
