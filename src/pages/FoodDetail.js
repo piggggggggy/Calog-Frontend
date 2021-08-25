@@ -110,11 +110,18 @@ const FoodDetail = (props) => {
     }
   `;
 
+  // 브랜드명 분리
+  const NameNBrand = foodInfo.name.indexOf('[') === 0 ? foodInfo.name.split(':') : false;
+  const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
+
 
   // 스피너
   if (!is_loaded) {
     return <Loading/>
   };
+
+  
 
   return (
     <React.Fragment>
@@ -128,8 +135,9 @@ const FoodDetail = (props) => {
         {/* 기본정보 */}
         <HeaderBox>
           <Grid>
+            <Text size="17px" m_size="17px" lineheight="22px" m_lineheight="20px" bold>{name}</Text>
             <Grid display="flex">
-              <NameBox>{foodInfo.name}</NameBox>
+              <NameBox>{name}</NameBox>
               <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
             </Grid>  
             <Grid is_flex>
