@@ -30,14 +30,15 @@ const CalorieBar = (props) => {
       width: 0%;
     }
     100% {
-      width: ${bmr === 0 ? bmr/1500 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
+      width: ${bmr === 0 ? (kcal/2000) * 100 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     }
   `;
 
   // 함수 내 변수를 사용하기 위해 함수안에서 styled-components 선언
   const FoodData = styled.div`
     position: relative;
-    top: ${is_login ? "-10px" : "0"};
+    /* top: ${is_login ? "-10px" : "0"}; */
+    top: ${bmr !== 0 ? "-10px" : "0"};
     height: 10px;
     background: #F19F13;
     border: none;
@@ -47,17 +48,18 @@ const CalorieBar = (props) => {
     'border-top-left-radius: 4px; border-bottom-left-radius: 4px;' 
     : ''}
     z-index: 10;
+    animation: ${slide} 1s 1 ease;
     transition: 1s ease;
     left: ${bmr !== 0 ? `${(totalKcal/bmr) * 100}%` : "0"};
-    background: ${totalKcal + kcal < bmr ? "#6993FF" : "#EC6262"};
+    background: ${bmr === 0 ? "#6993FF" : totalKcal + kcal < bmr ? "#6993FF" : "#EC6262"};
     /* width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%; */
-    width: ${bmr === 0 ? kcal/2000 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
-    animation: ${slide} 1s 1 ease;
+    width: ${bmr === 0 ? (kcal/2000)*100 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
+    
 
     
     & > div {
       position: relative;
-      /* left: ${(totalKcal + kcal/bmr) * 100}%; */
+      left: ${bmr === 0 ? "50%" : (totalKcal + kcal/bmr) * 100}%;
       top: -7vh;
       z-index: 5;
       opacity: 0;
@@ -85,9 +87,9 @@ const CalorieBar = (props) => {
         {bmr !==0 ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> 
         : <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text>}
         
-        {is_login ? 
+ 
         <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text> 
-        : ''}
+
         
       </Grid>
       <BackgroundBar>
