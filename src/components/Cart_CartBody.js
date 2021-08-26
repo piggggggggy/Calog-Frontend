@@ -37,7 +37,7 @@ const CartBody = (props) => {
   const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
   // user를 이용한 칼로리 기록
-  const bmr = user.user_info.bmr === undefined ? 0: user.user_info.bmr[0].bmr;
+  const bmr =!is_login ? 0 : user.user_info.bmr[0].bmr;
 
   // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
