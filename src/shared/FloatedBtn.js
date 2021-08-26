@@ -68,7 +68,8 @@ const FloatedBtn = (props) => {
   // on Modal!
   const onModal = () => {
     if (!is_login) {
-      window.alert("로그인하시면 피드백을 보낼 수 있어요!");
+      // window.alert("로그인하시면 피드백을 보낼 수 있어요!");
+      confirm();
       return;
     }
     setModal(false);
@@ -80,6 +81,15 @@ const FloatedBtn = (props) => {
     setModal(true);
   };
 
+  // 로그인 페이지 이동!
+  const confirm = () => {
+    if (window.confirm("로그인이 필요한 기능이에요! 로그인 페이지로 이동하시겠어요?")) {
+      history.push('/signsocial');
+    } else {
+      return;
+    }
+  }
+ 
   // 작성 후 화면전환
   const [complete, setComplete] = useState(false);
 
