@@ -198,7 +198,7 @@ const Strong = styled.b`
 const GenderBox = styled.div`
     width: 25%;
     height: 100px;
-    background-color: #F19F13;
+    background-color: #FFE899;
     border-radius: 50%;
     margin: 15px;
     display: flex;
