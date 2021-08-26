@@ -38,9 +38,9 @@ const App = (props) => {
   // login check
   useEffect(() => {
 
-    history.listen(() => {
-        dispatch(LoginCheck());
-    })
+    // history.listen(() => {
+    //     dispatch(LoginCheck());
+    // })
     dispatch(LoginCheck());
     // csrf 토큰 요청
     get_csrf_token();

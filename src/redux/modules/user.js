@@ -41,8 +41,15 @@ export const LoginSV = (user_info) => {
                 url: "https://2k1.shop/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
+
             document.cookie = `TOKEN=${res_token.data.token};`;
+
             dispatch(SetUser(res_user_info.data.user));
+            let _bmr = res_user_info.data.user.bmr[(res_user_info.data.user.bmr.length)-1].bmr
+            if(!res_user_info.data.user){
+                return;
+            };
+            dispatch(bmrChk(_bmr));
             history.replace('/loading/dashboard');
         };
         loginsv()
