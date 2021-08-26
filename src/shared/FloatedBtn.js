@@ -43,7 +43,7 @@ const FloatedBtn = (props) => {
 
   // feedback  
   const sendFeedback = () => {
-    if(contents1.current.value && contents2.current.value && phoneNum.current.value) {
+    if(contents1.current.value && contents2.current.value) {
       instance
       .post('/api/notice/feedback', {
         title: "피드백",
@@ -154,7 +154,7 @@ const FloatedBtn = (props) => {
           <>
             <ModalContainer>
               <ModalText>칼로그<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>를 위한</span></ModalText>
-              <ModalText style={{marginBottom: "28px"}}>다양한 피드백<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>들을 작성해주세요!</span></ModalText>
+              <ModalText style={{marginBottom: "24px"}}>다양한 피드백<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>들을 작성해주세요!</span></ModalText>
 
 
               <InputForm>
@@ -176,7 +176,7 @@ const FloatedBtn = (props) => {
                 <div>
                   <ModalInput ref={phoneNum} type="text" placeholder="'-'빼고 전화번호 입력"></ModalInput>
                 </div>
-                <Text size="13px" m_size="13px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
+                <span>*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</span>
               </InputForm>
 
               <InputForm>
@@ -184,7 +184,7 @@ const FloatedBtn = (props) => {
                 <div>
                   <ModalInput ref={instagramId} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
                 </div>
-                <Text size="13px" m_size="13px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
+                <span>*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</span>
               </InputForm>
 
               <SubmitBtn onClick={()=>{sendFeedback()}}>
@@ -345,6 +345,13 @@ const InputForm = styled.div`
     border-radius: 5.3px;
     background: #FFFFFF;
     padding: 10px 10px;
+  }
+
+  & > span {
+    font-size: 12px;
+    line-height: 24px;
+    color: #ff5983;
+    display: block;
   }
 `;
 
