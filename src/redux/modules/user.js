@@ -152,6 +152,14 @@ export const BodySpectSV = (gender, weight, height, age) => {
             // console.log(res);
             const user_info = {gender, weight, height, age};
             dispatch(BodySpect(user_info));
+            if(gender==="남자"){
+                const bmr = Math.round(66.47 + ( 13.75 * weight + (5 * height) - (6.76 * age)));
+                dispatch(bmrChk(bmr));
+                return;
+            } else if (gender==="여자"){
+                const bmr = Math.round(655.1 + ( 9.56 * weight + (1.85 * height) - (4.68 * age)));
+                dispatch(bmrChk(bmr));
+            };
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
