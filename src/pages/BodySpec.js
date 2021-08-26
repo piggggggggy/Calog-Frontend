@@ -146,7 +146,7 @@ return (
         <ContentBS>
           <Text m_size margin="0px auto 4px auto" color="#2F2F2F" size="12px" line-height="14px">키</Text>
           <Text m_size margin="0px auto 6px auto" color="#111E30" size="13px" line-height="18px" bold>180CM</Text>
-          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><u>수정</u></Text>
+          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><Hover><u>수정</u></Hover></Text>
         </ContentBS>
 
         <Line></Line>
@@ -154,7 +154,7 @@ return (
         <ContentBS>
           <Text m_size margin="0px auto 4px auto" color="#2F2F2F" size="12px" line-height="14px">체중</Text>
           <Text m_size margin="0px auto 6px auto" color="#111E30" size="13px" line-height="18px" bold>75KG</Text>
-          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><u>수정</u></Text>
+          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><Hover><u>수정</u></Hover></Text>
         </ContentBS>
 
         <Line></Line>
@@ -162,7 +162,7 @@ return (
         <ContentBS>
           <Text m_size margin="0px auto 4px auto" color="#2F2F2F" size="12px" line-height="14px">기초대사량</Text>
           <Text m_size margin="0px auto 6px auto" color="#111E30" size="13px" line-height="18px" bold>2000kcal</Text>
-          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><u>수정</u></Text>
+          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><Hover><u>수정</u></Hover></Text>
         </ContentBS>
       </BodySpecBox>
 
