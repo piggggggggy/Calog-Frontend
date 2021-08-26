@@ -119,7 +119,7 @@ const CardRcmd = (props) => {
         
         {/* 칼로리 */}
         <div>  
-          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0">{Math.round(props.kcal * 10)/10} kcal</Text>
+          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0" cursor="pointer">{Math.round(props.kcal * 10)/10} kcal</Text>
         </div>
         
         {/* 즐겨찾기 버튼 */}

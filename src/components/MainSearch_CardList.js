@@ -66,7 +66,7 @@ const CardList = (props) => {
           {/* 더보기 버튼  */}
           {search_list?.length > page.end ? 
             <MoreBtn onClick={nextPage}>
-              <Text size="13px" m_size="13px" padding="0" margin="0">더보기</Text>
+              <Text size="13px" m_size="13px" padding="0" margin="0" cursor="pointer">더보기</Text>
             </MoreBtn> 
           : ''}
 
@@ -112,6 +112,7 @@ const MoreBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 
@@ -129,6 +130,7 @@ const FeedBackText = styled.div`
   margin-bottom: 0.9vh;
   color: #5F5F5F;
   font-weight: bold;
+  cursor: default;
 `;
 
 const FeedbackInput = styled.div`

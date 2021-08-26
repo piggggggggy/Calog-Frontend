@@ -159,9 +159,9 @@ const DashBoard_Chart = (props) => {
       {/* 전체 틀 */}
       <Grid margin="9.6% auto 0 auto" border_radius="20px" width="48%" height="200px" m_margin="5% auto 0 auto">
 
-      <Title>
-          <Text size="13px" bold m_size="11px" margin="0">{today_kcal}kcal</Text>
-      </Title> 
+        <Title>
+            <Text size="13px" bold m_size="11px" margin="0">총<br/>{today_kcal}kcal</Text>
+        </Title> 
       {/**
         * data = 데이터
         * innerRadius = 도넛 안쪽 둥글기
@@ -227,8 +227,8 @@ const Title = styled.div`
   position: relative;
   height: 200px;
   text-align: center;
-  line-height: 200px;
   margin-bottom: -200px;
+  padding-top: 85px;
 `;
 
 export default DashBoard_Chart;

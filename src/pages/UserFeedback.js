@@ -89,16 +89,16 @@ if(!is_loaded) {
         {/* 전화번호 */}
         <Text size="17px" margin="6% 0 2% 0" m_size="15px">전화번호(선택)</Text>
         <InputBox placeholder="'-'빼고 전화번호 입력" ref={phone}/>
-        <Text size="13px" m_size="13px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
+        <Text size="13px" m_size="9px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
 
         {/* 인스타 */}
         <Text size="17px" margin="6% 0 2% 0" m_size="15px">인스타그램 아이디(선택)</Text>
         <InputBox placeholder="인스타그램 아이디 입력" ref={instagram}/>
-        <Text size="13px" m_size="13px" lineheight="24px" m_lineheight="24px" color="#6993FF">*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
+        <Text size="13px" m_size="9px" lineheight="24px" m_lineheight="24px" color="#6993FF">*인스타그램 후기 이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</Text>
 
         {/* 작성하기 버튼 */}
         <Button margin="6% 0 0 0" width="90%" height="50px" bg={theme.color.light} border_radius="60px" _onClick={sendFeedback}>
-          <Text size="16px" bold>작성하기</Text>
+          <Text size="16px" bold cursor="pointer">작성하기</Text>
         </Button>
       </Grid>
     </React.Fragment>
@@ -111,6 +111,7 @@ export default Feedback;
 const CloseBtn = styled.div`
   float: right;
   margin: 6% 6%;
+  cursor: pointer;
 `;
 
 const InputBox = styled.input`

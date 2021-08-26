@@ -77,6 +77,7 @@ const Emoji = styled.div`
   height: 44px;
   border-radius: 50%;
   margin: 20% auto 0 auto;
+  cursor: pointer;
 
   @media only screen and (max-width: 300px) {
     width: 30px;

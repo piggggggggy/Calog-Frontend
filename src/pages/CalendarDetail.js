@@ -136,7 +136,7 @@ const CalenderDetail = (props) => {
         <Grid padding="3.6vh 6.2%" bg={theme.color.light}>
 
           {/* 뒤로가기 버튼 */}
-          <Grid _onClick={() => history.goBack()}>  
+          <Grid _onClick={() => history.goBack()} cursor="pointer">  
             <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.7695 18.23L9.99953 20L-0.000469208 10L9.99953 0L11.7695 1.77L3.53953 10L11.7695 18.23Z" fill="#757575"/>
             </svg>
@@ -213,7 +213,7 @@ const CalenderDetail = (props) => {
         </Grid>
 
         {/* 메모 */}
-        <Grid margin="4% 9.7% 8% 9.7%" width="81%" m_margin="4% 9.7% 8% 9.7%">
+        <Grid margin="4% 9.7% 8% 9.7%" width="81%" m_margin="4% 9.7% 8% 9.7%" cursor="default">
           {memo_list?.length > 0 ? (
             <React.Fragment>
               {memo_list?.map((r, idx) => {
@@ -267,6 +267,7 @@ const BmrInfo = styled.div`
   padding-right: 5.8%;
   margin-bottom: 2%;
   font-size: 13px;
+  cursor: default;
 `;
 
 const DelTitle = styled.p`
@@ -274,6 +275,7 @@ const DelTitle = styled.p`
   border-bottom: 1px solid ${theme.color.gray_5};
   color: ${theme.color.gray_5};
   width: auto;
+  cursor: pointer;
 `;
 
 export default CalenderDetail;

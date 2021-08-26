@@ -68,10 +68,10 @@ const Modal = (props) => {
             {title === "삭제" && (
               <DelBtns>
                 <Btn onClick={xBtn}>
-                  <Text size="16px" bold m_size="12px">취소</Text>
+                  <Text size="16px" bold m_size="12px" cursor="pointer">취소</Text>
                 </Btn>
                 <Btn onClick={delBtn}>
-                  <Text size="16px" bold m_size="12px">삭제</Text>
+                  <Text size="16px" bold m_size="12px" cursor="pointer">삭제</Text>
                 </Btn>
               </DelBtns>
             )}
@@ -143,6 +143,7 @@ const Btn = styled.button`
   background-color: ${theme.color.light};
   border: none;
   border-radius: 44px;
+  cursor: pointer;
 `;
 
 const DelBtns = styled.div`
