@@ -3,6 +3,7 @@ import DashBoard from './DashBoard';
 import Calendar from './Calendar';
 import Record from './Record';
 import CalendarDetail from './CalendarDetail';
+import SelfAddFood from './SelfAddFood';
 //지혁
 import Login from './Login';
 import Signup from './Signup';
@@ -47,5 +48,6 @@ export {
   Loading,
   Loading2,
   Loading3,
-  Loading4
+  Loading4,
+  SelfAddFood,
 }
