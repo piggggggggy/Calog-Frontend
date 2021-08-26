@@ -216,7 +216,7 @@ const FoodDetail = (props) => {
             </Grid>
             <Line/>
 
-            <Grid is_flex padding="1.8vh 8.6% 0 8.6%">
+            <Grid is_flex padding="0 8.6% 0 8.6%">
               <IngreText>당</IngreText>
               <IngreText>{foodInfo.sugars}g</IngreText>
             </Grid>
