@@ -348,9 +348,9 @@ const InputForm = styled.div`
   }
 
   & > span {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 24px;
-    color: red;
+    color: #ff5983;
     display: block;
   }
 `;
