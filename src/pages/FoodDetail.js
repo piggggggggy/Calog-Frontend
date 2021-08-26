@@ -48,7 +48,7 @@ const FoodDetail = (props) => {
   }, []);
 
   const record = _record === undefined ? [] : _record;
-  const bmr = !is_login ? 2000 : user.bmr[0]?.bmr === 0 ? 2000 : user.bmr[0]?.bmr;
+  const bmr = !is_login ? 0 : user.bmr[0]?.bmr === 0 ? 0 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
 
   if (foodId !== foodInfo.foodId) {
@@ -115,7 +115,7 @@ const FoodDetail = (props) => {
   const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
   const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
 
-  console.log(foodInfo);
+  // console.log(foodInfo);
 
   // 스피너
   if (!is_loaded) {
@@ -154,13 +154,15 @@ const FoodDetail = (props) => {
           {/* 칼로리 비교정보 */}
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
             <StatusText lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
-              {is_login ? 
+              {bmr === 0 ? 
+              " 앗! 바디스펙이 없어 기초대사량 확인이 어려워요! " 
+              :
               is_over() === "line" ? 
               " 현재까지 오늘의 기준치를 모두 채웠어요! " 
               : is_over() === "over" ? 
-              ` 현재까지 기준치 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal 초과했어요! ` 
-              : ` 아직 기준치까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요! `
-              : " 로그인 하시면 더 많은 정보를 얻을 수 있어요! "}
+              ` 오늘의 기초대사량에서 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal를 초과했어요! ` 
+              : ` 아직 기초대사량까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요! `
+              }
               
               
             </StatusText>

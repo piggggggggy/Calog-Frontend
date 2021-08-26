@@ -143,7 +143,7 @@ const FeedbackInput = styled.div`
     border: none;
     outline: none;
     color: #A9A9A9;
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 

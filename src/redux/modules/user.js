@@ -37,10 +37,10 @@ export const LoginSV = (user_info) => {
                 method: "get",
 
                 // test
-                // url: "http://52.79.110.219/api/user/me",
+                url: "http://52.79.110.219/api/user/me",
 
                 // deploy
-                url: "https://2k1.shop/api/user/me",
+                // url: "https://2k1.shop/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
             document.cookie = `TOKEN=${res_token.data.token};`;
@@ -206,7 +206,7 @@ const user = createSlice({
     // 최근삭제목록 리듀서
     // 삭제목록 저장하기
     recordDeleted: (state, action) => {
-        state.user_info.deleteList = action.payload;
+        state.user_info.deleteList = [action.payload];
     },
     // 삭제목록 날리기
     clearDeleted: state => {

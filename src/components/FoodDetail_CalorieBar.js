@@ -19,6 +19,7 @@ const CalorieBar = (props) => {
   const kcal = props.kcal;
   const totalKcal = props.totalKcal;
   const bmr = props.bmr;
+  console.log(bmr);
   
   // 로그인 유무
   const is_login = useSelector((state) => state.user.is_login);
@@ -29,7 +30,7 @@ const CalorieBar = (props) => {
       width: 0%;
     }
     100% {
-      width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
+      width: ${bmr === 0 ? bmr/1500 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     }
   `;
 
@@ -47,9 +48,10 @@ const CalorieBar = (props) => {
     : ''}
     z-index: 10;
     transition: 1s ease;
-    left: ${is_login ? `${(totalKcal/bmr) * 100}%` : "0"};
+    left: ${bmr !== 0 ? `${(totalKcal/bmr) * 100}%` : "0"};
     background: ${totalKcal + kcal < bmr ? "#6993FF" : "#EC6262"};
-    width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
+    /* width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%; */
+    width: ${bmr === 0 ? kcal/2000 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     animation: ${slide} 1s 1 ease;
 
     
@@ -80,7 +82,7 @@ const CalorieBar = (props) => {
   return (
     <React.Fragment>
       <Grid is_flex margin="2.6vh 0 0 0" m_margin="2.6vh 0 0 0" padding="0 6.5%">
-        {is_login ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> 
+        {bmr !==0 ? <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">현재 {totalKcal} kcal</Text> 
         : <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text>}
         
         {is_login ? 
@@ -89,9 +91,11 @@ const CalorieBar = (props) => {
         
       </Grid>
       <BackgroundBar>
-        {is_login ? 
+        {bmr === 0 ?
+        <CurrentData style={{display: "none"}}/> 
+        :
         <CurrentData style={totalKcal <= bmr ? {width: `${(totalKcal/bmr) * 100}%`} : {width: "100%", backgroundColor: "#EC6262"}} /> 
-        : ''}
+        }
         <FoodData>
           <div>
             <Text size="15px" m_size="15px" bold>{kcal} kcal</Text>
