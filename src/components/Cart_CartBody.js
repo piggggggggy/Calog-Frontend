@@ -112,7 +112,7 @@ const CartBody = (props) => {
           </Grid>
 
           {/* 푸드 시간 타입 */}
-          <Grid display="flex" margin="3.5vh 0 0 0" m_margin="3.5vh 0 0 0">
+          <Grid display="flex" margin="3.5vh 0 0 0" m_margin="3.5vh 0 0 0" cursor>
             <div onClick={()=>{selectType("morning")}} style={{marginRight: "3%" }}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
               <Dot>
@@ -121,7 +121,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("lunch")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("lunch")}} style={{marginRight: "3%" }} cursor>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">점심</Text>
               <Dot>
                 <Grid display={type === "점심" ? 'block' : 'none'}>
@@ -129,7 +129,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("dinner")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("dinner")}} style={{marginRight: "3%" }} cursor>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">저녁</Text>
               <Dot>
                 <Grid display={type === "저녁" ? 'block' : 'none'}>
@@ -137,7 +137,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("snack")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("snack")}} style={{marginRight: "3%" }} cursor>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">간식</Text>
               <Dot>
                 <Grid display={type === "간식" ? 'block' : 'none'}>
@@ -145,7 +145,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("midnightSnack")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("midnightSnack")}} style={{marginRight: "3%" }} cursor>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">야식</Text>
               <Dot>
                 <Grid display={type === "야식" ? 'block' : 'none'}>
