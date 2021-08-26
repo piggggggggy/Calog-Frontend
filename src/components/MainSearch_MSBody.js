@@ -233,7 +233,7 @@ const MSBody = (props) => {
         </SearchGrid>
 
         {/* Range Slider  */}
-        <Grid padding="0 2.8vh" >
+        <Grid padding="0 3.5vh" >
           <RangeSlider 
             min={0}
             max={2000}
