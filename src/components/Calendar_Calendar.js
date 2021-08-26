@@ -122,10 +122,10 @@ const Calendar_Calendar = (props) => {
             <Header>
 
             {/* < icon */}
-              <svg onClick={lastMonthBtn}
+              <Svg onClick={lastMonthBtn}
                 width="3%" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
                 <path fillRule="evenodd" clipRule="evenodd" d="M0.288001 7.37245L7.296 0.291018C7.704 -0.0970059 8.328 -0.0970059 8.712 0.291018C9.096 0.679042 9.096 1.30958 8.712 1.72186L2.4 8.1L8.712 14.4781C9.096 14.8662 9.096 15.521 8.712 15.909C8.328 16.297 7.704 16.297 7.296 15.909L0.288001 8.80329C-0.095999 8.41527 -0.095999 7.78473 0.288001 7.37245Z" fill="#8C8C8C"/>
-              </svg>
+              </Svg>
 
               {/* 년-월 */}
               <Grid width="auto">
@@ -133,10 +133,10 @@ const Calendar_Calendar = (props) => {
               </Grid>
 
               {/* > icon */}
-              <svg onClick={nextMonthBtn}
+              <Svg onClick={nextMonthBtn}
                 width="3%" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M8.712 9.62755L1.704 16.709C1.296 17.097 0.672 17.097 0.288 16.709C-0.096 16.321 -0.096 15.6904 0.288 15.2781L6.6 8.9L0.288 2.52186C-0.096 2.13383 -0.096 1.47904 0.288 1.09102C0.672 0.702995 1.296 0.702995 1.704 1.09102L8.712 8.19671C9.096 8.58473 9.096 9.21527 8.712 9.62755Z" fill="#8C8C8C"/>
-              </svg>
+              </Svg>
             </Header>
 
           {/* 캘린더 요일 */}
@@ -189,6 +189,10 @@ const Header = styled.div`
   line-height: 53px;
 `;
 
+const Svg = styled.svg`
+  cursor: pointer;
+`;
+
 const Table = styled.table`
   margin: 6% auto 0% auto;
   width: 100%;
@@ -203,6 +207,7 @@ const Today = styled.div`
   text-align: center;
   margin: auto;
   line-height: 25px;
+  cursor: default;
 
   & span {
     font-family: 'Pretendard';  
@@ -215,6 +220,7 @@ const NotToday = styled.div`
   text-align: center;
   margin: auto;
   line-height: 25px;
+  cursor: default;
 
   & span {
     font-family: 'Pretendard';  

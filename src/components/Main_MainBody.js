@@ -383,6 +383,7 @@ const TextBaloon = styled.div`
   left: 5%;
   top: -5%;
   width: 53%;
+  cursor: default;
 
   @media ${theme.device.mobileS} {
     left: 3%;

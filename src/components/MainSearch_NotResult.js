@@ -150,6 +150,7 @@ const FeedBackContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 3.7vh;
+  cursor: default;
 `;
 
 const FeedBackText = styled.div`
