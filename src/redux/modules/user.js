@@ -20,6 +20,7 @@ const initialState = {
     gender: "",
     height: "",
     age: 0,
+    bmr: [{bmr: 0, date: ""}],
 },
   is_login: false,
   email_dupli: false,
@@ -149,16 +150,17 @@ export const BodySpectSV = (gender, weight, height, age) => {
         instance
         .post('/api/user/bodySpec', {gender, weight, height, age})
         .then((res) => {
-            // console.log(res);
-            const user_info = {gender, weight, height, age};
-            dispatch(BodySpect(user_info));
             if(gender==="남자"){
                 const bmr = Math.round(66.47 + ( 13.75 * weight + (5 * height) - (6.76 * age)));
+                const user_info = {gender, weight, height, age, bmr};
                 dispatch(bmrChk(bmr));
+                dispatch(BodySpect(user_info));
                 return;
             } else if (gender==="여자"){
                 const bmr = Math.round(655.1 + ( 9.56 * weight + (1.85 * height) - (4.68 * age)));
+                const user_info = {gender, weight, height, age, bmr};
                 dispatch(bmrChk(bmr));
+                dispatch(BodySpect(user_info));
             };
         })
         .catch((err) => {
@@ -208,6 +210,7 @@ const user = createSlice({
         state.user_info.age = action.payload.age;
         state.user_info.height = action.payload.height;
         state.user_info.weight = action.payload.weight;
+        state.user_info.bmr[0].bmr = action.payload.bmr;
     },
     Profile: (state, action) => {
         state.user_info.profile_image = action.payload;
