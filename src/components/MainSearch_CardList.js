@@ -9,7 +9,8 @@ import { Text } from '../elements';
 import Loading from '../pages/Loading3';
 
 // modulse
-  import { foodFeedBack } from '../redux/modules/notice';
+import { foodFeedBack } from '../redux/modules/notice';
+import { history } from '../redux/configStore';
 
 
 /** 
@@ -75,14 +76,20 @@ const CardList = (props) => {
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             {feedback ? 
               <FeedbackInput>
-                <input ref={ref} placeholder="요청할 키워드를 입력"></input>
+                <input ref={ref} placeholder="이곳에 찾으시는 음식을 적어주세요!"></input>
               </FeedbackInput>
             : ''}
             <FeedBackBtn onClick={()=>{!feedback ? setFeedback(true) : feedBack()}}>
-              <div>{!feedback ? "키워드 입력하기" : "키워드 등록 요청하기"}</div>
+              <div>{!feedback ? "키워드 등록 요청하기" : "제출하기"}</div>
             </FeedBackBtn>
           </FeedBackContainer>
 
+          {/* 음식 직접 등록 */}
+          {!feedback && (
+            <AddFoodBtn onClick={() => {history.push('/addFood')}}>
+              <div>음식 직접 등록하기</div>
+            </AddFoodBtn>
+          )}
         </CardContainer>
 
 
@@ -125,7 +132,7 @@ const FeedBackContainer = styled.div`
 `;
 
 const FeedBackText = styled.div`
-  font-size: 15px;
+  font-size: 17px;
   line-height: 22px;
   margin-bottom: 0.9vh;
   color: #5F5F5F;
@@ -134,23 +141,27 @@ const FeedBackText = styled.div`
 `;
 
 const FeedbackInput = styled.div`
-  width: 80%;
+  width: 72.5%;
   margin: auto;
-  border: 1px solid #DADADA;
-  border-radius: 10px;
+  border: 1px solid #838383;
+  border-radius: 44px;
   padding: 1.3vh 25px;
-  margin-bottom: 1vh;
+  margin-bottom: 1.2vh;
 
   & > input {
+    width: 100%;
     border: none;
     outline: none;
-    color: #A9A9A9;
-    font-size: 15px;
+
+    ::placeholder {
+      font-size: 13px;
+      color: #C4C4C4;
+    }
   }
 `;
 
 const FeedBackBtn = styled.div`
-  width: 50%;
+  width: 54%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,6 +177,34 @@ const FeedBackBtn = styled.div`
     line-height: 22px;
     font-weight: bold;
     color: #404040;
+
+    @media ${theme.device.mobileM} {
+      font-size: 14px;
+    }
+  }
+`;
+
+const AddFoodBtn = styled.div`
+  width: 54%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid #F5CC3F;
+  border-radius: 44px;
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
+  cursor: pointer;
+  margin-top: 2%;
+
+  & > div {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+    color: #E6BB2A;
+
+    @media ${theme.device.mobileM} {
+      font-size: 14px;
+    }
   }
 `;
 
