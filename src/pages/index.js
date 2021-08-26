@@ -11,7 +11,6 @@ import BodySpec from './BodySpec';
 import Notice from './Notice';
 import NotiDetail from './NoticeDetail';
 import NoticeWrite from './NoticeWrite';
-import Alarm from './Alarm';
 import AddSpec from './AddSpec';
 import UserFeedback from './UserFeedback';
 //용태
@@ -35,7 +34,6 @@ export {
   Notice, 
   NotiDetail, 
   NoticeWrite, 
-  Alarm,
   UserFeedback,
   Main, 
   Calendar, 
