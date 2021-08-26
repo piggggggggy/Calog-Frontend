@@ -45,7 +45,6 @@ export const postNoticeSV = (noticelist) => {
 
 export const putNotiSV = (updatelist, noticeId) => {
     return function(dispatch, getState, {history}){
-        console.log(updatelist, noticeId)
         instance
         .put(`/api/notice/${noticeId}`, updatelist)
         .then((res) => {
@@ -79,7 +78,6 @@ export const getNotiDetailSV = (noticeId) => {
         instance
         .get(`/api/notice/${noticeId}`)
         .then((res) => {
-            console.log(res.data.notice);
             dispatch(SetListOne(res.data.notice));
             dispatch(isLoaded(true))
         })
@@ -98,7 +96,6 @@ export const foodFeedBack = (contents) => {
             date: moment().format('YYYY-MM-DD'),
         })
         .then((res) => {
-            console.log(res);
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);

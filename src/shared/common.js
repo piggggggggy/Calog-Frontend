@@ -9,7 +9,6 @@ export const IdCheck = (id) => {
     if(nick.length<2||nick.length>5){
         return false;
     }
-    console.log(nick)
     return _reg.test(nick);
   };
 

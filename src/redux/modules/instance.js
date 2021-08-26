@@ -8,7 +8,7 @@ const getToken = () => {
 
 const getToken_csrf = () => {
   const token = `${document.cookie}`;
-  const csrf_token = token.split("; ").find(row => row.startsWith('CSRF_TOKEN')).split("=")[1];
+  const csrf_token = token?.split("; ").find(row => row.startsWith('CSRF_TOKEN'))?.split("=")[1];
     return csrf_token;
 };
 

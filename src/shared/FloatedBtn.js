@@ -47,7 +47,7 @@ const FloatedBtn = (props) => {
       instance
       .post('/api/notice/feedback', {
         title: "피드백",
-        contents: contents1.current.value + contents2.current.value,
+        contents: contents1.current.value + " / " + contents2.current.value,
         date: date,
         phoneNum: phoneNum.current.value,
         instagramId: instagramId.current.value,

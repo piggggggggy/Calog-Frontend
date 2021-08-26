@@ -61,6 +61,15 @@ const Main = (props) => {
     }
   }
 
+  // 로그인 페이지 이동!
+  const confirm = () => {
+    if (window.confirm("로그인이 필요한 기능이에요! 로그인 페이지로 이동하시겠어요?")) {
+      history.push('/signsocial');
+    } else {
+      return;
+    }
+  }
+
   if (!is_loaded) {
     return <Loading/>;
   }
@@ -78,7 +87,7 @@ const Main = (props) => {
 
       <FloatFeedback style={cart_list.length === 0 ? {bottom: "11%"} : {bottom: "20%"}}>
         <svg 
-          onClick={()=>{is_login ? history.push("/userfeedback") : window.alert("로그인이 필요한 기능입니다.")}} 
+          onClick={()=>{is_login ? history.push("/userfeedback") : confirm() }} 
           width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d)">
           <circle cx="48" cy="45" r="40" fill="white"/>
