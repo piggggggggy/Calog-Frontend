@@ -27,7 +27,7 @@ Image.defaultProps = {
   height: "100%",
   margin: "0px",
   b_size: "contain",
-  cursor: "auto",
+  cursor: false,
   border_radius: "0px",
   src: "",
   _onClick: () => {},
