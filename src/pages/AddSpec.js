@@ -92,7 +92,8 @@ const AddSpec = () =>
                     <Grid padding="12px">
                         <Text m_size="11px" size="15px" lineheight="20px" color="#5F5F5F">
                             {user_nickname}님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
-                            신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.
+                            신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.<br/>
+                            <Source href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4278349/">bmr은 이 논문을 바탕으로 계산하였습니다.</Source>
                         </Text>
                     </Grid>
                 </Headers>
@@ -209,4 +210,9 @@ const GenderBox = styled.div`
     &:hover{
         cursor: pointer;
     }
+`;
+
+const Source = styled.a`
+    font-size: 12px;
+    color: #F19F13;
 `;
