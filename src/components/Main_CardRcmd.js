@@ -166,7 +166,7 @@ const NameBox = styled.div`
   font-family: 'Pretendard';  
   max-height: 30px;
   /* min-height: 30px; */
-  max-width: 100%;
+  max-width: 120px;
   min-width: 100px;
   line-height: 15px;
   font-size: 13px;
@@ -176,6 +176,10 @@ const NameBox = styled.div`
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  @media ${theme.device.mobileS} {
+    max-width: 110px;
+  }
 `;
 
 const BookmarkBox = styled.div`
