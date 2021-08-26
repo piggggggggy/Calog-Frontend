@@ -146,6 +146,7 @@ const FoodCard = styled.div`
   margin-right: 2%;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   & > div {
     /* display: flex;
@@ -189,6 +190,7 @@ const BookmarkBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const CartBox = styled.div`
@@ -198,6 +200,7 @@ const CartBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 

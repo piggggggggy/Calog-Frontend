@@ -158,6 +158,7 @@ const FoodCard = styled.div`
   margin-bottom: 16px;
   border-radius: 16px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
 
   /* & > div {
     display: flex;
