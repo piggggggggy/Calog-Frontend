@@ -146,6 +146,7 @@ const FoodCard = styled.div`
   margin-right: 2%;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   & > div {
     /* display: flex;
@@ -166,7 +167,7 @@ const NameBox = styled.div`
   font-family: 'Pretendard';  
   max-height: 30px;
   /* min-height: 30px; */
-  max-width: 100%;
+  max-width: 120px;
   min-width: 100px;
   line-height: 15px;
   font-size: 13px;
@@ -176,6 +177,10 @@ const NameBox = styled.div`
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  @media ${theme.device.mobileS} {
+    max-width: 110px;
+  }
 `;
 
 const BookmarkBox = styled.div`
@@ -185,6 +190,7 @@ const BookmarkBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const CartBox = styled.div`
@@ -194,6 +200,7 @@ const CartBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 

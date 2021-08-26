@@ -157,6 +157,7 @@ const Record = (props) => {
       {/* 사진 */}
       <Grid padding="13.5% 7.7% 0 7.7%">
         <Text size="17px" bold color={theme.color.gray_7}>내가 먹은 음식</Text>
+        <Text size="14px" bold color={theme.color.gray_5} margin="2% 0 0 0" m_size="12px">이미지가 여러장인 경우, 한번에 선택이 가능해요!</Text>
       </Grid>
       <Grid margin="3.9% 0 7.3% 0" m_margin="3.9% 0 7.3% 0">
         <LazyLoad>

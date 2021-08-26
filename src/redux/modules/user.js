@@ -27,12 +27,10 @@ const initialState = {
 };
 
 export const LoginSV = (user_info) => {
-    console.log("click LoginDB")
     const {email, password} = user_info
     return function(dispatch, getState, {history}){
         async function loginsv() {
             const res_token = await instance.post('/api/user/login', {email, password});
-            console.log(res_token);
             const res_user_info = await axios({
                 method: "get",
 
@@ -50,20 +48,18 @@ export const LoginSV = (user_info) => {
         loginsv()
         .catch((err)=>{
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
             window.alert("이메일 또는 비밀번호가 일치하지 않습니다.")
         });
     };
 };
 
 export const SignupSV = (user_info) => {
-    console.log("click SignupDB")
     const {email, nickname, password} = user_info
     return function(dispatch, getState, {history}){
         instance
         .post('/api/user/register', {email, nickname, password})
         .then((res) => {
-            console.log("res of SignupDB", res);
+            // console.log("res of SignupDB", res);
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
@@ -77,7 +73,7 @@ export const EmailDuplicate = (email) => { //undefined 도 됨
         instance
         .post('/api/user/duplicate-email', {email})
         .then((res) => {
-            console.log("res of email dupli", res);
+            // console.log("res of email dupli", res);
             if(res.status===201){
                 dispatch(EmailDupli(true));
             }
@@ -111,13 +107,13 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         .get('/api/user/me')
         .then((res) => {
             let _bmr = res.data.user.bmr[(res.data.user.bmr.length)-1].bmr
-            console.log("res of login check", res);
+            // console.log("res of login check", res);
             if(!res.data.user){
                 return;
             };
             dispatch(SetUser(res.data.user));
             dispatch(bmrChk(_bmr))
-            console.log("디스패치 성공!");
+            // console.log("디스패치 성공!");
         })
         .catch((err) => {
             // Sentry.captureException(`Catched Error : ${err}`);
@@ -146,7 +142,7 @@ export const BodySpectSV = (gender, weight, height, age) => {
         instance
         .post('/api/user/bodySpec', {gender, weight, height, age})
         .then((res) => {
-            console.log(res);
+            // console.log(res);
             const user_info = {gender, weight, height, age};
             dispatch(BodySpect(user_info));
         })
@@ -159,14 +155,14 @@ export const BodySpectSV = (gender, weight, height, age) => {
 
 export const ProfileSV = (url) => {
     return function(dispatch){
-        console.log(url);
+        // console.log(url);
         instance
         .post('/api/user/update-profile-image', {url})
         .then((res) => {
             dispatch(Profile(url));
         })
         .catch((err)=>{console.log(err)});
-        console.log("프로필 이미지 추가!");
+        // console.log("프로필 이미지 추가!");
     }
 };
 

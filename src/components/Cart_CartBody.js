@@ -32,7 +32,8 @@ const CartBody = (props) => {
   console.log(user)
   
   // 최근삭제목록의 유무확인을 위한...
-  const _recentDeleted_list = useSelector((state) => state.user.user_info.deleteList);
+  const user_info = useSelector((state) => state.user.user_info);
+  const _recentDeleted_list = is_login ? user_info.deleteList : undefined;
   const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
   // user를 이용한 칼로리 기록
