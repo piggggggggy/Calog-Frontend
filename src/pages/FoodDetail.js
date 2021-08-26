@@ -104,7 +104,7 @@ const FoodDetail = (props) => {
     color: ${colors};
     background: #fff;
 
-    @media ${theme.device.mobileS} {
+    @media ${theme.device.mobileM} {
       line-height: 20px;
       font-size: 13px;
     }
@@ -153,7 +153,7 @@ const FoodDetail = (props) => {
           </Grid>
           {/* 칼로리 비교정보 */}
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
-            <StatusText lineheight="22px" m_lineheight="20px" size="15px" m_size="13px" bold color={colors} padding="0" margin="0">
+            <StatusText color={colors}>
               {bmr === 0 ? 
               " 앗! 바디스펙이 없어 기초대사량 확인이 어려워요! " 
               :
