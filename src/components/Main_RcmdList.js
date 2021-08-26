@@ -22,6 +22,7 @@ const RcmdList = (props) => {
 
   // 추천 리스트
   const recommended_list = useSelector((state) => state.search.recommend);
+  console.log(recommended_list);
   
   // 이름 가져오기위해!
   const user = useSelector((state) => state.user.user_info);

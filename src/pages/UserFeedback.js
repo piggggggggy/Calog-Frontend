@@ -38,7 +38,7 @@ const Feedback = (props) =>
       window.alert('필수항목을 모두 입력해주세요!')
     } else {
       instance
-      .post('/api/notice/feedback', {title:'피드백', contents:goodContents+badContents, date:date, phoneNum:phoneNum, instagramId:instagramId})
+      .post('/api/notice/feedback', {title:'피드백', contents:goodContents + " / " + badContents, date:date, phoneNum:phoneNum, instagramId:instagramId})
       .then((res) => {
         history.replace('/body')
         window.alert("소중한 의견 감사드립니다:) 더 좋은 서비스로 보답하겠습니다!")
