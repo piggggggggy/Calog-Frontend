@@ -7,7 +7,7 @@ import theme from '../shared/theme';
 import {history} from '../redux/configStore';
 
 /** 
- * @역할 원하는 검색 결과가 없을 때 유저가 직접 입력하여 등록할 수 있도록 하는 추가 페이지
+ * @역할 원하는 검색 결과가 없을 때 직접 입력하여 등록할 수 있도록 하는 추가 페이지
  * @담당자 김나영
 */
 
@@ -38,10 +38,17 @@ const SelfAddFood = (props) => {
     const cholesterol = cholesterolInput.current.value;
     const natrium = natriumInput.current.value;
     
-    if (!name || !kcal) {
-      window.alert('필수 항목을 모두 입력해주세요!')
+    // 음식 추가 요청으로 인해 운영진이 db에 데이터를 추가할 경우 숨김 페이지를 통해서 진행 >> 페이지 재활용
+    if (history.location.pathname.includes('onlyHQ'))  {
+      window.alert('비밀!')
     } else {
-      console.log({name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium})
+
+      // 유저가 직접 데이터를 추가하여 사용하는 경우
+      if (!name || !kcal) {
+        window.alert('필수 항목을 모두 입력해주세요!')
+      } else {
+        console.log({name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium})
+      }
     }
   }
 

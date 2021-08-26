@@ -42,6 +42,10 @@ export const addBodySpecDB = (bodySpec) => {
     instance
       .put('/api/calendar/blind', {weightBlind: weightBlindDB, heightBlind: heightBlindDB , bmrBlind: bmrBlindDB})
       .then((res) => {
+        // if(res.data === "OK") {
+
+        //   dispatch(saveBlind())
+        // }
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
@@ -60,6 +64,13 @@ const initialState = {
 
   // 최초 1회 홈 화면 추가 모달 체크
   chk_modal: false,
+
+  // 바디스펙 블라인드
+  specBlind : {
+    height_blind : false,
+    weight_blind : false,
+    bmr_blind : false,
+  }
 }
 
 const dashboard = createSlice({
@@ -71,6 +82,7 @@ const dashboard = createSlice({
     delDashboardAll: state => {
       state.exercise = [];
       state.bmr = 0;
+      state.chk_modal = false;
       state.specBlind = {
         height_blind : false,
         weight_blind : false,
@@ -92,9 +104,13 @@ const dashboard = createSlice({
     ChkModal: (state, action) => {
       state.chk_modal = action.payload;
     },
+
+    // 바디스펙 저장
+    saveBlind: (state, action) => {
+    }
   }
 });
 
-export const {getExercise, bmrChk, delDashboardAll, ChkModal} = dashboard.actions;
+export const {getExercise, bmrChk, delDashboardAll, ChkModal, saveBlind} = dashboard.actions;
 
 export default dashboard;
