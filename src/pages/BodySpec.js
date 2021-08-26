@@ -95,15 +95,7 @@ const BodySpec = (props) =>
                 }}>공지사항
               </Hover>
             </Text>
-            {/* <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-              <Tag onClick={()=>
-                {
-                  history.push("/alam")
-                }}>
-                  알림
-              </Tag>
-            </Text> */}
+  
             <hr color="#F5F5F5"/>
             <Version>
               <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
@@ -177,15 +169,7 @@ return (
                 공지사항
             </Hover>
           </Text>
-          {/* <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-            <Hover onClick={()=>
-              {
-                history.push("/alam")
-              }}>
-              알림
-            </Hover>
-          </Text> */}
+
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
                 <Hover onClick={()=>
