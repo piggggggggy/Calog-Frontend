@@ -29,18 +29,19 @@ const CartBody = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   
   const user = useSelector((state) => state.user);
+  console.log(user)
   
   // 최근삭제목록의 유무확인을 위한...
   const _recentDeleted_list = useSelector((state) => state.user.user_info.deleteList);
   const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
-  
-// 대사량과 나의 칼로리 기록
+  // user를 이용한 칼로리 기록
+  const bmr = user.user_info.bmr === undefined ? 0: user.user_info.bmr[0].bmr;
+
+  // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
   const record = _record === undefined ? [] : _record;
-  const bmr = record.length === 0 ? 0 : record[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
-  console.log(cart_list);
 
   // 장바구니에 담긴 food의 칼로리 합계
   const sumKcal = () => {
@@ -91,6 +92,8 @@ const CartBody = (props) => {
       return 0;
     }
   };
+  
+  console.log(bmr);
 
   return (
     <React.Fragment>
@@ -100,8 +103,8 @@ const CartBody = (props) => {
           {/* 상단 내용 */}
           <Grid>
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{Math.round(sumKcal() * 10)/10} kcal</Text>
-            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color="#EB5858" margin="1.7vh 0 0 0" paddig="0">
-              {totalKcal() + sumKcal() >= bmr ? 
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color={totalKcal() + sumKcal() >= bmr ? "#EB5858" : "#6993FF"} margin="1.7vh 0 0 0" paddig="0">
+              {bmr === 0 ? "앗! 바디스펙이 없어 기초대사량 확인이 어려워요!" : totalKcal() + sumKcal() >= bmr ? 
               `오늘의 기준치를 ${Math.round((totalKcal() + sumKcal()- bmr)*10)/10} kcal 초과해요!` 
               : `먹어도 아직 ${Math.round((bmr - (totalKcal() + sumKcal()))*10)/10} kcal 이나 더 먹을 수 있어요!`}
             </Text>

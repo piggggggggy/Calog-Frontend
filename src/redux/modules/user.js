@@ -206,7 +206,7 @@ const user = createSlice({
     // 최근삭제목록 리듀서
     // 삭제목록 저장하기
     recordDeleted: (state, action) => {
-        state.user_info.deleteList = action.payload;
+        state.user_info.deleteList = [action.payload];
     },
     // 삭제목록 날리기
     clearDeleted: state => {

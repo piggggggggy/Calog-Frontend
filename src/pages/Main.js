@@ -77,7 +77,9 @@ const Main = (props) => {
       <MainBody/>
 
       <FloatFeedback style={cart_list.length === 0 ? {bottom: "11%"} : {bottom: "20%"}}>
-        <svg onClick={()=>{history.push("/userfeedback")}} width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg 
+          onClick={()=>{is_login ? history.push("/userfeedback") : window.alert("로그인이 필요한 기능입니다.")}} 
+          width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d)">
           <circle cx="48" cy="45" r="40" fill="white"/>
           </g>
