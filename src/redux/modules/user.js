@@ -67,7 +67,6 @@ export const SignupSV = (user_info) => {
         instance
         .post('/api/user/register', {email, nickname, password})
         .then((res) => {
-            // console.log("res of SignupDB", res);
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
@@ -81,7 +80,6 @@ export const EmailDuplicate = (email) => { //undefined 도 됨
         instance
         .post('/api/user/duplicate-email', {email})
         .then((res) => {
-            // console.log("res of email dupli", res);
             if(res.status===201){
                 dispatch(EmailDupli(true));
             }
@@ -115,13 +113,11 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         .get('/api/user/me')
         .then((res) => {
             let _bmr = res.data.user.bmr[(res.data.user.bmr.length)-1].bmr
-            // console.log("res of login check", res);
             if(!res.data.user){
                 return;
             };
             dispatch(SetUser(res.data.user));
             dispatch(bmrChk(_bmr))
-            // console.log("디스패치 성공!");
         })
         .catch((err) => {
             // Sentry.captureException(`Catched Error : ${err}`);
@@ -146,7 +142,6 @@ export const _logOut = () => {
 
 export const BodySpectSV = (gender, weight, height, age) => {
     return function(dispatch, getState, {history}){
-        console.log(gender, weight, height, age)
         instance
         .post('/api/user/bodySpec', {gender, weight, height, age})
         .then((res) => {
@@ -172,14 +167,12 @@ export const BodySpectSV = (gender, weight, height, age) => {
 
 export const ProfileSV = (url) => {
     return function(dispatch){
-        // console.log(url);
         instance
         .post('/api/user/update-profile-image', {url})
         .then((res) => {
             dispatch(Profile(url));
         })
         .catch((err)=>{console.log(err)});
-        // console.log("프로필 이미지 추가!");
     }
 };
 
