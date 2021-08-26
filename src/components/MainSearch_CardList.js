@@ -26,7 +26,7 @@ const CardList = (props) => {
   // 검색결과
   // const search_list = useSelector((state) => state.search.filtered_list);
   const search_list = props.search_list;
-  
+
   // 페이지네이션
   const [page, setPage] = useState({
     start: 0,
