@@ -178,7 +178,7 @@ const FoodDetail = (props) => {
               <img src={Carbo} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">탄수화물</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.carbo}</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.carbo}g</Text> 
           </div>
 
           <div>
@@ -186,7 +186,7 @@ const FoodDetail = (props) => {
               <img src={Protein} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">단백질</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.protein}</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.protein}g</Text> 
           </div>
 
           <div>
@@ -194,7 +194,7 @@ const FoodDetail = (props) => {
               <img src={Fat} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">지방</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.fat}</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.fat}g</Text> 
           </div>
         </IngreBox>
 

@@ -32,6 +32,7 @@ const CartBody = (props) => {
   // 카드 담긴 내용
 
   const cart = useSelector((state) => state.cart);
+  console.log(cart.type)
 
   const cart_list = cart.cart;
 
@@ -65,19 +66,19 @@ const CartBody = (props) => {
   const [type, setType] = useState("아침");
 
   const selectType = (type) => {
-    if(type === "morning") {
+    if(type === "아침") {
       setType("아침");
       dispatch(cartOut(type));
-    }else if (type === "lunch") {
+    }else if (type === "점심") {
       setType("점심");
       dispatch(cartOut(type));
-    }else if (type === "dinner") {
+    }else if (type === "저녁") {
       setType("저녁");
       dispatch(cartOut(type));
-    }else if (type === "snack") {
+    }else if (type === "간식") {
       setType("간식");
       dispatch(cartOut(type));
-    }else if (type === "midnightSnack") {
+    }else if (type === "야식") {
       setType("야식");
       dispatch(cartOut(type));
     };
@@ -125,7 +126,7 @@ const CartBody = (props) => {
 
           {/* 푸드 시간 타입 */}
           <Grid display="flex" margin="2.7vh 0 0 0" m_margin="2.7vh 0 0 0">
-            <div onClick={()=>{selectType("morning")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("아침")}} style={{marginRight: "3%" }}>
               <Text cursor="pointer" lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
               <Dot>
                 <Grid display={type === "아침" ? 'block' : 'none'}>
@@ -133,7 +134,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("lunch")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("점심")}} style={{marginRight: "3%" }}>
               <Text cursor="pointer" lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "점심" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">점심</Text>
               <Dot>
                 <Grid display={type === "점심" ? 'block' : 'none'}>
@@ -141,7 +142,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("dinner")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("저녁")}} style={{marginRight: "3%" }}>
               <Text cursor="pointer" lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "저녁" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">저녁</Text>
               <Dot>
                 <Grid display={type === "저녁" ? 'block' : 'none'}>
@@ -149,7 +150,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("snack")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("간식")}} style={{marginRight: "3%" }}>
               <Text cursor="pointer" lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "간식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">간식</Text>
               <Dot>
                 <Grid display={type === "간식" ? 'block' : 'none'}>
@@ -157,7 +158,7 @@ const CartBody = (props) => {
                 </Grid>
               </Dot>
             </div>
-            <div onClick={()=>{selectType("midnightSnack")}} style={{marginRight: "3%" }}>
+            <div onClick={()=>{selectType("야식")}} style={{marginRight: "3%" }}>
               <Text cursor="pointer" lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "야식" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">야식</Text>
               <Dot>
                 <Grid display={type === "야식" ? 'block' : 'none'}>
