@@ -27,6 +27,7 @@ const CardList = (props) => {
   // 검색결과
   // const search_list = useSelector((state) => state.search.filtered_list);
   const search_list = props.search_list;
+  const keyword = props.keyword;
 
   // 페이지네이션
   const [page, setPage] = useState({
@@ -42,12 +43,16 @@ const CardList = (props) => {
   }, [page])
 
   // 피드백 보내기
+  const [_keyword, setKeyword] = useState(keyword);
   const [feedback, setFeedback] = useState(false);
+  const changeKeyword = (e) => {
+    setKeyword(e.target.value);
+  }
   
-  const ref = useRef()
+  const ref = useRef(keyword);
   const feedBack = () => {
-    if (ref.current.value) {
-      dispatch(foodFeedBack(ref.current.value));
+    if (_keyword) {
+      dispatch(foodFeedBack(_keyword));
       setFeedback(false);
       window.alert("요청되었습니다!")
     } else {
@@ -76,7 +81,7 @@ const CardList = (props) => {
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             {feedback ? 
               <FeedbackInput>
-                <input ref={ref} placeholder="이곳에 찾으시는 음식을 적어주세요!"></input>
+                <input onChange={changeKeyword} value={_keyword} placeholder="이곳에 찾으시는 음식을 적어주세요!"></input>
               </FeedbackInput>
             : ''}
             <FeedBackBtn onClick={()=>{!feedback ? setFeedback(true) : feedBack()}}>
@@ -141,11 +146,11 @@ const FeedBackText = styled.div`
 `;
 
 const FeedbackInput = styled.div`
-  width: 72.5%;
+  width: 72%;
   margin: auto;
   border: 1px solid #838383;
   border-radius: 44px;
-  padding: 1.3vh 25px;
+  padding: 1.3vh 6.6%;
   margin-bottom: 1.2vh;
 
   & > input {
@@ -156,6 +161,7 @@ const FeedbackInput = styled.div`
     ::placeholder {
       font-size: 13px;
       color: #C4C4C4;
+      line-height: 20px;
     }
   }
 `;

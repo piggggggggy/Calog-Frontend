@@ -1,14 +1,20 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Cart_Card';
 import UnderBar from './Cart_UnderBar';
+import Cart_Date from './Cart_Date';
+
 // icons
 import { FaCircle } from "react-icons/fa";
+
 // modules
 import { cartOut } from '../redux/modules/cart';
+import { addRecordDB } from '../redux/modules/record';
+
 // history
 import { history } from '../redux/configStore';
 
@@ -24,12 +30,14 @@ const CartBody = (props) => {
   const dispatch = useDispatch();
 
   // 카드 담긴 내용
-  const cart_list = useSelector((state) => state.cart.cart);
-  
+
+  const cart = useSelector((state) => state.cart);
+
+  const cart_list = cart.cart;
+
   const is_login = useSelector((state) => state.user.is_login);
   
   const user = useSelector((state) => state.user);
-  console.log(user)
   
   // 최근삭제목록의 유무확인을 위한...
   const user_info = useSelector((state) => state.user.user_info);
@@ -58,27 +66,31 @@ const CartBody = (props) => {
 
   const selectType = (type) => {
     if(type === "morning") {
-      setType("아침")
+      setType("아침");
+      dispatch(cartOut(type));
     }else if (type === "lunch") {
-      setType("점심") 
+      setType("점심");
+      dispatch(cartOut(type));
     }else if (type === "dinner") {
-      setType("저녁")
+      setType("저녁");
+      dispatch(cartOut(type));
     }else if (type === "snack") {
-      setType("간식")
+      setType("간식");
+      dispatch(cartOut(type));
     }else if (type === "midnightSnack") {
-      setType("야식")
+      setType("야식");
+      dispatch(cartOut(type));
     };
   };
 
-  // 기록하기
-  const write = () => {
-    if(is_login) {
-      dispatch(cartOut(type));
-      history.push('/record');
+  const recordDB = () => {
+    if(is_login){
+      dispatch(addRecordDB(cart.date, cart_list, cart.type))
     } else {
-      let result = window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')
-      result ? history.push('/signsocial') : history.goBack('/');
-    }
+      if (window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')) {
+        history.push('/signsocial');
+      };
+    };
   };
 
   // 현재 남은(초과한) 칼로리 계산
@@ -93,18 +105,18 @@ const CartBody = (props) => {
       return 0;
     }
   };
-  
-  console.log(bmr);
 
   return (
     <React.Fragment>
       <BodyContainer>
+
+        <Cart_Date/>
         
         <Grid padding="0 9%">
           {/* 상단 내용 */}
           <Grid>
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{Math.round(sumKcal() * 10)/10} kcal</Text>
-            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color={totalKcal() + sumKcal() >= bmr ? "#EB5858" : "#6993FF"} margin="1.7vh 0 0 0" paddig="0">
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color={totalKcal() + sumKcal() >= bmr ? "#EB5858" : "#6993FF"} margin="0.9vh 0 0 0" paddig="0">
               {bmr === 0 ? "앗! 바디스펙이 없어 기초대사량 확인이 어려워요!" : totalKcal() + sumKcal() >= bmr ? 
               `오늘의 기준치를 ${Math.round((totalKcal() + sumKcal()- bmr)*10)/10} kcal 초과해요!` 
               : `먹어도 아직 ${Math.round((bmr - (totalKcal() + sumKcal()))*10)/10} kcal 이나 더 먹을 수 있어요!`}
@@ -112,7 +124,7 @@ const CartBody = (props) => {
           </Grid>
 
           {/* 푸드 시간 타입 */}
-          <Grid display="flex" margin="3.5vh 0 0 0" m_margin="3.5vh 0 0 0" cursor>
+          <Grid display="flex" margin="2.7vh 0 0 0" m_margin="2.7vh 0 0 0" cursor>
             <div onClick={()=>{selectType("morning")}} style={{marginRight: "3%" }}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold color={type === "아침" ? "black":"#C4C4C4"} padding="0" margin="0 10px 0 0">아침</Text>
               <Dot>
@@ -166,8 +178,8 @@ const CartBody = (props) => {
         
         {/* 기록하기 버튼*/}
           <CalcBox style={!is_login || recentDeleted_list.length === 0 ? {bottom: "9%"} : {bottom: "21%"}}>
-            <div onClick={()=>{write()}}>
-              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">기록하러가기</Text>
+            <div onClick={()=>{recordDB()}}>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">기록하기</Text>
             </div>
           </CalcBox>
 
@@ -193,7 +205,7 @@ const BodyContainer = styled.div`
   max-width: 420px;
   max-height: 80vh;
   overflow: scroll;
-  padding-top: 3vh;
+  /* padding-top: 3vh; */
 
   &::-webkit-scrollbar {
     display: none;
@@ -203,7 +215,7 @@ const BodyContainer = styled.div`
 const CartListBox = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 2.7vh;
+  margin-top: 2.5vh;
   padding-bottom: 24vh;
   display: flex;
   flex-direction: column;

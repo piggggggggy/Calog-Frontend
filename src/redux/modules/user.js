@@ -36,10 +36,10 @@ export const LoginSV = (user_info) => {
                 method: "get",
 
                 // test
-                // url: "http://52.79.110.219/api/user/me",
+                url: "http://52.79.110.219/api/user/me",
 
                 // deploy
-                url: "https://2k1.shop/api/user/me",
+                // url: "https://2k1.shop/api/user/me",
                 headers: { authorization: `Bearer ${res_token.data.token}` }
             });
 
@@ -121,7 +121,7 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         })
         .catch((err) => {
             // Sentry.captureException(`Catched Error : ${err}`);
-            Sentry.captureException(err);
+            // Sentry.captureException(err);
             console.log("err of login check", err);
         })
     };

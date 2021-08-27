@@ -60,8 +60,8 @@ const FoodDetail = (props) => {
     const cartUnit = {
       foodId: foodInfo.foodId,
       name: foodInfo.name,
-      // forOne: foodInfo.forOne,
-      // grams: foodInfo.grams,
+      forOne: foodInfo.forOne,
+      measurement: foodInfo.measurement,
       kcal: Math.round(foodInfo.kcal * 10)/10,
       amount: 1,
     };
@@ -115,7 +115,7 @@ const FoodDetail = (props) => {
   const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
   const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
 
-  // console.log(foodInfo);
+  console.log(foodInfo);
 
   // 스피너
   if (!is_loaded) {
@@ -139,7 +139,7 @@ const FoodDetail = (props) => {
             <Text size="17px" m_size="17px" lineheight="22px" m_lineheight="20px" bold color="#5F5F5F">{brand}</Text>
             <Grid display="flex">
               <NameBox>{name}</NameBox>
-              <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
+              <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne + foodInfo.measurement})</span>
             </Grid>  
             <Grid is_flex>
               <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{Math.round(foodInfo.kcal * 10)/10} kcal</Text>
@@ -293,7 +293,7 @@ const FoodDetail = (props) => {
         
 
         {/* 카트 탭 */}
-        <UnderBar/>
+        {/* <UnderBar/> */}
 
       </BodyContainer>
     </React.Fragment>
@@ -310,8 +310,6 @@ const BodyContainer = styled.div`
   position: relative;
   max-width: 420px;
   max-height: 80vh;
-  padding-bottom: 10vh;
-  /* padding-top: 2.4vh; */
   overflow: scroll;
 
   &::-webkit-scrollbar {
