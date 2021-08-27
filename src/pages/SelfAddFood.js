@@ -8,7 +8,7 @@ import {history} from '../redux/configStore';
 
 // redux
 import {useDispatch} from 'react-redux';
-import {addDataDB} from '../redux/modules/record';
+import {addDataDB, addUserFoodDB} from '../redux/modules/food';
 
 /** 
  * @역할 원하는 검색 결과가 없을 때 직접 입력하여 등록할 수 있도록 하는 추가 페이지
@@ -33,22 +33,22 @@ const SelfAddFood = (props) => {
   const measurementInput = useRef()
 
   const addFood = () => {
-    const name = nameInput.current.value;
-    const kcal = kcalInput.current.value;
-    const carbo = carboInput.current.value;
-    const sugars = sugarsInput.current.value;
-    const protein = proteinInput.current.value;
-    const fat = fatInput.current.value;
-    const fattyAcid = fattyAcidInput.current.value;
-    const transFattyAcid = transFattyAcidInput.current.value;
-    const unFattyAcid = unFattyAcidInput.current.value;
-    const cholesterol = cholesterolInput.current.value;
-    const natrium = natriumInput.current.value;
-    const forOne = forOneInput.current.value;
-    const measurement = measurementInput.current.value;
+    const name = nameInput.current.value
+    const kcal = kcalInput.current.value
+    const carbo = carboInput.current.value === "" ? undefined : carboInput.current.value;
+    const sugars = sugarsInput.current.value === "" ? undefined : sugarsInput.current.value;
+    const protein = proteinInput.current.value === "" ? undefined : proteinInput.current.value;
+    const fat = fatInput.current.value === "" ? undefined : fatInput.current.value;
+    const fattyAcid = fattyAcidInput.current.value === "" ? undefined : fattyAcidInput.current.value;
+    const transFattyAcid = transFattyAcidInput.current.value === "" ? undefined : transFattyAcidInput.current.value;
+    const unFattyAcid = unFattyAcidInput.current.value === "" ? undefined : unFattyAcidInput.current.value;
+    const cholesterol = cholesterolInput.current.value === "" ? undefined : cholesterolInput.current.value;
+    const natrium = natriumInput.current.value === "" ? undefined : natriumInput.current.value;
     
     // 음식 추가 요청으로 인해 운영진이 db에 데이터를 추가할 경우 숨김 페이지를 통해서 진행 >> 페이지 재활용
     if (history.location.pathname.includes('onlyHQ'))  {
+      const forOne = forOneInput.current.value
+      const measurement = measurementInput.current.value
       dispatch(addDataDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
     } else {
 
@@ -56,7 +56,10 @@ const SelfAddFood = (props) => {
       if (!name || !kcal) {
         window.alert('필수 항목을 모두 입력해주세요!')
       } else {
-        console.log({name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium})
+        dispatch(addUserFoodDB(name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        // let result = window.confirm("추가한 칼로리를 담으시겠어요?");
+        // result ? dispatch(addUserFoodDB(name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        // : dispatch(addUserFoodDB(name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
       }
     }
   }
