@@ -28,10 +28,10 @@ const Notice = (props) =>
   // 공지사항 리스트 배열 뒤집기
   notilist.map((i)=>{notilist_reverse.unshift(i)});
 
-  React.useEffect(()=>
-  {
-    dispatch(getNoticeSV());
-  },[]);
+  // React.useEffect(()=>
+  // {
+  //   dispatch(getNoticeSV());
+  // },[]);
 
 // loading
 const is_loaded = useSelector((state) => state.record.is_loaded)
@@ -93,22 +93,21 @@ if(!is_loaded) {
             <hr color="#F5F5F5"/>
           </Post>
 
-          {notilist_reverse.map((l)=>
-          {
-            return(
-              <Post key={l._id}>
-                  <Tag onClick={()=>{history.push(`/notice/${l.id}`)}}>
-                    <Text size="17px"  ineheight="22px">
-                      {l.title}
-                    </Text>
-                    <Text size="17px" lineheight="22px" color="#A9A9A9">
-                      {l.date}
-                    </Text>
-                  </Tag>
-                  <hr color="#F5F5F5"/>
-              </Post>
-            );
-          })}
+          <Post>
+            <Tag onClick={()=>{history.push(`/notice/notice2`)}}>
+              <Text size="17px"  ineheight="22px">🎈피드백 이벤트 안내</Text>
+              <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-26</Text>
+            </Tag>
+            <hr color="#F5F5F5"/>
+          </Post>
+
+          <Post>
+            <Tag onClick={()=>{history.push(`/notice/notice1`)}}>
+              <Text size="17px"  ineheight="22px">🎉 Calog 정식런칭!</Text>
+              <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-26</Text>
+            </Tag>
+            <hr color="#F5F5F5"/>
+          </Post>
         </PostList>
       </Container>
     </React.Fragment>

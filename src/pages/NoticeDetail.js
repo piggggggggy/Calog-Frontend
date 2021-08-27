@@ -33,9 +33,9 @@ const NotiDetail = (props) =>
     dispatch(deleteNotiSV(notiId));
   }
 
-  React.useEffect(()=>{
-    dispatch(getNotiDetailSV(notiId));
-  },[]);
+  // React.useEffect(()=>{
+  //   dispatch(getNotiDetailSV(notiId));
+  // },[]);
 
 
   return (
@@ -64,7 +64,7 @@ const NotiDetail = (props) =>
           </Tag>
           <hr color="#F5F5F5"/>
           <Content>
-            {noticeOne?.title === "🎉 Calog 정식런칭!" && (
+            {history.location.pathname.includes('notice1') && (
               <Text>
               안녕하세요, Calog입니다!<br/><br/>
               Calog는 일일 칼로리를 계산해주고 기록해주는 서비스로 2021.08.26 정식 런칭을 시작합니다🎉<br/><br/>
@@ -74,7 +74,7 @@ const NotiDetail = (props) =>
               </Text>
             )}
 
-            {noticeOne?.title === "🎈피드백 이벤트 안내" && (
+            {history.location.pathname.includes('notice2') && (
               <PostBox>
                 <Text>
                 안녕하세요, 유저 여러분!<br/><br/>
