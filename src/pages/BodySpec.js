@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
@@ -51,6 +51,33 @@ const BodySpec = (props) =>
   const age = user_info?.age;
   const height = user_info?.height;
   const weight = user_info?.weight;
+  const bmr = user_info?.bmr[0].bmr;
+
+  const [m_height, setHeight] = useState(0);
+  const [m_weight, setWeight] = useState(0);
+  const [m_bmr, setBmr] = useState(0);
+  console.log(m_height, m_weight, m_bmr);
+  const M_height = () => {
+    if(m_height===1){
+      setHeight(0);
+    } else {
+      setHeight(1);
+    }
+  };
+  const M_weight = () => {
+    if(m_weight===1){
+      setWeight(0);
+    } else {
+      setWeight(1);
+    }
+  };
+  const M_bmr = () => {
+    if(m_bmr===1){
+      setBmr(0);
+    } else {
+      setBmr(1);
+    }
+  };
 
   const logout = () => {
     dispatch(_logOut());
@@ -95,15 +122,7 @@ const BodySpec = (props) =>
                 }}>공지사항
               </Hover>
             </Text>
-            {/* <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-              <Tag onClick={()=>
-                {
-                  history.push("/alam")
-                }}>
-                  알림
-              </Tag>
-            </Text> */}
+  
             <hr color="#F5F5F5"/>
             <Version>
               <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
@@ -150,7 +169,31 @@ return (
             {user_info?.nickname}
           </Text>
 
-        <BodyBox>
+      <BodySpecBox>
+        <ContentBS>
+          <Text m_size margin="0px auto 4px auto" color="#2F2F2F" size="12px" line-height="14px">키</Text>
+          <Text m_size margin="0px auto 6px auto" color="#111E30" size="13px" line-height="18px" bold>{height}CM</Text>
+          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><Hover onClick={M_height}>{m_height?"수정완료":<u>수정</u>}</Hover></Text>
+        </ContentBS>
+
+        <Line></Line>
+
+        <ContentBS>
+          <Text m_size margin="0px auto 4px auto" color="#2F2F2F" size="12px" line-height="14px">체중</Text>
+          <Text m_size margin="0px auto 6px auto" color="#111E30" size="13px" line-height="18px" bold>{weight}KG</Text>
+          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><Hover onClick={M_weight}>{m_weight?"수정완료":<u>수정</u>}</Hover></Text>
+        </ContentBS>
+
+        <Line></Line>
+
+        <ContentBS>
+          <Text m_size margin="0px auto 4px auto" color="#2F2F2F" size="12px" line-height="14px">기초대사량</Text>
+          <Text m_size margin="0px auto 6px auto" color="#111E30" size="13px" line-height="18px" bold>{bmr}kcal</Text>
+          <Text m_size color="#8C8C8C" size="12px" line-height="14.4px"><Hover onClick={M_bmr}>{m_bmr?"수정완료":<u>수정</u>}</Hover></Text>
+        </ContentBS>
+      </BodySpecBox>
+
+        {/* <BodyBox>
           <Text margin="30px">
             신체 정보를 등록하고<br/> 나의 기초대사량을 알아보세요!
           </Text>
@@ -166,7 +209,7 @@ return (
             </Text>
           </Hover>
           </Button>
-        </BodyBox>
+        </BodyBox> */}
 
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
@@ -177,15 +220,7 @@ return (
                 공지사항
             </Hover>
           </Text>
-          {/* <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-            <Hover onClick={()=>
-              {
-                history.push("/alam")
-              }}>
-              알림
-            </Hover>
-          </Text> */}
+
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
                 <Hover onClick={()=>
@@ -249,9 +284,7 @@ const Profile = styled.div`
   margin-left: 20px;
   @media only screen and (max-width: 320px){
     margin-top: -22%;
-    
-  }
-
+  };
 `;
 
 const Version = styled.div`
@@ -260,14 +293,15 @@ const Version = styled.div`
   justify-content: space-between;
 `;
 
-const BodyBox = styled.div`
-  width: 80%;
-  height: 170px;
-  margin: auto;
-  margin-bottom: 32px;
-  background-color: rgba(255, 232, 153, 0.2);
-  border: 1px solid #FFE899;
-  border-radius: 12px;
+const BodySpecBox = styled.div`
+  width: 83%;
+  height: 92px;
+  margin: auto auto 32px auto;
+  border: 1px solid #E8E8E8;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Cameradiv = styled.div`
@@ -286,4 +320,15 @@ const Hover = styled.a`
 
 const File_box = styled.input`
   display: none;
+`;
+
+const Line = styled.div`
+  border: 1px solid #E8E8E8;
+  height: 60px;
+`;
+
+const ContentBS = styled.div`
+  width: 33%;
+  display: flex;
+  flex-direction: column;
 `;
