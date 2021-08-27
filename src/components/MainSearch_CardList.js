@@ -141,11 +141,11 @@ const FeedBackText = styled.div`
 `;
 
 const FeedbackInput = styled.div`
-  width: 72.5%;
+  width: 72%;
   margin: auto;
   border: 1px solid #838383;
   border-radius: 44px;
-  padding: 1.3vh 25px;
+  padding: 1.3vh 6.6%;
   margin-bottom: 1.2vh;
 
   & > input {
@@ -156,6 +156,7 @@ const FeedbackInput = styled.div`
     ::placeholder {
       font-size: 13px;
       color: #C4C4C4;
+      line-height: 20px;
     }
   }
 `;

@@ -23,6 +23,7 @@ const FavoList = (props) => {
   // MainBody에서 props로 받아옴
   const favo_list = props.favo_list;
   const [moreFavo, setFavo] = useState(false);
+  console.log(favo_list)
 
   // 즐겨찾기 덩보기, 더보기
   const changeFavo = () => {

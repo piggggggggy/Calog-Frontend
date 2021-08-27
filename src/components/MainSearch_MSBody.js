@@ -260,24 +260,19 @@ const MSBody = (props) => {
       </HeaderContainer>    
 
 
-
+      {/* 검색결과가 들어가는 곳 */}
       <BodyContainer>
 
-        {/* 검색결과가 들어가는 곳 */}
-        {/* <CardList search_list={search_list}/> */}
         {search_list.length !== 0 ? 
         <CardList search_list={search_list}/>
         : <NotResult keyword={_keyword}/>}
 
-        {/* 장바구니 탭 */}
-        <UnderBar/>
       </BodyContainer>
 
       
     </React.Fragment>
-    );
-          
-  };
+  );
+};
     
 
 MSBody.defaultProps = {
@@ -291,8 +286,9 @@ const HeaderContainer = styled.div`
 const BodyContainer = styled.div`
   padding-top: 2vh;
   max-width: 100%;
-  max-height: 57vh;
-  padding-bottom: 5vh;
+  /* height: 100% */
+  max-height: 60vh;
+  /* padding-bottom: 5vh; */
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;

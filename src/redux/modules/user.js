@@ -121,7 +121,7 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         })
         .catch((err) => {
             // Sentry.captureException(`Catched Error : ${err}`);
-            Sentry.captureException(err);
+            // Sentry.captureException(err);
             console.log("err of login check", err);
         })
     };

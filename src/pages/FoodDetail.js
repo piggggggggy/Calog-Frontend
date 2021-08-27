@@ -293,7 +293,7 @@ const FoodDetail = (props) => {
         
 
         {/* 카트 탭 */}
-        <UnderBar/>
+        {/* <UnderBar/> */}
 
       </BodyContainer>
     </React.Fragment>
@@ -310,7 +310,7 @@ const BodyContainer = styled.div`
   position: relative;
   max-width: 420px;
   max-height: 80vh;
-  padding-bottom: 10vh;
+  /* padding-bottom: 10vh; */
   /* padding-top: 2.4vh; */
   overflow: scroll;
 
