@@ -63,8 +63,8 @@ const Main = (props) => {
 
   // 로그인 페이지 이동!
   const confirm = () => {
-    if (window.confirm("로그인이 필요한 기능이에요! 로그인 페이지로 이동하시겠어요?")) {
-      history.push('/signsocial');
+    if (window.confirm("피드백 페이지로 이동하시겠어요?")) {
+      history.push('/userfeedback');
     } else {
       return;
     }

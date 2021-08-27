@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 // history
 import { history } from '../redux/configStore';
 // modules
-import { addCartRx } from '../redux/modules/cart';
+import { addCartRx, deleteCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
 // elements & components
 import { Text } from '../elements';
@@ -29,17 +29,22 @@ const CardRcmd = (props) => {
   
   // 장바구니 담기!
   const addCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const cartUnit = {
       foodId: props.foodId,
       name: props.name,
       forOne: props.forOne,
-      grams: props.grams,
+      measurement: props.measurement,
       kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(addCartRx(cartUnit));
+    let index = cart_list.findIndex((cart) => cart.foodId === props.foodId)
+      if (index !== -1) {
+        dispatch(deleteCartRx(props.foodId))
+      }else{
+        dispatch(addCartRx(cartUnit));
+      };
   };
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899

@@ -41,6 +41,9 @@ export const delRecordDB = (id, date, type) => {
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
         let deleted_list = getState().record.record[0].foodRecords;
+        
+        console.log(deleted_list);
+        console.log(res);
         let result = deleted_list.filter((d,idx) => {
           if (d.type === type) {
             return d;
