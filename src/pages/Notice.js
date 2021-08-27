@@ -15,7 +15,7 @@ import Loading from './Loading4';
  * @returns 공지사항
  * @역할 공지사항 페이지
  * @필수값 이 컴포넌트를 사용할 때 필수 props
- * @담당자 : 성수
+ * @담당자 : 성수 + 나영(게시글 관리)
 */
 
 const Notice = (props) =>
@@ -56,6 +56,7 @@ if(!is_loaded) {
           <Text size="17px" lineheight="22px" bold color="#000000">
             공지사항
           </Text>
+
           {/* 관리자 아이디만 쓰기 버튼 표시 */}
           {/* 보여주는 것보다 어디 숨겨놔야할 듯 */}
           {admin==="cadmin@calories.com"?
@@ -74,22 +75,40 @@ if(!is_loaded) {
 
         <hr color="#F5F5F5"/>
         <PostList>
-        {notilist_reverse.map((l)=>
-        {
-          return(
-            <Post key={l._id}>
-                <Tag onClick={()=>{history.push(`/notice/${l.id}`)}}>
-                  <Text size="17px"  ineheight="22px">
-                    {l.title}
-                  </Text>
-                  <Text size="17px" lineheight="22px" color="#A9A9A9">
-                    {l.date}
-                  </Text>
-                </Tag>
-                <hr color="#F5F5F5"/>
-            </Post>
-          );
-        })}
+
+          {/* 공지사항 db로 받을 경우 디테일 수정이 어려워 프론트에서 md처럼 관리 */}
+          <Post>
+            <Tag onClick={()=>{history.push(`/notice/notice4`)}}>
+              <Text size="17px"  ineheight="22px">🍓 Calog 데이터 관련 공지</Text>
+              <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-27</Text>
+            </Tag>
+            <hr color="#F5F5F5"/>
+          </Post>
+
+          <Post>
+            <Tag onClick={()=>{history.push(`/notice/notice3`)}}>
+              <Text size="17px"  ineheight="22px">📲 ios/안드로이드 홈 화면 추가 방법</Text>
+              <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-27</Text>
+            </Tag>
+            <hr color="#F5F5F5"/>
+          </Post>
+
+          {notilist_reverse.map((l)=>
+          {
+            return(
+              <Post key={l._id}>
+                  <Tag onClick={()=>{history.push(`/notice/${l.id}`)}}>
+                    <Text size="17px"  ineheight="22px">
+                      {l.title}
+                    </Text>
+                    <Text size="17px" lineheight="22px" color="#A9A9A9">
+                      {l.date}
+                    </Text>
+                  </Tag>
+                  <hr color="#F5F5F5"/>
+              </Post>
+            );
+          })}
         </PostList>
       </Container>
     </React.Fragment>
