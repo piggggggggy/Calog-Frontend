@@ -35,12 +35,12 @@ const CalenderDetail_Info = (props) => {
   if(bmr === 0) {
     return(
       <Wrap>
-        <Grid is_flex padding="0 9%">
-          <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+        <Grid is_flex padding="0 9%" height="100%">
+          <Grid width="auto">
             <P>입력된<br/>기초대사량이<br/>없어요!</P>
             <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">{totalCalories}kcal만큼 섭취했어요</Text>
           </Grid>
-          <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+          <Grid width="auto">
             <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="22" cy="22" r="22" fill="#E4E4E4"/>
               <path d="M18.8368 18.8727C19.3682 18.3374 19.6667 17.6114 19.6667 16.8544C19.6667 16.0973 19.3682 15.3713 18.8368 14.836C18.3054 14.3007 17.5848 14 16.8333 14C16.0819 14 15.3612 14.3007 14.8299 14.836C14.2985 15.3713 14 16.0973 14 16.8544C14 17.6114 14.2985 18.3374 14.8299 18.8727C15.3612 19.408 16.0819 19.7087 16.8333 19.7087C17.5848 19.7087 18.3054 19.408 18.8368 18.8727Z" fill="#C5C5C5"/>
@@ -58,12 +58,12 @@ const CalenderDetail_Info = (props) => {
     return(
       <React.Fragment>
         <Wrap>
-          <Grid is_flex padding="0 9%">
-            <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+          <Grid is_flex padding="0 9%" height="100%">
+            <Grid width="auto">
               <P>조금 더 노력하면<br/>기초대사량에 맞추어<br/>먹을 수 있던 하루!</P>
               <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량과 {extra}kcal만큼 차이나요</Text>
             </Grid>
-            <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+            <Grid width="auto">
               <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="22" cy="22" r="22" fill="#8C8C8C"/>
                   <path d="M18.8368 18.8727C19.3682 18.3374 19.6667 17.6114 19.6667 16.8544C19.6667 16.0973 19.3682 15.3713 18.8368 14.836C18.3054 14.3007 17.5848 14 16.8333 14C16.0819 14 15.3612 14.3007 14.8299 14.836C14.2985 15.3713 14 16.0973 14 16.8544C14 17.6114 14.2985 18.3374 14.8299 18.8727C15.3612 19.408 16.0819 19.7087 16.8333 19.7087C17.5848 19.7087 18.3054 19.408 18.8368 18.8727Z" fill="white"/>
@@ -86,12 +86,12 @@ const CalenderDetail_Info = (props) => {
       return(
       <React.Fragment>
         <Wrap>
-          <Grid is_flex padding="0 9%">
-            <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+          <Grid is_flex padding="0 9%" height="100%">
+            <Grid width="auto">
               <P>Bad<br/>기초대사량에 많이<br/>못미치는 하루였어요</P>
               <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량까지 {extra}kcal 모자라요</Text>
             </Grid>
-            <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+            <Grid width="auto">
               <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="22" cy="22" r="22" fill="#F87C7C"/>
                 <path d="M17.8368 18.8518C18.3682 18.3188 18.6667 17.5959 18.6667 16.8421C18.6667 16.0883 18.3682 15.3654 17.8368 14.8324C17.3054 14.2994 16.5848 14 15.8333 14C15.0819 14 14.3612 14.2994 13.8299 14.8324C13.2985 15.3654 13 16.0883 13 16.8421C13 17.5959 13.2985 18.3188 13.8299 18.8518C14.3612 19.3848 15.0819 19.6842 15.8333 19.6842C16.5848 19.6842 17.3054 19.3848 17.8368 18.8518Z" fill="white"/>
@@ -110,12 +110,12 @@ const CalenderDetail_Info = (props) => {
       return(
         <React.Fragment>
             <Wrap>
-            <Grid is_flex padding="0 9%">
-              <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+            <Grid is_flex padding="0 9%" height="100%">
+              <Grid width="auto">
                 <P>Bad<br/>기초대사량을 많이<br/>초과한 하루였네요</P>
                 <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량보다 {extra}kcal 많이 섭취했어요</Text>
               </Grid>
-              <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+              <Grid width="auto">
                 <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="22" cy="22" r="22" fill="#F87C7C"/>
                   <path d="M17.8368 18.8518C18.3682 18.3188 18.6667 17.5959 18.6667 16.8421C18.6667 16.0883 18.3682 15.3654 17.8368 14.8324C17.3054 14.2994 16.5848 14 15.8333 14C15.0819 14 14.3612 14.2994 13.8299 14.8324C13.2985 15.3654 13 16.0883 13 16.8421C13 17.5959 13.2985 18.3188 13.8299 18.8518C14.3612 19.3848 15.0819 19.6842 15.8333 19.6842C16.5848 19.6842 17.3054 19.3848 17.8368 18.8518Z" fill="white"/>
@@ -135,12 +135,12 @@ const CalenderDetail_Info = (props) => {
   return (
     <React.Fragment>
       <Wrap>
-        <Grid is_flex padding="0 9%">
-          <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+        <Grid is_flex padding="0 9%" height="100%">
+          <Grid width="auto">
             <P>Good<br/>기초대사량을<br/>충분히 채운 하루네요!</P>
             <Text size="15px" bold m_size="11px" color={theme.color.gray_6} margin="3.8% 0 0 0">기초대사량과 {extra}kcal만큼 차이나요</Text>
           </Grid>
-          <Grid width="auto" margin="13.2% 0 0 0" m_margin="8% 0 0 0">
+          <Grid width="auto">
             <Svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="22" cy="22" r="22" fill="#6993FF"/>
               <path d="M17.8368 18.852C18.3682 18.319 18.6667 17.596 18.6667 16.8422C18.6667 16.0884 18.3682 15.3655 17.8368 14.8325C17.3054 14.2994 16.5848 14 15.8333 14C15.0819 14 14.3612 14.2994 13.8299 14.8325C13.2985 15.3655 13 16.0884 13 16.8422C13 17.596 13.2985 18.319 13.8299 18.852C14.3612 19.385 15.0819 19.6845 15.8333 19.6845C16.5848 19.6845 17.3054 19.385 17.8368 18.852Z" fill="white"/>

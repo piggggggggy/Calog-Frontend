@@ -118,6 +118,21 @@ export const getRecordDB = (date) => {
   }
 };
 
+// 추가 데이터 기록(운영진 추가용)
+export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .post('/api/home/addData',
+        {name:name, forOne:forOne, kcal:kcal, measurement:measurement, protein:protein, fat:fat, carbo:carbo, sugars:sugars, natrium:natrium, cholesterol:cholesterol, fattyAcid:fattyAcid, transFattyAcid:transFattyAcid, unFattyAcid:unFattyAcid})
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+  }
+};
+
 // initial State 
 const initialState = {
 
