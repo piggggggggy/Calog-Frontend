@@ -6,12 +6,17 @@ import theme from '../shared/theme';
 // history
 import {history} from '../redux/configStore';
 
+// redux
+import {useDispatch} from 'react-redux';
+import {addDataDB} from '../redux/modules/record';
+
 /** 
  * @역할 원하는 검색 결과가 없을 때 직접 입력하여 등록할 수 있도록 하는 추가 페이지
  * @담당자 김나영
 */
 
 const SelfAddFood = (props) => {
+  const dispatch = useDispatch()
 
   const nameInput = useRef()
   const kcalInput = useRef()
@@ -24,6 +29,8 @@ const SelfAddFood = (props) => {
   const unFattyAcidInput = useRef()
   const cholesterolInput = useRef()
   const natriumInput = useRef()
+  const forOneInput = useRef()
+  const measurementInput = useRef()
 
   const addFood = () => {
     const name = nameInput.current.value;
@@ -37,10 +44,12 @@ const SelfAddFood = (props) => {
     const unFattyAcid = unFattyAcidInput.current.value;
     const cholesterol = cholesterolInput.current.value;
     const natrium = natriumInput.current.value;
+    const forOne = forOneInput.current.value;
+    const measurement = measurementInput.current.value;
     
     // 음식 추가 요청으로 인해 운영진이 db에 데이터를 추가할 경우 숨김 페이지를 통해서 진행 >> 페이지 재활용
     if (history.location.pathname.includes('onlyHQ'))  {
-      window.alert('비밀!')
+      dispatch(addDataDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
     } else {
 
       // 유저가 직접 데이터를 추가하여 사용하는 경우
@@ -115,6 +124,18 @@ const SelfAddFood = (props) => {
         {/* 나트륨 */}
         <Text size="17px" margin="6% 0 2% 0" m_size="15px">나트륨 함량(선택)</Text>
         <TextBox placeholder="나트륨 함량 입력" ref={natriumInput}/>
+
+        {history.location.pathname.includes('onlyHQ') && (
+          <React.Fragment>
+            {/* 용량 */}
+            <Text size="17px" margin="6% 0 2% 0" m_size="15px">용량</Text>
+            <TextBox ref={forOneInput}/>
+
+            {/* 단위 */}
+            <Text size="17px" margin="6% 0 2% 0" m_size="15px">단위</Text>
+            <TextBox ref={measurementInput}/>
+          </React.Fragment>
+        )}
         
         {/* 작성하기 버튼 */}
         <Button margin="6% 0 0 0" width="90%" height="50px" bg={theme.color.light} border_radius="60px" _onClick={addFood}>
