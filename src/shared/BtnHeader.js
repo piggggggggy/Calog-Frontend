@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import {Grid, Text} from '../elements';
 
 // history
@@ -10,6 +10,8 @@ const BtnHeader = (props) => {
 
   // 카트리스트
   const cart_list = useSelector((state) => state.cart.cart);
+  // const reder = cart_list.length
+  // const [reRender, setReRender] = useState(cart_list.length);
 
   return (
     <React.Fragment>
@@ -35,7 +37,9 @@ const BtnHeader = (props) => {
           <></>
           :
           <div>
-            <Text size="13px" m_size="13px" bold color="#FFFFFF">{cart_list.length}</Text>
+            <div>
+              <Text size="13px" m_size="13px" bold color="#FFFFFF">{cart_list.length}</Text>
+            </div>
           </div>
           }
         </CartContainer> : <Grid width="3%"/>}
@@ -44,6 +48,29 @@ const BtnHeader = (props) => {
   );
 };
 
+const AddMove = keyframes`
+0% {
+  width: 21px;
+  height: 21px;
+}
+25% {
+  width: 27px;
+  height: 27px;
+}
+50% {
+  width: 21px;
+  height: 21px;
+}
+75% {
+  width: 17px;
+  height: 17px;
+}
+100% {
+  width: 21px;
+  height: 21px;
+}
+`;
+
 const CartContainer = styled.div`
   position: relative;
   width: auto;
@@ -51,16 +78,26 @@ const CartContainer = styled.div`
 
   & > div {
     position: absolute;
-    right: -11px;
-    top: -3px;
-    width: 21px;
-    height: 21px;
-    border: none;
-    border-radius: 50%;
-    background: #6993FF;
+    right: -12px;
+    top: -4px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    & > div {
+      position: relative;
+      width: 21px;
+      height: 21px;
+      border: none;
+      border-radius: 50%;
+      background: #6993FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: ${AddMove} 0.5s 1 ease;
+    }
   }
 `;
 

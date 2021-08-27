@@ -149,22 +149,29 @@ const MainBody = (props) => {
           {/* 최근 검색어 영역 */}
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
+
               <Grid is_flex padding="4.5vh 6% 2vh 6%">
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
               </Grid>
+              
               <Line/>
+              
               {recent_list.length !== 0 ? recent_list.map((rec, idx) => {
                 if (idx < 5) {
                   return (
                     <>
                       <Grid is_flex padding="1.1vh 11% 1.1vh 8%" key={idx}>
+                        
                         <Grid cursor _onClick={()=>{recentSearch(rec)}}>
                           <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
                         </Grid>
+                        
                         <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                           <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="18px" color="#737373"/>
                         </div>
+                        
                       </Grid>
+                      
                       <Line/>
                     </>
                   )
@@ -184,13 +191,13 @@ const MainBody = (props) => {
 
 
 
-      {/* <BodyContainer> */}
+      <BodyContainer>
         {/* 즐겨찾기가 들어가는 곳 */}
-        {/* {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''} */}
+        {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
 
         {/* 장바구니 탭 */}
-        {/* <UnderBar/>
-      </BodyContainer> */}
+        {/* <UnderBar/> */}
+      </BodyContainer>
       
       {!is_login || favo_list.length === 0 ? 
       <Mascort>

@@ -86,7 +86,11 @@ const Card = (props) => {
             <NameBox>{name}</NameBox>
           
             {/* kcal */}
-            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">{Math.round(props.kcal * 10)/10} kcal</Text>
+            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">
+              {Math.round(props.kcal * 10)/10} kcal
+              <ForOne> / {props.forOne + props.measurement}</ForOne>
+            </Text>
+
           </Grid>
           
           {/* 카운트 */}
@@ -191,6 +195,13 @@ const NameBox = styled.div`
     line-height: 18px; 
     font-size: 13px; 
   }
+`;
+
+const ForOne = styled.span`
+  font-size: 15px;
+  font-weight: bold;
+  color: #939393;
+
 `;
 
 const CountBox = styled.div`
