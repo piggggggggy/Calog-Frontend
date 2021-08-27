@@ -14,6 +14,7 @@ import CalendarDetail_Food from '../components/CalendarDetail_Food';
 import CalendarDetail_Image from '../components/CalendarDetail_Image';
 import Loading from './Loading2';
 import Modal from '../components/Modal';
+import Record_img from '../components/Record_img';
 
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
@@ -127,6 +128,7 @@ const CalenderDetail = (props) => {
   const delRecord = (async () => {
     setModalOpen(true)
   });
+  console.log(same_food)
 
   return (
     <React.Fragment>
@@ -192,17 +194,17 @@ const CalenderDetail = (props) => {
         </Grid>
 
         {/* 이미지 */}
-        <Grid margin="4% 9.7% 0 9.7%" bg={'#eee'} width="81%" height="221px" border_radius="8px" m_margin="4% 9.7% 0 9.7%">
           {same_list?.length > 0 ? (
-            <Slider {...settings}>
-              {same_list?.map((i, idx) => {
-                return <CalendarDetail_Image key={i.url} {...[i]} />
-              })}
-            </Slider>
+            <Grid margin="4% 9.7% 0 9.7%" bg={'#eee'} width="81%" height="221px" border_radius="8px" m_margin="4% 9.7% 0 9.7%">
+              <Slider {...settings}>
+                {same_list?.map((i, idx) => {
+                  return <CalendarDetail_Image key={i.url} {...[i]} />
+                })}
+              </Slider>
+            </Grid>
           ) : (
-            <Image height="221px" src={noImg} b_size="100% 100%"/>
+            <Record_img />
           )}
-        </Grid>
 
         {/* 메모title */}
         <Grid height="3vh"/>
