@@ -192,11 +192,10 @@ const MainBody = (props) => {
 
 
       <BodyContainer>
+
         {/* 즐겨찾기가 들어가는 곳 */}
         {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
 
-        {/* 장바구니 탭 */}
-        {/* <UnderBar/> */}
       </BodyContainer>
       
       {!is_login || favo_list.length === 0 ? 
