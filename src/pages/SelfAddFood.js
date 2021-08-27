@@ -8,7 +8,7 @@ import {history} from '../redux/configStore';
 
 // redux
 import {useDispatch} from 'react-redux';
-import {addDataDB, addUserFoodDB} from '../redux/modules/food';
+import {addDataDB, addUserFoodDB, wantCart} from '../redux/modules/food';
 
 /** 
  * @역할 원하는 검색 결과가 없을 때 직접 입력하여 등록할 수 있도록 하는 추가 페이지
@@ -54,12 +54,15 @@ const SelfAddFood = (props) => {
 
       // 유저가 직접 데이터를 추가하여 사용하는 경우
       if (!name || !kcal) {
-        window.alert('필수 항목을 모두 입력해주세요!')
+        window.alert('필수 항목을 모두 입력해주세요:)')
       } else {
-        dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
-        // let result = window.confirm("추가한 칼로리를 담으시겠어요?");
-        // result ? dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
-        // : dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        let result = window.confirm("지금 바로 칼로리를 등록할까요?");
+        if(result) {
+          dispatch(wantCart(true))
+          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        } else {
+          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        }
       }
     }
   }
