@@ -36,6 +36,9 @@ const App = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
+  // 관리자 계정
+  const admin = useSelector((state)=>state.user.user_info?.email);
+
   // login check
   useEffect(() => {
 
@@ -72,7 +75,7 @@ const App = (props) => {
               <Route path="/record" exact component={Record}/>
               <Route path="/modal" exact component={Modal}/>
               <Route path="/addFood" exact component={SelfAddFood}/>
-              <Route path='/onlyHQ' exact component={SelfAddFood} />
+              {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />}
 
               <Route path="/login" exact component={Login}/>
               <Route path="/signup" exact component={Signup}/>
