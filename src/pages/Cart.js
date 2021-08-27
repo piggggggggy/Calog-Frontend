@@ -15,7 +15,7 @@ const Cart = (props) => {
 
   return (
     <React.Fragment>
-      <BtnHeader title="장바구니"/>
+      <BtnHeader title="음식담기"/>
       <CartBody/>
     </React.Fragment>
   );

@@ -11,6 +11,9 @@ import Loading from '../pages/Loading2';
 // modules
 import { getRecommendedDB } from '../redux/modules/search';
 
+// horizontal scroll
+import HorizontalScroll from "react-scroll-horizontal";
+
 /** 
  * @param {*} props
  * @returns 추천음식
@@ -74,15 +77,18 @@ const RcmdList = (props) => {
 
       {/* 추천리스트 */}
       <RecommendContainer 
-        onMouseDown={dragStart}
-        onMouseMove={isDrag ? throttleDragMove : null}
-        onMouseUp={dragEnd}
-        onMouseLeave={dragEnd}
-        ref={refX}
+        // onMouseDown={dragStart}
+        // onMouseMove={isDrag ? throttleDragMove : null}
+        // onMouseUp={dragEnd}
+        // onMouseLeave={dragEnd}
+        // ref={refX}
         >
-        {recommended_list && recommended_list.map((r, idx) => {
-          return <CardRcmd key={r.foodId} {...r}/>
-        })}
+          <HorizontalScroll>
+            {recommended_list && recommended_list.map((r, idx) => {
+              return <CardRcmd key={r.foodId} {...r}/>
+            })}
+          </HorizontalScroll>
+        
       </RecommendContainer>
     </React.Fragment>
   );
@@ -100,8 +106,10 @@ const TitleBox = styled.div`
 
 const RecommendContainer = styled.div`
   position: relative;
+  height: 200px;
   margin: 1.7vh 0 0 0;
-  padding: 0 3% 3vh 5.2%;
+  /* padding: 0 3% 3vh 5.2%; */
+  padding: 0 0 3vh 0;
   display: flex;
   align-items: center;
   /* gap: 1.7vh; */

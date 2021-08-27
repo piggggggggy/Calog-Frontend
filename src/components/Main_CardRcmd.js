@@ -134,7 +134,7 @@ const CardRcmd = (props) => {
         
         {/* 장바구니 버튼 */}
         <CartBox onClick={addCart}>
-          <BsFillPlusSquareFill  color="#F19F13" size="17px"/>
+          <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
         </CartBox>
 
       </FoodCard>
@@ -148,19 +148,40 @@ CardRcmd.defaultProps = {
 
 const FoodCard = styled.div`
   position: relative;
-  min-width: 44%;
-  max-width: 44%;
-  min-height: 13.5vh;
-  max-height: 130px;
+  /* min-width: 9.2%; */
+  /* max-width: 174px; */
+  /* width: 171px; */
+  min-width: 171px;
+  max-width: 171px;
+  min-height: 105px;
+  max-height: 13.2vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: calc(1.3vh + 20px) 3.8% 1.5vh 3.8%;
-  margin-right: 2%;
+  padding: calc(1.3vh + 20px) 0.9% 1.5vh 0.9%;
+  margin: 0 0.5%;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+
+  @media only screen and (max-width:400px) {
+    min-width: 160px;
+    max-width: 160px;
+  }
+  @media only screen and (max-width:350px) {
+    min-width: 140px;
+    max-width: 140px;
+  }
+  @media only screen and (max-width:300px) {
+    min-width: 120px;
+    max-width: 120px;
+  }  
+  /* @media only screen and (max-width:250px) {
+    min-width: 105px;
+    max-width: 105px;
+  } */
+
 
   & > div {
     /* display: flex;
@@ -209,12 +230,16 @@ const BookmarkBox = styled.div`
 
 const CartBox = styled.div`
   position: absolute;
-  bottom: 2vh;
+  bottom: 1.8vh;
   right: 10.5%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  @media only screen and (max-width:320px) {
+    right: 7%;
+  }  
 `;
 
 

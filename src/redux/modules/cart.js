@@ -9,7 +9,7 @@ import moment from "moment";
 const initialState = {
   // persist 적용을 위한 cart
   cart: [],
-  type: null,
+  type: "아침",
   //카트 기록 날짜
   date: moment().format('YYYY-MM-DD'),
 }

@@ -147,7 +147,7 @@ const Card = (props) => {
 
         {/* 장바구니 */}
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
-          <BsFillPlusSquareFill color="#F19F13" size="17px"/>
+          <BsFillPlusSquareFill color="#F19F13" size="24px"/>
         </CartBox>
 
       </FoodCard>
