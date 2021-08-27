@@ -9,7 +9,7 @@ import {delImage} from '../redux/modules/record';
 import {useDispatch, useSelector} from 'react-redux';
 
 /** 
- * @역할 기록 페이지에서 이미지 미리보기 컴포넌트
+ * @역할 기록 페이지에서 이미지 미리보기 컴포넌트 >> 1차 피드백 후 개선 사항 : 캘린더 상세에서 이미지 추가로 변경
  * @담당자 : 김나영
 */
 

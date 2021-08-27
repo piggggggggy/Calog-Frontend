@@ -22,23 +22,26 @@ export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protei
 };
 
 // 추가 데이터 기록(유저 추가용)
-export const addUserFoodDB = (name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
+export const addUserFoodDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
   return function (dispatch, getState, {history}) {
     instance
       .post('/api/customize/newFood',
-        {name:name, kcal:kcal, protein:protein, fat:fat, carbo:carbo, sugars:sugars, natrium:natrium, cholesterol:cholesterol, fattyAcid:fattyAcid, transFattyAcid:transFattyAcid, unFattyAcid:unFattyAcid})
+        {name:name, forOne:forOne, kcal:kcal, measurement:measurement, protein:protein, fat:fat, carbo:carbo, sugars:sugars, natrium:natrium, cholesterol:cholesterol, fattyAcid:fattyAcid, transFattyAcid:transFattyAcid, unFattyAcid:unFattyAcid})
       .then((res) => {
-        console.log(res)
         history.push('/')
       })
       .catch((err) => {
-        console.log(err)
+        window.alert('칼로리 추가에 오류가 있어요:(')
+        history.push('/')
       }) 
   }
 };
 
 // initial State 
 const initialState = {
+
+  // 칼로리 직접 등록 후 장바구니 추가 체크 여부
+  wantAddCart: false
 }
 
 // redux
@@ -47,10 +50,13 @@ const food = createSlice({
   initialState,
   reducers: {
 
-    
+    // 칼로리 직접 등록 후 장바구니 추가 체크 여부
+    wantCart : (state, action) => {
+      state.wantAddCart = action.payload
+    }
   }
 });
 
-export const {} = food.actions;
+export const {wantCart} = food.actions;
 
 export default food;
