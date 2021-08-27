@@ -4,7 +4,7 @@ import {Grid, Text} from '../elements';
 import theme from '../shared/theme';
 
 // 데이터
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addBodySpecDB} from '../redux/modules/dashboard';
 
 /** 
@@ -16,7 +16,10 @@ import {addBodySpecDB} from '../redux/modules/dashboard';
 const DashBoard_BodySpec = (props) => {
   const dispatch = useDispatch();
 
-  const {height, weight, bmr, heightBlind, weightBlind, bmrBlind, is_login} = props;
+  const {height, weight, bmr, is_login} = props;
+
+  //바디스펙 블라인드
+  const blind = useSelector((state) => state.dashboard.specBlind)
 
   // 키 on off
   // debounce
@@ -26,8 +29,8 @@ const DashBoard_BodySpec = (props) => {
   // const height_keyPress = useCallback(height_debounce, []);
 
   const [heightShow, setHeightShow] = useState({
-    hShow: heightBlind === true ? "block" : "none",
-    hHide: heightBlind === true ? "none" : "block"
+    hShow: blind.height_blind === true ? "block" : "none",
+    hHide: blind.height_blind === true ? "none" : "block"
   });
   const {hShow, hHide} = heightShow;
   const heightOn = (e) => {
@@ -55,8 +58,8 @@ const DashBoard_BodySpec = (props) => {
   // const weight_keyPress = useCallback(weight_debounce, []);
 
   const [weightShow, setWeightShow] = useState({
-    wShow: weightBlind === true ? "block" : "none",
-    wHide: weightBlind === true ? "none" : "block"
+    wShow: blind.weight_blind === true ? "block" : "none",
+    wHide: blind.weight_blind === true ? "none" : "block"
   });
   const {wShow, wHide} = weightShow;
   const weightOn = (e) => {
@@ -84,8 +87,8 @@ const DashBoard_BodySpec = (props) => {
   // const bmr_keyPress = useCallback(bmr_debounce, []);
 
   const [kcalShow, setKcalShow] = useState({
-    kShow: bmrBlind === true ? "block" : "none",
-    kHide: bmrBlind === true ? "none" : "block"
+    kShow: blind.bmr_blind === true ? "block" : "none",
+    kHide: blind.bmr_blind === true ? "none" : "block"
   });
   const {kShow, kHide} = kcalShow;
   const kcalOn = (e) => {
