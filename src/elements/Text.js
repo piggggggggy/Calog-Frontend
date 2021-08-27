@@ -5,7 +5,7 @@ import theme from '../shared/theme'
 const Text = (props) => {
     // bold : font-weight / size : font-size / lineheight: line-height
     // to : text-overflow / ws : white-space
-    const {children, width, bold, color, size, margin, lineheight, to, ws, overflow,
+    const {children, width, bold, color, size, margin, lineheight, to, ws, overflow, cursor,
 
         // media
         m_size} = props;
@@ -20,6 +20,7 @@ const Text = (props) => {
         overflow,
         to,
         ws,
+        cursor,
 
         // media
         m_size,
@@ -40,6 +41,7 @@ Text.defaultProps = {
     size: "1em",
     margin: "auto",
     lineheight: "null",
+    cursor: "default",
 
     // media
     m_size: "1em",
@@ -59,6 +61,7 @@ const DefaultText = styled.p`
     ${(props) => props.overflow ? `overflow: ${props.overflow}` : ''};
     ${(props) => props.to ? 'text-overflow: ellipsis' : ''};
     ${(props) => props.ws ? `white-space: ${props.ws}` : ''};
+    cursor: ${(props) => props.cursor};
 
     @media ${theme.device.mobileM} {
         font-size: ${(props) => props.m_size};

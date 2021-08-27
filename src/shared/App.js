@@ -9,7 +9,7 @@ import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDetail, Loading, Loading2, Loading3, Loading4, UserFeedback,} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDetail, Loading4, UserFeedback, SelfAddFood,} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
@@ -29,6 +29,7 @@ import webImg from '../img/backImg.png';
 // lazy loading
 import LazyLoad from 'react-lazyload';
 
+// csrf
 import { get_csrf_token } from './api';
 
 const App = (props) => {
@@ -70,6 +71,8 @@ const App = (props) => {
               <Route path="/calendar/:date" exact component={CalendarDetail}/>
               <Route path="/record" exact component={Record}/>
               <Route path="/modal" exact component={Modal}/>
+              <Route path="/addFood" exact component={SelfAddFood}/>
+              <Route path='/onlyHQ' exact component={SelfAddFood} />
 
               <Route path="/login" exact component={Login}/>
               <Route path="/signup" exact component={Signup}/>

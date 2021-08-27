@@ -17,11 +17,11 @@ const CalendarDetail_Image = (props) => {
   return (
     <React.Fragment>
       {url[0] === "" ? (
-        <Grid height="221px">
+        <Grid height="221px" cursor="pointer">
           <Image height="221px" src={noImg} b_size="100% 100%"/>
         </Grid>
       ) : (
-        <Grid height="221px">
+        <Grid height="221px" cursor="pointer">
           <Image height="221px" src={url[0]} b_size="100% 100%"/>
         </Grid>
       )}

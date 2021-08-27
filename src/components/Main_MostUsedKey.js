@@ -52,7 +52,7 @@ const MostUsedKey = (props) => {
                   search(m.keyword);
                 }}
                 key={idx}>
-                <Text lineheight="14px" m_lineheight="14px" size="12px" m_size="12px" color="#404040" padding="0" margin="0">{m.keyword}</Text>
+                <Text lineheight="14px" m_lineheight="14px" size="12px" m_size="12px" color="#404040" padding="0" margin="0" cursor="pointer">{m.keyword}</Text>
               </MostButton>
             )
           }

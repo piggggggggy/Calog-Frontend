@@ -27,7 +27,7 @@ Image.defaultProps = {
   height: "100%",
   margin: "0px",
   b_size: "contain",
-  cursor: false,
+  cursor: "default",
   border_radius: "0px",
   src: "",
   _onClick: () => {},
@@ -42,7 +42,7 @@ const DefaultImage = styled.div`
   background-position: center;
   background-size: ${(props) => props.b_size};
   background-repeat: no-repeat;
-  ${(props) => (props.cursor ? `cursor: pointer;` : "")};
+  cursor: ${(props) => props.cursor};
 `;
 
 export default Image;
