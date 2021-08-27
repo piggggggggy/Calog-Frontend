@@ -242,6 +242,16 @@ return (
           </Text>
           <hr color="#F5F5F5"/>
 
+          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
+                <Hover onClick={()=>
+              {
+                history.push("/aboutUs")
+              }}>
+              About us
+            </Hover>
+          </Text>
+          <hr color="#F5F5F5"/>
+
           <Version>
             <Text lineheight="22px" size="17px" color="#A9A9A9" margin="15px 0px 15px 20px">
               현재 버전
