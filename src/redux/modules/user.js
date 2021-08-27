@@ -4,7 +4,7 @@ import axios from "axios";
 
 // 액션
 import {bmrChk, delDashboardAll} from './dashboard';
-import {addBodySpecDB} from './dashboard';
+import {saveBlind} from './dashboard';
 import { delCartAll } from "./cart";
 import { delRecentAll } from "./recent";
 import { delRecordAll } from "./record";
@@ -45,8 +45,13 @@ export const LoginSV = (user_info) => {
 
             document.cookie = `TOKEN=${res_token.data.token};`;
 
-            dispatch(SetUser(res_user_info.data.user));
-            let _bmr = res_user_info.data.user.bmr[(res_user_info.data.user.bmr.length)-1].bmr
+            const data = res_user_info.data.user
+            dispatch(SetUser(data));
+
+            //바디스펙 가져가기
+            dispatch(saveBlind({weight:data.weightBlind, height:data.heightBlind, bmr:data.bmrBlind}))
+
+            let _bmr = data.bmr[(res_user_info.data.user.bmr.length)-1].bmr
             if(!res_user_info.data.user){
                 return;
             };

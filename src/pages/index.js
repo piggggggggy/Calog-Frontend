@@ -4,6 +4,7 @@ import Calendar from './Calendar';
 import Record from './Record';
 import CalendarDetail from './CalendarDetail';
 import SelfAddFood from './SelfAddFood';
+import AboutUs from './AboutUs';
 //지혁
 import Login from './Login';
 import Signup from './Signup';
@@ -48,4 +49,5 @@ export {
   Loading3,
   Loading4,
   SelfAddFood,
+  AboutUs,
 }
