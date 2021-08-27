@@ -5,7 +5,11 @@ import { history } from '../redux/configStore';
 import { getNotiDetailSV, deleteNotiSV } from '../redux/modules/notice';
 
 import styled from 'styled-components';
-import { Grid, Button, Text } from '../elements';
+import { Grid, Text, Image } from '../elements';
+import ios1 from '../img/ios1.PNG';
+import ios2 from '../img/ios2.PNG';
+import and1 from '../img/and1.PNG';
+import and2 from '../img/and2.PNG';
 
 import {Back} from "../img/svg";
 
@@ -14,7 +18,7 @@ import {Back} from "../img/svg";
  * @returns 공지 상세보기
  * @역할 공지 상세보기 페이지
  * @필수값 공지사항 게시글 고유 id
- * @담당자 : 성수
+ * @담당자 : 성수 + 나영(게시글 관리)
 */
 
 const NotiDetail = (props) => 
@@ -76,9 +80,9 @@ const NotiDetail = (props) =>
                 안녕하세요, 유저 여러분!<br/><br/>
                 다들 식사는 잘 하고 계신가요?<br/><br/>
                 운영진이 더 나은 서비스를 제공하기 위해 현재 피드백을 받고있지만 피드백 작성이 손이 많이 가는 일인 것 같아요.<br/><br/>
-                그래서 저희가 작은 이벤트를 준비했습니다!🎉<br/><br/>
-                피드백을 작성해주신 분들께 <span style={{fontWeight:"bold"}}>스타벅스 아메리카노 50잔과 베스킨라빈스 파인트 20개</span>를 드리려고합니다!<br/><br/>
-                참여방법은 아래 글을 참고해주세요!<br/><br/>
+                그래서 저희가 작은 이벤트를 준비했습니다.🎉<br/><br/>
+                피드백을 작성해주신 분들께 추첨을 통해 <span style={{fontWeight:"bold"}}>저희의 마음이 담긴 선물</span>을 드리려고해요!<br/><br/>
+                참여방법은 아래 글을 참고해주세요.<br/><br/>
                 <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>🎯 참여방법 첫번째!</span><br/>
                 1. Calog 페이지에서 서비스 이용 후<br/><span style={{borderBottom:"3px solid #f19f13"}}>"마이페이지" - "의견 보내기"</span>에서 피드백을 제출한다.<br/>
                 2. <span style={{borderBottom:"3px solid #f19f13"}}>9월 3일 추첨을 통해 스타벅스 기프티콘</span>을 받아 맛있게 마신다.<br/><br/>
@@ -90,17 +94,42 @@ const NotiDetail = (props) =>
                 </Text>
               </PostBox>
             )}
+
+            {history.location.pathname.includes('notice3') && (
+              <PostBox>
+                <Text>
+                안녕하세요, 칼로그입니다!<br/><br/>
+                현재 칼로그는 PWA라는 모바일웹 기술을 적용하여 플레이스토어나 앱스토어에서 다운이 아닌 <span style={{borderBottom:"3px solid #f19f13", fontWeight:"bold"}}>홈 화면에 추가</span>하여 사용하시면 더 원활한 환경에서 확인이 가능해요!<br/><br/>
+                자세한 방법은 아래 글을 참고해주세요!<br/><br/>
+                <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>🎯 ios</span><br/>
+                <span style={{fontWeight:"bold"}}>1.</span>칼로그 URL을 사파리로 연다.<br/>
+                <span style={{fontWeight:"bold"}}>2.</span>아래 이미지와 같이 공유하기 아이콘을 누른다.<br/><Image src={ios1} width="100%" height="13vh" b_size="100% 100%"/>
+                <span style={{fontWeight:"bold"}}>3.</span>홈 화면에 추가하여 사용한다.<br/><Image src={ios2} width="100%" height="10vh" b_size="100% 100%"/>
+                <br/>
+                <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>🎯 안드로이드</span><br/>
+                <span style={{fontWeight:"bold"}}>1.</span>칼로그 URL을 크롬으로 연다.<br/>
+                <span style={{fontWeight:"bold"}}>2.</span>아래 이미지와 같이 설정 아이콘을 누른다.<br/><Image src={and1} width="100%" height="13vh" b_size="100% 100%"/>
+                <span style={{fontWeight:"bold"}}>3.</span>홈 화면에 설치하여 사용한다.<br/><Image src={and2} width="100%" height="7vh" b_size="100% 100%"/>
+                <br/>
+                추후 안드로이드의 경우 플레이스토어에 정식 런칭 예정이며 추가 공지로 돌아오겠습니다.<br/><br/>
+                감사합니다❣️<br/><br/>
+                </Text>
+              </PostBox>
+            )}
+
+            {history.location.pathname.includes('notice4') && (
+              <PostBox>
+                <Text>
+                안녕하세요, 칼로그입니다!<br/><br/>
+                현재 칼로그에서는 "내가 먹은 칼로리"에 대한 확인이 가능한 서비스입니다.<br/><br/>
+                모든 데이터는 <span style={{borderBottom:"3px solid #f19f13"}}>식약청 및 각 브랜드 공식 홈페이지</span>를 기반으로 가지고 온 정식 데이터예요!<br/><br/>
+                검색 후 확인이 어려운 칼로리의 경우 영양성분을 아신다면 직접 추가 및 요청도 가능하니 많은 이용 부탁드립니다.<br/><br/>
+                감사합니다❣️<br/><br/>
+                </Text>
+              </PostBox>
+            )}
           </Content>
         </Post>
-        {/* 관리자 아이디 삭제 버튼 표시 / 관리자 아이디 숨겨야함 */}
-        {admin_email==="cadmin@calories.com"?
-        <Grid width="25%">
-            <Button bg="#FFE899" border_radius="15px"
-            _onClick={notidelete}>
-              삭제
-            </Button>
-        </Grid>
-        :""}
       </Container>
     </React.Fragment>
   );
