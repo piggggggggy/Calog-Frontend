@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Button, Grid, Text, Image} from '../elements';
 import styled from 'styled-components';
 import theme from '../shared/theme';
@@ -16,17 +16,21 @@ import Loading from './Loading2';
 import Modal from '../components/Modal';
 import Record_img from '../components/Record_img';
 
+// 이미지 업로드(압축해서 s3)
+import S3upload from 'react-aws-s3';
+import imageCompression from "browser-image-compression";
+
 // 데이터
 import {useDispatch, useSelector} from 'react-redux';
-import {getRecordDB} from '../redux/modules/record';
+import {getRecordDB, addRecordDB, addImage} from '../redux/modules/record';
 
 // slick
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-//img
-import noImg from '../img/noImg.png';
+// lazy loading
+import LazyLoad from 'react-lazyload';
 
 //moment
 import moment from 'moment';
@@ -117,6 +121,121 @@ const CalenderDetail = (props) => {
     }
   };
 
+  // 이미지
+  const [fileUrl, setFileUrl] = useState({
+    file : []
+  });
+
+  const {file} = fileUrl;
+
+  // 리사이징 옵션
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
+  };
+
+  // 리사이징 후 프리뷰
+  const chgPreview = async (e) => {
+
+    // 원본
+    const imageFile = e.target.files;
+
+    let files = []
+
+    for(let idx=0; idx<imageFile?.length; idx++) {
+      let image = imageFile[idx]
+
+      // 리사이징
+      try {
+        const compressedFile = await imageCompression(image, options);
+        const imageUrl = URL.createObjectURL(compressedFile);
+        files.push(imageUrl)
+      } catch (error) {
+        window.alert('앗, 이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')
+      }
+    }
+    setFileUrl({
+      file: files
+    })
+    dispatch(addImage(files))
+  };
+
+  
+  // 이미지 업로드
+  const fileUpload = useRef();
+
+  const S3_BUCKET = process.env.REACT_APP_BUCKET_NAME;
+  const REGION = process.env.REACT_APP_REGION;
+  const ACCESS_KEY = process.env.REACT_APP_ACCESS_ID;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+
+  const config = {
+    bucketName: S3_BUCKET,
+    region: REGION,
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+  }
+
+  // 메모
+  const [inputMemo, setInputMemo] = useState();
+  const chgMemo = (e) => {
+    setInputMemo(e.target.value)
+  };
+
+  // 비활성화 btn
+  const noFunc = () => {
+    window.alert('사진과 메모를 기록하는 경우 클릭이 가능해요!')
+  }
+
+  // 사진과 메모 중 기록이 하나라도 있을 경우에만 버튼 활성화;
+  const [btn, setBtn] = useState({
+    color: '#9E9E9E',
+    func: noFunc,
+    fontColor: 'white',
+  });
+  const {color, func, fontColor} = btn
+
+  // upload btn
+  const submitBtn = async (e) => {
+    e.preventDefault();
+    let file = fileUpload.current.files;
+    let image_list = []
+      if (file?.length > 0) {
+
+        for(let i=0; i<file?.length; i++) {
+          let newFileName = file[i].name;
+          const ReactS3Client = new S3upload(config);
+          
+          // 리사이징하여 업로드
+          try {
+            const resizeFile = await imageCompression(file[i], options);
+            ReactS3Client.uploadFile(resizeFile, newFileName).then(data => {
+              if(data.status === 204) {
+                let imgUrl = data.location
+                image_list.push(imgUrl)
+                if(i === file?.length-1) {
+                // case1) 메모에 입력된 내용이 없을 때
+                inputMemo === undefined ? dispatch(addRecordDB(image_list, "")) :
+
+                // case2) 메모에 입력된 내용이 있을 때
+                dispatch(addRecordDB(image_list, inputMemo))
+                }
+              }
+            });
+          } catch (error) {window.alert('앗, 게시글 업로드에 오류가 있어요! 관리자에게 문의해주세요😿')}
+        }
+      } else {
+
+        // 업로드 할 이미지가 없을 때
+        // case1) 메모에 입력된 내용이 없을 때
+        inputMemo === undefined ? dispatch(addRecordDB([""], "")) : 
+
+        // case2) 메모에 입력된 내용이 있을 때
+        dispatch(addRecordDB([""], inputMemo))
+      }
+  };
+
   // loading
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
@@ -128,7 +247,6 @@ const CalenderDetail = (props) => {
   const delRecord = (async () => {
     setModalOpen(true)
   });
-  console.log(same_food)
 
   return (
     <React.Fragment>
@@ -192,6 +310,7 @@ const CalenderDetail = (props) => {
             <Text size="13px" bold>사진</Text>
           </Button>
         </Grid>
+        <Text size="13px" margin="2% 9.7% 0 9.7%">이미지가 여러장인 경우, 한번에 선택이 가능해요!</Text>
 
         {/* 이미지 */}
           {same_list?.length > 0 ? (
@@ -203,31 +322,43 @@ const CalenderDetail = (props) => {
               </Slider>
             </Grid>
           ) : (
-            <Record_img />
+            <LazyLoad>
+
+            {/* 이미지 여러장 업로드 */}
+            <label htmlFor="imgFile">
+              <Record_img />
+              <FileBox type="file" multiple accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+            </label>
+          </LazyLoad>
           )}
 
         {/* 메모title */}
-        <Grid height="3vh"/>
-        <Grid margin="6.3% 9.7% 0 9.7%" width="13.5%" m_margin="6.3% 9.7% 0 9.7%">
+        <Grid margin="2% 9.7% 0 9.7%" width="13.5%" m_margin="2% 9.7% 0 9.7%">
           <Button height="25px" bg={theme.color.light} border_radius="15.5px">
             <Text size="13px" bold>메모</Text>
           </Button>
         </Grid>
 
         {/* 메모 */}
-        <Grid margin="4% 9.7% 8% 9.7%" width="81%" m_margin="4% 9.7% 8% 9.7%" cursor="default">
           {memo_list?.length > 0 ? (
-            <React.Fragment>
+            <Grid margin="4% 9.7% 8% 9.7%" width="81%" m_margin="4% 9.7% 8% 9.7%" cursor="default">
               {memo_list?.map((r, idx) => {
                 return <Text margin="0 0 3% 0" size="15px" m_size="13px">{r}</Text>
               })}
-            </React.Fragment>
+            </Grid>
           ) : (
-            <Grid text_align="center">
-              <Text size="15px" m_size="13px">기록된 메모가 없어요😿</Text>
+            <Grid padding="5% 5.5%">
+              <TextArea rows={10} onChange={chgMemo} placeholder="메모를 작성해주세요."/>
             </Grid>
           )}
-        </Grid>
+
+        {/* 기록하기 버튼 */}
+        {/* 사진과 메모 중 기록이 없는 경우에만 활성화 */}
+        <Button
+        _onClick={func}
+        width="90%" height="56px" border_radius="44px" bg={color} margin="0 auto 13% auto">
+          <Text size="16px" bold color={fontColor}>기록하기</Text>
+        </Button>
 
         {/* 삭제하기 버튼 */}
         {/* 식단 기록이 있는 경우에만 활성화 */}
@@ -262,12 +393,27 @@ const Wrap = styled.div`
   }
 `;
 
+const FileBox = styled.input`
+  display: none;
+`;
+
+const TextArea = styled.textarea`
+  resize: none;
+  display: block;
+  width: 100%;
+  padding: 5% 7%;
+  border: none;
+  background: #EEEEEE;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+`;
+
 const BmrInfo = styled.div`
   position: relative;
   width: 100%;
-  text-align: right;
-  padding-right: 5.8%;
-  margin-bottom: 2%;
+  padding: 2% 0 0 10%;
+  margin-bottom: 3%;
   font-size: 13px;
   cursor: default;
 `;
