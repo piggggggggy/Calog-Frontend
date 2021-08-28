@@ -9,7 +9,7 @@ import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDetail, Loading4, UserFeedback, SelfAddFood, AboutUs,} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDate, Loading4, UserFeedback, SelfAddFood, AboutUs,} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
@@ -71,11 +71,12 @@ const App = (props) => {
 
               <Route path="/dashboard" exact component={DashBoard}/>
               <Route path="/calendar" exact component={Calendar}/>
-              <Route path="/calendar/:date" exact component={CalendarDetail}/>
+              <Route path="/calendar/:date" exact component={CalendarDate}/>
               <Route path="/record" exact component={Record}/>
               <Route path="/modal" exact component={Modal}/>
               <Route path="/addFood" exact component={SelfAddFood}/>
-              {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />}
+              {/* {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />} */}
+              <Route path="/onlyHQ" exact component={SelfAddFood} />
               <Route path="/aboutUs" exact component={AboutUs}/>
 
               <Route path="/login" exact component={Login}/>
