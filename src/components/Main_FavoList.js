@@ -23,7 +23,6 @@ const FavoList = (props) => {
   // MainBody에서 props로 받아옴
   const favo_list = props.favo_list;
   const [moreFavo, setFavo] = useState(false);
-  console.log(favo_list)
 
   // 즐겨찾기 덩보기, 더보기
   const changeFavo = () => {
@@ -39,10 +38,10 @@ const FavoList = (props) => {
       {favo_list.length !== 0 ?
       <CardContainer>
 
-        {/* 이름 */}
+        {/* 이름
         <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
           <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
-        </Grid>
+        </Grid> */}
 
         {/* 카드리스트 */}
         {!moreFavo ? favo_list.slice(0,4).map((favo, idx) => {     

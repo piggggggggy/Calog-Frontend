@@ -85,7 +85,7 @@ const Main = (props) => {
       <LogoHeader/>
       <MainBody/>
 
-      <FloatFeedback style={cart_list.length === 0 ? {bottom: "11%"} : {bottom: "20%"}}>
+      <FloatFeedback>
         <svg 
           onClick={()=>{is_login ? history.push("/userfeedback") : confirm() }} 
           width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
