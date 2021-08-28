@@ -170,7 +170,7 @@ const Calendar_Calendar = (props) => {
                 <Button
                   _onClick={() => history.push('/signsocial')}
                   height="6vh" border_radius="60px" bg={theme.color.dark}>
-                  <Text size="16px" bold m_size="14px">로그인하기</Text>
+                  <Text size="16px" bold m_size="14px" cursor="pointer">로그인하기</Text>
                 </Button>
               </Modal>
             </Grid>

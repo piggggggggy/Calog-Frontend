@@ -151,7 +151,7 @@ const Signup = () => {
           <SignupButton>
           <Grid display="flex" fd="column-reverse" height="100%">
           <Button bg="#E4E4E4" height="56px">
-            <Text color="#A9A9A9" size="16px" lineheight="22px">회원가입 하기</Text>
+            <Text color="#A9A9A9" size="16px" lineheight="22px" cursor="pointer">회원가입 하기</Text>
           </Button>
           </Grid>
           </SignupButton>

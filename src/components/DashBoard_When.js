@@ -101,25 +101,50 @@ const DashBoard_When = (props) => {
   // 선택된 type에 따라 css변경, 타입과 총 칼로리 리덕스 저장
   const selectType = (type) => {
     if(type === "morning") {
-      setType("아침")
-      dispatch(typeChk("아침"))
-      dispatch(ttlKcal(morning_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("아침")
+        dispatch(typeChk("아침"))
+        dispatch(ttlKcal(morning_kcal))
+      }
     }else if (type === "lunch") {
-      setType("점심") 
-      dispatch(typeChk("점심"))
-      dispatch(ttlKcal(lunch_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("점심") 
+        dispatch(typeChk("점심"))
+        dispatch(ttlKcal(lunch_kcal))
+      }
     }else if (type === "dinner") {
-      setType("저녁")
-      dispatch(typeChk("저녁"))
-      dispatch(ttlKcal(dinner_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("저녁")
+        dispatch(typeChk("저녁"))
+        dispatch(ttlKcal(dinner_kcal))
+      }
     }else if (type === "snack") {
-      setType("간식")
-      dispatch(typeChk("간식"))
-      dispatch(ttlKcal(snack_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("간식")
+        dispatch(typeChk("간식"))
+        dispatch(ttlKcal(snack_kcal))
+      }
     }else if (type === "midnightSnack") {
-      setType("야식")
-      dispatch(typeChk("야식"))
-      dispatch(ttlKcal(night_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("야식")
+        dispatch(typeChk("야식"))
+        dispatch(ttlKcal(night_kcal))
+      }
     };
   };
 
