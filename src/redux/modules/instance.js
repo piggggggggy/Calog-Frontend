@@ -15,10 +15,10 @@ const getToken_csrf = () => {
 const instance = axios.create({
 
   // test
-  baseURL : "http://52.79.110.219/",
+  // baseURL : "http://52.79.110.219/",
 
   // deploy
-  // baseURL: "https://2k1.shop/",
+  baseURL: "https://2k1.shop/",
 });
 
 instance.interceptors.request.use(config => {
