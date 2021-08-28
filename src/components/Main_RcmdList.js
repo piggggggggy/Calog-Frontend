@@ -25,7 +25,6 @@ const RcmdList = (props) => {
 
   // 추천 리스트
   const recommended_list = useSelector((state) => state.search.recommend);
-  console.log(recommended_list);
   
   // 이름 가져오기위해!
   const user = useSelector((state) => state.user.user_info);
@@ -34,36 +33,36 @@ const RcmdList = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
   
   // 횡 스와이프 구현!
-  const refX = useRef(null);
-  const [isDrag, setDrag] = useState(false);
-  const [startX, setStart] = useState();
+  // const refX = useRef(null);
+  // const [isDrag, setDrag] = useState(false);
+  // const [startX, setStart] = useState();
 
-  const dragStart = (e) => {
-    e.preventDefault();
-    setDrag(true);
-    setStart(e.pageX + refX.current.scrollLeft)
-  };
+  // const dragStart = (e) => {
+  //   e.preventDefault();
+  //   setDrag(true);
+  //   setStart(e.pageX + refX.current.scrollLeft)
+  // };
 
-  const dragEnd = (e) => {
-    setDrag(false);
-  };
+  // const dragEnd = (e) => {
+  //   setDrag(false);
+  // };
 
-  const dragMove = (e) => {
-    if (isDrag) {
-      const { scrollWidth, clientWidth, scrollLeft } = refX.current;
+  // const dragMove = (e) => {
+  //   if (isDrag) {
+  //     const { scrollWidth, clientWidth, scrollLeft } = refX.current;
  
-      refX.current.scrollLeft = startX - e.pageX;
+  //     refX.current.scrollLeft = startX - e.pageX;
 
-      if (scrollLeft === 0) {
-        setStart(e.pageX);
-      } else if (scrollWidth <= clientWidth + scrollLeft) {
-        setStart(e.pageX + scrollLeft);
-      }
-    }
-  };
+  //     if (scrollLeft === 0) {
+  //       setStart(e.pageX);
+  //     } else if (scrollWidth <= clientWidth + scrollLeft) {
+  //       setStart(e.pageX + scrollLeft);
+  //     }
+  //   }
+  // };
 
-  const delay = 50;
-  const throttleDragMove = throttle(dragMove, delay);
+  // const delay = 50;
+  // const throttleDragMove = throttle(dragMove, delay);
 
   return (
     <React.Fragment>
@@ -85,7 +84,7 @@ const RcmdList = (props) => {
         >
           <HorizontalScroll>
             {recommended_list && recommended_list.map((r, idx) => {
-              return <CardRcmd key={r.foodId} {...r}/>
+              return <CardRcmd key={idx} {...r}/>
             })}
           </HorizontalScroll>
         
@@ -106,10 +105,10 @@ const TitleBox = styled.div`
 
 const RecommendContainer = styled.div`
   position: relative;
-  height: 200px;
+  height: 137px;
   margin: 1.7vh 0 0 0;
   /* padding: 0 3% 3vh 5.2%; */
-  padding: 0 0 3vh 0;
+  /* padding: 0 0 vh 0; */
   display: flex;
   align-items: center;
   /* gap: 1.7vh; */

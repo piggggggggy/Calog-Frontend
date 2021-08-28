@@ -189,9 +189,16 @@ const MainBody = (props) => {
 
       </HeaderContainer>    
 
+      <MiddleTap>
+        {/* 이름 */}
+        <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
+          <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
+        </Grid>
+      </MiddleTap>
 
 
       <BodyContainer>
+
 
         {/* 즐겨찾기가 들어가는 곳 */}
         {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
@@ -251,10 +258,15 @@ const TopBack = styled.div`
   border-bottom-right-radius: 32px;
 `;
 
+const MiddleTap = styled.div`
+  margin-top: 4vh;
+  width: 100%;
+`;
+
 const BodyContainer = styled.div`
-  padding-top: 2vh;
+  /* padding-top: 2vh; */
   max-width: 100%;
-  max-height: 45vh;
+  max-height: 40vh;
   padding-bottom: 20vh;
   overflow: scroll;
   &::-webkit-scrollbar {

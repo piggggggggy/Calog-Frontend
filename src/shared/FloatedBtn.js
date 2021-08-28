@@ -194,7 +194,7 @@ const FloatedBtn = (props) => {
                 <div>
                   <ModalInput ref={instagramId} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
                 </div>
-                <span>*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</span>
+                <span>*인스타그램 후기 이벤트에 참여하시는 분들은 반드시 입력해주세요.</span>
               </InputForm>
 
               <SubmitBtn onClick={()=>{sendFeedback()}}>
