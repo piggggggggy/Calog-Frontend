@@ -8,7 +8,7 @@ import {history} from '../redux/configStore';
 
 // redux
 import {useDispatch} from 'react-redux';
-import {addDataDB} from '../redux/modules/record';
+import {addDataDB, addUserFoodDB, wantCart} from '../redux/modules/food';
 
 /** 
  * @역할 원하는 검색 결과가 없을 때 직접 입력하여 등록할 수 있도록 하는 추가 페이지
@@ -33,19 +33,19 @@ const SelfAddFood = (props) => {
   const measurementInput = useRef()
 
   const addFood = () => {
-    const name = nameInput.current.value;
-    const kcal = kcalInput.current.value;
-    const carbo = carboInput.current.value;
-    const sugars = sugarsInput.current.value;
-    const protein = proteinInput.current.value;
-    const fat = fatInput.current.value;
-    const fattyAcid = fattyAcidInput.current.value;
-    const transFattyAcid = transFattyAcidInput.current.value;
-    const unFattyAcid = unFattyAcidInput.current.value;
-    const cholesterol = cholesterolInput.current.value;
-    const natrium = natriumInput.current.value;
-    const forOne = forOneInput.current.value;
-    const measurement = measurementInput.current.value;
+    const name = nameInput.current.value
+    const kcal = kcalInput.current.value
+    const carbo = carboInput.current.value === "" ? undefined : carboInput.current.value;
+    const sugars = sugarsInput.current.value === "" ? undefined : sugarsInput.current.value;
+    const protein = proteinInput.current.value === "" ? undefined : proteinInput.current.value;
+    const fat = fatInput.current.value === "" ? undefined : fatInput.current.value;
+    const fattyAcid = fattyAcidInput.current.value === "" ? undefined : fattyAcidInput.current.value;
+    const transFattyAcid = transFattyAcidInput.current.value === "" ? undefined : transFattyAcidInput.current.value;
+    const unFattyAcid = unFattyAcidInput.current.value === "" ? undefined : unFattyAcidInput.current.value;
+    const cholesterol = cholesterolInput.current.value === "" ? undefined : cholesterolInput.current.value;
+    const natrium = natriumInput.current.value === "" ? undefined : natriumInput.current.value;
+    const forOne = forOneInput.current.value === "" ? undefined : forOneInput.current.value;
+    const measurement = measurementInput.current.value === "" ? undefined : measurementInput.current.value;
     
     // 음식 추가 요청으로 인해 운영진이 db에 데이터를 추가할 경우 숨김 페이지를 통해서 진행 >> 페이지 재활용
     if (history.location.pathname.includes('onlyHQ'))  {
@@ -54,9 +54,15 @@ const SelfAddFood = (props) => {
 
       // 유저가 직접 데이터를 추가하여 사용하는 경우
       if (!name || !kcal) {
-        window.alert('필수 항목을 모두 입력해주세요!')
+        window.alert('필수 항목을 모두 입력해주세요:)')
       } else {
-        console.log({name, kcal, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium})
+        let result = window.confirm("지금 바로 칼로리를 등록할까요?");
+        if(result) {
+          dispatch(wantCart(true))
+          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        } else {
+          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+        }
       }
     }
   }
@@ -88,6 +94,16 @@ const SelfAddFood = (props) => {
         <Text size="17px" margin="4% 0 2% 0" m_size="15px">칼로리<span style={{color:"#FD0000"}}>*</span></Text>
         <TextBox placeholder="칼로리 입력" ref={kcalInput}/>
         <Text size="13px" m_size="9px" lineheight="24px" m_lineheight="24px" color="#6993FF">*필수 입력 사항입니다.</Text>
+
+        {/* 용량 */}
+        <Text size="17px" margin="6% 0 2% 0" m_size="15px">용량(권장)</Text>
+        <TextBox placeholder="용량 입력" ref={forOneInput}/>
+        <Text size="13px" m_size="9px" lineheight="24px" m_lineheight="24px" color="#6993FF">*권장 입력 사항입니다.</Text>
+
+        {/* 단위 */}
+        <Text size="17px" margin="6% 0 2% 0" m_size="15px">단위(권장)</Text>
+        <TextBox placeholder="단위 입력" ref={measurementInput}/>
+        <Text size="13px" m_size="9px" lineheight="24px" m_lineheight="24px" color="#6993FF">*권장 입력 사항입니다.</Text>
 
         {/* 탄수화물 */}
         <Text size="17px" margin="4% 0 2% 0" m_size="15px">탄수화물 함량(선택)</Text>
@@ -124,18 +140,6 @@ const SelfAddFood = (props) => {
         {/* 나트륨 */}
         <Text size="17px" margin="6% 0 2% 0" m_size="15px">나트륨 함량(선택)</Text>
         <TextBox placeholder="나트륨 함량 입력" ref={natriumInput}/>
-
-        {history.location.pathname.includes('onlyHQ') && (
-          <React.Fragment>
-            {/* 용량 */}
-            <Text size="17px" margin="6% 0 2% 0" m_size="15px">용량</Text>
-            <TextBox ref={forOneInput}/>
-
-            {/* 단위 */}
-            <Text size="17px" margin="6% 0 2% 0" m_size="15px">단위</Text>
-            <TextBox ref={measurementInput}/>
-          </React.Fragment>
-        )}
         
         {/* 작성하기 버튼 */}
         <Button margin="6% 0 0 0" width="90%" height="50px" bg={theme.color.light} border_radius="60px" _onClick={addFood}>

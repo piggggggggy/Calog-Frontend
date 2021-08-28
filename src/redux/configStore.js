@@ -16,6 +16,7 @@ import search from './modules/search';
 import notice from "./modules/notice";
 import recent from './modules/recent';
 import dashboard from './modules/dashboard';
+import food from './modules/food';
 
 export const history = createBrowserHistory();
 
@@ -36,7 +37,7 @@ if (env === "development") {
 const persistConfig = {
   key: "auth",
   storage: storageSession,
-  whitelist: ["cart", "recent", "record", "dashboard"]
+  whitelist: ["cart", "recent", "record", "dashboard", "food"]
 };
 
 const reducer = combineReducers({
@@ -48,6 +49,7 @@ const reducer = combineReducers({
   recent: recent.reducer,
   notice: notice.reducer,
   dashboard: dashboard.reducer,
+  food:food.reducer,
   router: connectRouter(history),
 });
 

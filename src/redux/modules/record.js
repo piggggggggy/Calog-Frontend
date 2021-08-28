@@ -30,6 +30,7 @@ export const addRecordDB = (date, list, type, url, memo) => {
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
         window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+        history.push('/')
       })
   }
 };
@@ -77,6 +78,7 @@ export const getTodayRecordDB = () => {
         Sentry.captureException(`Catched Error : ${err}`);
         console.log(err)
         window.alert('기록을 불러오는데 오류가 발생했어요! 관리자에게 문의해주세요😿')
+        history.push('/')
       }) 
   }
 };
@@ -93,6 +95,7 @@ export const getAllRecordDB = (monthFormat) => {
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
         window.alert('게시글 로드에 문제가 발생했어요! 관리자에게 문의해주세요😿')
+        history.push('/')
       }) 
   }
 };
@@ -117,21 +120,7 @@ export const getRecordDB = (date) => {
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
-      }) 
-  }
-};
-
-// 추가 데이터 기록(운영진 추가용)
-export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
-  return function (dispatch, getState, {history}) {
-    instance
-      .post('/api/home/addData',
-        {name:name, forOne:forOne, kcal:kcal, measurement:measurement, protein:protein, fat:fat, carbo:carbo, sugars:sugars, natrium:natrium, cholesterol:cholesterol, fattyAcid:fattyAcid, transFattyAcid:transFattyAcid, unFattyAcid:unFattyAcid})
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
+        history.push('/loading/calendar')
       }) 
   }
 };
