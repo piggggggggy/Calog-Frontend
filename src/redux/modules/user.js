@@ -185,7 +185,7 @@ export const ModifyNickSV = (nickname) => {
     return function(dispatch){
         console.log("sdfsdf", nickname);
         instance
-        .post('/api/user/update-nickname', {nickname})
+        .put('/api/user/update-nickname', {nickname})
         .then((res) => {
             console.log(res);
             dispatch(ModifyNick(nickname));
