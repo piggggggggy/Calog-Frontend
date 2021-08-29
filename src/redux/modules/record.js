@@ -15,21 +15,22 @@ import * as Sentry from '@sentry/react';
 // 기록하기 - 전체
 export const addCartDB = (date, foodList, type) => {
   return function (dispatch, getState, {history}) {
-    instance
-      .post('/api/record', {date:date, foodList:foodList, type:type})
-      .then((res) => {
-        window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
-        dispatch(delCartAll())
-        dispatch(delImgAll())
-        dispatch(typeChk(type))
-        dispatch(clearDeleted())
-        history.replace('/loading/dashboard')
-      })
-      .catch((err) => {
-        Sentry.captureException(`Catched Error : ${err}`);
-        window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
-        history.push('/')
-      })
+    console.log(date, foodList, type)
+    // instance
+    //   .post('/api/record', {date:date, foodList:foodList, type:type})
+    //   .then((res) => {
+    //     window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
+    //     dispatch(delCartAll())
+    //     dispatch(delImgAll())
+    //     dispatch(typeChk(type))
+    //     dispatch(clearDeleted())
+    //     history.replace('/loading/dashboard')
+    //   })
+    //   .catch((err) => {
+    //     Sentry.captureException(`Catched Error : ${err}`);
+    //     window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+    //     history.push('/')
+    //   })
   }
 };
 

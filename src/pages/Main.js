@@ -36,7 +36,6 @@ const Main = (props) => {
   // 카트목록의 유무 확인
   const cart_list = useSelector((state) => state.cart.cart);
 
-  console.log(is_login);
   // 최근검색어, 즐겨찾기, 추천음식, 인기검색어
   useEffect(() => {
     if (is_login) {
