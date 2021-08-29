@@ -81,7 +81,7 @@ const FavoList = (props) => {
             </React.Fragment>
           ) : (
             <AddFoodBtn onClick={() => {history.push('/addFood')}}>
-              <div>음식 직접 등록하기</div>
+              <P>음식 직접 등록하기</P>
             </AddFoodBtn>
           )}
         </CardContainer>
@@ -131,6 +131,10 @@ const AddFoodBtn = styled.div`
       font-size: 14px;
     }
   }
+`;
+
+const P = styled.div`
+  font-family: 'Pretendard';
 `;
 
 export default FavoList;

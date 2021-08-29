@@ -85,14 +85,14 @@ const CardList = (props) => {
               </FeedbackInput>
             : ''}
             <FeedBackBtn onClick={()=>{!feedback ? setFeedback(true) : feedBack()}}>
-              <div>{!feedback ? "키워드 등록 요청하기" : "제출하기"}</div>
+              <P>{!feedback ? "키워드 등록 요청하기" : "제출하기"}</P>
             </FeedBackBtn>
           </FeedBackContainer>
 
           {/* 음식 직접 등록 */}
           {!feedback && (
             <AddFoodBtn onClick={() => {history.push('/addFood')}}>
-              <div>음식 직접 등록하기</div>
+              <P>음식 직접 등록하기</P>
             </AddFoodBtn>
           )}
         </CardContainer>
@@ -212,6 +212,10 @@ const AddFoodBtn = styled.div`
       font-size: 14px;
     }
   }
+`;
+
+const P = styled.p`
+  font-family: 'Pretendard';  
 `;
 
 
