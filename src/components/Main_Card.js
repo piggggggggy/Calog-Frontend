@@ -12,9 +12,12 @@ import { history } from '../redux/configStore';
 import { addCartRx, deleteCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
 import { addUserFood } from '../redux/modules/search';
+import { delUserFoodDB } from '../redux/modules/food';
 
 // icons
-import { IoStar } from 'react-icons/io5';
+import { IoStar, IoTrashBinSharp } from 'react-icons/io5';
+import { FaTrashAlt } from 'react-icons/fa';
+import { BiTrash } from 'react-icons/bi';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 
 
@@ -134,6 +137,13 @@ const Card = (props) => {
     }
   }
 
+  const delCreateFood = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    let result = window.confirm('해당 데이터를 삭제하시겠어요?')
+    result && dispatch(delUserFoodDB(props._id))
+  }
+
   return (
     <React.Fragment>
 
@@ -143,8 +153,8 @@ const Card = (props) => {
         {/* 즐겨찾기 */}
         {/* 유저가 직접 등록한 데이터의 경우 즐겨찾기는 default, 해제 시 삭제 */}
         {props.title === "useAdd" ? (
-          <BookmarkBox>
-            <IoStar style={{color:"#F19F13"}} width="100%"/>
+          <BookmarkBox onClick={delCreateFood}>
+            <IoTrashBinSharp style={{color:"black"}} width="100%"/>
           </BookmarkBox>
         ) : (
           <BookmarkBox  onClick={addFavorite}>
