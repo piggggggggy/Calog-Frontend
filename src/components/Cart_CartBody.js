@@ -32,9 +32,9 @@ const CartBody = (props) => {
   // 카드 담긴 내용
 
   const cart = useSelector((state) => state.cart);
-  console.log(cart.date)
 
   const cart_list = cart.cart;
+  console.log(cart_list)
 
   const is_login = useSelector((state) => state.user.is_login);
   
