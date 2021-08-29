@@ -10,6 +10,7 @@ import { getRecentDB } from '../redux/modules/recent';
 import { getFavoriteDB } from '../redux/modules/favorite';
 import { getRecommendedDB, getMostUsedKeyDB } from '../redux/modules/search';
 import { ChkModal } from '../redux/modules/dashboard';
+import { GetCustomList } from '../redux/modules/DietCustom';
 
 // elements & components
 import MainBody from '../components/Main_MainBody';
@@ -36,16 +37,16 @@ const Main = (props) => {
   // 카트목록의 유무 확인
   const cart_list = useSelector((state) => state.cart.cart);
 
-
+  console.log(is_login);
   // 최근검색어, 즐겨찾기, 추천음식, 인기검색어
   useEffect(() => {
     if (is_login) {
       dispatch(getRecentDB());
       dispatch(getFavoriteDB());
     }
-    dispatch(getRecommendedDB())
+    dispatch(getRecommendedDB());
     dispatch(getMostUsedKeyDB());
-
+    dispatch(GetCustomList());
   }, []);
 
   // 홈 화면 추가 안내

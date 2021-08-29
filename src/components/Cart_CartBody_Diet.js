@@ -8,6 +8,7 @@ import Card from './Cart_Card';
 
 // modules
 import { addRecordDB } from '../redux/modules/record';
+import { CustomSV } from '../redux/modules/DietCustom';
 
 // history
 import { history } from '../redux/configStore';
@@ -35,8 +36,8 @@ const CartBodyDiet = (props) => {
 
   const recordDB = () => {
     if(is_login){
-      dispatch(addRecordDB(cart.date, cart_list, cart.type))
-      history.push('/record');
+      dispatch(CustomSV(diet, cart.cart));
+      history.push('/');
     } else {
       if (window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')) {
         history.push('/signsocial');
