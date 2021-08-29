@@ -22,6 +22,9 @@ import instance from '../redux/modules/instance';
 // sentry
 import * as Sentry from '@sentry/react';
 
+// icons
+import { TiDeleteOutline } from 'react-icons/ti'
+
 /** 
  * @param {*} props
  * @returns 플롯버튼
@@ -31,13 +34,11 @@ import * as Sentry from '@sentry/react';
 
 const FloatedBtn = (props) => {
 
-  const dispatch = useDispatch();
-
   // feedback contents
-  const phoneNum = useRef();
-  const goodContents = useRef();
-  const badContents = useRef();
-  const instagramId = useRef();
+  const phone = useRef();
+  const good = useRef();
+  const bad = useRef();
+  const instagram = useRef();
   const date = moment().format('YYYY-MM-DD');
 
   // modal on off
@@ -47,48 +48,41 @@ const FloatedBtn = (props) => {
   const file = useRef();
   const [_file, setFile] = useState(null);
 
+  const deleteFile = () => {
+    setFile(null);
+  }
+
   const checkName = (e) => {
     setFile(e.target.files);
   };
 
   const accessKey = process.env.REACT_APP_S3_FEEDBACK_ACCESSKEY;
   const secretKey = process.env.REACT_APP_S3_FEEDBACK_SECRETKEY;
-  const s3Bucket = process.env.REACT_APP_FEEDBACK_BUCKET_NAME2;
+  const s3Bucket = process.env.REACT_APP_FEEDBACK_BUCKET_NAME;
   const region = process.env.REACT_APP_FEEDBACK_REGION;
 
   const config = {
     bucketName: s3Bucket,
     region: region,
     accessKeyId: accessKey,
-    secretAccesskey: secretKey,
+    secretAccessKey: secretKey,
   };
 
   const options = {
     maxSizeMB: 1,
     maxWidthOrHeight: 720,
-  }
-
-
-  // const sbm = () => {
-  //   const ff = file.current.files[0];
-  //   const dd = file.current.files[0].name;
-  //   const S3upload = new S3(config);
-  //   S3upload.uploadFile(ff, dd).then((res) => {
-  //     console.log(res)
-  //   });
-  // }
+  };
 
   // feedback  
   const submit = async (e) => {
     e.preventDefault();
 
-    const _phoneNum = phoneNum.current.value;
-    const _instagramId = instagramId.current.value;
-    const _goodContents = goodContents.current.value;
-    const _badContents = badContents.current.value;
-
+    const phoneNum = phone.current.value;
+    const instagramId = instagram.current.value;
+    const goodContents = good.current.value;
+    const badContents = bad.current.value;
+    
     if (_file !== null) {
-      
       const S3upload = new S3(config);
       const fileName = file.current.files[0].name;
       const refFile = file.current.files[0];
@@ -96,22 +90,24 @@ const FloatedBtn = (props) => {
 
       try {
         const resizeFile = await imageCompression(refFile, options);
-        S3upload.uploadFile(resizeFile, fileName).then((res) => {
+        S3upload.uploadFile(resizeFile, fileName).then((res) =>{
+          console.log(res)
           if (res.status === 204) {
             const url = res.location;
 
-            if(_goodContents.current.value && _badContents.current.value) {
+            if(goodContents && badContents) {
               instance
               .post('/api/notice/feedback', {
                 title: "피드백",
-                contents: _goodContents + " / " + _badContents,
+                contents: goodContents + " / " + badContents,
                 date: date,
-                phoneNum: _phoneNum,
-                instagramId: _instagramId,
+                phoneNum: phoneNum,
+                instagramId: instagramId,
                 url: url,
               })
               .then((res)=>{
                 setComplete(true);  
+                deleteFile();
               })
               .catch((err)=>{
                 // Sentry.captureException(`Catched Error : ${err}`);
@@ -132,18 +128,19 @@ const FloatedBtn = (props) => {
       }
     } else {
 
-      if(goodContents.current.value && badContents.current.value) {
+      if(goodContents && badContents) {
         instance
         .post('/api/notice/feedback', {
           title: "피드백",
-          contents: _goodContents + " / " + _badContents,
+          contents: goodContents + " / " + badContents,
           date: date,
-          phoneNum: _phoneNum,
-          instagramId: _instagramId,
+          phoneNum: phoneNum,
+          instagramId: instagramId,
           url: "",
         })
         .then((res)=>{
           setComplete(true);  
+          deleteFile();
         })
         .catch((err)=>{
           Sentry.captureException(`Catched Error : ${err}`);
@@ -168,6 +165,7 @@ const FloatedBtn = (props) => {
   // off Modal!!
   const offModal = () => {
     setModal(true);
+    deleteFile();
   };
 
   // 작성 후 화면전환
@@ -250,14 +248,14 @@ const FloatedBtn = (props) => {
               <InputForm>
                 <p>칼로그 장점<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
                 <InputDiv style={{padding: "10px"}}>
-                  <ModalTextarea ref={goodContents} type="text" placeholder="칼로그 장점을 작성해주세요."></ModalTextarea>
+                  <ModalTextarea ref={good} type="text" placeholder="칼로그 장점을 작성해주세요."></ModalTextarea>
                 </InputDiv>
               </InputForm>
 
               <InputForm>
                 <p>칼로그 불편한 점<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
                 <InputDiv style={{padding: "10px"}}>
-                  <ModalTextarea ref={badContents} type="text" placeholder="칼로그의 불편한 점을 작성해주세요."></ModalTextarea>
+                  <ModalTextarea ref={bad} type="text" placeholder="칼로그의 불편한 점을 작성해주세요."></ModalTextarea>
                 </InputDiv>
               </InputForm>
 
@@ -266,17 +264,22 @@ const FloatedBtn = (props) => {
                 <UploadContainer>
                   <FileNameBox style={_file !== null ? {color: "#2B2B2B", fontSize: "13px"} : {color: `${theme.color.gray_4}`,padding: "4.3% 6%"}}>
                     {_file !== null ? _file[0].name : "이미지를 업로드"}
+                    {_file !== null ?
+                    <div onClick={deleteFile}>
+                      <TiDeleteOutline size="18px"/>
+                    </div>
+                    : <></>}
                   </FileNameBox>
                   <UploadBtn htmlFor="feedbackImg"><div>사진찾기</div></UploadBtn>
                   <ModalInput ref={file} type="file" id="feedbackImg" style={{display: "none"}} onChange={checkName}/>
                 </UploadContainer>
               </InputForm>
-              {/* <button onClick={sbm}>aa</button> */}
+              {/* <button onClick={deleteFile}>dd</button> */}
 
               <InputForm>
                 <p>전화번호(선택)</p>
                 <InputDiv>
-                  <ModalInput ref={phoneNum} type="text" placeholder="'-'빼고 전화번호 입력"></ModalInput>
+                  <ModalInput ref={phone} type="text" placeholder="'-'빼고 전화번호 입력"></ModalInput>
                 </InputDiv>
                 <span>*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</span>
               </InputForm>
@@ -284,7 +287,7 @@ const FloatedBtn = (props) => {
               <InputForm>
                 <p>인스타그램 아이디(선택)</p>
                 <InputDiv>
-                  <ModalInput ref={instagramId} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
+                  <ModalInput ref={instagram} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
                 </InputDiv>
                 <span>*인스타그램 이벤트에 참여하시는 분들은 반드시 입력해주세요.</span>
               </InputForm>
@@ -461,6 +464,7 @@ const UploadContainer = styled.div`
 `;
 
 const FileNameBox = styled.div`
+  position: relative;
   padding: 10px 10px;
   border: none;
   border-radius: 5.3px;
@@ -468,6 +472,17 @@ const FileNameBox = styled.div`
   line-height: 21px;
   color: #A9A9A9;
   background: #FFFFFF;
+
+  & > div {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+  }
 `;
 
 const UploadBtn = styled.label`

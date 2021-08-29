@@ -17,6 +17,9 @@ import Loading from './Loading2';
 // moment
 import moment from 'moment';
 
+// icons
+import { TiDeleteOutline } from 'react-icons/ti';
+
 /**
  * @param {*} props
  * @returns 공지사항
@@ -36,6 +39,10 @@ const Feedback = (props) => {
   // s3 이미지 업로드
   const file = useRef();
   const [_file, setFile] = useState(null);
+
+  const deleteFile = () => {
+    setFile(null);
+  }
 
   const checkName = (e) => {
     setFile(e.target.files);
@@ -173,6 +180,11 @@ if(!is_loaded) {
         <UploadContainer>
           <FileNameBox style={_file !== null ? {color: "#2B2B2B", fontSize: "13px"} : {color: `${theme.color.gray_4}`,padding: "4.3% 6%"}}>
             {_file !== null ? _file[0].name : "이미지를 업로드"}
+            {_file !== null ?
+            <div onClick={deleteFile}>
+              <TiDeleteOutline size="16px"/>
+            </div>
+            : <></>}
           </FileNameBox>
           <UploadBtn htmlFor="feedbackImg"><div>사진찾기</div></UploadBtn>
           <InputBox type="file" id="feedbackImg" style={{display: "none"}} ref={file} onChange={checkName}/>
@@ -230,6 +242,7 @@ const UploadContainer = styled.div`
 `;
 
 const FileNameBox = styled.div`
+  position: relative;
   padding: 4.9% 6%;
   border: 1px solid #DADADA;
   border-radius: 6px;
@@ -238,6 +251,17 @@ const FileNameBox = styled.div`
 
   @media ${theme.device.mobileM} {
     font-size: 13px;
+  }
+
+  & > div {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
   }
 `;
 
