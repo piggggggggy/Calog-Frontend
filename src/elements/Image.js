@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../shared/theme";
 
 const Image = (props) => {
 
   // b_size : background-size(contain으로 유지할 경우 사이즈가 맞지 않는 이미지 잘림 방지)
-  const { width, height, margin, b_size, cursor, src, border_radius, _onClick,} = props;
+  const { width, height, margin, b_size, cursor, src, border_radius, _onClick, HH_width, HH_height} = props;
 
   const styles = {
     width,
@@ -13,6 +14,8 @@ const Image = (props) => {
     b_size,
     cursor,
     border_radius,
+    HH_width,
+    HH_height,
   };
 
   return (
@@ -43,6 +46,11 @@ const DefaultImage = styled.div`
   background-size: ${(props) => props.b_size};
   background-repeat: no-repeat;
   cursor: ${(props) => props.cursor};
+
+  @media ${theme.device.mobileHH} {
+    width: ${(props) => props.HH_width};
+    height: ${(props) => props.HH_height};
+  }
 `;
 
 export default Image;
