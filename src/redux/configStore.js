@@ -17,6 +17,7 @@ import notice from "./modules/notice";
 import recent from './modules/recent';
 import dashboard from './modules/dashboard';
 import food from './modules/food';
+import custom from "./modules/DietCustom";
 
 export const history = createBrowserHistory();
 
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   notice: notice.reducer,
   dashboard: dashboard.reducer,
   food:food.reducer,
+  custom: custom.reducer,
   router: connectRouter(history),
 });
 
