@@ -178,16 +178,16 @@ const CartBody = (props) => {
 
         
         {/* 기록하기 버튼*/}
-          <CalcBox style={!is_login || recentDeleted_list.length === 0 ? {bottom: "9%"} : {bottom: "21%"}}>
+          <CalcBox>
             <div onClick={()=>{recordDB()}}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">기록하기</Text>
             </div>
           </CalcBox>
 
         {/* 최근삭제목록 */}
-        {(is_login && recentDeleted_list.length !== 0) &&
+        {/* {(is_login && recentDeleted_list.length !== 0) &&
           <UnderBar recentDeleted_list={recentDeleted_list} type={type}/>
-        }
+        } */}
         
 
         
@@ -226,7 +226,7 @@ const CartListBox = styled.div`
 
 const CalcBox = styled.div`
   position: fixed;
-  /* bottom: 21%; */
+  bottom: 9%;
   max-width: 420px;
   width: 100%;
   padding: 2vh 20px 2.8vh 20px;
