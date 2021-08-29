@@ -34,6 +34,7 @@ Button.defaultProps = {
 const DefaultBtn = styled.button`
   display: block;
   border: none;
+  cursor: pointer;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};

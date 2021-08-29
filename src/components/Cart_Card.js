@@ -147,6 +147,7 @@ const DeleteBar = styled.div`
   opacity: 0;
   transition: 1s ease;
   z-index: 3;
+  cursor: pointer;
 
   @media ${theme.device.mobileM} {
     top: calc(32.5px - 0.65vh);

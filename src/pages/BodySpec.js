@@ -210,7 +210,7 @@ return (
             history.push("/addspec")
           }}>
         <Hover>
-          <Text lineheight="22px" size="16px" bold>
+          <Text lineheight="22px" size="16px" bold cursor="pointer">
             신체정보 등록하기
           </Text>
         </Hover>
