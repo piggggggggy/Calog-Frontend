@@ -96,7 +96,7 @@ const NotResult = (props) => {
           <FeedBackContainer>
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             <FeedBackBtn onClick={feedBack}>
-              <div>키워드 등록 요청하기</div>
+              <P>키워드 등록 요청하기</P>
             </FeedBackBtn>
           </FeedBackContainer>
 
@@ -159,6 +159,7 @@ const FeedBackText = styled.div`
   margin-bottom: 0.9vh;
   color: #5F5F5F;
   font-weight: bold;
+  font-family: 'Pretendard';  
 `;
 
 const FeedBackBtn = styled.div`
@@ -179,6 +180,10 @@ const FeedBackBtn = styled.div`
     font-weight: bold;
     color: #404040;
   }
+`;
+
+const P = styled.div`
+  font-family: 'Pretendard';  
 `;
 
 

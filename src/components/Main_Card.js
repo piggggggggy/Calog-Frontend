@@ -211,6 +211,7 @@ const KcalBox = styled.div`
   font-weight: bold;
   margin: 0;
   padding: 0;
+  font-family: 'Pretendard'; 
 
   @media ${theme.device.mobileM} {
     font-size: 15px;
