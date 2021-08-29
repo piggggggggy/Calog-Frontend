@@ -32,7 +32,7 @@ const CartBody = (props) => {
   // 카드 담긴 내용
 
   const cart = useSelector((state) => state.cart);
-  console.log(cart.type)
+  console.log(cart.date)
 
   const cart_list = cart.cart;
 
@@ -86,6 +86,8 @@ const CartBody = (props) => {
 
   const recordDB = () => {
     if(is_login){
+  console.log(cart.date)
+
       dispatch(addCartDB(cart.date, cart_list, cart.type))
     } else {
       if (window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')) {
@@ -180,7 +182,7 @@ const CartBody = (props) => {
         {/* 기록하기 버튼*/}
           <CalcBox>
             <div onClick={()=>{recordDB()}}>
-              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">기록하기</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0" cursor="pointer">기록하기</Text>
             </div>
           </CalcBox>
 
