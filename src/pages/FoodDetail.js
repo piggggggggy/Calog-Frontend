@@ -37,13 +37,15 @@ const FoodDetail = (props) => {
   const foodInfo = useSelector((state) => state.search.detail);
   const user = useSelector((state) => state.user.user_info);
   const is_loaded = useSelector((state) => state.record.is_loaded);
-
+  console.log(foodInfo)
 
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
+  console.log(_record)
 
   useEffect(() => {
-    foodInfo?.length === 0 && dispatch(getDetailDB(foodId))
+    // dispatch(getDetailDB(foodId))
+    (foodInfo.length === 0 && dispatch(getDetailDB(foodId))) || (foodInfo.foodId !== foodId && dispatch(getDetailDB(foodId)));
   }, []);
 
   const record = _record === undefined ? [] : _record;
@@ -286,11 +288,6 @@ const FoodDetail = (props) => {
           </IngreDetail>
 
         </IngreDetailContainer>
-        
-        
-
-        {/* 카트 탭 */}
-        {/* <UnderBar/> */}
 
       </BodyContainer>
     </React.Fragment>

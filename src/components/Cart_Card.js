@@ -147,6 +147,7 @@ const DeleteBar = styled.div`
   opacity: 0;
   transition: 1s ease;
   z-index: 3;
+  cursor: pointer;
 
   @media ${theme.device.mobileM} {
     top: calc(32.5px - 0.65vh);
@@ -206,16 +207,11 @@ const ForOne = styled.span`
 `;
 
 const CountBox = styled.div`
-  /* min-width: 32%;
-  max-width: 32%; */
-  /* padding: 0 4.8%; */
   display: flex;
   align-items: center;
   justify-content: space-between;  
 
   & > div {
-    /* width: 5vw;
-    height: 5vw; */
     margin: 0;
     padding: 0;
     cursor: pointer;

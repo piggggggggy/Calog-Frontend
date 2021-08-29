@@ -53,7 +53,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>김민경</Text>
               </NameWrap>
             </Circle>
-            <Image src={mk_img} width="63%" height="17vh" b_size="85% 85%" margin="0 0 0 auto"/>
+            <Image src={mk_img} width="14.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="88% 80%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">min97118@naver.com</Text>
 
@@ -65,7 +65,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>이경원</Text>
               </NameWrap>
             </Circle>
-            <Image src={ky_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={ky_img} width="14vh" height="17vh" HH_width="148px" HH_height="173px" b_size="80% 85%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">dennis9352@gmail.com</Text>
 
@@ -77,7 +77,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>오인웅</Text>
               </NameWrap>
             </Circle>
-            <Image src={iw_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={iw_img} width="14.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="85% 85%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">ohinung@gmail.com</Text>
 
@@ -89,7 +89,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>박용태</Text>
               </NameWrap>
             </Circle>
-            <Image src={yt_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={yt_img} width="13.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="80% 85%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">pyt4105@gmail.com</Text>
         </Grid>
@@ -105,7 +105,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>이경미</Text>
               </NameWrap>
             </Circle>
-            <Image src={km_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={km_img} width="14.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="85% 85%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">kmkmm0701@naver.com</Text>
 
@@ -117,7 +117,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>박진홍</Text>
               </NameWrap>
             </Circle>
-            <Image src={jh_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={jh_img} width="14.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="85% 85%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">duabck@naver.com</Text>
 
@@ -129,7 +129,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>김나영</Text>
               </NameWrap>
             </Circle>
-            <Image src={ny_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={ny_img} width="14.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="83% 83%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">nayeongFE@gmail.com</Text>
 
@@ -141,7 +141,7 @@ const AboutUs = (props) => {
                 <Text size="20px" m_size="17px" bold>최지혁</Text>
               </NameWrap>
             </Circle>
-            <Image src={jih_img} width="63%" height="17vh" b_size="80% 85%" margin="0 0 0 auto"/>
+            <Image src={jih_img} width="14.5vh" height="17vh" HH_width="148px" HH_height="173px" b_size="85% 85%" margin="0 0 0 auto"/>
           </Grid>
           <Text size="12px" m_size="11px" color={'#7C7C7C'} margin="0 0 0 13%">chltjdtn9703@gmail.com</Text>
 
@@ -150,7 +150,7 @@ const AboutUs = (props) => {
 
       {/* 지방이들 */}
       <Grid padding="3% 3% 9% 3%">
-        <Image src={trio} height="17vh" b_size="100% 100%"/>
+        <Image src={trio} height="17vh" HH_height="173px"  b_size="100% 100%"/>
       </Grid>
     </Wrap>
   );
@@ -168,14 +168,23 @@ const Title = styled.p`
   @media ${theme.device.mobileM} {
     font-size: 30px;
   }
+
+  @media ${theme.device.mobileS} {
+    font-size: 26px;
+  }
 `;
 
 const Circle = styled.div`
   background-color: ${theme.color.light};
-  width: 28%;
+  width: 7.3vh;
   height: 7.3vh;
   border-radius: 50%;
   margin-top: 35%;
+
+  @media ${theme.device.mobileHH} {
+    width: 74px;
+    height: 74px;
+  }
 `;
 
 const NameWrap = styled.div`
@@ -191,7 +200,7 @@ const NameWrap = styled.div`
 
 const GridBox = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-columns: 50% 50%;
   padding: 10% 2.5%;
 `;
 

@@ -181,6 +181,18 @@ export const ProfileSV = (url) => {
     }
 };
 
+export const ModifyNickSV = (nickname) => {
+    return function(dispatch){
+        console.log("sdfsdf", nickname);
+        instance
+        .put('/api/user/update-nickname', {nickname})
+        .then((res) => {
+            console.log(res);
+            dispatch(ModifyNick(nickname));
+        })
+        .catch((err) => {console.error(err);});
+    }
+}
 
 //리덕스
 const user = createSlice({
@@ -213,7 +225,9 @@ const user = createSlice({
     Profile: (state, action) => {
         state.user_info.profile_image = action.payload;
     },
-
+    ModifyNick: (state, action) => {
+        state.user_info.nickname = action.payload;
+    },
     
     // 최근삭제목록 리듀서
     // 삭제목록 저장하기
@@ -238,5 +252,5 @@ const user = createSlice({
   },
 });
 
-export const {SetUser, LogOut, EmailDupli, NickDupli, BodySpect, Profile, recordDeleted, clearDeleted, removeDeleted} = user.actions;
+export const {SetUser, LogOut, EmailDupli, NickDupli, BodySpect, Profile, ModifyNick, recordDeleted, clearDeleted, removeDeleted} = user.actions;
 export default user;

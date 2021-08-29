@@ -6,12 +6,12 @@ import { history } from '../redux/configStore';
 import { storage } from '../shared/firebase';
 
 import styled from 'styled-components';
-import { Grid, Button, Text } from '../elements';
+import { Grid, Button, Text, Input } from '../elements';
 import theme from '../shared/theme';
 
 import { ProfileDefault, Camera, Go } from '../img/svg';
 
-import { _logOut, ProfileSV, BodySpectSV } from '../redux/modules/user';
+import { _logOut, ProfileSV, BodySpectSV, ModifyNickSV } from '../redux/modules/user';
 
 // helmet
 import {Helmet} from 'react-helmet';
@@ -31,6 +31,17 @@ const BodySpec = (props) =>
   const user_info = useSelector(state=>state.user.user_info);
 
   const profile = useRef();
+
+  const [nickModifyClass, setNickClass] = useState(0);
+  const [nickModify, setNick] = useState("");
+  const modify_nick = () => {
+    if(nickModify===""){
+      window.alert("닉네임을 입력해주세요!");
+      return;
+    };
+    setNickClass(0);
+    dispatch(ModifyNickSV(nickModify));
+  }
   
   const store_profile = () => {
     const profile_url = profile.current.files[0];
@@ -166,8 +177,12 @@ return (
         <Bottombg>
           <hr color="#FFE899"/>
           <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
-            {user_info?.nickname}
+            {nickModifyClass?<><NickInput type="text" value={nickModify} onChange={(e)=>{setNick(e.target.value)}} width="20%"/><Line_/></>:user_info?.nickname}
+            {<button onClick={()=>{nickModifyClass?modify_nick():setNickClass(1)}} style={{marginLeft: "3%"}}>
+              편집
+            </button>}
           </Text>
+
 
       {height||weight?
       <BodySpecBox>
@@ -210,7 +225,7 @@ return (
             history.push("/addspec")
           }}>
         <Hover>
-          <Text lineheight="22px" size="16px" bold>
+          <Text lineheight="22px" size="16px" bold cursor="pointer">
             신체정보 등록하기
           </Text>
         </Hover>
@@ -373,4 +388,16 @@ const BodyInput = styled.input`
   width: 30%;
   margin-left: 3vw;
   height: 20%;
+`;
+const NickInput = styled.input`
+  width: 20%;
+  border: none;
+  :focus {
+      outline: none;
+    }
+`;
+const Line_ = styled.div`
+  border: 1px solid #E8E8E8;
+  width: 20%;
+  margin: 0px;
 `;
