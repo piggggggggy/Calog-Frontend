@@ -206,7 +206,7 @@ const record = createSlice({
 
     // 기록 삭제하기
     delRecord : (state, action) => {
-      const food_list = state.record[0].foodRecords
+      const food_list = state.record.foodRecords
       for(let idx = 0; idx<food_list?.length; idx++) {
         let food_idx = food_list.findIndex((f) => f.type === action.payload)
         if (food_idx !== -1) {

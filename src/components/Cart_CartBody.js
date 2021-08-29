@@ -98,7 +98,7 @@ const CartBody = (props) => {
   const totalKcal = () => {
     let result = 0
     if (foodRecord?.length !== 0) {
-      foodRecord.map((f, idx) => {
+      foodRecord?.map((f, idx) => {
         result += f.resultKcal;
       });
       return result;
