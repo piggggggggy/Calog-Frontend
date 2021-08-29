@@ -181,8 +181,7 @@ const search = createSlice({
     getDetail : (state, action) => {
       state.detail = action.payload;
     },
-
-
+    
     // 인기검색어 get
     getMostUsedKey : (state, action) => {
       state.most = action.payload;
@@ -208,6 +207,15 @@ const search = createSlice({
       state.recommend = action.payload;
     },
 
+    // 유저가 직접 등록한 칼로리
+    addUserFood : (state, action) => {
+      state.detail = action.payload;
+    }, 
+
+    // 디테일 삭제
+    delDetail : (state, action) => {
+      state.detail = []
+    },
   }
 });
 
@@ -222,7 +230,9 @@ export const {
   exactSort, 
   getScrollData, 
   getDetail,
-  getRecommended
+  getRecommended,
+  addUserFood,
+  delDetail
 } = search.actions;
 
 export default search;

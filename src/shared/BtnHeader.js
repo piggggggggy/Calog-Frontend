@@ -6,19 +6,33 @@ import {Grid, Text} from '../elements';
 // history
 import {history} from '../redux/configStore';
 
+// redux
+import {useDispatch} from 'react-redux';
+import {delDetail} from '../redux/modules/search';
+
 const BtnHeader = (props) => {
+  const dispatch = useDispatch()
 
   // 카트리스트
   const cart_list = useSelector((state) => state.cart.cart);
   // const reder = cart_list.length
   // const [reRender, setReRender] = useState(cart_list.length);
 
+  const goBack = () => {
+    if(history.location.pathname.includes('fooddetail')) {
+      history.goBack()
+      dispatch(delDetail())
+    } else {
+      history.goBack()
+    }
+  }
+
   return (
     <React.Fragment>
       <Grid is_flex padding="2.9vh 6.2%" bg={props.bg}>
 
         {/* 뒤로가기 버튼 */}
-        <Grid width="3vh" _onClick={() => history.goBack()} cursor="pointer">  
+        <Grid width="3vh" _onClick={goBack} cursor="pointer">  
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11.7695 18.23L9.99953 20L-0.000469208 10L9.99953 0L11.7695 1.77L3.53953 10L11.7695 18.23Z" fill="#757575"/>
           </svg>

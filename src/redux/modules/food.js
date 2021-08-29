@@ -38,11 +38,30 @@ export const addUserFoodDB = (name, kcal, forOne, measurement, carbo, sugars, pr
   }
 };
 
+// 유저가 직접 추가한 데이터 불러오기
+export const getUserAddFoodDB = () => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .get('/api/customize/newFood')
+      .then((res) => {
+        const addedFood = res.data
+        dispatch(getUserAddFood(addedFood))
+      })
+      .catch((err) => {
+        window.alert('추가 칼로리에 오류가 있어요:(')
+        history.push('/')
+      }) 
+  }
+};
+
 // initial State 
 const initialState = {
 
   // 칼로리 직접 등록 후 장바구니 추가 체크 여부
-  wantAddCart: false
+  wantAddCart: false,
+
+  // 유저가 등록한 칼로리 정보
+  addFood: []
 }
 
 // redux
@@ -54,10 +73,15 @@ const food = createSlice({
     // 칼로리 직접 등록 후 장바구니 추가 체크 여부
     wantCart : (state, action) => {
       state.wantAddCart = action.payload
+    },
+
+    // 유저가 직접 추가한 칼로리 정보
+    getUserAddFood : (state, action) => {
+      state.addFood = action.payload
     }
   }
 });
 
-export const {wantCart} = food.actions;
+export const {wantCart, getUserAddFood} = food.actions;
 
 export default food;

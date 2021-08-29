@@ -11,6 +11,7 @@ import { history } from '../redux/configStore';
 // modules
 import { addCartRx, deleteCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
+import { addUserFood } from '../redux/modules/search';
 
 // icons
 import { IoStar } from 'react-icons/io5';
@@ -119,20 +120,37 @@ const Card = (props) => {
   };
   
   // 브랜드명 분리
-  const NameNBrand = props.name.indexOf('[') === 0 ? props.name.split(':') : false;
-  const brand = props.name.indexOf('[') === 0 ? NameNBrand[0] : '';
-  const name = props.name.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+  const NameNBrand = props.name?.indexOf('[') === 0 ? props.name.split(':') : false;
+  const brand = props.name?.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = props.name?.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+
+  const pushDetail = () => {
+    if (props.title === "useAdd") {
+      history.push(`/fooddetail/${props._id}`)
+      dispatch(addUserFood(props))
+
+    } else {
+      history.push(`/fooddetail/${props.foodId}`)
+    }
+  }
 
   return (
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
+      <FoodCard style={is_picked()} onClick={pushDetail}>
 
         {/* 즐겨찾기 */}
-        <BookmarkBox  onClick={addFavorite}>
-          <IoStar style={is_favorite()} width="100%"/>
-        </BookmarkBox>
+        {/* 유저가 직접 등록한 데이터의 경우 즐겨찾기는 default, 해제 시 삭제 */}
+        {props.title === "useAdd" ? (
+          <BookmarkBox>
+            <IoStar style={{color:"#F19F13"}} width="100%"/>
+          </BookmarkBox>
+        ) : (
+          <BookmarkBox  onClick={addFavorite}>
+            <IoStar style={is_favorite()} width="100%"/>
+          </BookmarkBox>
+        )}
 
         {/* 이름 */}
         <NameContainer >
