@@ -191,6 +191,7 @@ const NameBox = styled.div`
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-family: 'Pretendard';
 
   @media ${theme.device.mobileM} {
     line-height: 18px; 

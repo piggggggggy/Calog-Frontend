@@ -70,8 +70,8 @@ const FoodDetail = (props) => {
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
     let result = 0
-    if(foodRecord.length !== 0) {
-      foodRecord.map((f, idx) => {
+    if(foodRecord?.length !== 0) {
+      foodRecord?.map((f, idx) => {
         result += f.resultKcal;
       });
       return result;
@@ -136,7 +136,7 @@ const FoodDetail = (props) => {
             <Text size="17px" m_size="17px" lineheight="22px" m_lineheight="20px" bold color="#5F5F5F">{brand}</Text>
             <Grid display="flex">
               <NameBox>{name}</NameBox>
-              <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne + foodInfo.measurement})</span>
+              <span style={{fontSize: "13px", color: "#404040", fontFamily: "Pretendard"}}>1인분 ({foodInfo.forOne + foodInfo.measurement})</span>
             </Grid>  
             <Grid is_flex>
               <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{Math.round(foodInfo.kcal * 10)/10} kcal</Text>
@@ -344,6 +344,7 @@ const NameBox = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   letter-spacing: -0.0041em;
+  font-family: 'Pretendard';  
   
   @media ${theme.device.mobileH} {
     font-size: 17px;
@@ -399,6 +400,7 @@ const IngreText = styled.div`
   font-size: 13px; 
   /* font-weight: bold; */
   color: #404040;
+  font-family: 'Pretendard';  
 `;
 
 const Line = styled.div`
