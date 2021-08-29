@@ -34,13 +34,14 @@ const Calendar_Emoji = (props) => {
   const data = useSelector((state) => state.record.calendar);
   const format = moment(_date).format('YYYY-MM-DD');
   const match = data.find((d) => d.date === format);
+  console.log({data:data, format:format, match:match})
 
   // 입력값이 없을 때
   // case 1) 당일 기준 이 전
   if(date < today) {
     return (
       <React.Fragment>
-        {match ?
+        {match?.totalCalories > 0 ?
 
           // case 1-1) 기록이 있을 때
           <Calendar_DayEmoji item={match} day={date}/> :
@@ -63,7 +64,7 @@ const Calendar_Emoji = (props) => {
   if(date === today) {
     return(
       <React.Fragment>
-        {match ?
+        {match?.totalCalories > 0 ?
 
           // case 2-1) 기록이 있을 때
           <Calendar_DayEmoji item={match} day={date}/> :

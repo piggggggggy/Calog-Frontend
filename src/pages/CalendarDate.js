@@ -53,7 +53,7 @@ const CalendarDate = (props) => {
   const SelectDate = _SelectDate[2];
 
   // 기록
-  const record_list = useSelector((state) => state.record.record[0]);
+  const record_list = useSelector((state) => state.record.record);
   const record_map = record_list?.foodRecords;
 
   // 기록한 날짜
@@ -233,6 +233,8 @@ const CalendarDate = (props) => {
     const result = window.confirm(`${type}에 대한 기록을 모두 삭제하시겠어요?`)
     result ? dispatch(delRecordDB(record_list?.recordId, SelectDate, type)) : history.push(`/loading/calendar/${SelectDate}`)
   });
+
+  console.log(record_list)
 
   return (
     <React.Fragment>
