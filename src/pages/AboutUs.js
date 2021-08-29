@@ -199,7 +199,6 @@ const NameWrap = styled.div`
 
 const GridBox = styled.div`
   display: grid;
-  /* grid-template-columns: 0.5fr 0.5fr; */
   grid-template-columns: 50% 50%;
   padding: 10% 2.5%;
 `;

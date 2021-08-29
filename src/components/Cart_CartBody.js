@@ -186,12 +186,6 @@ const CartBody = (props) => {
             </div>
           </CalcBox>
 
-        {/* 최근삭제목록 */}
-        {/* {(is_login && recentDeleted_list.length !== 0) &&
-          <UnderBar recentDeleted_list={recentDeleted_list} type={type}/>
-        } */}
-        
-
         
 
       </BodyContainer>
