@@ -36,8 +36,9 @@ export const addCartDB = (date, foodList, type) => {
 // 기록하기 - 사진, 메모
 export const addRecordDB = (type, url, memo, recordId, date) => {
   return function (dispatch, getState, {history}) {
+    const dataMemo = memo === "" ? memo : [memo]
     instance
-      .post(`/api/record/${recordId}/urlContents`, {type:type, url:url, contents:[memo]})
+      .post(`/api/record/${recordId}/urlContents`, {type:type, url:url, contents:dataMemo})
       .then((res) => {
         history.push(`/loading/calendar/${date}`)
         dispatch(delImgAll())
