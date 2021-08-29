@@ -7,6 +7,7 @@ import { storage } from '../shared/firebase';
 
 import styled from 'styled-components';
 import { Grid, Button, Text } from '../elements';
+import theme from '../shared/theme';
 
 import { ProfileDefault, Camera, Go } from '../img/svg';
 
@@ -222,14 +223,19 @@ return (
 
 
           <hr color="#F5F5F5"/>
-          <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-            <Hover onClick={()=>
-              {
-                history.push("/notice")
-              }}>
-                공지사항
-            </Hover>
-          </Text>
+          <Grid display="flex">
+            <Text lineheight="22px" size="17px" margin="24px 0px 24px 20px" width="auto">
+              <Hover onClick={()=>
+                {
+                  history.push("/notice")
+                }}>
+                  공지사항
+              </Hover>
+            </Text>
+            <Grid display="flex" width="auto" border_radius="20px" bg={theme.color.light} padding="1%" margin="auto auto auto 2%" m_margin="auto auto auto 2%">
+              <Text size="13px" m_size="11px">New</Text>
+            </Grid>
+          </Grid>
 
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">

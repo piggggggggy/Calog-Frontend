@@ -6,6 +6,7 @@ import { getNoticeSV } from '../redux/modules/notice';
 
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
+import theme from '../shared/theme'
 
 import {Back} from "../img/svg";
 
@@ -77,6 +78,19 @@ if(!is_loaded) {
         <PostList>
 
           {/* 공지사항 db로 받을 경우 디테일 수정이 어려워 프론트에서 md처럼 관리 */}
+          <Post>
+            <Tag onClick={()=>{history.push(`/notice/notice5`)}}>
+              <Grid display="flex">
+                <Text size="17px"  ineheight="22px" cursor="pointer" margin="auto 0">✌🏽 Calog 버전 업그레이드 (.ver2)</Text>
+                <Grid width="auto" border_radius="20px" bg={theme.color.light} padding="1%" margin="auto auto auto 2%" m_margin="auto auto auto 2%">
+                  <Text size="13px" m_size="11px">New</Text>
+                </Grid>
+              </Grid>
+              <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-30</Text>
+            </Tag>
+            <hr color="#F5F5F5"/>
+          </Post>
+
           <Post>
             <Tag onClick={()=>{history.push(`/notice/notice4`)}}>
               <Text size="17px"  ineheight="22px" cursor="pointer">🍓 Calog 데이터 관련 공지</Text>

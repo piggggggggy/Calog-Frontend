@@ -157,7 +157,7 @@ const CalendarDate = (props) => {
                 image_list.push(imgUrl)
                 if(i === fileList?.length-1) {
                 // case1) 메모에 입력된 내용이 없을 때
-                inputMemo === undefined ? dispatch(addRecordDB(type, image_list, undefined, record_list?.recordId, SelectDate)) :
+                inputMemo === undefined ? dispatch(addRecordDB(type, image_list, "", record_list?.recordId, SelectDate)) :
 
                 // case2) 메모에 입력된 내용이 있을 때
                 dispatch(addRecordDB(type, image_list, inputMemo, record_list?.recordId, SelectDate))
@@ -233,8 +233,6 @@ const CalendarDate = (props) => {
     const result = window.confirm(`${type}에 대한 기록을 모두 삭제하시겠어요?`)
     result ? dispatch(delRecordDB(record_list?.recordId, SelectDate, type)) : history.push(`/loading/calendar/${SelectDate}`)
   });
-
-  console.log(record_list)
 
   return (
     <React.Fragment>

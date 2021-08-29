@@ -34,7 +34,6 @@ const Calendar_Emoji = (props) => {
   const data = useSelector((state) => state.record.calendar);
   const format = moment(_date).format('YYYY-MM-DD');
   const match = data.find((d) => d.date === format);
-  console.log({data:data, format:format, match:match})
 
   // 입력값이 없을 때
   // case 1) 당일 기준 이 전

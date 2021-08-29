@@ -6,16 +6,39 @@ import { createSlice } from "@reduxjs/toolkit";
 // 전역 > 서버 배포
 import instance from "./instance";
 import { recordDeleted, clearDeleted } from "./user";
+import {delCartAll} from './cart';
 
 // sentry
 import * as Sentry from '@sentry/react';
 
 // middleware
+// 기록하기 - 전체
+export const addCartDB = (date, foodList, type) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .post('/api/record', {date:date, foodList:foodList, type:type})
+      .then((res) => {
+        window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
+        dispatch(delCartAll())
+        dispatch(delImgAll())
+        dispatch(typeChk(type))
+        dispatch(clearDeleted())
+        history.replace('/loading/dashboard')
+      })
+      .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
+        window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+        history.push('/')
+      })
+  }
+};
+
 // 기록하기 - 사진, 메모
 export const addRecordDB = (type, url, memo, recordId, date) => {
   return function (dispatch, getState, {history}) {
+    const dataMemo = memo === "" ? memo : [memo]
     instance
-      .post(`/api/record/${recordId}/urlContents`, {type:type, url:url, contents:[memo]})
+      .post(`/api/record/${recordId}/urlContents`, {type:type, url:url, contents:dataMemo})
       .then((res) => {
         history.push(`/loading/calendar/${date}`)
         dispatch(delImgAll())
@@ -83,6 +106,7 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
+          console.log(res)
           const food_list = res.data.record
           dispatch(getRecord(food_list))
           dispatch(isLoaded(true))
@@ -182,7 +206,7 @@ const record = createSlice({
 
     // 기록 삭제하기
     delRecord : (state, action) => {
-      const food_list = state.record[0].foodRecords
+      const food_list = state.record.foodRecords
       for(let idx = 0; idx<food_list?.length; idx++) {
         let food_idx = food_list.findIndex((f) => f.type === action.payload)
         if (food_idx !== -1) {

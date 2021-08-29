@@ -13,7 +13,7 @@ import { FaCircle } from "react-icons/fa";
 
 // modules
 import { cartOut } from '../redux/modules/cart';
-import { addRecordDB } from '../redux/modules/record';
+import { addCartDB } from '../redux/modules/record';
 
 // history
 import { history } from '../redux/configStore';
@@ -86,7 +86,7 @@ const CartBody = (props) => {
 
   const recordDB = () => {
     if(is_login){
-      dispatch(addRecordDB(cart.date, cart_list, cart.type))
+      dispatch(addCartDB(cart.date, cart_list, cart.type))
     } else {
       if (window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')) {
         history.push('/signsocial');
@@ -97,8 +97,8 @@ const CartBody = (props) => {
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
     let result = 0
-    if (foodRecord.length !== 0) {
-      foodRecord.map((f, idx) => {
+    if (foodRecord?.length !== 0) {
+      foodRecord?.map((f, idx) => {
         result += f.resultKcal;
       });
       return result;
