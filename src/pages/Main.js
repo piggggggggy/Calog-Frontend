@@ -10,7 +10,6 @@ import { getRecentDB } from '../redux/modules/recent';
 import { getFavoriteDB } from '../redux/modules/favorite';
 import { getRecommendedDB, getMostUsedKeyDB } from '../redux/modules/search';
 import { ChkModal } from '../redux/modules/dashboard';
-import { GetCustomList } from '../redux/modules/DietCustom';
 
 // elements & components
 import MainBody from '../components/Main_MainBody';
@@ -46,7 +45,6 @@ const Main = (props) => {
     }
     dispatch(getRecommendedDB());
     dispatch(getMostUsedKeyDB());
-    dispatch(GetCustomList());
   }, []);
 
   // 홈 화면 추가 안내
