@@ -18,6 +18,7 @@ import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
 import Loading from '../pages/Loading4';
+import MainNav from './Main_Nav';
 
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
@@ -189,23 +190,21 @@ const MainBody = (props) => {
 
       </HeaderContainer>    
 
-      <MiddleTap>
         {/* 이름 */}
+      {/* <MiddleTap>
         <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
           <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
         </Grid>
-      </MiddleTap>
-
-
-      <BodyContainer>
-
+      </MiddleTap> */}
 
         {/* 즐겨찾기가 들어가는 곳 */}
+      <BodyContainer>
         {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
-
       </BodyContainer>
+
+      <MainNav/>
       
-      {!is_login || favo_list.length === 0 ? 
+      {/* {!is_login || favo_list.length === 0 ? 
       <Mascort>
         <MFace>
           <svg   viewBox="0 0 199 274" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -226,7 +225,7 @@ const MainBody = (props) => {
           </TextBaloon>
         </MFace>
       </Mascort>
-      : <></>}
+      : <></>} */}
 
       
     </React.Fragment>
