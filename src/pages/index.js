@@ -2,7 +2,7 @@
 import DashBoard from './DashBoard';
 import Calendar from './Calendar';
 import Record from './Record';
-import CalendarDetail from './CalendarDetail';
+import CalendarDate from './CalendarDate';
 import SelfAddFood from './SelfAddFood';
 import AboutUs from './AboutUs';
 //지혁
@@ -43,7 +43,7 @@ export {
   Cart, 
   Record, 
   MainSearch, 
-  CalendarDetail, 
+  CalendarDate, 
   Loading,
   Loading2,
   Loading3,

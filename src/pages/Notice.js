@@ -49,7 +49,7 @@ if(!is_loaded) {
             {
               history.push("/body")
             }}>
-            <Grid>
+            <Grid cursor="pointer">
               {Back}
             </Grid>
           </td>
@@ -79,7 +79,7 @@ if(!is_loaded) {
           {/* 공지사항 db로 받을 경우 디테일 수정이 어려워 프론트에서 md처럼 관리 */}
           <Post>
             <Tag onClick={()=>{history.push(`/notice/notice4`)}}>
-              <Text size="17px"  ineheight="22px">🍓 Calog 데이터 관련 공지</Text>
+              <Text size="17px"  ineheight="22px" cursor="pointer">🍓 Calog 데이터 관련 공지</Text>
               <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-27</Text>
             </Tag>
             <hr color="#F5F5F5"/>
@@ -87,7 +87,7 @@ if(!is_loaded) {
 
           <Post>
             <Tag onClick={()=>{history.push(`/notice/notice3`)}}>
-              <Text size="17px"  ineheight="22px">📲 ios/안드로이드 홈 화면 추가 방법</Text>
+              <Text size="17px"  ineheight="22px" cursor="pointer">📲 ios/안드로이드 홈 화면 추가 방법</Text>
               <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-27</Text>
             </Tag>
             <hr color="#F5F5F5"/>
@@ -95,7 +95,7 @@ if(!is_loaded) {
 
           <Post>
             <Tag onClick={()=>{history.push(`/notice/notice2`)}}>
-              <Text size="17px"  ineheight="22px">🎈피드백 이벤트 안내</Text>
+              <Text size="17px"  ineheight="22px" cursor="pointer">🎈피드백 이벤트 안내</Text>
               <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-26</Text>
             </Tag>
             <hr color="#F5F5F5"/>
@@ -103,7 +103,7 @@ if(!is_loaded) {
 
           <Post>
             <Tag onClick={()=>{history.push(`/notice/notice1`)}}>
-              <Text size="17px"  ineheight="22px">🎉 Calog 정식런칭!</Text>
+              <Text size="17px"  ineheight="22px" cursor="pointer">🎉 Calog 정식런칭!</Text>
               <Text size="17px" lineheight="22px" color="#A9A9A9">2021-08-26</Text>
             </Tag>
             <hr color="#F5F5F5"/>

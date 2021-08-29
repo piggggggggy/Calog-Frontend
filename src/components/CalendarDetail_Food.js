@@ -20,12 +20,12 @@ const CalendarDetail_Food = (props) => {
         <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0" cursor="default">
 
           {/* 메뉴 */}
-          <Grid width="63%">
+          <Grid width="100%">
             <Text size="15px" m_size="13px">{foodName}</Text>
           </Grid>
 
           {/* 칼로리 */}
-          <Grid width="28%">
+          <Grid width="25%">
             <Text size="15px" bold m_size="13px">{resultKcal}kcal</Text>
           </Grid>
 

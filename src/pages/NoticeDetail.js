@@ -46,7 +46,7 @@ const NotiDetail = (props) =>
             {
               history.push("/notice")
             }}>
-            <Grid>
+            <Grid cursor="pointer">
               {Back}
             </Grid>
           </td>

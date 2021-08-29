@@ -34,7 +34,7 @@ const SelfAddFood = (props) => {
 
   const addFood = () => {
     const name = nameInput.current.value
-    const kcal = kcalInput.current.value
+    const kcal = parseInt(kcalInput.current.value)
     const carbo = carboInput.current.value === "" ? undefined : carboInput.current.value;
     const sugars = sugarsInput.current.value === "" ? undefined : sugarsInput.current.value;
     const protein = proteinInput.current.value === "" ? undefined : proteinInput.current.value;
@@ -44,7 +44,7 @@ const SelfAddFood = (props) => {
     const unFattyAcid = unFattyAcidInput.current.value === "" ? undefined : unFattyAcidInput.current.value;
     const cholesterol = cholesterolInput.current.value === "" ? undefined : cholesterolInput.current.value;
     const natrium = natriumInput.current.value === "" ? undefined : natriumInput.current.value;
-    const forOne = forOneInput.current.value === "" ? undefined : forOneInput.current.value;
+    const forOne = forOneInput.current.value === "" ? undefined : parseInt(forOneInput.current.value);
     const measurement = measurementInput.current.value === "" ? undefined : measurementInput.current.value;
     
     // 음식 추가 요청으로 인해 운영진이 db에 데이터를 추가할 경우 숨김 페이지를 통해서 진행 >> 페이지 재활용

@@ -33,7 +33,7 @@ const Login = (props) =>
       <Container>
           <Head>
             <div>
-            {Back}
+              {Back}
             </div>
             <Text size="17px" lineheight="22px" bold color="#000000">
               로그인 하기
@@ -112,7 +112,7 @@ const Login = (props) =>
           <Grid display="flex" fd="column-reverse" height="100%">
             <Button bg="#FFE899" height="56px" margin="0px"
             _onClick={login}>
-              <Text bold color="#404040" size="16px" lineheight="22px">
+              <Text bold color="#404040" size="16px" lineheight="22px" cursor="pointer">
                 로그인 하기
               </Text>
             </Button>
@@ -122,7 +122,7 @@ const Login = (props) =>
         <LoginButton>
           <Grid display="flex" fd="column-reverse" height="100%">
             <Button bg="#E4E4E4" height="56px" margin="0px">
-              <Text color="#A9A9A9" size="16px" lineheight="22px">
+              <Text color="#A9A9A9" size="16px" lineheight="22px" cursor="pointer">
                 로그인 하기
               </Text>
             </Button>

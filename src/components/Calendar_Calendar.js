@@ -116,7 +116,7 @@ const Calendar_Calendar = (props) => {
       <React.Fragment>
 
         {/* case1) 로그인 유저 */}
-        <Grid padding="5% 2% 0 2%">
+        <Wrap>
 
           {/* 헤더 */}
             <Header>
@@ -156,7 +156,7 @@ const Calendar_Calendar = (props) => {
               {calendarArr()}
             </tbody>
           </Table>
-        </Grid>
+        </Wrap>
 
         {/* case2) 비로그인 유저 >> 로그인 이동하기 버튼 */}
         {!is_login && (
@@ -170,7 +170,7 @@ const Calendar_Calendar = (props) => {
                 <Button
                   _onClick={() => history.push('/signsocial')}
                   height="6vh" border_radius="60px" bg={theme.color.dark}>
-                  <Text size="16px" bold m_size="14px">로그인하기</Text>
+                  <Text size="16px" bold m_size="14px" cursor="pointer">로그인하기</Text>
                 </Button>
               </Modal>
             </Grid>
@@ -179,6 +179,10 @@ const Calendar_Calendar = (props) => {
       </React.Fragment>
     );
 };
+
+const Wrap = styled.div`
+  padding: 5% 2%;
+`;
 
 const Header = styled.div`
   width: 88.5%;
