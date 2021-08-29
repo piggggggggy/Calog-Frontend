@@ -36,6 +36,7 @@ const FavoList = (props) => {
 
   // 유저 직접 추가 칼로리
   const userAddFood = useSelector((state) => state.food.addFood)
+  console.log(userAddFood)
 
   return (
     <React.Fragment>

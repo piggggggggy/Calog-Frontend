@@ -123,11 +123,13 @@ const Card = (props) => {
   const NameNBrand = props.name?.indexOf('[') === 0 ? props.name.split(':') : false;
   const brand = props.name?.indexOf('[') === 0 ? NameNBrand[0] : '';
   const name = props.name?.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+  console.log(props)
 
   const pushDetail = () => {
     if (props.title === "useAdd") {
-      history.push(`/fooddetail/${props._id}`)
       dispatch(addUserFood(props))
+
+      history.push(`/fooddetail/${props._id}`)
 
     } else {
       history.push(`/fooddetail/${props.foodId}`)
