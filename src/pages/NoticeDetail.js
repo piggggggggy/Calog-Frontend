@@ -206,4 +206,8 @@ const Content = styled.div`
 const PostBox = styled.div`
   height: 100%;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
