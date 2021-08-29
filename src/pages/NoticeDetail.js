@@ -10,6 +10,10 @@ import ios1 from '../img/ios1.PNG';
 import ios2 from '../img/ios2.PNG';
 import and1 from '../img/and1.PNG';
 import and2 from '../img/and2.PNG';
+import addFood from '../img/ver2_addFood.png';
+import makeFood from '../img/ver2_makeFood.png';
+import addImgMemo from '../img/addImgMemo.png';
+import myPage from '../img/mypage.png';
 
 import {Back} from "../img/svg";
 
@@ -125,6 +129,40 @@ const NotiDetail = (props) =>
                 모든 데이터는 <span style={{borderBottom:"3px solid #f19f13"}}>식약청 및 각 브랜드 공식 홈페이지</span>를 기반으로 가지고 온 정식 데이터예요!<br/><br/>
                 검색 후 확인이 어려운 칼로리의 경우 영양성분을 아신다면 직접 추가 및 요청도 가능하니 많은 이용 부탁드립니다.<br/><br/>
                 감사합니다❣️<br/><br/>
+                </Text>
+              </PostBox>
+            )}
+
+            {history.location.pathname.includes('notice5') && (
+              <PostBox>
+                <Text>
+                  안녕하세요, 여러분!<br/><br/>
+                  칼로그와 함께 건강한 식습관 만들고 있으신가요?<br/><br/>
+                  8월 26일 칼로그 런칭과 함께 많은 분들께서 피드백 이벤에 참여해주고 계신데 도움을 주신 많은 분들께 감사의 말씀드리며 피드백을 반영한 <span style={{borderBottom:"3px solid #f19f13"}}>두번째 Calog</span>가 오픈되었어요!💝<br/><br/>
+                  <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>1. 칼로리 직접 등록</span><br/>
+                  칼로그에서는 검색되지 않은 칼로리에 대해서 <span style={{borderBottom:"3px solid #f19f13"}}>1) 운영진에게 추가 요청, 2) 직접 등록</span> 두 가지의 방법으로 추가가 가능하게 바뀌었어요.<br/>
+                  칼로리 직접 등록은 <span style={{borderBottom:"3px solid #f19f13"}}>검색 결과 하단</span>에서 확인 가능해요!<br/><br/>
+                  <Image src={addFood} width="100%" height="18vh" b_size="100% 100%"/><br/><br/>
+
+                  <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>2. 나만의 식단 커스텀</span><br/>
+                  혹시 매일 아침 '사과 반쪽 + 우유 200ml + 씨리얼 1인분' 이렇게 규칙적인 식습관을 가지고 있으신가요?<br/>
+                  이러한 유저 분들을 위해 직접 식단을 커스텀 할 수 있어요!<br/>
+                  나만의 식단 만들기는 <span style={{borderBottom:"3px solid #f19f13"}}>음식 담기(기존 장바구니)</span>에서 확인 가능해요!<br/><br/>
+                  <Image src={makeFood} width="100%" height="30vh" b_size="100% 100%"/><br/><br/>
+
+                  <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>3. 기록하기 단계 간소화</span><br/>
+                  기존 기록하기 단계가 조금 더 간소화되었어요!<br/>
+                  기록하기에서 가능하던 사진과 메모는 <span style={{borderBottom:"3px solid #f19f13"}}>캘린더 날짜 상세 페이지</span>에서 등록이 가능해요.<br/><br/>
+                  <Image src={addImgMemo} width="100%" height="70vh" b_size="100% 100%"/><br/><br/>
+
+                  <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>4. 신체 정보 마이페이지</span><br/>
+                  마이페이지에서 신체 정보 등록 후에도 <span style={{borderBottom:"3px solid #f19f13"}}>확인 및 수정</span>이 가능해요!<br/>
+                  <Image src={myPage} width="100%" height="18vh" b_size="100% 100%"/><br/><br/>
+
+                  <span style={{fontWeight:"bold", fontSize:"20px", color:"#f19f13"}}>5. 의견 보내기 시 이미지 첨부</span><br/>
+                  의견을 제출하실 때 설명이 어려운 부분은 <span style={{borderBottom:"3px solid #f19f13"}}>이미지 첨부</span>가 가능해요!
+
+
                 </Text>
               </PostBox>
             )}
