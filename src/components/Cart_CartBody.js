@@ -97,7 +97,7 @@ const CartBody = (props) => {
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
     let result = 0
-    if (foodRecord.length !== 0) {
+    if (foodRecord?.length !== 0) {
       foodRecord.map((f, idx) => {
         result += f.resultKcal;
       });
