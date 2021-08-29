@@ -275,11 +275,11 @@ const CalendarDate = (props) => {
           </Button>
 
           {/* 식단이 있을 때에만 편집이 가능 */}
-          {/* {same_food?.length !== 0 && (
+          {same_food?.length !== 0 && (
             <EditBtn>
               <Text color={'#8C8C8C'} size="13px" m_size="11px">편집</Text>
             </EditBtn>
-          )} */}
+          )}
         </Grid>
 
         {/* case1) 식단이 없을 때 */}
