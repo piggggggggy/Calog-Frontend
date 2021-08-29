@@ -104,9 +104,9 @@ const dashboard = createSlice({
 
     // 바디스펙 저장
     saveBlind: (state, action) => {
-      state.specBlind.height_blind = action.payload.height
-      state.specBlind.weight_blind = action.payload.weight
-      state.specBlind.bmr_blind = action.payload.bmr
+      state.specBlind.height_blind = action.payload.heightBlind
+      state.specBlind.weight_blind = action.payload.weightBlind
+      state.specBlind.bmr_blind = action.payload.bmrBlind
     }
   }
 });

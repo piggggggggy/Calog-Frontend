@@ -49,7 +49,7 @@ export const LoginSV = (user_info) => {
             dispatch(SetUser(data));
 
             //바디스펙 가져가기
-            dispatch(saveBlind({weight:data.weightBlind, height:data.heightBlind, bmr:data.bmrBlind}))
+            dispatch(saveBlind({weightBlind:data.weightBlind, heightBlind:data.heightBlind, bmrBlind:data.bmrBlind}))
 
             let _bmr = data.bmr[(res_user_info.data.user.bmr.length)-1].bmr
             if(!res_user_info.data.user){

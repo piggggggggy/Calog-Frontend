@@ -15,9 +15,8 @@ import * as Sentry from '@sentry/react';
 export const addRecordDB = (type, url, memo, recordId, date) => {
   return function (dispatch, getState, {history}) {
     instance
-      .post(`/api/record/${recordId}/urlContents`, {type:type, url:url, contents:memo})
+      .post(`/api/record/${recordId}/urlContents`, {type:type, url:url, contents:[memo]})
       .then((res) => {
-        console.log(res)
         history.push(`/loading/calendar/${date}`)
         dispatch(delImgAll())
       })
@@ -35,18 +34,6 @@ export const delRecordDB = (id, date, type) => {
     instance
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
-        let deleted_list = getState().record.record[0].foodRecords;
-        
-        console.log(deleted_list);
-        console.log(res);
-        let result = deleted_list.filter((d,idx) => {
-          if (d.type === type) {
-            return d;
-          }
-        });
-        dispatch(recordDeleted(result));
-
-        // 기존 삭제
         dispatch(delRecord(type));
         history.push(`/loading/calendar`);
       })
@@ -133,13 +120,13 @@ export const getRecordDB = (date) => {
     instance
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
-        const record_list = res.data.record
+        const record_list = res.data.record[0]
 
         // 기록이 없을 경우 alert, dashboard로 이동
         // 기록이 있을 경우 액션
-        if (record_list.length === 0) {
+        if (record_list.foodRecords.length === 0) {
           window.alert('기록된 칼로리가 없어요!')
-          history.push('/dashboard')
+          history.push('/calendar')
         } else {dispatch(getRecord(record_list))}
         dispatch(isLoaded(true))
       })
