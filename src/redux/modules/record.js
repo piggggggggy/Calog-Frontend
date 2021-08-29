@@ -6,11 +6,33 @@ import { createSlice } from "@reduxjs/toolkit";
 // 전역 > 서버 배포
 import instance from "./instance";
 import { recordDeleted, clearDeleted } from "./user";
+import {delCartAll} from './cart';
 
 // sentry
 import * as Sentry from '@sentry/react';
 
 // middleware
+// 기록하기 - 전체
+export const addCartDB = (date, foodList, type) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .post('/api/record', {date:date, foodList:foodList, type:type})
+      .then((res) => {
+        window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
+        dispatch(delCartAll())
+        dispatch(delImgAll())
+        dispatch(typeChk(type))
+        dispatch(clearDeleted())
+        history.replace('/loading/dashboard')
+      })
+      .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
+        window.alert('게시글 업로드에 오류가 발생했어요! 관리자에게 문의해주세요😿')
+        history.push('/')
+      })
+  }
+};
+
 // 기록하기 - 사진, 메모
 export const addRecordDB = (type, url, memo, recordId, date) => {
   return function (dispatch, getState, {history}) {
@@ -83,6 +105,7 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
+          console.log(res)
           const food_list = res.data.record
           dispatch(getRecord(food_list))
           dispatch(isLoaded(true))
