@@ -163,6 +163,7 @@ const Wrap = styled.div`
 const Title = styled.p`
   font-size: 34px;
   font-weight: bold;
+  font-family: 'Pretendard';  
 
   @media ${theme.device.mobileM} {
     font-size: 30px;
