@@ -34,7 +34,7 @@ const CartBodyDiet = (props) => {
   const _recentDeleted_list = is_login ? user_info.deleteList : undefined;
   const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
-  const recordDB = () => {
+  const recordCustom = () => {
     if(is_login){
       dispatch(CustomSV(diet, cart.cart));
       history.push('/');
@@ -69,9 +69,9 @@ const CartBodyDiet = (props) => {
         </CartListBox>
 
         
-        {/* 기록하기 버튼*/}
+        {/* 식단 만들기 버튼*/}
           <CalcBox style={!is_login || recentDeleted_list.length === 0 ? {bottom: "9%"} : {bottom: "21%"}}>
-            <div onClick={()=>{recordDB()}}>
+            <div onClick={()=>{recordCustom()}}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">식단 추가하기</Text>
             </div>
           </CalcBox>
@@ -136,6 +136,7 @@ const DietName = styled.div`
 `;
 
 const DietInputContainer = styled.div`
+    margin-top: 0.5%;
     margin-left: 5%;
     margin-right: -3%;
 `;
