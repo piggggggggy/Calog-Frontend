@@ -67,6 +67,21 @@ export const getUserAddFoodDB = () => {
   }
 };
 
+// 유저가 직접 추가한 데이터 삭제하기
+export const delUserFoodDB = (mealId) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .delete(`/api/customize/meal/${mealId}`)
+      .then((res) => {
+        dispatch(delUserFood(mealId))
+      })
+      .catch((err) => {
+        window.alert('칼로리 삭제에 오류가 있어요:(')
+        history.push('/')
+      }) 
+  }
+};
+
 // initial State 
 const initialState = {
 
@@ -80,18 +95,21 @@ const food = createSlice({
   initialState,
   reducers: {
 
-    // 칼로리 직접 등록 후 장바구니 추가
-    wantCart : (state, action) => {
-      state.wantAddCart = action.payload
-    },
-
     // 유저가 직접 추가한 칼로리 정보
     getUserAddFood : (state, action) => {
       state.addFood = action.payload
     },
+
+    // 직접 추가한 칼로리 삭제
+    delUserFood : (state, action) => {
+      let idx = state.addFood.findIndex((r) => r.mealId === action.payload)
+      if (idx !== -1) {
+        state.addFood.splice(idx, 1);
+      }
+    },
   }
 });
 
-export const {getUserAddFood} = food.actions;
+export const {getUserAddFood, delUserFood} = food.actions;
 
 export default food;
