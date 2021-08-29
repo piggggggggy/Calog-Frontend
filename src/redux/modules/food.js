@@ -6,10 +6,12 @@ import { createSlice } from "@reduxjs/toolkit";
 // 전역 > 서버 배포
 import instance from "./instance";
 
+// redux
+import {addCartRx} from './cart';
+
 // 추가 데이터 기록(운영진 추가용)
 export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
   return function (dispatch, getState, {history}) {
-    console.log(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium)
     instance
       .post('/api/home/addData',
         {name:name, forOne:forOne, kcal:kcal, measurement:measurement, protein:protein, fat:fat, carbo:carbo, sugars:sugars, natrium:natrium, cholesterol:cholesterol, fattyAcid:fattyAcid, transFattyAcid:transFattyAcid, unFattyAcid:unFattyAcid})
@@ -23,13 +25,24 @@ export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protei
 };
 
 // 추가 데이터 기록(유저 추가용)
-export const addUserFoodDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
+export const addUserFoodDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium, boolean) => {
   return function (dispatch, getState, {history}) {
     instance
       .post('/api/customize/newFood',
         {name:name, forOne:forOne, kcal:kcal, measurement:measurement, protein:protein, fat:fat, carbo:carbo, sugars:sugars, natrium:natrium, cholesterol:cholesterol, fattyAcid:fattyAcid, transFattyAcid:transFattyAcid, unFattyAcid:unFattyAcid})
       .then((res) => {
         history.push('/')
+        if(boolean === "true") {
+          const cartUnit = {
+            foodId: res.data,
+            name: name,
+            forOne: forOne,
+            measurement: measurement,
+            kcal: Math.round(kcal * 10)/10,
+            amount: 1,
+          };
+          dispatch(addCartRx(cartUnit));
+        }
       })
       .catch((err) => {
         window.alert('칼로리 추가에 오류가 있어요:(')
@@ -57,11 +70,8 @@ export const getUserAddFoodDB = () => {
 // initial State 
 const initialState = {
 
-  // 칼로리 직접 등록 후 장바구니 추가 체크 여부
-  wantAddCart: false,
-
   // 유저가 등록한 칼로리 정보
-  addFood: []
+  addFood: [],
 }
 
 // redux
@@ -70,7 +80,7 @@ const food = createSlice({
   initialState,
   reducers: {
 
-    // 칼로리 직접 등록 후 장바구니 추가 체크 여부
+    // 칼로리 직접 등록 후 장바구니 추가
     wantCart : (state, action) => {
       state.wantAddCart = action.payload
     },
@@ -78,10 +88,10 @@ const food = createSlice({
     // 유저가 직접 추가한 칼로리 정보
     getUserAddFood : (state, action) => {
       state.addFood = action.payload
-    }
+    },
   }
 });
 
-export const {wantCart, getUserAddFood} = food.actions;
+export const {getUserAddFood} = food.actions;
 
 export default food;

@@ -8,7 +8,7 @@ import {history} from '../redux/configStore';
 
 // redux
 import {useDispatch} from 'react-redux';
-import {addDataDB, addUserFoodDB, wantCart} from '../redux/modules/food';
+import {addDataDB, addUserFoodDB} from '../redux/modules/food';
 
 /** 
  * @역할 원하는 검색 결과가 없을 때 직접 입력하여 등록할 수 있도록 하는 추가 페이지
@@ -58,8 +58,7 @@ const SelfAddFood = (props) => {
       } else {
         let result = window.confirm("지금 바로 칼로리를 등록할까요?");
         if(result) {
-          dispatch(wantCart(true))
-          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium, "true"))
         } else {
           dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
         }
