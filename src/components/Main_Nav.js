@@ -1,66 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Text, Button } from '../elements';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
-
+import { GetCustomList } from '../redux/modules/DietCustom';
 
 const Main_Nav = () => {
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+    dispatch(GetCustomList());
+    },[]);
+
+    const custom_list = useSelector((state)=>state.custom.custom);
 
     return (
         <React.Fragment>
             {/* 나의 식단 커스텀 */}
                 <PostContainer >
-                <Post>
-                    <TitleBox>
-                        <Text width="75%"size="15px" margin="auto 0 auto 11%">Title</Text>
-                        <CartBox>
-                            <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
-                        </CartBox>
-                    </TitleBox>
-                    <ListBox>
-                        <List>[굽네치킨]볼케이노</List>
-                        <List>목록2</List>
-                        <List>목록3</List>
-                        <List>목록4</List>
-                        <List>목록5</List>
-                        <List>목록6</List>
-                        <List>목록7</List>
-                    </ListBox>
-                </Post>
-                <Post>
-                    <TitleBox>
-                        <Text width="75%"size="15px" margin="auto 0 auto 11%">Title</Text>
-                        <CartBox>
-                            <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
-                        </CartBox>
-                    </TitleBox>
-                    <ListBox>
-                        <List>[굽네치킨]볼케이노</List>
-                        <List>목록2</List>
-                        <List>목록3</List>
-                        <List>목록4</List>
-                        <List>목록5</List>
-                        <List>목록6</List>
-                        <List>목록7</List>
-                    </ListBox>
-                </Post>
-                <Post>
-                    <TitleBox>
-                        <Text width="75%"size="15px" margin="auto 0 auto 11%">Title</Text>
-                        <CartBox>
-                            <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
-                        </CartBox>
-                    </TitleBox>
-                    <ListBox>
-                        <List>[굽네치킨]볼케이노</List>
-                        <List>목록2</List>
-                        <List>목록3</List>
-                        <List>목록4</List>
-                        <List>목록5</List>
-                        <List>목록6</List>
-                        <List>목록7</List>
-                    </ListBox>
-                </Post>
+                    {custom_list.length>0?
+                        custom_list.map((i, idx) => {
+                            console.log(i.foodList);
+                            return (
+                                <Post key={idx}>
+                                    <TitleBox>
+                                        <Text bold width="75%"size="15px" margin="auto 0 auto 11%">{i.name}</Text>
+                                        <CartBox>
+                                            <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
+                                        </CartBox>
+                                    </TitleBox>
+                                    
+                                    {i.foodList.length>0?
+                                    i.foodList.map((i, idx) => {
+                                        console.log(i.name);
+                                        return (
+                                            <ListBox key={idx}>
+                                                <List>{i.name}</List>
+                                            </ListBox>
+                                        )
+                                    })
+                                    :
+                                    <></>
+                                    }
+                                </Post>
+                                );
+                            })
+
+                    :
+                    <></>
+                    }
+
 
             </PostContainer>
         </React.Fragment>
