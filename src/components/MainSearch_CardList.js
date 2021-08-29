@@ -143,6 +143,7 @@ const FeedBackText = styled.div`
   color: #5F5F5F;
   font-weight: bold;
   cursor: default;
+  font-family: 'Pretendard'; 
 `;
 
 const FeedbackInput = styled.div`
@@ -214,7 +215,7 @@ const AddFoodBtn = styled.div`
   }
 `;
 
-const P = styled.p`
+const P = styled.div`
   font-family: 'Pretendard';  
 `;
 
