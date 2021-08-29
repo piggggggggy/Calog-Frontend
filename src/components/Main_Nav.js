@@ -5,18 +5,11 @@ import { BsFillPlusSquareFill } from 'react-icons/bs';
 
 
 const Main_Nav = () => {
-    const [navFocus, setFocus] = useState(0);
-
 
     return (
         <React.Fragment>
-            <Nav>
-                <Text m_size bold color={navFocus===0?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
-                <Text m_size bold color={navFocus===1?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
-                <Text m_size bold color={navFocus===2?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(2)}}>직접등록</div></Text>
-            </Nav>
-            <Line/>
-            <PostContainer>
+            {/* 나의 식단 커스텀 */}
+                <PostContainer >
                 <Post>
                     <TitleBox>
                         <Text width="75%"size="15px" margin="auto 0 auto 11%">Title</Text>
@@ -70,29 +63,12 @@ const Main_Nav = () => {
                 </Post>
 
             </PostContainer>
-
         </React.Fragment>
     )
 }
 
 export default Main_Nav;
 
-const Nav = styled.div`
-    margin: -28% auto auto 4%;
-    width: 60%;
-    display: flex;
-        @media only screen and (max-width: 320px) {
-            margin: -36% auto auto 4%;
-            z-index: 100;
-     };
-
-`;
-const Line = styled.div`
-    margin: 2% auto auto 7%;
-    width: 56%;
-    height: 1px;
-    background-color: #ADADAD;
-`;
 const Post = styled.div`
     width: 43%;
     height: 30vh;

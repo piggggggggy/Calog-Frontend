@@ -42,9 +42,8 @@ const FoodDetail = (props) => {
 // 대사량과 나의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
 
-
   useEffect(() => {
-    dispatch(getDetailDB(foodId))
+    foodInfo?.length === 0 && dispatch(getDetailDB(foodId))
   }, []);
 
   const record = _record === undefined ? [] : _record;
@@ -114,8 +113,6 @@ const FoodDetail = (props) => {
   const NameNBrand = foodInfo.name.indexOf('[') === 0 ? foodInfo.name.split(':') : false;
   const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
   const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
-
-  console.log(foodInfo);
 
   // 스피너
   if (!is_loaded) {
