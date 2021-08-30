@@ -201,9 +201,9 @@ const MainBody = (props) => {
       {/* nav 탭 바 */}
         <Nav>
           <div>
-            <Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
-            <Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
-            <Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
+            <Text cursor="pointer" bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
+            <Text cursor="pointer" bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
+            <Text cursor="pointer" bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
           </div>
           <NavLine>
             <NavLineBold style={navFocus === 0 ? {left: "0"} : navFocus === 1 ? {left: "33.3%"} : {left: "66.7%"}}/>

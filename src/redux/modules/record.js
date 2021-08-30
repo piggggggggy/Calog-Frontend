@@ -157,11 +157,15 @@ export const getRecordDB = (date) => {
     instance
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
+        console.log(res)
         const record_list = res.data[0]
 
         // 기록이 없을 경우 alert, dashboard로 이동
         // 기록이 있을 경우 액션
         if (res.data?.length === 0) {
+          window.alert('기록된 칼로리가 없어요!')
+          history.push('/calendar')
+        } else if (record_list?.foodRecords?.length === 0) {
           window.alert('기록된 칼로리가 없어요!')
           history.push('/calendar')
         } else {dispatch(getRecord(record_list))}
