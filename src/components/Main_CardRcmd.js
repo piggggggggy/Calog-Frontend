@@ -5,7 +5,7 @@ import theme from '../shared/theme';
 // history
 import { history } from '../redux/configStore';
 // modules
-import { addCartRx } from '../redux/modules/cart';
+import { addCartRx, deleteCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
 // elements & components
 import { Text } from '../elements';
@@ -29,17 +29,22 @@ const CardRcmd = (props) => {
   
   // 장바구니 담기!
   const addCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const cartUnit = {
       foodId: props.foodId,
       name: props.name,
       forOne: props.forOne,
-      grams: props.grams,
+      measurement: props.measurement,
       kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(addCartRx(cartUnit));
+    let index = cart_list.findIndex((cart) => cart.foodId === props.foodId)
+      if (index !== -1) {
+        dispatch(deleteCartRx(props.foodId))
+      }else{
+        dispatch(addCartRx(cartUnit));
+      };
   };
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899
@@ -119,7 +124,7 @@ const CardRcmd = (props) => {
         
         {/* 칼로리 */}
         <div>  
-          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0">{Math.round(props.kcal * 10)/10} kcal</Text>
+          <Text lineheight="28px" m_lineheight="25px" size="20px" m_size="17px" bold color="#000000" padding="0" margin="0" cursor="pointer">{Math.round(props.kcal * 10)/10} kcal</Text>
         </div>
         
         {/* 즐겨찾기 버튼 */}
@@ -129,7 +134,7 @@ const CardRcmd = (props) => {
         
         {/* 장바구니 버튼 */}
         <CartBox onClick={addCart}>
-          <BsFillPlusSquareFill  color="#F19F13" size="17px"/>
+          <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
         </CartBox>
 
       </FoodCard>
@@ -143,19 +148,35 @@ CardRcmd.defaultProps = {
 
 const FoodCard = styled.div`
   position: relative;
-  min-width: 44%;
-  max-width: 44%;
-  min-height: 13.5vh;
-  max-height: 130px;
+  min-width: 171px;
+  max-width: 171px;
+  min-height: 105px;
+  max-height: 13.2vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: calc(1.3vh + 20px) 3.8% 1.5vh 3.8%;
-  margin-right: 2%;
+  padding: calc(1.3vh + 20px) 0.9% 1.5vh 0.9%;
+  margin: 0 0.5%;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+
+  @media only screen and (max-width:400px) {
+    min-width: 160px;
+    max-width: 160px;
+  }
+  @media only screen and (max-width:350px) {
+    min-width: 140px;
+    max-width: 140px;
+  }
+  @media only screen and (max-width:300px) {
+    min-width: 120px;
+    max-width: 120px;
+  }  
+  @media ${theme.device.mobileHH} {
+    max-height: 123px;
+  }
 
   & > div {
     /* display: flex;
@@ -204,12 +225,16 @@ const BookmarkBox = styled.div`
 
 const CartBox = styled.div`
   position: absolute;
-  bottom: 2vh;
+  bottom: 1.8vh;
   right: 10.5%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  @media only screen and (max-width:320px) {
+    right: 7%;
+  }  
 `;
 
 

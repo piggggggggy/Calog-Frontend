@@ -39,10 +39,8 @@ const UnderBar = (props) => {
 
   // 최근 삭제목록 
   const _recentDeleted_list = props.recentDeleted_list;
-  console.log(_recentDeleted_list)
   
   const recentDeleted_list = _recentDeleted_list.length === 0 ? [] : _recentDeleted_list[0];
-  console.log(recentDeleted_list);
   // const recentDeleted_list = []
 
 

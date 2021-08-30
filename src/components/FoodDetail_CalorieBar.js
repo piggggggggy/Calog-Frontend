@@ -19,7 +19,6 @@ const CalorieBar = (props) => {
   const kcal = props.kcal;
   const totalKcal = props.totalKcal;
   const bmr = props.bmr;
-  console.log(bmr);
   
   // 로그인 유무
   const is_login = useSelector((state) => state.user.is_login);

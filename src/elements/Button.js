@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
   // bg : background-color
-  const { children, bg, width, margin, height, _onClick, border_radius } = props;
+  const { children, bg, width, margin, height, _onClick, border_radius, cursor} = props;
 
   const styles = {
     bg,
@@ -11,6 +11,7 @@ const Button = (props) => {
     margin,
     height,
     border_radius,
+    cursor,
   };
 
   return (
@@ -29,11 +30,13 @@ Button.defaultProps = {
   height: null,
   _onClick: () => {},
   border_radius: "0px",
+  cursor: "pointer"
 };
 
 const DefaultBtn = styled.button`
   display: block;
   border: none;
+  ${(props) => props.cursor ? `cursor: default` : `cursor: pointer`};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};

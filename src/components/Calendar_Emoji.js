@@ -40,7 +40,7 @@ const Calendar_Emoji = (props) => {
   if(date < today) {
     return (
       <React.Fragment>
-        {match ?
+        {match?.totalCalories > 0 ?
 
           // case 1-1) 기록이 있을 때
           <Calendar_DayEmoji item={match} day={date}/> :
@@ -63,7 +63,7 @@ const Calendar_Emoji = (props) => {
   if(date === today) {
     return(
       <React.Fragment>
-        {match ?
+        {match?.totalCalories > 0 ?
 
           // case 2-1) 기록이 있을 때
           <Calendar_DayEmoji item={match} day={date}/> :

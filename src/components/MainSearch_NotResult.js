@@ -90,13 +90,13 @@ const NotResult = (props) => {
                 </svg>
               </Fats>
           }
-          
-          <Text size="28px" m_size="22px" bold margin="3.7vh 0 0 0" color="#2A2A2A" >앗! 검색결과가 없어요 ㅠㅠ</Text>
+          <Text size="28px" m_size="22px" bold margin="4vh 0 0 0" color="#2A2A2A" >"{keyword}"</Text>
+          <Text size="28px" m_size="22px" margin="0 0 0 0" color="#2A2A2A" >에 대한 검색결과가 없어요 ㅠㅠ</Text>
 
           <FeedBackContainer>
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             <FeedBackBtn onClick={feedBack}>
-              <div>키워드 등록 요청하기</div>
+              <P>키워드 등록 요청하기</P>
             </FeedBackBtn>
           </FeedBackContainer>
 
@@ -149,7 +149,8 @@ const FeedBackContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3.7vh;
+  margin-top: 4.8vh;
+  cursor: default;
 `;
 
 const FeedBackText = styled.div`
@@ -158,6 +159,7 @@ const FeedBackText = styled.div`
   margin-bottom: 0.9vh;
   color: #5F5F5F;
   font-weight: bold;
+  font-family: 'Pretendard';  
 `;
 
 const FeedBackBtn = styled.div`
@@ -178,6 +180,10 @@ const FeedBackBtn = styled.div`
     font-weight: bold;
     color: #404040;
   }
+`;
+
+const P = styled.div`
+  font-family: 'Pretendard';  
 `;
 
 

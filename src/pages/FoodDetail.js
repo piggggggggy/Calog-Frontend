@@ -6,7 +6,6 @@ import theme from '../shared/theme';
 // elements & components
 import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
-import UnderBar from '../components/Main_UnderBar';
 import CalorieBar from '../components/FoodDetail_CalorieBar';
 import Loading from './Loading4';
 
@@ -32,24 +31,34 @@ import Fat from '../img/C_fat.jpg';
 const FoodDetail = (props) => {
 
   const dispatch = useDispatch();
+
+  // params로 가져오는 foodId
   const foodId = props.match.params.foodId;
+
+  // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
+ 
+  // 현페이지의 메인 정보
   const foodInfo = useSelector((state) => state.search.detail);
+  
+  // bmr을 가져오기 위한 유저정보
   const user = useSelector((state) => state.user.user_info);
+  
+  // 스피너를 위한 로딩유무
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
+  // 대사량 비교를 위한 오늘의 칼로리 기록
+  const record = useSelector((state) => state.record.record);
 
-// 대사량과 나의 칼로리 기록
-  const _record = useSelector((state) => state.record.record);
-
-
+  // 기존 음식일경우 foodId에 해당하는 디테일 정보 불러오기 || 직접등록 음식일 경우 useEffect를 막아준다..
   useEffect(() => {
-    dispatch(getDetailDB(foodId))
+    (foodInfo.length === 0 && dispatch(getDetailDB(foodId))) || (foodInfo.foodId !== foodId && dispatch(getDetailDB(foodId)));
   }, []);
 
-  const record = _record === undefined ? [] : _record;
+
+  // 대사량과 나의 칼로리 기록
   const bmr = !is_login ? 0 : user.bmr[0]?.bmr === 0 ? 0 : user.bmr[0]?.bmr;
-  const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+  const foodRecord = record?.length === 0 ? [] : record[0]?.foodRecords;
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
@@ -60,8 +69,8 @@ const FoodDetail = (props) => {
     const cartUnit = {
       foodId: foodInfo.foodId,
       name: foodInfo.name,
-      // forOne: foodInfo.forOne,
-      // grams: foodInfo.grams,
+      forOne: foodInfo.forOne,
+      measurement: foodInfo.measurement,
       kcal: Math.round(foodInfo.kcal * 10)/10,
       amount: 1,
     };
@@ -71,8 +80,8 @@ const FoodDetail = (props) => {
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
     let result = 0
-    if(foodRecord.length !== 0) {
-      foodRecord.map((f, idx) => {
+    if(foodRecord?.length !== 0) {
+      foodRecord?.map((f, idx) => {
         result += f.resultKcal;
       });
       return result;
@@ -81,21 +90,25 @@ const FoodDetail = (props) => {
     }
   };
   
+  // 현재 남은 기초대사량의 상태값
   const is_over = () => {
-    if (bmr === totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
+    if (bmr === totalKcal()) {
       return "line";
-    } else if (bmr > totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
+    } else if (bmr > totalKcal()) {
       return "under";
-    } else if (bmr < totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
+    } else if (bmr < totalKcal()) {
       return "over";
     }
   };
 
+  // 상태값에 해당하는 텍스트 배경색
   const colors = is_over() === "line" ? 
   '#59C451' 
   : is_over() === "over" ? '#EC6262' : '#6993FF' ;
 
 
+
+  // 상태text
   const StatusText = styled.div`
     width: auto;
     line-height: 22px;
@@ -115,14 +128,10 @@ const FoodDetail = (props) => {
   const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
   const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
 
-  // console.log(foodInfo);
-
   // 스피너
   if (!is_loaded) {
     return <Loading/>
   };
-
-  
 
   return (
     <React.Fragment>
@@ -139,37 +148,34 @@ const FoodDetail = (props) => {
             <Text size="17px" m_size="17px" lineheight="22px" m_lineheight="20px" bold color="#5F5F5F">{brand}</Text>
             <Grid display="flex">
               <NameBox>{name}</NameBox>
-              <span style={{fontSize: "13px", color: "#404040"}}>1인분 ({foodInfo.forOne}g)</span>
+              <span style={{fontSize: "13px", color: "#404040", fontFamily: "Pretendard"}}>1인분 ({foodInfo.forOne + foodInfo.measurement})</span>
             </Grid>  
             <Grid is_flex>
               <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{Math.round(foodInfo.kcal * 10)/10} kcal</Text>
+              
               {/* 카트 버튼 */}
-
               <div style={{height: "34px"}}>
                 <BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/>
               </div>
 
             </Grid>
           </Grid>
+
           {/* 칼로리 비교정보 */}
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
             <StatusText color={colors}>
               {bmr === 0 ? 
-              " 앗! 바디스펙이 없어 기초대사량 확인이 어려워요! " 
+              " 바디스펙이 없어 기초대사량 확인이 어려워요! " 
               :
               is_over() === "line" ? 
-              " 현재까지 오늘의 기준치를 모두 채웠어요! " 
+              " 오늘의 기초대사량을 모두 채웠어요! " 
               : is_over() === "over" ? 
-              ` 오늘의 기초대사량에서 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal를 초과했어요! ` 
-              : ` 아직 기초대사량까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요! `
+              ` 기초대사량에서 ${totalKcal()-bmr} kcal를 초과했어요! ` 
+              : ` 기초대사량까지 ${bmr-(totalKcal())} kcal 남았어요! `
               }
-              
-              
             </StatusText>
           </Grid>
         </HeaderBox>
-
-        
 
         {/* 영양성분 */}
         <IngreBox>
@@ -178,7 +184,7 @@ const FoodDetail = (props) => {
               <img src={Carbo} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">탄수화물</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.carbo}</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.carbo}g</Text> 
           </div>
 
           <div>
@@ -186,7 +192,7 @@ const FoodDetail = (props) => {
               <img src={Protein} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">단백질</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.protein}</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.protein}g</Text> 
           </div>
 
           <div>
@@ -194,7 +200,7 @@ const FoodDetail = (props) => {
               <img src={Fat} width="100%" alt="carbohydrate"/>
             </div>
             <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">지방</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.fat}</Text> 
+            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.fat}g</Text> 
           </div>
         </IngreBox>
 
@@ -203,6 +209,7 @@ const FoodDetail = (props) => {
 
         {/* 영양정보 디테일 */}
         <IngreDetailContainer>
+          
           {/* 탄수화물 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">
@@ -289,11 +296,6 @@ const FoodDetail = (props) => {
           </IngreDetail>
 
         </IngreDetailContainer>
-        
-        
-
-        {/* 카트 탭 */}
-        <UnderBar/>
 
       </BodyContainer>
     </React.Fragment>
@@ -310,8 +312,6 @@ const BodyContainer = styled.div`
   position: relative;
   max-width: 420px;
   max-height: 80vh;
-  padding-bottom: 10vh;
-  /* padding-top: 2.4vh; */
   overflow: scroll;
 
   &::-webkit-scrollbar {
@@ -349,6 +349,7 @@ const NameBox = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   letter-spacing: -0.0041em;
+  font-family: 'Pretendard';  
   
   @media ${theme.device.mobileH} {
     font-size: 17px;
@@ -404,6 +405,7 @@ const IngreText = styled.div`
   font-size: 13px; 
   /* font-weight: bold; */
   color: #404040;
+  font-family: 'Pretendard';  
 `;
 
 const Line = styled.div`

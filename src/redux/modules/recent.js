@@ -16,12 +16,10 @@ import * as Sentry from '@sentry/react';
       instance
         .get('/api/home/recentKey')
         .then((res) => {
-          // console.log(res);
           dispatch(getRecent(res.data));
         })
         .catch((err) => {
           Sentry.captureException(`Catched Error : ${err}`);
-          console.log(err, "에러가 났읍니다.")
         })
     }
   };
@@ -32,12 +30,10 @@ import * as Sentry from '@sentry/react';
       instance
         .post('/api/home/recentKey',{keyword: keyword})
         .then((res) => {
-          // console.log(res);
           dispatch(addRecent(keyword));
         })
         .catch((err) => {  
           Sentry.captureException(`Catched Error : ${err}`);
-          console.log(err, "에러가 났읍니다.");
         })
     }
   };
@@ -46,15 +42,13 @@ import * as Sentry from '@sentry/react';
   export const deleteRecentDB = (keyword) => {
     return function (dispatch, getState, {history}) {
       instance
-       .delete('/api/home/recentKey', {data: {keyword: keyword}})
-       .then((res) => {
-         console.log(res);
-         dispatch(deleteRecent(keyword));
-       })
-       .catch((err) => {
+        .delete('/api/home/recentKey', {data: {keyword: keyword}})
+        .then((res) => {
+          dispatch(deleteRecent(keyword));
+        })
+        .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
-       })
+        })
     }
   };
   

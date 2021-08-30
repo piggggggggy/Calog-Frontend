@@ -9,7 +9,8 @@ import { Text } from '../elements';
 import Loading from '../pages/Loading3';
 
 // modulse
-  import { foodFeedBack } from '../redux/modules/notice';
+import { foodFeedBack } from '../redux/modules/notice';
+import { history } from '../redux/configStore';
 
 
 /** 
@@ -26,6 +27,7 @@ const CardList = (props) => {
   // 검색결과
   // const search_list = useSelector((state) => state.search.filtered_list);
   const search_list = props.search_list;
+  const keyword = props.keyword;
 
   // 페이지네이션
   const [page, setPage] = useState({
@@ -41,12 +43,16 @@ const CardList = (props) => {
   }, [page])
 
   // 피드백 보내기
+  const [_keyword, setKeyword] = useState(keyword);
   const [feedback, setFeedback] = useState(false);
+  const changeKeyword = (e) => {
+    setKeyword(e.target.value);
+  }
   
-  const ref = useRef()
+  const ref = useRef(keyword);
   const feedBack = () => {
-    if (ref.current.value) {
-      dispatch(foodFeedBack(ref.current.value));
+    if (_keyword) {
+      dispatch(foodFeedBack(_keyword));
       setFeedback(false);
       window.alert("요청되었습니다!")
     } else {
@@ -66,7 +72,7 @@ const CardList = (props) => {
           {/* 더보기 버튼  */}
           {search_list?.length > page.end ? 
             <MoreBtn onClick={nextPage}>
-              <Text size="13px" m_size="13px" padding="0" margin="0">더보기</Text>
+              <Text size="13px" m_size="13px" padding="0" margin="0" cursor="pointer">더보기</Text>
             </MoreBtn> 
           : ''}
 
@@ -75,14 +81,20 @@ const CardList = (props) => {
             <FeedBackText>혹시 찾으시는 음식이 없으신가요?</FeedBackText>
             {feedback ? 
               <FeedbackInput>
-                <input ref={ref} placeholder="요청할 키워드를 입력"></input>
+                <input onChange={changeKeyword} value={_keyword} placeholder="이곳에 찾으시는 음식을 적어주세요!"></input>
               </FeedbackInput>
             : ''}
             <FeedBackBtn onClick={()=>{!feedback ? setFeedback(true) : feedBack()}}>
-              <div>{!feedback ? "키워드 입력하기" : "키워드 등록 요청하기"}</div>
+              <P>{!feedback ? "키워드 등록 요청하기" : "제출하기"}</P>
             </FeedBackBtn>
           </FeedBackContainer>
 
+          {/* 음식 직접 등록 */}
+          {!feedback && (
+            <AddFoodBtn onClick={() => {history.push('/addFood')}}>
+              <P>음식 직접 등록하기</P>
+            </AddFoodBtn>
+          )}
         </CardContainer>
 
 
@@ -101,7 +113,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   column-gap: 1.8vh;
-  margin-bottom: 20vh;
+  margin-bottom: 15vh;
 `;
 
 const MoreBtn = styled.div`
@@ -112,6 +124,7 @@ const MoreBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 
@@ -124,31 +137,38 @@ const FeedBackContainer = styled.div`
 `;
 
 const FeedBackText = styled.div`
-  font-size: 15px;
+  font-size: 17px;
   line-height: 22px;
   margin-bottom: 0.9vh;
   color: #5F5F5F;
   font-weight: bold;
+  cursor: default;
+  font-family: 'Pretendard'; 
 `;
 
 const FeedbackInput = styled.div`
-  width: 80%;
+  width: 72%;
   margin: auto;
-  border: 1px solid #DADADA;
-  border-radius: 10px;
-  padding: 1.3vh 25px;
-  margin-bottom: 1vh;
+  border: 1px solid #838383;
+  border-radius: 44px;
+  padding: 1.3vh 6.6%;
+  margin-bottom: 1.2vh;
 
   & > input {
+    width: 100%;
     border: none;
     outline: none;
-    color: #A9A9A9;
-    font-size: 15px;
+
+    ::placeholder {
+      font-size: 13px;
+      color: #C4C4C4;
+      line-height: 20px;
+    }
   }
 `;
 
 const FeedBackBtn = styled.div`
-  width: 50%;
+  width: 54%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -164,7 +184,39 @@ const FeedBackBtn = styled.div`
     line-height: 22px;
     font-weight: bold;
     color: #404040;
+
+    @media ${theme.device.mobileM} {
+      font-size: 14px;
+    }
   }
+`;
+
+const AddFoodBtn = styled.div`
+  width: 54%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid #F5CC3F;
+  border-radius: 44px;
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
+  cursor: pointer;
+  margin-top: 2%;
+
+  & > div {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+    color: #E6BB2A;
+
+    @media ${theme.device.mobileM} {
+      font-size: 14px;
+    }
+  }
+`;
+
+const P = styled.div`
+  font-family: 'Pretendard';  
 `;
 
 

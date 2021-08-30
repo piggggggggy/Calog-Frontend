@@ -1,9 +1,14 @@
 import React,{useRef, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, {keyframes} from 'styled-components';
+import theme from './theme';
 
 // moment
 import moment from 'moment';
+
+// s3
+import S3 from 'react-aws-s3';
+import imageCompression from 'browser-image-compression';
 
 // history
 import { history } from '../redux/configStore';
@@ -17,6 +22,9 @@ import instance from '../redux/modules/instance';
 // sentry
 import * as Sentry from '@sentry/react';
 
+// icons
+import { TiDeleteOutline } from 'react-icons/ti'
+
 /** 
  * @param {*} props
  * @returns 플롯버튼
@@ -26,52 +34,126 @@ import * as Sentry from '@sentry/react';
 
 const FloatedBtn = (props) => {
 
-  const dispatch = useDispatch();
-
-  // 로그인 체크
-  const is_login = useSelector((state) => state.user.is_login);
-
   // feedback contents
-  const phoneNum = useRef();
-  const contents1 = useRef();
-  const contents2 = useRef();
-  const instagramId = useRef();
+  const phone = useRef();
+  const good = useRef();
+  const bad = useRef();
+  const instagram = useRef();
   const date = moment().format('YYYY-MM-DD');
 
   // modal on off
   const [modal, setModal] = useState(true);
 
-  // feedback  
-  const sendFeedback = () => {
-    if(contents1.current.value && contents2.current.value) {
-      instance
-      .post('/api/notice/feedback', {
-        title: "피드백",
-        contents: contents1.current.value + " / " + contents2.current.value,
-        date: date,
-        phoneNum: phoneNum.current.value,
-        instagramId: instagramId.current.value,
-      })
-      .then((res)=>{
-        setComplete(true);  
-      })
-      .catch((err)=>{
-        Sentry.captureException(`Catched Error : ${err}`);
-        console.log("피드백전송에 오류가 있어요!",err)
-      });
-    } else {
-      window.alert("필수항목을 모두 입력해주세요!")
-    }
+  // s3 이미지 업로드
+  const file = useRef();
+  const [_file, setFile] = useState(null);
+
+  const deleteFile = () => {
+    setFile(null);
   }
+
+  const checkName = (e) => {
+    setFile(e.target.files);
+  };
+
+  const accessKey = process.env.REACT_APP_S3_FEEDBACK_ACCESSKEY;
+  const secretKey = process.env.REACT_APP_S3_FEEDBACK_SECRETKEY;
+  const s3Bucket = process.env.REACT_APP_FEEDBACK_BUCKET_NAME;
+  const region = process.env.REACT_APP_FEEDBACK_REGION;
+
+  const config = {
+    bucketName: s3Bucket,
+    region: region,
+    accessKeyId: accessKey,
+    secretAccessKey: secretKey,
+  };
+
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 720,
+  };
+
+  // feedback  
+  const submit = async (e) => {
+    e.preventDefault();
+
+    const phoneNum = phone.current.value;
+    const instagramId = instagram.current.value;
+    const goodContents = good.current.value;
+    const badContents = bad.current.value;
+    
+    if (_file !== null) {
+      const S3upload = new S3(config);
+      const fileName = file.current.files[0].name;
+      const refFile = file.current.files[0];
+
+      try {
+        const resizeFile = await imageCompression(refFile, options);
+        S3upload.uploadFile(resizeFile, fileName).then((res) =>{
+          if (res.status === 204) {
+            const url = res.location;
+
+            if(goodContents && badContents) {
+              instance
+              .post('/api/notice/feedback', {
+                title: "피드백",
+                contents: goodContents + " / " + badContents,
+                date: date,
+                phoneNum: phoneNum,
+                instagramId: instagramId,
+                url: url,
+              })
+              .then((res)=>{
+                setComplete(true);  
+                deleteFile();
+              })
+              .catch((err)=>{
+                Sentry.captureException(`Catched Error : ${err}`);
+                console.log("피드백전송에 오류가 있어요!",err)
+                window.alert(err, "피드백 작성에 오류가 있어요!")
+              });
+            } else {
+              window.alert("필수항목을 모두 입력해주세요!")
+            }
+
+          }
+
+        })
+
+      } catch (err) {
+        window.alert("제출에 실패했어요. 관리자에게 문의해주세요!")
+      }
+    } else {
+
+      if(goodContents && badContents) {
+        instance
+        .post('/api/notice/feedback', {
+          title: "피드백",
+          contents: goodContents + " / " + badContents,
+          date: date,
+          phoneNum: phoneNum,
+          instagramId: instagramId,
+          url: "",
+        })
+        .then((res)=>{
+          setComplete(true);  
+          deleteFile();
+        })
+        .catch((err)=>{
+          Sentry.captureException(`Catched Error : ${err}`);
+        });
+      } else {
+        window.alert("필수항목을 모두 입력해주세요!")
+      }
+    }
+
+  }
+
 
 
   // on Modal!
   const onModal = () => {
-    if (!is_login) {
-      // window.alert("로그인하시면 피드백을 보낼 수 있어요!");
-      confirm();
-      return;
-    }
+
     setModal(false);
     setComplete(false);  
   };
@@ -79,17 +161,9 @@ const FloatedBtn = (props) => {
   // off Modal!!
   const offModal = () => {
     setModal(true);
+    deleteFile();
   };
 
-  // 로그인 페이지 이동!
-  const confirm = () => {
-    if (window.confirm("로그인이 필요한 기능이에요! 로그인 페이지로 이동하시겠어요?")) {
-      history.push('/signsocial');
-    } else {
-      return;
-    }
-  }
- 
   // 작성 후 화면전환
   const [complete, setComplete] = useState(false);
 
@@ -164,41 +238,57 @@ const FloatedBtn = (props) => {
           <>
             <ModalContainer>
               <ModalText>칼로그<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>를 위한</span></ModalText>
-              <ModalText style={{marginBottom: "24px"}}>다양한 피드백<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>들을 작성해주세요!</span></ModalText>
+              <ModalText style={{marginBottom: "20px"}}>다양한 피드백<span style={{fontSize: "22px", fontWeight: "400", lineHeight: "30.5px", color: "#FFFFFF"}}>들을 작성해주세요!</span></ModalText>
 
 
               <InputForm>
                 <p>칼로그 장점<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
-                <div style={{padding: "10px"}}>
-                  <ModalTextarea ref={contents1} type="text" placeholder="칼로그 장점을 작성해주세요."></ModalTextarea>
-                </div>
+                <InputDiv style={{padding: "10px"}}>
+                  <ModalTextarea ref={good} type="text" placeholder="칼로그 장점을 작성해주세요."></ModalTextarea>
+                </InputDiv>
               </InputForm>
 
               <InputForm>
                 <p>칼로그 불편한 점<span style={{color: "red", fontWeight: "bold", fontSize: "16px"}}>*</span></p>
-                <div style={{padding: "10px"}}>
-                  <ModalTextarea ref={contents2} type="text" placeholder="칼로그의 불편한 점을 작성해주세요."></ModalTextarea>
-                </div>
+                <InputDiv style={{padding: "10px"}}>
+                  <ModalTextarea ref={bad} type="text" placeholder="칼로그의 불편한 점을 작성해주세요."></ModalTextarea>
+                </InputDiv>
+              </InputForm>
+
+              <InputForm>
+                <p>이미지 업로드(선택)</p>
+                <UploadContainer>
+                  <FileNameBox style={_file !== null ? {color: "#2B2B2B", fontSize: "13px"} : {color: `${theme.color.gray_4}`,padding: "4.3% 6%"}}>
+                    {_file !== null ? _file[0].name : "이미지를 업로드"}
+                    {_file !== null ?
+                    <div onClick={deleteFile}>
+                      <TiDeleteOutline color="#BABABA" size="18px"/>
+                    </div>
+                    : <></>}
+                  </FileNameBox>
+                  <UploadBtn htmlFor="feedbackImg"><div>사진찾기</div></UploadBtn>
+                  <ModalInput ref={file} type="file" id="feedbackImg" style={{display: "none"}} onChange={checkName}/>
+                </UploadContainer>
               </InputForm>
 
               <InputForm>
                 <p>전화번호(선택)</p>
-                <div>
-                  <ModalInput ref={phoneNum} type="text" placeholder="'-'빼고 전화번호 입력"></ModalInput>
-                </div>
+                <InputDiv>
+                  <ModalInput ref={phone} type="text" placeholder="'-'빼고 전화번호 입력"></ModalInput>
+                </InputDiv>
                 <span>*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</span>
               </InputForm>
 
               <InputForm>
                 <p>인스타그램 아이디(선택)</p>
-                <div>
-                  <ModalInput ref={instagramId} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
-                </div>
-                <span>*이벤트에 참여하시는 모든 분들은 반드시 입력해주세요.</span>
+                <InputDiv>
+                  <ModalInput ref={instagram} type="text" placeholder="인스타그램 아이디 입력"></ModalInput>
+                </InputDiv>
+                <span>*인스타그램 이벤트에 참여하시는 분들은 반드시 입력해주세요.</span>
               </InputForm>
 
-              <SubmitBtn onClick={()=>{sendFeedback()}}>
-                <div style={{fontSize: "16px", fontWeight: "bold", lineHeight: "22px"}}>
+              <SubmitBtn onClick={submit}>
+                <div style={{fontSize: "16px", fontWeight: "bold", lineHeight: "22px", color: "#3C3C3C"}}>
                   작성하기
                 </div>
               </SubmitBtn>
@@ -307,17 +397,13 @@ const FeedbackModal = styled.div`
   position: fixed;
   right: 6%;
   bottom: 30px;
-  height: 763px;
+  height: 839px;
   width: 397px;
   box-shadow: 0px 4px 38px 3px rgba(0, 0, 0, 0.06);
   border: none;
   border-radius: 20px;
   background: #FFFFFF;
-  z-index: 100;
-
-  /* display: grid;
-  grid-template-rows: 443px 70px; */
-
+  z-index: 300;
   animation: ${FadeIn} 0.5s ease;
 `;
 
@@ -339,7 +425,7 @@ const ModalText = styled.div`
 
 const InputForm = styled.div`
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 
   & > p {
     font-size: 15px;
@@ -349,20 +435,65 @@ const InputForm = styled.div`
     color: #FFFFFF;
   }
 
-  & > div {
-    width: 100%;
-    border: none;
-    border-radius: 5.3px;
-    background: #FFFFFF;
-    padding: 10px 10px;
-  }
-
   & > span {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 24px;
     color: #ff5983;
     display: block;
   }
+`;
+
+const InputDiv = styled.div`
+  width: 100%;
+  border: none;
+  border-radius: 5.3px;
+  background: #FFFFFF;
+  padding: 10px 10px;
+`;
+
+const UploadContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 76% 22%;
+  column-gap: 2%;
+`;
+
+const FileNameBox = styled.div`
+  position: relative;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5.3px;
+  font-size: 14px;
+  line-height: 21px;
+  color: #A9A9A9;
+  background: #FFFFFF;
+
+  & > div {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+  }
+`;
+
+const UploadBtn = styled.label`
+border: none;
+border-radius: 5.3px;
+background: #FFE899;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+
+& > div {
+  font-size: 13px;
+  font-weight: bold;
+  color: #3C3C3C;
+}
 `;
 
 const ModalInput = styled.input`
@@ -399,6 +530,7 @@ const SubmitBtn = styled.div`
     background: #FFE899;
     border: none;
     border-radius: 60px;
+    cursor: pointer;
 `;
 
 const ModalComplete = styled.div`

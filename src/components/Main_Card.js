@@ -9,11 +9,14 @@ import theme from '../shared/theme';
 import { history } from '../redux/configStore';
 
 // modules
-import { addCartRx } from '../redux/modules/cart';
+import { addCartRx, deleteCartRx } from '../redux/modules/cart';
 import { addFavoriteDB, deleteFavoriteDB } from '../redux/modules/favorite';
+import { addUserFood } from '../redux/modules/search';
+import { delUserFoodDB } from '../redux/modules/food';
 
 // icons
 import { IoStar } from 'react-icons/io5';
+import { FaRegIdBadge, FaTrashAlt } from 'react-icons/fa';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 
 
@@ -41,17 +44,22 @@ const Card = (props) => {
 
   // 장바구니 담기!
   const addCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const cartUnit = {
       foodId: props.foodId,
       name: props.name,
-      // forOne: props.forOne,
-      // grams: props.grams,
+      forOne: props.forOne,
+      measurement: props.measurement,
       kcal: Math.round(props.kcal * 10)/10,
       amount: 1,
     };
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(addCartRx(cartUnit));
+    let index = cart_list.findIndex((cart) => cart.foodId === props.foodId)
+      if (index !== -1) {
+        dispatch(deleteCartRx(props.foodId))
+      }else{
+        dispatch(addCartRx(cartUnit));
+      };
   };
 
   // 장바구니에 담긴 food일 경우 배경 #FFE899
@@ -114,20 +122,45 @@ const Card = (props) => {
   };
   
   // 브랜드명 분리
-  const NameNBrand = props.name.indexOf('[') === 0 ? props.name.split(':') : false;
-  const brand = props.name.indexOf('[') === 0 ? NameNBrand[0] : '';
-  const name = props.name.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+  const NameNBrand = props.name?.indexOf('[') === 0 ? props.name.split(':') : false;
+  const brand = props.name?.indexOf('[') === 0 ? NameNBrand[0] : '';
+  const name = props.name?.indexOf('[') === 0 ? NameNBrand[1] : props.name;
+
+  const pushDetail = () => {
+    if (props.title === "useAdd") {
+      dispatch(addUserFood(props))
+
+      history.push(`/fooddetail/${props._id}`)
+
+    } else {
+      history.push(`/fooddetail/${props.foodId}`)
+    }
+  }
+
+  const delCreateFood = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    let result = window.confirm('해당 데이터를 삭제하시겠어요?')
+    result && dispatch(delUserFoodDB(props._id))
+  }
 
   return (
     <React.Fragment>
 
       {/* 검색 결과 낱개 카드 */}
-      <FoodCard style={is_picked()} onClick={()=>{history.push(`/fooddetail/${props.foodId}`)}}>
+      <FoodCard style={is_picked()} onClick={pushDetail}>
 
         {/* 즐겨찾기 */}
-        <BookmarkBox  onClick={addFavorite}>
-          <IoStar style={is_favorite()} width="100%"/>
-        </BookmarkBox>
+        {/* 유저가 직접 등록한 데이터의 경우 즐겨찾기는 default, 해제 시 삭제 */}
+        {props.title === "useAdd" ? (
+          <BookmarkBox onClick={delCreateFood}>
+            <FaTrashAlt style={{color:"rgb(186, 186, 186)"}} width="100%"/>
+          </BookmarkBox>
+        ) : (
+          <BookmarkBox  onClick={addFavorite}>
+            <IoStar style={is_favorite()} width="100%"/>
+          </BookmarkBox>
+        )}
 
         {/* 이름 */}
         <NameContainer >
@@ -142,7 +175,7 @@ const Card = (props) => {
 
         {/* 장바구니 */}
         <CartBox onClick={addCart} style={{zIndex: "10"}}>
-          <BsFillPlusSquareFill color="#F19F13" size="17px"/>
+          <BsFillPlusSquareFill color="#F19F13" size="24px"/>
         </CartBox>
 
       </FoodCard>
@@ -186,6 +219,7 @@ const KcalBox = styled.div`
   font-weight: bold;
   margin: 0;
   padding: 0;
+  font-family: 'Pretendard'; 
 
   @media ${theme.device.mobileM} {
     font-size: 15px;

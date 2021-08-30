@@ -9,9 +9,9 @@ import moment from "moment";
 const initialState = {
   // persist 적용을 위한 cart
   cart: [],
-  type: null,
+  type: "아침",
   //카트 기록 날짜
-  date: null,
+  date: moment().format('YYYY-MM-DD'),
 }
 
 // redux
@@ -22,14 +22,31 @@ const search = createSlice({
     
     // 카트 담기
     addCartRx : (state, action) => {
-      let index = state.cart.findIndex((cart) => cart.foodId === action.payload.foodId)
-      if (index !== -1) {
-        window.alert('이미 장바구니에 담으셨어요!');
-        return;
-      }else{
-        state.cart.unshift(action.payload);
-        // window.alert('과식은 건강에 해롭습니다.');
-      };
+      // let index = state.cart.findIndex((cart) => cart.foodId === action.payload.foodId)
+      // if (index !== -1) {
+      //   window.alert('이미 장바구니에 담으셨어요!');
+      //   return;
+      // }else{
+      //   state.cart.unshift(action.payload);
+      //   // window.alert('과식은 건강에 해롭습니다.');
+      // };
+      state.cart.unshift(action.payload);
+    },
+
+    // 식단목록 무더기로 카트에 담기
+    addCartCustomRx : (state, action) => {
+      const custom_list = action.payload;
+      console.log(custom_list);
+
+      const set_custom_list = custom_list.filter((custom, idx) => {
+        let index = state.cart.findIndex((cart) => cart.foodId === custom.foodId);
+        if (index === -1) {
+          return custom;
+        }
+      })
+      console.log(set_custom_list);
+      state.cart = [...state.cart,...set_custom_list];
+      
     },
 
     // 카트 삭제
@@ -88,6 +105,6 @@ const search = createSlice({
   }
 });
 
-export const {addCartRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate, chgType} = search.actions;
+export const {addCartRx, addCartCustomRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate, chgType} = search.actions;
 
 export default search;

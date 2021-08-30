@@ -2,7 +2,10 @@
 import DashBoard from './DashBoard';
 import Calendar from './Calendar';
 import Record from './Record';
-import CalendarDetail from './CalendarDetail';
+import CalendarDate from './CalendarDate';
+import SelfAddFood from './SelfAddFood';
+import AboutUs from './AboutUs';
+import CalendarDateEdit from './CalendarDateEdit'
 //지혁
 import Login from './Login';
 import Signup from './Signup';
@@ -11,7 +14,6 @@ import BodySpec from './BodySpec';
 import Notice from './Notice';
 import NotiDetail from './NoticeDetail';
 import NoticeWrite from './NoticeWrite';
-import Alarm from './Alarm';
 import AddSpec from './AddSpec';
 import UserFeedback from './UserFeedback';
 //용태
@@ -35,7 +37,6 @@ export {
   Notice, 
   NotiDetail, 
   NoticeWrite, 
-  Alarm,
   UserFeedback,
   Main, 
   Calendar, 
@@ -43,9 +44,12 @@ export {
   Cart, 
   Record, 
   MainSearch, 
-  CalendarDetail, 
+  CalendarDate, 
   Loading,
   Loading2,
   Loading3,
-  Loading4
+  Loading4,
+  SelfAddFood,
+  AboutUs,
+  CalendarDateEdit,
 }

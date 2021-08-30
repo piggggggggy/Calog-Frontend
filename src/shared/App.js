@@ -9,7 +9,7 @@ import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, Alarm, MainSearch, CalendarDetail, Loading, Loading2, Loading3, Loading4, UserFeedback,} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDate, Loading4, UserFeedback, SelfAddFood, AboutUs, CalendarDateEdit} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
@@ -29,11 +29,15 @@ import webImg from '../img/backImg.png';
 // lazy loading
 import LazyLoad from 'react-lazyload';
 
+// csrf
 import { get_csrf_token } from './api';
 
 const App = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+
+  // 관리자 계정
+  const admin = useSelector((state)=>state.user.user_info?.email);
 
   // login check
   useEffect(() => {
@@ -48,48 +52,52 @@ const App = (props) => {
   
   return (
     <React.Fragment>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <LazyLoad>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <LazyLoad>
 
-            {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
-            <WebVer/>
-            <FloatedBtn/>
-            <WebSearch/>
-            <Wrap>
-              <Route path="/" exact component={Main} />
-              <Route path="/search/:keyword" exact component={MainSearch} />
-              <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
-              <Route path="/cart" exact component={Cart} />
-              <Route path="/loading/" exact component={Loading4} />
-              <Route path="/loading/:url" exact component={Loading4} />
-              <Route path="/loading/:url/:date" exact component={Loading4} />
+          {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
+          <WebVer/>
+          <FloatedBtn/>
+          <WebSearch/>
+          <Wrap>
+            <Route path="/" exact component={Main} />
+            <Route path="/search/:keyword" exact component={MainSearch} />
+            <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
+            <Route path="/cart" exact component={Cart} />
+            <Route path="/loading/" exact component={Loading4} />
+            <Route path="/loading/:url" exact component={Loading4} />
+            <Route path="/loading/:url/:date" exact component={Loading4} />
 
-              <Route path="/dashboard" exact component={DashBoard}/>
-              <Route path="/calendar" exact component={Calendar}/>
-              <Route path="/calendar/:date" exact component={CalendarDetail}/>
-              <Route path="/record" exact component={Record}/>
-              <Route path="/modal" exact component={Modal}/>
+            <Route path="/dashboard" exact component={DashBoard}/>
+            <Route path="/calendar" exact component={Calendar}/>
+            <Route path="/calendar/:date" exact component={CalendarDate}/>
+            <Route path="/record" exact component={Record}/>
+            <Route path="/modal" exact component={Modal}/>
+            <Route path="/addFood" exact component={SelfAddFood}/>
+            {/* {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />} */}
+            <Route path="/onlyHQ" exact component={SelfAddFood} />
+            <Route path="/aboutUs" exact component={AboutUs}/>
+            <Route path="/calendarEdit/:date/:mealId/:type" exact component={CalendarDateEdit}/>
 
-              <Route path="/login" exact component={Login}/>
-              <Route path="/signup" exact component={Signup}/>
-              <Route path="/signsocial" exact component={SignSocial}/>
-              <Route path="/body" exact component={BodySpec}/>
-              <Route path="/addspec" exact component={AddSpec}/>
-              <Route path="/notice" exact component={Notice}/>
-              <Route path="/notice/:postid" exact component={NotiDetail}/>
-              <Route path="/notiwrite" exact component={NoticeWrite}/>
-              <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
-              <Route path="/userfeedback" exact component={UserFeedback}/>
-              <Route path="/alam" exact component={Alarm}/>
-              <Route path="/naver" exact component={Naver}/>
-              <Route path="/google" exact component={Google}/>
-              <Route path="/kakao" exact component={Kakao}/>
+            <Route path="/login" exact component={Login}/>
+            <Route path="/signup" exact component={Signup}/>
+            <Route path="/signsocial" exact component={SignSocial}/>
+            <Route path="/body" exact component={BodySpec}/>
+            <Route path="/addspec" exact component={AddSpec}/>
+            <Route path="/notice" exact component={Notice}/>
+            <Route path="/notice/:postid" exact component={NotiDetail}/>
+            <Route path="/notiwrite" exact component={NoticeWrite}/>
+            <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
+            <Route path="/userfeedback" exact component={UserFeedback}/>
+            <Route path="/naver" exact component={Naver}/>
+            <Route path="/google" exact component={Google}/>
+            <Route path="/kakao" exact component={Kakao}/>
 
-              <Nav />
-            </Wrap>
-          </LazyLoad>
-        </ThemeProvider>
+            <Nav />
+          </Wrap>
+        </LazyLoad>
+      </ThemeProvider>
     </React.Fragment>
   );
 };

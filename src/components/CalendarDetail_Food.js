@@ -12,18 +12,20 @@ import theme from '../shared/theme';
 const CalendarDetail_Food = (props) => {
   const {amount, name, resultKcal, data_type, type} = props;
 
+  const foodName = name.includes(':') ? name.split(':')[1] : name;
+
   return (
     <React.Fragment>
       {data_type === type && (
-        <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0">
+        <Grid display="flex" margin="2.5% 0 2% 0" m_margin="3% 0 2% 0" cursor="default">
 
           {/* 메뉴 */}
-          <Grid width="63%">
-            <Text size="15px" m_size="13px">{name.split(':')[1]}</Text>
+          <Grid width="100%">
+            <Text size="15px" m_size="13px">{foodName}</Text>
           </Grid>
 
           {/* 칼로리 */}
-          <Grid width="28%">
+          <Grid width="25%">
             <Text size="15px" bold m_size="13px">{resultKcal}kcal</Text>
           </Grid>
 
@@ -38,10 +40,11 @@ const CalendarDetail_Food = (props) => {
 }
 
 const Width = styled.div`
-  width:9.1%;
+  width: 15%;
+  text-align: right;
 
   @media ${theme.device.mobileM} {
-    width:12%
+    width: 20%;
   }
 `;
 

@@ -33,7 +33,6 @@ export const searchKeywordDB = (data) => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       }) 
 
   }
@@ -46,13 +45,11 @@ export const getDetailDB = (foodId) => {
     instance
       .get(`/api/home/search/detail/${foodId}`)
       .then((res) => {
-        // console.log(res)
         dispatch(getDetail(res.data.foodDetail));
         dispatch(isLoaded(true))
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       })
   }
 };
@@ -63,12 +60,10 @@ export const countKeywordDB = (keyword) => {
     instance
       .post('/api/home/search/mostUsed',{keyword: keyword})
       .then((res) => {
-        // console.log(res);
         dispatch(addMostUsedKey(keyword));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.");
       })
   }
 };
@@ -79,12 +74,10 @@ export const getMostUsedKeyDB = () => {
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
-        // console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       })
   }
 };
@@ -96,12 +89,13 @@ export const getRecommendedDB = () => {
     instance
       .get('/api/home/recommend')
       .then((res) => {
-        dispatch(getRecommended(res.data.randomList));
+        console.log(res)
+        dispatch(getRecommended(res.data.recommendFood));
         dispatch(isLoaded(true));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
+        console.log(err, "추천음식에서 오류가 나요")
       })
   }
 };
@@ -181,8 +175,7 @@ const search = createSlice({
     getDetail : (state, action) => {
       state.detail = action.payload;
     },
-
-
+    
     // 인기검색어 get
     getMostUsedKey : (state, action) => {
       state.most = action.payload;
@@ -208,6 +201,15 @@ const search = createSlice({
       state.recommend = action.payload;
     },
 
+    // 유저가 직접 등록한 칼로리
+    addUserFood : (state, action) => {
+      state.detail = action.payload;
+    }, 
+
+    // 디테일 삭제
+    delDetail : (state, action) => {
+      state.detail = []
+    },
   }
 });
 
@@ -222,7 +224,9 @@ export const {
   exactSort, 
   getScrollData, 
   getDetail,
-  getRecommended
+  getRecommended,
+  addUserFood,
+  delDetail
 } = search.actions;
 
 export default search;

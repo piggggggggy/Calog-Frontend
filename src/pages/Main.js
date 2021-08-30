@@ -36,16 +36,14 @@ const Main = (props) => {
   // 카트목록의 유무 확인
   const cart_list = useSelector((state) => state.cart.cart);
 
-
   // 최근검색어, 즐겨찾기, 추천음식, 인기검색어
   useEffect(() => {
     if (is_login) {
       dispatch(getRecentDB());
       dispatch(getFavoriteDB());
     }
-    dispatch(getRecommendedDB())
+    dispatch(getRecommendedDB());
     dispatch(getMostUsedKeyDB());
-
   }, []);
 
   // 홈 화면 추가 안내
@@ -63,8 +61,8 @@ const Main = (props) => {
 
   // 로그인 페이지 이동!
   const confirm = () => {
-    if (window.confirm("로그인이 필요한 기능이에요! 로그인 페이지로 이동하시겠어요?")) {
-      history.push('/signsocial');
+    if (window.confirm("피드백 페이지로 이동하시겠어요?")) {
+      history.push('/userfeedback');
     } else {
       return;
     }
@@ -85,7 +83,7 @@ const Main = (props) => {
       <LogoHeader/>
       <MainBody/>
 
-      <FloatFeedback style={cart_list.length === 0 ? {bottom: "11%"} : {bottom: "20%"}}>
+      <FloatFeedback>
         <svg 
           onClick={()=>{is_login ? history.push("/userfeedback") : confirm() }} 
           width="12vh" height="12vh" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +153,7 @@ const FloatFeedback = styled.div`
     top: -50%;
   }
 
-  @media only screen and (min-width: 421px) {
+  @media only screen and (min-width: 1023px) {
     display: none;
   }
 `;

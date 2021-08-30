@@ -89,22 +89,22 @@ const DashBoard_Food = (props) => {
         {is_login ? (
 
           // 칼로리 검색 페이지 이동 버튼
-          <Grid margin="6.5% auto" width="94%" m_margin="7% auto">
+          <Grid margin="6.5% auto" width="94%" m_margin="7% auto" cursor="pointer">
             <Button
               _onClick={() => history.push('/')}
               height="56px" border_radius="60px" bg={theme.color.light}>
-              <Text size="16px" bold m_size="14px">칼로리 등록하기</Text>
+              <Text size="16px" bold m_size="14px" cursor="pointer">칼로리 등록하기</Text>
             </Button>
           </Grid>
         ) : (
 
           // case2-2) 비유저여서 기록이 없는 경우
           // 로그인 페이지 이동 버튼
-          <Grid margin="6.5% auto" width="94%" m_margin="7% auto">
+          <Grid margin="6.5% auto" width="94%" m_margin="7% auto" cursor="pointer">
             <Button
               _onClick={() => history.push('/signsocial')}
               height="56px" border_radius="60px" bg={theme.color.light}>
-              <Text size="16px" bold m_size="14px">로그인하기</Text>
+              <Text size="16px" bold m_size="14px" cursor="pointer">로그인하기</Text>
             </Button>
           </Grid>
         )}
@@ -121,6 +121,7 @@ const List = styled.div`
 const P = styled.p`
   font-size: 20px;
   font-weight: bold;
+  cursor: default;
 
   @media ${theme.device.mobileM} {
     font-size: 17px;

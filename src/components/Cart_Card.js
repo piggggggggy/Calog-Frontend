@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // elements & components
 import { Grid, Text } from '../elements';
@@ -11,6 +11,8 @@ import { TiDeleteOutline } from 'react-icons/ti';
 
 // modules
 import { setUpAmount, setDownAmount, deleteCartRx } from '../redux/modules/cart';
+import { forDel, editUpAmount, editDownAmount } from '../redux/modules/food';
+import { history } from '../redux/configStore';
 
 // theme
 import theme from '../shared/theme'
@@ -25,18 +27,19 @@ import theme from '../shared/theme'
 const Card = (props) => {
 
   const dispatch = useDispatch();
-  
 
+  // 식단 편집에서 넘어옴 체크
+  const editChk = history.location.pathname.includes('calendarEdit')
+  
   // 갯수 카운팅하기!
   const [count, setCount] = useState(props.amount);
-  console.log(count);
   const upCount = () => {
     if (count >= 0.5){
       setCount(count + 0.5);
-      dispatch(setUpAmount(props.foodId));
+      !editChk ? dispatch(setUpAmount(props.foodId)) : dispatch(editUpAmount(props.foodId));
     } else {
       setCount(Number((count + 0.1).toFixed(1)));
-      dispatch(setUpAmount(props.foodId));
+      !editChk ?  dispatch(setUpAmount(props.foodId)) : dispatch(editUpAmount(props.foodId));
     }
 
   };
@@ -44,10 +47,10 @@ const Card = (props) => {
   const downCount = () => {
     if(count > 0.5){
       setCount(count - 0.5);
-      dispatch(setDownAmount(props.foodId));
+      !editChk ?  dispatch(setDownAmount(props.foodId)) : dispatch(editDownAmount(props.foodId));
     } else if (count > 0.1) {
       setCount(Number((count - 0.1).toFixed(1)));
-      dispatch(setDownAmount(props.foodId));
+      !editChk ?  dispatch(setDownAmount(props.foodId)) : dispatch(editDownAmount(props.foodId));
     }
   };
 
@@ -63,8 +66,9 @@ const Card = (props) => {
     }
   }
 
+  // 식단 편집에서 넘어온 경우 리스트에서 삭제
   const deleteCart = () => {
-    dispatch(deleteCartRx(props.foodId))
+    !editChk? dispatch(deleteCartRx(props.foodId)) : dispatch(forDel(props.foodId))
   }
 
   // 브랜드명 분리
@@ -86,7 +90,11 @@ const Card = (props) => {
             <NameBox>{name}</NameBox>
           
             {/* kcal */}
-            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">{Math.round(props.kcal * 10)/10} kcal</Text>
+            <Text lineheight="28px" m_lineheight="25px" size="22px" m_size="20px" bold color="#2A2A2A" margin="0.9vh 0 0 0" padding="0">
+              {Math.round(props.kcal * 10)/10} kcal
+              <ForOne> / {props.forOne + props.measurement}</ForOne>
+            </Text>
+
           </Grid>
           
           {/* 카운트 */}
@@ -97,21 +105,25 @@ const Card = (props) => {
           </CountBox>
 
           {/* 삭제버튼 */}
-          <DeleteBtn onClick={openDelete}>
+          <DeleteBtn onClick={!editChk ? openDelete : deleteCart}>
             <TiDeleteOutline size="21px" color="#BABABA"/>
           </DeleteBtn>
 
         </FoodCard>
-        <DeleteBar 
-          style={del? {opacity: "1"} : {opacity: "0"}}
-          onClick={deleteCart}
-          >
-          <div>
-            <svg width="2.2vh" height="2.2vh" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19.3337 2.54675L17.4537 0.666748L10.0003 8.12008L2.54699 0.666748L0.666992 2.54675L8.12033 10.0001L0.666992 17.4534L2.54699 19.3334L10.0003 11.8801L17.4537 19.3334L19.3337 17.4534L11.8803 10.0001L19.3337 2.54675Z" fill="#5F5F5F"/>
-            </svg>  
-          </div>
-        </DeleteBar>
+
+        {/* 식단 편집에서 넘어오는 경우 삭제 슬라이더 없앰 */}
+        {!editChk && (
+          <DeleteBar 
+            style={del? {opacity: "1"} : {opacity: "0"}}
+            onClick={deleteCart}
+            >
+            <div>
+              <svg width="2.2vh" height="2.2vh" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.3337 2.54675L17.4537 0.666748L10.0003 8.12008L2.54699 0.666748L0.666992 2.54675L8.12033 10.0001L0.666992 17.4534L2.54699 19.3334L10.0003 11.8801L17.4537 19.3334L19.3337 17.4534L11.8803 10.0001L19.3337 2.54675Z" fill="#5F5F5F"/>
+              </svg>  
+            </div>
+          </DeleteBar>
+        )}
       </CardContainer>
       
     </React.Fragment>
@@ -143,6 +155,7 @@ const DeleteBar = styled.div`
   opacity: 0;
   transition: 1s ease;
   z-index: 3;
+  cursor: pointer;
 
   @media ${theme.device.mobileM} {
     top: calc(32.5px - 0.65vh);
@@ -186,6 +199,7 @@ const NameBox = styled.div`
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-family: 'Pretendard';
 
   @media ${theme.device.mobileM} {
     line-height: 18px; 
@@ -193,17 +207,19 @@ const NameBox = styled.div`
   }
 `;
 
+const ForOne = styled.span`
+  font-size: 15px;
+  font-weight: bold;
+  color: #939393;
+
+`;
+
 const CountBox = styled.div`
-  /* min-width: 32%;
-  max-width: 32%; */
-  /* padding: 0 4.8%; */
   display: flex;
   align-items: center;
   justify-content: space-between;  
 
   & > div {
-    /* width: 5vw;
-    height: 5vw; */
     margin: 0;
     padding: 0;
     cursor: pointer;

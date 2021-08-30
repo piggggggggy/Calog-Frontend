@@ -39,7 +39,7 @@ const Calendar = (props) => {
 
       {/* 헤더 */}
       <Grid padding="13.5% 0 0 5.8%">
-        <Text size="28px" bold m_size='22px'>캘린더</Text>
+        <Text size="28px" bold m_size='22px' cursor="default">캘린더</Text>
       </Grid>
 
       {/* 캘린더 */}

@@ -11,6 +11,9 @@ import Loading from '../pages/Loading2';
 // modules
 import { getRecommendedDB } from '../redux/modules/search';
 
+// horizontal scroll
+import HorizontalScroll from "react-scroll-horizontal";
+
 /** 
  * @param {*} props
  * @returns 추천음식
@@ -22,45 +25,12 @@ const RcmdList = (props) => {
 
   // 추천 리스트
   const recommended_list = useSelector((state) => state.search.recommend);
-  console.log(recommended_list);
   
   // 이름 가져오기위해!
   const user = useSelector((state) => state.user.user_info);
 
   // 로그인 체크
   const is_login = useSelector((state) => state.user.is_login);
-  
-  // 횡 스와이프 구현!
-  const refX = useRef(null);
-  const [isDrag, setDrag] = useState(false);
-  const [startX, setStart] = useState();
-
-  const dragStart = (e) => {
-    e.preventDefault();
-    setDrag(true);
-    setStart(e.pageX + refX.current.scrollLeft)
-  };
-
-  const dragEnd = (e) => {
-    setDrag(false);
-  };
-
-  const dragMove = (e) => {
-    if (isDrag) {
-      const { scrollWidth, clientWidth, scrollLeft } = refX.current;
- 
-      refX.current.scrollLeft = startX - e.pageX;
-
-      if (scrollLeft === 0) {
-        setStart(e.pageX);
-      } else if (scrollWidth <= clientWidth + scrollLeft) {
-        setStart(e.pageX + scrollLeft);
-      }
-    }
-  };
-
-  const delay = 50;
-  const throttleDragMove = throttle(dragMove, delay);
 
   return (
     <React.Fragment>
@@ -73,16 +43,13 @@ const RcmdList = (props) => {
       </TitleBox>
 
       {/* 추천리스트 */}
-      <RecommendContainer 
-        onMouseDown={dragStart}
-        onMouseMove={isDrag ? throttleDragMove : null}
-        onMouseUp={dragEnd}
-        onMouseLeave={dragEnd}
-        ref={refX}
-        >
-        {recommended_list && recommended_list.map((r, idx) => {
-          return <CardRcmd key={r.foodId} {...r}/>
-        })}
+      <RecommendContainer>
+          <HorizontalScroll>
+            {recommended_list && recommended_list.map((r, idx) => {
+              return <CardRcmd key={idx} {...r}/>
+            })}
+          </HorizontalScroll>
+        
       </RecommendContainer>
     </React.Fragment>
   );
@@ -100,11 +67,11 @@ const TitleBox = styled.div`
 
 const RecommendContainer = styled.div`
   position: relative;
+  height: 13.5vh;
+  min-height: 110px;
   margin: 1.7vh 0 0 0;
-  padding: 0 3% 3vh 5.2%;
   display: flex;
   align-items: center;
-  /* gap: 1.7vh; */
   overflow-x: scroll;
   z-index: 5;
 

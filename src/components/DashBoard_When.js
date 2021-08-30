@@ -101,25 +101,50 @@ const DashBoard_When = (props) => {
   // 선택된 type에 따라 css변경, 타입과 총 칼로리 리덕스 저장
   const selectType = (type) => {
     if(type === "morning") {
-      setType("아침")
-      dispatch(typeChk("아침"))
-      dispatch(ttlKcal(morning_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("아침")
+        dispatch(typeChk("아침"))
+        dispatch(ttlKcal(morning_kcal))
+      }
     }else if (type === "lunch") {
-      setType("점심") 
-      dispatch(typeChk("점심"))
-      dispatch(ttlKcal(lunch_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("점심") 
+        dispatch(typeChk("점심"))
+        dispatch(ttlKcal(lunch_kcal))
+      }
     }else if (type === "dinner") {
-      setType("저녁")
-      dispatch(typeChk("저녁"))
-      dispatch(ttlKcal(dinner_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("저녁")
+        dispatch(typeChk("저녁"))
+        dispatch(ttlKcal(dinner_kcal))
+      }
     }else if (type === "snack") {
-      setType("간식")
-      dispatch(typeChk("간식"))
-      dispatch(ttlKcal(snack_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("간식")
+        dispatch(typeChk("간식"))
+        dispatch(ttlKcal(snack_kcal))
+      }
     }else if (type === "midnightSnack") {
-      setType("야식")
-      dispatch(typeChk("야식"))
-      dispatch(ttlKcal(night_kcal))
+      if (history.location.pathname.includes('calendar') && props.inputMemo) {
+        window.alert('기록 중인 메모가 있어요!')
+        return;
+      } else {
+        setType("야식")
+        dispatch(typeChk("야식"))
+        dispatch(ttlKcal(night_kcal))
+      }
     };
   };
 
@@ -132,7 +157,7 @@ const DashBoard_When = (props) => {
 
           {/* 아침 */}
           <When onClick={()=> {selectType('morning')}}>
-            <Text size="17px" bold color={type === "아침" ? 'black' : '#c4c4c4'} m_size="15px">아침</Text>
+            <Text size="17px" bold color={type === "아침" ? 'black' : '#c4c4c4'} m_size="15px" cursor="pointer">아침</Text>
             <Dot>
               <Grid display={type === "아침" ? 'block' : 'none'}>
                 <FaCircle size="7px" color="#F19F13"/>
@@ -142,7 +167,7 @@ const DashBoard_When = (props) => {
 
           {/* 점심 */}
           <When onClick={()=> {selectType('lunch')}}>
-            <Text size="17px" bold color={type === "점심" ? 'black' : '#c4c4c4'} m_size="15px">점심</Text>
+            <Text size="17px" bold color={type === "점심" ? 'black' : '#c4c4c4'} m_size="15px" cursor="pointer">점심</Text>
             <Dot>
               <Grid display={type === "점심" ? 'block' : 'none'}>
                 <FaCircle size="7px" color="#F19F13"/>
@@ -152,7 +177,7 @@ const DashBoard_When = (props) => {
 
           {/* 저녁 */}
           <When onClick={()=> {selectType('dinner')}} >
-            <Text size="17px" bold color={type === "저녁" ? 'black' : '#c4c4c4'} m_size="15px">저녁</Text>
+            <Text size="17px" bold color={type === "저녁" ? 'black' : '#c4c4c4'} m_size="15px" cursor="pointer">저녁</Text>
             <Dot>
               <Grid display={type === "저녁" ? 'block' : 'none'}>
                 <FaCircle size="7px" color="#F19F13"/>
@@ -162,7 +187,7 @@ const DashBoard_When = (props) => {
 
           {/* 간식 */}
           <When onClick={()=> {selectType('snack')}} >
-            <Text size="17px" bold color={type === "간식" ? 'black' : '#c4c4c4'} m_size="15px">간식</Text>
+            <Text size="17px" bold color={type === "간식" ? 'black' : '#c4c4c4'} m_size="15px" cursor="pointer">간식</Text>
             <Dot>
               <Grid display={type === "간식" ? 'block' : 'none'}>
                 <FaCircle size="7px" color="#F19F13"/>
@@ -172,7 +197,7 @@ const DashBoard_When = (props) => {
 
           {/* 야식 */}
           <When onClick={()=> {selectType('midnightSnack')}}>
-            <Text size="17px" bold color={type === "야식" ? 'black' : '#c4c4c4'} m_size="15px">야식</Text>
+            <Text size="17px" bold color={type === "야식" ? 'black' : '#c4c4c4'} m_size="15px" cursor="pointer">야식</Text>
             <Dot>
               <Grid display={type === "야식" ? 'block' : 'none'}>
                 <FaCircle size="7px" color="#F19F13"/>

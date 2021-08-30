@@ -4250,10 +4250,10 @@ autoprefixer@^9.6.1:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
-aws-sdk@^2.975.0:
-  version "2.975.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.975.0.tgz#0adc8126fd5cd48ea70bf7741fe7ef2e88ad17be"
-  integrity sha512-cmRcM+gU+rfW1RZjca3bdbRTQV6WHuCI6NuqnDgd5HoqufylCrNI/wtysPK1IMJLsAhrcsY0U0YRx+Y/hxQNoQ==
+aws-sdk@^2.978.0:
+  version "2.978.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.978.0.tgz#aba16756aab7e46d476d8f160a10a05ef3712afd"
+  integrity sha512-UO1HP2b9FFtPhc5KbzEJ9oMBdzCmVv9nQTb+yIEh6SajcaErmK/ryleLOuPq9EsirE6wgb6mtf2qodRFucUA3g==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -5237,6 +5237,11 @@ clone@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
+
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
 co@^4.6.0:
   version "4.6.0"
@@ -12064,6 +12069,11 @@ react-hook-inview@^4.3.10:
   resolved "https://registry.yarnpkg.com/react-hook-inview/-/react-hook-inview-4.3.10.tgz#4e3d79ea1aa3974f262ece70f777b61d8e958974"
   integrity sha512-B6/RzTSqVKAJSe4h/yAv1Eb5OR67xEVFYZgezZ8Yj2/hct7QTTiuqtTkhvvYdL90NQ1fkz4S71cqlWJfj6OlEw==
 
+react-horizontal-scrolling-menu@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/react-horizontal-scrolling-menu/-/react-horizontal-scrolling-menu-2.0.7.tgz#40e5df1cf09c5574664cf06b08758cd6e3ff5c92"
+  integrity sha512-yiGJBZ5YBUxw3dMVilEeZKS6uwfwsLUVYwnHGwLWxcDTb2QNH5ZpML1H+Ii+wuGLOlx6fSMyamEAfUbUnbxpjA==
+
 react-hot-loader@^4.13.0:
   version "4.13.0"
   resolved "https://registry.npmjs.org/react-hot-loader/-/react-hot-loader-4.13.0.tgz"
@@ -12267,6 +12277,13 @@ react-scripts@4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
+react-scroll-horizontal@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/react-scroll-horizontal/-/react-scroll-horizontal-1.6.6.tgz#b887be6a4e3a116054783b496c0ae8b50bfaab32"
+  integrity sha512-aR5xE+5EOTQhhrljztHT5qqKEiYU+mKTePaQZJQqikREN0brNfpZst7QP2iEeQo8aip+r7ljTxQZOmfT3OwdSg==
+  dependencies:
+    react-motion "^0.5.2"
+
 react-side-effect@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
@@ -12287,6 +12304,13 @@ react-st-modal@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/react-st-modal/-/react-st-modal-1.1.3.tgz#9f51b2028ceef2b9d1ed4abeca68211b619067bb"
   integrity sha512-QNAKjxPPKcHHGDKvXjcTkGgSzxd495nBxunGf3t4XfKjEDARKANcFg8yC1a3T2h/kXKB+YQfVuR5bK9iERWDDg==
+
+react-toastify@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-8.0.1.tgz#5787e0bc3fc3106c264fcafe101e77650b9448ba"
+  integrity sha512-hHf4sJo9D+SKPcNM5iiri1UDXjZkDvflMGCPNnfm4fjUEC3rH4tRqOQB5IXjroEtArRRf3f26nTsKdficEBBIg==
+  dependencies:
+    clsx "^1.1.1"
 
 react-tween-state@^0.1.5:
   version "0.1.5"

@@ -23,10 +23,9 @@ import { store, persistor } from './redux/configStore';
 Sentry.init({
   // 환경에 상관없이
   dsn: process.env.REACT_APP_SENTRY_DSN,
-  // dsn: "https://642520931c36496a813e99643535804f@o968220.ingest.sentry.io/5919723",
   // 프로덕션 만
   // dsn: process.env.NODE_ENV === "production"
-  //   ? "https://642520931c36496a813e99643535804f@o968220.ingest.sentry.io/5919723"
+  //   ? process.env.REACT_APP_SENTRY_DSN
   //   : false,
   integrations: [new Integrations.BrowserTracing()],
   // environment: process.env.NODE_ENV,
