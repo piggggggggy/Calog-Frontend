@@ -10,6 +10,5 @@ export const get_csrf_token = () => {
         document.cookie = `CSRF_TOKEN=${res.data.csrfToken};`;
     })
     .catch((err) => {
-        console.log(err);
     })
 };

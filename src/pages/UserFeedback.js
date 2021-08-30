@@ -112,7 +112,6 @@ const Feedback = (props) => {
         
       } catch (err) {
         window.alert("제출에 실패했어요. 관리자에게 문의해주세요!")
-        console.log(err, "제출 에러남")
       }
     } else {
       if(!goodContents || !badContents) {

@@ -75,7 +75,6 @@ export const SignupSV = (user_info) => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log("err of SignupDB", err);
         })
     };
 };
@@ -127,7 +126,6 @@ export const LoginCheck = () => { //토큰 없어도 응답 옴
         .catch((err) => {
             // Sentry.captureException(`Catched Error : ${err}`);
             // Sentry.captureException(err);
-            console.log("err of login check", err);
         })
     };
 };
@@ -165,7 +163,6 @@ export const BodySpectSV = (gender, weight, height, age) => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     }
 };
@@ -177,7 +174,7 @@ export const ProfileSV = (url) => {
         .then((res) => {
             dispatch(Profile(url));
         })
-        .catch((err)=>{console.log(err)});
+        .catch((err)=>{});
     }
 };
 
@@ -187,10 +184,9 @@ export const ModifyNickSV = (nickname) => {
         instance
         .put('/api/user/update-nickname', {nickname})
         .then((res) => {
-            console.log(res);
             dispatch(ModifyNick(nickname));
         })
-        .catch((err) => {console.error(err);});
+        .catch((err) => {});
     }
 }
 

@@ -79,7 +79,6 @@ const CartBody = (props) => {
 
   const recordDB = () => {
     if(is_login){
-  console.log(cart.date)
 
       dispatch(addCartDB(cart.date, cart_list, cart.type))
     } else {

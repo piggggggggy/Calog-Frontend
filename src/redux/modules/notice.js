@@ -24,7 +24,6 @@ export const getNoticeSV = () => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };
@@ -38,7 +37,6 @@ export const postNoticeSV = (noticelist) => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };
@@ -48,11 +46,9 @@ export const putNotiSV = (updatelist, noticeId) => {
         instance
         .put(`/api/notice/${noticeId}`, updatelist)
         .then((res) => {
-            console.log(res);
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };
@@ -62,12 +58,10 @@ export const deleteNotiSV = (noticeId) => {
         instance
         .delete(`/api/notice/${noticeId}`, {data:{password:"zkffhfltm1@"}})
         .then((res) => {
-            console.log(res);
             history.push("/notice");
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };
@@ -83,7 +77,6 @@ export const getNotiDetailSV = (noticeId) => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };
@@ -99,7 +92,6 @@ export const foodFeedBack = (contents) => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err, '에너 났어요');
         });
     };
 };
