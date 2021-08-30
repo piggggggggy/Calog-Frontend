@@ -42,6 +42,10 @@ import S3upload from 'react-aws-s3';
 const CalendarDate = (props) => {
   const dispatch = useDispatch();
 
+  // 기록
+  const record_list = useSelector((state) => state.record.record);
+  const record_map = record_list?.foodRecords;
+
   // 화면 로딩 시 선택한 날짜의 기록 데이터 불러오기
   useEffect(() => {
     dispatch(getRecordDB(SelectDate))
@@ -51,10 +55,6 @@ const CalendarDate = (props) => {
   // 날짜
   const _SelectDate = history.location.pathname.split('/');
   const SelectDate = _SelectDate[2];
-
-  // 기록
-  const record_list = useSelector((state) => state.record.record);
-  const record_map = record_list?.foodRecords;
 
   // 기록한 날짜
   const record_date = record_list?.date;
@@ -281,7 +281,7 @@ const CalendarDate = (props) => {
 
         {/* 식단title */}
         <Grid display="flex" jc="space-between" margin="6% auto 0 auto" m_margin="6% auto 0 auto" width="87%">
-          <Button width="13.5%" height="25px" bg={theme.color.light} border_radius="15.5px" margin="0">
+          <Button width="13.5%" height="25px" bg={theme.color.light} border_radius="15.5px" margin="0" cursor>
             <Text size="13px" bold>식단</Text>
           </Button>
 

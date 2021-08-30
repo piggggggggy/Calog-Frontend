@@ -121,6 +121,7 @@ const List = styled.div`
 const P = styled.p`
   font-size: 20px;
   font-weight: bold;
+  cursor: default;
 
   @media ${theme.device.mobileM} {
     font-size: 17px;

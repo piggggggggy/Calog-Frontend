@@ -82,7 +82,7 @@ const CalendarDateEdit = (props) => {
 
       {/* 수정하기 버튼 */}
       <Button bg={theme.color.light} width="93%" height="7.5vh" border_radius="44px" margin="19% auto 0 auto" _onClick={editBtn}>
-        <Text size="16px" bold m_size="14px">수정하기</Text>
+        <Text size="16px" bold m_size="14px" cursor="pointer">수정하기</Text>
       </Button>
     </React.Fragment>
   );

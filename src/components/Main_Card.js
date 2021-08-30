@@ -15,9 +15,8 @@ import { addUserFood } from '../redux/modules/search';
 import { delUserFoodDB } from '../redux/modules/food';
 
 // icons
-import { IoStar, IoTrashBinSharp } from 'react-icons/io5';
-import { FaTrashAlt } from 'react-icons/fa';
-import { BiTrash } from 'react-icons/bi';
+import { IoStar } from 'react-icons/io5';
+import { FaRegIdBadge, FaTrashAlt } from 'react-icons/fa';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 
 
@@ -155,7 +154,7 @@ const Card = (props) => {
         {/* 유저가 직접 등록한 데이터의 경우 즐겨찾기는 default, 해제 시 삭제 */}
         {props.title === "useAdd" ? (
           <BookmarkBox onClick={delCreateFood}>
-            <IoTrashBinSharp style={{color:"black"}} width="100%"/>
+            <FaTrashAlt style={{color:"rgba(95,95,95,0.5)"}} width="100%"/>
           </BookmarkBox>
         ) : (
           <BookmarkBox  onClick={addFavorite}>

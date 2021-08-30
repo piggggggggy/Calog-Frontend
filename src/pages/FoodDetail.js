@@ -58,7 +58,7 @@ const FoodDetail = (props) => {
 
   // 대사량과 나의 칼로리 기록
   const bmr = !is_login ? 0 : user.bmr[0]?.bmr === 0 ? 0 : user.bmr[0]?.bmr;
-  const foodRecord = record.length === 0 ? [] : record[0].foodRecords;
+  const foodRecord = record?.length === 0 ? [] : record[0]?.foodRecords;
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
