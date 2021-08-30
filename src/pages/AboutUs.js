@@ -23,9 +23,6 @@ import trio from '../img/trio.png';
 */
 
 const AboutUs = (props) => {
-// dispatch
-// props
-// useEffect
 
   return (
     <Wrap>
