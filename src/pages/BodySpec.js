@@ -195,7 +195,7 @@ return (
           :
             <Text m_size="23px" bold lineheight="34px" size="28px" margin="0">{user_info?.nickname}</Text>
           }
-            <EditBtn onClick={()=>{nickModifyClass?modify_nick():setNickClass(1)}}>
+            <EditBtn onClick={()=>{nickModifyClass ? modify_nick() : setNickClass(1)}}>
               <GrEdit/>
             </EditBtn>
           </Grid>

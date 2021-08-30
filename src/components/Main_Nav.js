@@ -8,6 +8,8 @@ import { Text, Button } from '../elements';
 
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
+import { IoTrashBinSharp } from 'react-icons/io5';
+
 
 // modules
 import { GetCustomList } from '../redux/modules/DietCustom';
@@ -49,7 +51,7 @@ const Main_Nav = () => {
                                             {custom.name}
                                         </Text>
                                         <CartBox onClick={addCartCustom}>
-                                            <BsFillPlusSquareFill  color="#F19F13" size="24px"/>
+                                            <IoTrashBinSharp  color="#F19F13" size="24px"/>
                                         </CartBox>
                                     </TitleBox>
                                     
