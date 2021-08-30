@@ -8,37 +8,49 @@ import { Text, Button } from '../elements';
 
 // icons
 import { BsFillPlusSquareFill } from 'react-icons/bs';
-import { IoTrashBinSharp } from 'react-icons/io5';
-
+import { FaTrashAlt } from 'react-icons/fa';
 
 // modules
 import { GetCustomList } from '../redux/modules/DietCustom';
 import { addCartCustomRx } from '../redux/modules/cart';
+import { DeleteCustomDB } from '../redux/modules/DietCustom';
+
 
 const Main_Nav = () => {
+    
     const dispatch = useDispatch();
 
+    // 커스텀 리스트 불러오기
     useEffect(()=>{
     dispatch(GetCustomList());
     },[]);
 
     const custom_list = useSelector((state)=>state.custom.custom);
 
+    // 삭제
+    
     return (
         <React.Fragment>
             {/* 나의 식단 커스텀 */}
                 <PostContainer >
                     {custom_list.length>0?
                         custom_list.map((custom, idx) => {
-                            // console.log(custom.foodList);
+                            // console.log(custom);
 
                             const addCartCustom = () => {
                                 const data = custom.foodList;
                                 dispatch(addCartCustomRx(data));
                             };
+                            const deleteCustom = (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                const mealId = custom.mealId;
+                                dispatch(DeleteCustomDB(mealId))
+                            }
+                        
 
                             return (
-                                <Post key={idx}>
+                                <Post key={idx} onClick={addCartCustom}>
                                     <TitleBox>
                                         <Text 
                                         bold 
@@ -47,11 +59,12 @@ const Main_Nav = () => {
                                         size="15px" m_size="15px" 
                                         margin="0" padding="0"
                                         overflow="hidden" ws="nowrap" to
+                                        // color="#F19F13"
                                         >
                                             {custom.name}
                                         </Text>
-                                        <CartBox onClick={addCartCustom}>
-                                            <IoTrashBinSharp  color="#F19F13" size="24px"/>
+                                        <CartBox onClick={deleteCustom}>
+                                            <FaTrashAlt  color="#BABABA" size="20px"/>
                                         </CartBox>
                                     </TitleBox>
                                     
@@ -91,6 +104,7 @@ const Post = styled.div`
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 16px;
     padding: 1.7vh 4.5%;
+    cursor: pointer;
 
     @media ${theme.device.mobileHH} {
         max-height: 168px;
@@ -133,13 +147,17 @@ const TitleBox = styled.div`
     position: relative;
     height: 2.7vh;
     margin-bottom: 1.3vh;
+    cursor: pointer;
 `;
+
 const ListBox = styled.div`
     height: 10.6vh;
     display: flex;
     flex-direction: column;
     column-gap: 0.6vh;
     overflow: scroll;
+    cursor: pointer;
+
 
     &::-webkit-scrollbar {
     display: none;
