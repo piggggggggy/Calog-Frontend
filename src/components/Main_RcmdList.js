@@ -44,7 +44,13 @@ const RcmdList = (props) => {
       </TitleBox>
 
       {/* 추천리스트 */}
-      {!window.navigator.standalone ?
+      {window.navigator.standalone || window.navigator.fullscreen || window.navigator.browser ?
+          <RecommendContainerM>
+            {recommended_list && recommended_list.map((r, idx) => {
+              return <CardRcmd2 key={idx} {...r}/>
+            })}
+          </RecommendContainerM>
+      :
           <RecommendContainer>
             <HorizontalScroll>
               {recommended_list && recommended_list.map((r, idx) => {
@@ -52,12 +58,6 @@ const RcmdList = (props) => {
               })}
             </HorizontalScroll>
           </RecommendContainer>
-      :
-        <RecommendContainerM>
-          {recommended_list && recommended_list.map((r, idx) => {
-            return <CardRcmd2 key={idx} {...r}/>
-          })}
-        </RecommendContainerM>
         }
     </React.Fragment>
   );
