@@ -27,7 +27,6 @@ export const getWorkoutDB = () => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err)
       }) 
   }
 };
@@ -42,7 +41,6 @@ export const addBodySpecDB = (bodySpec) => {
     instance
       .put('/api/calendar/blind', {weightBlind: weightBlindDB, heightBlind: heightBlindDB , bmrBlind: bmrBlindDB})
       .then((res) => {
-        console.log(res)
         dispatch(saveBlind(res.data))
       })
       .catch((err) => {

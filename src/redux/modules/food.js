@@ -79,7 +79,6 @@ export const delUserFoodDB = (mealId) => {
     instance
       .delete(`/api/customize/newFood/${mealId}`)
       .then((res) => {
-        console.log(res)
         dispatch(delUserFood(mealId))
       })
       .catch((err) => {

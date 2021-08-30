@@ -6,11 +6,14 @@ import { history } from '../redux/configStore';
 
 // elements & components
 import Card from './Main_Card';
-import { Grid, Text } from '../elements';
+import { Grid, Text, Image } from '../elements';
 import Loading from '../pages/Loading2';
 
 // modules
 import { getFavoriteDB } from '../redux/modules/favorite';
+
+// img
+import addFood from '../img/addFood.png';
 
 /** 
  * @param {*} props
@@ -81,9 +84,7 @@ const FavoList = (props) => {
               })}
             </React.Fragment>
           ) : (
-            <AddFoodBtn onClick={() => {history.push('/addFood')}}>
-              <P>음식 직접 등록하기</P>
-            </AddFoodBtn>
+            <Image src={addFood} width="85%" height="15vh" margin="2% auto 0 auto" _onClick={() => history.push('/addFood')} cursor="pointer"/>
           )}
         </CardContainer>
       )}

@@ -21,7 +21,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Main_Nav = () => {
-    
     const dispatch = useDispatch();
 
     // 커스텀 리스트 불러오기
@@ -119,10 +118,8 @@ const Main_Nav = () => {
                     :
                     <></>
                     }
-
-
-            </PostContainer>
-        </React.Fragment>
+    </PostContainer>
+  </React.Fragment>
     )
 }
 

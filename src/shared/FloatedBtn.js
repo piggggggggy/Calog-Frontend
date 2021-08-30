@@ -86,12 +86,10 @@ const FloatedBtn = (props) => {
       const S3upload = new S3(config);
       const fileName = file.current.files[0].name;
       const refFile = file.current.files[0];
-      console.log(S3upload)
 
       try {
         const resizeFile = await imageCompression(refFile, options);
         S3upload.uploadFile(resizeFile, fileName).then((res) =>{
-          console.log(res)
           if (res.status === 204) {
             const url = res.location;
 
@@ -124,7 +122,6 @@ const FloatedBtn = (props) => {
 
       } catch (err) {
         window.alert("제출에 실패했어요. 관리자에게 문의해주세요!")
-        console.log(err, "제출 에러남")
       }
     } else {
 
@@ -144,7 +141,6 @@ const FloatedBtn = (props) => {
         })
         .catch((err)=>{
           Sentry.captureException(`Catched Error : ${err}`);
-          console.log("피드백전송에 오류가 있어요!",err)
         });
       } else {
         window.alert("필수항목을 모두 입력해주세요!")

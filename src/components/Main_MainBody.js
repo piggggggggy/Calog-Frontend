@@ -12,7 +12,7 @@ import { getUserAddFoodDB } from '../redux/modules/food';
 import { getFavoriteDB } from '../redux/modules/favorite';
 
 // elements & components
-import { Grid, Text } from '../elements';
+import { Grid, Text, Image } from '../elements';
 import RangeSlider from './Main_RangeSlider';
 import UnderBar from './Main_UnderBar';
 import FavoList from './Main_FavoList';
@@ -20,6 +20,7 @@ import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
 import Loading from '../pages/Loading4';
 import MainNav from './Main_Nav';
+import makeFoodNone from '../img/makeFoodNone.png';
 
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
@@ -115,6 +116,9 @@ const MainBody = (props) => {
 
   // history tab 관리
   const styles = _history ? {display: "none"} : {display: "block"};
+
+  // 커스텀 식단
+  const customFood = useSelector((state) => state.custom.custom)
 
   // nav
   const [navFocus, setFocus] = useState(0);
@@ -244,7 +248,16 @@ const MainBody = (props) => {
 
         {/* 나의 식단  */}
         {navFocus === 1 && (
-          <MainNav /> 
+          <React.Fragment>
+          <BodyContainer>
+            {is_login && customFood.length !== 0 ? <MainNav />  : ''}
+          </BodyContainer>
+          {!is_login || customFood.length === 0 ? 
+          <Mascort_makeFood>
+            <Image src={makeFoodNone} width="100%" height="40vh"/>
+          </Mascort_makeFood>
+          : <></>}
+        </React.Fragment>
         )}
 
         {/* 직접 등록 칼로리 */}
@@ -401,6 +414,28 @@ const Mascort = styled.div`
   width: 100%;
   bottom: 9%;
 
+  @media ${theme.device.mobileM} {
+    bottom: 7%;
+  }
+  @media ${theme.device.mobileS} {
+    bottom: -3%;
+  }
+  @media ${theme.device.mobileF} {
+    bottom: 3%;    
+  }
+
+`;
+
+const Mascort_makeFood = styled.div`
+  position: fixed;
+  max-width: 420px;
+  width: 100%;
+  bottom: 9%;
+
+  @media ${theme.device.mobileS} {
+    bottom: 7%;
+    height: 45vh;
+  }
   @media ${theme.device.mobileM} {
     bottom: 7%;
   }

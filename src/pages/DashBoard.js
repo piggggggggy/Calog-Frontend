@@ -106,45 +106,45 @@ const DashBoard = (props) => {
   };
 
   return (
-        <Grid width="100%">
+    <Grid width="100%">
 
-        {/* 헬멧 */}
-        <Helmet>
-          <title>[Calog] 오늘의 칼로리</title>
-        </Helmet>
+      {/* 헬멧 */}
+      <Helmet>
+        <title>[Calog] 오늘의 칼로리</title>
+      </Helmet>
 
-        {/* 상단 bmr 관련 타이틀 */}
-        <DashBoard_Title is_login={is_login} bmr={bmr} record={record} user_info={user}/>
+      {/* 상단 bmr 관련 타이틀 */}
+      <DashBoard_Title is_login={is_login} bmr={bmr} record={record} user_info={user}/>
 
-        {/* 바디스펙 */}
-        <DashBoard_BodySpec {...user} bmr={bmr} is_login={is_login}/>
+      {/* 바디스펙 */}
+      <DashBoard_BodySpec {...user} bmr={bmr} is_login={is_login}/>
 
-        {/* 칼로리 분석 */}
-        <DashBoard_Chart {...[record]} bmr={bmr}/>
+      {/* 칼로리 분석 */}
+      <DashBoard_Chart {...[record]} bmr={bmr}/>
 
-        {/* 칼로리 리스트 */}
-        <DashBoard_Food _data={record_list} is_login={is_login} {...[record]} />
+      {/* 칼로리 리스트 */}
+      <DashBoard_Food _data={record_list} is_login={is_login} {...[record]} />
 
-        {/* 운동 추천 - 로그인 유저만 확인 가능 */}
-        {is_login && (
-          <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0">
-            <Text size="20px" bold m_size="17px" margin="0 0 0 8.3%">{user.nickname}님, 이런 운동은 어때요?</Text>
-            <Exercise_Wrap
-              onMouseDown={dragStart}
-              onMouseMove={isDrag ? throttleDragMove : null}
-              onMouseUp={dragEnd}
-              onMouseLeave={dragEnd}
-              ref={refX}
-            >
+      {/* 운동 추천 - 로그인 유저만 확인 가능 */}
+      {is_login && (
+        <Grid margin="14.6% 0 0 0" m_margin="13.6% 0 0 0" bg={'#F5F5F5'} padding="7.8% 0">
+          <Text size="20px" bold m_size="17px" margin="0 0 0 8.3%">{user.nickname}님, 이런 운동은 어때요?</Text>
+          <Exercise_Wrap
+            onMouseDown={dragStart}
+            onMouseMove={isDrag ? throttleDragMove : null}
+            onMouseUp={dragEnd}
+            onMouseLeave={dragEnd}
+            ref={refX}
+          >
 
-              {/* 운동 리스트 맵 */}
-              {exercise_list?.map((e, idx) => {
-                return <DashBoard_Workout key={e._id} {...e}/>
-              })}
-            </Exercise_Wrap>
-          </Grid>
-        )}
-      </Grid>
+            {/* 운동 리스트 맵 */}
+            {exercise_list?.map((e, idx) => {
+              return <DashBoard_Workout key={e._id} {...e}/>
+            })}
+          </Exercise_Wrap>
+        </Grid>
+      )}
+    </Grid>
   );
 };
 

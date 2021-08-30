@@ -18,13 +18,11 @@ export const addFavoriteDB = (data) => {
     instance
       .post('/api/favorite/add', {foodId: data.foodId})
       .then((res) => {
-        // console.log(res);
         dispatch(addFavorite(data));
         // window.alert("즐겨찾기 추가!");
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       }) 
   }
 };
@@ -40,7 +38,6 @@ export const deleteFavoriteDB = (foodId) => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       }) 
   }
 };
@@ -51,12 +48,10 @@ export const getFavoriteDB = () => {
     instance
       .get('/api/favorite/list')
       .then((res) => {
-        // console.log(res);
         dispatch(getFavorite(res.data.foodList));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       }) 
   }
 };
