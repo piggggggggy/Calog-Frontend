@@ -35,7 +35,6 @@ const Main_Nav = () => {
                 <PostContainer >
                     {custom_list.length>0?
                         custom_list.map((custom, idx) => {
-                            // console.log(custom);
 
                             const addCartCustom = () => {
                                 const data = custom.foodList;
@@ -43,10 +42,12 @@ const Main_Nav = () => {
                             };
 
                             const deleteCustom = (e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                const mealId = custom.mealId;
-                                dispatch(DeleteCustomDB(mealId))
+                                if (window.confirm(`${custom.name} 식단을 삭제하시겠어요?`)) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    const mealId = custom.mealId;
+                                    dispatch(DeleteCustomDB(mealId))
+                                }
                             };
                         
 

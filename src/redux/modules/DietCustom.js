@@ -49,7 +49,10 @@ export const CustomSV = (name, foodList) => {
             dispatch(delCartAll());
         };
         customize()
-        .catch((err)=>{console.log(err);});
+        .catch((err)=>{
+          Sentry.captureException(`Catched Error : ${err}`);
+          console.log(err);
+        });
     };
 };
 
@@ -61,7 +64,10 @@ export const GetCustomList = () => {
             dispatch(setCustom(res.data));
         };
         getcustomize()
-        .catch((err)=>{console.error(err)});
+        .catch((err)=>{
+          Sentry.captureException(`Catched Error : ${err}`);
+          console.error(err)
+        });
     }
 };
 
@@ -72,6 +78,10 @@ export const DeleteCustomDB = (mealId) => {
       .then((res) => {
         // console.log(res);
         dispatch(deleteCustom(mealId));
+      })
+      .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
+        console.log(err, "삭제하는데 에러가 났어요!")
       })
   }
 };
