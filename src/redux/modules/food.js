@@ -71,8 +71,9 @@ export const getUserAddFoodDB = () => {
 export const delUserFoodDB = (mealId) => {
   return function (dispatch, getState, {history}) {
     instance
-      .delete(`/api/customize/meal/${mealId}`)
+      .delete(`/api/customize/newFood/${mealId}`)
       .then((res) => {
+        console.log(res)
         dispatch(delUserFood(mealId))
       })
       .catch((err) => {
@@ -87,6 +88,9 @@ const initialState = {
 
   // 유저가 등록한 칼로리 정보
   addFood: [],
+
+  // 식단 편집을 위한 특정 끼니의 데이터
+  typeFood: [],
 }
 
 // redux
@@ -107,9 +111,44 @@ const food = createSlice({
         state.addFood.splice(idx, 1);
       }
     },
+
+    // 식단 편집
+    forEdit : (state, action) => {
+      state.typeFood = action.payload
+    },
+
+    // 식단 삭제
+    forDel : (state, action) => {
+      let idx = state.typeFood.findIndex((r) => r.foodId === action.payload)
+      if (idx !== -1) {
+        state.typeFood.splice(idx, 1);
+      }
+    },
+
+    // 푸드 up카운팅
+    editUpAmount : (state, action) => {
+      const index = state.typeFood.findIndex((food) => food.foodId === action.payload);
+      if (state.typeFood[index].amount >= 0.5) {
+        state.typeFood[index].amount += 0.5;
+      } else {
+        state.typeFood[index].amount = Number((state.typeFood[index].amount + 0.1).toFixed(1));
+      }
+      
+    },
+
+    // 푸드 down카운팅
+    editDownAmount : (state, action) => {
+      const index = state.typeFood.findIndex((food) => food.foodId === action.payload);
+      if (state.typeFood[index].amount > 0.5) {
+        state.typeFood[index].amount -= 0.5;
+      } else if (state.typeFood[index].amount > 0.1) {
+        state.typeFood[index].amount = Number((state.typeFood[index].amount - 0.1).toFixed(1));
+      }
+      
+    },
   }
 });
 
-export const {getUserAddFood, delUserFood} = food.actions;
+export const {getUserAddFood, delUserFood, forEdit, forDel, editUpAmount, editDownAmount} = food.actions;
 
 export default food;
