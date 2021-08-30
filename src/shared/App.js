@@ -9,7 +9,7 @@ import { LoginCheck } from '../redux/modules/user';
 
 // 라우팅
 import { Route } from "react-router-dom";
-import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDate, Loading4, UserFeedback, SelfAddFood, AboutUs,} from '../pages'
+import {DashBoard, Calendar, Record, Login, Signup, AddSpec, Main, FoodDetail, Cart, SignSocial, BodySpec, Notice, NotiDetail, NoticeWrite, MainSearch, CalendarDate, Loading4, UserFeedback, SelfAddFood, AboutUs, CalendarDateEdit} from '../pages'
 import Naver from '../components/social/Naver';
 import Google from '../components/social/Google';
 import Kakao from '../components/social/Kakao';
@@ -78,6 +78,7 @@ const App = (props) => {
               {/* {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />} */}
               <Route path="/onlyHQ" exact component={SelfAddFood} />
               <Route path="/aboutUs" exact component={AboutUs}/>
+              <Route path="/calendarEdit/:date/:mealId/:type" exact component={CalendarDateEdit}/>
 
               <Route path="/login" exact component={Login}/>
               <Route path="/signup" exact component={Signup}/>

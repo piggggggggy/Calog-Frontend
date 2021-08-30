@@ -234,6 +234,17 @@ const CalendarDate = (props) => {
     result ? dispatch(delRecordDB(record_list?.recordId, SelectDate, type)) : history.push(`/loading/calendar/${SelectDate}`)
   });
 
+  // 식단 편집 버튼
+  const editBtn = (async () => {
+    history.push(`/calendarEdit/${SelectDate}/${record_list.recordId}/${type}`)
+  });
+
+  // 식단 삭제 버튼 >> 전체 삭제로 이어짐
+  const delFoodBtn = () => {
+    const result = window.confirm(`식단이 삭제되면 ${type}에 대한 기록이 모두 사라져요! 삭제하시겠습니까?`)
+    result ? dispatch(delRecordDB(record_list?.recordId, SelectDate, type)) : history.push(`/loading/calendar/${SelectDate}`)
+  }
+
   return (
     <React.Fragment>
       <Wrap>
@@ -275,11 +286,18 @@ const CalendarDate = (props) => {
           </Button>
 
           {/* 식단이 있을 때에만 편집이 가능 */}
-          {/* {same_food?.length !== 0 && (
-            <EditBtn>
-              <Text color={'#8C8C8C'} size="13px" m_size="11px">편집</Text>
-            </EditBtn>
-          )} */}
+          {same_food?.length !== 0 && (
+            <Grid width="50%">
+              {(same_list?.length === 0 || memo_list?.length === 0 || same_food?.length === 0) && (
+                <EditBtn onClick={delFoodBtn}>
+                  <Text color={'#8C8C8C'} size="13px" cursor="pointer" m_size="11px">삭제</Text>
+                </EditBtn>
+              )}
+              <EditBtn onClick={editBtn}>
+                <Text color={'#8C8C8C'} size="13px" cursor="pointer" m_size="11px">편집</Text>
+              </EditBtn>
+            </Grid>
+          )}
         </Grid>
 
         {/* case1) 식단이 없을 때 */}

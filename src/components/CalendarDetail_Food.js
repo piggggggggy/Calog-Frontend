@@ -40,10 +40,11 @@ const CalendarDetail_Food = (props) => {
 }
 
 const Width = styled.div`
-  width: 11%;
+  width: 15%;
+  text-align: right;
 
   @media ${theme.device.mobileM} {
-    width: 13%;
+    width: 20%;
   }
 `;
 
