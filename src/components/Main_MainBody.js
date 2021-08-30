@@ -201,9 +201,9 @@ const MainBody = (props) => {
       {/* nav 탭 바 */}
         <Nav>
           <div>
-            <div onClick={()=>{setFocus(0)}}><Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px">즐겨찾기 목록</Text></div>
-            <div onClick={()=>{setFocus(1)}}><Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px">나의 식단</Text></div>
-            <div onClick={()=>{setFocus(2)}}><Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px">직접 등록</Text></div>
+            <div onClick={()=>{setFocus(0)}}><Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px" cursor="pointer">즐겨찾기 목록</Text></div>
+            <div onClick={()=>{setFocus(1)}}><Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px" cursor="pointer">나의 식단</Text></div>
+            <div onClick={()=>{setFocus(2)}}><Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px" cursor="pointer">직접 등록</Text></div>
           </div>
           <NavLine>
             <NavLineBold style={navFocus === 0 ? {left: "0"} : navFocus === 1 ? {left: "33.3%"} : {left: "66.7%"}}/>
@@ -501,6 +501,7 @@ const Nav = styled.div`
       justify-content: center;
       font-size: 14px;
       font-weight: bold;
+      cursor: pointer;
 
       @media ${theme.device.mobileM} {
         font-size: 12px;

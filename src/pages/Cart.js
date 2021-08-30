@@ -23,12 +23,12 @@ const [selectNav, setSelect] = useState(0);
       <BtnHeader title="음식담기"/>
       <Nav>
         <div onClick={()=>{setSelect(0)}}>
-          <Text size="15px" m_size="13px" lineheight="22px" m_lineheight="20px" color="#111E30">
+          <Text size="15px" m_size="13px" lineheight="22px" m_lineheight="20px" color="#111E30" cursor="pointer">
             캘린더에 기록
           </Text>
         </div>
         <div onClick={()=>{setSelect(1)}}>
-          <Text size="15px" m_size="13px" lineheight="22px" m_lineheight="20px" color="#111E30">
+          <Text size="15px" m_size="13px" lineheight="22px" m_lineheight="20px" color="#111E30" cursor="pointer">
             식단 만들기
           </Text>
         </div>
@@ -58,6 +58,7 @@ const Nav = styled.div`
   & > div {
     display: flex;
     justify-content: center;
+    cursor: pointer;
   }
 `;
 

@@ -57,7 +57,7 @@ const CartBodyDiet = (props) => {
                 <Line/>
             </DietInputContainer>
             <EditBtn>
-                <Text color="#FFFFFF" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px">완료</Text>
+                <Text color="#FFFFFF" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px" cursor="pointer">완료</Text>
             </EditBtn>
         </DietName>
         
@@ -172,6 +172,7 @@ const EditBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export default CartBodyDiet;
