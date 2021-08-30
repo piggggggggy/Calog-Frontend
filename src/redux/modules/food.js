@@ -66,6 +66,7 @@ export const getUserAddFoodDB = () => {
         dispatch(getUserAddFood(addedFood))
       })
       .catch((err) => {
+        console.log(err)
         Sentry.captureException(`Catched Error : ${err}`);
         window.alert('추가 칼로리에 오류가 있어요:(')
         history.push('/')
