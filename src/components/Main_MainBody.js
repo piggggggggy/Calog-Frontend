@@ -122,7 +122,7 @@ const MainBody = (props) => {
 
   // 유저 직접 추가 칼로리
   const userAddFood = useSelector((state) => state.food.addFood)
-  console.log(userAddFood)
+  // console.log(userAddFood)
 
   // nav
   const [navFocus, setFocus] = useState(0);
