@@ -210,6 +210,11 @@ const BodyContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media only screen and (max-height: 750px) {
+    max-height: 70vh;
+
+  }
 `;
 
 const CartListBox = styled.div`

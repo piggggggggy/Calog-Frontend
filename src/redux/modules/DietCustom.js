@@ -9,34 +9,7 @@ import * as Sentry from '@sentry/react';
 
 
 const initialState = {
-  custom: [
-  //   {
-  //   name: "",
-  //   foodList: [
-  //     {
-  //         amount: 0,
-  //         foodId: 2,
-  //         forOne: 200,
-  //         measurement: "g",
-  //         kcal: 0,
-  //         name: "양념치킨"
-  //     }
-  //    ]
-  // },
-  // {
-  //   name: "",
-  //   foodList: [
-  //     {
-  //         amount: 0,
-  //         foodId: 2,
-  //         forOne: 200,
-  //         measurement: "g",
-  //         kcal: 0,
-  //         name: "양념치킨"
-  //     }
-  //    ]
-  // },
-]
+  custom: []
 };
 
 export const CustomSV = (name, foodList) => {

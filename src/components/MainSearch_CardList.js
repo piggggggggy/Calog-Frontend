@@ -113,7 +113,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   column-gap: 1.8vh;
-  margin-bottom: 20vh;
+  margin-bottom: 15vh;
 `;
 
 const MoreBtn = styled.div`
