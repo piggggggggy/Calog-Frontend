@@ -9,34 +9,7 @@ import * as Sentry from '@sentry/react';
 
 
 const initialState = {
-  custom: [
-  //   {
-  //   name: "",
-  //   foodList: [
-  //     {
-  //         amount: 0,
-  //         foodId: 2,
-  //         forOne: 200,
-  //         measurement: "g",
-  //         kcal: 0,
-  //         name: "양념치킨"
-  //     }
-  //    ]
-  // },
-  // {
-  //   name: "",
-  //   foodList: [
-  //     {
-  //         amount: 0,
-  //         foodId: 2,
-  //         forOne: 200,
-  //         measurement: "g",
-  //         kcal: 0,
-  //         name: "양념치킨"
-  //     }
-  //    ]
-  // },
-]
+  custom: []
 };
 
 export const CustomSV = (name, foodList) => {
@@ -47,7 +20,10 @@ export const CustomSV = (name, foodList) => {
             dispatch(delCartAll());
         };
         customize()
-        .catch((err)=>{console.log(err);});
+        .catch((err)=>{
+          Sentry.captureException(`Catched Error : ${err}`);
+          console.log(err);
+        });
     };
 };
 
@@ -58,7 +34,10 @@ export const GetCustomList = () => {
             dispatch(setCustom(res.data));
         };
         getcustomize()
-        .catch((err)=>{console.error(err)});
+        .catch((err)=>{
+          Sentry.captureException(`Catched Error : ${err}`);
+          console.error(err)
+        });
     }
 };
 
@@ -68,6 +47,10 @@ export const DeleteCustomDB = (mealId) => {
       .delete(`/api/customize/meal/${mealId}`)
       .then((res) => {
         dispatch(deleteCustom(mealId));
+      })
+      .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
+        console.log(err, "삭제하는데 에러가 났어요!")
       })
   }
 };

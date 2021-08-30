@@ -105,14 +105,14 @@ const Card = (props) => {
           </CountBox>
 
           {/* 삭제버튼 */}
-          <DeleteBtn onClick={!editChk === "edit" ? openDelete : deleteCart}>
+          <DeleteBtn onClick={!editChk ? openDelete : deleteCart}>
             <TiDeleteOutline size="21px" color="#BABABA"/>
           </DeleteBtn>
 
         </FoodCard>
 
         {/* 식단 편집에서 넘어오는 경우 삭제 슬라이더 없앰 */}
-        {!editChk === "edit" && (
+        {!editChk && (
           <DeleteBar 
             style={del? {opacity: "1"} : {opacity: "0"}}
             onClick={deleteCart}

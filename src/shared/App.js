@@ -52,52 +52,52 @@ const App = (props) => {
   
   return (
     <React.Fragment>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <LazyLoad>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <LazyLoad>
 
-            {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
-            <WebVer/>
-            <FloatedBtn/>
-            <WebSearch/>
-            <Wrap>
-              <Route path="/" exact component={Main} />
-              <Route path="/search/:keyword" exact component={MainSearch} />
-              <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
-              <Route path="/cart" exact component={Cart} />
-              <Route path="/loading/" exact component={Loading4} />
-              <Route path="/loading/:url" exact component={Loading4} />
-              <Route path="/loading/:url/:date" exact component={Loading4} />
+          {/* 1024px(아이패드 이상) 일 때 웹 버전 */}
+          <WebVer/>
+          <FloatedBtn/>
+          <WebSearch/>
+          <Wrap>
+            <Route path="/" exact component={Main} />
+            <Route path="/search/:keyword" exact component={MainSearch} />
+            <Route path="/fooddetail/:foodId" exact component={FoodDetail} />
+            <Route path="/cart" exact component={Cart} />
+            <Route path="/loading/" exact component={Loading4} />
+            <Route path="/loading/:url" exact component={Loading4} />
+            <Route path="/loading/:url/:date" exact component={Loading4} />
 
-              <Route path="/dashboard" exact component={DashBoard}/>
-              <Route path="/calendar" exact component={Calendar}/>
-              <Route path="/calendar/:date" exact component={CalendarDate}/>
-              <Route path="/record" exact component={Record}/>
-              <Route path="/modal" exact component={Modal}/>
-              <Route path="/addFood" exact component={SelfAddFood}/>
-              {/* {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />} */}
-              <Route path="/onlyHQ" exact component={SelfAddFood} />
-              <Route path="/aboutUs" exact component={AboutUs}/>
-              <Route path="/calendarEdit/:date/:mealId/:type" exact component={CalendarDateEdit}/>
+            <Route path="/dashboard" exact component={DashBoard}/>
+            <Route path="/calendar" exact component={Calendar}/>
+            <Route path="/calendar/:date" exact component={CalendarDate}/>
+            <Route path="/record" exact component={Record}/>
+            <Route path="/modal" exact component={Modal}/>
+            <Route path="/addFood" exact component={SelfAddFood}/>
+            {/* {admin==="cadmin@calories.com" && <Route path="/onlyHQ" exact component={SelfAddFood} />} */}
+            <Route path="/onlyHQ" exact component={SelfAddFood} />
+            <Route path="/aboutUs" exact component={AboutUs}/>
+            <Route path="/calendarEdit/:date/:mealId/:type" exact component={CalendarDateEdit}/>
 
-              <Route path="/login" exact component={Login}/>
-              <Route path="/signup" exact component={Signup}/>
-              <Route path="/signsocial" exact component={SignSocial}/>
-              <Route path="/body" exact component={BodySpec}/>
-              <Route path="/addspec" exact component={AddSpec}/>
-              <Route path="/notice" exact component={Notice}/>
-              <Route path="/notice/:postid" exact component={NotiDetail}/>
-              <Route path="/notiwrite" exact component={NoticeWrite}/>
-              <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
-              <Route path="/userfeedback" exact component={UserFeedback}/>
-              <Route path="/naver" exact component={Naver}/>
-              <Route path="/google" exact component={Google}/>
-              <Route path="/kakao" exact component={Kakao}/>
+            <Route path="/login" exact component={Login}/>
+            <Route path="/signup" exact component={Signup}/>
+            <Route path="/signsocial" exact component={SignSocial}/>
+            <Route path="/body" exact component={BodySpec}/>
+            <Route path="/addspec" exact component={AddSpec}/>
+            <Route path="/notice" exact component={Notice}/>
+            <Route path="/notice/:postid" exact component={NotiDetail}/>
+            <Route path="/notiwrite" exact component={NoticeWrite}/>
+            <Route path="/notiwrite/:postid" exact component={NoticeWrite}/>
+            <Route path="/userfeedback" exact component={UserFeedback}/>
+            <Route path="/naver" exact component={Naver}/>
+            <Route path="/google" exact component={Google}/>
+            <Route path="/kakao" exact component={Kakao}/>
 
-              <Nav />
-            </Wrap>
-          </LazyLoad>
-        </ThemeProvider>
+            <Nav />
+          </Wrap>
+        </LazyLoad>
+      </ThemeProvider>
     </React.Fragment>
   );
 };

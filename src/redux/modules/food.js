@@ -9,6 +9,9 @@ import instance from "./instance";
 // redux
 import {addCartRx} from './cart';
 
+// sentry
+import * as Sentry from '@sentry/react';
+
 // 추가 데이터 기록(운영진 추가용)
 export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium) => {
   return function (dispatch, getState, {history}) {
@@ -19,6 +22,7 @@ export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protei
         console.log(res)
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         console.log(err)
       }) 
   }
@@ -45,6 +49,7 @@ export const addUserFoodDB = (name, kcal, forOne, measurement, carbo, sugars, pr
         }
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('칼로리 추가에 오류가 있어요:(')
         history.push('/')
       }) 
@@ -61,6 +66,7 @@ export const getUserAddFoodDB = () => {
         dispatch(getUserAddFood(addedFood))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('추가 칼로리에 오류가 있어요:(')
         history.push('/')
       }) 
@@ -76,6 +82,7 @@ export const delUserFoodDB = (mealId) => {
         dispatch(delUserFood(mealId))
       })
       .catch((err) => {
+        Sentry.captureException(`Catched Error : ${err}`);
         window.alert('칼로리 삭제에 오류가 있어요:(')
         history.push('/')
       }) 

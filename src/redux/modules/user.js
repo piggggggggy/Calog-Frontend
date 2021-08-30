@@ -28,41 +28,41 @@ const initialState = {
 };
 
 export const LoginSV = (user_info) => {
-  const {email, password} = user_info
-  return function(dispatch, getState, {history}){
-    async function loginsv() {
-      const res_token = await instance.post('/api/user/login', {email, password});
-      const res_user_info = await axios({
-        method: "get",
+	const {email, password} = user_info
+	return function(dispatch, getState, {history}){
+		async function loginsv() {
+			const res_token = await instance.post('/api/user/login', {email, password});
+			const res_user_info = await axios({
+				method: "get",
 
-        // test
-        url: "http://52.79.110.219/api/user/me",
+				// test
+				// url: "http://52.79.110.219/api/user/me",
 
-        // deploy
-        // url: "https://2k1.shop/api/user/me",
-        headers: { authorization: `Bearer ${res_token.data.token}` }
-      });
+				// deploy
+				url: "https://2k1.shop/api/user/me",
+				headers: { authorization: `Bearer ${res_token.data.token}` }
+			});
 
-      document.cookie = `TOKEN=${res_token.data.token};`;
+			document.cookie = `TOKEN=${res_token.data.token};`;
 
-      const data = res_user_info.data.user
-      dispatch(SetUser(data));
+			const data = res_user_info.data.user
+			dispatch(SetUser(data));
 
-      //바디스펙 가져가기
-      dispatch(saveBlind({weightBlind:data.weightBlind, heightBlind:data.heightBlind, bmrBlind:data.bmrBlind}))
+			//바디스펙 가져가기
+			dispatch(saveBlind({weightBlind:data.weightBlind, heightBlind:data.heightBlind, bmrBlind:data.bmrBlind}))
 
-      let _bmr = data.bmr[(res_user_info.data.user.bmr.length)-1].bmr
-      if(!res_user_info.data.user){
-        return;
-      };
-      dispatch(bmrChk(_bmr));
-      history.replace('/loading/dashboard');
-    };
-    loginsv()
-    .catch((err)=>{
-      Sentry.captureException(`Catched Error : ${err}`);
-      window.alert("이메일 또는 비밀번호가 일치하지 않습니다.")
-    });
+			let _bmr = data.bmr[(res_user_info.data.user.bmr.length)-1].bmr
+			if(!res_user_info.data.user){
+					return;
+			};
+			dispatch(bmrChk(_bmr));
+				history.replace('/loading/dashboard');
+		};
+		loginsv()
+		.catch((err)=>{
+				Sentry.captureException(`Catched Error : ${err}`);
+				window.alert("이메일 또는 비밀번호가 일치하지 않습니다.")
+		});
   };
 };
 

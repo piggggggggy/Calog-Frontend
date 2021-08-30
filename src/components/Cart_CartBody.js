@@ -111,10 +111,11 @@ const CartBody = (props) => {
           {/* 상단 내용 */}
           <Grid>
             <Text lineheight="41px" m_lineheight="38px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0" paddig="0">{Math.round(sumKcal() * 10)/10} kcal</Text>
-            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color={totalKcal() + sumKcal() >= bmr ? "#EB5858" : "#6993FF"} margin="0.9vh 0 0 0" paddig="0">
-              {bmr === 0 ? "앗! 바디스펙이 없어 기초대사량 확인이 어려워요!" : totalKcal() + sumKcal() >= bmr ? 
-              `오늘의 기준치를 ${Math.round((totalKcal() + sumKcal()- bmr)*10)/10} kcal 초과해요!` 
-              : `먹어도 아직 ${Math.round((bmr - (totalKcal() + sumKcal()))*10)/10} kcal 이나 더 먹을 수 있어요!`}
+            <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" color={totalKcal() >= bmr ? "#EB5858" : "#6993FF"} margin="0.9vh 0 0 0" paddig="0">
+              {bmr === 0 ? "바디스펙이 없어 기초대사량 확인이 어려워요!" : 
+              totalKcal() >= bmr ? 
+              "오늘은 이미 기초대사량을 초과했어요!" 
+              : `현재 기초대사량까지 ${Math.round((bmr - totalKcal())*10)/10} kcal 남았어요!`}
             </Text>
           </Grid>
 
@@ -208,6 +209,11 @@ const BodyContainer = styled.div`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media only screen and (max-height: 750px) {
+    max-height: 70vh;
+
   }
 `;
 

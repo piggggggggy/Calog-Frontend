@@ -165,13 +165,13 @@ const FoodDetail = (props) => {
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
             <StatusText color={colors}>
               {bmr === 0 ? 
-              " 앗! 바디스펙이 없어 기초대사량 확인이 어려워요! " 
+              " 바디스펙이 없어 기초대사량 확인이 어려워요! " 
               :
               is_over() === "line" ? 
-              " 현재까지 오늘의 기준치를 모두 채웠어요! " 
+              " 오늘의 기초대사량을 모두 채웠어요! " 
               : is_over() === "over" ? 
-              ` 오늘의 기초대사량에서 ${totalKcal()-bmr} kcal를 초과했어요! ` 
-              : ` 오늘의 기초대사량까지 ${bmr-(totalKcal())} kcal 남았어요! `
+              ` 기초대사량에서 ${totalKcal()-bmr} kcal를 초과했어요! ` 
+              : ` 기초대사량까지 ${bmr-(totalKcal())} kcal 남았어요! `
               }
             </StatusText>
           </Grid>

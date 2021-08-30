@@ -108,7 +108,8 @@ const FloatedBtn = (props) => {
                 deleteFile();
               })
               .catch((err)=>{
-                // Sentry.captureException(`Catched Error : ${err}`);
+                Sentry.captureException(`Catched Error : ${err}`);
+                console.log("피드백전송에 오류가 있어요!",err)
                 window.alert(err, "피드백 작성에 오류가 있어요!")
               });
             } else {
@@ -269,7 +270,6 @@ const FloatedBtn = (props) => {
                   <ModalInput ref={file} type="file" id="feedbackImg" style={{display: "none"}} onChange={checkName}/>
                 </UploadContainer>
               </InputForm>
-              {/* <button onClick={deleteFile}>dd</button> */}
 
               <InputForm>
                 <p>전화번호(선택)</p>

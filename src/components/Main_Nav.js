@@ -15,6 +15,10 @@ import { GetCustomList } from '../redux/modules/DietCustom';
 import { addCartCustomRx } from '../redux/modules/cart';
 import { DeleteCustomDB } from '../redux/modules/DietCustom';
 
+// toast message
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Main_Nav = () => {
     const dispatch = useDispatch();
@@ -26,26 +30,49 @@ const Main_Nav = () => {
 
     const custom_list = useSelector((state)=>state.custom.custom);
 
-    // 삭제
+
+    // 브랜드명 분리
+
     
     return (
         <React.Fragment>
+            <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover={false}
+            />
             {/* 나의 식단 커스텀 */}
                 <PostContainer >
                     {custom_list.length>0?
                         custom_list.map((custom, idx) => {
-                            // console.log(custom);
 
                             const addCartCustom = () => {
                                 const data = custom.foodList;
                                 dispatch(addCartCustomRx(data));
+                                toast('음식담기에 추가되었어요!', {
+                                    position: "top-center",
+                                    autoClose: 1000,
+                                    hideProgressBar: true,
+                                    closeOnClick: false,
+                                    pauseOnHover: false,
+                                    draggable: true,
+                                    progress: undefined,
+                                    });
                             };
 
                             const deleteCustom = (e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                const mealId = custom.mealId;
-                                dispatch(DeleteCustomDB(mealId))
+                                if (window.confirm(`${custom.name} 식단을 삭제하시겠어요?`)) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    const mealId = custom.mealId;
+                                    dispatch(DeleteCustomDB(mealId))
+                                }
                             };
                         
 
@@ -68,29 +95,29 @@ const Main_Nav = () => {
                                         </CartBox>
                                     </TitleBox>
                                     
-          <ListBox>
-            {custom.foodList.map((food, idx) => {
-                // console.log(food.name);
-                if (custom.foodList.length <= 3){
-                    return <List key={idx}>{food.name}</List>
-                } else {
-                    if (idx < 3) {
-                        return <List key={idx}>{food.name}</List>
+                                    <ListBox>
+                                    {custom.foodList.map((food, idx) => {
+                                        const NameNBrand = food.name.indexOf('[') === 0 ? food.name.split(':') : false;
+                                        const name = food.name.indexOf('[') === 0 ? NameNBrand[1] : food.name;
+                                        // console.log(food.name);
+                                        if (custom.foodList.length <= 3){
+                                            return <List key={idx}>{name}</List>
+                                        } else {
+                                            if (idx < 3) {
+                                                return <List key={idx}>{name}</List>
+                                            }
+                                        }
+                                    })}
+                                    {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
+                                    </ListBox>
+
+                                </Post>
+                                );
+                            })
+
+                    :
+                    <></>
                     }
-                }
-            })}
-          {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
-          </ListBox>
-
-        </Post>
-      );
-      })
-
-    :
-    <></>
-	}
-
-
     </PostContainer>
   </React.Fragment>
     )
