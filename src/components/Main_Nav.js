@@ -51,6 +51,7 @@ const Main_Nav = () => {
                 <PostContainer >
                     {custom_list.length>0?
                         custom_list.map((custom, idx) => {
+                            console.log(custom)
 
                             const addCartCustom = () => {
                                 const data = custom.foodList;
