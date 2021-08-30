@@ -89,11 +89,13 @@ export const getRecommendedDB = () => {
     instance
       .get('/api/home/recommend')
       .then((res) => {
-        dispatch(getRecommended(res.data.randomList));
+        console.log(res)
+        dispatch(getRecommended(res.data.recommendFood));
         dispatch(isLoaded(true));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
+        console.log(err, "추천음식에서 오류가 나요")
       })
   }
 };
