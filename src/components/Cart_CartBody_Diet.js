@@ -18,7 +18,7 @@ import { history } from '../redux/configStore';
  * @param {*} props
  * @returns 장바구니 담긴 내용, 계산된 칼로리, 기초대사량과 비교
  * @역할 장바구니 역할
- * @담당자 : 박용태
+ * @담당자 : 박용태, 김나영
 */
 
 const CartBodyDiet = (props) => {
@@ -57,9 +57,9 @@ const CartBodyDiet = (props) => {
                 <input onChange={(e)=>{setDiet(e.target.value)}} type="text" value={diet} placeholder="식단 이름 입력"/>
                 <Line/>
             </DietInputContainer>
-            <EditBtn>
+            {/* <EditBtn>
                 <Text color="#FFFFFF" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px" cursor="pointer">완료</Text>
-            </EditBtn>
+            </EditBtn> */}
         </DietName>
         
         {/* 카트에 담긴 내용 */}
