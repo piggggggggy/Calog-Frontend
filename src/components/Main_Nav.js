@@ -16,70 +16,67 @@ import { GetCustomList } from '../redux/modules/DietCustom';
 import { addCartCustomRx } from '../redux/modules/cart';
 
 const Main_Nav = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-    dispatch(GetCustomList());
-    },[]);
+  useEffect(()=>{
+  dispatch(GetCustomList());
+  },[]);
 
-    const custom_list = useSelector((state)=>state.custom.custom);
+  const custom_list = useSelector((state)=>state.custom.custom);
 
-    return (
-        <React.Fragment>
-            {/* 나의 식단 커스텀 */}
-                <PostContainer >
-                    {custom_list.length>0?
-                        custom_list.map((custom, idx) => {
-                            // console.log(custom.foodList);
+  return (
+    <React.Fragment>
+			{/* 나의 식단 커스텀 */}
+			<PostContainer >
+      {custom_list.length>0? custom_list.map((custom, idx) => {
+        const addCartCustom = () => {
+          const data = custom.foodList;
+          dispatch(addCartCustomRx(data));
+        };
 
-                            const addCartCustom = () => {
-                                const data = custom.foodList;
-                                dispatch(addCartCustomRx(data));
-                            };
-
-                            return (
-                                <Post key={idx}>
-                                    <TitleBox>
-                                        <Text 
-                                        bold 
-                                        width="100%" 
-                                        lineheight="20px" m_lineheight="20px"
-                                        size="15px" m_size="15px" 
-                                        margin="0" padding="0"
-                                        overflow="hidden" ws="nowrap" to
-                                        >
-                                            {custom.name}
-                                        </Text>
-                                        <CartBox onClick={addCartCustom}>
-                                            <IoTrashBinSharp  color="#F19F13" size="24px"/>
-                                        </CartBox>
-                                    </TitleBox>
+      return (
+        <Post key={idx}>
+          <TitleBox>
+            <Text 
+              bold 
+              width="100%" 
+							size="15px" m_size="15px" 
+							lineheight="20px" m_lineheight="20px"
+							overflow="hidden" ws="nowrap" to
+							margin="0" padding="0"
+							>
+								{custom.name}
+            </Text>
+            <CartBox onClick={addCartCustom}>
+                <IoTrashBinSharp  color="#F19F13" size="24px"/>
+            </CartBox>
+          </TitleBox>
                                     
-                                    <ListBox>
-                                    {custom.foodList.map((food, idx) => {
-                                        // console.log(food.name);
-                                        if (custom.foodList.length <= 3){
-                                            return <List key={idx}>{food.name}</List>
-                                        } else {
-                                            if (idx < 3) {
-                                                return <List key={idx}>{food.name}</List>
-                                            }
-                                        }
-                                    })}
-                                    {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
-                                    </ListBox>
-
-                                </Post>
-                                );
-                            })
-
-                    :
-                    <></>
+          <ListBox>
+            {custom.foodList.map((food, idx) => {
+                // console.log(food.name);
+                if (custom.foodList.length <= 3){
+                    return <List key={idx}>{food.name}</List>
+                } else {
+                    if (idx < 3) {
+                        return <List key={idx}>{food.name}</List>
                     }
+                }
+            })}
+          {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
+          </ListBox>
+
+        </Post>
+      );
+      })
+
+    :
+    <></>
+	}
 
 
-            </PostContainer>
-        </React.Fragment>
+    </PostContainer>
+  </React.Fragment>
     )
 }
 
