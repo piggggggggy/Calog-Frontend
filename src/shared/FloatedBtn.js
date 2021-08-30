@@ -266,7 +266,7 @@ const FloatedBtn = (props) => {
                     {_file !== null ? _file[0].name : "이미지를 업로드"}
                     {_file !== null ?
                     <div onClick={deleteFile}>
-                      <TiDeleteOutline size="18px"/>
+                      <TiDeleteOutline color="#BABABA" size="18px"/>
                     </div>
                     : <></>}
                   </FileNameBox>

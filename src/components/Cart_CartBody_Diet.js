@@ -9,6 +9,7 @@ import Card from './Cart_Card';
 // modules
 import { addRecordDB } from '../redux/modules/record';
 import { CustomSV } from '../redux/modules/DietCustom';
+import { delCartAll } from '../redux/modules/cart';
 
 // history
 import { history } from '../redux/configStore';
@@ -66,6 +67,16 @@ const CartBodyDiet = (props) => {
           {cart_list.map((cart, idx) => {
             return <Card key={cart.foodId} {...cart}/>
           })}
+
+          {cart_list.length === 0 ?
+            <></>
+            :
+            <Grid width="45px" _onClick={() => {dispatch(delCartAll())}} cursor="pointer">
+              <Text color="#8C8C8C" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px" cursor="pointer">전체삭제</Text>
+              <div style={{border: "1px solid #8C8C8C"}}></div>
+            </Grid>
+          }
+
         </CartListBox>
 
         

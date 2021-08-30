@@ -12,7 +12,7 @@ import Cart_Date from './Cart_Date';
 import { FaCircle } from "react-icons/fa";
 
 // modules
-import { cartOut } from '../redux/modules/cart';
+import { cartOut, delCartAll } from '../redux/modules/cart';
 import { addCartDB } from '../redux/modules/record';
 
 // history
@@ -34,6 +34,7 @@ const CartBody = (props) => {
   const cart = useSelector((state) => state.cart);
 
   const cart_list = cart.cart;
+  console.log(cart_list)
 
   const is_login = useSelector((state) => state.user.is_login);
   
@@ -79,8 +80,6 @@ const CartBody = (props) => {
 
   const recordDB = () => {
     if(is_login){
-  console.log(cart.date)
-
       dispatch(addCartDB(cart.date, cart_list, cart.type))
     } else {
       if (window.confirm('로그인이 필요해요! 로그인 페이지로 이동할까요?')) {
@@ -166,9 +165,20 @@ const CartBody = (props) => {
 
         {/* 카트에 담긴 내용 */}
         <CartListBox>
+          
           {cart_list.map((cart, idx) => {
             return <Card key={cart.foodId} {...cart}/>
           })}
+
+          {cart_list.length === 0 ?
+            <></>
+            :
+            <Grid width="45px" _onClick={() => {dispatch(delCartAll())}} cursor="pointer">
+              <Text color="#8C8C8C" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px" cursor="pointer">전체삭제</Text>
+              <Line></Line>
+            </Grid>
+          }
+          
         </CartListBox>
 
         
@@ -238,6 +248,10 @@ const Dot = styled.div`
   position: relative;
   float: right;
   margin-top: -70%;
+`;
+
+const Line = styled.div`
+  border: 1px solid #8C8C8C;
 `;
 
 export default CartBody;

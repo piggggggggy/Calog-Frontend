@@ -182,7 +182,7 @@ if(!is_loaded) {
             {_file !== null ? _file[0].name : "이미지를 업로드"}
             {_file !== null ?
             <div onClick={deleteFile}>
-              <TiDeleteOutline size="16px"/>
+              <TiDeleteOutline color="#BABABA" size="16px"/>
             </div>
             : <></>}
           </FileNameBox>

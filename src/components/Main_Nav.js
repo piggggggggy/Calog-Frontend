@@ -41,12 +41,13 @@ const Main_Nav = () => {
                                 const data = custom.foodList;
                                 dispatch(addCartCustomRx(data));
                             };
+
                             const deleteCustom = (e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
                                 const mealId = custom.mealId;
                                 dispatch(DeleteCustomDB(mealId))
-                            }
+                            };
                         
 
                             return (
