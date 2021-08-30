@@ -25,7 +25,7 @@ const Record_ListBody = (props) => {
     setShort('none')
   };
 
-  // 덜보기(?) 버튼
+  // 덜보기(..?) 버튼
   const lessBtn = () => {
     setLong('none')
     setShort('block')
