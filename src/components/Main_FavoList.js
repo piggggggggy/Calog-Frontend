@@ -13,7 +13,7 @@ import Loading from '../pages/Loading2';
 import { getFavoriteDB } from '../redux/modules/favorite';
 
 // img
-import addFood from '../img/addFood.png';
+import addFoodImage from '../img/addFoodImg.png';
 
 /** 
  * @param {*} props
@@ -84,7 +84,7 @@ const FavoList = (props) => {
               })}
             </React.Fragment>
           ) : (
-            <Image src={addFood} width="85%" height="15vh" margin="2% auto 0 auto" _onClick={() => history.push('/addFood')} cursor="pointer"/>
+            <Image src={addFoodImage} width="85%" height="15vh" margin="2% auto 0 auto" _onClick={() => history.push('/addFood')} cursor="pointer"/>
           )}
         </CardContainer>
       )}

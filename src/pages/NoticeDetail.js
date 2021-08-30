@@ -6,10 +6,10 @@ import { getNotiDetailSV, deleteNotiSV } from '../redux/modules/notice';
 
 import styled from 'styled-components';
 import { Grid, Text, Image } from '../elements';
-import ios1 from '../img/ios1.PNG';
-import ios2 from '../img/ios2.PNG';
-import and1 from '../img/and1.PNG';
-import and2 from '../img/and2.PNG';
+import ios1 from '../img/ios1.jpg';
+import ios2 from '../img/ios2.jpg';
+import and1 from '../img/and1.jpg';
+import and2 from '../img/and2.jpg';
 import addFood from '../img/ver2_addFood.png';
 import makeFood from '../img/ver2_makeFood.png';
 import addImgMemo from '../img/addImgMemo.png';
