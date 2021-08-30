@@ -6,7 +6,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // 전역 > 서버 배포
 import instance from "./instance";
 import { recordDeleted, clearDeleted } from "./user";
-import {delCartAll} from './cart';
+import {delCartAll, chgType} from './cart';
 
 // sentry
 import * as Sentry from '@sentry/react';
@@ -20,6 +20,7 @@ export const addCartDB = (date, foodList, type) => {
       .then((res) => {
         window.alert('식사 기록되었어요! 칼로리즈와 함께 건강해져요💪🏻')
         dispatch(delCartAll())
+        dispatch(chgType('아침'))
         dispatch(delImgAll())
         dispatch(typeChk(type))
         dispatch(clearDeleted())
@@ -58,7 +59,7 @@ export const delRecordDB = (id, date, type) => {
       .delete(`/api/record/${id}`, {data : {date:date, type:type}})
       .then((res) => {
         dispatch(delRecord(type));
-        history.push(`/loading/calendar`);
+        history.push(`/loading/calendar/${date}`);
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
@@ -73,7 +74,6 @@ export const delImgDB = (recordId, type, date) => {
     instance
       .delete(`/api/record/${recordId}/url`, {data : {type:type}})
       .then((res) => {
-        window.alert('사진이 삭제되었어요!')
         history.push(`/loading/calendar/${date}`)
       })
       .catch((err) => {
@@ -89,7 +89,21 @@ export const delMemoDB = (recordId, type, date) => {
     instance
       .delete(`/api/record/${recordId}/contents`, {data : {type:type}})
       .then((res) => {
-        window.alert('메모가 삭제되었어요!')
+        history.push(`/loading/calendar/${date}`)
+      })
+      .catch((err) => {
+        window.alert('앗! 오류가 발생했어요:(')
+        history.push(`/loading/calendar/${date}`)
+      })
+  }
+};
+
+// 기록 수정하기 > 편집기능
+export const editRecordDB = (recordId, date, typeFoodList, data_type, typeCalories) => {
+  return function (dispatch, getState, {history}) {
+    instance
+      .put(`/api/record/${recordId}`, {date:date, foodList:typeFoodList, type:data_type, typeCalories:typeCalories})
+      .then((res) => {
         history.push(`/loading/calendar/${date}`)
       })
       .catch((err) => {
@@ -106,7 +120,6 @@ export const getTodayRecordDB = () => {
     instance
       .get('/api/calendar/dash')
       .then((res) => {
-          console.log(res)
           const food_list = res.data.record
           dispatch(getRecord(food_list))
           dispatch(isLoaded(true))
@@ -144,17 +157,18 @@ export const getRecordDB = (date) => {
     instance
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
-        const record_list = res.data.record[0]
+        const record_list = res.data[0]
 
         // 기록이 없을 경우 alert, dashboard로 이동
         // 기록이 있을 경우 액션
-        if (record_list.foodRecords.length === 0) {
+        if (res.data?.length === 0) {
           window.alert('기록된 칼로리가 없어요!')
           history.push('/calendar')
         } else {dispatch(getRecord(record_list))}
         dispatch(isLoaded(true))
       })
       .catch((err) => {
+        console.log(err)
         Sentry.captureException(`Catched Error : ${err}`);
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
         history.push('/loading/calendar')

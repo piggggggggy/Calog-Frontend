@@ -5,6 +5,7 @@ import Record from './Record';
 import CalendarDate from './CalendarDate';
 import SelfAddFood from './SelfAddFood';
 import AboutUs from './AboutUs';
+import CalendarDateEdit from './CalendarDateEdit'
 //지혁
 import Login from './Login';
 import Signup from './Signup';
@@ -50,4 +51,5 @@ export {
   Loading4,
   SelfAddFood,
   AboutUs,
+  CalendarDateEdit,
 }

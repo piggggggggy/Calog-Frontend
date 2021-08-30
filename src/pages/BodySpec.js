@@ -129,13 +129,19 @@ const BodySpec = (props) =>
               회원이 되어 칼로리스 서비스를 <br/> 자유롭게 이용해보세요!
             </Text>
             <hr color="#F5F5F5"/>
-            <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-              <Hover onClick={()=>
-                {
-                  history.push("/notice")
-                }}>공지사항
-              </Hover>
-            </Text>
+            <Grid display="flex">
+              <Text lineheight="22px" size="17px" margin="24px 0px 24px 20px" width="auto">
+                <Hover onClick={()=>
+                  {
+                    history.push("/notice")
+                  }}>
+                    공지사항
+                </Hover>
+              </Text>
+              <Grid display="flex" width="auto" border_radius="20px" bg={theme.color.light} padding="1%" margin="auto auto auto 2%" m_margin="auto auto auto 2%">
+                <Text size="13px" m_size="11px">New</Text>
+              </Grid>
+          </Grid>
   
             <hr color="#F5F5F5"/>
             <Version>
