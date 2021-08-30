@@ -62,7 +62,7 @@ export const GetCustomList = () => {
     }
 };
 
-export const DeleteCustom = (mealId) => {
+export const DeleteCustomDB = (mealId) => {
   return function(dispatch, getState, {history}) {
     instance
       .delete(`/api/customize/meal/${mealId}`)
