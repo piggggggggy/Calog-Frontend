@@ -120,12 +120,16 @@ const MainBody = (props) => {
   // 커스텀 식단
   const customFood = useSelector((state) => state.custom.custom)
 
+  // 유저 직접 추가 칼로리
+  const userAddFood = useSelector((state) => state.food.addFood)
+  console.log(userAddFood)
+
   // nav
   const [navFocus, setFocus] = useState(0);
 
   // 직접 등록 네브 탭을 눌렀을 경우 기록 불러오기
   useEffect(() => {
-    if(navFocus === 2) {
+    if(navFocus === 2 && is_login) {
       dispatch(getUserAddFoodDB())
     }
   }, [navFocus])

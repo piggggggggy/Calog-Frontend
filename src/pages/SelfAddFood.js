@@ -78,7 +78,7 @@ const SelfAddFood = (props) => {
       </CloseBtn>
 
       <Grid margin="0 0 0 6%" m_margin="0 0 0 6%" padding="18% 0 0 0">
-        <Text size="28px" bold>직접 식단 추가</Text>
+        <Text size="28px" bold>음식 추가</Text>
       </Grid>
 
       {/* body */}
