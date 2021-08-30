@@ -35,7 +35,18 @@ const search = createSlice({
 
     // 식단목록 무더기로 카트에 담기
     addCartCustomRx : (state, action) => {
-      state.cart = [...state.cart, ...action.payload];
+      const custom_list = action.payload;
+      console.log(custom_list);
+
+      const set_custom_list = custom_list.filter((custom, idx) => {
+        let index = state.cart.findIndex((cart) => cart.foodId === custom.foodId);
+        if (index === -1) {
+          return custom;
+        }
+      })
+      console.log(set_custom_list);
+      state.cart = [...state.cart,...set_custom_list];
+      
     },
 
     // 카트 삭제
