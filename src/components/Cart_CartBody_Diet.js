@@ -72,7 +72,7 @@ const CartBodyDiet = (props) => {
         {/* 식단 만들기 버튼*/}
           <CalcBox style={!is_login || recentDeleted_list.length === 0 ? {bottom: "9%"} : {bottom: "21%"}}>
             <div onClick={()=>{recordCustom()}}>
-              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0">식단 추가하기</Text>
+              <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0" cursor="pointer">식단 추가하기</Text>
             </div>
           </CalcBox>
 
@@ -88,7 +88,7 @@ CartBodyDiet.defaultProps = {
 const BodyContainer = styled.div`
   position: relative;
   max-width: 420px;
-  max-height: 80vh;
+  max-height: 70vh;
   overflow: scroll;
   /* padding-top: 3vh; */
 

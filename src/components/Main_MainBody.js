@@ -200,11 +200,16 @@ const MainBody = (props) => {
 
       {/* nav 탭 바 */}
         <Nav>
-          <Text m_size bold color={navFocus===0?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
-          <Text m_size bold color={navFocus===1?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
-          <Text m_size bold color={navFocus===2?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
+          <div>
+            <Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
+            <Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
+            <Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
+          </div>
+          <NavLine>
+            <NavLineBold style={navFocus === 0 ? {left: "0"} : navFocus === 1 ? {left: "33.3%"} : {left: "66.7%"}}/>
+          </NavLine>
         </Nav>
-        <NavLine/>
+        
 
        {/* 즐겨찾기가 들어가는 곳 */}
         {navFocus === 0 && (
@@ -474,23 +479,38 @@ const TextBaloon = styled.div`
 `;
 
 const Nav = styled.div`
-  margin: 0 auto auto 4%;
-  width: 60%;
-  display: flex;
-  margin-top: 4vh;
+  margin-left: 8.3%;
+  width: 63%;
+  margin-top: 3vh;
 
   @media only screen and (max-width: 320px) {
     margin: -36% auto auto 4%;
     z-index: 100;
   };
+
+  & > div {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    margin-bottom: 0.6vh;
+  }
 `;
 
 const NavLine = styled.div`
-  width: 56%;
+  position: relative;
+  width: 100%;
   height: 1px;
   background-color: #ADADAD;
   margin-bottom: 2.6vh;
-  
+`;
+
+const NavLineBold = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 33.3%;
+  height: 2px;
+  background-color: #535353;
+  transition: 0.5s ease;
 `;
 
 export default MainBody;

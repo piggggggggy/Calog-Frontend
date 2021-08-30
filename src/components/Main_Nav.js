@@ -78,7 +78,7 @@ const Main_Nav = () => {
 export default Main_Nav;
 
 const Post = styled.div`
-    width: 42%;
+    width: 47.5%;
     height: 18vh;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 16px;
@@ -88,12 +88,17 @@ const Post = styled.div`
 const PostContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    column-gap: 3.8%;
+    justify-content: flex-start;
+    width: 88%;
+    max-height: 40vh;
+    column-gap: 4.4%;
     row-gap: 1.7vh;
-    margin: auto;
-    /* margin-left: 1.6vw; */
-    /* margin-top: 1vw; */
+    margin: 0 auto 0 auto;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 `;
 
 const CartBox = styled.div`
