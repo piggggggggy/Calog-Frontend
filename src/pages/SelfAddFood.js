@@ -58,7 +58,9 @@ const SelfAddFood = (props) => {
       } else {
         let result = window.confirm("지금 바로 칼로리를 등록할까요?");
         if(result) {
-          dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium, "true"))
+          let cartForOne = forOneInput.current.value === "" ? "-" : forOneInput.current.value;
+          let cartForMeasurement = measurementInput.current.value === "" ? "-": measurementInput.current.value;
+          dispatch(addUserFoodDB(name, kcal, cartForOne, cartForMeasurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium, "true"))
         } else {
           dispatch(addUserFoodDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
         }
