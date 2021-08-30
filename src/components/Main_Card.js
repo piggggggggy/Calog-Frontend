@@ -154,7 +154,7 @@ const Card = (props) => {
         {/* 유저가 직접 등록한 데이터의 경우 즐겨찾기는 default, 해제 시 삭제 */}
         {props.title === "useAdd" ? (
           <BookmarkBox onClick={delCreateFood}>
-            <FaTrashAlt style={{color:"rgba(95,95,95,0.5)"}} width="100%"/>
+            <FaTrashAlt style={{color:"rgb(186, 186, 186)"}} width="100%"/>
           </BookmarkBox>
         ) : (
           <BookmarkBox  onClick={addFavorite}>

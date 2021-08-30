@@ -33,7 +33,6 @@ export const searchKeywordDB = (data) => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       }) 
 
   }
@@ -46,13 +45,11 @@ export const getDetailDB = (foodId) => {
     instance
       .get(`/api/home/search/detail/${foodId}`)
       .then((res) => {
-        // console.log(res)
         dispatch(getDetail(res.data.foodDetail));
         dispatch(isLoaded(true))
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       })
   }
 };
@@ -63,12 +60,10 @@ export const countKeywordDB = (keyword) => {
     instance
       .post('/api/home/search/mostUsed',{keyword: keyword})
       .then((res) => {
-        // console.log(res);
         dispatch(addMostUsedKey(keyword));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.");
       })
   }
 };
@@ -79,12 +74,10 @@ export const getMostUsedKeyDB = () => {
     instance
       .get('/api/home/mostUsedKey')
       .then((res) => {
-        // console.log(res);
         dispatch(getMostUsedKey(res.data.mostUsedKey));
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       })
   }
 };
@@ -101,7 +94,6 @@ export const getRecommendedDB = () => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "에러가 났읍니다.")
       })
   }
 };

@@ -22,7 +22,6 @@ export const getNoticeSV = () => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };
@@ -36,7 +35,6 @@ export const postNoticeSV = (noticelist) => {
         })
         .catch((err) => {
             Sentry.captureException(`Catched Error : ${err}`);
-            console.log(err);
         });
     };
 };

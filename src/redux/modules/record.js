@@ -6,10 +6,13 @@ import { createSlice } from "@reduxjs/toolkit";
 // 전역 > 서버 배포
 import instance from "./instance";
 import { recordDeleted, clearDeleted } from "./user";
-import {delCartAll, chgType} from './cart';
+import {delCartAll, chgType, addDate} from './cart';
 
 // sentry
 import * as Sentry from '@sentry/react';
+
+// moment
+import moment from 'moment'
 
 // middleware
 // 기록하기 - 전체
@@ -23,6 +26,7 @@ export const addCartDB = (date, foodList, type) => {
         dispatch(chgType('아침'))
         dispatch(delImgAll())
         dispatch(typeChk(type))
+        dispatch(addDate(moment().format('YYYY-MM-DD')))
         dispatch(clearDeleted())
         history.replace('/loading/dashboard')
       })
@@ -126,7 +130,6 @@ export const getTodayRecordDB = () => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err)
         window.alert('기록을 불러오는데 오류가 발생했어요! 관리자에게 문의해주세요😿')
         history.push('/')
       }) 
@@ -157,7 +160,6 @@ export const getRecordDB = (date) => {
     instance
       .get(`/api/calendar/detail/${date}`)
       .then((res) => {
-        console.log(res)
         const record_list = res.data[0]
 
         // 기록이 없을 경우 alert, dashboard로 이동
@@ -172,7 +174,6 @@ export const getRecordDB = (date) => {
         dispatch(isLoaded(true))
       })
       .catch((err) => {
-        console.log(err)
         Sentry.captureException(`Catched Error : ${err}`);
         window.alert('기록을 로드하는데 오류가 있어요! 관리자에게 문의해주세요😿')
         history.push('/loading/calendar')

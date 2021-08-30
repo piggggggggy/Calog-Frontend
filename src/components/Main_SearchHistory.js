@@ -21,7 +21,6 @@ const SearchHistory = (props) => {
   const dispatch = useDispatch();
   const styles = props.style;
   const recent_list = useSelector((state) => state.recent.recent);
-  console.log(recent_list);
 
   useEffect(() => {
     dispatch(getRecentDB());

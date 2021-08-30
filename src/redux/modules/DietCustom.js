@@ -40,11 +40,9 @@ const initialState = {
 };
 
 export const CustomSV = (name, foodList) => {
-    console.log({name, foodList});
     return function(dispatch, getState, {history}){
         async function customize() {
             const res = await instance.post('/api/customize/meal', {name, foodList});
-            // console.log(res);
             dispatch(addCustom({name, foodList}));
             dispatch(delCartAll());
         };
@@ -57,7 +55,6 @@ export const GetCustomList = () => {
     return function(dispatch, getState, {history}){
         async function getcustomize() {
             const res = await instance.get('/api/customize/meal');
-            // console.log(res)
             dispatch(setCustom(res.data));
         };
         getcustomize()
@@ -70,7 +67,6 @@ export const DeleteCustomDB = (mealId) => {
     instance
       .delete(`/api/customize/meal/${mealId}`)
       .then((res) => {
-        // console.log(res);
         dispatch(deleteCustom(mealId));
       })
   }
