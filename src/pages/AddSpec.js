@@ -193,6 +193,7 @@ const Strong = styled.b`
     size: 28px;
     line-height: 34px;
     font-weight: 700;
+    font-family: 'Pretendard';
 `;
 
 const GenderBox = styled.div`
