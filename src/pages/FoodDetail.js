@@ -6,7 +6,6 @@ import theme from '../shared/theme';
 // elements & components
 import BtnHeader from '../shared/BtnHeader';
 import { Grid, Text } from '../elements';
-import UnderBar from '../components/Main_UnderBar';
 import CalorieBar from '../components/FoodDetail_CalorieBar';
 import Loading from './Loading4';
 
@@ -32,25 +31,38 @@ import Fat from '../img/C_fat.jpg';
 const FoodDetail = (props) => {
 
   const dispatch = useDispatch();
-  const foodId = props.match.params.foodId;
-  const is_login = useSelector((state) => state.user.is_login);
-  const foodInfo = useSelector((state) => state.search.detail);
-  const user = useSelector((state) => state.user.user_info);
-  const is_loaded = useSelector((state) => state.record.is_loaded);
-  console.log(foodInfo)
 
-// 대사량과 나의 칼로리 기록
+  // params로 가져오는 foodId
+  const foodId = props.match.params.foodId;
+
+  // 로그인체크
+  const is_login = useSelector((state) => state.user.is_login);
+ 
+  // 현페이지의 메인 정보
+  const foodInfo = useSelector((state) => state.search.detail);
+  
+  // bmr을 가져오기 위한 유저정보
+  const user = useSelector((state) => state.user.user_info);
+  
+  // 스피너를 위한 로딩유무
+  const is_loaded = useSelector((state) => state.record.is_loaded);
+
+  // 대사량 비교를 위한 오늘의 칼로리 기록
   const _record = useSelector((state) => state.record.record);
   console.log(_record)
 
+
+  // 기존 음식일경우 foodId에 해당하는 디테일 정보 불러오기 || 직접등록 음식일 경우 useEffect를 막아준다..
   useEffect(() => {
-    // dispatch(getDetailDB(foodId))
     (foodInfo.length === 0 && dispatch(getDetailDB(foodId))) || (foodInfo.foodId !== foodId && dispatch(getDetailDB(foodId)));
   }, []);
 
+
+  // 대사량과 나의 칼로리 기록
   const record = _record === undefined ? [] : _record;
   const bmr = !is_login ? 0 : user.bmr[0]?.bmr === 0 ? 0 : user.bmr[0]?.bmr;
-  const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
+  const foodRecord = record.length === 0 ? [] : record[0].foodRecords;
+  console.log(foodRecord)
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
@@ -82,21 +94,25 @@ const FoodDetail = (props) => {
     }
   };
   
+  // 현재 남은 기초대사량의 상태값
   const is_over = () => {
-    if (bmr === totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
+    if (bmr === totalKcal()) {
       return "line";
-    } else if (bmr > totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
+    } else if (bmr > totalKcal()) {
       return "under";
-    } else if (bmr < totalKcal()+Math.round(foodInfo.kcal * 10)/10) {
+    } else if (bmr < totalKcal()) {
       return "over";
     }
   };
 
+  // 상태값에 해당하는 텍스트 배경색
   const colors = is_over() === "line" ? 
   '#59C451' 
   : is_over() === "over" ? '#EC6262' : '#6993FF' ;
 
 
+
+  // 상태text
   const StatusText = styled.div`
     width: auto;
     line-height: 22px;
@@ -121,8 +137,6 @@ const FoodDetail = (props) => {
     return <Loading/>
   };
 
-  
-
   return (
     <React.Fragment>
       {/* 헤더 */}
@@ -142,14 +156,15 @@ const FoodDetail = (props) => {
             </Grid>  
             <Grid is_flex>
               <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{Math.round(foodInfo.kcal * 10)/10} kcal</Text>
+              
               {/* 카트 버튼 */}
-
               <div style={{height: "34px"}}>
                 <BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/>
               </div>
 
             </Grid>
           </Grid>
+
           {/* 칼로리 비교정보 */}
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
             <StatusText color={colors}>
@@ -159,16 +174,12 @@ const FoodDetail = (props) => {
               is_over() === "line" ? 
               " 현재까지 오늘의 기준치를 모두 채웠어요! " 
               : is_over() === "over" ? 
-              ` 오늘의 기초대사량에서 ${totalKcal()+Math.round(foodInfo.kcal * 10)/10-bmr} kcal를 초과했어요! ` 
-              : ` 아직 기초대사량까지 ${bmr-(totalKcal()+Math.round(foodInfo.kcal * 10)/10)} kcal 남았어요! `
+              ` 오늘의 기초대사량에서 ${totalKcal()-bmr} kcal를 초과했어요! ` 
+              : ` 오늘의 기초대사량까지 ${bmr-(totalKcal())} kcal 남았어요! `
               }
-              
-              
             </StatusText>
           </Grid>
         </HeaderBox>
-
-        
 
         {/* 영양성분 */}
         <IngreBox>
@@ -202,6 +213,7 @@ const FoodDetail = (props) => {
 
         {/* 영양정보 디테일 */}
         <IngreDetailContainer>
+          
           {/* 탄수화물 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">

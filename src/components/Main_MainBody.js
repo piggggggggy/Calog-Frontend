@@ -292,7 +292,7 @@ const BodyContainer = styled.div`
   /* padding-top: 2vh; */
   max-width: 100%;
   max-height: 40vh;
-  padding-bottom: 20vh;
+  padding-bottom: 5vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
