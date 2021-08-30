@@ -8,11 +8,11 @@ import theme from '../shared/theme';
 // components
 import BtnHeader from '../shared/BtnHeader';
 import km_img from '../img/km_img.png';
-import mk_img from '../img/mk_img.jpeg';
+import mk_img from '../img/mk_img.jpg';
 import ky_img from '../img/ky_img.jpg';
 import jh_img from '../img/jh_img.png';
-import iw_img from '../img/iw_img.PNG';
-import ny_img from '../img/ny_img.PNG';
+import iw_img from '../img/iw_img.png';
+import ny_img from '../img/ny_img.jpg';
 import yt_img from '../img/yt_img.png';
 import jih_img from '../img/jih_img.png';
 import trio from '../img/trio.png';

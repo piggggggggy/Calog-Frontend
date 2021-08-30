@@ -157,6 +157,7 @@ const FoodCard = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   padding: calc(1.3vh + 20px) 3.8% 1.5vh 3.8%;
+  margin-right: 2%;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
