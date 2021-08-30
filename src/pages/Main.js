@@ -153,7 +153,7 @@ const FloatFeedback = styled.div`
     top: -50%;
   }
 
-  @media only screen and (min-width: 421px) {
+  @media only screen and (min-width: 1023px) {
     display: none;
   }
 `;

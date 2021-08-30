@@ -34,23 +34,16 @@ const CartBody = (props) => {
   const cart = useSelector((state) => state.cart);
 
   const cart_list = cart.cart;
-  console.log(cart_list)
 
   const is_login = useSelector((state) => state.user.is_login);
   
   const user = useSelector((state) => state.user);
-  
-  // 최근삭제목록의 유무확인을 위한...
-  const user_info = useSelector((state) => state.user.user_info);
-  const _recentDeleted_list = is_login ? user_info.deleteList : undefined;
-  const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
   // user를 이용한 칼로리 기록
   const bmr =!is_login ? 0 : user.user_info.bmr[0].bmr;
 
   // 대사량과 나의 칼로리 기록
-  const _record = useSelector((state) => state.record.record);
-  const record = _record === undefined ? [] : _record;
+  const record = useSelector((state) => state.record.record);
   const foodRecord = record.length === 0 ? [] : record[0]?.foodRecords;
 
   // 장바구니에 담긴 food의 칼로리 합계
@@ -200,9 +193,8 @@ CartBody.defaultProps = {
 const BodyContainer = styled.div`
   position: relative;
   max-width: 420px;
-  max-height: 80vh;
+  max-height: 75vh;
   overflow: scroll;
-  /* padding-top: 3vh; */
 
   &::-webkit-scrollbar {
     display: none;

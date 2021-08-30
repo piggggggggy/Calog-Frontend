@@ -148,9 +148,6 @@ CardRcmd.defaultProps = {
 
 const FoodCard = styled.div`
   position: relative;
-  /* min-width: 9.2%; */
-  /* max-width: 174px; */
-  /* width: 171px; */
   min-width: 171px;
   max-width: 171px;
   min-height: 105px;
@@ -177,11 +174,9 @@ const FoodCard = styled.div`
     min-width: 120px;
     max-width: 120px;
   }  
-  /* @media only screen and (max-width:250px) {
-    min-width: 105px;
-    max-width: 105px;
-  } */
-
+  @media ${theme.device.mobileHH} {
+    max-height: 123px;
+  }
 
   & > div {
     /* display: flex;

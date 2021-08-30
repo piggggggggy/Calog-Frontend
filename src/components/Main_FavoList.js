@@ -96,7 +96,7 @@ const CardContainer = styled.div`
   align-items: center;
   flex-direction: column;
   column-gap: 1.8vh;
-  margin-top: 7% 
+  /* margin-top: 7%; */
 `;
 
 const MoreBtn = styled.div`

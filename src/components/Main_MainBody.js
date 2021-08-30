@@ -198,20 +198,18 @@ const MainBody = (props) => {
 
       </HeaderContainer>    
 
-        {/* 이름 */}
-      {/* <MiddleTap>
-        <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
-          <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
-        </Grid>
-      </MiddleTap> */}
-
       {/* nav 탭 바 */}
         <Nav>
-          <Text m_size bold color={navFocus===0?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
-          <Text m_size bold color={navFocus===1?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
-          <Text m_size bold color={navFocus===2?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
+          <div>
+            <Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
+            <Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
+            <Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
+          </div>
+          <NavLine>
+            <NavLineBold style={navFocus === 0 ? {left: "0"} : navFocus === 1 ? {left: "33.3%"} : {left: "66.7%"}}/>
+          </NavLine>
         </Nav>
-        <NavLine/>
+        
 
        {/* 즐겨찾기가 들어가는 곳 */}
         {navFocus === 0 && (
@@ -251,7 +249,9 @@ const MainBody = (props) => {
 
         {/* 직접 등록 칼로리 */}
         {navFocus === 2 && (
-          <FavoList title={"userAddKcal"}/>
+          <BodyContainer>
+            <FavoList title={"userAddKcal"}/>
+          </BodyContainer>
         )}
         
     </React.Fragment>
@@ -292,11 +292,18 @@ const BodyContainer = styled.div`
   /* padding-top: 2vh; */
   max-width: 100%;
   max-height: 40vh;
-  padding-bottom: 20vh;
+  padding-bottom: 10vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media only screen and (max-height: 720px) {
+    max-height: 35vh;
+  } 
+  @media only screen and (max-height: 600px) {
+    max-height: 30vh;
+  } 
 `;
 
 const SearchGrid = styled.div`
@@ -481,21 +488,31 @@ const TextBaloon = styled.div`
 `;
 
 const Nav = styled.div`
-  margin: 0 auto auto 4%;
-  width: 60%;
-  display: flex;
+  margin: 3vh 0 2.6vh 8.3%;
+  width: 63%;
 
-  @media only screen and (max-width: 320px) {
-    margin: -36% auto auto 4%;
-    z-index: 100;
-  };
+  & > div {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    margin-bottom: 0.6vh;
+  }
 `;
 
 const NavLine = styled.div`
-  margin: 2% auto auto 7%;
-  width: 56%;
+  position: relative;
+  width: 100%;
   height: 1px;
   background-color: #ADADAD;
+`;
+
+const NavLineBold = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 33.3%;
+  height: 2px;
+  background-color: #535353;
+  transition: 0.5s ease;
 `;
 
 export default MainBody;
