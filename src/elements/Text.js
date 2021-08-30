@@ -67,6 +67,7 @@ const DefaultText = styled.p`
         font-size: ${(props) => props.m_size};
         ${(props) => props.m_lineheight ? `line-height: ${props.m_lineheight}` : ''};
     }
+    
 `;
 
 export default Text;

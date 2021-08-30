@@ -60,8 +60,9 @@ const FavoList = (props) => {
             })}
 
             {/* 버튼 */}
-            {favo_list?.length > 4 ? <MoreBtn onClick={changeFavo}>
-              <Text size="13px" m_size="13px" padding="0" margin="0">{moreFavo ? "덜보기" : "더보기"}</Text>
+            {favo_list?.length > 4 ? 
+            <MoreBtn onClick={changeFavo}>
+              <Text size="13px" m_size="13px" padding="0" margin="0" cursor="pointer">{moreFavo ? "덜보기" : "더보기"}</Text>
             </MoreBtn> : ''}
           </CardContainer>
           : ''}
@@ -107,6 +108,7 @@ const MoreBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const AddFoodBtn = styled.div`
