@@ -13,6 +13,9 @@ import { ProfileDefault, Camera, Go } from '../img/svg';
 
 import { _logOut, ProfileSV, BodySpectSV, ModifyNickSV } from '../redux/modules/user';
 
+// icons
+import { GrEdit } from 'react-icons/gr';
+
 // helmet
 import {Helmet} from 'react-helmet';
 
@@ -176,12 +179,21 @@ return (
 
         <Bottombg>
           <hr color="#FFE899"/>
-          <Text m_size="23px" bold lineheight="34px" size="28px" margin="92px 0px 16px 42px">
-            {nickModifyClass?<><NickInput type="text" value={nickModify} onChange={(e)=>{setNick(e.target.value)}} width="20%"/><Line_/></>:user_info?.nickname}
-            {<button onClick={()=>{nickModifyClass?modify_nick():setNickClass(1)}} style={{marginLeft: "3%"}}>
-              편집
-            </button>}
-          </Text>
+          <Grid display="flex" margin="10vh 60% 2.7vh 5.7%" m_margin="10vh 60% 2.7vh 5.7%" width="auto">
+            
+          {nickModifyClass?
+            <div>
+              <NickInput type="text" value={nickModify} onChange={(e)=>{setNick(e.target.value)}} width="100%"/>
+              <Line_/>
+            </div>
+          :
+            <Text m_size="23px" bold lineheight="34px" size="28px" margin="0">{user_info?.nickname}</Text>
+          }
+            <EditBtn onClick={()=>{nickModifyClass?modify_nick():setNickClass(1)}}>
+              <GrEdit/>
+            </EditBtn>
+          </Grid>
+          
 
 
       {height||weight?
@@ -297,9 +309,6 @@ return (
   );
 }
 
-
-export default BodySpec;
-
 const Container = styled.div`
   padding-top: 120px;
   height: 100%;
@@ -389,15 +398,31 @@ const BodyInput = styled.input`
   margin-left: 3vw;
   height: 20%;
 `;
+
 const NickInput = styled.input`
-  width: 20%;
+  width: 100%;
   border: none;
+  font-size: 15px;
+  margin-bottom: 0.5vh;
+
   :focus {
       outline: none;
     }
 `;
 const Line_ = styled.div`
   border: 1px solid #E8E8E8;
-  width: 20%;
-  margin: 0px;
+  width: 100%;
 `;
+
+const EditBtn = styled.span`
+  margin-left: 5%;
+  font-size: 15px;
+  cursor: pointer;
+  color: #737373;
+
+  @media ${theme.device.mobileM} {
+    font-size: 13;
+  }
+`;
+
+export default BodySpec;

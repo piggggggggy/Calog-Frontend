@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from '../shared/theme';
 
 // elements & components
 import { Text, Button } from '../elements';
@@ -55,10 +56,15 @@ const Main_Nav = () => {
                                     <ListBox>
                                     {custom.foodList.map((food, idx) => {
                                         // console.log(food.name);
-                                        return (
-                                            <List>{food.name}</List>
-                                        )
+                                        if (custom.foodList.length <= 3){
+                                            return <List key={idx}>{food.name}</List>
+                                        } else {
+                                            if (idx < 3) {
+                                                return <List key={idx}>{food.name}</List>
+                                            }
+                                        }
                                     })}
+                                    {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
                                     </ListBox>
 
                                 </Post>
@@ -84,28 +90,40 @@ const Post = styled.div`
     border-radius: 16px;
     padding: 1.7vh 4.5%;
 
+    @media ${theme.device.mobileHH} {
+        max-height: 168px;
+    }
 `;
 const PostContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 88%;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 6%;
     max-height: 40vh;
-    column-gap: 4.4%;
+    padding-bottom: 10vh;
+    column-gap: 5%;
     row-gap: 1.7vh;
-    margin: 0 auto 0 auto;
+    margin: auto;
     overflow: scroll;
 
     &::-webkit-scrollbar {
       display: none;
     }
+
+    @media only screen and (max-height: 720px) {
+        max-height: 35vh;
+    } 
+    @media only screen and (max-height: 600px) {
+        max-height: 30vh;
+    } 
 `;
 
 const CartBox = styled.div`
     position: absolute;
     right: 0;
     top: 0;
-  cursor: pointer;
+    cursor: pointer;
 
 `;
 
@@ -119,7 +137,11 @@ const ListBox = styled.div`
     display: flex;
     flex-direction: column;
     column-gap: 0.6vh;
-    overflow-y: hidden;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+    display: none;
+    }
 `;
 const List = styled.div`
     width: 100%;

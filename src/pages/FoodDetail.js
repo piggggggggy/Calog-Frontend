@@ -48,9 +48,7 @@ const FoodDetail = (props) => {
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
   // 대사량 비교를 위한 오늘의 칼로리 기록
-  const _record = useSelector((state) => state.record.record);
-  console.log(_record)
-
+  const record = useSelector((state) => state.record.record);
 
   // 기존 음식일경우 foodId에 해당하는 디테일 정보 불러오기 || 직접등록 음식일 경우 useEffect를 막아준다..
   useEffect(() => {
@@ -59,10 +57,8 @@ const FoodDetail = (props) => {
 
 
   // 대사량과 나의 칼로리 기록
-  const record = _record === undefined ? [] : _record;
   const bmr = !is_login ? 0 : user.bmr[0]?.bmr === 0 ? 0 : user.bmr[0]?.bmr;
   const foodRecord = record.length === 0 ? [] : record[0].foodRecords;
-  console.log(foodRecord)
 
   if (foodId !== foodInfo.foodId) {
     return <></>;

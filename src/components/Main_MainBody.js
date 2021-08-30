@@ -249,7 +249,9 @@ const MainBody = (props) => {
 
         {/* 직접 등록 칼로리 */}
         {navFocus === 2 && (
-          <FavoList title={"userAddKcal"}/>
+          <BodyContainer>
+            <FavoList title={"userAddKcal"}/>
+          </BodyContainer>
         )}
         
     </React.Fragment>
@@ -290,11 +292,18 @@ const BodyContainer = styled.div`
   /* padding-top: 2vh; */
   max-width: 100%;
   max-height: 40vh;
-  padding-bottom: 5vh;
+  padding-bottom: 10vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media only screen and (max-height: 720px) {
+    max-height: 35vh;
+  } 
+  @media only screen and (max-height: 600px) {
+    max-height: 30vh;
+  } 
 `;
 
 const SearchGrid = styled.div`
@@ -479,14 +488,8 @@ const TextBaloon = styled.div`
 `;
 
 const Nav = styled.div`
-  margin-left: 8.3%;
+  margin: 3vh 0 2.6vh 8.3%;
   width: 63%;
-  margin-top: 3vh;
-
-  @media only screen and (max-width: 320px) {
-    margin: -36% auto auto 4%;
-    z-index: 100;
-  };
 
   & > div {
     display: grid;
@@ -500,7 +503,6 @@ const NavLine = styled.div`
   width: 100%;
   height: 1px;
   background-color: #ADADAD;
-  margin-bottom: 2.6vh;
 `;
 
 const NavLineBold = styled.div`
