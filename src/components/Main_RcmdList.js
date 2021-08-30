@@ -6,6 +6,7 @@ import _, { throttle } from 'lodash';
 // elementc & components
 import { Grid, Text } from '../elements';
 import CardRcmd from './Main_CardRcmd';
+import CardRcmd2 from './Main_CardRcmd2';
 import Loading from '../pages/Loading2';
 
 // modules
@@ -43,14 +44,21 @@ const RcmdList = (props) => {
       </TitleBox>
 
       {/* 추천리스트 */}
-      <RecommendContainer>
-          <HorizontalScroll>
-            {recommended_list && recommended_list.map((r, idx) => {
-              return <CardRcmd key={idx} {...r}/>
-            })}
-          </HorizontalScroll>
-        
-      </RecommendContainer>
+      {!window.navigator.standalone ?
+          <RecommendContainer>
+            <HorizontalScroll>
+              {recommended_list && recommended_list.map((r, idx) => {
+                return <CardRcmd key={idx} {...r}/>
+              })}
+            </HorizontalScroll>
+          </RecommendContainer>
+      :
+        <RecommendContainerM>
+          {recommended_list && recommended_list.map((r, idx) => {
+            return <CardRcmd2 key={idx} {...r}/>
+          })}
+        </RecommendContainerM>
+        }
     </React.Fragment>
   );
 }
@@ -70,6 +78,20 @@ const RecommendContainer = styled.div`
   height: 13.5vh;
   min-height: 110px;
   margin: 1.7vh 0 0 0;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  z-index: 5;
+
+  &::-webkit-scrollbar {
+    display: none;
+  } 
+`;
+
+const RecommendContainerM = styled.div`
+  position: relative;
+  margin: 1.7vh 0 0 0;
+  padding: 0 3% 3vh 5.2%;
   display: flex;
   align-items: center;
   overflow-x: scroll;

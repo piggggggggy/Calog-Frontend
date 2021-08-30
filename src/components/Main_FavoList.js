@@ -24,6 +24,9 @@ import addFoodImage from '../img/addFoodImg.png';
 
 const FavoList = (props) => {
 
+  // 로그인 체크
+  const is_login = useSelector((state) => state.user.is_login);
+
   // MainBody에서 props로 받아옴
   const favo_list = props.favo_list;
   const [moreFavo, setFavo] = useState(false);
@@ -39,6 +42,17 @@ const FavoList = (props) => {
 
   // 유저 직접 추가 칼로리
   const userAddFood = useSelector((state) => state.food.addFood)
+
+  // 직접등록 추가
+  const addFoodCustom = () => {
+    if (is_login) {
+      history.push('/addFood');
+    } else {
+      if(window.confirm("로그인을 하시면 이용하실 수 있어요. 바로 로그인하시겠어요?")) {
+        history.push('/signsocial');
+      }
+    }
+  }
 
   return (
     <React.Fragment>
@@ -84,7 +98,7 @@ const FavoList = (props) => {
               })}
             </React.Fragment>
           ) : (
-            <Image src={addFoodImage} width="85%" height="15vh" margin="2% auto 0 auto" _onClick={() => history.push('/addFood')} cursor="pointer"/>
+            <Image src={addFoodImage} width="85%" height="15vh" margin="2% auto 0 auto" _onClick={addFoodCustom} cursor="pointer"/>
           )}
         </CardContainer>
       )}
