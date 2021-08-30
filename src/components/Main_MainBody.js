@@ -198,13 +198,6 @@ const MainBody = (props) => {
 
       </HeaderContainer>    
 
-        {/* 이름 */}
-      {/* <MiddleTap>
-        <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
-          <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
-        </Grid>
-      </MiddleTap> */}
-
       {/* nav 탭 바 */}
         <Nav>
           <Text m_size bold color={navFocus===0?"#535353":"#ADADAD"} size="14px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
@@ -484,6 +477,7 @@ const Nav = styled.div`
   margin: 0 auto auto 4%;
   width: 60%;
   display: flex;
+  margin-top: 4vh;
 
   @media only screen and (max-width: 320px) {
     margin: -36% auto auto 4%;
@@ -492,10 +486,11 @@ const Nav = styled.div`
 `;
 
 const NavLine = styled.div`
-  margin: 2% auto auto 7%;
   width: 56%;
   height: 1px;
   background-color: #ADADAD;
+  margin-bottom: 2.6vh;
+  
 `;
 
 export default MainBody;

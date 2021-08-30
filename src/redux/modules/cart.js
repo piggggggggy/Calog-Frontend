@@ -33,6 +33,11 @@ const search = createSlice({
       state.cart.unshift(action.payload);
     },
 
+    // 식단목록 무더기로 카트에 담기
+    addCartCustomRx : (state, action) => {
+      state.cart = [...state.cart, ...action.payload];
+    },
+
     // 카트 삭제
     deleteCartRx : (state, action) => {
       const deleted_list = state.cart.filter((cart, idx) => {
@@ -89,6 +94,6 @@ const search = createSlice({
   }
 });
 
-export const {addCartRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate, chgType} = search.actions;
+export const {addCartRx, addCartCustomRx, deleteCartRx, delCartAll, setUpAmount, setDownAmount, cartOut, addDate, chgType} = search.actions;
 
 export default search;

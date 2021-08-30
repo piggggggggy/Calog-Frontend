@@ -58,7 +58,7 @@ export const GetCustomList = () => {
         async function getcustomize() {
             const res = await instance.get('/api/customize/meal');
             // console.log(res)
-            dispatch(SetCustom(res.data));
+            dispatch(setCustom(res.data));
         };
         getcustomize()
         .catch((err)=>{console.error(err)});
@@ -104,5 +104,5 @@ const custom = createSlice({
   },
 });
 
-export const {SetCustom, addCustom, deleteCustom} = custom.actions;
+export const {setCustom, addCustom, deleteCustom} = custom.actions;
 export default custom;

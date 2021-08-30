@@ -34,7 +34,6 @@ const CartBody = (props) => {
   const cart = useSelector((state) => state.cart);
 
   const cart_list = cart.cart;
-  console.log(cart_list)
 
   const is_login = useSelector((state) => state.user.is_login);
   
