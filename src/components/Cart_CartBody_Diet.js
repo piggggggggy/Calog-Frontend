@@ -53,12 +53,12 @@ const CartBodyDiet = (props) => {
         {/* 식단 이름 */}
         <DietName>
             <DietInputContainer>
-                <Input _onChange={(e)=>{setDiet(e.target.value)}} type="text" value={diet} width="150%" border="none" placeholder="식단 이름 입력"/>
+                <input onChange={(e)=>{setDiet(e.target.value)}} type="text" value={diet} placeholder="식단 이름 입력"/>
                 <Line/>
             </DietInputContainer>
-            <Button width="15%" height="5vh" bg="#6A6A6A" border_radius="6px">
-                <Text color="#FFFFFF" size="13px">완료</Text>
-            </Button>
+            <EditBtn>
+                <Text color="#FFFFFF" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px">완료</Text>
+            </EditBtn>
         </DietName>
         
         {/* 카트에 담긴 내용 */}
@@ -133,19 +133,45 @@ const CalcBox = styled.div`
 const DietName = styled.div`
     display: flex;
     margin: 5% 0px;
+    padding: 0 7.6%;
 `;
 
 const DietInputContainer = styled.div`
-    margin-top: 0.5%;
-    margin-left: 5%;
-    margin-right: -3%;
+  margin-top: 0.5%;
+  width: 50%;
+
+  & > input {
+    width: 100%;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 20px;
+      color: #E6E6E6;
+    }
+  }
 `;
 
 const Line = styled.div`
   margin-top: 5%;
   background-color: #C4C4C4;
-  width: 150%;
+  width: 100%;
   border: 1px solid #6A6A6A;
+`;
+
+const EditBtn = styled.div`
+  width: 15%;
+  /* height: 3.2vh; */
+  min-height: 100%;
+  background: #6A6A6A;
+  border: none;
+  border-radius: 6px;
+  margin-left: 1.9%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default CartBodyDiet;

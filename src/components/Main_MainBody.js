@@ -201,9 +201,9 @@ const MainBody = (props) => {
       {/* nav 탭 바 */}
         <Nav>
           <div>
-            <Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(0)}}>즐겨찾기 목록</div></Text>
-            <Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(1)}}>나의 식단</div></Text>
-            <Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px"><div onClick={()=>{setFocus(2)}}>직접 등록</div></Text>
+            <div onClick={()=>{setFocus(0)}}><Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px">즐겨찾기 목록</Text></div>
+            <div onClick={()=>{setFocus(1)}}><Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px">나의 식단</Text></div>
+            <div onClick={()=>{setFocus(2)}}><Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px">직접 등록</Text></div>
           </div>
           <NavLine>
             <NavLineBold style={navFocus === 0 ? {left: "0"} : navFocus === 1 ? {left: "33.3%"} : {left: "66.7%"}}/>
@@ -495,6 +495,23 @@ const Nav = styled.div`
     display: grid;
     grid-template-columns: 33.3% 33.3% 33.3%;
     margin-bottom: 0.6vh;
+
+    & > div {
+      display: flex;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+
+      @media ${theme.device.mobileM} {
+        font-size: 12px;
+      }
+      @media ${theme.device.mobileS} {
+        font-size: 11px;
+      }
+      @media only screen and (max-width: 320px) {
+        font-size: 9px;
+      }
+    }
   }
 `;
 
