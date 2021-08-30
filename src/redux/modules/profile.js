@@ -12,31 +12,31 @@ const initialState = {
 };
 
 export const getNoticeSV = () => {
-    return function(dispatch, getState, {history}){
-        dispatch(isLoaded(false))
-        instance
-        .get('/api/notice')
-        .then((res) => {
-            dispatch(SetList(res.data.notice))
-            dispatch(isLoaded(true))
-        })
-        .catch((err) => {
-            Sentry.captureException(`Catched Error : ${err}`);
-        });
-    };
+  return function(dispatch, getState, {history}){
+    dispatch(isLoaded(false))
+    instance
+    .get('/api/notice')
+    .then((res) => {
+      dispatch(SetList(res.data.notice))
+      dispatch(isLoaded(true))
+    })
+    .catch((err) => {
+      Sentry.captureException(`Catched Error : ${err}`);
+    });
+  };
 };
 
 export const postNoticeSV = (noticelist) => {
-    return function(dispatch, getState, {history}){
-        instance
-        .post('/api/notice', noticelist)
-        .then((res) => {
-            history.push("/notice");
-        })
-        .catch((err) => {
-            Sentry.captureException(`Catched Error : ${err}`);
-        });
-    };
+  return function(dispatch, getState, {history}){
+    instance
+    .post('/api/notice', noticelist)
+    .then((res) => {
+      history.push("/notice");
+    })
+    .catch((err) => {
+      Sentry.captureException(`Catched Error : ${err}`);
+    });
+  };
 };
 
 
@@ -53,14 +53,14 @@ const notice = createSlice({
   initialState,
   reducers: {
     SetList: (state, action) => {
-        state.list = action.payload;
+      state.list = action.payload;
     },
     SetListOne: (state, action) => {
-        state.listone = action.payload;
+      state.listone = action.payload;
     }
   },
   DeleteNoti: (state, action) => {
-        state.list = action.payload;
+      state.list = action.payload;
 }
 });
 

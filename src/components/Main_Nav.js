@@ -17,7 +17,6 @@ import { DeleteCustomDB } from '../redux/modules/DietCustom';
 
 
 const Main_Nav = () => {
-    
     const dispatch = useDispatch();
 
     // 커스텀 리스트 불러오기
@@ -69,31 +68,31 @@ const Main_Nav = () => {
                                         </CartBox>
                                     </TitleBox>
                                     
-                                    <ListBox>
-                                    {custom.foodList.map((food, idx) => {
-                                        // console.log(food.name);
-                                        if (custom.foodList.length <= 3){
-                                            return <List key={idx}>{food.name}</List>
-                                        } else {
-                                            if (idx < 3) {
-                                                return <List key={idx}>{food.name}</List>
-                                            }
-                                        }
-                                    })}
-                                    {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
-                                    </ListBox>
-
-                                </Post>
-                                );
-                            })
-
-                    :
-                    <></>
+          <ListBox>
+            {custom.foodList.map((food, idx) => {
+                // console.log(food.name);
+                if (custom.foodList.length <= 3){
+                    return <List key={idx}>{food.name}</List>
+                } else {
+                    if (idx < 3) {
+                        return <List key={idx}>{food.name}</List>
                     }
+                }
+            })}
+          {custom.foodList.length <= 3 ? <></> : <List> . . . . .</List> }
+          </ListBox>
+
+        </Post>
+      );
+      })
+
+    :
+    <></>
+	}
 
 
-            </PostContainer>
-        </React.Fragment>
+    </PostContainer>
+  </React.Fragment>
     )
 }
 

@@ -17,149 +17,148 @@ import { _Number } from '../shared/common';
  * @담당자 : 성수
 */
 
-const AddSpec = () => 
-{
-    const dispatch = useDispatch();
-    const user_nickname = useSelector(state=>state.user.user_info.nickname);
+const AddSpec = () => {
+  const dispatch = useDispatch();
+  const user_nickname = useSelector(state=>state.user.user_info.nickname);
 
-    const [bodyspec, SetSpec] = useState({});
-    const {gender, weight, height, age} = bodyspec;
-    const [page, Setpage] = useState(0);
+  const [bodyspec, SetSpec] = useState({});
+  const {gender, weight, height, age} = bodyspec;
+  const [page, Setpage] = useState(0);
 
-    const nextPage1 = () => 
-    {
-        if(!_Number(Number(age))){
-            SetSpec({...bodyspec, age: ""});
-            window.alert("나이에 숫자를 입력해주세요!");
-            return;
-        }
-        Setpage(page+1);
-    };
-    const nextPage2 = () => 
-    {
-        if(!_Number(Number(height))){
-            SetSpec({...bodyspec, height: ""});
-            window.alert("키에 숫자를 입력해주세요!");
-            return;
-        }
-        Setpage(page+1);
-    };
-    const addspec = () => 
-    {
-        if(!_Number(Number(weight))){
-            SetSpec({...bodyspec, weight: ""});
-            window.alert("몸무게에 숫자를 입력해주세요!");
-            return;
-        }
-        dispatch(BodySpectSV(gender, weight, height, age));
-        window.alert("신체 정보가 저장되었습니다!");
-        history.push("/body");
-    };
+  const nextPage1 = () => 
+  {
+    if(!_Number(Number(age))){
+        SetSpec({...bodyspec, age: ""});
+        window.alert("나이에 숫자를 입력해주세요!");
+        return;
+    }
+    Setpage(page+1);
+  };
+  const nextPage2 = () => 
+  {
+    if(!_Number(Number(height))){
+        SetSpec({...bodyspec, height: ""});
+        window.alert("키에 숫자를 입력해주세요!");
+        return;
+    }
+    Setpage(page+1);
+  };
+  const addspec = () => 
+  {
+    if(!_Number(Number(weight))){
+        SetSpec({...bodyspec, weight: ""});
+        window.alert("몸무게에 숫자를 입력해주세요!");
+        return;
+    }
+    dispatch(BodySpectSV(gender, weight, height, age));
+    window.alert("신체 정보가 저장되었습니다!");
+    history.push("/body");
+  };
 
-    const setMan = () => 
-    {
-        SetSpec({...bodyspec, gender: "남자"});
-        Setpage(page+1);
-    };
-    const setWoman = () => 
-    {
-        SetSpec({...bodyspec, gender: "여자"});
-        Setpage(page+1);
-    };
-
+  const setMan = () => 
+  {
+    SetSpec({...bodyspec, gender: "남자"});
+    Setpage(page+1);
+  };
+  const setWoman = () => 
+  {
+    SetSpec({...bodyspec, gender: "여자"});
+    Setpage(page+1);
+  };
 
 
-    return(
-        <React.Fragment>
-            <Container>
-                <Headers>
-                    <Grid padding="12px">
-                        <Text m_size="25px" size="28px" lineheight="34px">
-                            <Strong>{user_nickname}</Strong>의
-                        </Text>
 
-                        <Text  m_size="25px" size="28px" lineheight="34px">
-                            {/* 페이지에 따라 다른 주제 */}
-                            {
-                            page===0?<Strong>성별</Strong>:
-                            page===1?<Strong>나이</Strong>:
-                            page===2?<Strong>신장 사이즈</Strong>:
-                           <Strong>몸무게</Strong>
-                            }
-                            를 알려주세요</Text>
-                    </Grid>
+  return(
+    <React.Fragment>
+      <Container>
+        <Headers>
+          <Grid padding="12px">
+            <Text m_size="25px" size="28px" lineheight="34px">
+              <Strong>{user_nickname}</Strong>의
+            </Text>
 
-                    <Grid padding="12px">
-                        <Text m_size="11px" size="15px" lineheight="20px" color="#5F5F5F">
-                            {user_nickname}님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
-                            신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.<br/>
-                            <Source href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4278349/">bmr은 이 논문을 바탕으로 계산하였습니다.</Source>
-                        </Text>
-                    </Grid>
-                </Headers>
+            <Text  m_size="25px" size="28px" lineheight="34px">
+              {/* 페이지에 따라 다른 주제 */}
+              {
+              page===0?<Strong>성별</Strong>:
+              page===1?<Strong>나이</Strong>:
+              page===2?<Strong>신장 사이즈</Strong>:
+              <Strong>몸무게</Strong>
+              }
+              를 알려주세요</Text>
+          </Grid>
 
-                <Body>
-                    {/* 페이지에 따라 받아야하는 값이 다르므로 다른 input 박스 보여줌 */}
-                    {page===0?
-                    <Grid display="flex" jc="space-around">
-                        <GenderBox onClick={setMan}>남</GenderBox>
-                        <GenderBox onClick={setWoman}>여</GenderBox>
-                    </Grid>
-                    :page===1?
-                    <InputBox>
-                        &emsp;
-                        <Input border="none" width="80%" type="text" value={bodyspec.age} 
-                        _onChange=
-                        {
-                            (e) => SetSpec({...bodyspec, age: e.target.value})
-                        }/>
-                        <Strong>AGE&emsp;</Strong>
-                    </InputBox>
-                    :page===2?
-                    <InputBox>
-                        &emsp;
-                        <Input border="none" width="80%" type="text" value={bodyspec.height}
-                        _onChange=
-                        {
-                            (e) => SetSpec({...bodyspec, height: e.target.value})
-                        }/>
-                        <Strong>CM&emsp;</Strong>
-                    </InputBox>
-                    :
-                    <InputBox>
-                        &emsp;
-                        <Input border="none" width="80%" type="text" value={bodyspec.weight}
-                        _onChange=
-                        {
-                            (e) => SetSpec({...bodyspec, weight: e.target.value})
-                        }/>
-                        <Strong>KG&emsp;</Strong>
-                    </InputBox>
-                    }
-                    {/* 페이지가 1이상일 때 버튼 나타냄 */}
-                    {page<1?
-                    ""
-                    :
-                    <Button bg="#FFE899" width="87%" height="56px" border_radius="60px"
-                    _onClick=
-                    {
-                        page===1?
-                        nextPage1:
-                        page===2?
-                        nextPage2:
-                        addspec
-                    }>
-                        <Grid cursor>
-                            <Text color="#404040" size="16px" lineheight="22px" bold>
-                                다음
-                            </Text>
-                        </Grid>
-                    </Button>
-                    }
-                </Body>
-            </Container>
-        </React.Fragment>
-    )
+          <Grid padding="12px">
+            <Text m_size="11px" size="15px" lineheight="20px" color="#5F5F5F">
+              {user_nickname}님의 소중한 신체데이터는 저희만 알고있을게요!<br/>
+              신장사이즈는 기초대사량을 계산하는 데에 사용됩니다.<br/>
+              <Source href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4278349/">bmr은 이 논문을 바탕으로 계산하였습니다.</Source>
+            </Text>
+          </Grid>
+        </Headers>
+
+        <Body>
+          {/* 페이지에 따라 받아야하는 값이 다르므로 다른 input 박스 보여줌 */}
+          {page===0?
+          <Grid display="flex" jc="space-around">
+            <GenderBox onClick={setMan}>남</GenderBox>
+            <GenderBox onClick={setWoman}>여</GenderBox>
+          </Grid>
+          :page===1?
+          <InputBox>
+            &emsp;
+            <Input border="none" width="80%" type="text" value={bodyspec.age} 
+            _onChange=
+            {
+              (e) => SetSpec({...bodyspec, age: e.target.value})
+            }/>
+            <Strong>AGE&emsp;</Strong>
+          </InputBox>
+          :page===2?
+          <InputBox>
+            &emsp;
+            <Input border="none" width="80%" type="text" value={bodyspec.height}
+            _onChange=
+            {
+              (e) => SetSpec({...bodyspec, height: e.target.value})
+            }/>
+            <Strong>CM&emsp;</Strong>
+          </InputBox>
+          :
+          <InputBox>
+            &emsp;
+            <Input border="none" width="80%" type="text" value={bodyspec.weight}
+            _onChange=
+            {
+              (e) => SetSpec({...bodyspec, weight: e.target.value})
+            }/>
+            <Strong>KG&emsp;</Strong>
+          </InputBox>
+          }
+          {/* 페이지가 1이상일 때 버튼 나타냄 */}
+          {page<1?
+          ""
+          :
+          <Button bg="#FFE899" width="87%" height="56px" border_radius="60px"
+          _onClick=
+          {
+            page===1?
+            nextPage1:
+            page===2?
+            nextPage2:
+            addspec
+          }>
+            <Grid cursor>
+              <Text color="#404040" size="16px" lineheight="22px" bold>
+                다음
+              </Text>
+            </Grid>
+          </Button>
+          }
+        </Body>
+      </Container>
+    </React.Fragment>
+  )
 }
 
 
