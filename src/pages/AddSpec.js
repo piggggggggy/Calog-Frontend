@@ -25,8 +25,7 @@ const AddSpec = () => {
   const {gender, weight, height, age} = bodyspec;
   const [page, Setpage] = useState(0);
 
-  const nextPage1 = () => 
-  {
+  const nextPage1 = () => {
     if(!_Number(Number(age))){
         SetSpec({...bodyspec, age: ""});
         window.alert("나이에 숫자를 입력해주세요!");
@@ -34,8 +33,7 @@ const AddSpec = () => {
     }
     Setpage(page+1);
   };
-  const nextPage2 = () => 
-  {
+  const nextPage2 = () => {
     if(!_Number(Number(height))){
         SetSpec({...bodyspec, height: ""});
         window.alert("키에 숫자를 입력해주세요!");
@@ -43,8 +41,7 @@ const AddSpec = () => {
     }
     Setpage(page+1);
   };
-  const addspec = () => 
-  {
+  const addspec = () => {
     if(!_Number(Number(weight))){
         SetSpec({...bodyspec, weight: ""});
         window.alert("몸무게에 숫자를 입력해주세요!");
@@ -55,13 +52,11 @@ const AddSpec = () => {
     history.push("/body");
   };
 
-  const setMan = () => 
-  {
+  const setMan = () => {
     SetSpec({...bodyspec, gender: "남자"});
     Setpage(page+1);
   };
-  const setWoman = () => 
-  {
+  const setWoman = () => {
     SetSpec({...bodyspec, gender: "여자"});
     Setpage(page+1);
   };
@@ -108,8 +103,7 @@ const AddSpec = () => {
           <InputBox>
             &emsp;
             <Input border="none" width="80%" type="text" value={bodyspec.age} 
-            _onChange=
-            {
+            _onChange= {
               (e) => SetSpec({...bodyspec, age: e.target.value})
             }/>
             <Strong>AGE&emsp;</Strong>
@@ -118,8 +112,7 @@ const AddSpec = () => {
           <InputBox>
             &emsp;
             <Input border="none" width="80%" type="text" value={bodyspec.height}
-            _onChange=
-            {
+            _onChange= {
               (e) => SetSpec({...bodyspec, height: e.target.value})
             }/>
             <Strong>CM&emsp;</Strong>
@@ -128,8 +121,7 @@ const AddSpec = () => {
           <InputBox>
             &emsp;
             <Input border="none" width="80%" type="text" value={bodyspec.weight}
-            _onChange=
-            {
+            _onChange= {
               (e) => SetSpec({...bodyspec, weight: e.target.value})
             }/>
             <Strong>KG&emsp;</Strong>
@@ -140,8 +132,7 @@ const AddSpec = () => {
           ""
           :
           <Button bg="#FFE899" width="87%" height="56px" border_radius="60px"
-          _onClick=
-          {
+          _onClick= {
             page===1?
             nextPage1:
             page===2?

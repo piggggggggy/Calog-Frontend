@@ -24,8 +24,7 @@ const NoticeWrite = (props) => {
   const date = moment().format('YYYY-MM-DD');
   const [noticelist, setNotice] = useState({date});
 
-  const postNoti = () => 
-  {
+  const postNoti = () => {
     dispatch(postNoticeSV(noticelist));
   }
 

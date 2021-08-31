@@ -27,17 +27,14 @@ const Signup = () => {
   const dupliNick = useSelector((state)=>state.user.nick_dupli);
   const [user_info, setUserInfo] = useState({});
 
-  useEffect(() => 
-  {
-    const debounce = _.debounce(() => 
-    {
+  useEffect(() => {
+    const debounce = _.debounce(() => {
       dispatch(EmailDuplicate(user_info.email));
     }, 3);
     debounce();
   }, [user_info.email]);
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     const debounce = _.debounce(() => 
     {
       dispatch(NickDuplicate(user_info.nickname));
@@ -45,20 +42,17 @@ const Signup = () => {
     debounce();
   }, [user_info.nickname]);
 
-  const signup = () => 
-  {
+  const signup = () => {
     dispatch(SignupSV(user_info));
     window.alert("회원가입이 완료되었습니다!");
     history.push("/login");
   };
 
-  const debounceEmail = _.debounce((e) => 
-  {
+  const debounceEmail = _.debounce((e) => {
     setUserInfo({...user_info, email: e.target.value})
   }, 400);
 
-  const debounceNick = _.debounce((e) => 
-  {
+  const debounceNick = _.debounce((e) => {
     setUserInfo({...user_info, nickname: e.target.value})
   }, 400);
 

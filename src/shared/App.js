@@ -107,6 +107,7 @@ const Wrap = styled.div`
   width: 100%;
   max-width: 420px;
   min-width: 280px;
+  min-height: 500px;
   height: 91vh;
   margin: 0 auto;
   overflow-y: auto;
