@@ -50,6 +50,8 @@ const SelfAddFood = (props) => {
     // 음식 추가 요청으로 인해 운영진이 db에 데이터를 추가할 경우 숨김 페이지를 통해서 진행 >> 페이지 재활용
     if (history.location.pathname.includes('onlyHQ'))  {
       dispatch(addDataDB(name, kcal, forOne, measurement, carbo, sugars, protein, fat, fattyAcid, transFattyAcid, unFattyAcid, cholesterol, natrium))
+      window.alert("작성완료");
+      history.replace('/onlyHQ');
     } else {
 
       // 유저가 직접 데이터를 추가하여 사용하는 경우
