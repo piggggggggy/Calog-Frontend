@@ -22,8 +22,7 @@ const Login = (props) =>
   const dispatch = useDispatch();
   const [user_info, setUserInfo] = useState({});
 
-  const login = () => 
-  {
+  const login = () => {
     dispatch(LoginSV(user_info));
   };
 
@@ -47,8 +46,7 @@ const Login = (props) =>
             <InputBox>
               <Input border="none" placeholder="이메일을 입력해주세요" bg="#E4E4E4" width="80%" type="text"
               value={user_info.email}
-              _onChange={(e)=>
-                {
+              _onChange={(e)=> {
                   setUserInfo({...user_info, email: e.target.value})
                 }}
               />
@@ -80,8 +78,7 @@ const Login = (props) =>
             <InputBox>
               <Input border="none" placeholder="비밀번호를 입력해주세요" bg="#E4E4E4" width="80%" type="password"
               value={user_info.password}
-              _onChange={(e)=>
-                {
+              _onChange={(e)=> {
                   setUserInfo({...user_info, password: e.target.value})
                 }}
               />
