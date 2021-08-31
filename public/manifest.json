@@ -58,13 +58,13 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/calog.JPEG",
+      "src": "/icons/calog512.jpg",
       "sizes": "310x310",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/calog.JPEG",
+      "src": "/icons/calog512.jpg",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
