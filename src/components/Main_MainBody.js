@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import theme from '../shared/theme';
-import { history } from '../redux/configStore';
 
 // modules
-import { searchKeywordDB, countKeywordDB, addMostUsedKey, rangeFilter } from '../redux/modules/search';
+import { searchKeywordDB, countKeywordDB } from '../redux/modules/search';
 import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 import { getUserAddFoodDB } from '../redux/modules/food';
-import { getFavoriteDB } from '../redux/modules/favorite';
 
 // elements & components
 import { Grid, Text, Image } from '../elements';
-import RangeSlider from './Main_RangeSlider';
-import UnderBar from './Main_UnderBar';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
@@ -533,8 +529,8 @@ const TextBaloon = styled.div`
 `;
 
 const Nav = styled.div`
-  margin: 3vh 0 2.6vh 8.3%;
-  width: 63%;
+  margin: 3vh 0 2.6vh 8%;
+  width: 70%;
 
   & > div {
     display: grid;
