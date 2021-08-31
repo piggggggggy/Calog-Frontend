@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
-import { getNoticeSV } from '../redux/modules/notice';
 
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
@@ -19,9 +18,7 @@ import Loading from './Loading4';
  * @담당자 : 성수 + 나영(게시글 관리)
 */
 
-const Notice = (props) =>
-{
-  const dispatch = useDispatch();
+const Notice = (props) => {
   const admin = useSelector((state)=>state.user.user_info?.email);
   const notilist = useSelector(state=>state.notice.list);
   const notilist_reverse =[];
@@ -35,19 +32,18 @@ const Notice = (props) =>
   // },[]);
 
 // loading
-const is_loaded = useSelector((state) => state.record.is_loaded)
+const is_loaded = useSelector((state) => state.record.is_loaded);
 
 if(!is_loaded) {
   return (<Loading />);
-}
+};
 
 
   return (
     <React.Fragment>
       <Container>
         <Head>
-          <td onClick={()=>
-            {
+          <td onClick={()=> {
               history.push("/body")
             }}>
             <Grid cursor="pointer">
@@ -61,8 +57,7 @@ if(!is_loaded) {
           {/* 관리자 아이디만 쓰기 버튼 표시 */}
           {/* 보여주는 것보다 어디 숨겨놔야할 듯 */}
           {admin==="cadmin@calories.com"?
-          <Tag onClick={()=>
-          {
+          <Tag onClick={()=> {
             history.push("/notiwrite")
           }}>
             <Text size="13px" lineheight="25px">
