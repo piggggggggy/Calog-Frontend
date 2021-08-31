@@ -1,0 +1,6 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "app.calog.www.twa",
+  "sha256_cert_fingerprints": ["E4:F3:40:C6:A3:2B:2D:1B:89:E2:87:77:51:DA:BA:F2:D1:1E:8E:12:FB:E1:C9:5B:EE:D8:62:31:D1:0A:82:F6"] }
+}
+]
