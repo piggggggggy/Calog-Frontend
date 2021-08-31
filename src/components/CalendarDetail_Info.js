@@ -5,8 +5,8 @@ import theme from '../shared/theme';
 
 /** 
  * @역할 기록된 칼로리 양과 기초대사량을 비교하여 안내 메시지 컴포넌트
- * @필수값 : bmr, contents, foodRecords, totalCalories
- * @담당자 : 김나영
+ * @필수값 bmr, contents, foodRecords, totalCalories
+ * @담당자 김나영
 */
 
 const CalenderDetail_Info = (props) => {
