@@ -27,8 +27,8 @@ import {Helmet} from 'react-helmet';
  * @담당자 : 성수
 */
 
-const BodySpec = (props) => 
-{
+const BodySpec = (props) => {
+  
   const dispatch = useDispatch();
   const is_login = useSelector(state=>state.user.is_login);
   const user_info = useSelector(state=>state.user.user_info);

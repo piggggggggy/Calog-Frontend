@@ -18,6 +18,7 @@ import { NumberCheck } from '../shared/common';
 */
 
 const AddSpec = () => {
+  
   const dispatch = useDispatch();
   const user_nickname = useSelector(state=>state.user.user_info.nickname);
 
