@@ -111,6 +111,7 @@ const Wrap = styled.div`
   height: 91vh;
   margin: 0 auto;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: white;
 
   &::-webkit-scrollbar {
