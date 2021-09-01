@@ -135,6 +135,7 @@ const MainBody = (props) => {
 
   return (
     <React.Fragment>
+      <div style={{position: "relative", height: "90%", overflow: "hidden"}}>
 
       <HeaderContainer>
 
@@ -166,9 +167,9 @@ const MainBody = (props) => {
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
 
-              <Grid is_flex padding="4.5vh 6% 2vh 6%">
+              <RecentText style={{padding: "40px 6% 1vh 6%"}}>
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
-              </Grid>
+              </RecentText>
               
               <Line/>
               
@@ -176,17 +177,17 @@ const MainBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid is_flex padding="1.1vh 11% 1.1vh 8%" key={idx}>
+                      <RecentBox>
                         
-                        <Grid cursor _onClick={()=>{recentSearch(rec)}}>
-                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                        <Grid cursor="pointer" _onClick={()=>{recentSearch(rec)}}>
+                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0" cursor="pointer">{rec}</Text>
                         </Grid>
                         
-                        <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
                           <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="18px" color="#737373"/>
                         </div>
                         
-                      </Grid>
+                      </RecentBox>
                       
                       <Line/>
                     </>
@@ -252,6 +253,8 @@ const MainBody = (props) => {
             <FavoList title={"userAddKcal"}/>
           </BodyContainer>
         )}
+      
+      </div>
         
     </React.Fragment>
   );
@@ -387,6 +390,32 @@ const SearchHistory = styled.div`
   }
 `;
 
+const RecentText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const RecentBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 3.2% 11% 3.2% 8%;
+
+  @media only screen and (max-height: 850px) {
+    padding: 2.5% 11% 2.5% 8%;
+  }
+
+  @media only screen and (max-height: 800px) {
+    padding: 2% 11% 2% 8%;
+  }
+
+  @media only screen and (max-height: 70px) {
+    padding: 1.2% 11% 1.2% 8%;
+  }
+`;
+
 const Line = styled.div`
   width: 87%;
   margin: auto;
@@ -416,7 +445,7 @@ const Mascort_favoriteFood = styled.div`
   position: absolute;
   max-width: 420px;
   width: 120%;
-  bottom: -15%;
+  bottom: -10%;
   right: -10%;
 
   @media ${theme.device.mobileS} {
@@ -424,7 +453,7 @@ const Mascort_favoriteFood = styled.div`
     right: -10%;
   }
   @media ${theme.device.mobileM} {
-    bottom: -20%;
+    bottom: -15%;
     right: -10%;
   }
 
