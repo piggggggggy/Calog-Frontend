@@ -7,7 +7,7 @@ import { BodySpectSV } from '../redux/modules/user';
 import styled from 'styled-components';
 import {Button, Text, Grid, Input} from '../elements';
 
-import { _Number } from '../shared/common';
+import { NumberCheck } from '../shared/common';
 
 /**
  * @param {*} props
@@ -21,29 +21,38 @@ const AddSpec = () => {
   const dispatch = useDispatch();
   const user_nickname = useSelector(state=>state.user.user_info.nickname);
 
-  const [bodyspec, SetSpec] = useState({});
+  const [bodyspec, setSpec] = useState({});
   const {gender, weight, height, age} = bodyspec;
-  const [page, Setpage] = useState(0);
+  const [page, setPage] = useState(0);
+
+  const setGenderMan = () => {
+    setSpec({...bodyspec, gender: "남자"});
+    setPage(page+1);
+  };
+  const setGenderWoman = () => {
+    setSpec({...bodyspec, gender: "여자"});
+    setPage(page+1);
+  };
 
   const nextPage1 = () => {
-    if(!_Number(Number(age))){
-        SetSpec({...bodyspec, age: ""});
+    if(!NumberCheck(Number(age))){
+        setSpec({...bodyspec, age: ""});
         window.alert("나이에 숫자를 입력해주세요!");
         return;
     }
-    Setpage(page+1);
+    setPage(page+1);
   };
   const nextPage2 = () => {
-    if(!_Number(Number(height))){
-        SetSpec({...bodyspec, height: ""});
+    if(!NumberCheck(Number(height))){
+        setSpec({...bodyspec, height: ""});
         window.alert("키에 숫자를 입력해주세요!");
         return;
     }
-    Setpage(page+1);
+    setPage(page+1);
   };
-  const addspec = () => {
-    if(!_Number(Number(weight))){
-        SetSpec({...bodyspec, weight: ""});
+  const addBodySpec = () => {
+    if(!NumberCheck(Number(weight))){
+        setSpec({...bodyspec, weight: ""});
         window.alert("몸무게에 숫자를 입력해주세요!");
         return;
     }
@@ -52,14 +61,7 @@ const AddSpec = () => {
     history.push("/body");
   };
 
-  const setMan = () => {
-    SetSpec({...bodyspec, gender: "남자"});
-    Setpage(page+1);
-  };
-  const setWoman = () => {
-    SetSpec({...bodyspec, gender: "여자"});
-    Setpage(page+1);
-  };
+
 
 
 
@@ -96,15 +98,15 @@ const AddSpec = () => {
           {/* 페이지에 따라 받아야하는 값이 다르므로 다른 input 박스 보여줌 */}
           {page===0?
           <Grid display="flex" jc="space-around">
-            <GenderBox onClick={setMan}>남</GenderBox>
-            <GenderBox onClick={setWoman}>여</GenderBox>
+            <GenderBox onClick={setGenderMan}>남</GenderBox>
+            <GenderBox onClick={setGenderWoman}>여</GenderBox>
           </Grid>
           :page===1?
           <InputBox>
             &emsp;
             <Input border="none" width="80%" type="text" value={bodyspec.age} 
             _onChange= {
-              (e) => SetSpec({...bodyspec, age: e.target.value})
+              (e) => setSpec({...bodyspec, age: e.target.value})
             }/>
             <Strong>AGE&emsp;</Strong>
           </InputBox>
@@ -113,16 +115,16 @@ const AddSpec = () => {
             &emsp;
             <Input border="none" width="80%" type="text" value={bodyspec.height}
             _onChange= {
-              (e) => SetSpec({...bodyspec, height: e.target.value})
+              (e) => setSpec({...bodyspec, height: e.target.value})
             }/>
             <Strong>CM&emsp;</Strong>
           </InputBox>
-          :
+          : //page===3
           <InputBox>
             &emsp;
             <Input border="none" width="80%" type="text" value={bodyspec.weight}
             _onChange= {
-              (e) => SetSpec({...bodyspec, weight: e.target.value})
+              (e) => setSpec({...bodyspec, weight: e.target.value})
             }/>
             <Strong>KG&emsp;</Strong>
           </InputBox>
@@ -137,7 +139,7 @@ const AddSpec = () => {
             nextPage1:
             page===2?
             nextPage2:
-            addspec
+            addBodySpec
           }>
             <Grid cursor>
               <Text color="#404040" size="16px" lineheight="22px" bold>
