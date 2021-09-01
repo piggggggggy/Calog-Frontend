@@ -1,26 +1,25 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import theme from '../shared/theme';
-import { history } from '../redux/configStore';
 
 // modules
-import { searchKeywordDB, countKeywordDB, addMostUsedKey, rangeFilter } from '../redux/modules/search';
+import { searchKeywordDB, countKeywordDB } from '../redux/modules/search';
 import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
 import { getUserAddFoodDB } from '../redux/modules/food';
-import { getFavoriteDB } from '../redux/modules/favorite';
 
 // elements & components
 import { Grid, Text, Image } from '../elements';
-import RangeSlider from './Main_RangeSlider';
-import UnderBar from './Main_UnderBar';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
 import Loading from '../pages/Loading4';
 import MainNav from './Main_Nav';
+
+// image
 import makeFoodNone from '../img/makeFoodNone.png';
+import fatFavorite from '../img/fatFavorite.png';
 
 // icon
 import { BiSearchAlt2 } from 'react-icons/bi';
@@ -136,6 +135,7 @@ const MainBody = (props) => {
 
   return (
     <React.Fragment>
+      <div style={{position: "relative", height: "90%", overflow: "hidden"}}>
 
       <HeaderContainer>
 
@@ -167,9 +167,9 @@ const MainBody = (props) => {
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
 
-              <Grid is_flex padding="4.5vh 6% 2vh 6%">
+              <RecentText style={{padding: "40px 6% 1vh 6%"}}>
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
-              </Grid>
+              </RecentText>
               
               <Line/>
               
@@ -177,17 +177,17 @@ const MainBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid is_flex padding="1.1vh 11% 1.1vh 8%" key={idx}>
+                      <RecentBox>
                         
-                        <Grid cursor _onClick={()=>{recentSearch(rec)}}>
-                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
+                        <Grid cursor="pointer" _onClick={()=>{recentSearch(rec)}}>
+                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0" cursor="pointer">{rec}</Text>
                         </Grid>
                         
-                        <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
                           <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="18px" color="#737373"/>
                         </div>
                         
-                      </Grid>
+                      </RecentBox>
                       
                       <Line/>
                     </>
@@ -226,26 +226,9 @@ const MainBody = (props) => {
               {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
             </BodyContainer>
             {!is_login || favo_list.length === 0 ? 
-            <Mascort>
-              <MFace>
-                <svg viewBox="0 0 199 274" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M282.891 165C318.334 278.635 214.052 330 129.131 330C44.2106 330 -23.9337 270.544 8.03445 165C34.4221 77.8772 52.7239 0 137.645 0C222.565 0 256.743 81.1631 282.891 165Z" fill="#E4E4E4"/>
-                  <path d="M99.5696 81.6144C101.169 80.0048 102.066 77.8278 102.066 75.5588C102.066 73.2908 101.168 71.1149 99.5696 69.5063C97.9691 67.9038 95.7978 67.0025 93.5329 67.0005C91.2692 67.0033 89.0992 67.9046 87.4995 69.5063C85.8987 71.1138 84.9999 73.2901 85 75.5588C84.9991 77.8285 85.8979 80.0061 87.4995 81.6144C89.0992 83.2161 91.2692 84.1174 93.5329 84.1202C95.7978 84.1182 97.9691 83.2169 99.5696 81.6144Z" fill="white"/>
-                  <path d="M142.244 81.6139C140.644 83.2156 138.474 84.1169 136.211 84.1197C133.947 84.1169 131.777 83.2156 130.177 81.6139C128.576 80.0056 127.677 77.828 127.678 75.5583C127.678 73.2896 128.576 71.1134 130.177 69.5058C131.777 67.9041 133.947 67.0028 136.211 67C138.474 67.0028 140.644 67.9041 142.244 69.5058C143.845 71.1134 144.744 73.2896 144.744 75.5583C144.745 77.828 143.846 80.0056 142.244 81.6139Z" fill="white"/>
-                  <path d="M100.536 99.158C101.835 99.9257 102.776 101.177 103.152 102.638C104.639 107.609 109.942 109.804 114.719 109.804C119.497 109.804 124.806 107.59 126.286 102.638C126.685 101.203 127.63 99.9807 128.919 99.2339C130.205 98.4879 131.734 98.2777 133.174 98.6486C134.616 99.0198 135.855 99.9409 136.626 101.214C137.4 102.489 137.643 104.015 137.303 105.467C134.358 115.442 124.875 121.22 114.719 121.22C104.953 121.22 94.632 115.525 92.1357 105.479C91.768 104.014 91.9955 102.462 92.7685 101.164C93.5356 99.864 94.7873 98.9217 96.2487 98.5442C97.7028 98.1762 99.2434 98.3968 100.536 99.158Z" fill="white"/>
-                  <path d="M144.676 113.014C144.676 113.014 132.761 109.837 130.84 95.5381" stroke="white" strokeWidth="9.53235" strokeMiterlimit="10" strokeLinecap="round"/>
-                </svg>
-                <TextBaloon>
-                  <svg viewBox="0 0 227 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M221.101 7.69592C222.638 10.711 222.638 14.6579 222.638 22.5517V45.2713C222.65 51.2921 222.777 54.5387 224.07 57.0774C224.612 58.1411 225.293 59.1194 226.089 59.9893C222.836 59.8802 219.791 58.944 217.16 57.3843C214.93 59.0284 212.173 60 209.189 60H22.5517C14.6579 60 10.711 60 7.69591 58.4638C5.0438 57.1124 2.88756 54.9562 1.53624 52.3041C0 49.289 0 45.3421 0 37.4483V22.5517C0 14.6579 0 10.711 1.53624 7.69592C2.88756 5.04381 5.0438 2.88757 7.69591 1.53625C10.711 7.62939e-06 14.6579 7.62939e-06 22.5517 7.62939e-06H200.086C207.98 7.62939e-06 211.927 7.62939e-06 214.942 1.53625C217.594 2.88757 219.75 5.04381 221.101 7.69592Z" fill="#EFAF00" fillOpacity="0.5"/>
-                  </svg>
-                  <div>
-                    내가 자주먹는 음식을 등록해서
-                    <br/>볼 수 있어요!
-                  </div>
-                </TextBaloon>
-              </MFace>
-            </Mascort>
+            <Mascort_favoriteFood>
+              <Image src={fatFavorite} width="120%" height="45vh"/>
+            </Mascort_favoriteFood>
             : <></>}
           </React.Fragment>
         )}
@@ -270,6 +253,8 @@ const MainBody = (props) => {
             <FavoList title={"userAddKcal"}/>
           </BodyContainer>
         )}
+      
+      </div>
         
     </React.Fragment>
   );
@@ -405,6 +390,32 @@ const SearchHistory = styled.div`
   }
 `;
 
+const RecentText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const RecentBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 3.2% 11% 3.2% 8%;
+
+  @media only screen and (max-height: 850px) {
+    padding: 2.5% 11% 2.5% 8%;
+  }
+
+  @media only screen and (max-height: 800px) {
+    padding: 2% 11% 2% 8%;
+  }
+
+  @media only screen and (max-height: 70px) {
+    padding: 1.2% 11% 1.2% 8%;
+  }
+`;
+
 const Line = styled.div`
   width: 87%;
   margin: auto;
@@ -430,22 +441,42 @@ const Mascort = styled.div`
 
 `;
 
+const Mascort_favoriteFood = styled.div`
+  position: absolute;
+  max-width: 420px;
+  width: 120%;
+  bottom: -10%;
+  right: -10%;
+
+  @media ${theme.device.mobileS} {
+    bottom: -20%;
+    right: -10%;
+  }
+  @media ${theme.device.mobileM} {
+    bottom: -15%;
+    right: -10%;
+  }
+
+
+`;
+
+
 const Mascort_makeFood = styled.div`
   position: fixed;
   max-width: 420px;
   width: 100%;
-  bottom: 9%;
+  /* bottom: 9%; */
 
   @media ${theme.device.mobileS} {
-    bottom: 7%;
-    height: 45vh;
+    bottom: 0;
+    /* height:vh; */
   }
   @media ${theme.device.mobileM} {
-    bottom: 7%;
+    bottom: 0;
   }
-  @media ${theme.device.mobileS} {
+  /* @media ${theme.device.mobileS} {
     bottom: -3%;
-  }
+  } */
   @media ${theme.device.mobileF} {
     bottom: 3%;    
   }
@@ -527,8 +558,8 @@ const TextBaloon = styled.div`
 `;
 
 const Nav = styled.div`
-  margin: 3vh 0 2.6vh 8.3%;
-  width: 63%;
+  margin: 3vh 0 2.6vh 8%;
+  width: 70%;
 
   & > div {
     display: grid;

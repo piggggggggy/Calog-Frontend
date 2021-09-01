@@ -51,7 +51,6 @@ const CalorieBar = (props) => {
     transition: 1s ease;
     left: ${bmr !== 0 ? `${(totalKcal/bmr) * 100}%` : "0"};
     background: ${bmr === 0 ? "#6993FF" : totalKcal + kcal < bmr ? "#6993FF" : "#EC6262"};
-    /* width: ${totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%; */
     width: ${bmr === 0 ? (kcal/2000)*100 : totalKcal + kcal < bmr ? (kcal/bmr) * 100 : (100 - ((totalKcal/bmr) * 100))}%;
     
 
@@ -87,7 +86,7 @@ const CalorieBar = (props) => {
         : <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{kcal} kcal</Text>}
         
  
-        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{totalKcal + kcal < bmr ? "남은 양":""}</Text> 
+        <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" margin="0">{bmr} kcal</Text> 
 
         
       </Grid>
