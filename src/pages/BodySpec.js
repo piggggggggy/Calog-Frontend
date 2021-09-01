@@ -6,7 +6,7 @@ import { history } from '../redux/configStore';
 import { storage } from '../shared/firebase';
 
 import styled from 'styled-components';
-import { Grid, Button, Text, Input } from '../elements';
+import { Grid, Button, Text } from '../elements';
 import theme from '../shared/theme';
 
 import { ProfileDefault, Camera, Go } from '../img/svg';
@@ -38,7 +38,7 @@ const BodySpec = (props) =>
   const [nickModifyClass, setNickClass] = useState(0);
   const [nickModify, setNick] = useState("");
   const modify_nick = () => {
-    if(nickModify===""){
+    if(nickModify==="") {
       window.alert("닉네임을 입력해주세요!");
       return;
     };
@@ -95,7 +95,7 @@ const BodySpec = (props) =>
 
   const logout = () => {
     dispatch(_logOut());
-  }
+  };
 
   if(!is_login){
   return (
@@ -131,8 +131,7 @@ const BodySpec = (props) =>
             <hr color="#F5F5F5"/>
             <Grid display="flex">
               <Text lineheight="22px" size="17px" margin="24px 0px 24px 20px" width="auto">
-                <Hover onClick={()=>
-                  {
+                <Hover onClick={()=> {
                     history.push("/notice")
                   }}>
                     공지사항
@@ -149,7 +148,7 @@ const BodySpec = (props) =>
                 현재 버전
               </Text>
               <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">
-                V2.0.1
+                V2.0.2
               </Text>
             </Version>
             <hr color="#F5F5F5"/>
@@ -238,8 +237,7 @@ return (
         </Text>
         
         <Button border_radius="12px" bg="#FFE899" width="80%" height="56px"
-        _onClick={()=>
-          {
+        _onClick={()=> {
             history.push("/addspec")
           }}>
         <Hover>
@@ -258,8 +256,7 @@ return (
           <hr color="#F5F5F5"/>
           <Grid display="flex">
             <Text lineheight="22px" size="17px" margin="24px 0px 24px 20px" width="auto">
-              <Hover onClick={()=>
-                {
+              <Hover onClick={()=> {
                   history.push("/notice")
                 }}>
                   공지사항
@@ -272,20 +269,18 @@ return (
 
           <hr color="#F5F5F5"/>
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-                <Hover onClick={()=>
-              {
-                history.push("/userfeedback")
-              }}>
+                <Hover onClick={()=>  {
+                  history.push("/userfeedback")
+                }}>
               의견 보내기
             </Hover>
           </Text>
           <hr color="#F5F5F5"/>
 
           <Text lineheight="22px" size="17px" color="#000000" margin="24px 0px 24px 20px">
-                <Hover onClick={()=>
-              {
-                history.push("/aboutUs")
-              }}>
+                <Hover onClick={()=> {
+                  history.push("/aboutUs")
+                }}>
               About us
             </Hover>
           </Text>
@@ -296,7 +291,7 @@ return (
               현재 버전
             </Text>
             <Text size="17px" margin="17px 20px 15px 0px" color="#F19F13">
-              V2.0.1
+              V2.0.2
             </Text>
           </Version>
           <hr color="#F5F5F5"/>

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
-import { getNotiDetailSV, deleteNotiSV } from '../redux/modules/notice';
 
 import styled from 'styled-components';
 import { Grid, Text, Image } from '../elements';
@@ -25,29 +24,15 @@ import {Back} from "../img/svg";
  * @담당자 : 성수 + 나영(게시글 관리)
 */
 
-const NotiDetail = (props) => 
-{
-  const dispatch = useDispatch();
-  const notiId = props.match.params.postid;
+const NotiDetail = (props) => {
   const noticeOne = useSelector(state=>state.notice.listone);
-  const admin_email = useSelector(state=>state.user.user_info?.email);
-
-  const notidelete = () => 
-  {
-    dispatch(deleteNotiSV(notiId));
-  }
-
-  // React.useEffect(()=>{
-  //   dispatch(getNotiDetailSV(notiId));
-  // },[]);
 
 
   return (
     <React.Fragment>
       <Container>
         <Head>
-          <td onClick={()=>
-            {
+          <td onClick={()=> {
               history.push("/notice")
             }}>
             <Grid cursor="pointer">
