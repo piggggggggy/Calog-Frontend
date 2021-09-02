@@ -328,9 +328,35 @@
   - **결과**
     - 효율적으로 카트 기능을 운용할 수 있었고, 실제로 유용성이 검증되어 다른 기능 (최근검색어, 기록 등)에도 활용하게 됨.
 
-  ### AWS Amplify
+  ### ③ 이미지 리사이징
 
-  ### Sentry - Error Logging
+  ### ④ AWS Amplify
+
+  ### ⑤ Sentry - Error Logging
+  - 배포를 앞두고 유저들의 사용 중에 발생할지도 모르는 에러를 로깅하고 해결하기 위해 Sentry 를 적용하게 됨.
+  - 적용 후 Slack으로 연동해 발생하는 에러들에 발빠르게 찾아내 해결할 수 있었음.
+      <details>
+      <summary>Sentry</summary>
+      <div markdown="1">
+      
+      ```javascript
+      // sentry
+      import * as Sentry from '@sentry/react';
+      import { Integrations } from '@sentry/tracing';
+
+      // sentry 설정
+      Sentry.init({
+        // 환경에 상관없이
+        dsn: process.env.REACT_APP_SENTRY_DSN,
+        integrations: [new Integrations.BrowserTracing()],
+        tracesSampleRate: 1.0,
+      });
+
+      ```
+
+      ![sentry slack](public/ReadMe-img/sentry.png)
+      </div>
+      </details>
 
 ## 고객 반응 및 개선
 
