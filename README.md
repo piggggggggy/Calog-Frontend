@@ -12,6 +12,8 @@
 <a href="https://reactrouter.com/" target="_blank"><img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=ReactRouter&logoColor=white"/></a>
 <a href="https://styled-components.com/" target="_blank"><img src="https://img.shields.io/badge/Styled-components-DB7093?style=flat-square&logo=Styled-components&logoColor=white"/></a>
 
+<a href="https://ko.redux.js.org/" target="_blank"><img src="https://img.shields.io/badge/reduxjs/toolkit-764ABC?style=flat-square&logo=&logoColor=white"/></a>
+
 # 🙌🏻member
 ## view
 ### 나영
