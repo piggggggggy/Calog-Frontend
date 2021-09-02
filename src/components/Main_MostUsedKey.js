@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 // elements & components
 import { Text } from '../elements';
-import Loading from '../pages/Loading2';
 // modules
-import { getMostUsedKeyDB, searchKeywordDB, countKeywordDB, addMostUsedKey } from '../redux/modules/search';
+import { searchKeywordDB, countKeywordDB, addMostUsedKey } from '../redux/modules/search';
 import { searchRecentDB, addRecent } from '../redux/modules/recent';
 /** 
  * @param {*} props
@@ -70,7 +69,6 @@ const MostContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* column-gap: 1.9%; */
   margin-top: 1.2vh;
   min-height: 3.4vh;
 `;

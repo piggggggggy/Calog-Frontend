@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+
 // elements & components
 import { Grid, Text } from '../elements';
 import Loading from './Loading2';
+
 // icons
 import { TiDeleteOutline } from 'react-icons/ti';
+
 // modules
 import { getRecentDB, deleteRecentDB } from '../redux/modules/recent';
 

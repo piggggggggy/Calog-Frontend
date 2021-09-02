@@ -1,6 +1,6 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import theme from '../shared/theme';
 
 //history
@@ -192,7 +192,6 @@ const FeedbackModalWrap = styled.div`
   top: 0;
   left: 0;
   position: absolute;
-  /* background: #00000048; */
   width: 100%;
   height: 100vh;
   animation: modal-bg-show .3s;

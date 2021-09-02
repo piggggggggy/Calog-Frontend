@@ -1,16 +1,12 @@
-import React, {useState,  useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import theme from '../shared/theme';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { history } from '../redux/configStore';
 
 // elements & components
 import Card from './Main_Card';
-import { Grid, Text, Image } from '../elements';
-import Loading from '../pages/Loading2';
-
-// modules
-import { getFavoriteDB } from '../redux/modules/favorite';
+import { Text, Image } from '../elements';
 
 // img
 import addFoodImage from '../img/addFoodImg.png';
@@ -63,11 +59,6 @@ const FavoList = (props) => {
           {favo_list.length !== 0 ?
           <CardContainer>
 
-            {/* 이름
-            <Grid margin="0 0 1.3vh 0" m_margin="0 0 1.3vh 0" padding="0 6%">
-              <Text lineheight="18px" m_lineheight="18px" size="13px" m_size="13px" color="#8C8C8C" padding="0" margin="0">즐겨찾기 모음</Text>
-            </Grid> */}
-
             {/* 카드리스트 */}
             {!moreFavo ? favo_list.slice(0,4).map((favo, idx) => {     
               return <Card key={favo.foodId} {...favo}/>              
@@ -112,7 +103,6 @@ const CardContainer = styled.div`
   align-items: center;
   flex-direction: column;
   column-gap: 1.8vh;
-  /* margin-top: 7%; */
 `;
 
 const MoreBtn = styled.div`
@@ -148,10 +138,6 @@ const AddFoodBtn = styled.div`
       font-size: 14px;
     }
   }
-`;
-
-const P = styled.div`
-  font-family: 'Pretendard';
 `;
 
 export default FavoList;

@@ -4,9 +4,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 
-//loading
-import {isLoaded} from './record';
-
 // sentry
 import * as Sentry from '@sentry/react';
 

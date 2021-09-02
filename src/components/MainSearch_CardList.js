@@ -1,12 +1,11 @@
 import React, {useCallback, useRef, useState} from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import theme from '../shared/theme';
 
 // elements & components
 import Card from './Main_Card';
 import { Text } from '../elements';
-import Loading from '../pages/Loading3';
 
 // modulse
 import { foodFeedBack } from '../redux/modules/notice';
@@ -25,7 +24,6 @@ const CardList = (props) => {
   const dispatch = useDispatch();
 
   // 검색결과
-  // const search_list = useSelector((state) => state.search.filtered_list);
   const search_list = props.search_list;
   const keyword = props.keyword;
 
@@ -48,8 +46,7 @@ const CardList = (props) => {
   const changeKeyword = (e) => {
     setKeyword(e.target.value);
   }
-  
-  const ref = useRef(keyword);
+
   const feedBack = () => {
     if (_keyword) {
       dispatch(foodFeedBack(_keyword));

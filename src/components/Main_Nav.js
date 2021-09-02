@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import theme from '../shared/theme';
 
 // elements & components
-import { Text, Button } from '../elements';
+import { Text } from '../elements';
 
 // icons
-import { BsFillPlusSquareFill } from 'react-icons/bs';
 import { FaTrashAlt } from 'react-icons/fa';
 
 // modules
@@ -29,10 +28,6 @@ const Main_Nav = () => {
     },[]);
 
     const custom_list = useSelector((state)=>state.custom.custom);
-
-
-    // 브랜드명 분리
-
     
     return (
         <React.Fragment>
@@ -100,7 +95,6 @@ const Main_Nav = () => {
                                     {custom.foodList.map((food, idx) => {
                                         const NameNBrand = food.name.indexOf('[') === 0 ? food.name.split(':') : false;
                                         const name = food.name.indexOf('[') === 0 ? NameNBrand[1] : food.name;
-                                        // console.log(food.name);
                                         if (custom.foodList.length <= 3){
                                             return <List key={idx}>{name}</List>
                                         } else {

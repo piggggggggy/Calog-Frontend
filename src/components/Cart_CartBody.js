@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 // elements & components
 import { Grid, Text } from '../elements';
 import Card from './Cart_Card';
-import UnderBar from './Cart_UnderBar';
 import Cart_Date from './Cart_Date';
 
 // icons
@@ -224,7 +223,6 @@ const CartListBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 2vh; */
 `;
 
 const CalcBox = styled.div`

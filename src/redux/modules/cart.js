@@ -22,14 +22,6 @@ const search = createSlice({
     
     // 카트 담기
     addCartRx : (state, action) => {
-      // let index = state.cart.findIndex((cart) => cart.foodId === action.payload.foodId)
-      // if (index !== -1) {
-      //   window.alert('이미 장바구니에 담으셨어요!');
-      //   return;
-      // }else{
-      //   state.cart.unshift(action.payload);
-      //   // window.alert('과식은 건강에 해롭습니다.');
-      // };
       state.cart.unshift(action.payload);
     },
 

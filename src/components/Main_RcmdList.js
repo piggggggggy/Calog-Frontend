@@ -1,16 +1,10 @@
-import React, {useRef, useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import _, { throttle } from 'lodash';
-
 // elementc & components
-import { Grid, Text } from '../elements';
+import { Text } from '../elements';
 import CardRcmd from './Main_CardRcmd';
 import CardRcmd2 from './Main_CardRcmd2';
-import Loading from '../pages/Loading2';
-
-// modules
-import { getRecommendedDB } from '../redux/modules/search';
 
 // horizontal scroll
 import HorizontalScroll from "react-scroll-horizontal";

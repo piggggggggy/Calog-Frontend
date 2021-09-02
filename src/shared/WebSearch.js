@@ -32,7 +32,6 @@ import SearchBar from '../img/Searchbar_p.png';
 const WebSearch = (props) => {
 
   const dispatch = useDispatch();
-  // const { history } = props;
   const keyword = useRef();
   const is_login = useSelector((state) => state.user.is_login);
 
@@ -48,7 +47,6 @@ const WebSearch = (props) => {
     {is_login ?
       dispatch(searchRecentDB(keyword.current.value))
       : dispatch(addRecent(keyword.current.value))};
-      // history.push(`/search/${keyword.current.value}`);
   };
 
   // 엔터 검색
@@ -118,8 +116,6 @@ const Container = styled.div`
   max-width: 512px;
   height: 100%;
   left: calc(50vw - 512px);
-  /* background: #F19F13; */
-  /* border: 5px solid black; */
 
   @media only screen and (max-width: 1024px) {
     display: none;
@@ -158,12 +154,9 @@ const SearchContents = styled.div`
 
   & > div {
     position: absolute;
-    /* display: none; */
     width: 24px;
     height: 24px;
     right: 65px;
-    /* background: #E4E4E4;
-    border-radius: 50%; */
     border: none;
     padding: 0;
     cursor: pointer;
