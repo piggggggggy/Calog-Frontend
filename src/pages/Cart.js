@@ -1,54 +1,68 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 // elements & components
-import BtnHeader from '../shared/BtnHeader';
-import CartBody from '../components/Cart_CartBody';
-import CartBodyDiet from '../components/Cart_CartBody_Diet';
+import BtnHeader from "../shared/BtnHeader";
+import CartBody from "../components/Cart_CartBody";
+import CartBodyDiet from "../components/Cart_CartBody_Diet";
 
-import styled from 'styled-components';
-import { Text } from '../elements';
-/** 
+import styled from "styled-components";
+import { Text } from "../elements";
+/**
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
  * @담당자 : 박용태
-*/
+ */
 
-const Cart = (props) => {
-const [selectNav, setSelect] = useState(0);
-
+const Cart = () => {
+  const [selectNav, setSelect] = useState(0);
 
   return (
     <React.Fragment>
-      <BtnHeader title="음식담기"/>
+      <BtnHeader title="음식담기" />
       <Nav>
-        <div onClick={()=>{setSelect(0)}}>
-          <Text size="15px" m_size="13px" lineheight="22px" m_lineheight="20px" color="#111E30" cursor="pointer">
+        <div
+          onClick={() => {
+            setSelect(0);
+          }}
+        >
+          <Text
+            size="15px"
+            m_size="13px"
+            lineheight="22px"
+            m_lineheight="20px"
+            color="#111E30"
+            cursor="pointer"
+          >
             캘린더에 기록
           </Text>
         </div>
-        <div onClick={()=>{setSelect(1)}}>
-          <Text size="15px" m_size="13px" lineheight="22px" m_lineheight="20px" color="#111E30" cursor="pointer">
+        <div
+          onClick={() => {
+            setSelect(1);
+          }}
+        >
+          <Text
+            size="15px"
+            m_size="13px"
+            lineheight="22px"
+            m_lineheight="20px"
+            color="#111E30"
+            cursor="pointer"
+          >
             식단 만들기
           </Text>
         </div>
       </Nav>
       <Line>
-        <div style={selectNav=== 0 ? {left: "7.6%"} : {left: "50%"}}/>
+        <div style={selectNav === 0 ? { left: "7.6%" } : { left: "50%" }} />
       </Line>
-      {selectNav===0?
-      <CartBody/>
-      :
-      <CartBodyDiet/>
-      }
+      {selectNav === 0 ? <CartBody /> : <CartBodyDiet />}
     </React.Fragment>
   );
-}
+};
 
-Cart.defaultProps = {
-
-}
-
+Cart.defaultProps = {};
 
 const Nav = styled.div`
   display: grid;
@@ -67,7 +81,7 @@ const Line = styled.div`
   margin-top: 2%;
   margin-bottom: 3%;
   height: 1px;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   width: 100%;
 
   & > div {
@@ -79,6 +93,5 @@ const Line = styled.div`
     transition: 0.5s ease;
   }
 `;
-
 
 export default Cart;

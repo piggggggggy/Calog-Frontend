@@ -1,19 +1,39 @@
 import React from "react";
 import styled from "styled-components";
-import theme from '../shared/theme';
+import theme from "../shared/theme";
 
 const Grid = (props) => {
-  // bg : background-color 
-  // is_flex : flex,justify-content,align-items 
+  // bg : background-color
+  // is_flex : flex,justify-content,align-items
   // jc : justify-content
   // ai : align-items
   // fd : flex-direction
   // grid_row : grid-template-row
   // grid_column : grid-template-column
-  const {children, width, height, margin, padding, bg, border_radius, border, text_align, is_flex, _onClick, cursor, display, jc, ai, fd, fw, grid_row, grid_column, line_height,
-    
+  const {
+    children,
+    width,
+    height,
+    margin,
+    padding,
+    bg,
+    border_radius,
+    border,
+    text_align,
+    is_flex,
+    _onClick,
+    cursor,
+    display,
+    jc,
+    ai,
+    fd,
+    fw,
+    grid_row,
+    grid_column,
+    line_height,
+
     //media
-    m_margin
+    m_margin,
   } = props;
 
   const styles = {
@@ -42,9 +62,10 @@ const Grid = (props) => {
 
   return (
     <React.Fragment>
-      <DefaultGrid onClick={_onClick} {...styles}>{children}</DefaultGrid>
+      <DefaultGrid onClick={_onClick} {...styles}>
+        {children}
+      </DefaultGrid>
     </React.Fragment>
-    
   );
 };
 
@@ -56,7 +77,7 @@ Grid.defaultProps = {
   padding: "0px",
   bg: null,
   border_radius: "0px",
-  border:false,
+  border: false,
   text_align: false,
   is_flex: false,
   cursor: "default",
@@ -69,21 +90,25 @@ Grid.defaultProps = {
   grid_column: false,
   _onClick: () => {},
   line_height: false,
-  
+
   //media
   m_margin: "0px",
 };
 
 const DefaultGrid = styled.div`
   width: ${(props) => props.width};
-  ${(props) => props.height? `height: ${props.height}`:''};
+  ${(props) => (props.height ? `height: ${props.height}` : "")};
   margin: ${(props) => props.margin};
-  padding : ${(props) => props.padding};
+  padding: ${(props) => props.padding};
   background-color: ${(props) => props.bg};
-  ${(props) => (props.border_radius ? `border-radius:${props.border_radius}`:'')};
+  ${(props) =>
+    props.border_radius ? `border-radius:${props.border_radius}` : ""};
   border: ${(props) => props.border};
-  ${(props) => props.text_align ? `text-align: ${props.text_align}` : ""};
-  ${(props) => (props.is_flex ? "display: flex; justify-content: space-between; align-items: center;" : "")}
+  ${(props) => (props.text_align ? `text-align: ${props.text_align}` : "")};
+  ${(props) =>
+    props.is_flex
+      ? "display: flex; justify-content: space-between; align-items: center;"
+      : ""}
   cursor: ${(props) => props.cursor};
   ${(props) => (props.display ? `display: ${props.display}` : "")};
   ${(props) => (props.jc ? `justify-content: ${props.jc}` : "")};
@@ -91,11 +116,13 @@ const DefaultGrid = styled.div`
   ${(props) => (props.fd ? `flex-direction: ${props.fd}` : "")};
   ${(props) => (props.fw ? `flex-wrap: ${props.fw}` : "")};
   ${(props) => (props.grid_row ? `grid-template-rows: ${props.grid_row}` : "")};
-  ${(props) => (props.grid_column ? `grid-template-columns: ${props.grid_column}` : "")};
+  ${(props) =>
+    props.grid_column ? `grid-template-columns: ${props.grid_column}` : ""};
   ${(props) => (props.line_height ? `line-height: ${props.line_height}` : "")};
 
   @media ${theme.device.mobileM} {
-    margin: ${(props) => (props.m_margin ? `${props.m_margin}` : `${props.margin}`)}
+    margin: ${(props) =>
+      props.m_margin ? `${props.m_margin}` : `${props.margin}`};
   }
 `;
 
