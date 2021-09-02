@@ -65,6 +65,38 @@
 
 - 칼로리를 고민하는 사람들을 위해, 편리하게 칼로리 검색과 기록, 계산까지 한번에 할 수 있도록 도와주는 서비스
 
+- 사용 패키지 (설명 추가 및 정리 예정)
+
+  - react-redux, @redux-toolkit
+
+  - axios
+
+  - styled-components, styled-reset
+
+  - moment
+
+  - connected-react-router, history
+
+  - redux-persist
+
+  - react-slick
+
+  - react-nice-dates
+
+  - @nivo/pie
+
+  - prop-types
+
+  - lodash
+
+  - @sentry/react, @sentry/tracing
+
+  - react-lazyload
+
+  - react-helmet
+
+  - browser-image-compression, react-aws-s3??
+
 
 ## 프로젝트 기능
 
