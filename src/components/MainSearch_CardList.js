@@ -29,7 +29,7 @@ const CardList = (props) => {
   const search_list = props.search_list;
   const keyword = props.keyword;
 
-  // 페이지네이션
+  // 페이징
   const [page, setPage] = useState({
     start: 0,
     end: 20,

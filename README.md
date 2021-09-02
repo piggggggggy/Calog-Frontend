@@ -96,28 +96,126 @@
   - browser-image-compression, react-aws-s3??
 
 
-## 프로젝트 기능
+## 프로젝트 주요 기능
 
   #### ⓞ 주요 기능
-        - 로그인, 회원가입, 소셜로그인
-        - 기록 : 바디스펙, daily 칼로리 기록 (사진, 메모), 캘린더
-        - 검색 : 칼로리 검색 (필터링, 정렬), 최근검색어, 인기검색어
-        - 편의(???) : 즐겨찾기, 카드, 커스텀 식단, 직접등록
-        - 기타: 피드백, 프로필 (닉네임, 사진)
+  - 로그인, 회원가입, 소셜로그인
+  - 기록 : 바디스펙, daily 칼로리 기록 (사진, 메모), 캘린더
+  - 검색 : 칼로리 검색 (필터링, 정렬, 페이징), 최근검색어, 인기검색어
+  - 편의(???) : 즐겨찾기, 카트, 커스텀 식단, 직접등록
+  - 기타: 피드백, 프로필 (닉네임, 사진), 스피너
+  
   #### ① 로그인, 회원가입, 소셜로그인
-        -
+  - 
 
   #### ② 기록
-        -
+  -
 
   #### ③ 검색
-        -
+  - 검색 기능은 Calog의 메인 기능입니다. 유저가 필수적으로 사용해야 하는 기능인만큼 **직관적인 뷰, 타이핑과 클릭을 최소화**하여 **사용성**을 높이는데 초점을 맞춰서 개발했습니다.**최근검색어**와 **인기검색어**기능은 이 점을 극대화하기 위하여 부가적으로 구현한 기능입니다.
+  - **칼로리 검색** 
+    - keyword에 해당하는 결과값을 받아오는 기능. 무한스크롤이나 페이지네이션처럼 데이터를 끊어서 받아오지 않고 첫 검색에 한번에 해당하는 모든 데이터를 받아옴.
+    - 후술할 필터링과 정렬기능을 서버요청없이 프론트에서 구현하기 위해 원본을 담는  `list`와 가공된 데이터를 담는 `filtered_list`, 두 개의 initialState 를 만들어 검색결과를 프론트에서 가공하여 출력.
+
+        <details>
+        <summary>Range Slider</summary>
+        <div markdown="1">
+        
+        ```javascript
+        const initialState = {
+
+          // 검색 결과 리스트 (원본)
+          list : [],
+          // 정렬 및 필터링된 결과
+          filtered_list: [],
+
+        }
+        ```
+        </div>
+        </details>
+  
+  - **칼로리 정렬**
+    - `list`의 원본 값을 칼로리 오름차순, 내림차순, 이름 으로 정렬해 `filtered_list`에 담아 출력
+
+  - **칼로리 필터링**
+    - Range Slider 를 직접 구현해, 최소값과 최대값 사이의 값들만 `filter_list`에 담아 출력
+        <details>
+        <summary>RangeSlider 구현 과정</summary>
+        <div markdown="1">
+        
+        ```javascript
+        const [minVal, setMin] = useState(min);
+        const [maxVal, setMax] = useState(max);
+        const minRef = useRef(min);
+        const maxRef = useRef(max);
+        const range = useRef();
+
+        // percentage 변환 함수
+        const getPercent = useCallback((value) => {
+          return Math.round(((value-min) / (max - min)) * 100);
+        }, [min, max]);
+
+        // 왼쪽 SliderRange 조절
+        useEffect(() => {
+          const minPercent = getPercent(minVal);
+          const maxPercent = getPercent(maxRef.current);
+
+          if (range.current) {
+            range.current.style.left = `${minPercent}%`;
+            range.current.style.width = `${maxPercent - minPercent}%`
+          }
+        }, [minVal, getPercent]);
+
+        // 오른쪽 SliderRange 조절
+        useEffect(() => {
+          const minPercent = getPercent(minRef.current);
+          const maxPercent = getPercent(maxVal);
+
+          if (range.current) {
+            range.current.style.width = `${maxPercent - minPercent}%`;
+          }
+        }, [maxVal, getPercent]);
+
+        // 변화 값 반환
+        useEffect(() => {
+          onChange({ min: minVal, max: maxVal });
+        }, [minVal, maxVal, onChange]);
+
+        // 두개의 thumb 역할을 하는 input 태그와 배경에 해당하는 SliderTrack, 가변요소인 SliderRange 를 활용하여 렌더되는 코드에 위의 요소들을 반영
+        // src/componenets 경로의 Main_RangeSlider 컴포넌트에서 확인할 수 있습니다.
+        ```
+        </div>
+        </details>
+
+  - **페이징**
+    - 후술할 [트러블 슈팅](#트러블-슈팅)에서 언급할 이슈를 해결하기위해 구현한 기능입니다.
+      <details>
+      <summary>페이징</summary>
+      <div markdown="1">
+      
+      ```javascript
+      // 페이징
+      const [page, setPage] = useState({
+        start: 0,
+        end: 20,
+      })
+      // 더보기 버튼에 넣어줄 함수
+      const nextPage = useCallback(() => {
+        setPage({
+          start: page.start,
+          end: page.end + 20,
+        })
+      }, [page])
+      ```
+      </div>
+      </details>
+
 
   #### ④ 편의(???)
-        -
+  - 편의 기능은 유저의 타이핑, 클릭을 최소화하고 지속적이고 편리한 이용을 위해 구현한 기능입니다.
 
   #### ⑤ 기타
-        -
+  -
 
 ## 트러블 슈팅
 
