@@ -86,7 +86,6 @@ export const getRecommendedDB = () => {
     instance
       .get("/api/home/recommend")
       .then((res) => {
-        // console.log(res)
         dispatch(getRecommended(res.data.recommendFood));
         dispatch(isLoaded(true));
       })
