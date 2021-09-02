@@ -1,6 +1,12 @@
-# 🧚🏻‍♀️항해99 실전프로젝트 Team Calog - 프론트(김나영, 박용태, 최지혁)
+# **Calog** - 내가 먹는 모든 음식의 칼로리가 궁금하다면?
 
-![logo](public/ReadMe-img/fat_logo.png)
+
+![logo](public/ReadMe-img/calog_sumnail.png)
+
+## 🧚‍♀️ 칼로그는?
+
+- 칼로리를 고민하는 사람들을 위해, 편리하게 칼로리 검색과 기록, 계산까지 한번에 할 수 있도록 도와주는 서비스
+- 기존의 식단앱에서 느낀 불편한 점들을 개선하고 내가 쓰고싶은 칼로리 프로그램을 만들자 하는 취지에서 만들게 된 서비스 
 
 🐷[Calog 링크](https://www.calog.app/)
 
@@ -60,65 +66,48 @@
   - **Back end** : **이경원, 박진홍, 오인웅**
   - **Designer** : **김민경, 이경미**
 
-
-- 칼로리를 고민하는 사람들을 위해, 편리하게 칼로리 검색과 기록, 계산까지 한번에 할 수 있도록 도와주는 서비스
-
 - 사용 패키지 (설명 추가 및 정리 예정)
 
   - react-redux, @redux-toolkit
-
   - axios
-
   - styled-components, styled-reset
-
   - moment
-
   - connected-react-router, history
-
   - redux-persist
-
   - react-slick
-
   - react-nice-dates
-
   - @nivo/pie
-
   - prop-types
-
   - lodash
-
   - @sentry/react, @sentry/tracing
-
   - react-lazyload
-
   - react-helmet
-
   - browser-image-compression, react-aws-s3??
 
 
 ## 프로젝트 주요 기능
 
-  #### ⓞ 주요 기능
+  ### ⓞ 주요 기능
   - 로그인, 회원가입, 소셜로그인
   - 기록 : 바디스펙, daily 칼로리 기록 (사진, 메모), 캘린더
   - 검색 : 칼로리 검색 (필터링, 정렬, 페이징), 최근검색어, 인기검색어
   - 편의 : 즐겨찾기, 카트, 커스텀 식단, 직접등록
-  - 기타 : 피드백, 프로필 (닉네임, 사진), 스피너
+  - 기타 : 피드백, 프로필 (닉네임, 사진), 스피너, 반응형
   
-  #### ① 로그인, 회원가입, 소셜로그인
+  ### ① 로그인, 회원가입, 소셜로그인
   - axios와 axios-interceptors 를 통한 서버와 api 요청
   - csrf 토큰, access 토큰을 이용한 로그인 체크 및 보안성 향상
   - 회원가입 시 이메일, 닉네임 debounce를 통해 서버에 자동 중복 체크
   - 서버에서 passport 모듈을 이용한 소셜 로그인
         
-  #### ② 기록
+  ### ② 기록
 
-  #### ③ 검색
+  ### ③ 검색
   - 검색 기능은 Calog의 메인 기능입니다. 유저가 필수적으로 사용해야 하는 기능인만큼 **직관적인 뷰, 타이핑과 클릭을 최소화**하여 **사용성**을 높이는데 초점을 맞춰서 개발했습니다.**최근검색어**와 **인기검색어**기능은 이 점을 극대화하기 위하여 부가적으로 구현한 기능입니다.
 
   - **칼로리 검색** 
-    - keyword에 해당하는 결과값을 받아오는 기능. 무한스크롤이나 페이지네이션처럼 데이터를 끊어서 받아오지 않고 첫 검색에 한번에 해당하는 모든 데이터를 받아옴.
-    - 후술할 필터링과 정렬기능을 서버요청없이 프론트에서 구현하기 위해 원본을 담는  `list`와 가공된 데이터를 담는 `filtered_list`, 두 개의 initialState 를 만들어 검색결과를 프론트에서 가공하여 출력.
+    - keyword에 해당하는 결과값을 받아오는 기능. 무한스크롤이나 페이지네이션처럼 데이터를 끊어서 받아오지 않고 첫 검색에 한번에 해당하는 모든 데이터를 받아왔습니다.
+    - 후술할 필터링과 정렬기능을 서버요청없이 프론트에서 구현하기 위해 원본을 담는  `list`와 가공된 데이터를 담는 `filtered_list`, 두 개의 initialState 를 만들어 검색결과를 프론트에서 가공하여 출력하였습니다.
 
         <details>
         <summary>Range Slider</summary>
@@ -138,10 +127,10 @@
         </details>
   
   - **칼로리 정렬**
-    - `list`의 원본 값을 칼로리 오름차순, 내림차순, 이름 으로 정렬해 `filtered_list`에 담아 출력
+    - `list`의 원본 값을 칼로리 오름차순, 내림차순, 이름 으로 정렬해 `filtered_list`에 담아 출력하였습니다.
 
   - **칼로리 필터링**
-    - Range Slider 를 직접 구현해, 최소값과 최대값 사이의 값들만 `filter_list`에 담아 출력
+    - Range Slider 를 직접 구현해, 최소값과 최대값 사이의 값들만 `filter_list`에 담아 출력하였습니다.
         <details>
         <summary>RangeSlider 구현 과정</summary>
         <div markdown="1">
@@ -215,7 +204,7 @@
       </details>
 
 
-  #### ④ 편의
+  ### ④ 편의
   - 편의 기능은 유저의 타이핑, 클릭을 최소화하고 **지속적**이고 **편리한 이용**을 위해 구현한 기능입니다.
 
   - **즐겨찾기**
@@ -237,7 +226,7 @@
     - 유저 개인데이터로 저장되며 본인만 사용할 수 있는 기능입니다.
     - 즐겨찾기나 커스텀식단과 같이 메인화면에서 확인할 수 있습니다.
 
-  #### ⑤ 기타
+  ### ⑤ 기타
   - **프로필 사진**밋밋한 마이 페이지에 프로필 사진 기능 추가
     - 유저의 마이 페이지에서 프로필사진을 추가할 수 있는 기능입니다. 
     - 소셜로그인을 했을 경우 디폴트 값으로 소셜매체의 프로필사진이 들어옵니다.
@@ -259,6 +248,10 @@
     - styled-components의 keyframes를 활용하여 구현하였습니다.
     - 실제로 다수의 유저가 피드백을 통해 호감을 보였던 부분이었습니다.
 
+  - **반응형 UI**
+    - 미디어 쿼리를 이용해 iphone5 부터 최신기종 및 각종 태블릿 pc까지 호환가능하도록 구현하였습니다.
+    - 뿐만아니라 웹에서도 단순 모바일형 UI가 아닌 프레임 밖에서도 상호작용할 수 있는 기능과 배경이미지를 활용하여 사용성을 높혔습니다.
+
 ## 트러블 슈팅
 
 - 변수로 브라우저에 저장되어 있는 토큰을 함수로 가져오게 함으로써 토큰이 없을 때 빈 값을 가져오는 것을 방지함
@@ -266,6 +259,71 @@
 - debounce 로 닉네임, 이메일 중복체크를 자동으로 서버에 요청하려했으나 닉네임, 이메일 입력 시 생기는 리랜더링으로 인해 입력한 글자 수 만큼 요청이 생겨 debounce 를 닉네임과 이메일 값에도 줌으로써 최종 닉네임과 이메일만 서버에 요청하게 설계
 
 - 서버에 요청받는 데이터들을 초기 변수 설정을 하지 않음으로써 생기는 문제를 데이터 형식에 맞게 기본 값을 줌으로써 
+
+  ### ① 검색결과 클라이언트 과부하 이슈
+  - **어떤 문제가 생겼나?**
+    - 서버에서 받아오는 검색결과가 600개를 넘어설 때 클라이언트에 과부하가 발생하였음.
+  - **해결을 위한 시도**
+    - 서버에서 무한스크롤과 페이지네이션으로 데이터를 끊어 받을 것을 요청. 
+      👉 기존 정렬 및 필터링 기능까지 서버에서 가져가야하고 그렇게 요청이 너무 많아질 수 있어 섣불리 결정할 수 없었음. (실패)
+    - 검색결과를 100개 까지만 출력.
+      👉 기존 정렬 및 필터링 기능에는 영향이 없는 방법이지만, 유저가 볼 수 있는 데이터의 갯수를 제한하는 방법이므로 유저의 사용성을 해친다고 판단. (실패)
+    - 많은 양의 데이터가 넘어오는 것 자체는 문제가 되지 않지만 그 많은 데이터를 전부 출력했을 때, 클라이언트에 부하가 생김. 그래서 받아온 데이터를 리덕스를 활용해 무한스크롤 구현을 시도
+      👉 무한스크롤의 경우 데이터를 앞으로 보내주는 과정이 필요한데, 리덕스 자체만으로 데이터를 호출할 수 없었음. (실패)
+    - 데이터를 끊어서 추가로 출력해주는 페이징을 구현
+      👉 자체 무한스크롤을 시도하며 사용했던 방법을 이용해 '더보기' 버튼을 누르면 추가로 20개씩 데이터를 더 보여주는 기능을 구현. (성공)
+  - **결과**
+    - 페이징을 통해 클라이언트의 과부하를 막을 수 있었고, 기존의 필터링 및 정렬 기능을 문제없이 가져갈 수 있었음.
+
+  ### ② Redux-persist 활용
+  - **어떤 문제가 생겼나?**
+    - 카트 기능은 유저가 가볍게 사용할 수 있고, 기록이라는 메인기능을 준비하는 과정을 담당하는 기능이기 때문에 얼마든지 가공하고 넣었다 뺐다 할 수 있는 기능이어야 했음. 때문에 많은 요청이 서버로 갈 수 있고, 이를 줄이기 위해 서버통신 없이 redux를 활용해 구현하게 된다면 새로고침 같은 이벤트가 있을 때 어렵게 담아놓은 카트가 비워진다는 이슈가 있었음.
+  - **해결을 위한 시도**
+    - redux에 있는 데이터를 localStorage나 sessionStorage에 반영구적으로 저장하는 redux-persist를 이용해 카트 모듈을 구현.
+      <details>
+      <summary>페이징</summary>
+      <div markdown="1">
+      
+      ```javascript
+      // redux-persist
+      import { persistReducer, persistStore } from "redux-persist";
+      import storageSession from "redux-persist/lib/storage/session";
+
+      ```
+
+      ```javascript
+      // persist
+      const persistConfig = {
+        key: "auth",
+        storage: storageSession,
+        whitelist: ["cart", "recent", "record", "dashboard", "food"]
+      };
+
+      const reducer = combineReducers({
+        user: user.reducer,
+        record: record.reducer,
+        cart: cart.reducer,
+        favorite: favorite.reducer,
+        search: search.reducer,
+        recent: recent.reducer,
+        notice: notice.reducer,
+        dashboard: dashboard.reducer,
+        food:food.reducer,
+        custom: custom.reducer,
+        router: connectRouter(history),
+      });
+
+      // persist
+      const persistedReducer = persistReducer(persistConfig, reducer);
+      export const store = configureStore({ reducer: persistedReducer, middleware: middlewares });
+      export const persistor = persistStore(store);
+      export default { store, persistor };
+      ```
+      </div>
+      </details>
+
+  - **결과**
+    - 효율적으로 카트 기능을 운용할 수 있었고, 실제로 유용성이 검증되어 다른 기능 (최근검색어, 기록 등)에도 활용하게 됨.
 
 
 ## 고객 반응 및 개선
