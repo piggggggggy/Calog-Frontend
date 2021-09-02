@@ -328,9 +328,11 @@
   - **결과**
     - 효율적으로 카트 기능을 운용할 수 있었고, 실제로 유용성이 검증되어 다른 기능 (최근검색어, 기록 등)에도 활용하게 됨.
 
-  ### AWS Amplify
+  ### ③ 이미지 리사이징
 
-  ### Sentry - Error Logging
+  ### ④ AWS Amplify
+
+  ### ⑤ Sentry - Error Logging
 
 ## 고객 반응 및 개선
 
