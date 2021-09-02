@@ -1,36 +1,28 @@
-import React, {useRef, useState} from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../redux/configStore';
+import React, { useRef, useState } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 // loadsh
-import _ from 'lodash';
+import _ from "lodash";
 
 // modules
-import { 
-  searchKeywordDB, 
-  countKeywordDB
-} from '../redux/modules/search';
-import { 
-  searchRecentDB,
-  addRecent
-} from '../redux/modules/recent';
+import { searchKeywordDB, countKeywordDB } from "../redux/modules/search";
+import { searchRecentDB, addRecent } from "../redux/modules/recent";
 
 // icons
-import { MdCancel } from 'react-icons/md';
+import { MdCancel } from "react-icons/md";
 
 // 이미지
-import SearchBar from '../img/Searchbar_p.png';
+import SearchBar from "../img/Searchbar_p.png";
 
-/** 
+/**
  * @param {*} props
  * @returns 설명적기
  * @역할 ~~~하는 컴포넌트
  * @담당자 : 박용태
-*/
+ */
 
-const WebSearch = (props) => {
-
+const WebSearch = () => {
   const dispatch = useDispatch();
   const keyword = useRef();
   const is_login = useSelector((state) => state.user.is_login);
@@ -40,20 +32,22 @@ const WebSearch = (props) => {
     const data = {
       keyword: keyword.current.value,
       min: 0,
-      max: 2000
+      max: 2000,
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
-    {is_login ?
-      dispatch(searchRecentDB(keyword.current.value))
-      : dispatch(addRecent(keyword.current.value))};
+    {
+      is_login
+        ? dispatch(searchRecentDB(keyword.current.value))
+        : dispatch(addRecent(keyword.current.value));
+    }
   };
 
   // 엔터 검색
   const onKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       search();
-      keyword.current.vlaue = '';
+      keyword.current.vlaue = "";
     }
   };
 
@@ -61,53 +55,52 @@ const WebSearch = (props) => {
   const [key, setKey] = useState();
   const _setKey = _.debounce((e) => {
     setKey(e.target.value);
-  }, 500)
-  
-  const deleteKeyword = () => {
-    keyword.current.value = '';
-    setKey('');
-  };
+  }, 500);
 
+  const deleteKeyword = () => {
+    keyword.current.value = "";
+    setKey("");
+  };
 
   return (
     <React.Fragment>
       <Container>
-
         <SearchBox>
-
           {/* 배경 */}
-          <img src={SearchBar}/>
+          <img src={SearchBar} />
 
           {/* 입력란 */}
           <SearchContents>
-            <input 
-            onKeyPress={onKeyPress}
-            ref={keyword} 
-            onChange={_setKey}
-            placeholder="어떤 칼로리가 궁금하신가요?"
+            <input
+              onKeyPress={onKeyPress}
+              ref={keyword}
+              onChange={_setKey}
+              placeholder="어떤 칼로리가 궁금하신가요?"
             />
-            {key ?
-            // <button onClick={deleteKeyword}/>
-            <div onClick={()=>{deleteKeyword()}}>
-              <MdCancel size="24px" color="#C4C4C4"/>
-            </div>
-            : ''}
+            {key ? (
+              // <button onClick={deleteKeyword}/>
+              <div
+                onClick={() => {
+                  deleteKeyword();
+                }}
+              >
+                <MdCancel size="24px" color="#C4C4C4" />
+              </div>
+            ) : (
+              ""
+            )}
           </SearchContents>
 
           {/* 버튼 */}
- 
-            <SearchBtn onClick={()=>search()}/>
 
+          <SearchBtn onClick={() => search()} />
         </SearchBox>
-
       </Container>
     </React.Fragment>
   );
-}
+};
 
-WebSearch.defaultProps = {
-
-}
+WebSearch.defaultProps = {};
 
 const Container = styled.div`
   position: fixed;

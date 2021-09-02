@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './shared/App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./shared/App";
+import reportWebVitals from "./reportWebVitals";
 
 // sentry
-import * as Sentry from '@sentry/react';
-import { Integrations } from '@sentry/tracing';
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 
 //history 라우팅
 import { ConnectedRouter } from "connected-react-router";
@@ -16,8 +16,8 @@ import { history } from "./redux/configStore";
 import { Provider } from "react-redux";
 
 // redux-persist
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux/configStore';
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/configStore";
 
 // sentry 설정
 Sentry.init({
@@ -32,11 +32,10 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
-      </PersistGate>    
+      </PersistGate>
     </ConnectedRouter>
-  </Provider>
-    ,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById("root")
 );
 
 reportWebVitals();

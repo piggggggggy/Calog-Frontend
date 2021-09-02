@@ -1,23 +1,26 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 // elements & components
-import { Text } from '../elements';
+import { Text } from "../elements";
 // modules
-import { searchKeywordDB, countKeywordDB, addMostUsedKey } from '../redux/modules/search';
-import { searchRecentDB, addRecent } from '../redux/modules/recent';
-/** 
+import {
+  searchKeywordDB,
+  countKeywordDB,
+  addMostUsedKey,
+} from "../redux/modules/search";
+import { searchRecentDB, addRecent } from "../redux/modules/recent";
+/**
  * @param {*} props
  * @returns 인기검색어 3개
  * @역할 인기검색어를 보여주는
  * @담당자 : 박용태
-*/
+ */
 
-const MostUsedKey = (props) => {
-
+const MostUsedKey = () => {
   // dispatch
   const dispatch = useDispatch();
-  
+
   // 인기검색어 목록
   const most_list = useSelector((state) => state.search.most);
 
@@ -29,41 +32,55 @@ const MostUsedKey = (props) => {
     const data = {
       keyword: keyword,
       min: 0,
-      max: 5000
+      max: 5000,
     };
     dispatch(searchKeywordDB(data));
-    {is_login ? 
-      dispatch(countKeywordDB(keyword))
-      : dispatch(addMostUsedKey(keyword))};
-    {is_login ?
-      dispatch(searchRecentDB(keyword))
-      : dispatch(addRecent(keyword))};
+    {
+      is_login
+        ? dispatch(countKeywordDB(keyword))
+        : dispatch(addMostUsedKey(keyword));
+    }
+    {
+      is_login
+        ? dispatch(searchRecentDB(keyword))
+        : dispatch(addRecent(keyword));
+    }
   };
 
   return (
     <React.Fragment>
       <MostContainer>
         {most_list.map((m, idx) => {
-          if (idx < 4){
+          if (idx < 4) {
             return (
-              <MostButton 
-                onClick={()=>{
+              <MostButton
+                onClick={() => {
                   search(m.keyword);
                 }}
-                key={idx}>
-                <Text lineheight="14px" m_lineheight="14px" size="12px" m_size="12px" color="#404040" padding="0" margin="0" cursor="pointer">{m.keyword}</Text>
+                key={idx}
+              >
+                <Text
+                  lineheight="14px"
+                  m_lineheight="14px"
+                  size="12px"
+                  m_size="12px"
+                  color="#404040"
+                  padding="0"
+                  margin="0"
+                  cursor="pointer"
+                >
+                  {m.keyword}
+                </Text>
               </MostButton>
-            )
+            );
           }
         })}
       </MostContainer>
     </React.Fragment>
   );
-}
+};
 
-MostUsedKey.defaultProps = {
-
-}
+MostUsedKey.defaultProps = {};
 
 const MostContainer = styled.div`
   display: flex;

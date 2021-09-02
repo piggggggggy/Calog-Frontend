@@ -1,39 +1,43 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import _ from 'lodash';
-import theme from '../shared/theme';
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import _ from "lodash";
+import theme from "../shared/theme";
 
 // modules
-import { searchKeywordDB, countKeywordDB } from '../redux/modules/search';
-import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
-import { getUserAddFoodDB } from '../redux/modules/food';
+import { searchKeywordDB, countKeywordDB } from "../redux/modules/search";
+import {
+  searchRecentDB,
+  deleteRecentDB,
+  addRecent,
+  deleteRecent,
+} from "../redux/modules/recent";
+import { getUserAddFoodDB } from "../redux/modules/food";
 
 // elements & components
-import { Grid, Text, Image } from '../elements';
-import FavoList from './Main_FavoList';
-import MostUsedKey from './Main_MostUsedKey';
-import RcmdList from './Main_RcmdList';
-import MainNav from './Main_Nav';
+import { Grid, Text, Image } from "../elements";
+import FavoList from "./Main_FavoList";
+import MostUsedKey from "./Main_MostUsedKey";
+import RcmdList from "./Main_RcmdList";
+import MainNav from "./Main_Nav";
 
 // image
-import makeFoodNone from '../img/makeFoodNone.png';
-import fatFavorite from '../img/fatFavorite.png';
+import makeFoodNone from "../img/makeFoodNone.png";
+import fatFavorite from "../img/fatFavorite.png";
 
 // icon
-import { BiSearchAlt2 } from 'react-icons/bi';
-import { MdCancel } from 'react-icons/md';
-import { TiDeleteOutline } from 'react-icons/ti';
+import { BiSearchAlt2 } from "react-icons/bi";
+import { MdCancel } from "react-icons/md";
+import { TiDeleteOutline } from "react-icons/ti";
 
-/** 
+/**
  * @param {*} props
  * @returns 검색결과와 구분되는 첫페이지
  * @역할 말그대로 메인페이지의 body영역
  * @담당자 : 박용태
-*/
+ */
 
-const MainBody = (props) => {
-
+const MainBody = () => {
   // dispatch
   const dispatch = useDispatch();
 
@@ -43,10 +47,10 @@ const MainBody = (props) => {
   // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
   const favo_list = useSelector((state) => state.favorite.list);
-  
-  // 로그인체크 
+
+  // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
-  
+
   // 검색 키워드
   const keyword = useRef();
 
@@ -55,13 +59,15 @@ const MainBody = (props) => {
     const data = {
       keyword: keyword.current.value,
       min: 0,
-      max: 5000
+      max: 5000,
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
-    {is_login ?
-      dispatch(searchRecentDB(keyword.current.value))
-      : dispatch(addRecent(keyword.current.value))};
+    {
+      is_login
+        ? dispatch(searchRecentDB(keyword.current.value))
+        : dispatch(addRecent(keyword.current.value));
+    }
     setHistory(true);
   };
 
@@ -70,190 +76,299 @@ const MainBody = (props) => {
     const data = {
       keyword: keyword,
       min: 0,
-      max: 5000
+      max: 5000,
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword));
-    {is_login ?
-      dispatch(searchRecentDB(keyword))
-      : dispatch(addRecent(keyword))};
+    {
+      is_login
+        ? dispatch(searchRecentDB(keyword))
+        : dispatch(addRecent(keyword));
+    }
     setHistory(true);
   };
 
   // 최근 검색어 삭제
   const recentDelete = (keyword) => {
-    {is_login ? dispatch(deleteRecentDB(keyword)) 
-      : dispatch(deleteRecent(keyword))}
+    {
+      is_login
+        ? dispatch(deleteRecentDB(keyword))
+        : dispatch(deleteRecent(keyword));
+    }
   };
 
   // 엔터 검색
   const onKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       search();
-      keyword.current.vlaue = '';
+      keyword.current.vlaue = "";
     }
   };
-  
+
   // 검색어 삭제
   const [key, setKey] = useState();
   const _setKey = _.debounce((e) => {
     setKey(e.target.value);
-  }, 500)
-  
+  }, 500);
+
   const deleteKeyword = () => {
-    keyword.current.value = '';
-    setKey('');
+    keyword.current.value = "";
+    setKey("");
   };
 
   // history tab 관리
-  const styles = _history ? {display: "none"} : {display: "block"};
+  const styles = _history ? { display: "none" } : { display: "block" };
 
   // 커스텀 식단
-  const customFood = useSelector((state) => state.custom.custom)
+  const customFood = useSelector((state) => state.custom.custom);
 
   // nav
   const [navFocus, setFocus] = useState(0);
 
   // 직접 등록 네브 탭을 눌렀을 경우 기록 불러오기
   useEffect(() => {
-    if(navFocus === 2 && is_login) {
-      dispatch(getUserAddFoodDB())
+    if (navFocus === 2 && is_login) {
+      dispatch(getUserAddFoodDB());
     }
-  }, [navFocus])
+  }, [navFocus]);
 
   return (
     <React.Fragment>
-      <div style={{position: "relative", height: "90%", overflow: "hidden"}}>
+      <div style={{ position: "relative", height: "90%", overflow: "hidden" }}>
+        <HeaderContainer>
+          {/* 배경 */}
+          <TopBack />
 
-      <HeaderContainer>
+          {/* 검색바 */}
+          <SearchGrid>
+            <SearchBox>
+              <input
+                ref={keyword}
+                onFocus={() => {
+                  setHistory(false);
+                }}
+                placeholder="어떤 칼로리가 궁금하신가요?"
+                onKeyPress={onKeyPress}
+                onChange={_setKey}
+              />
+              {key ? (
+                <div
+                  onClick={() => {
+                    deleteKeyword();
+                  }}
+                  style={{ right: "10%", top: "1vh", cursor: "pointer" }}
+                >
+                  <MdCancel size="16px" color="#C4C4C4" />
+                </div>
+              ) : (
+                ""
+              )}
+              <div
+                onClick={() => {
+                  search();
+                }}
+              >
+                <BiSearchAlt2 size="24px" color="#F19F13" />
+              </div>
+            </SearchBox>
 
-        {/* 배경 */}
-        <TopBack/>
+            {/* 최근 검색어 영역 */}
+            <SearchHistory
+              style={styles}
+              onClick={() => {
+                setHistory(true);
+              }}
+            >
+              <div>
+                <RecentText style={{ padding: "40px 6% 1vh 6%" }}>
+                  <Text
+                    lineheight="18px"
+                    bold
+                    size="13px"
+                    m_size="13px"
+                    color="#000000"
+                    padding="0"
+                    margin="0"
+                  >
+                    최근검색어
+                  </Text>
+                </RecentText>
 
-        {/* 검색바 */}
-        <SearchGrid>
-          <SearchBox>
-            <input 
+                <Line />
 
-            ref={keyword}
-            onFocus={()=>{setHistory(false)}} 
-            placeholder="어떤 칼로리가 궁금하신가요?"
-            onKeyPress={onKeyPress}
-            onChange={_setKey}
-            />
-            {key ? 
-            <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
-              <MdCancel size="16px" color="#C4C4C4"/>
-            </div>
-            : ''}
-            <div onClick={()=>{search()}}>
-              <BiSearchAlt2 size="24px" color="#F19F13" />
-            </div>
-          </SearchBox>
+                {recent_list.length !== 0
+                  ? recent_list.map((rec, idx) => {
+                      if (idx < 5) {
+                        return (
+                          <>
+                            <RecentBox key={idx}>
+                              <Grid
+                                cursor="pointer"
+                                _onClick={() => {
+                                  recentSearch(rec);
+                                }}
+                              >
+                                <Text
+                                  lineheight="18px"
+                                  m_lineheight="15px"
+                                  size="15px"
+                                  m_size="13px"
+                                  color="#404040"
+                                  padding="0"
+                                  margin="0"
+                                  cursor="pointer"
+                                >
+                                  {rec}
+                                </Text>
+                              </Grid>
 
-          {/* 최근 검색어 영역 */}
-          <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
-            <div>
+                              <div
+                                style={{
+                                  width: "18px",
+                                  height: "18px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <TiDeleteOutline
+                                  onClick={() => {
+                                    recentDelete(rec);
+                                  }}
+                                  size="18px"
+                                  color="#737373"
+                                />
+                              </div>
+                            </RecentBox>
 
-              <RecentText style={{padding: "40px 6% 1vh 6%"}}>
-                <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
-              </RecentText>
-              
-              <Line/>
-              
-              {recent_list.length !== 0 ? recent_list.map((rec, idx) => {
-                if (idx < 5) {
-                  return (
-                    <>
-                      <RecentBox key={idx}>
+                            <Line />
+                          </>
+                        );
+                      }
+                    })
+                  : ""}
+              </div>
+            </SearchHistory>
 
-                        <Grid cursor="pointer" _onClick={()=>{recentSearch(rec)}}>
-                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0" cursor="pointer">{rec}</Text>
-                        </Grid>
-                        
-                        <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
-                          <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="18px" color="#737373"/>
-                        </div>
-                        
-                      </RecentBox>
-                      
-                      <Line/>
-                    </>
-                  )
-                }
-              }) : ''}
-            </div>
-          </SearchHistory>
-          
-          {/* 인기검색어 */}
-          <MostUsedKey/>
-        </SearchGrid>
+            {/* 인기검색어 */}
+            <MostUsedKey />
+          </SearchGrid>
 
-        {/* 추천 푸드 */}
-        <RcmdList/>
+          {/* 추천 푸드 */}
+          <RcmdList />
+        </HeaderContainer>
 
-      </HeaderContainer>    
-
-      {/* nav 탭 바 */}
+        {/* nav 탭 바 */}
         <Nav>
           <div>
-            <div onClick={()=>{setFocus(0)}}><Text bold color={navFocus===0?"#535353":"#ADADAD"} size="14px" m_size="12px" cursor="pointer">즐겨찾기 목록</Text></div>
-            <div onClick={()=>{setFocus(1)}}><Text bold color={navFocus===1?"#535353":"#ADADAD"} size="14px" m_size="12px" cursor="pointer">나의 식단</Text></div>
-            <div onClick={()=>{setFocus(2)}}><Text bold color={navFocus===2?"#535353":"#ADADAD"} size="14px" m_size="12px" cursor="pointer">직접 등록</Text></div>
+            <div
+              onClick={() => {
+                setFocus(0);
+              }}
+            >
+              <Text
+                bold
+                color={navFocus === 0 ? "#535353" : "#ADADAD"}
+                size="14px"
+                m_size="12px"
+                cursor="pointer"
+              >
+                즐겨찾기 목록
+              </Text>
+            </div>
+            <div
+              onClick={() => {
+                setFocus(1);
+              }}
+            >
+              <Text
+                bold
+                color={navFocus === 1 ? "#535353" : "#ADADAD"}
+                size="14px"
+                m_size="12px"
+                cursor="pointer"
+              >
+                나의 식단
+              </Text>
+            </div>
+            <div
+              onClick={() => {
+                setFocus(2);
+              }}
+            >
+              <Text
+                bold
+                color={navFocus === 2 ? "#535353" : "#ADADAD"}
+                size="14px"
+                m_size="12px"
+                cursor="pointer"
+              >
+                직접 등록
+              </Text>
+            </div>
           </div>
           <NavLine>
-            <NavLineBold style={navFocus === 0 ? {left: "0"} : navFocus === 1 ? {left: "33.3%"} : {left: "66.7%"}}/>
+            <NavLineBold
+              style={
+                navFocus === 0
+                  ? { left: "0" }
+                  : navFocus === 1
+                  ? { left: "33.3%" }
+                  : { left: "66.7%" }
+              }
+            />
           </NavLine>
         </Nav>
-        
 
-       {/* 즐겨찾기가 들어가는 곳 */}
+        {/* 즐겨찾기가 들어가는 곳 */}
         {navFocus === 0 && (
           <React.Fragment>
             <BodyContainer>
-              {is_login && favo_list.length !== 0 ? <FavoList favo_list={favo_list}/> : ''}
+              {is_login && favo_list.length !== 0 ? (
+                <FavoList favo_list={favo_list} />
+              ) : (
+                ""
+              )}
             </BodyContainer>
-            {!is_login || favo_list.length === 0 ? 
-            <Mascort_favoriteFood>
-              <Image src={fatFavorite} width="120%" height="45vh"/>
-            </Mascort_favoriteFood>
-            : <></>}
+            {!is_login || favo_list.length === 0 ? (
+              <Mascort_favoriteFood>
+                <Image src={fatFavorite} width="120%" height="45vh" />
+              </Mascort_favoriteFood>
+            ) : (
+              <></>
+            )}
           </React.Fragment>
         )}
 
         {/* 나의 식단  */}
         {navFocus === 1 && (
           <React.Fragment>
-          <BodyContainer>
-            {is_login && customFood.length !== 0 ? <MainNav />  : ''}
-          </BodyContainer>
-          {!is_login || customFood.length === 0 ? 
-          <Mascort_makeFood>
-            <Image src={makeFoodNone} width="100%" height="40vh"/>
-          </Mascort_makeFood>
-          : <></>}
-        </React.Fragment>
+            <BodyContainer>
+              {is_login && customFood.length !== 0 ? <MainNav /> : ""}
+            </BodyContainer>
+            {!is_login || customFood.length === 0 ? (
+              <Mascort_makeFood>
+                <Image src={makeFoodNone} width="100%" height="40vh" />
+              </Mascort_makeFood>
+            ) : (
+              <></>
+            )}
+          </React.Fragment>
         )}
 
         {/* 직접 등록 칼로리 */}
         {navFocus === 2 && (
           <BodyContainer>
-            <FavoList title={"userAddKcal"}/>
+            <FavoList title={"userAddKcal"} />
           </BodyContainer>
         )}
-      
       </div>
-        
     </React.Fragment>
   );
-}
+};
 
-  
-
-
-MainBody.defaultProps = {
-
-}
+MainBody.defaultProps = {};
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -283,10 +398,10 @@ const BodyContainer = styled.div`
 
   @media only screen and (max-height: 720px) {
     max-height: 35vh;
-  } 
+  }
   @media only screen and (max-height: 600px) {
     max-height: 30vh;
-  } 
+  }
 `;
 
 const SearchGrid = styled.div`
@@ -298,7 +413,7 @@ const SearchGrid = styled.div`
 const SearchBox = styled.div`
   position: relative;
   width: 88%;
-  border: 1px solid #F19F13;
+  border: 1px solid #f19f13;
   padding: 1.3vh 25px;
   margin: auto;
   border-radius: 31px;
@@ -400,7 +515,7 @@ const RecentBox = styled.div`
 const Line = styled.div`
   width: 87%;
   margin: auto;
-  border: 1px solid #FFE899;
+  border: 1px solid #ffe899;
   border-radius: 0.5px;
 `;
 
@@ -433,9 +548,8 @@ const Mascort_makeFood = styled.div`
     bottom: 0;
   }
   @media ${theme.device.mobileF} {
-    bottom: 3%;    
+    bottom: 3%;
   }
-
 `;
 
 const Nav = styled.div`
@@ -471,7 +585,7 @@ const NavLine = styled.div`
   position: relative;
   width: 100%;
   height: 1px;
-  background-color: #ADADAD;
+  background-color: #adadad;
 `;
 
 const NavLineBold = styled.div`

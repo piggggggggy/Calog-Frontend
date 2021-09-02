@@ -1,4 +1,4 @@
-//컬러 
+//컬러
 const color = {
   gray_1: "#ffffff",
   gray_2: "#e4e4e4",
@@ -11,7 +11,7 @@ const color = {
   gray_9: "#2b2b2b",
   gray_10: "#111e30",
   light: "#ffe899",
-  dark: "#f19f13"
+  dark: "#f19f13",
 };
 
 //반응형용 디바이스 사이즈
@@ -37,13 +37,13 @@ const device = {
   mobileM: `only screen and (max-width: ${deviceSizes.mobileM})`,
   mobileH: `only screen and (min-height: ${deviceSizes.mobileH})`,
   mobileMini: `only screen and (max-height: ${deviceSizes.mobileMini})`,
-  mobileHH: `only screen and (min-height: ${deviceSizes.mobileHH})`
+  mobileHH: `only screen and (min-height: ${deviceSizes.mobileHH})`,
 };
 
 const theme = {
   color,
   deviceSizes,
   device,
-}
+};
 
 export default theme;

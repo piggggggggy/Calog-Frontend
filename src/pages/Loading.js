@@ -1,34 +1,32 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
-/** 
+/**
  * @param {*} props
  * @returns 똔똔똔
  * @역할 스피너 역할
- * @필수값 
+ * @필수값
  * @담당자 : 박용태
-*/
+ */
 
-const Loading = (props) => {
-// dispatch
-// props
-// useEffect
+const Loading = () => {
+  // dispatch
+  // props
+  // useEffect
 
   return (
     <React.Fragment>
       <SpinnerContainer>
-        <SpinnerCircle1/>
-        <SpinnerCircle2/>
-        <SpinnerCircle3/>
-        <SpinnerCircle4/>
+        <SpinnerCircle1 />
+        <SpinnerCircle2 />
+        <SpinnerCircle3 />
+        <SpinnerCircle4 />
       </SpinnerContainer>
     </React.Fragment>
   );
-}
+};
 
-Loading.defaultProps = {
-
-}
+Loading.defaultProps = {};
 
 const SpinnerContainer = styled.div`
   width: 100%;
@@ -36,7 +34,7 @@ const SpinnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:30px;
+  gap: 30px;
 `;
 
 const ddonddon = keyframes`
@@ -67,13 +65,12 @@ const ddonddon = keyframes`
 }
 `;
 
-
 const SpinnerCircle1 = styled.div`
   width: 20px;
   height: 20px;
   border: none;
   border-radius: 50%;
-  background: #FFE899;
+  background: #ffe899;
   animation: ${ddonddon} 2s 1s infinite ease;
 `;
 
@@ -82,7 +79,7 @@ const SpinnerCircle2 = styled.div`
   height: 20px;
   border: none;
   border-radius: 50%;
-  background: #FFE899;
+  background: #ffe899;
   animation: ${ddonddon} 2s 1.5s infinite ease;
 `;
 
@@ -91,7 +88,7 @@ const SpinnerCircle3 = styled.div`
   height: 20px;
   border: none;
   border-radius: 50%;
-  background: #FFE899;
+  background: #ffe899;
   animation: ${ddonddon} 2s 2s infinite ease;
 `;
 
@@ -100,10 +97,8 @@ const SpinnerCircle4 = styled.div`
   height: 20px;
   border: none;
   border-radius: 50%;
-  background: #FFE899;
+  background: #ffe899;
   animation: ${ddonddon} 2s 2.5s infinite ease;
 `;
-
-
 
 export default Loading;
