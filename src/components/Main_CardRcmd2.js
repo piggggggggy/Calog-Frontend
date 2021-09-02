@@ -16,7 +16,7 @@ import { IoStar } from 'react-icons/io5';
 /** 
  * @param {*} props
  * @returns 뚱뚱이 카드
- * @역할 음식 추천에 활용할 뚱뚱한 카드
+ * @역할 횡스크롤 이슈를 해결하고자 급조한 컴포넌트입니다.
  * @담당자 : 박용태
 */
 
@@ -161,29 +161,6 @@ const FoodCard = styled.div`
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-
-  /* @media only screen and (max-width:400px) {
-    min-width: 160px;
-    max-width: 160px;
-  }
-  @media only screen and (max-width:350px) {
-    min-width: 140px;
-    max-width: 140px;
-  }
-  @media only screen and (max-width:300px) {
-    min-width: 120px;
-    max-width: 120px;
-  }  
-  @media ${theme.device.mobileHH} {
-    max-height: 123px;
-  } */
-
-  & > div {
-    /* display: flex;
-    align-items: center;
-    justify-content: flex-start; */
-    
-  }
 `;
 
 const NameContainer = styled.div`
@@ -196,7 +173,6 @@ const NameContainer = styled.div`
 const NameBox = styled.div`
   font-family: 'Pretendard';  
   max-height: 30px;
-  /* min-height: 30px; */
   max-width: 120px;
   min-width: 100px;
   line-height: 15px;

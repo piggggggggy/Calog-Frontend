@@ -23,16 +23,9 @@ import { store, persistor } from './redux/configStore';
 Sentry.init({
   // 환경에 상관없이
   dsn: process.env.REACT_APP_SENTRY_DSN,
-  // 프로덕션 만
-  // dsn: process.env.NODE_ENV === "production"
-  //   ? process.env.REACT_APP_SENTRY_DSN
-  //   : false,
   integrations: [new Integrations.BrowserTracing()],
-  // environment: process.env.NODE_ENV,
   tracesSampleRate: 1.0,
 });
-
-// return <button onClick={methodDoesNotExist}>Break the world</button>;
 
 ReactDOM.render(
   <Provider store={store}>

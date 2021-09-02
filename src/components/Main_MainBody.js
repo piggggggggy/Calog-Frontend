@@ -14,7 +14,6 @@ import { Grid, Text, Image } from '../elements';
 import FavoList from './Main_FavoList';
 import MostUsedKey from './Main_MostUsedKey';
 import RcmdList from './Main_RcmdList';
-import Loading from '../pages/Loading4';
 import MainNav from './Main_Nav';
 
 // image
@@ -41,19 +40,12 @@ const MainBody = (props) => {
   // 검색히스토리 on off
   const [_history, setHistory] = useState(true);
 
-  // 칼로리 range
-  const [filterMin, setMin] = useState(0);
-  const [filterMax, setMax] = useState(5000);
-
   // 최근 검색리스트, 즐겨찾기 리스트
   const recent_list = useSelector((state) => state.recent.recent);
   const favo_list = useSelector((state) => state.favorite.list);
   
   // 로그인체크 
   const is_login = useSelector((state) => state.user.is_login);
-
-  // 스피너
-  const is_loaded = useSelector((state) => state.record.is_loaded)
   
   // 검색 키워드
   const keyword = useRef();
@@ -62,8 +54,8 @@ const MainBody = (props) => {
   const search = () => {
     const data = {
       keyword: keyword.current.value,
-      min: filterMin,
-      max: filterMax
+      min: 0,
+      max: 5000
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
@@ -77,8 +69,8 @@ const MainBody = (props) => {
   const recentSearch = (keyword) => {
     const data = {
       keyword: keyword,
-      min: filterMin,
-      max: filterMax
+      min: 0,
+      max: 5000
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword));
@@ -118,10 +110,6 @@ const MainBody = (props) => {
 
   // 커스텀 식단
   const customFood = useSelector((state) => state.custom.custom)
-
-  // 유저 직접 추가 칼로리
-  const userAddFood = useSelector((state) => state.food.addFood)
-  // console.log(userAddFood)
 
   // nav
   const [navFocus, setFocus] = useState(0);
@@ -270,7 +258,6 @@ MainBody.defaultProps = {
 const HeaderContainer = styled.div`
   position: relative;
   max-width: 420px;
-  /* overflow: hidden; */
 `;
 
 const TopBack = styled.div`
@@ -285,13 +272,7 @@ const TopBack = styled.div`
   border-bottom-right-radius: 32px;
 `;
 
-const MiddleTap = styled.div`
-  margin-top: 4vh;
-  width: 100%;
-`;
-
 const BodyContainer = styled.div`
-  /* padding-top: 2vh; */
   max-width: 100%;
   max-height: 40vh;
   padding-bottom: 10vh;
@@ -423,24 +404,6 @@ const Line = styled.div`
   border-radius: 0.5px;
 `;
 
-const Mascort = styled.div`
-  position: fixed;
-  max-width: 420px;
-  width: 100%;
-  bottom: 9%;
-
-  @media ${theme.device.mobileM} {
-    bottom: 7%;
-  }
-  @media ${theme.device.mobileS} {
-    bottom: -3%;
-  }
-  @media ${theme.device.mobileF} {
-    bottom: 3%;    
-  }
-
-`;
-
 const Mascort_favoriteFood = styled.div`
   position: absolute;
   max-width: 420px;
@@ -456,105 +419,23 @@ const Mascort_favoriteFood = styled.div`
     bottom: -15%;
     right: -10%;
   }
-
-
 `;
-
 
 const Mascort_makeFood = styled.div`
   position: fixed;
   max-width: 420px;
   width: 100%;
-  /* bottom: 9%; */
 
   @media ${theme.device.mobileS} {
     bottom: 0;
-    /* height:vh; */
   }
   @media ${theme.device.mobileM} {
     bottom: 0;
   }
-  /* @media ${theme.device.mobileS} {
-    bottom: -3%;
-  } */
   @media ${theme.device.mobileF} {
     bottom: 3%;    
   }
 
-`;
-
-const MFace = styled.div`
-  position: relative;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  padding-left: 46%;
-  
-  @media ${theme.device.mobileS} {
-    padding-left: 40%;
-  }
-  @media only screen and (max-height: 800px) {
-    padding-left: 54%;
-  } 
-`;
-
-const TextBaloon = styled.div`
-  position: absolute;
-  left: 5%;
-  top: -5%;
-  width: 53%;
-  cursor: default;
-
-  @media ${theme.device.mobileS} {
-    left: 3%;
-    top: 0%;
-  }
-  @media ${theme.device.mobileF} {
-    left: 3%;
-    top: -10%;
-    width: 58%;
-  }
-
-  & > svg {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-  }
-
-  & > div {
-    font-family: 'Pretendard';  
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 2% 5% 4% 3%;
-    width: 100%;
-    height: 100%;
-    font-size: 15px;
-    line-height: 20px;
-    color: #5F5F5F;
-    letter-spacing: -0.583379px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @media ${theme.device.mobileM} {
-      font-size: 15px;
-      line-height: 15px;
-      padding: 3% 6% 3% 4%;
-    }
-    @media ${theme.device.mobileS} {
-      font-size: 13px;
-      line-height: 13px;
-      padding: 3% 5% 3% 3%;
-    }
-    @media ${theme.device.mobileF} {
-      font-size: 12px;
-      line-height: 13px;
-      padding: 3% 5% 3% 3%;
-    }
-  }
 `;
 
 const Nav = styled.div`

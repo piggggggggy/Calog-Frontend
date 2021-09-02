@@ -1,5 +1,4 @@
 import React,{useRef, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled, {keyframes} from 'styled-components';
 import theme from './theme';
 
@@ -10,11 +9,8 @@ import moment from 'moment';
 import S3 from 'react-aws-s3';
 import imageCompression from 'browser-image-compression';
 
-// history
-import { history } from '../redux/configStore';
-
 // elements & components
-import { Grid, Text } from '../elements';
+import { Text } from '../elements';
 
 // modules
 import instance from '../redux/modules/instance';
@@ -148,8 +144,6 @@ const FloatedBtn = (props) => {
     }
 
   }
-
-
 
   // on Modal!
   const onModal = () => {

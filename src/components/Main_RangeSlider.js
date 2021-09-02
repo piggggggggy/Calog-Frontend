@@ -163,7 +163,6 @@ const Thumb = styled.input`
     background-color: #F19F13;
     border: none;
     border-radius: 50%;
-    /* box-shadow: 0 0 1px 1px #ced4da; */
     cursor: pointer;
     height: 20px;
     width: 20px;

@@ -177,13 +177,6 @@ const FoodCard = styled.div`
   @media ${theme.device.mobileHH} {
     max-height: 123px;
   }
-
-  & > div {
-    /* display: flex;
-    align-items: center;
-    justify-content: flex-start; */
-    
-  }
 `;
 
 const NameContainer = styled.div`
@@ -196,7 +189,6 @@ const NameContainer = styled.div`
 const NameBox = styled.div`
   font-family: 'Pretendard';  
   max-height: 30px;
-  /* min-height: 30px; */
   max-width: 120px;
   min-width: 100px;
   line-height: 15px;

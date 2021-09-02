@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styled,{keyframes} from 'styled-components';
 import {Grid, Text} from '../elements';
@@ -6,18 +6,10 @@ import {Grid, Text} from '../elements';
 // history
 import {history} from '../redux/configStore';
 
-// redux
-import {useDispatch} from 'react-redux';
-import {delDetail} from '../redux/modules/search';
-
 const BtnHeader = (props) => {
-  const dispatch = useDispatch()
 
   // 카트리스트
   const cart_list = useSelector((state) => state.cart.cart);
-  // const reder = cart_list.length
-  // const [reRender, setReRender] = useState(cart_list.length);
-
 
   return (
     <React.Fragment>

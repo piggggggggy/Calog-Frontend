@@ -12,7 +12,7 @@ import '../styles/css/nice_date.css';
 import moment from 'moment';
 
 // 날짜 보내기
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {addDate} from '../redux/modules/cart';
 
 /** 
@@ -78,11 +78,7 @@ const Cart_Date = (props) => {
 const Wrap = styled.div`
   position: relative;
   display: flex;
-/* 
-  @media ${theme.device.mobileF} {
-    width: 105%;
-  } */
-
+  
   & > div {
     height: 28px;
     display: flex;
