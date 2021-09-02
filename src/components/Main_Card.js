@@ -16,7 +16,7 @@ import { delUserFoodDB } from '../redux/modules/food';
 
 // icons
 import { IoStar } from 'react-icons/io5';
-import { FaRegIdBadge, FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 
 
@@ -137,6 +137,7 @@ const Card = (props) => {
     }
   }
 
+  // 직접등록 데이터일 때 삭제버튼
   const delCreateFood = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -196,21 +197,10 @@ const FoodCard = styled.div`
   padding-top: 1.7vh;
   padding-bottom: 1.7vh;
   min-height: 40px;
-  /* max-height: 80px; */
   margin-bottom: 16px;
   border-radius: 16px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-
-  /* & > div {
-    display: flex;
-    align-items: center;
-    width: 100%;
-
-    & > svg {
-      width: 100%;
-    }
-  } */
 `;
 
 const KcalBox = styled.div`

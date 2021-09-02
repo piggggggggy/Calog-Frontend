@@ -18,12 +18,10 @@ import {
   rangeFilter, 
 } from '../redux/modules/search';
 import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
-import { isLoaded } from '../redux/modules/record';
 
 // elements & components
 import { Grid, Text } from '../elements';
 import RangeSlider from './Main_RangeSlider';
-import UnderBar from './Main_UnderBar';
 import CardList from './MainSearch_CardList';
 import MostUsedKey from './Main_MostUsedKey';
 import NotResult from './MainSearch_NotResult';
@@ -186,7 +184,6 @@ const MSBody = (props) => {
             <input 
             ref={keyword}
             onFocus={()=>{setHistory(false)}} 
-            // onBlur={()=>{setHistory(true)}} 
             placeholder="어떤 칼로리가 궁금하신가요?"
             onKeyPress={onKeyPress}
             onChange={_setKey}
@@ -293,9 +290,7 @@ const HeaderContainer = styled.div`
 const BodyContainer = styled.div`
   padding-top: 2vh;
   max-width: 100%;
-  /* height: 100% */
   max-height: 60vh;
-  /* padding-bottom: 5vh; */
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;

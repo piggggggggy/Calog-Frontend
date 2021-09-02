@@ -1,13 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 // elements & components
-import { Grid, Text, Input, Button } from '../elements';
+import { Grid, Text } from '../elements';
 import Card from './Cart_Card';
 
 // modules
-import { addRecordDB } from '../redux/modules/record';
 import { CustomSV } from '../redux/modules/DietCustom';
 import { delCartAll } from '../redux/modules/cart';
 
@@ -29,12 +28,8 @@ const CartBodyDiet = (props) => {
   const cart = useSelector((state) => state.cart);
   const cart_list = cart.cart;
   const is_login = useSelector((state) => state.user.is_login);
-  
-  // 최근삭제목록의 유무확인을 위한...
-  const user_info = useSelector((state) => state.user.user_info);
-  const _recentDeleted_list = is_login ? user_info.deleteList : undefined;
-  const recentDeleted_list = _recentDeleted_list === undefined ? [] : _recentDeleted_list;
 
+  // 커스텀 식단 
   const recordCustom = () => {
     if(is_login){
       dispatch(CustomSV(diet, cart.cart));
@@ -57,9 +52,6 @@ const CartBodyDiet = (props) => {
                 <input onChange={(e)=>{setDiet(e.target.value)}} type="text" value={diet} placeholder="식단 이름 입력"/>
                 <Line/>
             </DietInputContainer>
-            {/* <EditBtn>
-                <Text color="#FFFFFF" size="13px" m_size="13px" lineheight="18px" m_lineheight="18px" cursor="pointer">완료</Text>
-            </EditBtn> */}
         </DietName>
         
         {/* 카트에 담긴 내용 */}
@@ -81,7 +73,7 @@ const CartBodyDiet = (props) => {
 
         
         {/* 식단 만들기 버튼*/}
-          <CalcBox style={!is_login || recentDeleted_list.length === 0 ? {bottom: "9%"} : {bottom: "21%"}}>
+          <CalcBox>
             <div onClick={()=>{recordCustom()}}>
               <Text lineheight="22px" m_lineheight="20px" size="17px" m_size="15px" bold padding="0" margin="0" cursor="pointer">식단 추가하기</Text>
             </div>
@@ -101,7 +93,6 @@ const BodyContainer = styled.div`
   max-width: 420px;
   max-height: 70vh;
   overflow: scroll;
-  /* padding-top: 3vh; */
 
   &::-webkit-scrollbar {
     display: none;
@@ -116,12 +107,11 @@ const CartListBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 2vh; */
 `;
 
 const CalcBox = styled.div`
   position: fixed;
-  /* bottom: 21%; */
+  bottom: 9%;
   max-width: 420px;
   width: 100%;
   padding: 2vh 20px 2.8vh 20px;
@@ -170,20 +160,6 @@ const Line = styled.div`
   background-color: #C4C4C4;
   width: 100%;
   border: 1px solid #6A6A6A;
-`;
-
-const EditBtn = styled.div`
-  width: 15%;
-  /* height: 3.2vh; */
-  min-height: 100%;
-  background: #6A6A6A;
-  border: none;
-  border-radius: 6px;
-  margin-left: 1.9%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 `;
 
 export default CartBodyDiet;

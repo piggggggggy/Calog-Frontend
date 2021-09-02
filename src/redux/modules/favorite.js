@@ -5,9 +5,6 @@ import { createSlice } from "@reduxjs/toolkit";
 //전역 > 서버 배포
 import instance from "./instance";
 
-//loading
-import {isLoaded} from './record';
-
 // sentry
 import * as Sentry from '@sentry/react';
 
@@ -19,7 +16,6 @@ export const addFavoriteDB = (data) => {
       .post('/api/favorite/add', {foodId: data.foodId})
       .then((res) => {
         dispatch(addFavorite(data));
-        // window.alert("즐겨찾기 추가!");
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
@@ -34,7 +30,6 @@ export const deleteFavoriteDB = (foodId) => {
     .delete('/api/favorite/delete', {data: {foodId: foodId}})
       .then((res) => {
         dispatch(deleteFavorite(foodId));
-        // window.alert("즐겨찾기 해제!");
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);

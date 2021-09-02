@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // elements & components
 import { Grid, Text } from '../elements';
@@ -173,7 +173,6 @@ const DeleteBar = styled.div`
 
 const FoodCard = styled.div`
   position: relative;
-  /* right: 25%; */
   max-width: 88%;
   min-width: 88%;
   margin: auto;
@@ -190,7 +189,6 @@ const FoodCard = styled.div`
 `;
 
 const NameBox = styled.div`
-  /* max-width: 200px;  */
   line-height: 20px;
   font-size: 15px; 
   margin: 0; 
