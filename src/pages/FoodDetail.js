@@ -1,35 +1,34 @@
-import React, {useEffect} from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import theme from '../shared/theme';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import theme from "../shared/theme";
 
 // elements & components
-import BtnHeader from '../shared/BtnHeader';
-import { Grid, Text } from '../elements';
-import CalorieBar from '../components/FoodDetail_CalorieBar';
-import Loading from './Loading4';
+import BtnHeader from "../shared/BtnHeader";
+import { Grid, Text } from "../elements";
+import CalorieBar from "../components/FoodDetail_CalorieBar";
+import Loading from "./Loading4";
 
 // icons
-import { BsFillPlusSquareFill } from 'react-icons/bs';
+import { BsFillPlusSquareFill } from "react-icons/bs";
 
 // modules
-import { addCartRx } from '../redux/modules/cart';
-import { getDetailDB } from '../redux/modules/search';
+import { addCartRx } from "../redux/modules/cart";
+import { getDetailDB } from "../redux/modules/search";
 
 // img
-import Carbo from '../img/C_carbohydrate.jpg';
-import Protein from '../img/C_protein.jpg';
-import Fat from '../img/C_fat.jpg';
+import Carbo from "../img/C_carbohydrate.jpg";
+import Protein from "../img/C_protein.jpg";
+import Fat from "../img/C_fat.jpg";
 
-/** 
+/**
  * @param {*} props
  * @returns 기본정보, 영양정보, 칼로리 비교
  * @역할  음식 상세정보를 표시
  * @담당자 : 박용태
-*/
+ */
 
 const FoodDetail = (props) => {
-
   const dispatch = useDispatch();
 
   // params로 가져오는 foodId
@@ -37,13 +36,13 @@ const FoodDetail = (props) => {
 
   // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
- 
+
   // 현페이지의 메인 정보
   const foodInfo = useSelector((state) => state.search.detail);
-  
+
   // bmr을 가져오기 위한 유저정보
   const user = useSelector((state) => state.user.user_info);
-  
+
   // 스피너를 위한 로딩유무
   const is_loaded = useSelector((state) => state.record.is_loaded);
 
@@ -52,9 +51,9 @@ const FoodDetail = (props) => {
 
   // 기존 음식일경우 foodId에 해당하는 디테일 정보 불러오기 || 직접등록 음식일 경우 useEffect를 막아준다..
   useEffect(() => {
-    (foodInfo.length === 0 && dispatch(getDetailDB(foodId))) || (foodInfo.foodId !== foodId && dispatch(getDetailDB(foodId)));
+    (foodInfo.length === 0 && dispatch(getDetailDB(foodId))) ||
+      (foodInfo.foodId !== foodId && dispatch(getDetailDB(foodId)));
   }, []);
-
 
   // 대사량과 나의 칼로리 기록
   const bmr = !is_login ? 0 : user.bmr[0]?.bmr === 0 ? 0 : user.bmr[0]?.bmr;
@@ -62,7 +61,7 @@ const FoodDetail = (props) => {
 
   if (foodId !== foodInfo.foodId) {
     return <></>;
-  };
+  }
 
   // 장바구니 담기!
   const addCart = () => {
@@ -71,7 +70,7 @@ const FoodDetail = (props) => {
       name: foodInfo.name,
       forOne: foodInfo.forOne,
       measurement: foodInfo.measurement,
-      kcal: Math.round(foodInfo.kcal * 10)/10,
+      kcal: Math.round(foodInfo.kcal * 10) / 10,
       amount: 1,
     };
     dispatch(addCartRx(cartUnit));
@@ -79,8 +78,8 @@ const FoodDetail = (props) => {
 
   // 현재 남은(초과한) 칼로리 계산
   const totalKcal = () => {
-    let result = 0
-    if(foodRecord?.length !== 0) {
+    let result = 0;
+    if (foodRecord?.length !== 0) {
       foodRecord?.map((f, idx) => {
         result += f.resultKcal;
       });
@@ -89,7 +88,7 @@ const FoodDetail = (props) => {
       return 0;
     }
   };
-  
+
   // 현재 남은 기초대사량의 상태값
   const is_over = () => {
     if (bmr === totalKcal()) {
@@ -102,18 +101,19 @@ const FoodDetail = (props) => {
   };
 
   // 상태값에 해당하는 텍스트 배경색
-  const colors = is_over() === "line" ? 
-  '#59C451' 
-  : is_over() === "over" ? '#EC6262' : '#6993FF' ;
-
-
+  const colors =
+    is_over() === "line"
+      ? "#59C451"
+      : is_over() === "over"
+      ? "#EC6262"
+      : "#6993FF";
 
   // 상태text
   const StatusText = styled.div`
     width: auto;
     line-height: 22px;
     font-size: 15px;
-    font-weight: bold; 
+    font-weight: bold;
     color: ${colors};
     background: #fff;
 
@@ -124,55 +124,84 @@ const FoodDetail = (props) => {
   `;
 
   // 브랜드명 분리
-  const NameNBrand = foodInfo.name.indexOf('[') === 0 ? foodInfo.name.split(':') : false;
-  const brand = foodInfo.name.indexOf('[') === 0 ? NameNBrand[0] : '';
-  const name = foodInfo.name.indexOf('[') === 0 ? NameNBrand[1] : foodInfo.name;
+  const NameNBrand =
+    foodInfo.name.indexOf("[") === 0 ? foodInfo.name.split(":") : false;
+  const brand = foodInfo.name.indexOf("[") === 0 ? NameNBrand[0] : "";
+  const name = foodInfo.name.indexOf("[") === 0 ? NameNBrand[1] : foodInfo.name;
 
   // 스피너
   if (!is_loaded) {
-    return <Loading/>
-  };
+    return <Loading />;
+  }
 
   return (
     <React.Fragment>
       {/* 헤더 */}
-      <BtnHeader title="칼로리 상세" bg={theme.color.light}/>
+      <BtnHeader title="칼로리 상세" bg={theme.color.light} />
 
       <BodyContainer>
-        
-        <TopBack/>
-        
+        <TopBack />
+
         {/* 기본정보 */}
         <HeaderBox>
           <Grid>
-            <Text size="17px" m_size="17px" lineheight="22px" m_lineheight="20px" bold color="#5F5F5F">{brand}</Text>
+            <Text
+              size="17px"
+              m_size="17px"
+              lineheight="22px"
+              m_lineheight="20px"
+              bold
+              color="#5F5F5F"
+            >
+              {brand}
+            </Text>
             <Grid display="flex">
               <NameBox>{name}</NameBox>
-              <span style={{fontSize: "13px", color: "#404040", fontFamily: "Pretendard"}}>1인분 ({foodInfo.forOne + foodInfo.measurement})</span>
-            </Grid>  
+              <span
+                style={{
+                  fontSize: "13px",
+                  color: "#404040",
+                  fontFamily: "Pretendard",
+                }}
+              >
+                1인분 ({foodInfo.forOne + foodInfo.measurement})
+              </span>
+            </Grid>
             <Grid is_flex>
-              <Text lineheight="41px" bold size="34px" m_size="28px" color="#2A2A2A" margin="0.5% 0 1% 0" paddig="0">{Math.round(foodInfo.kcal * 10)/10} kcal</Text>
-              
-              {/* 카트 버튼 */}
-              <div style={{height: "34px"}}>
-                <BsFillPlusSquareFill onClick={addCart} style={{cursor: "pointer"}} color="#F19F13" size="34px"/>
-              </div>
+              <Text
+                lineheight="41px"
+                bold
+                size="34px"
+                m_size="28px"
+                color="#2A2A2A"
+                margin="0.5% 0 1% 0"
+                paddig="0"
+              >
+                {Math.round(foodInfo.kcal * 10) / 10} kcal
+              </Text>
 
+              {/* 카트 버튼 */}
+              <div style={{ height: "34px" }}>
+                <BsFillPlusSquareFill
+                  onClick={addCart}
+                  style={{ cursor: "pointer" }}
+                  color="#F19F13"
+                  size="34px"
+                />
+              </div>
             </Grid>
           </Grid>
 
           {/* 칼로리 비교정보 */}
           <Grid is_flex margin="1vh 0" m_margin="1vh 0">
             <StatusText color={colors}>
-              {bmr === 0 ? 
-              " 바디스펙이 없어 기초대사량 확인이 어려워요! " 
-              :
-              is_over() === "line" ? 
-              " 오늘의 기초대사량을 모두 채웠어요! " 
-              : is_over() === "over" ? 
-              ` 기초대사량에서 ${totalKcal()-bmr} kcal를 초과했어요! ` 
-              : ` 기초대사량까지 ${bmr-(totalKcal())} kcal 남았어요! `
-              }
+              {bmr === 0
+                ? " 바디스펙이 없어 기초대사량 확인이 어려워요! "
+                : is_over() === "line"
+                ? " 오늘의 기초대사량을 모두 채웠어요! "
+                : is_over() === "over"
+                ? ` 기초대사량에서 ${totalKcal() - bmr} kcal를 초과했어요! `
+                : ` 기초대사량까지 ${bmr - totalKcal()} kcal 남았어요! `}
             </StatusText>
           </Grid>
         </HeaderBox>
@@ -180,48 +209,120 @@ const FoodDetail = (props) => {
         {/* 영양성분 */}
         <IngreBox>
           <div>
-            <div style={{maxWidth: "34px"}}>
-              <img src={Carbo} width="100%" alt="carbohydrate"/>
+            <div style={{ maxWidth: "34px" }}>
+              <img src={Carbo} width="100%" alt="carbohydrate" />
             </div>
-            <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">탄수화물</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.carbo}g</Text> 
+            <Text
+              lineheight="15px"
+              m_lineheight="15px"
+              size="13px"
+              m_size="13px"
+              bold
+              color="#404040"
+              margin="2vh 0 0 0"
+            >
+              탄수화물
+            </Text>
+            <Text
+              lineheight="24px"
+              m_lineheight="22px"
+              size="22px"
+              m_size="20px"
+              bold
+              color="#404040"
+              margin="0.9vh 0 0 0"
+            >
+              {foodInfo.carbo}g
+            </Text>
           </div>
 
           <div>
-            <div style={{maxWidth: "34px"}}>
-              <img src={Protein} width="100%" alt="carbohydrate"/>
+            <div style={{ maxWidth: "34px" }}>
+              <img src={Protein} width="100%" alt="carbohydrate" />
             </div>
-            <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">단백질</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.protein}g</Text> 
+            <Text
+              lineheight="15px"
+              m_lineheight="15px"
+              size="13px"
+              m_size="13px"
+              bold
+              color="#404040"
+              margin="2vh 0 0 0"
+            >
+              단백질
+            </Text>
+            <Text
+              lineheight="24px"
+              m_lineheight="22px"
+              size="22px"
+              m_size="20px"
+              bold
+              color="#404040"
+              margin="0.9vh 0 0 0"
+            >
+              {foodInfo.protein}g
+            </Text>
           </div>
 
           <div>
-            <div style={{maxWidth: "34px"}}>
-              <img src={Fat} width="100%" alt="carbohydrate"/>
+            <div style={{ maxWidth: "34px" }}>
+              <img src={Fat} width="100%" alt="carbohydrate" />
             </div>
-            <Text lineheight="15px" m_lineheight="15px" size="13px" m_size="13px" bold color="#404040" margin="2vh 0 0 0">지방</Text>
-            <Text lineheight="24px" m_lineheight="22px" size="22px" m_size="20px" bold color="#404040" margin="0.9vh 0 0 0">{foodInfo.fat}g</Text> 
+            <Text
+              lineheight="15px"
+              m_lineheight="15px"
+              size="13px"
+              m_size="13px"
+              bold
+              color="#404040"
+              margin="2vh 0 0 0"
+            >
+              지방
+            </Text>
+            <Text
+              lineheight="24px"
+              m_lineheight="22px"
+              size="22px"
+              m_size="20px"
+              bold
+              color="#404040"
+              margin="0.9vh 0 0 0"
+            >
+              {foodInfo.fat}g
+            </Text>
           </div>
         </IngreBox>
 
         {/* 칼로리 수치 바 */}
-        <CalorieBar bmr={bmr} kcal={Math.round(foodInfo.kcal * 10)/10} totalKcal={totalKcal()}/>
+        <CalorieBar
+          bmr={bmr}
+          kcal={Math.round(foodInfo.kcal * 10) / 10}
+          totalKcal={totalKcal()}
+        />
 
         {/* 영양정보 디테일 */}
         <IngreDetailContainer>
-          
           {/* 탄수화물 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">
-              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
-                <img src={Carbo} alt="carbohydrate"/>
-                <IngreText style={{fontWeight: "bold"}}>탄수화물</IngreText>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  minWidth: "110px",
+                  gap: "16px",
+                }}
+              >
+                <img src={Carbo} alt="carbohydrate" />
+                <IngreText style={{ fontWeight: "bold" }}>탄수화물</IngreText>
               </div>
               <div>
-                <IngreText style={{fontWeight: "bold"}}>{foodInfo.carbo}g</IngreText>
+                <IngreText style={{ fontWeight: "bold" }}>
+                  {foodInfo.carbo}g
+                </IngreText>
               </div>
             </Grid>
-            <Line/>
+            <Line />
 
             <Grid is_flex padding="0 8.6% 0 8.6%">
               <IngreText>당</IngreText>
@@ -232,12 +333,21 @@ const FoodDetail = (props) => {
           {/* 단백질 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">
-              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
-                <img src={Protein} alt="protein"/>
-                <IngreText style={{fontWeight: "bold"}}>단백질</IngreText>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  minWidth: "110px",
+                  gap: "16px",
+                }}
+              >
+                <img src={Protein} alt="protein" />
+                <IngreText style={{ fontWeight: "bold" }}>단백질</IngreText>
               </div>
               <div>
-                <IngreText style={{fontWeight: "bold"}}>{foodInfo.protein}g</IngreText>
+                <IngreText style={{ fontWeight: "bold" }}>
+                  {foodInfo.protein}g
+                </IngreText>
               </div>
             </Grid>
           </IngreDetail>
@@ -245,15 +355,24 @@ const FoodDetail = (props) => {
           {/* 지방 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">
-              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
-                <img src={Fat} alt="fat"/>
-                <IngreText style={{fontWeight: "bold"}}>지방</IngreText>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  minWidth: "110px",
+                  gap: "16px",
+                }}
+              >
+                <img src={Fat} alt="fat" />
+                <IngreText style={{ fontWeight: "bold" }}>지방</IngreText>
               </div>
               <div>
-                <IngreText style={{fontWeight: "bold"}}>{foodInfo.fat}g</IngreText>
+                <IngreText style={{ fontWeight: "bold" }}>
+                  {foodInfo.fat}g
+                </IngreText>
               </div>
             </Grid>
-            <Line/>
+            <Line />
 
             <Grid is_flex padding="0 8.6% 0 8.6%">
               <IngreText>포화지방</IngreText>
@@ -274,11 +393,20 @@ const FoodDetail = (props) => {
           {/* 콜레스테롤 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">
-              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
-                <IngreText style={{fontWeight: "bold"}}>콜레스테롤</IngreText>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  minWidth: "110px",
+                  gap: "16px",
+                }}
+              >
+                <IngreText style={{ fontWeight: "bold" }}>콜레스테롤</IngreText>
               </div>
               <div>
-                <IngreText style={{fontWeight: "bold"}}>{foodInfo.cholesterol}mg</IngreText>
+                <IngreText style={{ fontWeight: "bold" }}>
+                  {foodInfo.cholesterol}mg
+                </IngreText>
               </div>
             </Grid>
           </IngreDetail>
@@ -286,27 +414,30 @@ const FoodDetail = (props) => {
           {/* 나트륨 */}
           <IngreDetail>
             <Grid is_flex padding="0 8.6% 0 6.5%">
-              <div style={{display: "flex", alignItems: "center", minWidth: "110px", gap: "16px"}}>
-                <IngreText style={{fontWeight: "bold"}}>나트륨</IngreText>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  minWidth: "110px",
+                  gap: "16px",
+                }}
+              >
+                <IngreText style={{ fontWeight: "bold" }}>나트륨</IngreText>
               </div>
               <div>
-                <IngreText style={{fontWeight: "bold"}}>{foodInfo.natrium}mg</IngreText>
+                <IngreText style={{ fontWeight: "bold" }}>
+                  {foodInfo.natrium}mg
+                </IngreText>
               </div>
             </Grid>
           </IngreDetail>
-
         </IngreDetailContainer>
-
       </BodyContainer>
     </React.Fragment>
   );
+};
 
-
-}
-
-FoodDetail.defaultProps = {
-
-}
+FoodDetail.defaultProps = {};
 
 const BodyContainer = styled.div`
   position: relative;
@@ -340,17 +471,17 @@ const HeaderBox = styled.div`
 const NameBox = styled.div`
   line-height: 22px;
   /* min-width: 160px; */
-  font-weight: bold; 
+  font-weight: bold;
   font-size: 15px;
-  color: #5F5F5F;
+  color: #5f5f5f;
   margin: 0 2% 0 0;
   padding: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   letter-spacing: -0.0041em;
-  font-family: 'Pretendard';  
-  
+  font-family: "Pretendard";
+
   @media ${theme.device.mobileH} {
     font-size: 17px;
   }
@@ -373,7 +504,7 @@ const IngreBox = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;  
+    align-items: center;
     min-width: 52px;
   }
 `;
@@ -392,7 +523,7 @@ const IngreDetailContainer = styled.div`
 
 const IngreDetail = styled.div`
   width: 87.6%;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   padding: 1.3vh 0 1.8vh 0;
@@ -401,20 +532,19 @@ const IngreDetail = styled.div`
 `;
 
 const IngreText = styled.div`
-  line-height: 18px; 
-  font-size: 13px; 
+  line-height: 18px;
+  font-size: 13px;
   /* font-weight: bold; */
   color: #404040;
-  font-family: 'Pretendard';  
+  font-family: "Pretendard";
 `;
 
 const Line = styled.div`
   margin-top: 1.3vh;
   margin-bottom: 1.8vh;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   height: 1px;
   width: 100%;
 `;
-
 
 export default FoodDetail;
