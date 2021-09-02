@@ -205,9 +205,9 @@ const MSBody = (props) => {
           <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
             <div>
 
-              <Grid is_flex padding="4.5vh 6% 1.8vh 6%">
+              <RecentText style={{padding: "40px 6% 1vh 6%"}}>
                 <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
-              </Grid>
+              </RecentText>
 
               <Line/>
 
@@ -215,7 +215,7 @@ const MSBody = (props) => {
                 if (idx < 5) {
                   return (
                     <>
-                      <Grid is_flex padding="1.3vh 8%" key={idx}>
+                      <RecentBox key={idx}>
 
                         <Grid cursor _onClick={()=>{recentSearch(rec)}}>
                           <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
@@ -225,7 +225,7 @@ const MSBody = (props) => {
                           <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="15px" color="#737373"/>
                         </div>
 
-                      </Grid>
+                      </RecentBox>
                       
                       <Line/>
                     </>
@@ -384,10 +384,39 @@ const SearchHistory = styled.div`
   }
 `;
 
+
+const RecentText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const RecentBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 3.2% 11% 3.2% 8%;
+
+  @media only screen and (max-height: 850px) {
+    padding: 2.5% 11% 2.5% 8%;
+  }
+
+  @media only screen and (max-height: 800px) {
+    padding: 2% 11% 2% 8%;
+  }
+
+  @media only screen and (max-height: 70px) {
+    padding: 1.2% 11% 1.2% 8%;
+  }
+`;
+
+
 const Line = styled.div`
   width: 87%;
   margin: auto;
   border: 1px solid #FFE899;
+  border-radius: 0.5px;
 `;
 
 const SortBox = styled.div`
@@ -400,6 +429,7 @@ const SortBox = styled.div`
 
 const SortSelect = styled.select`
   border: none;
+  outline: none;
   font-size: 13px;
   color: #8C8C8C; 
   line-height: 18px; 
