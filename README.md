@@ -1,6 +1,6 @@
 # 🧚🏻‍♀️항해99 실전프로젝트 Team Calog - 프론트(김나영, 박용태, 최지혁)
 
-![logo](public/ReadMe-img/fatLOGO.png)
+![logo](public/ReadMe-img/fat_logo.png)
 
 🐷[Calog 링크](https://www.calog.app/)
 
