@@ -178,7 +178,7 @@ const MainBody = (props) => {
                   return (
                     <>
                       <RecentBox key={idx}>
-                        
+
                         <Grid cursor="pointer" _onClick={()=>{recentSearch(rec)}}>
                           <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0" cursor="pointer">{rec}</Text>
                         </Grid>
