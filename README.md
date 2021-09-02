@@ -12,7 +12,10 @@
 <a href="https://reactrouter.com/" target="_blank"><img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=ReactRouter&logoColor=white"/></a>
 <a href="https://styled-components.com/" target="_blank"><img src="https://img.shields.io/badge/Styled-components-DB7093?style=flat-square&logo=Styled-components&logoColor=white"/></a>
 
-<a href="https://ko.redux.js.org/" target="_blank"><img src="https://img.shields.io/badge/reduxjs/toolkit-764ABC?style=flat-square&logo=&logoColor=white"/></a>
+<a href="https://ko.redux.js.org/" target="_blank"><img src="https://img.shields.io/badge/redux toolkit-764ABC?style=flat-square&logo=&logoColor=white"/></a>
+<a href="https://ko.redux.js.org/" target="_blank"><img src="https://img.shields.io/badge/redux persist-764ABC?style=flat-square&logo=&logoColor=white"/></a>
+<a href="https://ko.reactjs.org/" target="_blank"><img src="https://img.shields.io/badge/react helmet-61DAFB?style=flat-square&logo=&logoColor=white"/></a>
+<a href="https://developer.mozilla.org/ko/docs/Web/Progressive_web_apps/Introduction" target="_blank"><img src="https://img.shields.io/badge/PWA-512BD4?style=flat-square&logo=&logoColor=white"/></a>
 
 # 🙌🏻member
 ## view
