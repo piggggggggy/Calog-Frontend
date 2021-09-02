@@ -1,7 +1,7 @@
 # 🧚🏻‍♀️항해99 실전프로젝트 Team Calog - 프론트(김나영, 박용태, 최지혁)
 와이어프레임 : https://www.figma.com/file/KO3PQQwPOBCH9NKsoQFj74/%EC%B9%BC%EB%A1%9C%EB%A6%AC%EC%A6%88-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0%3A1
 
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white" href="https://javascript.info/"/></a>
 
 # 🙌🏻member
 ## view
