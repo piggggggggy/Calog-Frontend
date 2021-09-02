@@ -8,7 +8,9 @@
 
 📗[Notion 링크]() 예정...
 
-🎨[Wireframe](https://www.figma.com/file/KO3PQQwPOBCH9NKsoQFj74/%EC%B9%BC%EB%A1%9C%EB%A6%AC%EC%A6%88-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=1429%3A2272)
+🍕[Backend Repo 링크](https://github.com/dennis9352/Calog-Backend)
+
+🎨[Wireframe 링크](https://www.figma.com/file/KO3PQQwPOBCH9NKsoQFj74/%EC%B9%BC%EB%A1%9C%EB%A6%AC%EC%A6%88-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=1429%3A2272)
 
 <a href="https://ko.reactjs.org/" target="_blank"><img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/></a>
 <a href="https://javascript.info/" target="_blank"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/></a>
@@ -23,22 +25,6 @@
 <a href="https://ko.redux.js.org/" target="_blank"><img src="https://img.shields.io/badge/redux persist-764ABC?style=flat-square&logo=&logoColor=white"/></a>
 <a href="https://ko.reactjs.org/" target="_blank"><img src="https://img.shields.io/badge/react helmet-61DAFB?style=flat-square&logo=&logoColor=white"/></a>
 <a href="https://developer.mozilla.org/ko/docs/Web/Progressive_web_apps/Introduction" target="_blank"><img src="https://img.shields.io/badge/PWA-512BD4?style=flat-square&logo=&logoColor=white"/></a>
-
-# 🙌🏻member
-## view
-### 나영
-대시보드 / 캘린더 / 기록
-### 용태
-메인(검색)
-### 지혁
-로그인+회원가입 / 마이페이지
-
-## function
-### 나영
-
-### 용태
-
-### 지혁
 
 ---
 <br/>
@@ -58,6 +44,26 @@
 
 
 ## 개요
+
+- 프로젝트 이름: **Calog** (구 Calories)
+
+- 개발 기간 : 2021년 7월 23일 ~ 2021년 8월 31일
+
+- 개발 언어 : JavaScript
+
+- 개발 라이브러리 : React.js
+
+- 형상 관리 툴 : git
+
+- 협업 툴 : git / Notion / google spreadsheets / figma / slack
+
+- 개발 인원 : 8명
+  - **Front end** : **김나영, 최지혁, 박용태**
+  - **Back end** : **이경원, 박진홍, 오인웅**
+  - **Designer** : **김민경, 이경미**
+
+
+- 칼로리를 고민하는 사람들을 위해, 편리하게 칼로리 검색과 기록, 계산까지 한번에 할 수 있도록 도와주는 서비스
 
 
 ## 프로젝트 기능
