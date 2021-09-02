@@ -1,7 +1,14 @@
 # 🧚🏻‍♀️항해99 실전프로젝트 Team Calog - 프론트(김나영, 박용태, 최지혁)
-와이어프레임 : https://www.figma.com/file/KO3PQQwPOBCH9NKsoQFj74/%EC%B9%BC%EB%A1%9C%EB%A6%AC%EC%A6%88-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0%3A1
 
-웹사이트 : https://www.calog.app/
+![logo](public/ReadMe-img/fatLOGO.png)
+
+🐷[Calog 링크](https://www.calog.app/)
+
+💋[Youtube 링크]() 예정...
+
+📗[Notion 링크]() 예정...
+
+🎨[Wireframe](https://www.figma.com/file/KO3PQQwPOBCH9NKsoQFj74/%EC%B9%BC%EB%A1%9C%EB%A6%AC%EC%A6%88-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=1429%3A2272)
 
 <a href="https://ko.reactjs.org/" target="_blank"><img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/></a>
 <a href="https://javascript.info/" target="_blank"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/></a>
