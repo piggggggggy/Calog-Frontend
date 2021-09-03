@@ -23,7 +23,6 @@ export const addDataDB = (name, kcal, forOne, measurement, carbo, sugars, protei
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err)
       }) 
   }
 };

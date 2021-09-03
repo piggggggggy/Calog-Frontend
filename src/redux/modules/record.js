@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // 전역 > 서버 배포
 import instance from "./instance";
-import { recordDeleted, clearDeleted } from "./user";
+import {clearDeleted } from "./user";
 import {delCartAll, chgType, addDate} from './cart';
 
 // sentry

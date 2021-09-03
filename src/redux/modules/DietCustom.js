@@ -22,7 +22,6 @@ export const CustomSV = (name, foodList) => {
         customize()
         .catch((err)=>{
           Sentry.captureException(`Catched Error : ${err}`);
-          console.log(err);
         });
     };
 };
@@ -36,7 +35,6 @@ export const GetCustomList = () => {
         getcustomize()
         .catch((err)=>{
           Sentry.captureException(`Catched Error : ${err}`);
-          console.error(err)
         });
     }
 };
@@ -50,7 +48,6 @@ export const DeleteCustomDB = (mealId) => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "삭제하는데 에러가 났어요!")
       })
   }
 };
