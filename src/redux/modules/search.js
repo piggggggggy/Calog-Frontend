@@ -91,7 +91,6 @@ export const getRecommendedDB = () => {
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err, "추천음식에서 오류가 나요");
       });
   };
 };

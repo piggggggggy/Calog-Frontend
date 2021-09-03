@@ -50,7 +50,6 @@ export const addDataDB = (
       })
       .catch((err) => {
         Sentry.captureException(`Catched Error : ${err}`);
-        console.log(err);
       });
   };
 };
