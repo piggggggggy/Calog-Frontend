@@ -9,14 +9,14 @@ import storageSession from "redux-persist/lib/storage/session";
 
 // reducers
 import user from "./modules/user";
-import record from './modules/record';
-import cart from './modules/cart';
-import favorite from './modules/favorite';
-import search from './modules/search';
+import record from "./modules/record";
+import cart from "./modules/cart";
+import favorite from "./modules/favorite";
+import search from "./modules/search";
 import notice from "./modules/notice";
-import recent from './modules/recent';
-import dashboard from './modules/dashboard';
-import food from './modules/food';
+import recent from "./modules/recent";
+import dashboard from "./modules/dashboard";
+import food from "./modules/food";
 import custom from "./modules/DietCustom";
 
 export const history = createBrowserHistory();
@@ -38,7 +38,7 @@ if (env === "development") {
 const persistConfig = {
   key: "auth",
   storage: storageSession,
-  whitelist: ["cart", "recent", "record", "dashboard", "food"]
+  whitelist: ["cart", "recent", "record", "dashboard", "food"],
 };
 
 const reducer = combineReducers({
@@ -50,13 +50,16 @@ const reducer = combineReducers({
   recent: recent.reducer,
   notice: notice.reducer,
   dashboard: dashboard.reducer,
-  food:food.reducer,
+  food: food.reducer,
   custom: custom.reducer,
   router: connectRouter(history),
 });
 
 // persist
 const persistedReducer = persistReducer(persistConfig, reducer);
-export const store = configureStore({ reducer: persistedReducer, middleware: middlewares });
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: middlewares,
+});
 export const persistor = persistStore(store);
 export default { store, persistor };

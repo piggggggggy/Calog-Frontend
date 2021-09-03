@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Text} from '../elements';
-import theme from '../shared/theme';
+import React from "react";
+import styled from "styled-components";
+import { Text } from "../elements";
+import theme from "../shared/theme";
 
-/** 
+/**
  * @역할 : 유저가 카트에 담은 칼로리의 리스트를 보여주는 컴포넌트
  * @필수값 : 카트 칼로리 리스트(name, amount, kcal, grams)
  * @담당자 : 김나영
-*/
+ */
 
 const Record_List = (props) => {
   const { name, amount, kcal, grams } = props;
@@ -15,9 +15,15 @@ const Record_List = (props) => {
   return (
     <React.Fragment>
       <Wrap>
-        <Text width="60%" size="15px" m_size="13px">{name} ({grams}g)</Text>
-        <Text size="15px" bold m_size="13px">{kcal}kcal</Text>
-        <Text size="15px" m_size="13px">X {amount}</Text>
+        <Text width="60%" size="15px" m_size="13px">
+          {name} ({grams}g)
+        </Text>
+        <Text size="15px" bold m_size="13px">
+          {kcal}kcal
+        </Text>
+        <Text size="15px" m_size="13px">
+          X {amount}
+        </Text>
       </Wrap>
     </React.Fragment>
   );
@@ -25,8 +31,8 @@ const Record_List = (props) => {
 
 Record_List.defaultProps = {
   foodId: 1,
-  name: '피자마루 간장치킨',
-  quantity : 1,
+  name: "피자마루 간장치킨",
+  quantity: 1,
   calorie: 4500,
   gram: 600,
 };

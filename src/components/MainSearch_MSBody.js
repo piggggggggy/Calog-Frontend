@@ -1,47 +1,50 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
 // theme
-import theme from '../shared/theme';
+import theme from "../shared/theme";
 
 // lodash
-import _ from 'lodash';
+import _ from "lodash";
 
 // modules
-import { 
-  searchKeywordDB, 
-  countKeywordDB, 
-  ascendingSort, 
-  descendingSort, 
-  koreanSort, 
-  rangeFilter, 
-} from '../redux/modules/search';
-import { searchRecentDB, deleteRecentDB, addRecent, deleteRecent } from '../redux/modules/recent';
+import {
+  searchKeywordDB,
+  countKeywordDB,
+  ascendingSort,
+  descendingSort,
+  koreanSort,
+  rangeFilter,
+} from "../redux/modules/search";
+import {
+  searchRecentDB,
+  deleteRecentDB,
+  addRecent,
+  deleteRecent,
+} from "../redux/modules/recent";
 
 // elements & components
-import { Grid, Text } from '../elements';
-import RangeSlider from './Main_RangeSlider';
-import CardList from './MainSearch_CardList';
-import MostUsedKey from './Main_MostUsedKey';
-import NotResult from './MainSearch_NotResult';
-
+import { Grid, Text } from "../elements";
+import RangeSlider from "./Main_RangeSlider";
+import CardList from "./MainSearch_CardList";
+import MostUsedKey from "./Main_MostUsedKey";
+import NotResult from "./MainSearch_NotResult";
 
 // icon
-import { BiSearchAlt2 } from 'react-icons/bi';
-import { IoIosArrowDown } from 'react-icons/io';
-import { TiDeleteOutline } from 'react-icons/ti';
-import { MdCancel } from 'react-icons/md';
+import { BiSearchAlt2 } from "react-icons/bi";
+import { IoIosArrowDown } from "react-icons/io";
+import { TiDeleteOutline } from "react-icons/ti";
+import { MdCancel } from "react-icons/md";
 
-/** 
+/**
  * @param {*} props
  * @returns 검색결과 페이지
  * @역할 검색결과 페이지의 body
  * @담당자 : 박용태
-*/
+ */
 
 const MSBody = (props) => {
-
   // dispatch
   const dispatch = useDispatch();
 
@@ -50,39 +53,40 @@ const MSBody = (props) => {
 
   // 검색결과
   const search_list = useSelector((state) => state.search.filtered_list);
-  
+
   // 검색 히스토리 on off
   const [_history, setHistory] = useState(true);
-  
+
   // 칼로리 range 필터
   const [filterMin, setMin] = useState(0);
   const [filterMax, setMax] = useState(2000);
-  
+
   // 정렬
-  const [sortType, setSort] = useState('정확도순');
-  
+  const [sortType, setSort] = useState("정확도순");
+
   // 최근검색어
   const recent_list = useSelector((state) => state.recent.recent);
-  
+
   // 로그인체크
   const is_login = useSelector((state) => state.user.is_login);
-  
-  // 검색키워드
-  const keyword = useRef(); 
 
+  // 검색키워드
+  const keyword = useRef();
 
   // 검색함수
   const search = () => {
     const data = {
       keyword: keyword.current.value,
       min: filterMin,
-      max: filterMax  
+      max: filterMax,
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword.current.value));
-    {is_login ?
-      dispatch(searchRecentDB(keyword.current.value))
-      : dispatch(addRecent(keyword.current.value))};
+    {
+      is_login
+        ? dispatch(searchRecentDB(keyword.current.value))
+        : dispatch(addRecent(keyword.current.value));
+    }
     setHistory(true);
   };
 
@@ -91,27 +95,32 @@ const MSBody = (props) => {
     const data = {
       keyword: keyword,
       min: filterMin,
-      max: filterMax
+      max: filterMax,
     };
     dispatch(searchKeywordDB(data));
     dispatch(countKeywordDB(keyword));
-    {is_login ?
-      dispatch(searchRecentDB(keyword))
-      : dispatch(addRecent(keyword))};
+    {
+      is_login
+        ? dispatch(searchRecentDB(keyword))
+        : dispatch(addRecent(keyword));
+    }
     setHistory(true);
   };
 
   // 최근 검색어 삭제
   const recentDelete = (keyword) => {
-    {is_login ? dispatch(deleteRecentDB(keyword)) 
-      : dispatch(deleteRecent(keyword))}
+    {
+      is_login
+        ? dispatch(deleteRecentDB(keyword))
+        : dispatch(deleteRecent(keyword));
+    }
   };
 
   // 엔터 검색
   const onKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       search();
-      keyword.current.vlaue = '';
+      keyword.current.vlaue = "";
     }
   };
 
@@ -119,11 +128,11 @@ const MSBody = (props) => {
   const [key, setKey] = useState();
   const _setKey = _.debounce((e) => {
     setKey(e.target.value);
-  }, 500)
-  
+  }, 500);
+
   const deleteKeyword = () => {
-    keyword.current.value = '';
-    setKey('');
+    keyword.current.value = "";
+    setKey("");
   };
 
   // 정렬 선택
@@ -141,15 +150,14 @@ const MSBody = (props) => {
     } else if (sortType === "정확도순") {
       const data = {
         min: filterMin,
-        max: filterMax
+        max: filterMax,
       };
       debounceRangeCB(data);
     }
-  }, [sortType])
+  }, [sortType]);
 
   // history tab 관리
-  const styles = _history ? {display: "none"} : {display: "block"};
-
+  const styles = _history ? { display: "none" } : { display: "block" };
 
   // range debounce  함수
   const debounce = _.debounce((n, x) => {
@@ -157,88 +165,142 @@ const MSBody = (props) => {
     setMax(x);
   }, 500);
   const debounceCB = useCallback((n, x) => {
-    debounce(n,x);
-  }, [])
+    debounce(n, x);
+  }, []);
 
   // range 요청
   const debounceRangeCB = useCallback((e) => {
     dispatch(rangeFilter(e));
-  }, [])
+  }, []);
 
   useEffect(() => {
     const data = {
       min: filterMin,
-      max: filterMax
+      max: filterMax,
     };
     debounceRangeCB(data);
-  }, [filterMin, filterMax]); 
+  }, [filterMin, filterMax]);
 
   return (
     <React.Fragment>
-
       <HeaderContainer>
-
         {/* 검색바 */}
         <SearchGrid>
           <SearchBox>
-            <input 
-            ref={keyword}
-            onFocus={()=>{setHistory(false)}} 
-            placeholder="어떤 칼로리가 궁금하신가요?"
-            onKeyPress={onKeyPress}
-            onChange={_setKey}
+            <input
+              ref={keyword}
+              onFocus={() => {
+                setHistory(false);
+              }}
+              placeholder="어떤 칼로리가 궁금하신가요?"
+              onKeyPress={onKeyPress}
+              onChange={_setKey}
             />
-            {key ? 
-            <div onClick={()=>{deleteKeyword()}} style={{right: "10%", top: "1vh", cursor: "pointer"}}>
-              <MdCancel size="16px" color="#C4C4C4"/>
-            </div>
-            : ''}
-            <div onClick={()=>{search()}}>
+            {key ? (
+              <div
+                onClick={() => {
+                  deleteKeyword();
+                }}
+                style={{ right: "10%", top: "1vh", cursor: "pointer" }}
+              >
+                <MdCancel size="16px" color="#C4C4C4" />
+              </div>
+            ) : (
+              ""
+            )}
+            <div
+              onClick={() => {
+                search();
+              }}
+            >
               <BiSearchAlt2 size="24px" color="#F19F13" />
             </div>
           </SearchBox>
 
           {/* 최근 검색어 영역 */}
-          <SearchHistory style={styles} onClick={()=>{setHistory(true)}}>
+          <SearchHistory
+            style={styles}
+            onClick={() => {
+              setHistory(true);
+            }}
+          >
             <div>
-
-              <RecentText style={{padding: "40px 6% 1vh 6%"}}>
-                <Text lineheight="18px" bold size="13px" m_size="13px" color="#000000" padding="0" margin="0">최근검색어</Text>
+              <RecentText style={{ padding: "40px 6% 1vh 6%" }}>
+                <Text
+                  lineheight="18px"
+                  bold
+                  size="13px"
+                  m_size="13px"
+                  color="#000000"
+                  padding="0"
+                  margin="0"
+                >
+                  최근검색어
+                </Text>
               </RecentText>
 
-              <Line/>
+              <Line />
 
-              {recent_list.length !== 0 ? recent_list.map((rec, idx) => {
-                if (idx < 5) {
-                  return (
-                    <>
-                      <RecentBox key={idx}>
+              {recent_list.length !== 0
+                ? recent_list.map((rec, idx) => {
+                    if (idx < 5) {
+                      return (
+                        <>
+                          <RecentBox key={idx}>
+                            <Grid
+                              cursor
+                              _onClick={() => {
+                                recentSearch(rec);
+                              }}
+                            >
+                              <Text
+                                lineheight="18px"
+                                m_lineheight="15px"
+                                size="15px"
+                                m_size="13px"
+                                color="#404040"
+                                padding="0"
+                                margin="0"
+                              >
+                                {rec}
+                              </Text>
+                            </Grid>
 
-                        <Grid cursor _onClick={()=>{recentSearch(rec)}}>
-                          <Text lineheight="18px" m_lineheight="15px" size="15px" m_size="13px" color="#404040" padding="0" margin="0">{rec}</Text>
-                        </Grid>       
+                            <div
+                              style={{
+                                width: "18px",
+                                height: "18px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <TiDeleteOutline
+                                onClick={() => {
+                                  recentDelete(rec);
+                                }}
+                                size="15px"
+                                color="#737373"
+                              />
+                            </div>
+                          </RecentBox>
 
-                        <div style={{width: "18px", height: "18px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                          <TiDeleteOutline onClick={()=>{recentDelete(rec)}} size="15px" color="#737373"/>
-                        </div>
-
-                      </RecentBox>
-                      
-                      <Line/>
-                    </>
-                  )
-                }
-              }) : ''}
+                          <Line />
+                        </>
+                      );
+                    }
+                  })
+                : ""}
             </div>
           </SearchHistory>
 
           {/* 인기검색어 */}
-          <MostUsedKey/>
+          <MostUsedKey />
         </SearchGrid>
 
         {/* Range Slider  */}
-        <Grid padding="0 3.5vh" >
-          <RangeSlider 
+        <Grid padding="0 3.5vh">
+          <RangeSlider
             min={0}
             max={2000}
             onChange={({ min, max }) => {
@@ -248,7 +310,13 @@ const MSBody = (props) => {
         </Grid>
 
         {/* 정렬 선택 박스! */}
-        <Grid margin="5vh 0 2vh 0" m_margin="5vh 0 2vh 0" padding="0 6%" display="flex" jc="flex-end">
+        <Grid
+          margin="5vh 0 2vh 0"
+          m_margin="5vh 0 2vh 0"
+          padding="0 6%"
+          display="flex"
+          jc="flex-end"
+        >
           <SortBox>
             <SortSelect onChange={sortChange}>
               <SortOption value="정확도순">정확도순</SortOption>
@@ -257,31 +325,25 @@ const MSBody = (props) => {
               <SortOption value="가나다순">가나다순</SortOption>
             </SortSelect>
             <ButtonBox>
-              <IoIosArrowDown size="14px" color="8C8C8C"/>
+              <IoIosArrowDown size="14px" color="8C8C8C" />
             </ButtonBox>
           </SortBox>
         </Grid>
-      </HeaderContainer>    
-
+      </HeaderContainer>
 
       {/* 검색결과가 들어가는 곳 */}
       <BodyContainer>
-
-        {search_list.length !== 0 ? 
-        <CardList search_list={search_list} keyword={_keyword}/>
-        : <NotResult keyword={_keyword}/>}
-
+        {search_list.length !== 0 ? (
+          <CardList search_list={search_list} keyword={_keyword} />
+        ) : (
+          <NotResult keyword={_keyword} />
+        )}
       </BodyContainer>
-
-      
     </React.Fragment>
   );
 };
-    
 
-MSBody.defaultProps = {
-
-}
+MSBody.defaultProps = {};
 
 const HeaderContainer = styled.div`
   max-width: 100%;
@@ -306,7 +368,7 @@ const SearchGrid = styled.div`
 const SearchBox = styled.div`
   position: relative;
   width: 88%;
-  border: 1px solid #F19F13;
+  border: 1px solid #f19f13;
   padding: 1.3vh 25px;
   margin: auto;
   border-radius: 31px;
@@ -379,7 +441,6 @@ const SearchHistory = styled.div`
   }
 `;
 
-
 const RecentText = styled.div`
   display: flex;
   justify-content: space-between;
@@ -406,16 +467,15 @@ const RecentBox = styled.div`
   }
 `;
 
-
 const Line = styled.div`
   width: 87%;
   margin: auto;
-  border: 1px solid #FFE899;
+  border: 1px solid #ffe899;
   border-radius: 0.5px;
 `;
 
 const SortBox = styled.div`
-  display: flex; 
+  display: flex;
   justify-content: flex-end;
   width: auto;
   cursor: pointer;
@@ -426,15 +486,14 @@ const SortSelect = styled.select`
   border: none;
   outline: none;
   font-size: 13px;
-  color: #8C8C8C; 
-  line-height: 18px; 
+  color: #8c8c8c;
+  line-height: 18px;
   margin: 0;
   padding: 0 20px 0 0;
   appearance: none;
 `;
 
-const SortOption = styled.option`
-`;
+const SortOption = styled.option``;
 
 const ButtonBox = styled.div`
   position: absolute;

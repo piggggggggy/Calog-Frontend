@@ -1,50 +1,49 @@
 //나영
-import DashBoard from './DashBoard';
-import Calendar from './Calendar';
-import Record from './Record';
-import CalendarDate from './CalendarDate';
-import SelfAddFood from './SelfAddFood';
-import AboutUs from './AboutUs';
-import CalendarDateEdit from './CalendarDateEdit'
+import DashBoard from "./DashBoard";
+import Calendar from "./Calendar";
+import Record from "./Record";
+import CalendarDate from "./CalendarDate";
+import SelfAddFood from "./SelfAddFood";
+import AboutUs from "./AboutUs";
+import CalendarDateEdit from "./CalendarDateEdit";
 //지혁
-import Login from './Login';
-import Signup from './Signup';
-import SignSocial from './SignSocial';
-import BodySpec from './BodySpec';
-import Notice from './Notice';
-import NotiDetail from './NoticeDetail';
-import NoticeWrite from './NoticeWrite';
-import AddSpec from './AddSpec';
-import UserFeedback from './UserFeedback';
+import Login from "./Login";
+import Signup from "./Signup";
+import SignSocial from "./SignSocial";
+import BodySpec from "./BodySpec";
+import Notice from "./Notice";
+import NotiDetail from "./NoticeDetail";
+import NoticeWrite from "./NoticeWrite";
+import AddSpec from "./AddSpec";
+import UserFeedback from "./UserFeedback";
 //용태
-import Main from './Main';
-import FoodDetail from './FoodDetail';
-import Cart from './Cart';
-import MainSearch from './MainSearch';
-import Loading from './Loading';
-import Loading2 from './Loading2';
-import Loading3 from './Loading3';
-import Loading4 from './Loading4';
-
+import Main from "./Main";
+import FoodDetail from "./FoodDetail";
+import Cart from "./Cart";
+import MainSearch from "./MainSearch";
+import Loading from "./Loading";
+import Loading2 from "./Loading2";
+import Loading3 from "./Loading3";
+import Loading4 from "./Loading4";
 
 export {
-  DashBoard, 
-  AddSpec, 
-  Login, 
-  Signup, 
-  SignSocial, 
-  BodySpec, 
-  Notice, 
-  NotiDetail, 
-  NoticeWrite, 
+  DashBoard,
+  AddSpec,
+  Login,
+  Signup,
+  SignSocial,
+  BodySpec,
+  Notice,
+  NotiDetail,
+  NoticeWrite,
   UserFeedback,
-  Main, 
-  Calendar, 
-  FoodDetail, 
-  Cart, 
-  Record, 
-  MainSearch, 
-  CalendarDate, 
+  Main,
+  Calendar,
+  FoodDetail,
+  Cart,
+  Record,
+  MainSearch,
+  CalendarDate,
   Loading,
   Loading2,
   Loading3,
@@ -52,4 +51,4 @@ export {
   SelfAddFood,
   AboutUs,
   CalendarDateEdit,
-}
+};
