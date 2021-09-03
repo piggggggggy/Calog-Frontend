@@ -114,21 +114,29 @@
      - 캘린더에서는 한 달의 기록이라는 많은 데이터를 보여주고 있기 때문에 ux적으로 유저가 많은 데이터를 보기에 한 눈에 캐치할 수 있는 요소를 고민하였습니다.
      - 단순히 기록에 대한 데이터를 보여주는 것이 아닌 기초대사량 대비 적정 %를 기준으로 두어 내가 한 달 동안 올바른 식습관을 가지고 있는지 확인할 수 있도록 아이콘을 통해 구현하였습니다.
      
-     // 범위
-     // +,- 10
-     const ten = bmr*0.1;
+        <details>
+        <summary>아이콘 범위 설정</summary>
+        <div markdown="1">
+        
+        ```javascript
+         // 범위
+         // +,- 10
+         const ten = bmr*0.1;
 
-     // +,- 20
-     const twenty = bmr*0.2;
+         // +,- 20
+         const twenty = bmr*0.2;
 
-     // case 1) '잘 먹었어요'의 기준(bmr+-10)
-     const good = ((bmr-ten) <= kcal) && (kcal <= (bmr+ten));
+         // case 1) '잘 먹었어요'의 기준(bmr+-10)
+         const good = ((bmr-ten) <= kcal) && (kcal <= (bmr+ten));
 
-     // case 2) '적당히 먹었어요'의 기준(bmr+-20)
-     const well = ((bmr-twenty) <= kcal && kcal < (bmr-ten)) || ((bmr+ten) < kcal && kcal <= (bmr+twenty));
+         // case 2) '적당히 먹었어요'의 기준(bmr+-20)
+         const well = ((bmr-twenty) <= kcal && kcal < (bmr-ten)) || ((bmr+ten) < kcal && kcal <= (bmr+twenty));
 
-     // case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
-     const bad = kcal < (bmr-twenty) || (bmr+twenty) < kcal;
+         // case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
+         const bad = kcal < (bmr-twenty) || (bmr+twenty) < kcal;
+        ```
+        </div>
+        </details>
      
      - 또한, 1차 런칭 후 피드백에서 '기록 단계가 길어서 번거로운 부분이 있다.'의 의견을 수렴하여 기록 단계를 최소화 시키며 기록에서 진행하였던 이미지와 메모의 기록이 캘린더 특정 날짜에서 가능하게 되었습니다.
      - 이미지 업로드 시 미리보기 확인이 가능하며, 이미지의 용량이 클 경우 화면에 표출되는데 로딩이 걸려 **browser-image-compression**를 통해 리사이징 후 업로드를 진행하고 있습니다.
@@ -365,47 +373,54 @@
    - lambda를 사용하더라도 고해상도의 이미지는 필요가 없기 때문에 'browser-image-compression' 이미지 파일을 패키지를 사용하여 1차 리사이징하였습니다.
 
   -💡해결
-    - react-lazyload
 
-    import LazyLoad from 'react-lazyload';
-    ...
-    <LazyLoad>
-      <component />
-    </LazyLoad>
+        <details>
+        <summary>이미지 리사이징</summary>
+        <div markdown="1">
+        
+        ```javascript
+        import LazyLoad from 'react-lazyload';
+        ...
+        <LazyLoad>
+          <component />
+        </LazyLoad>
 
-    - browser-image-compression로 이미지 리사이징 후 preview 띄우기(업로드 버튼에도 동일하게 적용)
+        - browser-image-compression로 이미지 리사이징 후 preview 띄우기(업로드 버튼에도 동일하게 적용)
 
-    import imageCompression from "browser-image-compression";
-    ...
-    //인풋박스의 onChange 함수
-    const chgPreview = async (e) => {
-        //원본
-        const imageFile = e.target.files[0];
-        //아래 사진의 1-2번째 줄
-        console.log('originalFile instanceof Blob', imageFile instanceof Blob);
-        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
-        //리사이징 옵션
-        const options = {
-          //최대 크기 (default: Number.POSITIVE_INFINITY)
-          maxSizeMB: 1,
-          maxWidthOrHeight: 1920,
-        }
-        //리사이징
-        try {
-          const compressedFile = await imageCompression(imageFile, options);
-          //아래 사진의 3-4번째 줄(파일의 크기가 줄어든 것을 확인할 수 있다.)
-          console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-          console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); 
-          //preview에 띄우기 위해 리사이징된 파일의 url생성
-          const imageUrl = URL.createObjectURL(compressedFile);
-          //useState에 적용해준다.
-          setFileUrl(imageUrl)
-        } catch (error) {
-          window.alert('이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요!')
-        }
-      }
-    ...
-    <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+        import imageCompression from "browser-image-compression";
+        ...
+        //인풋박스의 onChange 함수
+        const chgPreview = async (e) => {
+            //원본
+            const imageFile = e.target.files[0];
+            //아래 사진의 1-2번째 줄
+            console.log('originalFile instanceof Blob', imageFile instanceof Blob);
+            console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+            //리사이징 옵션
+            const options = {
+              //최대 크기 (default: Number.POSITIVE_INFINITY)
+              maxSizeMB: 1,
+              maxWidthOrHeight: 1920,
+            }
+            //리사이징
+            try {
+              const compressedFile = await imageCompression(imageFile, options);
+              //아래 사진의 3-4번째 줄(파일의 크기가 줄어든 것을 확인할 수 있다.)
+              console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+              console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); 
+              //preview에 띄우기 위해 리사이징된 파일의 url생성
+              const imageUrl = URL.createObjectURL(compressedFile);
+              //useState에 적용해준다.
+              setFileUrl(imageUrl)
+            } catch (error) {
+              window.alert('이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요!')
+            }
+          }
+        ...
+        <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+        ```
+        </div>
+        </details>
 
     ✔️ s3에 업로드 시 한 번 리사이징을 통해 3MB정도 크기의 이미지를 700-800KB까지 줄일 수 있었습니다.
 
