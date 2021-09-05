@@ -13,7 +13,7 @@
 
 🐷[Calog 링크](https://www.calog.app/)
 
-💋[Youtube 링크]() 예정...
+💋[Youtube 링크](https://youtu.be/2TLdSkSYYaM)
 
 📗[Notion 링크]() 예정...
 
@@ -85,7 +85,7 @@
   - @sentry/react, @sentry/tracing
   - react-lazyload
   - react-helmet
-  - browser-image-compression, react-aws-s3??
+  - browser-image-compression, react-aws-s3
 
 
 ## 프로젝트 주요 기능
@@ -104,6 +104,43 @@
   - 서버에서 passport 모듈을 이용한 소셜 로그인
         
   ### ② 기록
+  -  유저가 기록한 데이터는 조금 더 시각적인 요소를 두어 포인트를 빠르게 캐치할 수 있도록 구성하였습니다.
+  
+    - **대시보드**
+     - 대시보드에서는 nivo 그래프를 사용하여 기초대사량 대비 오늘 섭취한 칼로리를 끼니별로 나누어 확인이 가능합니다.
+     - nivo 그래프를 사용한 이유 : 초기 chartjs로 그래프를 구현하였으나 nivo의 경우 라벨 등 조금 더 디테일하게 커스텀이 가능하고 이를 코드에 적용하는데 직관적으로 확인이 가능하였기 때문에 선택하게 되었습니다.
+     
+    - **캘린더**
+     - 캘린더에서는 한 달의 기록이라는 많은 데이터를 보여주고 있기 때문에 ux적으로 유저가 많은 데이터를 보기에 한 눈에 캐치할 수 있는 요소를 고민하였습니다.
+     - 단순히 기록에 대한 데이터를 보여주는 것이 아닌 기초대사량 대비 적정 %를 기준으로 두어 내가 한 달 동안 올바른 식습관을 가지고 있는지 확인할 수 있도록 아이콘을 통해 구현하였습니다.
+     
+        <details>
+        <summary>아이콘 범위 설정</summary>
+        <div markdown="1">
+        
+        ```javascript
+         // 범위
+         // +,- 10
+         const ten = bmr*0.1;
+
+         // +,- 20
+         const twenty = bmr*0.2;
+
+         // case 1) '잘 먹었어요'의 기준(bmr+-10)
+         const good = ((bmr-ten) <= kcal) && (kcal <= (bmr+ten));
+
+         // case 2) '적당히 먹었어요'의 기준(bmr+-20)
+         const well = ((bmr-twenty) <= kcal && kcal < (bmr-ten)) || ((bmr+ten) < kcal && kcal <= (bmr+twenty));
+
+         // case 3) '너무 적게 또는 많이 먹었어요'의 기준(over)
+         const bad = kcal < (bmr-twenty) || (bmr+twenty) < kcal;
+        ```
+        </div>
+        </details>
+     
+     - 또한, 1차 런칭 후 피드백에서 '기록 단계가 길어서 번거로운 부분이 있다.'의 의견을 수렴하여 기록 단계를 최소화 시키며 기록에서 진행하였던 이미지와 메모의 기록이 캘린더 특정 날짜에서 가능하게 되었습니다.
+     - 이미지 업로드 시 미리보기 확인이 가능하며, 이미지의 용량이 클 경우 화면에 표출되는데 로딩이 걸려 **browser-image-compression**를 통해 리사이징 후 업로드를 진행하고 있습니다.
+     
 
   ### ③ 검색
   > 검색 기능은 Calog의 메인 기능입니다. 유저가 필수적으로 사용해야 하는 기능인만큼 **직관적인 뷰, 타이핑과 클릭을 최소화**하여 **사용성**을 높이는데 초점을 맞춰서 개발했습니다.**최근검색어**와 **인기검색어**기능은 이 점을 극대화하기 위하여 부가적으로 구현한 기능입니다.
@@ -329,8 +366,70 @@
     - 효율적으로 카트 기능을 운용할 수 있었고, 실제로 유용성이 검증되어 다른 기능 (최근검색어, 기록 등)에도 활용하게 됨.
 
   ### ③ 이미지 리사이징
+  - ☝🏻 문제 : s3에 이미지 업로드 시 용량이 큰 이미지의 경우 스토리지에 적용되는 용량도 많이 차지하고 클라이언트에서 로드 할 때에도 끊어지는 현상이 있었습니다.
+
+  - ✍🏻 적용
+   - 미리보기가 로드되기 전까지는 lazy loading을 주었습니다.
+   - lambda를 사용하더라도 고해상도의 이미지는 필요가 없기 때문에 'browser-image-compression' 이미지 파일을 패키지를 사용하여 1차 리사이징하였습니다.
+
+  -💡해결
+
+        <details>
+        <summary>이미지 리사이징</summary>
+        <div markdown="1">
+        
+        ```javascript
+        import LazyLoad from 'react-lazyload';
+        ...
+        <LazyLoad>
+          <component />
+        </LazyLoad>
+
+        - browser-image-compression로 이미지 리사이징 후 preview 띄우기(업로드 버튼에도 동일하게 적용)
+
+        import imageCompression from "browser-image-compression";
+        ...
+        //인풋박스의 onChange 함수
+        const chgPreview = async (e) => {
+            //원본
+            const imageFile = e.target.files[0];
+            //아래 사진의 1-2번째 줄
+            console.log('originalFile instanceof Blob', imageFile instanceof Blob);
+            console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+            //리사이징 옵션
+            const options = {
+              //최대 크기 (default: Number.POSITIVE_INFINITY)
+              maxSizeMB: 1,
+              maxWidthOrHeight: 1920,
+            }
+            //리사이징
+            try {
+              const compressedFile = await imageCompression(imageFile, options);
+              //아래 사진의 3-4번째 줄(파일의 크기가 줄어든 것을 확인할 수 있다.)
+              console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+              console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); 
+              //preview에 띄우기 위해 리사이징된 파일의 url생성
+              const imageUrl = URL.createObjectURL(compressedFile);
+              //useState에 적용해준다.
+              setFileUrl(imageUrl)
+            } catch (error) {
+              window.alert('이미지 업로드에 오류가 있어요! 관리자에게 문의해주세요!')
+            }
+          }
+        ...
+        <FileBox type="file" accept="image/*" ref={fileUpload} onChange={chgPreview} id="imgFile"/>
+        ```
+        </div>
+        </details>
+
+    ✔️ s3에 업로드 시 한 번 리사이징을 통해 3MB정도 크기의 이미지를 700-800KB까지 줄일 수 있었습니다.
 
   ### ④ AWS Amplify
+  - 장점 : 배포 과정의 간소화, ssl 인증서 적용 및 custom domain 설정이 간단함, 작업별 테스트 배포 환경이 분리되어있습니다.
+  - 실제 적용
+    - 앱을 만들어 깃과 연동시키는데 5분도 채 걸리지 않을 정도로 간단하여 시간을 효율적으로 단축시킬 수 있었습니다.
+    - ssl 인증서 생성 후 설정, https 설정, custom domain 설정이 간편합니다.
+    - 깃 브랜치를 연동시켜놓으면 브랜치별로 각각의 페이지 확인이 가능하여 테스트 배포 환경이 분리됨으로 사이트에 적용되는 코드들을 바로 바로 확인이 가능하였습니다.
 
   ### ⑤ Sentry - Error Logging
   - 배포를 앞두고 유저들의 사용 중에 발생할지도 모르는 에러를 로깅하고 해결하기 위해 Sentry 를 적용하게 됨.
@@ -371,10 +470,10 @@
   - 그 외 음식데이터 추가 요청 등
 
   ### 피드백 반영 및 개선
-  - 자주먹는 식단을 저장할 수 있는 [식단 커스터마이징](#④-편의) 기능
-  - 사용자가 만들어가는 음식데이터 [직접등록](#④-편의) 기능
-  - [기록기능](#②-기록) 로직 분리 및 간소화 (칼로리 기록과 사진, 메모의 분리)
-  - [피드백 이미지 업로드](#⑤-기타)
+  - 자주먹는 식단을 저장할 수 있는 [식단 커스터마이징](#프로젝트-주요-기능) 기능
+  - 사용자가 만들어가는 음식데이터 [직접등록](#프로젝트-주요-기능) 기능
+  - [기록기능](#프로젝트-주요-기능) 로직 분리 및 간소화 (칼로리 기록과 사진, 메모의 분리)
+  - [피드백 이미지 업로드](#프로젝트-주요-기능)
 
 ## 기타
 
