@@ -15,7 +15,7 @@
 
 💋[Youtube 링크](https://youtu.be/2TLdSkSYYaM)
 
-📗[Notion 링크]() 예정...
+📗[Notion 링크](https://calog.notion.site/Calog-e1b4c0ecc65e4de5b5a7c5593faf6fce)
 
 🍕[Backend Repo 링크](https://github.com/dennis9352/Calog-Backend)
 
