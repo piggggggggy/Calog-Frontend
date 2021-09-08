@@ -15,7 +15,7 @@
 
 💋[Youtube 링크](https://youtu.be/2TLdSkSYYaM)
 
-📗[Notion 링크]() 예정...
+📗[Notion 링크](https://calog.notion.site/Calog-e1b4c0ecc65e4de5b5a7c5593faf6fce)
 
 🍕[Backend Repo 링크](https://github.com/dennis9352/Calog-Backend)
 
@@ -41,13 +41,15 @@
 ## 목차
 [1. 개요](#개요)
 
-[2. 프로젝트 기능](#프로젝트-기능)
+[2. 프로젝트 구조](#프로젝트-구조)
 
-[3. 트러블 슈팅](#트러블-슈팅)
+[3. 프로젝트 기능](#프로젝트-기능)
 
-[4. 고객 반응 및 개선](#고객-반응-및-개선)
+[4. 트러블 슈팅](#트러블-슈팅)
 
-[5. 기타](#기타)
+[5. 고객 반응 및 개선](#고객-반응-및-개선)
+
+[6. 기타](#기타)
 
 
 ## 개요
@@ -71,21 +73,39 @@
 
 - 사용 패키지 (설명 추가 및 정리 예정)
 
-  - react-redux, @redux-toolkit
-  - axios
-  - styled-components, styled-reset
-  - moment
-  - connected-react-router, history
-  - redux-persist
-  - react-slick
-  - react-nice-dates
-  - @nivo/pie
-  - prop-types
-  - lodash
-  - @sentry/react, @sentry/tracing
-  - react-lazyload
-  - react-helmet
-  - browser-image-compression, react-aws-s3
+  <details>
+    <summary>자세히</summary>
+    <div markdown="1">
+    
+    |이름|내용|
+    |---|---|
+    |react-toastify|토스트 메시지|
+    |react-scroll-horizontal|횡스크롤|
+    |styled-reset|스타일 전역 관리|
+    |axios|REST API 통신|
+    |@sentry/react, @sentry/tracing|에러 모니터링|
+    |@reduxjs/toolkit|Redux Toolkit|
+    |react-lazyload|로드 지연 방지|
+    |react-aws-s3|AWS S3 이미지 업로드|
+    |browser-image-comporession|이미지 리사이징|
+    |react-slick|이미지 캐러셀|
+    |react-helmet|검색 최적화|
+    |prop-types|타입 고정|
+    |lodash|이벤트 중복 발생 방지|
+    |react-icons|아이콘|
+    |nivo|대시보드 도넛 차트|
+    |moment|날짜|
+    |styled-components|CSS-in-JS 라이브러리|
+    |react-nice-dates|Date Picker|
+    |firebase|이미지 업로드|
+
+    </div>
+  </details>
+
+
+## 프로젝트 구조
+
+![](public/ReadMe-img/architecture.png)
 
 
 ## 프로젝트 주요 기능
@@ -470,10 +490,10 @@
   - 그 외 음식데이터 추가 요청 등
 
   ### 피드백 반영 및 개선
-  - 자주먹는 식단을 저장할 수 있는 [식단 커스터마이징](#④-편의) 기능
-  - 사용자가 만들어가는 음식데이터 [직접등록](#④-편의) 기능
-  - [기록기능](#②-기록) 로직 분리 및 간소화 (칼로리 기록과 사진, 메모의 분리)
-  - [피드백 이미지 업로드](#⑤-기타)
+  - 자주먹는 식단을 저장할 수 있는 [식단 커스터마이징](#프로젝트-주요-기능) 기능
+  - 사용자가 만들어가는 음식데이터 [직접등록](#프로젝트-주요-기능) 기능
+  - [기록기능](#프로젝트-주요-기능) 로직 분리 및 간소화 (칼로리 기록과 사진, 메모의 분리)
+  - [피드백 이미지 업로드](#프로젝트-주요-기능)
 
 ## 기타
 
